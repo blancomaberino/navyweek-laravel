@@ -7,8 +7,8 @@ or request-flow step must update this file in the same PR (see `platform/CLAUDE.
 Scope reflects what is **built so far**. Planned-but-not-yet-built entities are drawn
 with dashed borders and are not wired up until their slice lands.
 
-Last updated: Phase 2 slice 6 — Shared taxonomy: `audiences` lookup + `offer_audience`
-pivot, and polymorphic `sources` / `faqs` (citations + FAQ, morphed to Offer/Research/Page).
+Last updated: Phase 2 slice 7 — Bases pillar: `bases` (+ `us_states` / `overseas_countries`
+lookups), `region_type` discriminator, with FAQs/sources on the shared polymorphic tables.
 
 ## Domain modules & data access
 
@@ -111,8 +111,27 @@ flowchart TB
     Page -.->|"morphMany faqs"| Faq
     Offer -.->|"morphMany faqs"| Faq
 
+    subgraph Pillars["Pillars module (reference content)"]
+        BaseModel["Base (model)"]
+        UsState["UsState (model)"]
+        OverseasCountry["OverseasCountry (model)"]
+        BaseIface["BaseRepositoryInterface"]
+        BaseRepo["EloquentBaseRepository"]
+        BaseTypeEnum["enum BaseType"]
+        RegionTypeEnum["enum RegionType"]
+        CombatantEnum["enum CombatantCommand"]
+        BaseRepo -. implements .-> BaseIface
+        BaseRepo --> BaseModel
+        BaseModel -->|"belongsTo (state slug)"| UsState
+        BaseModel -->|"belongsTo (country slug)"| OverseasCountry
+        BaseModel -->|"nearby_bases (self-ref slugs, JSON)"| BaseModel
+    end
+
+    BaseModel -.->|"morphMany sources"| Source
+    BaseModel -.->|"morphMany faqs"| Faq
+
     subgraph Planned["Planned (not yet built)"]
-        Pillars["bases / ranks / events — Pillars"]:::planned
+        Pillars2["ranks / events / fleet weeks / air shows / jet teams — Pillars"]:::planned
     end
 
     DSP["DomainServiceProvider<br/>(interface to implementation bindings)"]
@@ -123,6 +142,7 @@ flowchart TB
     DSP -.binds.-> ResearchIface
     DSP -.binds.-> PageIface
     DSP -.binds.-> RedirIface
+    DSP -.binds.-> BaseIface
 
     classDef planned stroke-dasharray: 5 5,stroke:#999,color:#999;
 ```
@@ -334,11 +354,51 @@ erDiagram
 
     FAQS {
         bigint id PK
-        string faqable_type "morph: Page/Offer/pillar"
+        string faqable_type "morph: Page/Offer/Base/pillar"
         bigint faqable_id
         string question
         text answer
         int sort_order
+    }
+
+    US_STATES ||--o{ BASES : "state-based bases (state slug)"
+    OVERSEAS_COUNTRIES ||--o{ BASES : "overseas bases (country slug)"
+    BASES ||--o{ SOURCES : "cited by (sourceable morph)"
+    BASES ||--o{ FAQS : "has (faqable morph)"
+
+    US_STATES {
+        bigint id PK
+        string slug UK
+        string name
+        string abbr
+    }
+
+    OVERSEAS_COUNTRIES {
+        bigint id PK
+        string slug UK
+        string name
+        string iso2
+        string region "enum CombatantCommand"
+        bool is_us_territory
+    }
+
+    BASES {
+        bigint id PK
+        string slug UK
+        string name
+        string type "enum BaseType (hub)"
+        string region_type "enum RegionType: state/country/territory"
+        string state "us_states slug (soft FK)"
+        string country_slug "overseas_countries slug (soft FK)"
+        string region "enum CombatantCommand, nullable"
+        decimal lat
+        decimal lng
+        int established
+        json aka_major_units_key_facts_notable_events "cohesive display lists"
+        json nearby_bases "self-ref slugs"
+        string nearest_fleet_week_slug "soft link (pillar not built)"
+        longtext overview_history
+        date last_updated "base's own label, not build clock"
     }
 ```
 
@@ -371,6 +431,28 @@ erDiagram
 > `/discount/` path). Polymorphic rows have no DB-level cascade; parent hard-deletes
 > that should also drop citations/FAQs are handled when the Filament relation
 > managers / importers land.
+
+> **Bases pillar (slice 7).** First of the reference pillars. `region_type`
+> (state/country/territory) is the discriminator that decides which column group
+> applies — state fields (`state`/`state_name`/`state_abbr`) for CONUS, or the
+> overseas block (`country_slug`/`region`/`host_nation`/`timezone`/…) for OCONUS —
+> and whether the base is overseas. `state` and `country_slug` are **soft slug FKs**
+> to the `us_states` / `overseas_countries` lookups (a base has exactly one, never
+> both), joined by slug, not enforced by a DB constraint. `nearest_fleet_week_slug`
+> is a bare slug until the fleet-weeks pillar lands. The base's `state_name`/
+> `state_abbr` (and, overseas, `country`/`country_iso2`/`region`) are **intentionally
+> denormalized** — they are the base's own authoritative display values in the legacy
+> data, while the `us_states`/`overseas_countries` lookups exist to drive the hub
+> pages (grouping/listing), not to source a base's rendering. They coincide today; a
+> `bases:reconcile` validator (successor to the legacy build-time checks) can flag any
+> drift later. Base **FAQs and sources reuse
+> the shared polymorphic `faqs`/`sources` tables** (faqable/sourceable → Base)
+> rather than JSON columns — the reason those were made polymorphic in slice 6;
+> only the cohesive, base-specific display lists (`aka`, `major_units`, `key_facts`,
+> `notable_events`, `nearby_bases`) stay JSON. Base pages (pageable → Base) and the
+> body columns arrive with the Phase 3 rendering slice. Remaining reference pillars
+> (ranks, events, fleet weeks, air shows, jet teams, local discounts, veterans-day
+> meals) land in subsequent slices.
 
 ## Request / redirect pipeline
 

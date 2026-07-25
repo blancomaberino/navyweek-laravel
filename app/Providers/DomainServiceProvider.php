@@ -12,6 +12,8 @@ use App\Domain\Catalog\Repositories\EloquentOfferRepository;
 use App\Domain\Catalog\Repositories\OfferRepositoryInterface;
 use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
 use App\Domain\Crm\Repositories\EloquentConnectionRepository;
+use App\Domain\Pillars\Repositories\BaseRepositoryInterface;
+use App\Domain\Pillars\Repositories\EloquentBaseRepository;
 use App\Domain\Publishing\Repositories\EloquentPageRepository;
 use App\Domain\Publishing\Repositories\EloquentRedirectRepository;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
@@ -44,6 +46,7 @@ class DomainServiceProvider extends ServiceProvider
         AffiliateNetworkRepositoryInterface::class => EloquentAffiliateNetworkRepository::class,
         AffiliateLinkRepositoryInterface::class => EloquentAffiliateLinkRepository::class,
         ResearchRepositoryInterface::class => EloquentResearchRepository::class,
+        BaseRepositoryInterface::class => EloquentBaseRepository::class,
     ];
 
     public function register(): void
