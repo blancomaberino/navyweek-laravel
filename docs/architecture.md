@@ -7,8 +7,8 @@ or request-flow step must update this file in the same PR (see `platform/CLAUDE.
 Scope reflects what is **built so far**. Planned-but-not-yet-built entities are drawn
 with dashed borders and are not wired up until their slice lands.
 
-Last updated: Phase 2 slice 7 — Bases pillar: `bases` (+ `us_states` / `overseas_countries`
-lookups), `region_type` discriminator, with FAQs/sources on the shared polymorphic tables.
+Last updated: Phase 2 slice 8 — Ranks pillar: `ranks` single-table inheritance over the
+`category` discriminator (officers / enlisted / designators / ratings), self-ref + base slug links.
 
 ## Domain modules & data access
 
@@ -125,13 +125,24 @@ flowchart TB
         BaseModel -->|"belongsTo (state slug)"| UsState
         BaseModel -->|"belongsTo (country slug)"| OverseasCountry
         BaseModel -->|"nearby_bases (self-ref slugs, JSON)"| BaseModel
+        RankModel["Rank (model)<br/>STI on category"]
+        RankIface["RankRepositoryInterface"]
+        RankRepo["EloquentRankRepository"]
+        RankCatEnum["enum RankCategory"]
+        RankCommEnums["enums DesignatorCommunity /<br/>RatingCommunity / HistoricRatingEra"]
+        RankRepo -. implements .-> RankIface
+        RankRepo --> RankModel
+        RankModel -->|"next/previous/merged_into (self-ref slug)"| RankModel
+        RankModel -->|"belongsTo (related_base / a_school slug)"| BaseModel
     end
 
     BaseModel -.->|"morphMany sources"| Source
     BaseModel -.->|"morphMany faqs"| Faq
+    RankModel -.->|"morphMany sources"| Source
+    RankModel -.->|"morphMany faqs"| Faq
 
     subgraph Planned["Planned (not yet built)"]
-        Pillars2["ranks / events / fleet weeks / air shows / jet teams — Pillars"]:::planned
+        Pillars2["events / fleet weeks / air shows / jet teams / local discounts — Pillars"]:::planned
     end
 
     DSP["DomainServiceProvider<br/>(interface to implementation bindings)"]
@@ -143,6 +154,7 @@ flowchart TB
     DSP -.binds.-> PageIface
     DSP -.binds.-> RedirIface
     DSP -.binds.-> BaseIface
+    DSP -.binds.-> RankIface
 
     classDef planned stroke-dasharray: 5 5,stroke:#999,color:#999;
 ```
@@ -400,6 +412,32 @@ erDiagram
         longtext overview_history
         date last_updated "base's own label, not build clock"
     }
+
+    RANKS ||--o| RANKS : "next/previous/merged_into (self-ref slug)"
+    BASES ||--o{ RANKS : "related_base / a_school (soft slug FK)"
+    RANKS ||--o{ SOURCES : "cited by (sourceable morph)"
+    RANKS ||--o{ FAQS : "has (faqable morph)"
+
+    RANKS {
+        bigint id PK
+        string slug UK
+        string category "STI discriminator: enum RankCategory"
+        string name
+        string paygrade
+        json common "responsibilities, prerequisites, common_assignments, pay_range"
+        string next_slug "self-ref (officer next_rank / enlisted next_paygrade)"
+        string previous_slug "self-ref"
+        string nato_code "officers/enlisted; optional designators; null ratings"
+        bool is_flag_officer_is_chief "officer / enlisted flags"
+        string designator_community "enum DesignatorCommunity (designators)"
+        string rating_community "enum RatingCommunity (ratings)"
+        json variant_json "career_path, training_pipeline, community_variants, related_*"
+        string a_school_location_slug "soft FK → bases (ratings)"
+        string merged_into_slug "self-ref (historical ratings)"
+        json era_tags "enum HistoricRatingEra[] (historical ratings)"
+        string related_base_slug "soft FK → bases"
+        date last_updated
+    }
 ```
 
 > `pages` now carries the full SEO/JSON-LD head-meta layer (title, description,
@@ -451,8 +489,25 @@ erDiagram
 > only the cohesive, base-specific display lists (`aka`, `major_units`, `key_facts`,
 > `notable_events`, `nearby_bases`) stay JSON. Base pages (pageable → Base) and the
 > body columns arrive with the Phase 3 rendering slice. Remaining reference pillars
-> (ranks, events, fleet weeks, air shows, jet teams, local discounts, veterans-day
-> meals) land in subsequent slices.
+> (events, fleet weeks, air shows, jet teams, local discounts, veterans-day meals)
+> land in subsequent slices.
+
+> **Ranks pillar (slice 8).** Modeled as **single-table inheritance**: one `ranks`
+> table, `category` the discriminator over the legacy `NavyRankEntry` union (officer
+> commissioned/warrant, enlisted paygrade, officer designator, active/historical
+> rating). Common columns apply to every row; each category's variant columns are
+> nullable and populated only for that category. Two deliberate consolidations of
+> the source shape: the legacy `next_rank_slug` (officers) and `next_paygrade_slug`
+> (enlisted) are the same linked-list concept → unified `next_slug`/`previous_slug`;
+> and `community` names two disjoint vocabularies (designator vs rating) → split into
+> `designator_community`/`rating_community` so each casts to its own enum. Self-ref
+> links (`next`/`previous`/`merged_into`) and base links (`related_base`, ratings'
+> `a_school_location`) join by slug (soft, no constraint); array cross-links
+> (`related_designators`, `related_ratings`, `predecessor_ratings`, …) are JSON
+> slug lists. FAQs/sources reuse the shared polymorphic tables. Rank routing —
+> officers/enlisted → `/navy-ranks/#slug`, ratings → `/navy-ratings/#slug`,
+> designators → `/navy-designators/<slug>/` — is a Page/rendering concern (later
+> slice), not stored on `ranks`.
 
 ## Request / redirect pipeline
 
