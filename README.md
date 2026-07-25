@@ -86,14 +86,20 @@ same PR that introduces the model/repo (enforced by `CLAUDE.md`).
 | Repository | `Research\Repositories\ResearchRepositoryInterface` → `EloquentResearchRepository` | Research | Brief reads for a connection: `latestForConnection` (highest version), `historyForConnection`. |
 | Model | `Crm\Models\Audience` | Crm | A first-class eligible cohort (military, veteran, student, …) an Offer targets via the `offer_audience` pivot — the joinable form of the `Crm\Enums\Audience` vocabulary; replaces the legacy 9 `DiscountAudience` booleans (consolidated to 7 cases). |
 | Model | `Shared\Models\Source` | Shared | A primary-source citation attached polymorphically (`sourceable`) to an Offer / Research / Page. The shared backbone of the YMYL "every claim traces to a verified source" invariant. |
-| Model | `Shared\Models\Faq` | Shared | A question/answer pair attached polymorphically (`faqable`) to a Page / Offer (later pillars). Single source for both the rendered FAQ and its FAQPage JSON-LD (parity gate). |
+| Model | `Shared\Models\Faq` | Shared | A question/answer pair attached polymorphically (`faqable`) to a Page / Offer / pillar. Single source for both the rendered FAQ and its FAQPage JSON-LD (parity gate). |
+| Model | `Pillars\Models\Base` | Pillars | A naval base / installation (first reference pillar). `region_type` discriminates state-based (CONUS) from overseas (country/territory); cohesive lists are JSON, while FAQs/sources attach via the shared polymorphic tables. |
+| Model | `Pillars\Models\UsState` | Pillars | U.S. state/DC lookup (port of `bases/states.ts`) the state-based base hubs group on; `bases.state` is a soft slug FK. |
+| Model | `Pillars\Models\OverseasCountry` | Pillars | Overseas host-country lookup (port of `bases/countries.ts`, incl. country-equivalent U.S. territories) the OCONUS base hubs group on; `bases.country_slug` is a soft slug FK. |
+| Repository | `Pillars\Repositories\BaseRepositoryInterface` → `EloquentBaseRepository` | Pillars | Base pillar reads mirroring the legacy hubs: `findBySlug`, `forState`, `forCountry`, `forType`, `forRegion`. |
 
-Reads for these shared/lookup tables route through the aggregate they hang off (the
-Offer repository eager-loads `audiences` + `sources` on the `/discount/` read path;
-sources/faqs are reached via their parent's morph relation), so they add no
-repository of their own.
+Reads for the shared/lookup tables (`audiences`, `sources`, `faqs`, `us_states`,
+`overseas_countries`) route through the aggregate they hang off (the Offer
+repository eager-loads `audiences` + `sources` on the `/discount/` read path;
+sources/faqs are reached via their parent's morph relation; the state/country
+lookups via `Base`), so they add no repository of their own — only the `Base`
+aggregate carries one.
 
-Supporting types: value object `Shared\ValueObjects\UrlPath`; services `Publishing\Services\LegacyPathResolver`, `Catalog\Services\AffiliateLinkTagger` (port of `withPlacement` — the outbound sub-ID tagging choke point); enums `Crm\Enums\{ConnectionStatus,Audience}`, `Catalog\Enums\{OfferType,VerificationProvider,RedemptionChannel,Placement}`, `Research\Enums\{ResearchStatus,ResearchedBy}`, `Shared\Enums\{ConfidenceLevel,SourceType}` (confidence is shared by briefs + citations), `Publishing\Enums\{PageType,RedirectMatchType}`. Seeders: `AffiliateNetworkSeeder` (the 7 networks), `AudienceSeeder` (audience vocabulary from the enum).
+Supporting types: value object `Shared\ValueObjects\UrlPath`; services `Publishing\Services\LegacyPathResolver`, `Catalog\Services\AffiliateLinkTagger` (port of `withPlacement` — the outbound sub-ID tagging choke point); enums `Crm\Enums\{ConnectionStatus,Audience}`, `Catalog\Enums\{OfferType,VerificationProvider,RedemptionChannel,Placement}`, `Research\Enums\{ResearchStatus,ResearchedBy}`, `Shared\Enums\{ConfidenceLevel,SourceType}` (confidence is shared by briefs + citations), `Pillars\Enums\{BaseType,CombatantCommand,RegionType}`, `Publishing\Enums\{PageType,RedirectMatchType}`. Seeders: `AffiliateNetworkSeeder` (the 7 networks), `AudienceSeeder` (audience vocabulary from the enum).
 
 ## Quality gates (per the rebuild workflow)
 
