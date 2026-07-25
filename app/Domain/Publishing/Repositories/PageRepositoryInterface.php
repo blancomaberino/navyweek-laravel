@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Publishing\Repositories;
 
+use App\Domain\Publishing\Models\Page;
+
 interface PageRepositoryInterface
 {
     /**
@@ -13,4 +15,12 @@ interface PageRepositoryInterface
      * catch-all → "/".
      */
     public function publishedPathExists(string $urlPath): bool;
+
+    /**
+     * The published page at this exact canonical `url_path`, with its `pageable`
+     * aggregate eager-loaded, or null. The render read (Phase 3) — everything the
+     * head/JSON-LD builders need in one query. Non-canonical or unpublished paths
+     * return null (the middleware has already 301'd those).
+     */
+    public function findPublishedByPath(string $urlPath): ?Page;
 }
