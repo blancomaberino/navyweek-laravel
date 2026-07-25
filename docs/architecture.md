@@ -7,7 +7,8 @@ or request-flow step must update this file in the same PR (see `platform/CLAUDE.
 Scope reflects what is **built so far**. Planned-but-not-yet-built entities are drawn
 with dashed borders and are not wired up until their slice lands.
 
-Last updated: Phase 2 slice 4 — Affiliate layer (networks, links, sub-ID tagger).
+Last updated: Phase 2 slice 5 — Pages SEO/JSON-LD extension (head meta, build-clock
+dates, page-specific `json_ld`, polymorphic `pageable`).
 
 ## Domain modules & data access
 
@@ -89,6 +90,9 @@ flowchart TB
     Connection -->|"hasMany (versioned briefs)"| ResearchModel
     Offer -.->|"optional offer-scoped brief"| ResearchModel
 
+    Page -.->|"pageable morphTo"| Offer
+    Page -.->|"pageable morphTo"| Connection
+
     subgraph Shared["Shared module"]
         UrlPath["UrlPath value object<br/>(trailingSlash: always)"]
     end
@@ -127,6 +131,8 @@ erDiagram
     OFFERS ||--o{ AFFILIATE_LINKS : "offer links"
     AFFILIATE_NETWORKS ||--o{ AFFILIATE_LINKS : "tags via subid_param"
     AFFILIATE_NETWORKS ||--o| CONNECTIONS : "default network"
+    OFFERS ||--o{ PAGES : "presented by (pageable morph)"
+    CONNECTIONS ||--o{ PAGES : "presented by (pageable morph)"
 
     CONNECTIONS {
         bigint id PK
@@ -255,6 +261,17 @@ erDiagram
         string page_type "enum PageType"
         string slug
         string url_path UK "canonical routing key"
+        string title "head/og/twitter title"
+        text meta_description
+        string canonical_path "canonical override, nullable"
+        string og_type "default website"
+        string og_image_path "site-relative, nullable"
+        bool noindex "robots + suppresses org node"
+        datetimetz date_published "build-clock, first build"
+        datetimetz date_modified "build-clock, every build"
+        json json_ld "page-specific EXTRA schema nodes"
+        string pageable_type "polymorphic owner, nullable"
+        bigint pageable_id "Offer / Connection / pillar, nullable"
         bool is_published
     }
 
@@ -270,10 +287,16 @@ erDiagram
     }
 ```
 
-> `pages` currently carries the routing-critical columns only; the full SEO/JSON-LD
-> and body columns (and the polymorphic `pageable` relation to offers/connections/
-> pillars) are extended in a later Phase 2 slice. `connections.category` is kept as
-> the raw industry string; the category-hub FK lands with the rendering slice.
+> `pages` now carries the full SEO/JSON-LD head-meta layer (title, description,
+> canonical override, OG, robots), the build-clock Article dates, a `json_ld` slot
+> for page-specific EXTRA schema nodes, and the polymorphic `pageable` owner
+> (Offer/Connection today; pillars when those land). Derived schema — the auto
+> `Organization` node and the aggregate-driven `Article`/`LocalBusiness` — is
+> composed at render time from `pageable`, never stored, so the graph can't drift.
+> The page **body** columns land with the Phase 3 rendering slice (aggregate-backed
+> pages derive their body from the Offer/Connection; only static pages need stored
+> body). `connections.category` is kept as the raw industry string; the category-hub
+> FK lands with the rendering slice.
 
 ## Request / redirect pipeline
 

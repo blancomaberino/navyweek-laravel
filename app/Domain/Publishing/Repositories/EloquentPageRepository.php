@@ -15,4 +15,13 @@ final class EloquentPageRepository implements PageRepositoryInterface
             ->where('url_path', $urlPath)
             ->exists();
     }
+
+    public function findPublishedByPath(string $urlPath): ?Page
+    {
+        return Page::query()
+            ->with('pageable')
+            ->where('is_published', true)
+            ->where('url_path', $urlPath)
+            ->first();
+    }
 }
