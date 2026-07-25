@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RedirectSeeder::class,
             AffiliateNetworkSeeder::class,
+            AudienceSeeder::class,
         ]);
     }
 }

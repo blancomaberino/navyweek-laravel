@@ -6,9 +6,10 @@ namespace App\Domain\Research\Models;
 
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Crm\Models\Connection;
-use App\Domain\Research\Enums\ConfidenceLevel;
 use App\Domain\Research\Enums\ResearchedBy;
 use App\Domain\Research\Enums\ResearchStatus;
+use App\Domain\Shared\Enums\ConfidenceLevel;
+use App\Domain\Shared\Models\Source;
 use Database\Factories\ResearchFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -44,6 +46,7 @@ use Illuminate\Support\Carbon;
  * @property-read Connection $connection
  * @property-read Offer|null $offer
  * @property-read Collection<int, Skill> $skills
+ * @property-read Collection<int, Source> $sources
  *
  * @method static ResearchFactory factory($count = null, $state = [])
  */
@@ -123,5 +126,15 @@ class Research extends Model
         return $this->belongsToMany(Skill::class, 'research_skill')
             ->withPivot(['skill_version', 'used_for'])
             ->withTimestamps();
+    }
+
+    /**
+     * Primary-source citations this brief verified its facts against, in order.
+     *
+     * @return MorphMany<Source, $this>
+     */
+    public function sources(): MorphMany
+    {
+        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
     }
 }

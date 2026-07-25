@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Database\Factories;
 
 use App\Domain\Crm\Models\Connection;
-use App\Domain\Research\Enums\ConfidenceLevel;
 use App\Domain\Research\Enums\ResearchedBy;
 use App\Domain\Research\Enums\ResearchStatus;
 use App\Domain\Research\Models\Research;
+use App\Domain\Shared\Enums\ConfidenceLevel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

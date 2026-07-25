@@ -6,14 +6,19 @@ namespace App\Domain\Catalog\Models;
 
 use App\Domain\Catalog\Enums\OfferType;
 use App\Domain\Catalog\Enums\VerificationProvider;
+use App\Domain\Crm\Models\Audience;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Shared\Models\Faq;
+use App\Domain\Shared\Models\Source;
 use Database\Factories\OfferFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -52,6 +57,9 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, OfferTier> $tiers
  * @property-read Collection<int, RedemptionStep> $redemptionSteps
  * @property-read Collection<int, AffiliateLink> $affiliateLinks
+ * @property-read Collection<int, Audience> $audiences
+ * @property-read Collection<int, Source> $sources
+ * @property-read Collection<int, Faq> $faqs
  *
  * @method static OfferFactory factory($count = null, $state = [])
  */
@@ -166,5 +174,35 @@ class Offer extends Model
     public function affiliateLinks(): HasMany
     {
         return $this->hasMany(AffiliateLink::class);
+    }
+
+    /**
+     * The eligible cohorts this offer serves (drives filters + JSON-LD enumeration).
+     *
+     * @return BelongsToMany<Audience, $this>
+     */
+    public function audiences(): BelongsToMany
+    {
+        return $this->belongsToMany(Audience::class, 'offer_audience');
+    }
+
+    /**
+     * Primary-source citations backing this offer's facts, in display order.
+     *
+     * @return MorphMany<Source, $this>
+     */
+    public function sources(): MorphMany
+    {
+        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
+    }
+
+    /**
+     * Offer-scoped FAQs (bubble to the brand page's FAQPage schema), in order.
+     *
+     * @return MorphMany<Faq, $this>
+     */
+    public function faqs(): MorphMany
+    {
+        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
     }
 }
