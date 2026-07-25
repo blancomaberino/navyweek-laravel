@@ -1,0 +1,28 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domain\Research\Repositories;
+
+use App\Domain\Research\Models\Research;
+use Illuminate\Support\Collection;
+
+/**
+ * Data access for the Research aggregate. Callers depend on this interface; the
+ * Eloquent implementation is bound in DomainServiceProvider.
+ */
+interface ResearchRepositoryInterface
+{
+    /**
+     * The most recent brief for a connection (highest `version`), or null when the
+     * connection has none. This is the current source of truth for its page.
+     */
+    public function latestForConnection(int $connectionId): ?Research;
+
+    /**
+     * The full version history for a connection, newest first.
+     *
+     * @return Collection<int, Research>
+     */
+    public function historyForConnection(int $connectionId): Collection;
+}
