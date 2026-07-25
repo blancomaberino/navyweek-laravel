@@ -8,6 +8,7 @@ use App\Domain\Crm\Models\Audience;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Research\Models\Research;
 use App\Domain\Shared\Enums\ConfidenceLevel;
+use App\Domain\Shared\Enums\SourceType;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
 use Database\Seeders\AudienceSeeder;
@@ -65,6 +66,7 @@ it('attaches sources polymorphically to an offer, research and page', function (
         ->and($research->sources)->toHaveCount(1)
         ->and($page->sources)->toHaveCount(1)
         ->and($offer->sources->first()->sourceable->is($offer))->toBeTrue()
+        ->and($offer->sources->first()->source_type)->toBe(SourceType::Official)
         ->and($offer->sources->first()->confidence)->toBe(ConfidenceLevel::High);
 });
 

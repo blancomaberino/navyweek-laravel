@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Schema;
 
 /**
  * Audience lookup — the eligible-cohort vocabulary (military, veteran, student, …)
- * an Offer can target. Promotes the legacy 9 `DiscountAudience` booleans (and the
- * `Audience` enum they became) into first-class rows so the admin can filter
+ * an Offer can target. Promotes the legacy 9 `DiscountAudience` booleans (which the
+ * `Audience` enum consolidated to 7 cases) into first-class rows so the admin can filter
  * ("all SheerID + first-responder offers") and JSON-LD can enumerate them.
  *
  * `key` mirrors the `App\Domain\Crm\Enums\Audience` value; the enum stays the

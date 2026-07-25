@@ -355,7 +355,7 @@ erDiagram
 
 > **Shared taxonomy (slice 6).** `audiences` is a small lookup seeded from the
 > `Audience` enum (its `label` is a seeded default the CMS can later override);
-> `offer_audience` normalizes the legacy 9 audience booleans into a many-to-many so
+> `offer_audience` normalizes the legacy 9 audience booleans (now 7 enum cases) into a many-to-many so
 > offers can be filtered by cohort and JSON-LD can enumerate them. Audience is
 > represented at **two levels on purpose**: `connections.audiences` (JSON enum
 > collection) is the coarse brand-level tag set for CRM filtering, while

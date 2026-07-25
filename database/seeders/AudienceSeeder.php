@@ -10,8 +10,8 @@ use Illuminate\Database\Seeder;
 
 /**
  * Seeds the audience lookup from the canonical `Audience` enum vocabulary (the
- * legacy 9 `DiscountAudience` booleans, consolidated). Idempotent (upsert on
- * `key`); enum declaration order sets `sort_order`.
+ * legacy 9 `DiscountAudience` booleans, consolidated to 7 cases — so this seeds 7
+ * rows). Idempotent (upsert on `key`); enum declaration order sets `sort_order`.
  */
 class AudienceSeeder extends Seeder
 {

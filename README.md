@@ -84,7 +84,7 @@ same PR that introduces the model/repo (enforced by `CLAUDE.md`).
 | Model | `Research\Models\Research` | Research | A sourced, versioned research brief for a connection (fourth lifecycle). Stores the brief `raw_markdown` verbatim plus parsed facts/copy; only `last_verified` traces to research (build-clock rule). |
 | Model | `Research\Models\Skill` | Research | A research/QA skill in the provenance registry (`military-discount-research`, `seo-geo`); `content_hash`/`current_version` drive skill-upgrade re-research triggers. |
 | Repository | `Research\Repositories\ResearchRepositoryInterface` → `EloquentResearchRepository` | Research | Brief reads for a connection: `latestForConnection` (highest version), `historyForConnection`. |
-| Model | `Crm\Models\Audience` | Crm | A first-class eligible cohort (military, veteran, student, …) an Offer targets via the `offer_audience` pivot — the joinable form of the `Crm\Enums\Audience` vocabulary; replaces the legacy 9 `DiscountAudience` booleans. |
+| Model | `Crm\Models\Audience` | Crm | A first-class eligible cohort (military, veteran, student, …) an Offer targets via the `offer_audience` pivot — the joinable form of the `Crm\Enums\Audience` vocabulary; replaces the legacy 9 `DiscountAudience` booleans (consolidated to 7 cases). |
 | Model | `Shared\Models\Source` | Shared | A primary-source citation attached polymorphically (`sourceable`) to an Offer / Research / Page. The shared backbone of the YMYL "every claim traces to a verified source" invariant. |
 | Model | `Shared\Models\Faq` | Shared | A question/answer pair attached polymorphically (`faqable`) to a Page / Offer (later pillars). Single source for both the rendered FAQ and its FAQPage JSON-LD (parity gate). |
 
