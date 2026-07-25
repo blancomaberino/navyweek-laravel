@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Crm\Models\Connection;
-use App\Domain\Research\Enums\ConfidenceLevel;
 use App\Domain\Research\Enums\ResearchedBy;
 use App\Domain\Research\Enums\ResearchStatus;
 use App\Domain\Research\Models\Research;
 use App\Domain\Research\Models\Skill;
+use App\Domain\Shared\Enums\ConfidenceLevel;
 
 it('casts enums, JSON facts and dates', function () {
     $research = Research::factory()->create([

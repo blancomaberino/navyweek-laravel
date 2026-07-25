@@ -84,8 +84,16 @@ same PR that introduces the model/repo (enforced by `CLAUDE.md`).
 | Model | `Research\Models\Research` | Research | A sourced, versioned research brief for a connection (fourth lifecycle). Stores the brief `raw_markdown` verbatim plus parsed facts/copy; only `last_verified` traces to research (build-clock rule). |
 | Model | `Research\Models\Skill` | Research | A research/QA skill in the provenance registry (`military-discount-research`, `seo-geo`); `content_hash`/`current_version` drive skill-upgrade re-research triggers. |
 | Repository | `Research\Repositories\ResearchRepositoryInterface` → `EloquentResearchRepository` | Research | Brief reads for a connection: `latestForConnection` (highest version), `historyForConnection`. |
+| Model | `Crm\Models\Audience` | Crm | A first-class eligible cohort (military, veteran, student, …) an Offer targets via the `offer_audience` pivot — the joinable form of the `Crm\Enums\Audience` vocabulary; replaces the legacy 9 `DiscountAudience` booleans. |
+| Model | `Shared\Models\Source` | Shared | A primary-source citation attached polymorphically (`sourceable`) to an Offer / Research / Page. The shared backbone of the YMYL "every claim traces to a verified source" invariant. |
+| Model | `Shared\Models\Faq` | Shared | A question/answer pair attached polymorphically (`faqable`) to a Page / Offer (later pillars). Single source for both the rendered FAQ and its FAQPage JSON-LD (parity gate). |
 
-Supporting types: value object `Shared\ValueObjects\UrlPath`; services `Publishing\Services\LegacyPathResolver`, `Catalog\Services\AffiliateLinkTagger` (port of `withPlacement` — the outbound sub-ID tagging choke point); enums `Crm\Enums\{ConnectionStatus,Audience}`, `Catalog\Enums\{OfferType,VerificationProvider,RedemptionChannel,Placement}`, `Research\Enums\{ResearchStatus,ResearchedBy,ConfidenceLevel}`, `Publishing\Enums\{PageType,RedirectMatchType}`. Seeder: `AffiliateNetworkSeeder` (the 7 networks).
+Reads for these shared/lookup tables route through the aggregate they hang off (the
+Offer repository eager-loads `audiences` + `sources` on the `/discount/` read path;
+sources/faqs are reached via their parent's morph relation), so they add no
+repository of their own.
+
+Supporting types: value object `Shared\ValueObjects\UrlPath`; services `Publishing\Services\LegacyPathResolver`, `Catalog\Services\AffiliateLinkTagger` (port of `withPlacement` — the outbound sub-ID tagging choke point); enums `Crm\Enums\{ConnectionStatus,Audience}`, `Catalog\Enums\{OfferType,VerificationProvider,RedemptionChannel,Placement}`, `Research\Enums\{ResearchStatus,ResearchedBy}`, `Shared\Enums\{ConfidenceLevel,SourceType}` (confidence is shared by briefs + citations), `Publishing\Enums\{PageType,RedirectMatchType}`. Seeders: `AffiliateNetworkSeeder` (the 7 networks), `AudienceSeeder` (audience vocabulary from the enum).
 
 ## Quality gates (per the rebuild workflow)
 

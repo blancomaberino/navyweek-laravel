@@ -5,10 +5,14 @@ declare(strict_types=1);
 namespace App\Domain\Publishing\Models;
 
 use App\Domain\Publishing\Enums\PageType;
+use App\Domain\Shared\Models\Faq;
+use App\Domain\Shared\Models\Source;
 use Database\Factories\PageFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 
@@ -35,6 +39,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Model|null $pageable
+ * @property-read Collection<int, Source> $sources
+ * @property-read Collection<int, Faq> $faqs
  *
  * @method static PageFactory factory($count = null, $state = [])
  */
@@ -94,5 +100,26 @@ class Page extends Model
     public function pageable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Page-level primary-source citations, in display order.
+     *
+     * @return MorphMany<Source, $this>
+     */
+    public function sources(): MorphMany
+    {
+        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
+    }
+
+    /**
+     * FAQs for this page — the source for the rendered FAQ *and* its FAQPage
+     * JSON-LD (parity gate compares the two), in display order.
+     *
+     * @return MorphMany<Faq, $this>
+     */
+    public function faqs(): MorphMany
+    {
+        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
     }
 }

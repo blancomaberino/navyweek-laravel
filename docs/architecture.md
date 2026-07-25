@@ -7,8 +7,8 @@ or request-flow step must update this file in the same PR (see `platform/CLAUDE.
 Scope reflects what is **built so far**. Planned-but-not-yet-built entities are drawn
 with dashed borders and are not wired up until their slice lands.
 
-Last updated: Phase 2 slice 5 — Pages SEO/JSON-LD extension (head meta, build-clock
-dates, page-specific `json_ld`, polymorphic `pageable`).
+Last updated: Phase 2 slice 6 — Shared taxonomy: `audiences` lookup + `offer_audience`
+pivot, and polymorphic `sources` / `faqs` (citations + FAQ, morphed to Offer/Research/Page).
 
 ## Domain modules & data access
 
@@ -23,12 +23,14 @@ flowchart TB
         ConnIface["ConnectionRepositoryInterface"]
         ConnRepo["EloquentConnectionRepository"]
         ConnStatus["enum ConnectionStatus"]
-        Audience["enum Audience"]
+        AudienceEnum["enum Audience"]
+        AudienceModel["Audience (model)<br/>offer_audience lookup"]
         ConnRepo -. implements .-> ConnIface
         ConnRepo --> Connection
         ConnRepo --> ConnectionAlias
         ConnectionAlias -->|belongsTo| Connection
         Connection -->|"duplicate_of (self-ref)"| Connection
+        AudienceModel -.seeded from.-> AudienceEnum
     end
 
     subgraph Catalog["Catalog module (offers + affiliate)"]
@@ -81,7 +83,6 @@ flowchart TB
         ResearchRepo["EloquentResearchRepository"]
         ResearchStatus["enum ResearchStatus"]
         ResearchedBy["enum ResearchedBy"]
-        Confidence["enum ConfidenceLevel"]
         ResearchRepo -. implements .-> ResearchIface
         ResearchRepo --> ResearchModel
         ResearchModel -->|"belongsToMany (research_skill: skill_version, used_for)"| Skill
@@ -95,11 +96,23 @@ flowchart TB
 
     subgraph Shared["Shared module"]
         UrlPath["UrlPath value object<br/>(trailingSlash: always)"]
+        Source["Source (model)<br/>polymorphic sourceable"]
+        Faq["Faq (model)<br/>polymorphic faqable"]
+        ConfidenceEnum["enum ConfidenceLevel<br/>(briefs + citations)"]
+        SourceTypeEnum["enum SourceType"]
+        Source -.-> ConfidenceEnum
+        Source -.-> SourceTypeEnum
     end
+
+    Offer -->|"belongsToMany (offer_audience)"| AudienceModel
+    Offer -.->|"morphMany sources"| Source
+    ResearchModel -.->|"morphMany sources"| Source
+    Page -.->|"morphMany sources"| Source
+    Page -.->|"morphMany faqs"| Faq
+    Offer -.->|"morphMany faqs"| Faq
 
     subgraph Planned["Planned (not yet built)"]
         Pillars["bases / ranks / events — Pillars"]:::planned
-        SharedTaxonomy["sources / faqs / audience pivot — Shared"]:::planned
     end
 
     DSP["DomainServiceProvider<br/>(interface to implementation bindings)"]
@@ -133,6 +146,13 @@ erDiagram
     AFFILIATE_NETWORKS ||--o| CONNECTIONS : "default network"
     OFFERS ||--o{ PAGES : "presented by (pageable morph)"
     CONNECTIONS ||--o{ PAGES : "presented by (pageable morph)"
+    OFFERS ||--o{ OFFER_AUDIENCE : "targets cohorts"
+    AUDIENCES ||--o{ OFFER_AUDIENCE : "served by offers"
+    OFFERS ||--o{ SOURCES : "cited by (sourceable morph)"
+    RESEARCH ||--o{ SOURCES : "cited by (sourceable morph)"
+    PAGES ||--o{ SOURCES : "cited by (sourceable morph)"
+    PAGES ||--o{ FAQS : "has (faqable morph)"
+    OFFERS ||--o{ FAQS : "has (faqable morph)"
 
     CONNECTIONS {
         bigint id PK
@@ -285,6 +305,41 @@ erDiagram
         bool is_active
         int hits
     }
+
+    AUDIENCES {
+        bigint id PK
+        string key UK "enum Audience value"
+        string label
+        int sort_order
+    }
+
+    OFFER_AUDIENCE {
+        bigint id PK
+        bigint offer_id FK
+        bigint audience_id FK
+    }
+
+    SOURCES {
+        bigint id PK
+        string sourceable_type "morph: Offer/Research/Page"
+        bigint sourceable_id
+        string label
+        string url
+        string publisher
+        string source_type "primary/official/…"
+        date accessed_at
+        string confidence "enum ConfidenceLevel"
+        int sort_order
+    }
+
+    FAQS {
+        bigint id PK
+        string faqable_type "morph: Page/Offer/pillar"
+        bigint faqable_id
+        string question
+        text answer
+        int sort_order
+    }
 ```
 
 > `pages` now carries the full SEO/JSON-LD head-meta layer (title, description,
@@ -297,6 +352,25 @@ erDiagram
 > pages derive their body from the Offer/Connection; only static pages need stored
 > body). `connections.category` is kept as the raw industry string; the category-hub
 > FK lands with the rendering slice.
+
+> **Shared taxonomy (slice 6).** `audiences` is a small lookup seeded from the
+> `Audience` enum (its `label` is a seeded default the CMS can later override);
+> `offer_audience` normalizes the legacy 9 audience booleans into a many-to-many so
+> offers can be filtered by cohort and JSON-LD can enumerate them. Audience is
+> represented at **two levels on purpose**: `connections.audiences` (JSON enum
+> collection) is the coarse brand-level tag set for CRM filtering, while
+> `offer_audience` is the precise per-offer eligibility that drives page rendering
+> and schema — the pivot is authoritative for an offer; the connection JSON is not
+> migrated onto it.
+> `sources` (citations) and `faqs` are **polymorphic** — one table each, morphed onto
+> Offer/Research/Page (sources) and Page/Offer (faqs, later pillars). FAQs are the
+> single source for both the rendered FAQ and its FAQPage JSON-LD, so the hard
+> schema↔content parity gate compares them against one row set. These shared/lookup
+> tables carry no repository of their own — reads route through the aggregate they
+> hang off (the Offer repository eager-loads `audiences` + `sources` on the
+> `/discount/` path). Polymorphic rows have no DB-level cascade; parent hard-deletes
+> that should also drop citations/FAQs are handled when the Filament relation
+> managers / importers land.
 
 ## Request / redirect pipeline
 

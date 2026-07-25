@@ -12,9 +12,11 @@ final class EloquentOfferRepository implements OfferRepositoryInterface
     public function forConnection(int $connectionId): Collection
     {
         // Eager-load the aggregate's children — this is the /discount/ page read
-        // path, where accessing ->tiers / ->redemptionSteps per offer would N+1.
+        // path, where accessing ->tiers / ->redemptionSteps / ->audiences /
+        // ->sources per offer would N+1 (audiences drive JSON-LD, sources the
+        // key-facts citations).
         return Offer::query()
-            ->with(['tiers', 'redemptionSteps'])
+            ->with(['tiers', 'redemptionSteps', 'audiences', 'sources'])
             ->where('connection_id', $connectionId)
             ->orderByDesc('is_primary')
             ->orderBy('sort_order')
