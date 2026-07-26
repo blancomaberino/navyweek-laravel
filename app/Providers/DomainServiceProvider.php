@@ -6,10 +6,16 @@ namespace App\Providers;
 
 use App\Domain\Catalog\Repositories\AffiliateLinkRepositoryInterface;
 use App\Domain\Catalog\Repositories\AffiliateNetworkRepositoryInterface;
+use App\Domain\Catalog\Repositories\DiscountCategoryRepositoryInterface;
 use App\Domain\Catalog\Repositories\EloquentAffiliateLinkRepository;
 use App\Domain\Catalog\Repositories\EloquentAffiliateNetworkRepository;
+use App\Domain\Catalog\Repositories\EloquentDiscountCategoryRepository;
+use App\Domain\Catalog\Repositories\EloquentLocalDiscountRepository;
 use App\Domain\Catalog\Repositories\EloquentOfferRepository;
+use App\Domain\Catalog\Repositories\EloquentVeteransDayMealRepository;
+use App\Domain\Catalog\Repositories\LocalDiscountRepositoryInterface;
 use App\Domain\Catalog\Repositories\OfferRepositoryInterface;
+use App\Domain\Catalog\Repositories\VeteransDayMealRepositoryInterface;
 use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
 use App\Domain\Crm\Repositories\EloquentConnectionRepository;
 use App\Domain\Pillars\Repositories\BaseRepositoryInterface;
@@ -47,6 +53,9 @@ class DomainServiceProvider extends ServiceProvider
         OfferRepositoryInterface::class => EloquentOfferRepository::class,
         AffiliateNetworkRepositoryInterface::class => EloquentAffiliateNetworkRepository::class,
         AffiliateLinkRepositoryInterface::class => EloquentAffiliateLinkRepository::class,
+        DiscountCategoryRepositoryInterface::class => EloquentDiscountCategoryRepository::class,
+        VeteransDayMealRepositoryInterface::class => EloquentVeteransDayMealRepository::class,
+        LocalDiscountRepositoryInterface::class => EloquentLocalDiscountRepository::class,
         ResearchRepositoryInterface::class => EloquentResearchRepository::class,
         BaseRepositoryInterface::class => EloquentBaseRepository::class,
         RankRepositoryInterface::class => EloquentRankRepository::class,

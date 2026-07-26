@@ -7,8 +7,10 @@ or request-flow step must update this file in the same PR (see `platform/CLAUDE.
 Scope reflects what is **built so far**. Planned-but-not-yet-built entities are drawn
 with dashed borders and are not wired up until their slice lands.
 
-Last updated: Phase 2 slice 8 — Ranks pillar: `ranks` single-table inheritance over the
-`category` discriminator (officers / enlisted / designators / ratings), self-ref + base slug links.
+Last updated: Phase 2 slice 9 — Catalog directories: `discount_categories` hubs,
+`veterans_day_meals` seasonal roundup, and `local_discounts` (+ `local_stores` /
+`local_store_hours`) local pages; local pages reuse `us_states` + the shared polymorphic
+`faqs`/`sources`. (Slice 8: `ranks` single-table inheritance over the `category` discriminator.)
 
 ## Domain modules & data access
 
@@ -33,7 +35,7 @@ flowchart TB
         AudienceModel -.seeded from.-> AudienceEnum
     end
 
-    subgraph Catalog["Catalog module (offers + affiliate)"]
+    subgraph Catalog["Catalog module (offers, affiliate, directories)"]
         Offer["Offer (model)"]
         OfferTier["OfferTier (model)"]
         RedemptionStep["RedemptionStep (model)"]
@@ -55,6 +57,27 @@ flowchart TB
         Offer -->|hasMany| AffLink
         AffLink -->|belongsTo| AffNetwork
         Tagger -->|reads subid_param| AffNetwork
+        DiscountCategory["DiscountCategory (model)<br/>/discount/ hubs"]
+        CatIface["DiscountCategoryRepositoryInterface"]
+        CatRepo["EloquentDiscountCategoryRepository"]
+        Meal["VeteransDayMeal (model)"]
+        MealIface["VeteransDayMealRepositoryInterface"]
+        MealRepo["EloquentVeteransDayMealRepository"]
+        MealEnums["enums MealEligibility /<br/>MealRedemption / MealStatus"]
+        LocalDiscount["LocalDiscount (model)"]
+        LocalStore["LocalStore (model)"]
+        LocalStoreHours["LocalStoreHours (model)"]
+        LocalIface["LocalDiscountRepositoryInterface"]
+        LocalRepo["EloquentLocalDiscountRepository"]
+        LocalVerif["enum LocalVerification"]
+        CatRepo -. implements .-> CatIface
+        MealRepo -. implements .-> MealIface
+        LocalRepo -. implements .-> LocalIface
+        CatRepo --> DiscountCategory
+        MealRepo --> Meal
+        LocalRepo --> LocalDiscount
+        LocalDiscount -->|hasMany| LocalStore
+        LocalStore -->|hasMany| LocalStoreHours
     end
 
     Connection -->|"hasMany (one brand, many offers)"| Offer
@@ -110,6 +133,10 @@ flowchart TB
     Page -.->|"morphMany sources"| Source
     Page -.->|"morphMany faqs"| Faq
     Offer -.->|"morphMany faqs"| Faq
+    LocalDiscount -.->|"morphMany sources"| Source
+    LocalDiscount -.->|"morphMany faqs"| Faq
+    Connection -.->|"category = match_category (soft)"| DiscountCategory
+    Meal -.->|"discount_slug → Connection (soft)"| Connection
 
     subgraph Pillars["Pillars module (reference content)"]
         BaseModel["Base (model)"]
@@ -140,9 +167,10 @@ flowchart TB
     BaseModel -.->|"morphMany faqs"| Faq
     RankModel -.->|"morphMany sources"| Source
     RankModel -.->|"morphMany faqs"| Faq
+    LocalDiscount -.->|"belongsTo (state slug)"| UsState
 
     subgraph Planned["Planned (not yet built)"]
-        Pillars2["events / fleet weeks / air shows / jet teams / local discounts — Pillars"]:::planned
+        Pillars2["events / fleet weeks / air shows / jet teams — Pillars"]:::planned
     end
 
     DSP["DomainServiceProvider<br/>(interface to implementation bindings)"]
@@ -155,6 +183,9 @@ flowchart TB
     DSP -.binds.-> RedirIface
     DSP -.binds.-> BaseIface
     DSP -.binds.-> RankIface
+    DSP -.binds.-> CatIface
+    DSP -.binds.-> MealIface
+    DSP -.binds.-> LocalIface
 
     classDef planned stroke-dasharray: 5 5,stroke:#999,color:#999;
 ```
@@ -438,6 +469,70 @@ erDiagram
         string related_base_slug "soft FK → bases"
         date last_updated
     }
+
+    CONNECTIONS ||--o{ DISCOUNT_CATEGORIES : "grouped by (category = match_category, soft)"
+    CONNECTIONS ||--o{ VETERANS_DAY_MEALS : "discount_slug (soft FK)"
+    US_STATES ||--o{ LOCAL_DISCOUNTS : "in state (state slug, soft FK)"
+    LOCAL_DISCOUNTS ||--o{ LOCAL_STORES : "has storefronts"
+    LOCAL_STORES ||--o{ LOCAL_STORE_HOURS : "has opening-hours spans"
+    LOCAL_DISCOUNTS ||--o{ SOURCES : "cited by (sourceable morph)"
+    LOCAL_DISCOUNTS ||--o{ FAQS : "has (faqable morph)"
+
+    DISCOUNT_CATEGORIES {
+        bigint id PK
+        string slug UK
+        string name
+        string match_category "groups connections.category"
+        json intro "lead paragraphs"
+        json pinned_excluded_order "soft slug ordering overrides"
+        string og_image
+        date date_published_modified "build clock"
+        string last_verified "human label"
+    }
+
+    VETERANS_DAY_MEALS {
+        bigint id PK
+        string slug UK
+        string brand
+        string discount_slug "soft FK → connections, nullable"
+        json eligibility "enum MealEligibility[]"
+        bool dependents_eligible
+        string redemption "enum MealRedemption"
+        string source_url "PRIMARY — required to render"
+        date last_verified_at "drives Verified badge"
+        string status "enum MealStatus (render gate)"
+    }
+
+    LOCAL_DISCOUNTS {
+        bigint id PK
+        string state "us_states slug (soft FK)"
+        string city
+        string business_slug "UK(state,city,business_slug)"
+        string company
+        string verification "enum LocalVerification"
+        bool audience_flags "active_duty/veterans/retirees/reserve_guard/military_family"
+        json display_lists "tiers, redeem_in_store, exclusions, nearby_bases, intro, details, key_facts"
+        date date_published_modified "build clock"
+    }
+
+    LOCAL_STORES {
+        bigint id PK
+        bigint local_discount_id FK
+        string name
+        decimal lat
+        decimal lng
+        int sort_order "0 = primary NAP + schema"
+    }
+
+    LOCAL_STORE_HOURS {
+        bigint id PK
+        bigint local_store_id FK
+        string days "human label"
+        json day_of_week "schema.org day names"
+        string opens
+        string closes
+        int sort_order
+    }
 ```
 
 > `pages` now carries the full SEO/JSON-LD head-meta layer (title, description,
@@ -489,8 +584,7 @@ erDiagram
 > only the cohesive, base-specific display lists (`aka`, `major_units`, `key_facts`,
 > `notable_events`, `nearby_bases`) stay JSON. Base pages (pageable → Base) and the
 > body columns arrive with the Phase 3 rendering slice. Remaining reference pillars
-> (events, fleet weeks, air shows, jet teams, local discounts, veterans-day meals)
-> land in subsequent slices.
+> (events, fleet weeks, air shows, jet teams) land in subsequent slices.
 
 > **Ranks pillar (slice 8).** Modeled as **single-table inheritance**: one `ranks`
 > table, `category` the discriminator over the legacy `NavyRankEntry` union (officer
@@ -508,6 +602,29 @@ erDiagram
 > officers/enlisted → `/navy-ranks/#slug`, ratings → `/navy-ratings/#slug`,
 > designators → `/navy-designators/<slug>/` — is a Page/rendering concern (later
 > slice), not stored on `ranks`.
+
+> **Catalog directories (slice 9).** Three discount-content aggregates in the
+> Catalog module, alongside the offers. **`discount_categories`** are the
+> `/discount/<slug>/` hubs (port of `categories.ts`): a hub lists every Connection
+> whose `category` equals `match_category`, and the three ordering overrides
+> (`pinned`, `excluded`, `order`) are soft slug lists resolved at read time by
+> `EloquentDiscountCategoryRepository::orderedConnections` (the port of
+> `orderCategoryDiscounts`) — which connections are "live" is a Phase-3 render
+> concern, not the ordering algorithm. **`veterans_day_meals`** is the seasonal
+> roundup (port of `veterans-day-meals/*`): a strict YMYL render gate — the
+> repository's `verified()` returns only `status = verified` rows that carry a
+> primary `source_url`, and lapsed offers flip to `discontinued` (stop rendering)
+> rather than being deleted; `discount_slug` soft-links to the brand's `/discount/`
+> guide (nullable = a backlog brand, not an error). **`local_discounts`** are the
+> geographic `/discounts/<state>/<city>/<business>/` pages (port of
+> `localDiscounts/*`): `state` is a soft slug FK to the shared `us_states` lookup;
+> the military `audience` is the legacy fixed 5-flag struct kept as booleans; the
+> storefronts and their opening hours are the `local_stores` → `local_store_hours`
+> children (first store = primary NAP + LocalBusiness schema). Like the pillars,
+> local pages reuse the **shared polymorphic `faqs`/`sources`** tables; only the
+> cohesive display lists (tiers, redeem steps, exclusions, nearby bases, key facts,
+> intro/details) stay JSON. All three carry build-clock `date_published`/
+> `date_modified`, per the site's date policy.
 
 ## Request / redirect pipeline
 
