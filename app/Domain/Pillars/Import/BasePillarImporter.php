@@ -78,11 +78,8 @@ final class BasePillarImporter
 
             $base = Base::query()->updateOrCreate(['slug' => $row['slug']], $row);
 
-            $base->faqs()->delete();
-            $base->faqs()->createMany($faqs);
-
-            $base->sources()->delete();
-            $base->sources()->createMany($sources);
+            $base->replaceFaqs($faqs);
+            $base->replaceSources($sources);
         }
 
         return count($rows);

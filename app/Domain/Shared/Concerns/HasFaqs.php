@@ -28,4 +28,17 @@ trait HasFaqs
     {
         return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
     }
+
+    /**
+     * Replace this model's FAQs with the given rows — deletes the existing set,
+     * then recreates it. The idempotency contract (delete-then-recreate, so a
+     * re-import never duplicates) lives here once, for every Stage-B importer.
+     *
+     * @param  iterable<int, array<string, mixed>>  $rows
+     */
+    public function replaceFaqs(iterable $rows): void
+    {
+        $this->faqs()->delete();
+        $this->faqs()->createMany($rows);
+    }
 }

@@ -29,4 +29,17 @@ trait HasSources
     {
         return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
     }
+
+    /**
+     * Replace this model's sources with the given rows — deletes the existing
+     * set, then recreates it. The idempotency contract (delete-then-recreate, so
+     * a re-import never duplicates) lives here once, for every Stage-B importer.
+     *
+     * @param  iterable<int, array<string, mixed>>  $rows
+     */
+    public function replaceSources(iterable $rows): void
+    {
+        $this->sources()->delete();
+        $this->sources()->createMany($rows);
+    }
 }

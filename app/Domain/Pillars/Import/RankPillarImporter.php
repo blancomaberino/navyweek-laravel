@@ -39,11 +39,8 @@ final class RankPillarImporter
 
                 $rank = Rank::query()->updateOrCreate(['slug' => $row['slug']], $row);
 
-                $rank->faqs()->delete();
-                $rank->faqs()->createMany($faqs);
-
-                $rank->sources()->delete();
-                $rank->sources()->createMany($sources);
+                $rank->replaceFaqs($faqs);
+                $rank->replaceSources($sources);
             }
 
             return ['ranks' => count($rows)];
