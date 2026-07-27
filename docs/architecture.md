@@ -7,10 +7,10 @@ or request-flow step must update this file in the same PR (see `platform/CLAUDE.
 Scope reflects what is **built so far**. Planned-but-not-yet-built entities are drawn
 with dashed borders and are not wired up until their slice lands.
 
-Last updated: Phase 2 slice 9 — Catalog directories: `discount_categories` hubs,
-`veterans_day_meals` seasonal roundup, and `local_discounts` (+ `local_stores` /
-`local_store_hours`) local pages; local pages reuse `us_states` + the shared polymorphic
-`faqs`/`sources`. (Slice 8: `ranks` single-table inheritance over the `category` discriminator.)
+Last updated: Phase 2 slice 10a — Events silo (guides): `navy_week_events` (folds the
+legacy event + city detail), `fleet_weeks` block-template guides, and `air_shows` (+ the
+single-row `air_show_hub`); all reuse the shared polymorphic `faqs`/`sources`. The jet-teams
+sub-silo lands in 10b. (Slice 9: Catalog directories — categories, meals, local pages.)
 
 ## Domain modules & data access
 
@@ -161,6 +161,26 @@ flowchart TB
         RankRepo --> RankModel
         RankModel -->|"next/previous/merged_into (self-ref slug)"| RankModel
         RankModel -->|"belongsTo (related_base / a_school slug)"| BaseModel
+        NavyWeek["NavyWeekEvent (model)<br/>+ city detail"]
+        NavyWeekIface["NavyWeekEventRepositoryInterface"]
+        NavyWeekRepo["EloquentNavyWeekEventRepository"]
+        NavyWeekEnums["enums NavyWeekStatus /<br/>NavyWeekSourceLevel"]
+        FleetWeek["FleetWeek (model)<br/>block template"]
+        FleetWeekIface["FleetWeekRepositoryInterface"]
+        FleetWeekRepo["EloquentFleetWeekRepository"]
+        FleetWeekEnums["enums FleetWeekSeason /<br/>FleetWeekStatus"]
+        AirShow["AirShow (model)"]
+        AirShowHub["AirShowHubMeta (model)<br/>single hub row"]
+        AirShowIface["AirShowRepositoryInterface"]
+        AirShowRepo["EloquentAirShowRepository"]
+        AirShowEnums["enums AirShowStatus / Admission"]
+        NavyWeekRepo -. implements .-> NavyWeekIface
+        FleetWeekRepo -. implements .-> FleetWeekIface
+        AirShowRepo -. implements .-> AirShowIface
+        NavyWeekRepo --> NavyWeek
+        FleetWeekRepo --> FleetWeek
+        AirShowRepo --> AirShow
+        AirShowRepo --> AirShowHub
     end
 
     BaseModel -.->|"morphMany sources"| Source
@@ -168,9 +188,13 @@ flowchart TB
     RankModel -.->|"morphMany sources"| Source
     RankModel -.->|"morphMany faqs"| Faq
     LocalDiscount -.->|"belongsTo (state slug)"| UsState
+    NavyWeek -.->|"morphMany sources / faqs"| Source
+    FleetWeek -.->|"morphMany sources / faqs"| Source
+    AirShow -.->|"morphMany sources / faqs"| Source
+    AirShowHub -.->|"morphMany faqs"| Faq
 
     subgraph Planned["Planned (not yet built)"]
-        Pillars2["events / fleet weeks / air shows / jet teams — Pillars"]:::planned
+        Pillars2["jet teams (+ schedule + cities) — Pillars, slice 10b"]:::planned
     end
 
     DSP["DomainServiceProvider<br/>(interface to implementation bindings)"]
@@ -186,6 +210,9 @@ flowchart TB
     DSP -.binds.-> CatIface
     DSP -.binds.-> MealIface
     DSP -.binds.-> LocalIface
+    DSP -.binds.-> NavyWeekIface
+    DSP -.binds.-> FleetWeekIface
+    DSP -.binds.-> AirShowIface
 
     classDef planned stroke-dasharray: 5 5,stroke:#999,color:#999;
 ```
@@ -533,6 +560,64 @@ erDiagram
         string closes
         int sort_order
     }
+
+    NAVY_WEEK_EVENTS ||--o{ SOURCES : "official sources (sourceable morph)"
+    NAVY_WEEK_EVENTS ||--o{ FAQS : "has (faqable morph)"
+    FLEET_WEEKS ||--o{ SOURCES : "cited by (sourceable morph)"
+    FLEET_WEEKS ||--o{ FAQS : "has (faqable morph)"
+    AIR_SHOWS ||--o{ SOURCES : "cited by (sourceable morph)"
+    AIR_SHOWS ||--o{ FAQS : "has (faqable morph)"
+    AIR_SHOW_HUB ||--o{ FAQS : "has (faqable morph)"
+
+    NAVY_WEEK_EVENTS {
+        bigint id PK
+        int sequence UK "legacy id — canonical 1..N order"
+        string slug UK
+        string city
+        date start_date
+        date end_date
+        string anchor_event
+        bool first_time
+        bool first_time_location "nullable"
+        string status "enum NavyWeekStatus"
+        json city_detail "venues, daily_schedule, navy_assets, highlights, … (all nullable)"
+        date last_verified_at "nullable"
+    }
+
+    FLEET_WEEKS {
+        bigint id PK
+        string slug UK
+        string city
+        int year
+        string season "enum FleetWeekSeason"
+        bool has_official_fleet_week "Tier-3 = false"
+        bool has_air_show
+        string status "enum FleetWeekStatus"
+        json blocks "intro, schedule, airshow, parade, ship_tours, viewing_spots, festival, past_years, …"
+        date date_published_modified "build clock"
+    }
+
+    AIR_SHOWS {
+        bigint id PK
+        string slug UK
+        string name
+        string admission "enum Admission (FREE/TICKETED)"
+        string status "enum AirShowStatus"
+        bool published "render gate"
+        bool date_unconfirmed "suppresses Event JSON-LD"
+        string canonical_override "nullable — disambiguation page"
+        json body "sections, location, offer, organizer, performers, quick_facts, …"
+        date date_published_modified "build clock"
+    }
+
+    AIR_SHOW_HUB {
+        bigint id PK
+        string base_path UK "e.g. /air-show"
+        int year
+        string hub_title
+        json copy "intro, key_facts, about"
+        date date_published_modified "build clock"
+    }
 ```
 
 > `pages` now carries the full SEO/JSON-LD head-meta layer (title, description,
@@ -583,8 +668,8 @@ erDiagram
 > rather than JSON columns — the reason those were made polymorphic in slice 6;
 > only the cohesive, base-specific display lists (`aka`, `major_units`, `key_facts`,
 > `notable_events`, `nearby_bases`) stay JSON. Base pages (pageable → Base) and the
-> body columns arrive with the Phase 3 rendering slice. Remaining reference pillars
-> (events, fleet weeks, air shows, jet teams) land in subsequent slices.
+> body columns arrive with the Phase 3 rendering slice. The remaining reference
+> pillar (the jet-teams sub-silo) lands in slice 10b.
 
 > **Ranks pillar (slice 8).** Modeled as **single-table inheritance**: one `ranks`
 > table, `category` the discriminator over the legacy `NavyRankEntry` union (officer
@@ -625,6 +710,27 @@ erDiagram
 > cohesive display lists (tiers, redeem steps, exclusions, nearby bases, key facts,
 > intro/details) stay JSON. All three carry build-clock `date_published`/
 > `date_modified`, per the site's date policy.
+
+> **Events silo — guides (slice 10a).** Three event-content aggregates in the
+> Pillars module (the jet-teams sub-silo follows in 10b). **`navy_week_events`**
+> folds the legacy `NavyWeekEvent` + `CityData` + `CityExtras` into one row per
+> city — the three-file split was a file-organization artifact, all keyed by slug.
+> `sequence` preserves the legacy numeric `id` (the canonical 1..N stop order); the
+> rich city-detail block (venues, daily schedule, military context) is optional
+> JSON, so a stop can exist before its detail is compiled. **`fleet_weeks`** are the
+> `/fleetweek/<slug>/` city guides driven by one flexible block template:
+> `has_official_fleet_week`/`has_air_show` and `status` gate which blocks render, so
+> a Tier-3 city with no standing event sets the flag false, nulls the festival/
+> air-show payloads, and the template hides those blocks while still answering "is
+> there a fleet week in {city}?" honestly. **`air_shows`** are the `/air-show/<slug>/`
+> event guides — `published` gates the page, `date_unconfirmed` suppresses the Event
+> JSON-LD (schema requires real dates), and `canonical_override` marks a
+> disambiguation/router page that canonicalizes to another guide (all three encoded
+> once on `AirShow::emitsEventSchema()`); the `/air-show/` landing page is the
+> single-row **`air_show_hub`**. Every aggregate reuses the **shared polymorphic
+> `faqs`/`sources`** tables (official sources for Navy Week; citations for the
+> guides); the block payloads (schedule, sections, festival/location/offer schema
+> inputs) stay JSON. The guides carry build-clock `date_published`/`date_modified`.
 
 ## Request / redirect pipeline
 
