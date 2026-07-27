@@ -18,9 +18,15 @@ use App\Domain\Catalog\Repositories\OfferRepositoryInterface;
 use App\Domain\Catalog\Repositories\VeteransDayMealRepositoryInterface;
 use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
 use App\Domain\Crm\Repositories\EloquentConnectionRepository;
+use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
 use App\Domain\Pillars\Repositories\BaseRepositoryInterface;
+use App\Domain\Pillars\Repositories\EloquentAirShowRepository;
 use App\Domain\Pillars\Repositories\EloquentBaseRepository;
+use App\Domain\Pillars\Repositories\EloquentFleetWeekRepository;
+use App\Domain\Pillars\Repositories\EloquentNavyWeekEventRepository;
 use App\Domain\Pillars\Repositories\EloquentRankRepository;
+use App\Domain\Pillars\Repositories\FleetWeekRepositoryInterface;
+use App\Domain\Pillars\Repositories\NavyWeekEventRepositoryInterface;
 use App\Domain\Pillars\Repositories\RankRepositoryInterface;
 use App\Domain\Publishing\Repositories\EloquentPageRepository;
 use App\Domain\Publishing\Repositories\EloquentRedirectRepository;
@@ -59,6 +65,9 @@ class DomainServiceProvider extends ServiceProvider
         ResearchRepositoryInterface::class => EloquentResearchRepository::class,
         BaseRepositoryInterface::class => EloquentBaseRepository::class,
         RankRepositoryInterface::class => EloquentRankRepository::class,
+        NavyWeekEventRepositoryInterface::class => EloquentNavyWeekEventRepository::class,
+        FleetWeekRepositoryInterface::class => EloquentFleetWeekRepository::class,
+        AirShowRepositoryInterface::class => EloquentAirShowRepository::class,
     ];
 
     public function register(): void
