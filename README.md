@@ -43,7 +43,7 @@ Domain-first (modular monolith) under `app/Domain/*`:
 | Module | Responsibility |
 |---|---|
 | `Crm` | Connections (brands) + pipeline |
-| `Catalog` | Offers, tiers, affiliate links |
+| `Catalog` | Offers, tiers, affiliate links, category hubs, local & seasonal directories |
 | `Publishing` | Pages, redirects, SEO/JSON-LD, sitemap |
 | `Research` | Briefs, cadence, skill provenance, automation |
 | `Pillars` | Bases, ranks, events, air shows, etc. |
@@ -93,15 +93,25 @@ same PR that introduces the model/repo (enforced by `CLAUDE.md`).
 | Repository | `Pillars\Repositories\BaseRepositoryInterface` → `EloquentBaseRepository` | Pillars | Base pillar reads mirroring the legacy hubs: `findBySlug`, `forState`, `forCountry`, `forType`, `forRegion`. |
 | Model | `Pillars\Models\Rank` | Pillars | A rank / paygrade / designator / rating (2nd reference pillar), single-table inheritance over the `category` discriminator. Common columns + nullable per-category variant groups; self-ref `next`/`previous`/`merged_into`/`related_*` links by slug; FAQs/sources via the shared polymorphic tables. |
 | Repository | `Pillars\Repositories\RankRepositoryInterface` → `EloquentRankRepository` | Pillars | Rank pillar reads: `findBySlug` and `forCategory` (the list-page grouping, ordered by paygrade then name). |
+| Model | `Catalog\Models\DiscountCategory` | Catalog | A discount category hub (`/discount/<slug>/`) listing every Connection whose `category` matches `match_category`; the ordering overrides (`pinned`/`excluded`/`order`) are soft slug lists resolved at read time. |
+| Repository | `Catalog\Repositories\DiscountCategoryRepositoryInterface` → `EloquentDiscountCategoryRepository` | Catalog | Category-hub reads: `findBySlug`, `all`, and `orderedConnections` (the port of `orderCategoryDiscounts` — pinned/excluded/explicit-order). |
+| Model | `Catalog\Models\VeteransDayMeal` | Catalog | One brand's Veterans Day free-meal offer (seasonal roundup under `/veterans-day/`). YMYL render gate: shown only when `status = verified` AND a primary `source_url` is present; `discount_slug` soft-links to the brand's `/discount/` guide. |
+| Repository | `Catalog\Repositories\VeteransDayMealRepositoryInterface` → `EloquentVeteransDayMealRepository` | Catalog | Meal-roundup reads: `findBySlug` and `verified` (the render-gated, brand-ordered list). |
+| Model | `Catalog\Models\LocalDiscount` | Catalog | A local-business discount page (`/discounts/<state>/<city>/<business>/`) — geographic identity, the fixed 5-flag military audience, JSON display lists; `state` soft-FKs the shared `us_states` lookup, FAQs/sources via the shared polymorphic tables. |
+| Model | `Catalog\Models\LocalStore` | Catalog | A physical storefront for a `LocalDiscount` (the legacy `locations[]`); first (`sort_order` 0) is the primary NAP + LocalBusiness schema source. |
+| Model | `Catalog\Models\LocalStoreHours` | Catalog | One opening-hours span for a `LocalStore` (the legacy `hours[]`), mapped to schema.org `openingHoursSpecification`. |
+| Repository | `Catalog\Repositories\LocalDiscountRepositoryInterface` → `EloquentLocalDiscountRepository` | Catalog | Local-page reads: `find` (state/city/business triple) and the `forState`/`forCity` rollups. |
 
 Reads for the shared/lookup tables (`audiences`, `sources`, `faqs`, `us_states`,
 `overseas_countries`) route through the aggregate they hang off (the Offer
 repository eager-loads `audiences` + `sources` on the `/discount/` read path;
 sources/faqs are reached via their parent's morph relation; the state/country
-lookups via `Base`), so they add no repository of their own — only the `Base`
-aggregate carries one.
+lookups via `Base`, and `us_states` also via `LocalDiscount`), so they add no
+repository of their own — the pillar and catalog-directory aggregates carry
+theirs. The `local_stores` / `local_store_hours` children are likewise reached
+through their `LocalDiscount` parent, not a repository of their own.
 
-Supporting types: value object `Shared\ValueObjects\UrlPath`; services `Publishing\Services\LegacyPathResolver`, `Catalog\Services\AffiliateLinkTagger` (port of `withPlacement` — the outbound sub-ID tagging choke point); enums `Crm\Enums\{ConnectionStatus,Audience}`, `Catalog\Enums\{OfferType,VerificationProvider,RedemptionChannel,Placement}`, `Research\Enums\{ResearchStatus,ResearchedBy}`, `Shared\Enums\{ConfidenceLevel,SourceType}` (confidence is shared by briefs + citations), `Pillars\Enums\{BaseType,CombatantCommand,RegionType,RankCategory,DesignatorCommunity,RatingCommunity,HistoricRatingEra}`, `Publishing\Enums\{PageType,RedirectMatchType}`. Seeders: `AffiliateNetworkSeeder` (the 7 networks), `AudienceSeeder` (audience vocabulary from the enum).
+Supporting types: value object `Shared\ValueObjects\UrlPath`; services `Publishing\Services\LegacyPathResolver`, `Catalog\Services\AffiliateLinkTagger` (port of `withPlacement` — the outbound sub-ID tagging choke point); enums `Crm\Enums\{ConnectionStatus,Audience}`, `Catalog\Enums\{OfferType,VerificationProvider,RedemptionChannel,Placement,MealEligibility,MealRedemption,MealStatus,LocalVerification}`, `Research\Enums\{ResearchStatus,ResearchedBy}`, `Shared\Enums\{ConfidenceLevel,SourceType}` (confidence is shared by briefs + citations), `Pillars\Enums\{BaseType,CombatantCommand,RegionType,RankCategory,DesignatorCommunity,RatingCommunity,HistoricRatingEra}`, `Publishing\Enums\{PageType,RedirectMatchType}`. Seeders: `AffiliateNetworkSeeder` (the 7 networks), `AudienceSeeder` (audience vocabulary from the enum).
 
 ## Quality gates (per the rebuild workflow)
 
