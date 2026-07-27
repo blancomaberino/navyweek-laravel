@@ -165,8 +165,12 @@ command and a `*ImportTest` that runs against the real committed artifacts
   exporter's `team` natural key (the legacy row has no team field); a stop has no
   natural unique key (a city slug recurs in a season), so each team's stops are
   replaced wholesale on re-import, while hubs/cities upsert by their unique key.
+- **discount categories** (`import:discount-categories`) — the `/discount/<slug>`
+  category hubs (`discount_categories`); a flat camelCase→snake_case rename with the
+  intro/pinned/excluded/order arrays as JSON and no polymorphic children.
 
-Later slices add the remaining domains (catalog/CRM) through the same framework.
+Later slices add the remaining catalog/CRM domains (the brand → offer → research →
+page normalization of the ~990 discount records) through the same framework.
 
 ## Quality gates (per the rebuild workflow)
 
