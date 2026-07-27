@@ -165,6 +165,9 @@ command and a `*ImportTest` that runs against the real committed artifacts
   exporter's `team` natural key (the legacy row has no team field); a stop has no
   natural unique key (a city slug recurs in a season), so each team's stops are
   replaced wholesale on re-import, while hubs/cities upsert by their unique key.
+- **veterans day meals** (`import:veterans-day-meals`) — the Veterans Day free-meal
+  roundup (`veterans_day_meals`); a flat rename with `eligibility` as an enum-string
+  array. All statuses import (pending included) — the render gate filters on read.
 
 Later slices add the remaining domains (catalog/CRM) through the same framework.
 
