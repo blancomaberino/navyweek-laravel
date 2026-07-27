@@ -44,11 +44,8 @@ final class EventGuidesImporter
 
             $model = FleetWeek::query()->updateOrCreate(['slug' => $row['slug']], $row);
 
-            $model->faqs()->delete();
-            $model->faqs()->createMany($faqs);
-
-            $model->sources()->delete();
-            $model->sources()->createMany($sources);
+            $model->replaceFaqs($faqs);
+            $model->replaceSources($sources);
         }
 
         return count($rows);
@@ -67,11 +64,8 @@ final class EventGuidesImporter
 
             $model = AirShow::query()->updateOrCreate(['slug' => $row['slug']], $row);
 
-            $model->faqs()->delete();
-            $model->faqs()->createMany($faqs);
-
-            $model->sources()->delete();
-            $model->sources()->createMany($sources);
+            $model->replaceFaqs($faqs);
+            $model->replaceSources($sources);
         }
 
         return count($rows);
@@ -88,8 +82,7 @@ final class EventGuidesImporter
 
             $hub = AirShowHubMeta::query()->updateOrCreate(['base_path' => $row['base_path']], $row);
 
-            $hub->faqs()->delete();
-            $hub->faqs()->createMany($faqs);
+            $hub->replaceFaqs($faqs);
         }
 
         return count($rows);
