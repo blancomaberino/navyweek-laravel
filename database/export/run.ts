@@ -8,4 +8,5 @@
 import './air-shows';
 import './bases';
 import './fleet-weeks';
+import './jet-teams';
 import './ranks';

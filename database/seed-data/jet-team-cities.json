@@ -1,0 +1,438 @@
+[
+  {
+    "team": "blue-angels",
+    "slug": "anchorage",
+    "city": "Anchorage",
+    "state": "AK",
+    "state_name": "Alaska",
+    "year": 2026,
+    "show": "Arctic Thunder Air Show & Open House",
+    "venue": "Joint Base Elmendorf-Richardson",
+    "admission": "FREE",
+    "dates_label": "August 8–9, 2026",
+    "start_date": "2026-08-08",
+    "end_date": "2026-08-09",
+    "second_dates_label": null,
+    "second_start_date": null,
+    "second_end_date": null,
+    "status": "scheduled",
+    "published": true,
+    "needs_verification": [
+      "parking/shuttle plan",
+      "base access rules"
+    ],
+    "hero_dateline": "Saturday–Sunday, August 8–9, 2026 · Joint Base Elmendorf-Richardson · FREE EVENT",
+    "dek": null,
+    "intro": [
+      "The Blue Angels headline Arctic Thunder at Joint Base Elmendorf-Richardson — Alaska's biggest public event of any kind, a free open house on the joint base that guards the top of the world, with the Chugach Mountains as the show's back wall."
+    ],
+    "quick_facts": [
+      {
+        "label": "Team",
+        "value": "U.S. Navy Blue Angels"
+      },
+      {
+        "label": "Show",
+        "value": "Arctic Thunder Air Show & Open House"
+      },
+      {
+        "label": "Venue",
+        "value": "Joint Base Elmendorf-Richardson (JBER)"
+      },
+      {
+        "label": "Dates",
+        "value": "August 8–9, 2026"
+      },
+      {
+        "label": "Admission",
+        "value": "Free — admission, viewing, and parking"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why Anchorage Is a Special Stop",
+        "paragraphs": [
+          "Arctic Thunder runs only every other year, and when it does, it draws crowds that rival Anchorage's entire population — for many Alaskans it's the one chance in two years to see any air show at all, let alone the Navy's flagship team. JBER itself supplies a lineup no Lower-48 show can: F-22 Raptors are *based here*, and the Raptor demo over its home field, against mountains still snow-streaked in August, is the co-headline. Add C-17s, rescue squadrons, Army airborne operations from the Richardson side, and 19 hours of usable daylight, and you get one of the most distinctive shows on Earth."
+        ]
+      },
+      {
+        "heading": "Show Schedule & Times",
+        "paragraphs": [
+          "Two matching show days: gates open at 9 a.m. and the event runs 10:30 a.m. to 5 p.m., with headliners closing the afternoon (per the official JBER Arctic Thunder page). The JBER public affairs team publishes the performer list. Practice flying Friday is visible across much of Anchorage — the base abuts the city’s north side."
+        ]
+      },
+      {
+        "heading": "Where to Watch",
+        "bullets": [
+          "**On base (official viewing):** Free flight-line access — and uniquely, the backdrop is the show’s co-star: maneuvers play against the Chugach front range.",
+          "**Friday practice from the city:** North Anchorage neighborhoods, the Glenn Highway corridor, and viewpoints like Point Woronzof catch substantial practice flying.",
+          "**Arrive early and expect screening.** JBER open-house security lines run long; the early gate crowd has a far smoother day.",
+          "**Layers, always.** August in Anchorage spans 55–75°F in a single afternoon; sun, wind, and a stray shower can all visit."
+        ]
+      },
+      {
+        "heading": "Getting There & Parking",
+        "paragraphs": [
+          "JBER borders Anchorage’s north edge with main access off the Glenn Highway (Boniface and Muldoon gates feed the event per the published plan). Parking is free and directed on base; the Glenn backs up regionally on show mornings, so early starts win. No realistic transit option — drive, carpool, or rideshare. Anchorage lodging in August is peak-season; book well ahead."
+        ]
+      }
+    ],
+    "related_paragraph": [
+      {
+        "before": "The next stop returns to the Lower 48: ",
+        "label": "McMinnville, Oregon",
+        "href": "/blue-angels/mcminnville/",
+        "after": "."
+      }
+    ],
+    "card_summary": "The Blue Angels headline Arctic Thunder at JBER — Alaska's biggest public event, free, with the Chugach Mountains as the show's back wall.",
+    "meta_title": "Blue Angels Anchorage 2026 — Arctic Thunder at JBER Dates & Viewing Guide | NavyWeek.org",
+    "meta_description": "The Blue Angels headline Arctic Thunder at Joint Base Elmendorf-Richardson — Alaska's biggest public event, free to attend. Dates, schedule, and tips.",
+    "h1": "Blue Angels Anchorage 2026: Arctic Thunder at JBER",
+    "og_image": "/og/blue-angels/anchorage.png",
+    "date_published": "2026-06-11",
+    "date_modified": "2026-07-13",
+    "last_verified": "July 13, 2026",
+    "faqs": [
+      {
+        "question": "Is Arctic Thunder free?",
+        "answer": "Yes — Alaska’s biggest free event: admission, viewing, and parking all free.",
+        "sort_order": 0
+      },
+      {
+        "question": "What time do the Blue Angels fly?",
+        "answer": "Closing the afternoon program both days; exact times from JBER as the show nears.",
+        "sort_order": 1
+      },
+      {
+        "question": "Why every other year?",
+        "answer": "Arctic Thunder runs biennially — which is exactly why attendance is enormous when it happens.",
+        "sort_order": 2
+      },
+      {
+        "question": "Is the F-22 demo really that good here?",
+        "answer": "It’s the Raptor over its own home field with mountain scenery. Yes.",
+        "sort_order": 3
+      },
+      {
+        "question": "What should I bring?",
+        "answer": "Layers, rain shell, sunscreen — Alaskan August does all three — plus chairs and patience for security lines.",
+        "sort_order": 4
+      },
+      {
+        "question": "Can tourists attend?",
+        "answer": "Absolutely; it’s open to the public with standard screening. Pair it with an Alaska trip — early August is prime.",
+        "sort_order": 5
+      }
+    ],
+    "sources": [
+      {
+        "label": "Arctic Thunder Open House 2026 — official event page",
+        "url": "https://www.jber.jb.mil/Info/Arctic-Thunder-Open-House/",
+        "publisher": "Joint Base Elmendorf-Richardson",
+        "sort_order": 0
+      },
+      {
+        "label": "Blue Angels 2026 show schedule",
+        "url": "https://www.blueangels.navy.mil/show/",
+        "publisher": "U.S. Navy Blue Angels",
+        "sort_order": 1
+      }
+    ]
+  },
+  {
+    "team": "blue-angels",
+    "slug": "annapolis",
+    "city": "Annapolis",
+    "state": "MD",
+    "state_name": "Maryland",
+    "year": 2026,
+    "show": "U.S. Naval Academy Air Show (Commissioning Week)",
+    "venue": "Over the Severn River, Annapolis",
+    "admission": "FREE",
+    "dates_label": "May 20, 2026",
+    "start_date": "2026-05-20",
+    "end_date": "2026-05-20",
+    "second_dates_label": null,
+    "second_start_date": null,
+    "second_end_date": null,
+    "status": "completed",
+    "published": true,
+    "needs_verification": [
+      "USNA visitor access policy for show day",
+      "bridge pedestrian rules",
+      "flyover date for graduation"
+    ],
+    "hero_dateline": "Concluded — Wednesday, May 20, 2026 · Over the Severn River, Annapolis · FREE EVENT",
+    "dek": null,
+    "intro": [
+      "Every May, the Blue Angels fly over the Severn River for the U.S. Naval Academy's Commissioning Week — a midweek, hometown-Navy tradition where the demonstration plays out over the water beside the Academy, free to anyone within eyeshot of Annapolis."
+    ],
+    "quick_facts": [
+      {
+        "label": "Team",
+        "value": "U.S. Navy Blue Angels"
+      },
+      {
+        "label": "Show",
+        "value": "U.S. Naval Academy Air Show (Commissioning Week)"
+      },
+      {
+        "label": "Venue",
+        "value": "Over the Severn River, Annapolis"
+      },
+      {
+        "label": "Dates",
+        "value": "May 20, 2026"
+      },
+      {
+        "label": "Admission",
+        "value": "Free — flown over public water"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why Annapolis Is the Tour's Most Unique Stop",
+        "paragraphs": [
+          "This isn't an air show with vendors and static displays — it's a ritual. The Blue Angels perform for the graduating class of the Naval Academy during Commissioning Week, flying the full demonstration over the Severn with the Academy, the Chesapeake, and Maryland's capital as the stage. Some of the pilots overhead walked these same grounds as midshipmen. The show traditionally lands on the Wednesday of Commissioning Week, with a flyover at graduation itself days later, and the whole city treats it as a holiday: boats raft up on the river, downtown empties onto every waterfront, and the sneak pass comes up the Severn at mast height. There is no closer marriage of team and audience anywhere on the schedule."
+        ]
+      },
+      {
+        "heading": "Show Schedule & Times",
+        "paragraphs": [
+          "One day, one show: the demonstration typically flies Wednesday afternoon (around 2 p.m. historically), with a practice/rehearsal flight Tuesday afternoon over the same box — effectively a second full show. The graduation flyover follows at the stadium ceremony later that week. Exact timing is announced by the Academy and city; weather windows in May on the Chesapeake occasionally shuffle the hour."
+        ]
+      },
+      {
+        "heading": "Where to Watch",
+        "bullets": [
+          "**Jonas Green Park (Severn riverbank):** The classic spot, directly under the show box at the foot of the Naval Academy Bridge. Small park, fills hours early.",
+          "**Naval Academy grounds:** Visitor access during Commissioning Week is the premium experience when permitted — check the USNA visitor policy for show day, as access rules and ID requirements change year to year.",
+          "**City Dock & downtown waterfront:** Ego Alley and the harbor catch the southern edge of the box with restaurants steps away.",
+          "**On the water:** The signature Annapolis move. Hundreds of boats anchor along the Severn outside the safety zone — charters book out months ahead.",
+          "**World War II Memorial overlook (Route 450):** Elevated, panoramic, and right at the bridge — arrive very early."
+        ]
+      },
+      {
+        "heading": "Getting There & Parking",
+        "paragraphs": [
+          "Downtown Annapolis parking is scarce on a normal day and impossible on Blues Wednesday — use the Navy-Marine Corps Stadium lots and the free Commissioning Week shuttles, or park once and walk everywhere. From DC or Baltimore it's 45 minutes to US-50; leave well before noon. The Naval Academy Bridge closes to stopped pedestrians during the show — enforcement is real, keep moving or pick a bank."
+        ]
+      }
+    ],
+    "related_paragraph": [
+      {
+        "before": "Annapolis kicks off a Maryland triple-header: ",
+        "label": "NAS Patuxent River",
+        "href": "/blue-angels/patuxent-river/",
+        "after": " in June and "
+      },
+      {
+        "label": "Baltimore's Sail250 air show",
+        "href": "/blue-angels/baltimore/",
+        "after": " two weeks after that. Other 2026 stops: "
+      },
+      {
+        "label": "Vero Beach",
+        "href": "/blue-angels/vero-beach/",
+        "after": " and "
+      },
+      {
+        "label": "Harrisburg",
+        "href": "/blue-angels/harrisburg/",
+        "after": ". See the "
+      },
+      {
+        "label": "full Blue Angels schedule",
+        "href": "/blue-angels/",
+        "after": "."
+      }
+    ],
+    "card_summary": "The Blue Angels fly over the Severn River for the U.S. Naval Academy's Commissioning Week — a free midweek, hometown-Navy tradition beside the Academy in Annapolis.",
+    "meta_title": "Blue Angels Annapolis 2026 — Naval Academy Air Show Dates & Best Viewing Spots | NavyWeek.org",
+    "meta_description": "The Blue Angels fly over the Severn River for the U.S. Naval Academy's Commissioning Week — a free midweek tradition beside the Academy in Annapolis.",
+    "h1": "Blue Angels Annapolis 2026: U.S. Naval Academy Air Show",
+    "og_image": "/og/blue-angels/annapolis.png",
+    "date_published": "2026-06-11",
+    "date_modified": "2026-07-08",
+    "last_verified": "July 8, 2026",
+    "faqs": [
+      {
+        "question": "Is the Annapolis Blue Angels show free?",
+        "answer": "Completely — it's flown over public water; every riverbank, deck, and boat is a seat.",
+        "sort_order": 0
+      },
+      {
+        "question": "What time do the Blue Angels fly over the Severn?",
+        "answer": "Historically around 2 p.m. Wednesday, with Tuesday's practice around the same hour.",
+        "sort_order": 1
+      },
+      {
+        "question": "Is Tuesday's practice worth it?",
+        "answer": "It's the locals' secret — the full show with half the crowd.",
+        "sort_order": 2
+      },
+      {
+        "question": "Can I watch from a boat?",
+        "answer": "Yes, outside the marked exclusion zone — the rafted-up fleet is half the spectacle.",
+        "sort_order": 3
+      },
+      {
+        "question": "Can I get into the Naval Academy?",
+        "answer": "Visitor access varies by year and security posture during Commissioning Week — verify current policy before planning on it.",
+        "sort_order": 4
+      },
+      {
+        "question": "Why midweek?",
+        "answer": "The show serves the Academy's Commissioning Week calendar, not a weekend gate — it's for the graduates first, the public second, and better for it.",
+        "sort_order": 5
+      }
+    ],
+    "sources": []
+  },
+  {
+    "team": "thunderbirds",
+    "slug": "branson",
+    "city": "Branson",
+    "state": "MO",
+    "state_name": "Missouri",
+    "year": 2026,
+    "show": "Branson Air Show",
+    "venue": "Branson Airport",
+    "admission": "TICKETED",
+    "dates_label": "September 5–7, 2026",
+    "start_date": "2026-09-05",
+    "end_date": "2026-09-07",
+    "second_dates_label": null,
+    "second_start_date": null,
+    "second_end_date": null,
+    "status": "scheduled",
+    "published": true,
+    "needs_verification": [
+      "which show days carry the full flying program",
+      "gate times"
+    ],
+    "hero_dateline": "Labor Day Weekend, September 5–7, 2026 · Branson Airport · TICKETED EVENT",
+    "dek": null,
+    "intro": [
+      "The Thunderbirds headline the Branson Air Show over Labor Day weekend — jet aerobatics over the Ozarks' entertainment capital. Dates, schedule, and tips."
+    ],
+    "quick_facts": [
+      {
+        "label": "Team",
+        "value": "U.S. Air Force Thunderbirds"
+      },
+      {
+        "label": "Show",
+        "value": "Branson Air Show"
+      },
+      {
+        "label": "Venue",
+        "value": "Branson Airport"
+      },
+      {
+        "label": "Dates",
+        "value": "September 5–7, 2026 (Labor Day weekend)"
+      },
+      {
+        "label": "Admission",
+        "value": "Ticketed — GA and premium tiers"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Why Branson Is a Special Stop",
+        "paragraphs": [
+          "Branson knows how to stage a show — it's the town's entire economy — and the air show slots naturally into a place already built for eight million visitors a year: theaters, Silver Dollar City, Table Rock Lake, and now F-16s over the Ozark ridgelines. Branson Airport itself is a curiosity worth the visit: one of the only privately developed commercial airports in America, carved into the hilltops south of town, giving the show box a terrain backdrop most flatland venues can't offer. Labor Day timing means the summer season's grand finale, with the town's full entertainment machine running around the flying."
+        ]
+      },
+      {
+        "heading": "Show Schedule & Times",
+        "paragraphs": [
+          "The Labor Day window spans three days — organizers publish which days carry the full flying program and the Thunderbirds’ slots; the standard production rhythm (mid-morning gates, afternoon flying, headline close) applies. Practice flying precedes the show days over the airport’s ridge country."
+        ]
+      },
+      {
+        "heading": "Where to Watch",
+        "bullets": [
+          "**Inside the grounds (ticketed):** GA and premium tiers along the airport’s show line, Ozark hills behind the box.",
+          "**Practice day, free:** The US-65 corridor south of town and high ground around the airport catch rehearsals.",
+          "**Make it a Branson weekend:** The show is the headline, but the town’s calendar — shows, Silver Dollar City, the lakes — turns it into the easiest family air show trip on the schedule."
+        ]
+      },
+      {
+        "heading": "Getting There & Parking",
+        "paragraphs": [
+          "Branson Airport sits south of town off US-65 toward the Arkansas line, about 15 minutes from the Strip and 50 from Springfield. Event parking is organized at the field per the published plan; US-65 carries the load with the airport road as the pinch. Branson’s enormous lodging stock is the easiest hotel equation on the tour — but Labor Day books early anyway."
+        ]
+      }
+    ],
+    "related_paragraph": [
+      {
+        "before": "The Blue Angels fly ",
+        "label": "Cleveland",
+        "href": "/blue-angels/cleveland/",
+        "after": " the same Labor Day weekend. Next Thunderbirds stop: "
+      },
+      {
+        "label": "Owensboro",
+        "href": "/thunderbirds/owensboro/",
+        "after": "."
+      }
+    ],
+    "card_summary": "The Thunderbirds headline the Branson Air Show over Labor Day weekend — jet aerobatics over the Ozark ridgelines at the privately built Branson Airport.",
+    "meta_title": "Thunderbirds Branson 2026 — Branson Air Show Dates & Viewing Guide | NavyWeek.org",
+    "meta_description": "The Thunderbirds headline the Branson Air Show over Labor Day weekend — jet aerobatics over the Ozarks' entertainment capital. Dates, schedule, and tips.",
+    "h1": "Thunderbirds Branson 2026: Branson Air Show",
+    "og_image": "/og/thunderbirds/branson.png",
+    "date_published": "2026-06-11",
+    "date_modified": "2026-07-13",
+    "last_verified": "July 13, 2026",
+    "faqs": [
+      {
+        "question": "Is the Branson Air Show free?",
+        "answer": "No — ticketed with GA and premium tiers; practice day from public areas is the free preview.",
+        "sort_order": 0
+      },
+      {
+        "question": "What time do the Thunderbirds fly?",
+        "answer": "In the headline slots of the published show days — confirm which Labor Day days carry the full program.",
+        "sort_order": 1
+      },
+      {
+        "question": "What's unusual about the airport?",
+        "answer": "It’s privately built — blasted out of Ozark hilltops, one of a kind in American commercial aviation.",
+        "sort_order": 2
+      },
+      {
+        "question": "Where's the best seat?",
+        "answer": "Show-center reserved; the terrain backdrop flatters every angle.",
+        "sort_order": 3
+      },
+      {
+        "question": "What pairs with the show?",
+        "answer": "Everything — Silver Dollar City, the theaters, Table Rock Lake. Branson is the add-on capital of the tour.",
+        "sort_order": 4
+      },
+      {
+        "question": "Weather?",
+        "answer": "Early September in the Ozarks is usually superb — warm days, clear skies.",
+        "sort_order": 5
+      }
+    ],
+    "sources": [
+      {
+        "label": "Branson Wings of Pride Air Show — official site",
+        "url": "https://bransonwingsofpride.com/",
+        "publisher": "Branson Wings of Pride",
+        "sort_order": 0
+      },
+      {
+        "label": "Thunderbirds 2026 schedule",
+        "url": "https://www.airforce.com/thunderbirds/schedule",
+        "publisher": "U.S. Air Force",
+        "sort_order": 1
+      }
+    ]
+  }
+]

@@ -156,9 +156,14 @@ command and a `*ImportTest` that runs against the real committed artifacts
 - **event guides** (`import:event-guides`) — `fleet_weeks` + `air_shows` guides and
   the single-row `air_show_hub`; a pure top-level camelCase→snake_case rename with
   the block payloads (schedule, festival, sections, …) passing through as JSON.
+- **jet teams** (`import:jet-teams`) — the `jet_teams` hubs + their `jet_team_schedule`
+  stops + published `jet_team_cities` guides. The schedule FK comes from the
+  exporter's `team` natural key (the legacy row has no team field); a stop has no
+  natural unique key (a city slug recurs in a season), so each team's stops are
+  replaced wholesale on re-import, while hubs/cities upsert by their unique key.
 
-Later slices add the remaining domains (the navy-week + jet-team events, then
-catalog/CRM) through the same framework.
+Later slices add the remaining domains (the navy-week events, then catalog/CRM)
+through the same framework.
 
 ## Quality gates (per the rebuild workflow)
 

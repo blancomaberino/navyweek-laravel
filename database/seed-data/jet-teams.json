@@ -1,0 +1,176 @@
+[
+  {
+    "team": "blue-angels",
+    "name": "Blue Angels",
+    "full_name": "U.S. Navy Blue Angels",
+    "branch": "U.S. Navy",
+    "aircraft": "F/A-18 Super Hornet",
+    "home_base": "NAS Pensacola, Florida",
+    "base_path": "/blue-angels",
+    "year": 2026,
+    "eyebrow": "// U.S. Navy Flight Demonstration Squadron",
+    "hub_title": "BLUE ANGELS",
+    "hub_subtitle": "2026 Schedule",
+    "seo_headline": "Blue Angels 2026 Schedule: All 32 Air Show Locations",
+    "intro": [
+      "The U.S. Navy Blue Angels' 2026 season runs from March 14 in Yuma, Arizona, through the Homecoming Air Show at NAS Pensacola on November 6–7 — 32 shows across 31 cities, in a year themed around America's 250th birthday. Every stop on the official schedule is below, with a full city guide for each: dates, show times, the best viewing spots, and how to get there."
+    ],
+    "key_facts": [
+      {
+        "label": "Branch",
+        "value": "U.S. Navy"
+      },
+      {
+        "label": "Aircraft",
+        "value": "Six F/A-18 Super Hornets"
+      },
+      {
+        "label": "Home base",
+        "value": "NAS Pensacola, Florida"
+      },
+      {
+        "label": "2026 shows",
+        "value": "32 shows across 31 cities"
+      },
+      {
+        "label": "Season",
+        "value": "March 14 (Yuma) – November 6–7 (Pensacola Homecoming)"
+      },
+      {
+        "label": "Flying since",
+        "value": "1946"
+      }
+    ],
+    "about": [
+      "The Blue Angels are the U.S. Navy’s flight demonstration squadron — the second-oldest formal aerobatic team in the world, flying since 1946. Today the team flies six F/A-18 Super Hornets in formations as tight as 18 inches apart, supported by \"Fat Albert,\" a Marine Corps C-130J that opens most shows. The squadron is home-based at NAS Pensacola, Florida, where it practices over the National Naval Aviation Museum most weeks of the season, and winters at NAF El Centro, California.",
+      "A typical demonstration runs about 45 minutes and pairs the four-jet Diamond formation with two Solo pilots flying the high-speed passes — including the famous sneak pass that arrives before you hear it. The team performs at roughly 30 shows a year, reaching around 11 million spectators.",
+      "How the schedule gets made: air show organizers apply years in advance through the Department of Defense aerial events program, and the team announces its lineup each December at the International Council of Air Shows (ICAS) convention. The following season’s preliminary schedule is typically public more than a year out, and dates do shift — historically two to four changes per season for weather, maintenance, or funding reasons."
+    ],
+    "cross_team": {
+      "before": "Also performing across the country this year: the U.S. Air Force ",
+      "label": "Thunderbirds",
+      "href": "/thunderbirds/",
+      "after": ", whose 2026 tour covers 29 stops of its own."
+    },
+    "meta_title": "Blue Angels 2026 Schedule: All 32 Air Show Locations | NavyWeek.org",
+    "meta_description": "The complete Blue Angels 2026 schedule — every city, date, and air show on the tour, from Yuma in March to the Pensacola Homecoming in November.",
+    "og_image": "/og/blue-angels/hub.png",
+    "date_published": "2026-06-11",
+    "date_modified": "2026-07-13",
+    "last_verified": "July 13, 2026",
+    "faqs": [
+      {
+        "question": "How is the Blue Angels schedule decided?",
+        "answer": "Show organizers submit requests through the DoD aerial events process up to two years ahead. The team balances geography, recruiting priorities, and anniversary events — 2026 leans heavily into America 250 celebrations.",
+        "sort_order": 0
+      },
+      {
+        "question": "Do the Blue Angels and Thunderbirds ever perform together?",
+        "answer": "Rarely — the two teams normally keep at least 150 miles apart to maximize recruiting reach. 2026 is an exception: both teams headline the NAS Jacksonville Air Show on October 17–18, a marquee event of the 250th-birthday season.",
+        "sort_order": 1
+      },
+      {
+        "question": "Are Blue Angels shows free?",
+        "answer": "Shows hosted on military bases (Miramar, Oceana, Cherry Point, NAS Jax, Pensacola) and most beach and waterfront shows are free. Civilian airport shows — including all Air Dot Show tour stops — are ticketed. Each city guide above gives the straight answer.",
+        "sort_order": 2
+      },
+      {
+        "question": "How do I request a flyover?",
+        "answer": "Flyover requests go through the official Blue Angels and Navy aerial events channels, not the squadron directly — and they’re reserved for events of national significance.",
+        "sort_order": 3
+      },
+      {
+        "question": "When does the 2027 schedule come out?",
+        "answer": "The preliminary 2027 lineup was announced in December 2025 alongside the 2026 update; the confirmed version drops at ICAS in December 2026.",
+        "sort_order": 4
+      }
+    ]
+  },
+  {
+    "team": "thunderbirds",
+    "name": "Thunderbirds",
+    "full_name": "U.S. Air Force Thunderbirds",
+    "branch": "U.S. Air Force",
+    "aircraft": "F-16 Fighting Falcon",
+    "home_base": "Nellis AFB, Nevada",
+    "base_path": "/thunderbirds",
+    "year": 2026,
+    "eyebrow": "// U.S. Air Force Air Demonstration Squadron",
+    "hub_title": "THUNDERBIRDS",
+    "hub_subtitle": "2026 Schedule",
+    "seo_headline": "Thunderbirds 2026 Schedule: All 29 Air Show Locations",
+    "intro": [
+      "The U.S. Air Force Thunderbirds' 2026 season opens with the Daytona 500 flyover on February 15 and closes at Wings Over Houston on October 31–November 1 — 29 appearances coast to coast in the Air Force's America 250 year. Every stop on the official schedule is below, each with a full city guide: dates, show times, the best viewing spots, and how to get there. (Three early-season stops — Shaw AFB, Thunder of Niagara, and Hill AFB — were postponed or cancelled for 2026 due to operational commitments and are marked in the table; the Columbus Air Show was added in their place.)"
+    ],
+    "key_facts": [
+      {
+        "label": "Branch",
+        "value": "U.S. Air Force"
+      },
+      {
+        "label": "Aircraft",
+        "value": "Six F-16 Fighting Falcons"
+      },
+      {
+        "label": "Home base",
+        "value": "Nellis AFB, Nevada"
+      },
+      {
+        "label": "2026 shows",
+        "value": "29 appearances"
+      },
+      {
+        "label": "Season",
+        "value": "February 15 (Daytona) – October 31–November 1 (Houston)"
+      },
+      {
+        "label": "Flying since",
+        "value": "1953"
+      }
+    ],
+    "about": [
+      "The Thunderbirds — officially the U.S. Air Force Air Demonstration Squadron — have flown since 1953, making them America’s other great jet team and the Air Force’s ambassadors in blue. The squadron flies six red-white-and-blue F-16 Fighting Falcons from its home at Nellis Air Force Base outside Las Vegas, where it trains through the winter and flies its season-opening and season-anchoring appearances.",
+      "A Thunderbirds demonstration runs about 40–50 minutes: the four-ship Diamond flies the precision formation work — including the signature Diamond pass with wingtips feet apart — while the two Solos supply the high-speed crosses, sneak passes, and maximum-performance maneuvers. Unlike the Navy’s team, the Thunderbirds’ jets are combat-coded F-16s that can be returned to front-line service in days.",
+      "How the schedule gets made: show organizers apply through the Department of Defense aerial events program years in advance, and the team announces each season’s lineup the preceding December at the International Council of Air Shows convention. The 2027 preliminary schedule is already public — 31 more stops — and dates do move during a season; two to four changes a year is normal."
+    ],
+    "cross_team": {
+      "before": "Also touring this year: the U.S. Navy ",
+      "label": "Blue Angels",
+      "href": "/blue-angels/",
+      "after": ", with 32 shows of their own."
+    },
+    "meta_title": "Thunderbirds 2026 Schedule: All 29 Air Show Locations | NavyWeek.org",
+    "meta_description": "The complete USAF Thunderbirds 2026 schedule — every city, date, and air show on the tour, from the Daytona 500 flyover to the Wings Over Houston finale.",
+    "og_image": "/og/thunderbirds/hub.png",
+    "date_published": "2026-06-11",
+    "date_modified": "2026-07-13",
+    "last_verified": "July 13, 2026",
+    "faqs": [
+      {
+        "question": "How is the Thunderbirds schedule decided?",
+        "answer": "Organizers request dates up to two years out through the DoD aerial events process; the team balances geography, recruiting markets, and milestone events. The 2026 slate leans into America 250 celebrations.",
+        "sort_order": 0
+      },
+      {
+        "question": "Do the Thunderbirds and Blue Angels ever perform together?",
+        "answer": "Almost never — the teams deliberately stay 150+ miles apart. 2026’s NAS Jacksonville Air Show (October 17–18) is the historic exception, with both teams flying full demos at the same free show.",
+        "sort_order": 1
+      },
+      {
+        "question": "Are Thunderbirds shows free?",
+        "answer": "Air Force base shows (Travis, Grissom, JBSA) and the big beach/waterfront shows (Chicago, Fort Lauderdale, Huntington Beach, Ocean City) are free. Civilian airport shows are generally ticketed. Each guide above gives the straight answer.",
+        "sort_order": 2
+      },
+      {
+        "question": "What's the difference between the Thunderbirds and Blue Angels?",
+        "answer": "Air Force vs. Navy, F-16 vs. F/A-18, Nellis vs. Pensacola — and stylistic differences fans love to debate: the Thunderbirds emphasize the four-ship Diamond’s formation precision; the Blues fly tighter formations at lower altitudes over water more often.",
+        "sort_order": 3
+      },
+      {
+        "question": "When does the 2027 schedule come out?",
+        "answer": "The preliminary 2027 list is already public; the confirmed schedule drops at ICAS in December 2026.",
+        "sort_order": 4
+      }
+    ]
+  }
+]
