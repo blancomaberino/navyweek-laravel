@@ -1,0 +1,531 @@
+[
+  {
+    "state": "texas",
+    "state_name": "Texas",
+    "state_abbr": "TX",
+    "city": "houston",
+    "city_name": "Houston",
+    "business_slug": "houston-zoo-military-veteran",
+    "company": "Houston Zoo",
+    "business_type": "Zoo",
+    "category": "Attractions & Entertainment",
+    "logo": null,
+    "logo_alt": "Houston Zoo logo",
+    "logo_background": "#ffffff",
+    "official_url": "https://www.houstonzoo.org/plan-your-visit/prices-and-discounts/#faq-u-s-military-discounts",
+    "brand_home_url": "https://www.houstonzoo.org",
+    "headline_discount": "50% off general admission",
+    "discount_summary": "The Houston Zoo gives U.S. veterans and active military 50% off general admission for up to five guests (2 adults and 3 children), year-round. A reservation is required, and you show proof of military service when you arrive — it is redeemed in person at the Zoo, not with an online code.",
+    "verification": "Reservation + ID",
+    "verification_detail": "Reserve a dated ticket in advance, then show proof of military service (a military or veteran ID) when presenting your ticket at admission.",
+    "active_duty": true,
+    "veterans": true,
+    "retirees": true,
+    "reserve_guard": true,
+    "military_family": true,
+    "eligibility": [
+      "Active-duty military and U.S. veterans — named directly on the Houston Zoo’s Prices & Discounts page.",
+      "Retirees and dependents — Military.com’s Houston Zoo listing includes retirees and dependents among eligible groups; bring valid proof of service and confirm at admission.",
+      "Military families — the offer covers up to five guests (2 adults and 3 children) on one eligible member’s proof of service, so a service member or veteran can bring the family.",
+      "First responders, nurses, teachers, and students — not stated in the Zoo’s military terms; no separate program is published for them here."
+    ],
+    "tiers": [
+      {
+        "audience": "U.S. veterans & active military (up to 5 guests: 2 adults + 3 children)",
+        "amount": "50% off",
+        "note": "General admission, year-round. A reservation is required and proof of military service is shown at admission."
+      },
+      {
+        "audience": "Active-duty & veterans — annual membership",
+        "amount": "10% off (reported)",
+        "note": "Military.com reports 10% off Houston Zoo membership levels with a military or veteran ID at a ticketing window. Confirm current membership terms at the Zoo — this is a secondary source, not the Zoo’s admission-discount page."
+      }
+    ],
+    "redeem_in_store": [
+      {
+        "title": "Reserve a dated ticket in advance",
+        "detail": "The Houston Zoo requires a reservation. Book your visit date ahead of time — the military rate is applied to general admission for up to five guests (2 adults and 3 children)."
+      },
+      {
+        "title": "Bring proof of military service",
+        "detail": "Carry a military or veteran ID (or other acceptable proof of service). One eligible member’s proof covers the party of up to five."
+      },
+      {
+        "title": "Show your proof at admission",
+        "detail": "Present your proof of military service when you present your ticket(s) at the entrance. There is no online-only code — verification happens in person at the Zoo."
+      }
+    ],
+    "exclusions": [
+      "A reservation is required — walk-up availability is not guaranteed, especially on holidays and during summer.",
+      "The 50% rate covers general admission only; add-ons (parking, special exhibits, experiences, and events) are not stated to be discounted.",
+      "The party is capped at five guests (2 adults and 3 children) per eligible member’s proof of service.",
+      "You must show proof of military service at admission, every visit.",
+      "The 10% membership discount comes from a secondary source (Military.com); confirm it directly with the Zoo before relying on it."
+    ],
+    "nearby_bases": [
+      {
+        "name": "Ellington Field Joint Reserve Base",
+        "branch": "Joint (ANG / Navy / USCG reserve)",
+        "distanceMi": 13,
+        "note": "Texas Air National Guard, Navy and Coast Guard reserve units, NASA operations."
+      },
+      {
+        "name": "U.S. Coast Guard Sector Houston-Galveston",
+        "branch": "U.S. Coast Guard",
+        "distanceMi": 10,
+        "note": "Active-duty Coast Guard along the Houston Ship Channel."
+      },
+      {
+        "name": "NASA Johnson Space Center",
+        "branch": "Joint / NASA",
+        "distanceMi": 22,
+        "note": "Military detailees and the Clear Lake military community."
+      }
+    ],
+    "service_area": "Greater Houston metro",
+    "price_range": "$$",
+    "intro": [
+      "The Houston Zoo offers one of the deepest year-round military discounts of any Houston attraction: U.S. veterans and active military get 50% off general admission for up to five guests — 2 adults and 3 children — every day of the year. For a military family in the Houston metro, that turns a full-price outing in Hermann Park into a genuinely affordable one.",
+      "There are two things to know before you go. First, the Houston Zoo requires a reservation, so book your date in advance rather than showing up cold. Second, the discount is redeemed in person: you show proof of military service when you present your tickets at admission — there is no online-only military code to hunt for.",
+      "This is an independent guide — NavyWeek.org is not affiliated with the Houston Zoo. The Zoo controls the program and can change or end it at any time, so confirm current terms when you reserve."
+    ],
+    "details": [
+      "The mechanic is simple. Reserve a dated general-admission ticket, then bring a military or veteran ID and show it when you present your ticket(s) at the entrance. One eligible member’s proof of service covers a party of up to five (2 adults and 3 children), so the whole family comes in at the discounted rate on a single verification.",
+      "The Houston Zoo uses flex pricing, so the full general-admission price varies by date rather than sitting at one fixed number — which is exactly why the 50%-off rate is worth locking in when you reserve. Because the offer runs year-round rather than only on military holidays, it is one of the few big Houston attractions where a service member can plan a discounted visit any weekend.",
+      "One secondary note: Military.com’s Houston Zoo listing reports a 10% discount on Zoo membership levels for active-duty and veterans with a military or veteran ID at a ticketing window. The Zoo’s own admission-discount page does not spell that out, so treat the membership discount as reported-not-confirmed and verify it at the Zoo if a yearly membership is your goal.",
+      "The Houston Zoo sits at 6200 Hermann Park Drive, inside Hermann Park next to the Texas Medical Center and the Museum District — a straightforward drive for service members and families stationed around Ellington Field, Coast Guard Sector Houston-Galveston, and NASA’s Johnson Space Center to the southeast."
+    ],
+    "key_facts": [
+      {
+        "label": "Discount",
+        "value": "50% off general admission, up to 5 guests (2 adults + 3 children)"
+      },
+      {
+        "label": "Who qualifies",
+        "value": "U.S. veterans & active military (retirees/dependents per Military.com)"
+      },
+      {
+        "label": "When",
+        "value": "Year-round — not limited to military holidays"
+      },
+      {
+        "label": "Verification",
+        "value": "Reservation required + proof of military service at admission"
+      },
+      {
+        "label": "Where to redeem",
+        "value": "In person at the Zoo (no online-only code)"
+      },
+      {
+        "label": "Location",
+        "value": "6200 Hermann Park Drive, Houston, TX 77030"
+      },
+      {
+        "label": "Nearest base",
+        "value": "Ellington Field Joint Reserve Base — ~13 mi"
+      }
+    ],
+    "meta_title": "Houston Zoo Military Discount 2026: 50% Off Admission",
+    "meta_description": "Houston Zoo military discount: 50% off general admission for U.S. veterans & active military, up to 5 guests, year-round. Reserve ahead; show ID at the gate.",
+    "h1": "Houston Zoo Military & Veteran Discount",
+    "hero_tagline": "50% off general admission for U.S. veterans and active military — up to 5 guests (2 adults + 3 children), year-round. Reserve ahead and show proof of service at the gate.",
+    "primary_keyword": "houston zoo military discount",
+    "og_image": "/og/local-discounts/texas-houston-houston-zoo.png",
+    "date_published": "2026-07-23",
+    "date_modified": "2026-07-23",
+    "last_verified": "July 23, 2026",
+    "stores": [
+      {
+        "name": "Houston Zoo",
+        "street": "6200 Hermann Park Drive",
+        "city": "Houston",
+        "state_abbr": "TX",
+        "zip": "77030",
+        "phone": "(713) 533-6500",
+        "lat": "29.7146",
+        "lng": "-95.3908",
+        "directions_url": "https://www.google.com/maps/dir/?api=1&destination=Houston+Zoo,+6200+Hermann+Park+Dr,+Houston,+TX+77030",
+        "map_embed_url": "https://maps.google.com/maps?q=Houston%20Zoo,%206200%20Hermann%20Park%20Drive,%20Houston,%20TX%2077030&z=15&output=embed",
+        "distance_label": null,
+        "sort_order": 0,
+        "hours": [
+          {
+            "days": "Daily",
+            "day_of_week": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "09:00",
+            "closes": "17:00",
+            "note": "Hours vary seasonally and on holidays — confirm your date when you reserve.",
+            "sort_order": 0
+          }
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does the Houston Zoo offer a military discount?",
+        "answer": "Yes. The Houston Zoo gives U.S. veterans and active military 50% off general admission for up to five guests (2 adults and 3 children), all year long. A reservation is required, and you must show proof of military service when you present your ticket(s) at admission.",
+        "sort_order": 0
+      },
+      {
+        "question": "How much is the Houston Zoo military discount?",
+        "answer": "It is 50% off general admission tickets. Because one eligible member’s proof of service covers a party of up to five (2 adults and 3 children), an entire military family can visit at the discounted rate on a single verification.",
+        "sort_order": 1
+      },
+      {
+        "question": "How many guests does the Houston Zoo military discount cover?",
+        "answer": "Up to five guests — specifically 2 adults and 3 children — per eligible U.S. veteran or active-duty member, all year long.",
+        "sort_order": 2
+      },
+      {
+        "question": "Do I have to make a reservation for the Houston Zoo military discount?",
+        "answer": "Yes. The Houston Zoo requires a reservation. Book your visit date in advance, then show your military or veteran ID when you present your ticket(s) at admission.",
+        "sort_order": 3
+      },
+      {
+        "question": "What do I need to bring to get the Houston Zoo military discount?",
+        "answer": "Bring proof of military service — a military or veteran ID. The Houston Zoo’s terms state you MUST show your proof of military service when presenting your ticket(s) for admission.",
+        "sort_order": 4
+      },
+      {
+        "question": "Can I use the Houston Zoo military discount online?",
+        "answer": "The discount is redeemed in person — you must show proof of military service when presenting your ticket(s) at admission. Reserve your dated ticket ahead of time, but plan to verify at the gate rather than with an online-only code.",
+        "sort_order": 5
+      },
+      {
+        "question": "Do veterans, retirees, and dependents qualify?",
+        "answer": "The Houston Zoo’s page names U.S. veterans and active military. Military.com’s listing additionally includes retirees and dependents. Bring valid proof of service and confirm eligibility at admission.",
+        "sort_order": 6
+      },
+      {
+        "question": "Is the Houston Zoo military discount available year-round?",
+        "answer": "Yes. Unlike discounts limited to military holidays, the Houston Zoo’s 50%-off military rate is available all year long, so you can plan a discounted visit any time.",
+        "sort_order": 7
+      },
+      {
+        "question": "Does the Houston Zoo military discount apply to parking or special exhibits?",
+        "answer": "The 50% rate is stated for general admission. Add-ons such as parking, special exhibits, experiences, and events are not stated to be discounted — confirm at the Zoo if you plan to add them.",
+        "sort_order": 8
+      },
+      {
+        "question": "Is there a Houston Zoo membership discount for military?",
+        "answer": "Military.com reports 10% off Houston Zoo membership levels for active-duty and veterans with a military or veteran ID at a ticketing window. The Zoo’s own admission page does not state this, so confirm it directly with the Zoo before relying on it.",
+        "sort_order": 9
+      },
+      {
+        "question": "Does the Houston Zoo offer a first responder, nurse, or teacher discount?",
+        "answer": "Not stated. The Houston Zoo’s published military-discount terms cover U.S. veterans and active military; no separate first-responder, nurse, teacher, or student program is documented on that page.",
+        "sort_order": 10
+      },
+      {
+        "question": "Where is the Houston Zoo located?",
+        "answer": "The Houston Zoo is at 6200 Hermann Park Drive, Houston, TX 77030 — inside Hermann Park next to the Texas Medical Center and Museum District, roughly 13 miles from Ellington Field Joint Reserve Base.",
+        "sort_order": 11
+      }
+    ],
+    "sources": [
+      {
+        "label": "Houston Zoo — U.S. Military Discounts (official terms)",
+        "url": "https://www.houstonzoo.org/plan-your-visit/prices-and-discounts/#faq-u-s-military-discounts",
+        "publisher": "Houston Zoo",
+        "sort_order": 0
+      },
+      {
+        "label": "Houston Zoo — Plan Your Visit (hours, location, reservations)",
+        "url": "https://www.houstonzoo.org/plan-your-visit/",
+        "publisher": "Houston Zoo",
+        "sort_order": 1
+      },
+      {
+        "label": "Military.com — Houston Zoo Military Discount",
+        "url": "https://www.military.com/discounts/houston-zoo-military-discount",
+        "publisher": "Military.com",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "state": "texas",
+    "state_name": "Texas",
+    "state_abbr": "TX",
+    "city": "houston",
+    "city_name": "Houston",
+    "business_slug": "hmns-military-veteran",
+    "company": "Houston Museum of Natural Science",
+    "business_type": "Museum",
+    "category": "Attractions & Entertainment",
+    "logo": "/discount-logos/hmns.png",
+    "logo_alt": "Houston Museum of Natural Science (HMNS) logo",
+    "logo_background": "#0A1628",
+    "official_url": "https://help.hmns.org/support/solutions/articles/151000207601-military-discount",
+    "brand_home_url": "https://www.hmns.org",
+    "headline_discount": "Up to $9 off tickets",
+    "discount_summary": "HMNS gives a military discount on tickets to anyone who shows a valid Military ID in person at the box office — a set discounted price per attraction (Permanent Exhibit Halls $16 vs $25, Cockrell Butterfly Center $12, Burke Baker Planetarium $10, Giant Screen Theatre $10, special exhibits $27), applied only to the cardholder. It is not free admission, and HMNS is not a Blue Star Museum. For the permanent halls, the public Free Tuesday window (5–8 pm) is free for everyone and beats the military rate.",
+    "verification": "In-store ID",
+    "verification_detail": "Show a valid Military ID in person at the HMNS box office. The discount is applied only to the cardholder (one discounted ticket per ID). There is no online military rate and no ID.me/GovX/SheerID step.",
+    "active_duty": true,
+    "veterans": true,
+    "retirees": true,
+    "reserve_guard": true,
+    "military_family": true,
+    "eligibility": [
+      "Anyone with a valid U.S. Military ID card, shown in person at the box office — the discount is applied to the cardholder (one discounted ticket per ID).",
+      "Active-duty service members (CAC / Military ID).",
+      "Reserve and National Guard members with a valid Military ID.",
+      "Military retirees with a retiree ID.",
+      "Military family members (dependents) who hold their own valid Military/dependent ID — there is no family or group rate; each person needs their own ID.",
+      "Veterans who hold a qualifying Military ID (e.g., a retiree ID or VA-issued VHIC) — confirm accepted veteran credentials at the box office, since HMNS specifies \"Military I.D.\" without separately listing veteran documents."
+    ],
+    "tiers": [
+      {
+        "audience": "Permanent Exhibit Halls (Military ID)",
+        "amount": "$16 (vs $25)",
+        "note": "Save $9 (36%). Cardholder only, in person."
+      },
+      {
+        "audience": "Cockrell Butterfly Center (Military ID)",
+        "amount": "$12 (vs $15)",
+        "note": "Save $3. Cardholder only, in person."
+      },
+      {
+        "audience": "Burke Baker Planetarium (Military ID)",
+        "amount": "$10 (vs $12)",
+        "note": "Save $2. Cardholder only, in person."
+      },
+      {
+        "audience": "Giant Screen Theatre (Military ID)",
+        "amount": "$10 (vs $12)",
+        "note": "Save $2. Cardholder only, in person."
+      },
+      {
+        "audience": "Special Exhibits (Military ID)",
+        "amount": "$27",
+        "note": "Excludes \"Dinosaur Discoveries: A Holographic Adventure\"."
+      },
+      {
+        "audience": "Permanent Exhibit Halls — Free Tuesday (everyone)",
+        "amount": "Free 5–8 pm",
+        "note": "First-come, first-served; open to everyone, not just military. Beats the $16 military rate."
+      }
+    ],
+    "redeem_in_store": [
+      {
+        "title": "Go to the HMNS box office",
+        "detail": "Visit the box office at the flagship Hermann Park location (5555 Hermann Park Drive). The military discount is redeemed in person — there is no online military rate."
+      },
+      {
+        "title": "Present a valid Military ID",
+        "detail": "Show a valid Military ID. The discount is applied only to the cardholder (one discounted ticket per ID), not to a party or family."
+      },
+      {
+        "title": "Pay the discounted attraction price",
+        "detail": "Permanent Exhibit Halls $16, Cockrell Butterfly Center $12, Burke Baker Planetarium $10, Giant Screen Theatre $10, special exhibits $27. Prices are subject to change."
+      },
+      {
+        "title": "For the halls, weigh Free Tuesday instead",
+        "detail": "If you can visit Tuesday 5–8 pm, permanent-hall entry is free for everyone (first-come). Use the military rate for paid add-ons like the butterfly center, planetarium or a theatre film."
+      }
+    ],
+    "exclusions": [
+      "In person only — the military discount cannot be applied to a pre-purchased online ticket.",
+      "Cardholder only: one discounted ticket per Military ID, not a family or group rate.",
+      "Does not apply to \"Dinosaur Discoveries: A Holographic Adventure\".",
+      "Prices are \"subject to change\" — the box office is authoritative on the day.",
+      "HMNS is not a Blue Star Museums participant, so there is no summer free-family admission here."
+    ],
+    "nearby_bases": [
+      {
+        "name": "Ellington Field Joint Reserve Base",
+        "branch": "Joint (ANG / Navy / USCG reserve)",
+        "distanceMi": 13,
+        "note": "Texas Air National Guard, Navy and Coast Guard reserve units, NASA operations."
+      },
+      {
+        "name": "U.S. Coast Guard Sector Houston-Galveston",
+        "branch": "U.S. Coast Guard",
+        "distanceMi": 10,
+        "note": "Active-duty Coast Guard along the Houston Ship Channel."
+      },
+      {
+        "name": "NASA Johnson Space Center",
+        "branch": "Joint / NASA",
+        "distanceMi": 22,
+        "note": "Military detailees and the Clear Lake military community."
+      }
+    ],
+    "service_area": "Greater Houston metro",
+    "price_range": "$$",
+    "intro": [
+      "The Houston Museum of Natural Science gives a military discount on tickets to anyone who shows a valid Military ID in person at the box office. It is a set discounted price per attraction — not free admission and not a family rate — and it applies only to the cardholder. With a Military ID, the Permanent Exhibit Halls are $16 (versus $25 standard), the Cockrell Butterfly Center is $12, the Burke Baker Planetarium and Giant Screen Theatre are $10 each, and special exhibits are $27.",
+      "Here is the money-saving catch most pages miss: for the permanent halls, the cheapest option is not the military discount — it is Free Tuesday. HMNS opens permanent-hall general admission free to everyone, first-come, first-served, from 5:00–8:00 pm on Tuesdays. So if you can visit a Tuesday evening, the halls are free; use the military rate only on the paid add-ons you want.",
+      "This is an independent guide — NavyWeek.org is not affiliated with HMNS. The museum controls all terms and prices (\"subject to change\"), so confirm the current rate at the box office when you visit."
+    ],
+    "details": [
+      "The mechanic is simple: show a valid Military ID at the box office and the cardholder pays the discounted attraction price. Because it is applied only to the cardholder, it is one discounted ticket per Military ID — not a group or family price. Dependents who hold their own Military/dependent ID, and retirees with a retiree ID, can use it; a veteran needs a qualifying Military ID (such as a retiree card or VA-issued VHIC), so veterans without a military card should confirm accepted documents at the box office before counting on the rate. There is no online military checkout and no ID.me, GovX, or SheerID step.",
+      "The genuinely cheapest path for the Permanent Exhibit Halls is not the military discount at all — it is the public Free Tuesday window. HMNS opens permanent-hall general admission free to everyone from 5:00–8:00 pm on Tuesdays, first-come, first-served, which beats the $16 military rate. Because it fills up, arriving near 5:00 pm helps. The military rate still earns its keep on the paid add-ons — the Cockrell Butterfly Center ($12 vs $15), Burke Baker Planetarium ($10 vs $12), Giant Screen Theatre ($10 vs $12) and special exhibits ($27) — which you can buy at the discounted price any day.",
+      "One important limit: HMNS is not a Blue Star Museums participant, so there is no summer \"active-duty plus up to five family free\" benefit here. Active-duty families who want free museum days should look at the Houston museums that do participate — the Museum of Fine Arts Houston, The Health Museum, Children’s Museum Houston, and the Buffalo Soldiers National Museum — while HMNS remains a paid, discounted-ticket visit.",
+      "HMNS sits at 5555 Hermann Park Drive, inside Hermann Park next to the Texas Medical Center and the Museum District — a short hop from the Houston Zoo and a straightforward drive for service members and families stationed around Ellington Field, Coast Guard Sector Houston-Galveston, and NASA’s Johnson Space Center to the southeast."
+    ],
+    "key_facts": [
+      {
+        "label": "Discount",
+        "value": "Military-ID price cut: Permanent Halls $16 (vs $25); Butterfly $12; Planetarium $10; Theatre $10; special exhibits $27"
+      },
+      {
+        "label": "Who qualifies",
+        "value": "Valid Military ID holder — cardholder only (active-duty, Reserve/Guard, retirees, dependents with their own ID)"
+      },
+      {
+        "label": "Best free path",
+        "value": "Permanent halls free for everyone, Tuesdays 5–8 pm (first-come)"
+      },
+      {
+        "label": "Verification",
+        "value": "In person at the box office (valid Military ID); no online rate"
+      },
+      {
+        "label": "Not included",
+        "value": "No Blue Star free family admission at HMNS; excludes the holographic dinosaur exhibit"
+      },
+      {
+        "label": "Location",
+        "value": "5555 Hermann Park Drive, Houston, TX 77030"
+      },
+      {
+        "label": "Nearest base",
+        "value": "Ellington Field Joint Reserve Base — ~13 mi"
+      }
+    ],
+    "meta_title": "HMNS Military Discount (Houston Museum of Natural Science)",
+    "meta_description": "HMNS military discount in Houston: show a Military ID for $16 permanent halls (vs $25), plus butterfly, planetarium & theater deals. In person; Free Tuesdays too.",
+    "h1": "HMNS Military & Veteran Discount (Houston)",
+    "hero_tagline": "A Military ID gets you discounted HMNS tickets in person — $16 permanent halls (vs $25), plus butterfly, planetarium and theatre deals. And the permanent halls are free for everyone on Tuesday evenings.",
+    "primary_keyword": "hmns military discount",
+    "og_image": "/og/local-discounts/texas-houston-hmns-military-veteran.png",
+    "date_published": "2026-07-23",
+    "date_modified": "2026-07-23",
+    "last_verified": "July 23, 2026",
+    "stores": [
+      {
+        "name": "Houston Museum of Natural Science",
+        "street": "5555 Hermann Park Drive",
+        "city": "Houston",
+        "state_abbr": "TX",
+        "zip": "77030",
+        "phone": "(713) 639-4629",
+        "lat": "29.7221",
+        "lng": "-95.3896",
+        "directions_url": "https://www.google.com/maps/dir/?api=1&destination=Houston+Museum+of+Natural+Science,+5555+Hermann+Park+Dr,+Houston,+TX+77030",
+        "map_embed_url": "https://maps.google.com/maps?q=Houston%20Museum%20of%20Natural%20Science,%205555%20Hermann%20Park%20Drive,%20Houston,%20TX%2077030&z=15&output=embed",
+        "distance_label": null,
+        "sort_order": 0,
+        "hours": [
+          {
+            "days": "Mon–Thu",
+            "day_of_week": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday"
+            ],
+            "opens": "09:00",
+            "closes": "17:00",
+            "note": "Permanent-hall general admission is free for everyone Tuesdays 5–8 pm (first-come). Summer hours run later (to 6 pm) — confirm your date.",
+            "sort_order": 0
+          },
+          {
+            "days": "Fri–Sun",
+            "day_of_week": [
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "09:00",
+            "closes": "18:00",
+            "note": "Hours vary seasonally and on holidays — confirm when you plan your visit.",
+            "sort_order": 1
+          }
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Does HMNS offer a military discount?",
+        "answer": "Yes. The Houston Museum of Natural Science gives a discounted ticket price to anyone who shows a valid Military ID in person at the box office. It is not free admission and not a family rate; it applies only to the cardholder.",
+        "sort_order": 0
+      },
+      {
+        "question": "How much is the HMNS military discount?",
+        "answer": "With a Military ID: Permanent Exhibit Halls $16 (vs $25), Cockrell Butterfly Center $12, Burke Baker Planetarium $10, Giant Screen Theatre $10, and special exhibits $27. Prices are subject to change.",
+        "sort_order": 1
+      },
+      {
+        "question": "Do veterans, retirees, and dependents qualify?",
+        "answer": "The discount keys on a valid Military ID and applies to the cardholder. Dependents with their own Military ID and retirees qualify; veterans need a qualifying Military ID (e.g., a retiree ID or VHIC) — confirm accepted documents at the box office.",
+        "sort_order": 2
+      },
+      {
+        "question": "How do I verify my status at HMNS?",
+        "answer": "Show a valid Military ID at the box office. There is no online military rate and no ID.me, GovX, or SheerID step — it is an in-person ID check.",
+        "sort_order": 3
+      },
+      {
+        "question": "Can I use the HMNS military discount online?",
+        "answer": "No — it is redeemed in person only. Buy standard tickets online if you want timed entry, or claim the discount at the box office.",
+        "sort_order": 4
+      },
+      {
+        "question": "What is excluded from the discount?",
+        "answer": "It does not apply to \"Dinosaur Discoveries: A Holographic Adventure\", and it is cardholder-only (one discounted ticket per ID, not a family or group rate).",
+        "sort_order": 5
+      },
+      {
+        "question": "Is HMNS a Blue Star Museum with free military family admission?",
+        "answer": "No — HMNS is not a Blue Star Museums participant. Other Houston museums (the Museum of Fine Arts Houston, The Health Museum, Children’s Museum Houston, Buffalo Soldiers National Museum) run Blue Star each summer.",
+        "sort_order": 6
+      },
+      {
+        "question": "What is actually the cheapest way to see HMNS?",
+        "answer": "For the permanent halls, Free Tuesday 5–8 pm is free for everyone — cheaper than the $16 military rate. Use the military discount for paid add-ons like the butterfly center, planetarium or a theatre film, or when you cannot make Tuesday evening.",
+        "sort_order": 7
+      },
+      {
+        "question": "Where is HMNS located?",
+        "answer": "The Houston Museum of Natural Science is at 5555 Hermann Park Drive, Houston, TX 77030 — inside Hermann Park next to the Texas Medical Center and Museum District, roughly 13 miles from Ellington Field Joint Reserve Base.",
+        "sort_order": 8
+      },
+      {
+        "question": "Does the HMNS discount apply to parking or the Sugar Land location?",
+        "answer": "The verified prices are for the flagship Hermann Park museum’s ticketed attractions. Parking and the Sugar Land satellite are not stated in the military-discount terms — confirm at the box office.",
+        "sort_order": 9
+      }
+    ],
+    "sources": [
+      {
+        "label": "HMNS Help Center — Military Discount (official terms)",
+        "url": "https://help.hmns.org/support/solutions/articles/151000207601-military-discount",
+        "publisher": "Houston Museum of Natural Science",
+        "sort_order": 0
+      },
+      {
+        "label": "HMNS — Hours & Admission (standard prices, Free Tuesday)",
+        "url": "https://www.hmns.org/visit/hours-admission/",
+        "publisher": "Houston Museum of Natural Science",
+        "sort_order": 1
+      },
+      {
+        "label": "CultureMap Houston — Blue Star Museums free military admission (Houston list; HMNS not listed)",
+        "url": "https://houston.culturemap.com/news/entertainment/blue-star-museums-houston-free-military/",
+        "publisher": "CultureMap Houston",
+        "sort_order": 2
+      }
+    ]
+  }
+]

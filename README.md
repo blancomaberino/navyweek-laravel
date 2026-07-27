@@ -165,6 +165,11 @@ command and a `*ImportTest` that runs against the real committed artifacts
   exporter's `team` natural key (the legacy row has no team field); a stop has no
   natural unique key (a city slug recurs in a season), so each team's stops are
   replaced wholesale on re-import, while hubs/cities upsert by their unique key.
+- **local discounts** (`import:local-discounts`) — the geographic guides
+  (`local_discounts` → `local_stores` → `local_store_hours`). A nested aggregate:
+  the parent upserts on its `state`+`city`+`business_slug` composite key and
+  replaces FAQs/sources; stores/hours (no natural key) are replaced wholesale per
+  parent, their FKs + `sort_order` synthesized from the nesting.
 
 Later slices add the remaining domains (catalog/CRM) through the same framework.
 
