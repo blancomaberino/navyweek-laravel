@@ -841,11 +841,12 @@ Proven on the bases (`import:bases`), ranks (`import:ranks`, STI over `category`
 event-guide (`import:event-guides` — fleet weeks, air shows, hub), navy-week
 (`import:navy-week-events` — folding the legacy events + CityData + CityExtras into
 one row per city), jet-teams (`import:jet-teams` — hubs + schedule + city guides),
-the discount category hubs (`import:discount-categories`), and the Veterans Day meal
-roundup (`import:veterans-day-meals`) domains; one exporter + importer + command lands
-per domain in subsequent slices. A child table with no
-natural unique key (the jet-team schedule — a city slug recurs in a season) is
-replaced wholesale per parent rather than upserted per row.
+the discount category hubs (`import:discount-categories`), the Veterans Day meal
+roundup (`import:veterans-day-meals`), and the local discount guides
+(`import:local-discounts` — a nested discounts→stores→hours aggregate) domains; one
+exporter + importer + command lands per domain in subsequent slices. A child table
+with no natural unique key (the jet-team schedule; local stores/hours) is replaced
+wholesale per parent rather than upserted per row.
 
 ## References
 

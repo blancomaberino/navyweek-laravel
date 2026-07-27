@@ -171,6 +171,11 @@ command and a `*ImportTest` that runs against the real committed artifacts
 - **veterans day meals** (`import:veterans-day-meals`) — the Veterans Day free-meal
   roundup (`veterans_day_meals`); a flat rename with `eligibility` as an enum-string
   array. All statuses import (pending included) — the render gate filters on read.
+- **local discounts** (`import:local-discounts`) — the geographic guides
+  (`local_discounts` → `local_stores` → `local_store_hours`). A nested aggregate:
+  the parent upserts on its `state`+`city`+`business_slug` composite key and
+  replaces FAQs/sources; stores/hours (no natural key) are replaced wholesale per
+  parent, their FKs + `sort_order` synthesized from the nesting.
 
 Later slices add the remaining catalog/CRM domains (the brand → offer → research →
 page normalization of the ~990 discount records) through the same framework.
