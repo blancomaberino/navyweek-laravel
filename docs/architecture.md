@@ -4,13 +4,14 @@ Living architecture diagram for the Laravel rebuild. **Keep it current:** any ch
 that adds/removes a table, model, repository, middleware, service, event/listener,
 or request-flow step must update this file in the same PR (see `platform/CLAUDE.md`).
 
-Scope reflects what is **built so far**. Planned-but-not-yet-built entities are drawn
-with dashed borders and are not wired up until their slice lands.
+Scope reflects what is **built so far**. (Earlier revisions drew planned-but-not-yet-built
+entities with dashed borders; with the Phase-2 schema complete, none remain.)
 
-Last updated: Phase 2 slice 10a — Events silo (guides): `navy_week_events` (folds the
-legacy event + city detail), `fleet_weeks` block-template guides, and `air_shows` (+ the
-single-row `air_show_hub`); all reuse the shared polymorphic `faqs`/`sources`. The jet-teams
-sub-silo lands in 10b. (Slice 9: Catalog directories — categories, meals, local pages.)
+Last updated: Phase 2 slice 10b — Jet-teams sub-silo: `jet_teams` (Blue Angels /
+Thunderbirds hubs) with `jet_team_schedule` (every tour stop) and `jet_team_cities`
+(published city guides) children; guides reuse the shared polymorphic `faqs`/`sources`.
+This completes the Phase-2 schema work — the full data migration (Stage-A/Stage-B) is next.
+(Slice 10a: navy week / fleet weeks / air shows guides.)
 
 ## Domain modules & data access
 
@@ -181,6 +182,16 @@ flowchart TB
         FleetWeekRepo --> FleetWeek
         AirShowRepo --> AirShow
         AirShowRepo --> AirShowHub
+        JetTeam["JetTeam (model)<br/>hub + children"]
+        JetSchedule["JetTeamScheduleRow (model)"]
+        JetCity["JetTeamCity (model)"]
+        JetTeamIface["JetTeamRepositoryInterface"]
+        JetTeamRepo["EloquentJetTeamRepository"]
+        JetTeamEnums["enums TeamId / JetTeamStatus<br/>(+ shared Admission)"]
+        JetTeamRepo -. implements .-> JetTeamIface
+        JetTeamRepo --> JetTeam
+        JetTeam -->|hasMany| JetSchedule
+        JetTeam -->|hasMany| JetCity
     end
 
     BaseModel -.->|"morphMany sources"| Source
@@ -192,10 +203,8 @@ flowchart TB
     FleetWeek -.->|"morphMany sources / faqs"| Source
     AirShow -.->|"morphMany sources / faqs"| Source
     AirShowHub -.->|"morphMany faqs"| Faq
-
-    subgraph Planned["Planned (not yet built)"]
-        Pillars2["jet teams (+ schedule + cities) — Pillars, slice 10b"]:::planned
-    end
+    JetTeam -.->|"morphMany faqs"| Faq
+    JetCity -.->|"morphMany sources / faqs"| Source
 
     DSP["DomainServiceProvider<br/>(interface to implementation bindings)"]
     DSP -.binds.-> ConnIface
@@ -213,8 +222,7 @@ flowchart TB
     DSP -.binds.-> NavyWeekIface
     DSP -.binds.-> FleetWeekIface
     DSP -.binds.-> AirShowIface
-
-    classDef planned stroke-dasharray: 5 5,stroke:#999,color:#999;
+    DSP -.binds.-> JetTeamIface
 ```
 
 ## Data model (built so far)
@@ -618,6 +626,45 @@ erDiagram
         json copy "intro, key_facts, about"
         date date_published_modified "build clock"
     }
+
+    JET_TEAMS ||--o{ JET_TEAM_SCHEDULE : "season stops"
+    JET_TEAMS ||--o{ JET_TEAM_CITIES : "city guides"
+    JET_TEAMS ||--o{ FAQS : "hub FAQs (faqable morph)"
+    JET_TEAM_CITIES ||--o{ SOURCES : "cited by (sourceable morph)"
+    JET_TEAM_CITIES ||--o{ FAQS : "has (faqable morph)"
+
+    JET_TEAMS {
+        bigint id PK
+        string team UK "enum TeamId (blue-angels/thunderbirds)"
+        string base_path UK "e.g. /blue-angels"
+        int year
+        json copy "intro, key_facts, about, cross_team"
+        date date_published_modified "build clock"
+    }
+
+    JET_TEAM_SCHEDULE {
+        bigint id PK
+        bigint jet_team_id FK
+        date start_date
+        date end_date
+        string city
+        string slug "guide slug — links only if published (NOT unique)"
+        string admission "enum Admission, nullable"
+        string status "enum JetTeamStatus"
+        int sort_order "authored tour order"
+    }
+
+    JET_TEAM_CITIES {
+        bigint id PK
+        bigint jet_team_id FK
+        string slug "UK(jet_team_id, slug)"
+        string admission "enum Admission"
+        string status "enum JetTeamStatus"
+        bool published "render gate"
+        date second_start_date "nullable — twice-a-season window"
+        json body "intro, quick_facts, sections, related_paragraph, needs_verification"
+        date date_published_modified "build clock"
+    }
 ```
 
 > `pages` now carries the full SEO/JSON-LD head-meta layer (title, description,
@@ -668,8 +715,8 @@ erDiagram
 > rather than JSON columns — the reason those were made polymorphic in slice 6;
 > only the cohesive, base-specific display lists (`aka`, `major_units`, `key_facts`,
 > `notable_events`, `nearby_bases`) stay JSON. Base pages (pageable → Base) and the
-> body columns arrive with the Phase 3 rendering slice. The remaining reference
-> pillar (the jet-teams sub-silo) lands in slice 10b.
+> body columns arrive with the Phase 3 rendering slice. With the jet-teams
+> sub-silo (slice 10b), the Phase-2 pillar/directory schema work is complete.
 
 > **Ranks pillar (slice 8).** Modeled as **single-table inheritance**: one `ranks`
 > table, `category` the discriminator over the legacy `NavyRankEntry` union (officer
@@ -731,6 +778,22 @@ erDiagram
 > `faqs`/`sources`** tables (official sources for Navy Week; citations for the
 > guides); the block payloads (schedule, sections, festival/location/offer schema
 > inputs) stay JSON. The guides carry build-clock `date_published`/`date_modified`.
+
+> **Jet-teams sub-silo (slice 10b).** The flight-demonstration squadrons (Blue
+> Angels, Thunderbirds), completing the Phase-2 schema work. **`jet_teams`** is the
+> hub/identity per team (port of `TeamMeta`); `team` is the natural key (enum
+> `TeamId`), `base_path` the URL-base lookup. It roots two children: **`jet_team_schedule`**
+> is every stop on the season tour (port of `JetTeamScheduleRow`) — factual hub-table
+> data whose `slug` links to a guide only when one is published, and is deliberately
+> **not unique** (a city can appear twice a season, e.g. Pensacola in July and
+> November); **`jet_team_cities`** are the published, routed city guides (port of
+> `JetTeamCity`, `/{team}/{slug}/`, unique on `jet_team_id`+`slug`) where `published`
+> is the render gate and the optional `second_*` window covers a twice-a-season city.
+> The `Admission` enum is shared with air shows; `JetTeamStatus` maps onto schema.org
+> event status. Hub + guide FAQs and guide sources reuse the **shared polymorphic
+> `faqs`/`sources`** tables; body blocks stay JSON. The `JetTeamRepository` is the one
+> repository for the whole sub-silo (team lookup, schedule, `publishedCities` gate,
+> `findCity`), so the two child tables carry none of their own.
 
 ## Request / redirect pipeline
 
