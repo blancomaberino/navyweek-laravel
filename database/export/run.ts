@@ -7,8 +7,10 @@
 
 import './air-shows';
 import './bases';
+import './discount-categories';
 import './fleet-weeks';
 import './jet-teams';
 import './local-discounts';
 import './navy-week-events';
 import './ranks';
+import './veterans-day-meals';
