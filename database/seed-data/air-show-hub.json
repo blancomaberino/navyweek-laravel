@@ -1,0 +1,63 @@
+[
+  {
+    "base_path": "/air-show",
+    "year": 2026,
+    "eyebrow": "// U.S. Military Air Shows",
+    "hub_title": "AIR SHOWS",
+    "hub_subtitle": "2026 Guide",
+    "seo_headline": "Military Air Shows 2026: Dates, Tickets & Viewing Guides",
+    "intro": [
+      "Military air shows put the country's flight demonstration squadrons, fighter demos, and heritage aircraft over a single flight line for a weekend — most of them free, many on active bases. This guide tracks the major U.S. military air shows, with a full visitor guide for each: dates, tickets, performers, parking, and the rules you need to clear the gate."
+    ],
+    "key_facts": [
+      {
+        "label": "What",
+        "value": "Major U.S. military air shows"
+      },
+      {
+        "label": "Coverage",
+        "value": "Dates, tickets, performers, parking & gate rules"
+      },
+      {
+        "label": "Headliners",
+        "value": "Blue Angels, Thunderbirds & military demo teams"
+      },
+      {
+        "label": "Admission",
+        "value": "Most base shows are free"
+      }
+    ],
+    "about": [
+      "Air shows hosted on active U.S. military installations are unlike any civilian event: they put operational hardware on the ramp, the nation's jet demonstration teams in the sky, and — at most base shows — charge nothing to get in. The trade-off is stricter entry: government-issued photo ID, clear-bag policies, and long security lines on show mornings.",
+      "This guide focuses on the largest and most-attended military air shows in the country. Each show’s guide is verified against the official source and updated as the lineup, dates, and ticket details are confirmed for the season."
+    ],
+    "meta_title": "Military Air Shows 2026: Dates, Tickets & Guides | NavyWeek.org",
+    "meta_description": "A guide to major U.S. military air shows — dates, free admission and ticket options, performers, parking, and gate rules, with a visitor guide for each.",
+    "og_image": "/og/air-show/hub.png",
+    "date_published": "2026-06-15",
+    "date_modified": "2026-07-13",
+    "last_verified": "July 13, 2026",
+    "faqs": [
+      {
+        "question": "Are military air shows free?",
+        "answer": "Most air shows held on active military bases offer free general admission and parking. Optional reserved or premium seating is usually sold separately. Civilian airport shows are more often ticketed.",
+        "sort_order": 0
+      },
+      {
+        "question": "Do I need ID to get onto a base for an air show?",
+        "answer": "Yes. Base air shows typically require every attendee 18 and older to present a valid government-issued photo ID. Non-U.S. citizens should carry documentation of their legal status.",
+        "sort_order": 1
+      },
+      {
+        "question": "Can I bring a bag or cooler?",
+        "answer": "Most base shows enforce a clear-bag policy and prohibit coolers, backpacks, and non-clear bags. Check each show's guide for its specific rules before you go.",
+        "sort_order": 2
+      },
+      {
+        "question": "Who performs at military air shows?",
+        "answer": "Headliners are usually the U.S. Navy Blue Angels or U.S. Air Force Thunderbirds, alongside single-ship fighter demos (F-35, F-22, F-16), tactical demos, and heritage/warbird flights. Lineups are confirmed closer to each event.",
+        "sort_order": 3
+      }
+    ]
+  }
+]

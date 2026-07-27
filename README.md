@@ -153,9 +153,12 @@ command and a `*ImportTest` that runs against the real committed artifacts
   categories), reproducing the slice-8 consolidations (`next_slug`/`previous_slug`,
   the `designator_community`/`rating_community` split, unified `career_path`, the
   `era_tags` enum collection) plus self-ref slug links and FAQs/sources.
+- **event guides** (`import:event-guides`) — `fleet_weeks` + `air_shows` guides and
+  the single-row `air_show_hub`; a pure top-level camelCase→snake_case rename with
+  the block payloads (schedule, festival, sections, …) passing through as JSON.
 
-Later slices add the remaining domains (catalog/CRM, the events silo) through the
-same framework.
+Later slices add the remaining domains (the navy-week + jet-team events, then
+catalog/CRM) through the same framework.
 
 ## Quality gates (per the rebuild workflow)
 
