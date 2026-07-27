@@ -1,0 +1,1920 @@
+[
+  {
+    "sequence": 1,
+    "slug": "rio-grande-valley",
+    "city": "Rio Grande Valley",
+    "state": "Texas",
+    "state_abbr": "TX",
+    "start_date": "2026-01-26",
+    "end_date": "2026-02-01",
+    "anchor_event": "Texas Citrus Fiesta",
+    "lat": "26.2034",
+    "lng": "-98.23",
+    "first_time": true,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "completed",
+    "anchor_event_detail": "The Texas Citrus Fiesta in Mission, TX dates to 1932 and celebrates the annual citrus harvest with a Royal Coronation, Product Costume Show (costumes made from actual citrus), Grapefruit Pie Contest, and the signature Parade of Oranges — where floats are covered in fresh slices of oranges, grapefruits, and limes. The parade draws roughly 12,000 spectators, with overall fiesta attendance reaching approximately 100,000.",
+    "first_time_note": "Cmdr. Julie Holland confirmed: \"We're excited to bring Navy Week to the Rio Grande Valley for the very first time.\" It was the inaugural stop on the 2026 \"Road Trip to 250.\"",
+    "navy_assets": [
+      "Over 70 Sailors participated",
+      "USS Gonzalez (DDG 66) crew — named for Medal of Honor recipient Sgt. Alfredo \"Freddy\" Gonzalez from Edinburg, TX",
+      "Navy Band Southeast \"Deckplate Brass Band\" — concerts and flash mobs",
+      "Navy Ceremonial Guard bayonet drill team",
+      "Naval Aviation flyover at the Parade of Oranges (unverified)",
+      "\"Strike Group\" mobile mixed-reality VR experience",
+      "RADM David Faehnle (Commandant, Naval District Washington)"
+    ],
+    "key_venues": [
+      "Edinburg ACE Center (proclamation and kickoff)",
+      "Edinburg Municipal Auditorium",
+      "Oval Park in McAllen",
+      "Veteran's War Memorial of Texas in McAllen",
+      "Mission Events Center (Royal Coronation)",
+      "Conway Avenue, downtown Mission (Parade of Oranges)",
+      "Museum of South Texas History",
+      "South Texas College Cooper Center"
+    ],
+    "military_context": [
+      "The Rio Grande Valley sits along the U.S.-Mexico border in subtropical South Texas, the center of the state's citrus industry. Naval Air Station Kingsville (~120 miles north) is a major Navy pilot training base, and NAS Corpus Christi is also nearby.",
+      "Over 40,000 Sailors in today's Navy come from Texas. The Medal of Honor connection to Sgt. Gonzalez — killed during the Battle of Hue in 1968 — gives the region a deeply personal naval tie. South Texas College alone serves 800+ veterans, active-duty members, and dependents across 40,000+ students."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Rio-Grande-Valley-2026/",
+    "highlights": [
+      "USS Gonzalez (DDG 66) crew visit",
+      "Navy Band Southeast \"Deckplate Brass Band\"",
+      "Ceremonial Guard bayonet drill team",
+      "Naval Aviation flyover (unverified)",
+      "Strike Group VR experience",
+      "STEM exhibits at local schools",
+      "Community service projects"
+    ],
+    "anchor_event_url": "https://www.texascitrusfiesta.org/",
+    "venues": [
+      {
+        "name": "Edinburg ACE Center",
+        "address": "801 Travis Ave, Edinburg, TX 78539",
+        "lat": 26.3032,
+        "lng": -98.1631,
+        "notes": "Proclamation and Navy Week kickoff venue.",
+        "parking": "Free on-site parking for community events."
+      },
+      {
+        "name": "Mission Events Center",
+        "address": "2425 Ruby Red Blvd, Mission, TX 78572",
+        "lat": 26.2173,
+        "lng": -98.3253,
+        "notes": "Royal Coronation of the Texas Citrus Fiesta.",
+        "parking": "Free lot parking; expect heavy demand during Coronation."
+      },
+      {
+        "name": "Conway Avenue, downtown Mission",
+        "address": "Conway Ave & Tom Landry St, Mission, TX 78572",
+        "lat": 26.2159,
+        "lng": -98.3253,
+        "notes": "Parade of Oranges route.",
+        "parking": "Street parking closes early; use lots on side streets."
+      },
+      {
+        "name": "Oval Park",
+        "address": "500 N 1st St, McAllen, TX 78501",
+        "lat": 26.2076,
+        "lng": -98.2389,
+        "notes": "Family activities and outdoor displays.",
+        "parking": "Free street and lot parking nearby."
+      },
+      {
+        "name": "Veteran's War Memorial of Texas",
+        "address": "111 W Houston Ave, McAllen, TX 78501",
+        "lat": 26.2055,
+        "lng": -98.238,
+        "notes": "Wreath laying and veteran outreach.",
+        "parking": "On-site lot, free."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "Most venues across the Rio Grande Valley offer free parking. For the Parade of Oranges in Mission, arrive at least 90 minutes early and use lots one or two blocks off Conway Ave; main route closes to vehicle traffic.",
+    "cost_summary": "Free. All official Navy Week events in the Rio Grande Valley are free and open to the public. The Texas Citrus Fiesta anchor events (Royal Coronation, Product Costume Show) are ticketed separately by the Fiesta organizers.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When is Navy Week in the Rio Grande Valley in 2026?",
+        "answer": "Navy Week Rio Grande Valley ran January 26 – February 1, 2026, as the inaugural stop of the 2026 \"Road Trip to 250\" tour.",
+        "sort_order": 0
+      },
+      {
+        "question": "Where was the Parade of Oranges held?",
+        "answer": "The Parade of Oranges runs along Conway Avenue in downtown Mission, TX. Naval Aviation conducted a flyover at the parade.",
+        "sort_order": 1
+      },
+      {
+        "question": "Was Navy Week Rio Grande Valley free?",
+        "answer": "Yes. All official Navy Week events were free. The Texas Citrus Fiesta's ticketed events (Royal Coronation, Product Costume Show) were administered separately by the Fiesta.",
+        "sort_order": 2
+      },
+      {
+        "question": "Which Navy ship's crew visited the Rio Grande Valley?",
+        "answer": "Crew members from USS Gonzalez (DDG 66) — named for Medal of Honor recipient Sgt. Alfredo \"Freddy\" Gonzalez of Edinburg, TX — represented the Navy.",
+        "sort_order": 3
+      },
+      {
+        "question": "Is Navy Week returning to the Rio Grande Valley?",
+        "answer": "NAVCO has not announced a return. The 2026 visit was the region's first-ever Navy Week. Watch outreach.navy.mil for future schedules.",
+        "sort_order": 4
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Rio Grande Valley",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Rio-Grande-Valley-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Texas Citrus Fiesta (anchor event)",
+        "url": "https://www.texascitrusfiesta.org/",
+        "sort_order": 1
+      },
+      {
+        "label": "Visit McAllen (host city tourism)",
+        "url": "https://www.visitmcallen.com/",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "sequence": 2,
+    "slug": "honolulu-hilo",
+    "city": "Honolulu / Hilo",
+    "state": "Hawaii",
+    "state_abbr": "HI",
+    "start_date": "2026-03-09",
+    "end_date": "2026-03-15",
+    "anchor_event": "30th Annual Honolulu Festival",
+    "lat": "21.3069",
+    "lng": "-157.8583",
+    "first_time": false,
+    "first_time_location": true,
+    "first_time_badge": "First Navy Week visit to Hilo",
+    "status": "completed",
+    "anchor_event_detail": "The 30th Annual Honolulu Festival is Hawaii's premier Pacific Rim cultural festival, promoting mutual understanding and ethnic harmony between Hawaii and Pacific nations. The 2026 theme was \"Aloha & Mahalo — 30 Years of Cultural Celebration,\" featuring a craft fair with 100+ vendors, Governor's Luncheon, Sake & Food Fest, and the Grand Parade along Kalakaua Avenue in Waikiki with floats, taiko drums, hula dancers, and cultural groups from Japan, Australia, Tahiti, Philippines, Taiwan, and Korea.",
+    "first_time_note": "Hilo (Big Island) is a first-time location. Honolulu had never formally hosted a Navy Week because the program typically targets areas without significant Navy presence. The dual-city format is unprecedented. Lt. Madison Kwok explained: \"We are looking at places that don't have a naval concentration. We don't have that on Big Island.\"",
+    "navy_assets": [
+      "Over 70 Sailors deployed to both islands",
+      "USS Hawai'i (SSN 776) crew — Virginia-class fast-attack submarine",
+      "USS Daniel Inouye (DDG 118) crew — Arleigh Burke-class destroyer",
+      "USS Pearl Harbor (LSD 52) crew — dock landing ship",
+      "U.S. Pacific Fleet Band — performances across both islands",
+      "Navy Ceremonial Guard at Pearl Harbor Memorial",
+      "RADM Ryan Mahelona — Kāne'ohe native, Deputy Commander of U.S. 10th Fleet"
+    ],
+    "key_venues": [
+      "Pearl Harbor National Memorial visitors center",
+      "International Market Place",
+      "Ala Moana Center Stage",
+      "UH West Oahu (IT and Cyber Fair)",
+      "Governor's Office (proclamation)",
+      "Kalakaua Avenue/Waikiki (Grand Parade)",
+      "Rainbow Falls (Big Island)",
+      "Mokupāpapa Discovery Center",
+      "Pana'ewa Zoo & Gardens",
+      "UH Hilo campus"
+    ],
+    "military_context": [
+      "Hawaii is the epicenter of U.S. naval power in the Indo-Pacific. Joint Base Pearl Harbor-Hickam hosts U.S. Pacific Fleet headquarters. The December 7, 1941 attack on Pearl Harbor is the most defining moment in U.S. Naval history; the USS Arizona Memorial remains a major national shrine.",
+      "Military is second only to tourism in Hawaii's economy. Four Navy vessels currently bear Hawaiian names. The Hilo inclusion let NAVCO reach a community with minimal naval connections while leveraging Oahu's deep existing relationships."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Honolulu-Hilo-2026/",
+    "highlights": [
+      "Crews from three Hawaii-namesake warships",
+      "U.S. Pacific Fleet Band performances",
+      "Navy Ceremonial Guard at Pearl Harbor",
+      "IT and Cyber Fair at UH West Oahu",
+      "Beautification projects at UH Hilo",
+      "STEM programs across both islands",
+      "Community service and outreach"
+    ],
+    "anchor_event_url": "https://www.honolulufestival.com/",
+    "venues": [
+      {
+        "name": "Pearl Harbor National Memorial",
+        "address": "1 Arizona Memorial Place, Honolulu, HI 96818",
+        "lat": 21.3649,
+        "lng": -157.9507,
+        "notes": "Ceremonial Guard appearances and visitor outreach.",
+        "parking": "Free visitor center lot, fills early on weekends."
+      },
+      {
+        "name": "Ala Moana Center Stage",
+        "address": "1450 Ala Moana Blvd, Honolulu, HI 96814",
+        "lat": 21.2911,
+        "lng": -157.8434,
+        "notes": "Pacific Fleet Band performances.",
+        "parking": "Free covered parking garage at Ala Moana."
+      },
+      {
+        "name": "Kalakaua Avenue / Waikiki",
+        "address": "Kalakaua Ave, Honolulu, HI 96815",
+        "lat": 21.2784,
+        "lng": -157.8294,
+        "notes": "Honolulu Festival Grand Parade.",
+        "parking": "Limited; use Waikiki garages or TheBus."
+      },
+      {
+        "name": "UH Hilo campus",
+        "address": "200 W Kawili St, Hilo, HI 96720",
+        "lat": 19.7019,
+        "lng": -155.0856,
+        "notes": "Beautification projects and STEM events.",
+        "parking": "Free with visitor pass at UH Hilo lots."
+      },
+      {
+        "name": "Mokupāpapa Discovery Center",
+        "address": "76 Kamehameha Ave, Hilo, HI 96720",
+        "lat": 19.7295,
+        "lng": -155.0876,
+        "notes": "Marine science outreach in downtown Hilo.",
+        "parking": "Metered street parking; free Sundays."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "Pearl Harbor National Memorial offers a free lot that fills by mid-morning. In Waikiki, use Ala Moana or hotel garages and walk to Kalakaua Avenue events. On the Big Island, downtown Hilo has metered street parking and free public lots near Mokupāpapa.",
+    "cost_summary": "Free. All Navy Week events on both Oahu and the Big Island were free. The 30th Annual Honolulu Festival's craft fair, performances, and Grand Parade were free; the Governor's Luncheon and Sake & Food Fest were ticketed by Festival organizers.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When was Navy Week Honolulu / Hilo in 2026?",
+        "answer": "Navy Week ran March 9–15, 2026 across both Oahu (Honolulu) and the Big Island (Hilo) — an unprecedented dual-island format.",
+        "sort_order": 0
+      },
+      {
+        "question": "Why did Navy Week include Hilo?",
+        "answer": "NAVCO targets communities without a significant Navy presence. The Big Island has no naval concentration, making Hilo a natural first-time addition alongside Honolulu.",
+        "sort_order": 1
+      },
+      {
+        "question": "Which ships visited Hawaii during Navy Week?",
+        "answer": "Crews from USS Hawai'i (SSN 776), USS Daniel Inouye (DDG 118), and USS Pearl Harbor (LSD 52) participated across both islands.",
+        "sort_order": 2
+      },
+      {
+        "question": "How do I get to Pearl Harbor National Memorial?",
+        "answer": "Take H-1 west to exit 15A (Arizona Memorial). TheBus routes 20 and 42 also serve the visitor center. Parking is free but fills by mid-morning.",
+        "sort_order": 3
+      },
+      {
+        "question": "Was the Honolulu Festival Grand Parade free?",
+        "answer": "Yes. The Grand Parade along Kalakaua Avenue in Waikiki was free and open to the public.",
+        "sort_order": 4
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Honolulu / Hilo",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Honolulu-Hilo-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Honolulu Festival (anchor event)",
+        "url": "https://www.honolulufestival.com/",
+        "sort_order": 1
+      },
+      {
+        "label": "Go Hawaii (state tourism)",
+        "url": "https://www.gohawaii.com/",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "sequence": 3,
+    "slug": "lexington",
+    "city": "Lexington",
+    "state": "Kentucky",
+    "state_abbr": "KY",
+    "start_date": "2026-04-06",
+    "end_date": "2026-04-12",
+    "anchor_event": "Keeneland Spring Meet & Heroes Day",
+    "lat": "38.0406",
+    "lng": "-84.5037",
+    "first_time": true,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "completed",
+    "anchor_event_detail": "Keeneland Race Course is one of America's most prestigious Thoroughbred racing venues. The 2026 Spring Meet runs April 3–24, featuring 19 stakes races with a record $9.55 million in purses, including the $1.25 million Toyota Blue Grass Stakes (G1). The anchor is Keeneland Heroes Day on Sunday, April 12 — military, veterans, first responders, and families receive free admission, reserved seating, and a complimentary meal. A flag rollout takes place on the track with a POW-MIA Chair of Honor displayed near the Paddock.",
+    "first_time_note": "Explicitly confirmed as a first-time host by NAVCO. Mayor Linda Gorton noted: \"People don't see Navy people here in uniform, so we're really happy to have you here.\"",
+    "navy_assets": [
+      "Navy Band — Chief Musician Collin Greggs performing jazz and R&B",
+      "Community service building furniture for Lexington Rescue Mission",
+      "SCPO John Osborne — Frankfort native, 27 years of service, NAVCO senior enlisted leader",
+      "PO2 Zachary Scarbro — Paintsville native, cyber warfare technician",
+      "Elizabeth Clements — Georgetown native, naval meteorologist",
+      "Strike Group VR experience"
+    ],
+    "key_venues": [
+      "Keeneland Race Course (Heroes Day)",
+      "Kentucky Horse Park (Navy Band)",
+      "Lexington History Museum (kickoff)",
+      "Lexington Children's Museum",
+      "Black and Williams Center",
+      "Lexington Rescue Mission (community service)",
+      "Thursday Night Live downtown",
+      "University of Kentucky campus"
+    ],
+    "military_context": [
+      "Lexington is Kentucky's second-largest city in the heart of the Bluegrass Region — the \"Horse Capital of the World.\" It is thoroughly landlocked with no naval installations nearby, making it a prime Navy Week target.",
+      "Fort Knox (~80 miles west) houses the U.S. Army Human Resources Command and the U.S. Bullion Depository. Fort Campbell (101st Airborne, KY-TN border) is also in the state. The University of Kentucky provides a major audience of 30,000+ students. Kentucky has a significant veteran population and long military heritage across all branches."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Lexington-2026/",
+    "highlights": [
+      "Keeneland Heroes Day — free admission for military",
+      "Navy Band jazz and R&B performances",
+      "Strike Group VR experience",
+      "STEM exhibits and interactive displays",
+      "Community service at Lexington Rescue Mission",
+      "Meet hometown Sailors from Kentucky",
+      "School visits and educational outreach"
+    ],
+    "anchor_event_url": "https://www.keeneland.com/",
+    "venues": [
+      {
+        "name": "Keeneland Race Course",
+        "address": "4201 Versailles Rd, Lexington, KY 40510",
+        "lat": 38.0492,
+        "lng": -84.6181,
+        "notes": "Heroes Day on April 12 — free admission for military and first responders.",
+        "parking": "Free general parking; preferred parking $5–$10 on race days."
+      },
+      {
+        "name": "Kentucky Horse Park",
+        "address": "4089 Iron Works Pkwy, Lexington, KY 40511",
+        "lat": 38.131,
+        "lng": -84.523,
+        "notes": "Navy Band performances.",
+        "parking": "Free with park admission."
+      },
+      {
+        "name": "Lexington History Museum",
+        "address": "215 W Main St, Lexington, KY 40507",
+        "lat": 38.0469,
+        "lng": -84.4977,
+        "notes": "Navy Week kickoff venue.",
+        "parking": "Metered street and downtown garages."
+      },
+      {
+        "name": "Lexington Rescue Mission",
+        "address": "444 Glen Arvin Ave, Lexington, KY 40508",
+        "lat": 38.0606,
+        "lng": -84.5045,
+        "notes": "Sailor community service — furniture build.",
+        "parking": "On-site lot, free."
+      },
+      {
+        "name": "University of Kentucky",
+        "address": "410 Administration Dr, Lexington, KY 40506",
+        "lat": 38.0306,
+        "lng": -84.5037,
+        "notes": "STEM outreach and recruiter events.",
+        "parking": "Visitor garages, paid."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "Keeneland offers free general parking; arrive early on Heroes Day (April 12). Downtown Lexington has metered street parking and several public garages on Main and Vine. Kentucky Horse Park parking is included with admission.",
+    "cost_summary": "Free. All Navy Week Lexington events were free. Keeneland Heroes Day (Apr 12) waived general admission for military, veterans, first responders, and their families.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When was Navy Week Lexington in 2026?",
+        "answer": "Navy Week Lexington ran April 6–12, 2026, concluding with Keeneland Heroes Day on Sunday, April 12.",
+        "sort_order": 0
+      },
+      {
+        "question": "What was Keeneland Heroes Day?",
+        "answer": "Heroes Day at Keeneland (Apr 12) offered free admission, reserved seating, and a complimentary meal to military, veterans, first responders, and their families, with a flag rollout on the track and a POW-MIA Chair of Honor near the Paddock.",
+        "sort_order": 1
+      },
+      {
+        "question": "Where do I park for Keeneland?",
+        "answer": "Keeneland offers free general parking off Versailles Road. Preferred parking ($5–$10) is closer to the gates. On Heroes Day, arrive at least an hour before first post.",
+        "sort_order": 2
+      },
+      {
+        "question": "Was Navy Week Lexington free?",
+        "answer": "Yes. All Navy Week events in Lexington were free and open to the public. The Keeneland Spring Meet itself had paid general admission on most days.",
+        "sort_order": 3
+      },
+      {
+        "question": "Did Lexington host Navy Week before?",
+        "answer": "No. 2026 was Lexington's first time as a Navy Week host city, confirmed by NAVCO.",
+        "sort_order": 4
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Lexington",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Lexington-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Keeneland (anchor event)",
+        "url": "https://www.keeneland.com/",
+        "sort_order": 1
+      },
+      {
+        "label": "VisitLEX (host city tourism)",
+        "url": "https://www.visitlex.com/",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "sequence": 4,
+    "slug": "national-parks",
+    "city": "National Parks",
+    "state": "Nationwide",
+    "state_abbr": "US",
+    "start_date": "2026-04-20",
+    "end_date": "2026-04-26",
+    "anchor_event": "National Park Week",
+    "lat": "38.8977",
+    "lng": "-77.0365",
+    "first_time": true,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "completed",
+    "anchor_event_detail": "National Park Week, first designated in 1991, traditionally features fee-free days, ranger programs, Junior Ranger activities, and commemorative events across 430+ NPS sites. The 2026 theme is \"Celebrate America's Story\" in honor of the semiquincentennial. This is the first time in Navy Week's 20+ year history that a Navy Week is distributed nationwide rather than centered on a single city.",
+    "first_time_note": "Completely unprecedented format. This is the first time Navy Week has been distributed across multiple national parks nationwide rather than focused on a single city. No prior Navy Week has attempted a multi-site, geographically dispersed format.",
+    "navy_assets": [
+      "NAVCO teams deployed to national parks across the country",
+      "Interactive STEM exhibits",
+      "Navy Band performances at selected parks",
+      "Sailor engagement at naval heritage sites"
+    ],
+    "key_venues": [
+      "Hot Springs National Park (Arkansas)",
+      "Zion National Park (Utah)",
+      "Great Smoky Mountains National Park (Tennessee / North Carolina)",
+      "Olympic National Park (Washington)",
+      "Mesa Verde National Park (Colorado)",
+      "Everglades National Park (Florida)",
+      "Cuyahoga Valley National Park (Ohio)",
+      "National Mall and Memorial Parks (Washington, D.C. — Navy Memorial)"
+    ],
+    "military_context": [
+      "The Navy's 250-year history is preserved in numerous national parks. The Continental Navy was established October 13, 1775, and Revolutionary War, War of 1812, Civil War, and WWII sites across the NPS system tell the Navy's story.",
+      "Military veterans and Gold Star families already receive free lifetime passes to national parks. The \"Road Trip to 250\" concept aligns perfectly with a nationwide NPS format — Sailors visiting places that preserve the founding story while celebrating dual 250th anniversaries."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/National-Parks-2026/",
+    "highlights": [
+      "First-ever multi-site Navy Week format",
+      "Naval heritage at national parks and monuments",
+      "STEM exhibits at participating parks",
+      "Sailor engagement nationwide",
+      "Connection between Navy history and NPS sites",
+      "Semiquincentennial celebrations"
+    ],
+    "anchor_event_url": "https://www.nps.gov/subjects/npscelebrates/national-park-week.htm",
+    "venues": [
+      {
+        "name": "Hot Springs National Park",
+        "address": "369 Central Ave, Hot Springs, AR 71901",
+        "lat": 34.5217,
+        "lng": -93.0424,
+        "notes": "Historic Bathhouse Row — Navy outreach and STEM programming.",
+        "parking": "Free and metered lots downtown."
+      },
+      {
+        "name": "Zion National Park",
+        "address": "1 Zion Park Blvd, Springdale, UT 84767",
+        "lat": 37.2982,
+        "lng": -113.0263,
+        "notes": "Sailor engagement and stewardship programming.",
+        "parking": "Park shuttle system in peak season; Springdale lots."
+      },
+      {
+        "name": "Great Smoky Mountains National Park",
+        "address": "107 Park Headquarters Rd, Gatlinburg, TN 37738",
+        "lat": 35.6532,
+        "lng": -83.507,
+        "notes": "Most-visited U.S. national park — community outreach.",
+        "parking": "Free visitor center lots; parking tags required."
+      },
+      {
+        "name": "Olympic National Park",
+        "address": "3002 Mount Angeles Rd, Port Angeles, WA 98362",
+        "lat": 47.8021,
+        "lng": -123.6044,
+        "notes": "Pacific Northwest stewardship and STEM events.",
+        "parking": "Free visitor center lot."
+      },
+      {
+        "name": "Mesa Verde National Park",
+        "address": "Mesa Verde National Park, CO 81330",
+        "lat": 37.2309,
+        "lng": -108.4618,
+        "notes": "Ancestral Puebloan heritage — educational outreach.",
+        "parking": "Free visitor and research center lot."
+      },
+      {
+        "name": "Everglades National Park",
+        "address": "40001 State Road 9336, Homestead, FL 33034",
+        "lat": 25.2866,
+        "lng": -80.8987,
+        "notes": "Coastal ecosystem stewardship programming.",
+        "parking": "Free visitor center lots."
+      },
+      {
+        "name": "Cuyahoga Valley National Park",
+        "address": "15610 Vaughn Rd, Brecksville, OH 44141",
+        "lat": 41.2808,
+        "lng": -81.5678,
+        "notes": "STEM and community engagement near Cleveland/Akron.",
+        "parking": "Free trailhead and visitor center lots."
+      },
+      {
+        "name": "National Mall and Memorial Parks",
+        "address": "900 Ohio Dr SW, Washington, DC 20024",
+        "lat": 38.8895,
+        "lng": -77.0353,
+        "notes": "Near the U.S. Navy Memorial — naval-heritage programming.",
+        "parking": "Limited paid street parking; Metro strongly recommended."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "Most participating national parks offer free or low-cost parking at visitor centers; some (Zion, Great Smoky Mountains) use shuttle or parking-tag systems in peak season. For the National Mall in Washington, D.C., Metro is strongly recommended. Check nps.gov for site-specific guidance.",
+    "cost_summary": "Free. All Navy outreach during National Park Week was free. NPS fee-free days during National Park Week waived entrance fees at the 100+ parks that normally charge.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When was the National Parks Navy Week in 2026?",
+        "answer": "The first-ever nationwide-format Navy Week ran April 20–26, 2026, coinciding with the National Park Service's National Park Week.",
+        "sort_order": 0
+      },
+      {
+        "question": "Which parks participated?",
+        "answer": "Participating sites for 2026 included Hot Springs, Zion, Great Smoky Mountains, Olympic, Mesa Verde, Everglades, and Cuyahoga Valley National Parks, plus the National Mall and Memorial Parks in Washington, D.C. Check the NAVCO and NPS sites for the complete list.",
+        "sort_order": 1
+      },
+      {
+        "question": "Was the National Parks Navy Week free?",
+        "answer": "Yes. Navy outreach was free at every participating park. Fee-free days during National Park Week also waived NPS entrance fees at parks that normally charge.",
+        "sort_order": 2
+      },
+      {
+        "question": "Was this format unprecedented?",
+        "answer": "Yes. This was the first time in Navy Week's 20+ year history that a Navy Week was distributed nationwide across multiple parks rather than centered on a single city.",
+        "sort_order": 3
+      },
+      {
+        "question": "Where can I see Navy heritage at a national park?",
+        "answer": "The 2026 Navy Week parks span the country — from Hot Springs and Mesa Verde to the Everglades and Cuyahoga Valley. In Washington, D.C., the National Mall and Memorial Parks sit near the U.S. Navy Memorial, and the Navy's 250-year history connects to NPS sites nationwide.",
+        "sort_order": 4
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week National Parks",
+        "url": "https://outreach.navy.mil/Navy-Weeks/National-Parks-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "National Park Service — National Park Week",
+        "url": "https://www.nps.gov/subjects/npscelebrates/national-park-week.htm",
+        "sort_order": 1
+      },
+      {
+        "label": "Find Your Park (NPS site directory)",
+        "url": "https://findyourpark.com/",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "sequence": 5,
+    "slug": "charlotte",
+    "city": "Charlotte",
+    "state": "North Carolina",
+    "state_abbr": "NC",
+    "start_date": "2026-05-03",
+    "end_date": "2026-05-10",
+    "anchor_event": "Truist Championship",
+    "lat": "35.2271",
+    "lng": "-80.8431",
+    "first_time": false,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "completed",
+    "anchor_event_detail": "The Truist Championship is a PGA TOUR Signature Event (one of eight on the PGA TOUR) featuring 72 top-ranked golfers at Quail Hollow Club. Competition rounds run May 7–10 with Pro-Am on May 6. Military appreciation programming includes complimentary tickets for service members, veterans, and families, and the inaugural \"Folds of Honor Friday\" presented by Coca-Cola Consolidated. Quail Hollow is famed for the \"Green Mile\" finishing holes 16–18.",
+    "first_time_note": "Charlotte is hosting Navy Week for the first time since 2007 — a return after nearly two decades.",
+    "navy_assets": [
+      "Approximately 75 Sailors representing a dozen Navy units",
+      "U.S. Fleet Forces Band — public performances",
+      "Educational/youth programming at Discovery Place science museum",
+      "USS Charlotte (SSN-766) — Los Angeles-class submarine (4th Navy ship named for the city)",
+      "Strike Group VR experience",
+      "Community service projects with local organizations"
+    ],
+    "key_venues": [
+      "Quail Hollow Club (Truist Championship)",
+      "Discovery Place science museum",
+      "Bank of America Stadium (Panthers/Charlotte FC)",
+      "Charlotte Motor Speedway (NASCAR, Concord)",
+      "Uptown Charlotte"
+    ],
+    "military_context": [
+      "North Carolina has the 4th largest active-duty military population in the U.S. with 12 military bases. Defense is the state's 2nd largest economic sector. Approximately 725,000 military veterans reside in NC.",
+      "Fort Bragg (~150 miles east) is the largest U.S. Army base by population with 52,000+ personnel. Camp Lejeune (~250 miles east) is the largest USMC base on the East Coast. Charlotte itself has unexpected Civil War naval history: despite being landlocked, it housed a Confederate Navy Yard — one of the Confederacy's most important naval manufacturing centers. Charlotte's population exceeds 900,000 (metro ~2.7M) and it is a major financial center (Bank of America HQ, Truist HQ)."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Charlotte-2026/",
+    "highlights": [
+      "U.S. Fleet Forces Band performances",
+      "USS Charlotte (SSN-766) crew visit",
+      "STEM programming at Discovery Place",
+      "Strike Group VR experience",
+      "Truist Championship military appreciation",
+      "Community service projects",
+      "Folds of Honor Friday"
+    ],
+    "anchor_event_url": "https://www.truistchampionship.com/",
+    "venues": [
+      {
+        "name": "Quail Hollow Club",
+        "address": "3700 Glen Eagles Rd, Charlotte, NC 28210",
+        "lat": 35.1521,
+        "lng": -80.848,
+        "notes": "Truist Championship — PGA TOUR Signature Event.",
+        "parking": "No on-site public parking. Use designated remote lots with shuttle service per Truist Championship guidance."
+      },
+      {
+        "name": "Discovery Place Science",
+        "address": "301 N Tryon St, Charlotte, NC 28202",
+        "lat": 35.2294,
+        "lng": -80.8395,
+        "notes": "STEM programming and Strike Group VR experience.",
+        "parking": "7th Street Station garage adjacent; paid."
+      },
+      {
+        "name": "Bank of America Stadium",
+        "address": "800 S Mint St, Charlotte, NC 28202",
+        "lat": 35.2258,
+        "lng": -80.8528,
+        "notes": "Public appearances and outreach.",
+        "parking": "Numerous Uptown garages; paid."
+      },
+      {
+        "name": "Uptown Charlotte (Tryon Street)",
+        "address": "N Tryon St, Charlotte, NC 28202",
+        "lat": 35.2271,
+        "lng": -80.8431,
+        "notes": "U.S. Fleet Forces Band performances.",
+        "parking": "Uptown garages; LYNX Blue Line light rail recommended."
+      },
+      {
+        "name": "Charlotte Motor Speedway",
+        "address": "5555 Concord Pkwy S, Concord, NC 28027",
+        "lat": 35.352,
+        "lng": -80.6829,
+        "notes": "Possible NASCAR appearance during Navy Week.",
+        "parking": "Massive on-site free lots on non-race days."
+      }
+    ],
+    "daily_schedule": [
+      {
+        "date": "2026-05-03",
+        "items": [
+          {
+            "title": "Navy Week kickoff & community proclamations",
+            "description": "Welcome events and recognition ceremonies in Uptown Charlotte. Specific times TBA.",
+            "source": "https://outreach.navy.mil/Navy-Weeks/Charlotte-2026/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-04",
+        "items": [
+          {
+            "title": "STEM programming at Discovery Place",
+            "venue": "Discovery Place Science",
+            "description": "Strike Group VR and Navy STEM exhibits open to families and school groups. Times TBA.",
+            "source": "https://outreach.navy.mil/Navy-Weeks/Charlotte-2026/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-05",
+        "items": [
+          {
+            "title": "Community service projects",
+            "description": "Sailor-led service projects with local Charlotte partners. Times TBA."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-06",
+        "items": [
+          {
+            "title": "Truist Championship Pro-Am",
+            "venue": "Quail Hollow Club",
+            "description": "PGA TOUR Pro-Am day with military appreciation programming. Ticketed by Truist Championship.",
+            "source": "https://www.truistchampionship.com/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-07",
+        "items": [
+          {
+            "title": "Truist Championship — Round 1",
+            "venue": "Quail Hollow Club",
+            "description": "Tournament round 1 (Folds of Honor Friday presented by Coca-Cola Consolidated also features special military programming during the week).",
+            "source": "https://www.truistchampionship.com/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-08",
+        "items": [
+          {
+            "title": "Truist Championship — Round 2 (\"Folds of Honor Friday\")",
+            "venue": "Quail Hollow Club",
+            "description": "Folds of Honor Friday presented by Coca-Cola Consolidated — special military appreciation programming throughout the day.",
+            "source": "https://www.truistchampionship.com/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-09",
+        "items": [
+          {
+            "title": "Truist Championship — Round 3",
+            "venue": "Quail Hollow Club",
+            "description": "Tournament round 3.",
+            "source": "https://www.truistchampionship.com/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-10",
+        "items": [
+          {
+            "title": "Truist Championship — Final Round",
+            "venue": "Quail Hollow Club",
+            "description": "Final round on the \"Green Mile\" finishing holes 16–18. Closing Navy Week community events also held Uptown.",
+            "source": "https://www.truistchampionship.com/"
+          }
+        ]
+      }
+    ],
+    "parking_notes": "Quail Hollow has no on-site public parking — the Truist Championship runs free shuttle service from remote lots (details posted at truistchampionship.com closer to event week). In Uptown Charlotte, the LYNX Blue Line light rail is the easiest way to reach Discovery Place, Bank of America Stadium, and Tryon Street venues.",
+    "cost_summary": "Free. All official Navy Week Charlotte events — Fleet Forces Band performances, Discovery Place STEM programming, Strike Group VR — were free. The Truist Championship anchor event required separate paid tickets, with complimentary tickets offered to active-duty military, veterans, and their families.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When is Charlotte Navy Week 2026?",
+        "answer": "Navy Week Charlotte ran May 3–10, 2026, coinciding with the Truist Championship at Quail Hollow Club (competition rounds May 7–10, Pro-Am May 6).",
+        "sort_order": 0
+      },
+      {
+        "question": "Is Charlotte Navy Week free?",
+        "answer": "Yes. All official Navy Week Charlotte events — Fleet Forces Band performances, Discovery Place programming, Strike Group VR — were free and open to the public. The Truist Championship anchor required separate paid tickets, with complimentary tickets for active-duty military, veterans, and families.",
+        "sort_order": 1
+      },
+      {
+        "question": "Where do I park for the Truist Championship?",
+        "answer": "Quail Hollow has no on-site public parking. The Truist Championship runs free shuttle service from designated remote lots; check truistchampionship.com closer to event week for lot addresses and hours.",
+        "sort_order": 2
+      },
+      {
+        "question": "When did Charlotte last host Navy Week?",
+        "answer": "Charlotte last hosted Navy Week in 2007; the 2026 visit is its first since then — a return after nearly two decades.",
+        "sort_order": 3
+      },
+      {
+        "question": "Is there a USS Charlotte?",
+        "answer": "Yes. USS Charlotte (SSN-766) is a Los Angeles-class fast-attack submarine — the fourth Navy ship named for the city. Crew members with Charlotte-area ties participated in Navy Week.",
+        "sort_order": 4
+      },
+      {
+        "question": "How do I get around Uptown Charlotte during Navy Week?",
+        "answer": "The LYNX Blue Line light rail is the easiest way to reach Discovery Place, Bank of America Stadium, and Tryon Street venues. Free CATS Gold Rush trolley also circulates Uptown.",
+        "sort_order": 5
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Charlotte",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Charlotte-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Truist Championship (anchor event)",
+        "url": "https://www.truistchampionship.com/",
+        "sort_order": 1
+      },
+      {
+        "label": "Charlotte's Got A Lot (host city tourism)",
+        "url": "https://www.charlottesgotalot.com/",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "sequence": 6,
+    "slug": "harrisburg",
+    "city": "Harrisburg",
+    "state": "Pennsylvania",
+    "state_abbr": "PA",
+    "start_date": "2026-05-20",
+    "end_date": "2026-05-26",
+    "anchor_event": "Air Dot Show Central PA",
+    "lat": "40.2732",
+    "lng": "-76.8867",
+    "first_time": true,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "completed",
+    "anchor_event_detail": "The Air Dot Show Central PA is the fourth stop on the 2026 tour, held at Harrisburg International Airport (Middletown, PA) on May 23–25. The headliner is the U.S. Navy Blue Angels flying F/A-18 Super Hornets. Blue Angels advance team members #7 (LT Ronny \"Downy\" Hafeza) and #8 (LCDR Lilly \"Lunchbox\" Montana) conducted a site visit and flyover at Harrisburg International Airport on December 3, 2025.",
+    "first_time_note": "Cmdr. Holland stated: \"We're excited to bring Navy Week to Harrisburg for the first time and continue the 2026 tour to the birthplace of the Navy.\"",
+    "navy_assets": [
+      "U.S. Navy Blue Angels — F/A-18 Super Hornets (headline act)",
+      "Navy bands",
+      "STEM demonstrations",
+      "Naval History and Heritage Command — exploring \"Pennsylvania's proud naval legacy\"",
+      "Strike Group VR experience (F-35C launch sim, flight simulator, Navy diver role-play)",
+      "Community service projects"
+    ],
+    "key_venues": [
+      "Harrisburg International Airport (air show)",
+      "Pennsylvania State Capitol",
+      "City Island (63-acre island in the Susquehanna River)",
+      "Harrisburg Riverfront along the Susquehanna",
+      "Nearby Hershey (~15 miles east)"
+    ],
+    "military_context": [
+      "Harrisburg's Navy connections are surprisingly strong. Naval Support Activity (NSA) Mechanicsburg (~15 miles west) is an 806-acre naval supply depot with 150+ warehouses, 8.8 million sq ft of storage, and ~4,600 personnel. It houses NAVSUP (Naval Supply Systems Command) headquarters and has a nearly $2 billion economic impact.",
+      "Carlisle Barracks (~20 miles west) is the nation's second-oldest active military base (dating to 1745), home to the U.S. Army War College. George Washington reviewed troops there during the 1794 Whiskey Rebellion. The region has 51,357 military retirees. Pennsylvania was a cornerstone of American shipbuilding for two centuries, with the Philadelphia Navy Yard among the first U.S. naval shipyards."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Harrisburg-2026/",
+    "highlights": [
+      "U.S. Navy Blue Angels F/A-18 Super Hornets",
+      "Air Dot Show at Harrisburg International Airport",
+      "Naval History and Heritage Command exhibits",
+      "Strike Group VR experience",
+      "Navy Band performances",
+      "STEM demonstrations",
+      "Community service projects"
+    ],
+    "anchor_event_url": "https://www.airdotshow.com/",
+    "venues": [
+      {
+        "name": "Harrisburg International Airport (MDT)",
+        "address": "1 Terminal Dr, Middletown, PA 17057",
+        "lat": 40.1944,
+        "lng": -76.7634,
+        "notes": "Air Dot Show Central PA — Blue Angels headline May 23–25.",
+        "parking": "On-site paid airport lots; reserved air-show parking sold by event. Free shuttles typically offered from off-airport lots."
+      },
+      {
+        "name": "Pennsylvania State Capitol",
+        "address": "501 N 3rd St, Harrisburg, PA 17120",
+        "lat": 40.264,
+        "lng": -76.8836,
+        "notes": "Proclamations and ceremonial events.",
+        "parking": "State garages on N 3rd and Walnut St; paid weekdays, often free weekends."
+      },
+      {
+        "name": "City Island",
+        "address": "City Island, Harrisburg, PA 17101",
+        "lat": 40.2598,
+        "lng": -76.8859,
+        "notes": "63-acre Susquehanna River island — community festivals and Navy displays.",
+        "parking": "On-island paid lots; Walnut Street Bridge pedestrian access from downtown."
+      },
+      {
+        "name": "Harrisburg Riverfront Park",
+        "address": "Front St, Harrisburg, PA 17101",
+        "lat": 40.2615,
+        "lng": -76.8842,
+        "notes": "Navy Band performances along the Susquehanna.",
+        "parking": "Metered street parking on Front and 2nd; free on Sundays."
+      },
+      {
+        "name": "Whitaker Center for Science and the Arts",
+        "address": "222 Market St, Harrisburg, PA 17101",
+        "lat": 40.2595,
+        "lng": -76.883,
+        "notes": "STEM exhibits and Strike Group VR experience.",
+        "parking": "Adjacent Whitaker Center garage; paid."
+      }
+    ],
+    "daily_schedule": [
+      {
+        "date": "2026-05-20",
+        "items": [
+          {
+            "title": "Navy Week kickoff & State Capitol proclamation",
+            "venue": "Pennsylvania State Capitol",
+            "description": "Welcome ceremony with Cmdr. Holland and Pennsylvania officials. Specific times TBA.",
+            "source": "https://outreach.navy.mil/Navy-Weeks/Harrisburg-2026/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-21",
+        "items": [
+          {
+            "title": "Strike Group VR experience opens",
+            "venue": "Whitaker Center for Science and the Arts",
+            "description": "Interactive Navy STEM exhibits, F-35C launch simulator, flight simulator, and Navy diver role-play. Open to families and school groups. Times TBA.",
+            "source": "https://outreach.navy.mil/Navy-Weeks/Harrisburg-2026/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-22",
+        "items": [
+          {
+            "title": "Navy bands & community service projects",
+            "description": "Navy Band performances at Riverfront Park; sailor-led community service across the Harrisburg area. Times TBA."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-23",
+        "items": [
+          {
+            "time": "09:00",
+            "title": "Air Dot Show Central PA — Day 1 (Blue Angels)",
+            "venue": "Harrisburg International Airport (MDT)",
+            "description": "U.S. Navy Blue Angels headline in F/A-18 Super Hornets. Gates open 9 AM; headline demonstration mid-afternoon. Ticketed by Air Dot Show.",
+            "source": "https://www.airdotshow.com/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-24",
+        "items": [
+          {
+            "time": "09:00",
+            "title": "Air Dot Show Central PA — Day 2 (Blue Angels)",
+            "venue": "Harrisburg International Airport (MDT)",
+            "description": "Gates open 9 AM. U.S. Navy Blue Angels demonstration. Ticketed by Air Dot Show.",
+            "source": "https://www.airdotshow.com/"
+          }
+        ]
+      },
+      {
+        "date": "2026-05-25",
+        "items": [
+          {
+            "time": "09:00",
+            "title": "Air Dot Show Central PA — Day 3 (Blue Angels)",
+            "venue": "Harrisburg International Airport (MDT)",
+            "description": "Final day of the air show, on Memorial Day. U.S. Navy Blue Angels headline. Ticketed by Air Dot Show.",
+            "source": "https://www.airdotshow.com/"
+          },
+          {
+            "title": "Memorial Day observances & City Island events",
+            "venue": "City Island",
+            "description": "Joint Navy and community Memorial Day programming. Times TBA."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-26",
+        "items": [
+          {
+            "title": "Closing community events",
+            "description": "Naval History and Heritage Command Pennsylvania legacy exhibits and sailor send-off events. Times TBA."
+          }
+        ]
+      }
+    ],
+    "parking_notes": "For the Air Dot Show at Harrisburg International Airport (May 23–25), use the airport's reserved air-show parking or take free shuttles from off-airport lots (details published at airdotshow.com closer to event). In downtown Harrisburg, state garages on N 3rd and Walnut are often free on weekends. City Island has its own paid lots; the Walnut Street pedestrian bridge connects it to downtown.",
+    "cost_summary": "Free. All official Navy Week Harrisburg events were free, including Fleet Forces Band, Strike Group VR at Whitaker Center, and community ceremonies. The Air Dot Show Central PA anchor required separate paid air-show tickets (general admission and premium chalets).",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When is the Harrisburg Navy Week 2026 schedule?",
+        "answer": "Navy Week Harrisburg runs May 20–26, 2026. The Air Dot Show Central PA — headlined by the U.S. Navy Blue Angels — anchors the weekend on May 23–25 at Harrisburg International Airport.",
+        "sort_order": 0
+      },
+      {
+        "question": "Where is the Harrisburg air show?",
+        "answer": "The Air Dot Show Central PA is held at Harrisburg International Airport (MDT) in Middletown, PA — 1 Terminal Dr, Middletown, PA 17057, about 10 miles southeast of downtown Harrisburg.",
+        "sort_order": 1
+      },
+      {
+        "question": "Where do I park for the Harrisburg air show?",
+        "answer": "The Air Dot Show offers reserved on-airport parking (sold with tickets) plus free shuttles from designated off-airport lots. Addresses and shuttle schedules are published at airdotshow.com closer to event week. Plan to arrive 60–90 minutes before gates open.",
+        "sort_order": 2
+      },
+      {
+        "question": "Are the Blue Angels really performing in Harrisburg?",
+        "answer": "Yes. Blue Angels advance team members #7 (LT Ronny \"Downy\" Hafeza) and #8 (LCDR Lilly \"Lunchbox\" Montana) conducted a site visit and flyover at Harrisburg International Airport on December 3, 2025. The Blue Angels are confirmed to headline May 23–25, 2026.",
+        "sort_order": 3
+      },
+      {
+        "question": "Is the Harrisburg Navy Week free?",
+        "answer": "All official Navy Week Harrisburg events (Strike Group VR at Whitaker Center, Navy bands at Riverfront Park, ceremonies at the State Capitol) are free. The Air Dot Show anchor requires separate paid tickets.",
+        "sort_order": 4
+      },
+      {
+        "question": "What's the connection between Harrisburg and the Navy?",
+        "answer": "Naval Support Activity Mechanicsburg — 15 miles west — is an 806-acre supply depot with ~4,600 personnel housing NAVSUP headquarters and nearly $2 billion in annual economic impact. Pennsylvania is also called \"the birthplace of the Navy\" for its Revolutionary-era shipbuilding role.",
+        "sort_order": 5
+      },
+      {
+        "question": "Can I bring kids to the Strike Group VR experience?",
+        "answer": "Yes. The Strike Group VR experience at Whitaker Center is family-friendly and free. Activities include an F-35C launch simulator, flight simulator, and Navy diver role-play stations.",
+        "sort_order": 6
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Harrisburg",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Harrisburg-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Air Dot Show Central PA (anchor event)",
+        "url": "https://www.airdotshow.com/",
+        "sort_order": 1
+      },
+      {
+        "label": "2026 U.S. Navy Blue Angels show schedule (official)",
+        "url": "https://www.blueangels.navy.mil/show/",
+        "sort_order": 2
+      },
+      {
+        "label": "Visit Hershey & Harrisburg (host region tourism)",
+        "url": "https://www.visithersheyharrisburg.org/",
+        "sort_order": 3
+      }
+    ]
+  },
+  {
+    "sequence": 7,
+    "slug": "omaha",
+    "city": "Omaha",
+    "state": "Nebraska",
+    "state_abbr": "NE",
+    "start_date": "2026-06-15",
+    "end_date": "2026-06-21",
+    "anchor_event": "College World Series",
+    "lat": "41.2565",
+    "lng": "-95.9345",
+    "first_time": false,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "completed",
+    "anchor_event_detail": "The NCAA Division I Men's College World Series (CWS) is the championship tournament of college baseball, held in Omaha continuously since 1950 — over 75 years. Played at Charles Schwab Field Omaha (capacity ~24,000), the 2026 CWS runs June 12–22, overlapping almost entirely with Navy Week. A 25-year contract extension keeps CWS in Omaha through 2035. The event draws 350,000+ total attendance and national ESPN coverage.",
+    "first_time_note": "Omaha is a repeat Navy Week city with established NAVCO relationships. The city was listed for an Executive Engagement Visit in the 2025 plan.",
+    "navy_assets": [
+      "Strike Group VR experience",
+      "USS Omaha (LCS-12) — Independence-class littoral combat ship (namesake crew opportunity)",
+      "Navy bands, Leap Frogs, Ceremonial Guard (expected)",
+      "Hometown Sailors and recruiters",
+      "STEM demonstrations"
+    ],
+    "key_venues": [
+      "Charles Schwab Field Omaha (CWS)",
+      "CHI Health Center Omaha (convention/arena)",
+      "Old Market district",
+      "Bob Kerrey Pedestrian Bridge (Missouri River)",
+      "Henry Doorly Zoo",
+      "Strategic Air Command & Aerospace Museum (~30 miles SW)"
+    ],
+    "military_context": [
+      "Omaha's military significance is extraordinary. Offutt Air Force Base (~10 miles south in Bellevue) is headquarters of U.S. Strategic Command (USSTRATCOM), one of 11 Unified Combatant Commands. USSTRATCOM controls the entire U.S. nuclear arsenal — strategic nuclear deterrence, global strike, missile defense, and space operations.",
+      "The Navy connection is direct: the Navy provides the submarine-launched ballistic missile (SLBM) leg of the nuclear triad via Ohio-class ballistic missile submarines, a crucial USSTRATCOM asset. Offutt also has deep WWII history — the Enola Gay and Bockscar (B-29s that dropped atomic bombs on Hiroshima and Nagasaki) were assembled there. Omaha's metro population is ~1 million with a strong veteran community."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Omaha-2026/",
+    "highlights": [
+      "College World Series integration",
+      "Strike Group VR experience",
+      "USS Omaha (LCS-12) crew opportunity",
+      "Navy Band performances in Old Market",
+      "STEM exhibits at local museums",
+      "Community service projects",
+      "Sporting event appearances"
+    ],
+    "anchor_event_url": "https://www.ncaa.com/sports/baseball/d1/college-world-series",
+    "venues": [
+      {
+        "name": "Charles Schwab Field Omaha (CWS)",
+        "address": "1200 Mike Fahey St, Omaha, NE 68102",
+        "lat": 41.2566,
+        "lng": -95.9252,
+        "notes": "College World Series host venue.",
+        "parking": "Several downtown garages (Hilton, CenturyLink) within walking distance; paid."
+      },
+      {
+        "name": "CHI Health Center Omaha",
+        "address": "455 N 10th St, Omaha, NE 68102",
+        "lat": 41.2627,
+        "lng": -95.9269,
+        "notes": "Convention/arena adjacent to Charles Schwab Field.",
+        "parking": "Adjacent garage; paid."
+      },
+      {
+        "name": "Old Market district",
+        "address": "11th & Howard St, Omaha, NE 68102",
+        "lat": 41.2563,
+        "lng": -95.9314,
+        "notes": "Navy Band performances and community engagement.",
+        "parking": "Street parking and Old Market garages; paid."
+      },
+      {
+        "name": "Bob Kerrey Pedestrian Bridge",
+        "address": "705 Riverfront Dr, Omaha, NE 68102",
+        "lat": 41.2632,
+        "lng": -95.9216,
+        "notes": "Iconic Missouri River footbridge — flyover and photo opportunities.",
+        "parking": "Free Riverfront lot; fills on CWS weekends."
+      },
+      {
+        "name": "Strategic Air Command & Aerospace Museum",
+        "address": "28210 W Park Hwy, Ashland, NE 68003",
+        "lat": 41.0203,
+        "lng": -96.3303,
+        "notes": "STEM exhibits and aviation heritage outreach.",
+        "parking": "Free on-site lot."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "During the College World Series (mid-June), downtown Omaha garages near Charles Schwab Field fill early. Use ORBT bus rapid transit on Dodge Street, or park in the Old Market and walk (~10–15 min). The Bob Kerrey Pedestrian Bridge has a free lot on the Omaha side.",
+    "cost_summary": "Free. All Navy Week Omaha events (Strike Group VR, Navy Band performances in Old Market, STEM exhibits) were free. College World Series tickets are sold separately by the NCAA / TD Ameritrade.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When is Navy Week Omaha 2026?",
+        "answer": "Navy Week Omaha runs June 15–21, 2026, coinciding with the NCAA Men's College World Series (which runs June 12–22) at Charles Schwab Field Omaha.",
+        "sort_order": 0
+      },
+      {
+        "question": "How do I get tickets to the College World Series?",
+        "answer": "CWS tickets are sold by the NCAA via TD Ameritrade. They are separate from Navy Week — Navy Week's own events (Navy Band, Strike Group VR, community programming) are free.",
+        "sort_order": 1
+      },
+      {
+        "question": "Where do I park near Charles Schwab Field?",
+        "answer": "Downtown garages (CenturyLink, Hilton, CHI Health Center) all serve the ballpark; expect $20–$40 on game days. ORBT rapid transit on Dodge is a cheaper alternative; park near the Old Market and walk.",
+        "sort_order": 2
+      },
+      {
+        "question": "Is Navy Week Omaha free?",
+        "answer": "Yes. All official Navy Week events — Navy Band performances, Strike Group VR, STEM exhibits at the SAC Museum — are free. CWS tickets are paid separately.",
+        "sort_order": 3
+      },
+      {
+        "question": "What's Omaha's military connection?",
+        "answer": "Offutt Air Force Base (10 miles south in Bellevue) is headquarters of U.S. Strategic Command (USSTRATCOM), which controls the U.S. nuclear arsenal — including the Navy's submarine-launched ballistic missile leg of the nuclear triad.",
+        "sort_order": 4
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Omaha",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Omaha-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "NCAA Men's College World Series (anchor event)",
+        "url": "https://www.ncaa.com/sports/baseball/d1/college-world-series",
+        "sort_order": 1
+      },
+      {
+        "label": "Visit Omaha (host city tourism)",
+        "url": "https://www.visitomaha.com/",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "sequence": 8,
+    "slug": "billings",
+    "city": "Billings",
+    "state": "Montana",
+    "state_abbr": "MT",
+    "start_date": "2026-08-17",
+    "end_date": "2026-08-24",
+    "anchor_event": "Yellowstone International Air Show",
+    "lat": "45.7833",
+    "lng": "-108.5007",
+    "first_time": false,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "upcoming",
+    "anchor_event_detail": "The Yellowstone International Air Show is a major air show at Billings Logan International Airport on August 22–23, headlined by the U.S. Navy Blue Angels celebrating their 80th anniversary (founded 1946). The 2023 edition drew approximately 30,000 spectators. The 2026 show combines America's 250th anniversary with the Blue Angels' 80th — a once-in-a-generation convergence.",
+    "first_time_note": "Billings is a returning city. Local media confirmed: \"This August, it's Billings' turn again.\" Billings appeared on the 2023 NAVCO schedule during the Yellowstone International Air Show.",
+    "navy_assets": [
+      "U.S. Navy Blue Angels — F/A-18 Super Hornets + C-130J \"Fat Albert\" Super Hercules",
+      "Navy Leap Frogs parachute team (expected)",
+      "U.S. Navy F/A-18 Super Hornet \"Rhino\" tactical demo",
+      "USAF F-35A Lightning II demo (host air show)",
+      "Navy bands and Ceremonial Guard",
+      "Hometown Sailors and STEM demonstrations",
+      "Recruiters"
+    ],
+    "key_venues": [
+      "Billings Logan International Airport (air show)",
+      "Downtown Billings",
+      "The Rimrocks (sandstone cliffs — air show rim viewpoints)",
+      "MetraPark (Yellowstone County fairgrounds)",
+      "Near Yellowstone National Park (~130 miles)",
+      "Near Little Bighorn Battlefield (~65 miles)"
+    ],
+    "military_context": [
+      "Montana has the 3rd highest percentage of veterans per capita in the nation (after Alaska and Virginia). Malmstrom Air Force Base in Great Falls (~230 miles northwest) is the only active-duty installation in Montana, home to the 341st Missile Wing — one of three USAF bases operating Minuteman III ICBMs (150 missiles), critical to U.S. nuclear deterrence.",
+      "A Navy Reserve Center operates in Billings. The city (population ~120,000, Montana's largest) is known as the \"Magic City\" and sits in the Yellowstone River valley at ~3,100 feet elevation. Being over 1,000 miles from the nearest ocean, it exemplifies the \"heartland\" Navy Week philosophy. Little Bighorn Battlefield (Custer's Last Stand, 1876) is only 65 miles away, adding rich military heritage."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Billings-2026/",
+    "highlights": [
+      "Blue Angels 80th anniversary performance",
+      "Navy F/A-18 Super Hornet \"Rhino\" tactical demo",
+      "USAF F-35A Lightning II demo",
+      "Navy Leap Frogs parachute team",
+      "\"Fat Albert\" C-130J Super Hercules",
+      "STEM demonstrations",
+      "Navy Band concerts",
+      "Community engagement across Big Sky Country"
+    ],
+    "anchor_event_url": "https://yellowstoneairshow.com/",
+    "venues": [
+      {
+        "name": "Billings Logan International Airport",
+        "address": "1901 Terminal Cir, Billings, MT 59105",
+        "lat": 45.8077,
+        "lng": -108.5429,
+        "notes": "Yellowstone International Air Show — Blue Angels 80th anniversary.",
+        "parking": "Air-show reserved parking + free shuttles from off-airport lots (per show organizers)."
+      },
+      {
+        "name": "MetraPark",
+        "address": "308 6th Ave N, Billings, MT 59101",
+        "lat": 45.7895,
+        "lng": -108.4943,
+        "notes": "Yellowstone County fairgrounds — community displays.",
+        "parking": "On-site paid lots."
+      },
+      {
+        "name": "The Rimrocks (Swords Park)",
+        "address": "Swords Park Rd, Billings, MT 59105",
+        "lat": 45.8104,
+        "lng": -108.5354,
+        "notes": "Sandstone cliffs above Billings — natural air-show overlook.",
+        "parking": "Free Swords Park lot; arrives at capacity early on show days."
+      },
+      {
+        "name": "Downtown Billings (Skypoint)",
+        "address": "2814 2nd Ave N, Billings, MT 59101",
+        "lat": 45.7833,
+        "lng": -108.5007,
+        "notes": "Navy Band performances downtown.",
+        "parking": "Metered street parking and downtown garages."
+      },
+      {
+        "name": "ZooMontana",
+        "address": "2100 S Shiloh Rd, Billings, MT 59106",
+        "lat": 45.7619,
+        "lng": -108.6263,
+        "notes": "STEM and family outreach.",
+        "parking": "Free on-site lot."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "For the Yellowstone International Air Show at Billings Logan (Aug 22–23), use reserved on-airport parking sold with tickets or free shuttles from off-airport lots (details at yellowstoneairshow.com). The Rimrocks offer a free natural overlook; arrive at sunrise on show days. Downtown Billings has metered street parking and the affordable downtown garage on N 27th.",
+    "cost_summary": "Free. Navy Week Billings community events — Navy Band performances, ceremonial appearances, STEM exhibits — are free. The Yellowstone International Air Show anchor requires separate paid tickets (general admission, premium boxes, chalets).",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When is Navy Week Billings 2026?",
+        "answer": "Navy Week Billings runs August 17–24, 2026. The Yellowstone International Air Show (headlined by the U.S. Navy Blue Angels celebrating their 80th anniversary) anchors the weekend, August 22–23.",
+        "sort_order": 0
+      },
+      {
+        "question": "Where do I watch the Billings air show?",
+        "answer": "Paid viewing is at Billings Logan International Airport (general admission, premium boxes, chalets — tickets at yellowstoneairshow.com). The Rimrocks (Swords Park) above Billings offer a free natural overlook of the airport with dramatic views.",
+        "sort_order": 1
+      },
+      {
+        "question": "Where do I park for the Yellowstone International Air Show?",
+        "answer": "The air show offers reserved on-airport parking sold with tickets, plus free shuttles from designated off-airport lots in Billings. Plan to arrive at least 90 minutes before showtime.",
+        "sort_order": 2
+      },
+      {
+        "question": "Are the Blue Angels really performing in Billings?",
+        "answer": "Yes. The Blue Angels are confirmed to headline the Yellowstone International Air Show on Aug 22–23, 2026, celebrating their 80th anniversary.",
+        "sort_order": 3
+      },
+      {
+        "question": "Is Navy Week Billings free?",
+        "answer": "Navy Week's own community events are free. The air show anchor requires paid tickets — but Rimrocks viewing is free.",
+        "sort_order": 4
+      },
+      {
+        "question": "What's Montana's military connection?",
+        "answer": "Montana has the 3rd highest percentage of veterans per capita in the nation. Malmstrom Air Force Base in Great Falls operates 150 Minuteman III ICBMs — critical to U.S. nuclear deterrence.",
+        "sort_order": 5
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Billings",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Billings-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Yellowstone International Air Show (anchor event)",
+        "url": "https://yellowstoneairshow.com/",
+        "sort_order": 1
+      },
+      {
+        "label": "2026 U.S. Navy Blue Angels show schedule (official)",
+        "url": "https://www.blueangels.navy.mil/show/",
+        "sort_order": 2
+      },
+      {
+        "label": "Visit Billings (host city tourism)",
+        "url": "https://www.visitbillings.com/",
+        "sort_order": 3
+      }
+    ]
+  },
+  {
+    "sequence": 9,
+    "slug": "burlington",
+    "city": "Burlington",
+    "state": "Vermont",
+    "state_abbr": "VT",
+    "start_date": "2026-08-24",
+    "end_date": "2026-08-30",
+    "anchor_event": "Champlain Valley Fair",
+    "lat": "44.4759",
+    "lng": "-73.2121",
+    "first_time": true,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "upcoming",
+    "anchor_event_detail": "The Champlain Valley Fair is Vermont's largest county fair, running August 28 – September 6 (\"The Ten Best Days of Summer!\") at the Champlain Valley Exposition in Essex Junction. Features agricultural exhibits, midway rides, concerts, motorsports, and nationally recognized performers. Navy Week (Aug 24–30) overlaps with the fair's opening three days, positioning Navy outreach to reach the fair's massive audience.",
+    "first_time_note": "Explicitly confirmed as a first-time host by NAVCO. Cmdr. Holland highlighted Burlington as part of the 2026 expansion into new communities.",
+    "navy_assets": [
+      "Navy bands and interactive displays",
+      "Ceremonial Guard",
+      "Hometown Sailors",
+      "STEM demonstrations",
+      "Recruiters"
+    ],
+    "key_venues": [
+      "Champlain Valley Exposition/Fairgrounds (Essex Junction)",
+      "Burlington Waterfront Park — home to the \"Lone Sailor\" statue",
+      "Battery Park (War of 1812 British attack site)",
+      "Church Street Marketplace",
+      "Lake Champlain Maritime Museum",
+      "University of Vermont campus",
+      "Ethan Allen Homestead"
+    ],
+    "military_context": [
+      "Burlington's naval history is exceptionally significant despite its distance from the ocean. The Battle of Valcour Island (October 11, 1776) on Lake Champlain was one of the first naval battles of the American Revolution. Benedict Arnold commanded a Continental Navy fleet that stalled British invasion plans — a strategically decisive delay often cited as foundational to the American naval tradition.",
+      "The Battle of Plattsburgh / Battle of Lake Champlain (September 11, 1814) was a decisive War of 1812 naval victory. Burlington served as a key naval staging base, and Battery Park is named for an 1813 British naval attack. The 158th Fighter Wing (Vermont Air National Guard) was the first ANG unit to receive the F-35A Lightning II (2019). Vermont has approximately 40,000 veterans, one of the highest per-capita rates in New England."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Burlington-2026/",
+    "highlights": [
+      "Champlain Valley Fair integration",
+      "\"Lone Sailor\" statue at Waterfront Park",
+      "Revolutionary War and War of 1812 naval heritage",
+      "Navy Band performances",
+      "STEM demonstrations",
+      "Community engagement across Vermont",
+      "Lake Champlain Maritime Museum exhibits"
+    ],
+    "anchor_event_url": "https://www.champlainvalleyfair.org/",
+    "venues": [
+      {
+        "name": "Champlain Valley Exposition",
+        "address": "105 Pearl St, Essex Junction, VT 05452",
+        "lat": 44.4906,
+        "lng": -73.1131,
+        "notes": "Champlain Valley Fair — Vermont's largest fair.",
+        "parking": "Free on-site lot."
+      },
+      {
+        "name": "Burlington Waterfront Park",
+        "address": "20 Lake St, Burlington, VT 05401",
+        "lat": 44.4789,
+        "lng": -73.2169,
+        "notes": "Home to the \"Lone Sailor\" statue.",
+        "parking": "Paid waterfront garages and metered street."
+      },
+      {
+        "name": "Battery Park",
+        "address": "1 N Battery St, Burlington, VT 05401",
+        "lat": 44.4848,
+        "lng": -73.2189,
+        "notes": "War of 1812 British attack site — historic naval significance.",
+        "parking": "Metered street parking."
+      },
+      {
+        "name": "Church Street Marketplace",
+        "address": "Church St, Burlington, VT 05401",
+        "lat": 44.4778,
+        "lng": -73.2125,
+        "notes": "Pedestrian marketplace — Navy Band performances.",
+        "parking": "Marketplace garage on Cherry St; paid."
+      },
+      {
+        "name": "Lake Champlain Maritime Museum",
+        "address": "4472 Basin Harbor Rd, Vergennes, VT 05491",
+        "lat": 44.2098,
+        "lng": -73.3673,
+        "notes": "Naval heritage exhibits and outreach.",
+        "parking": "Free on-site lot."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "Champlain Valley Exposition offers free on-site parking — generally adequate even during the fair. In downtown Burlington, use the Cherry Street Marketplace garage or paid waterfront garages near Lake Street; metered street parking is free Sundays.",
+    "cost_summary": "Free. All official Navy Week Burlington events — Navy Band performances, Lake Champlain Maritime Museum naval exhibits, ceremonial events — are free. Champlain Valley Fair admission is ticketed by the Fair.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When is Navy Week Burlington 2026?",
+        "answer": "Navy Week Burlington runs August 24–30, 2026, overlapping the opening three days of the Champlain Valley Fair (Aug 28 – Sep 6).",
+        "sort_order": 0
+      },
+      {
+        "question": "Is Burlington Navy Week free?",
+        "answer": "Yes. All official Navy Week events are free. Champlain Valley Fair admission is sold separately by the Fair.",
+        "sort_order": 1
+      },
+      {
+        "question": "Where is the \"Lone Sailor\" statue in Burlington?",
+        "answer": "The Lone Sailor statue stands at Waterfront Park (20 Lake St) overlooking Lake Champlain — honoring sailors past and present and the lake's naval heritage.",
+        "sort_order": 2
+      },
+      {
+        "question": "What's Burlington's naval history?",
+        "answer": "The Battle of Valcour Island (1776) on Lake Champlain was one of the first naval battles of the American Revolution. The Battle of Plattsburgh / Battle of Lake Champlain (1814) was a decisive War of 1812 naval victory. Battery Park is named for an 1813 British naval attack on the city.",
+        "sort_order": 3
+      },
+      {
+        "question": "Where do I park downtown for Navy Week events?",
+        "answer": "Use the Marketplace garage on Cherry Street, or paid waterfront garages near Lake Street. Metered street parking is free on Sundays.",
+        "sort_order": 4
+      },
+      {
+        "question": "Has Burlington hosted Navy Week before?",
+        "answer": "No. 2026 is Burlington's first time as a Navy Week host city, confirmed by NAVCO.",
+        "sort_order": 5
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Burlington",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Burlington-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Champlain Valley Fair (anchor event)",
+        "url": "https://www.champlainvalleyfair.org/",
+        "sort_order": 1
+      },
+      {
+        "label": "Lake Champlain Regional Chamber (host region)",
+        "url": "https://www.vermont.org/",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "sequence": 10,
+    "slug": "cincinnati",
+    "city": "Cincinnati",
+    "state": "Ohio",
+    "state_abbr": "OH",
+    "start_date": "2026-09-14",
+    "end_date": "2026-09-20",
+    "anchor_event": "Zinzinnati Oktoberfest",
+    "lat": "39.1031",
+    "lng": "-84.512",
+    "first_time": false,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "upcoming",
+    "anchor_event_detail": "Zinzinnati Oktoberfest is the largest Oktoberfest celebration in the United States and second largest in the world (after Munich). 2026 marks its golden jubilee (first held 1976). Held at Sawyer Point and Yeatman's Cove on the Ohio River, September 17–20. Record 818,532 attendees in 2025. Features the World's Largest Chicken Dance, Running of the Wieners (dachshund races), Samuel Adams Stein Hoisting Championship, and World Brat Eating Championship. Free admission.",
+    "first_time_note": "Cincinnati has hosted Navy Week previously, though exact prior years were not identified. Not listed among the seven 2026 first-time host cities.",
+    "navy_assets": [
+      "Navy bands and interactive displays (expected)",
+      "Submarine-related outreach (promoted by Naval Submarine League)",
+      "Hometown Sailors and recruiters",
+      "STEM demonstrations",
+      "Community service projects"
+    ],
+    "key_venues": [
+      "Sawyer Point & Yeatman's Cove (Oktoberfest)",
+      "Fountain Square (central gathering space)",
+      "The Banks (riverfront entertainment district)",
+      "Great American Ball Park (Reds MLB)",
+      "Paycor Stadium (Bengals NFL)",
+      "National Underground Railroad Freedom Center",
+      "Cincinnati Museum Center at Union Terminal (National Historic Landmark)"
+    ],
+    "military_context": [
+      "The Navy has had five ships named USS Cincinnati — a remarkable naming tradition. The most notable was the Civil War ironclad gunboat that served on the Mississippi and Yazoo rivers; sunk during the Siege of Vicksburg (1863), six crew members received the Medal of Honor. The current USS Cincinnati (LCS-20) is an Independence-class littoral combat ship.",
+      "Cincinnati's Ohio River location was strategically critical during the Civil War — a staging area for Union forces and a center for building ironclad gunboats. Wright-Patterson Air Force Base (~60 miles northeast in Dayton) is a major USAF installation. Ohio has approximately 730,000 veterans — one of the largest veteran populations in the country."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Cincinnati-2026/",
+    "highlights": [
+      "Zinzinnati Oktoberfest 50th anniversary integration",
+      "USS Cincinnati (LCS-20) heritage",
+      "Navy Band performances at Fountain Square",
+      "STEM exhibits at Cincinnati Museum Center",
+      "Community service across the tri-state area",
+      "Submarine outreach programming",
+      "Sporting event appearances"
+    ],
+    "anchor_event_url": "https://www.oktoberfestzinzinnati.com/",
+    "venues": [
+      {
+        "name": "Sawyer Point & Yeatman's Cove",
+        "address": "705 E Pete Rose Way, Cincinnati, OH 45202",
+        "lat": 39.0986,
+        "lng": -84.5036,
+        "notes": "Zinzinnati Oktoberfest main grounds along the Ohio River.",
+        "parking": "Limited adjacent lots; use The Banks garages and walk."
+      },
+      {
+        "name": "Fountain Square",
+        "address": "520 Vine St, Cincinnati, OH 45202",
+        "lat": 39.1014,
+        "lng": -84.512,
+        "notes": "Central gathering space for Navy Band performances.",
+        "parking": "Fountain Square underground garage; paid."
+      },
+      {
+        "name": "The Banks",
+        "address": "161 Joe Nuxhall Way, Cincinnati, OH 45202",
+        "lat": 39.0984,
+        "lng": -84.5095,
+        "notes": "Riverfront entertainment district adjacent to the Reds and Bengals stadiums.",
+        "parking": "Multiple paid garages."
+      },
+      {
+        "name": "Great American Ball Park",
+        "address": "100 Joe Nuxhall Way, Cincinnati, OH 45202",
+        "lat": 39.0975,
+        "lng": -84.5066,
+        "notes": "Cincinnati Reds — potential ceremonial first-pitch appearance.",
+        "parking": "Banks garages; paid."
+      },
+      {
+        "name": "Cincinnati Museum Center (Union Terminal)",
+        "address": "1301 Western Ave, Cincinnati, OH 45203",
+        "lat": 39.1099,
+        "lng": -84.5378,
+        "notes": "STEM exhibits at this National Historic Landmark.",
+        "parking": "On-site garage; paid."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "Zinzinnati Oktoberfest fills downtown to capacity. Use The Banks garages or the Fountain Square underground garage and walk to Sawyer Point. The Cincinnati Bell Connector streetcar circulates downtown to Over-the-Rhine for free during major events on some days — check the city site.",
+    "cost_summary": "Free. All Navy Week Cincinnati events — Navy Band at Fountain Square, STEM at Cincinnati Museum Center, community service projects — are free. Zinzinnati Oktoberfest itself is also free admission.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When is Navy Week Cincinnati 2026?",
+        "answer": "Navy Week Cincinnati runs September 14–20, 2026, leading into Oktoberfest Zinzinnati (Sep 17–20) at Sawyer Point & Yeatman's Cove.",
+        "sort_order": 0
+      },
+      {
+        "question": "Is Oktoberfest Zinzinnati free?",
+        "answer": "Yes. General admission to Oktoberfest Zinzinnati is free. Food, drinks, and some specialty events (Stein Hoisting, Beer Stein Race) are pay-as-you-go.",
+        "sort_order": 1
+      },
+      {
+        "question": "Where do I park for Oktoberfest and Navy Week events?",
+        "answer": "Use The Banks garages or the Fountain Square underground garage and walk to Sawyer Point. Expect heavy demand — arrive early on Saturday.",
+        "sort_order": 2
+      },
+      {
+        "question": "Is there a USS Cincinnati?",
+        "answer": "Yes. The current USS Cincinnati (LCS-20) is an Independence-class littoral combat ship — the fifth Navy ship to carry the city's name.",
+        "sort_order": 3
+      },
+      {
+        "question": "What is the World's Largest Chicken Dance?",
+        "answer": "A signature Oktoberfest Zinzinnati tradition where tens of thousands of attendees do the Chicken Dance simultaneously on Fountain Square — a Guinness-recognized record event.",
+        "sort_order": 4
+      },
+      {
+        "question": "Is Navy Week Cincinnati free?",
+        "answer": "Yes. All official Navy Week Cincinnati events are free and open to the public.",
+        "sort_order": 5
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Cincinnati",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Cincinnati-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Oktoberfest Zinzinnati (anchor event)",
+        "url": "https://www.oktoberfestzinzinnati.com/",
+        "sort_order": 1
+      },
+      {
+        "label": "Visit Cincy (host city tourism)",
+        "url": "https://www.visitcincy.com/",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "sequence": 11,
+    "slug": "sussex-county",
+    "city": "Sussex County",
+    "state": "Delaware",
+    "state_abbr": "DE",
+    "start_date": "2026-10-20",
+    "end_date": "2026-10-26",
+    "anchor_event": "Rehoboth Seawitch Festival",
+    "lat": "38.7209",
+    "lng": "-75.0766",
+    "first_time": true,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "upcoming",
+    "anchor_event_detail": "The Rehoboth Seawitch Festival is a beloved Halloween-themed coastal festival in Rehoboth Beach, produced by the Rehoboth Beach-Dewey Beach Chamber of Commerce since 1989. Named THE BEST Annual Festival (Downstate) in Delaware Today Magazine (2022, 2023) and featured in HGTV's \"21 Great Fall Festivals.\" Events include the Sea Witch Costume Parade down Rehoboth Avenue, Costumed Dog Parade, Sea Witch 5K, trick-or-treating, hayrides, and scarecrow trail. Free admission to most events.",
+    "first_time_note": "Confirmed as a first-time host by NAVCO. Sussex County's coastal location on Delaware Bay provides a natural connection to the Navy's maritime mission.",
+    "navy_assets": [
+      "Navy bands and interactive displays (expected)",
+      "Ceremonial Guard (expected)",
+      "Hometown Sailors and recruiters",
+      "STEM demonstrations",
+      "Potential small Navy vessel visit (coastal location)"
+    ],
+    "key_venues": [
+      "Rehoboth Beach Boardwalk & Bandstand",
+      "Rehoboth Avenue (parade route)",
+      "Rehoboth Beach Convention Center",
+      "Dewey Beach",
+      "Cape Henlopen State Park (Fort Miles — WWII coastal defense)",
+      "Indian River Life-Saving Station Museum",
+      "Delaware Seashore State Park"
+    ],
+    "military_context": [
+      "Dover Air Force Base (~45 miles north) is the largest aerial port in the Department of Defense, home to the 436th Airlift Wing (C-5M Super Galaxy & C-17 Globemaster III) and the only Continental U.S. Port Mortuary — where fallen service members are returned with dignity. It contributes ~$470 million annually to Delaware's economy.",
+      "Fort Miles at Cape Henlopen is a WWII-era coastal defense installation whose observation towers still line the beaches. Delaware was the first state to ratify the Constitution (\"The First State\"). The state has approximately 70,000 veterans. As a Mid-Atlantic beach resort area, the Rehoboth Seawitch Festival draws visitors from DC, Baltimore, and Philadelphia, multiplying outreach impact."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Sussex-County-2026/",
+    "highlights": [
+      "Rehoboth Seawitch Festival coastal integration",
+      "Fort Miles WWII coastal defense heritage",
+      "Navy Band performances at the Bandstand",
+      "STEM demonstrations",
+      "Boardwalk interactive exhibits",
+      "Community engagement across beach towns",
+      "Maritime heritage programming"
+    ],
+    "anchor_event_url": "https://www.beach-fun.com/sea-witch-festival.html",
+    "venues": [
+      {
+        "name": "Rehoboth Beach Bandstand",
+        "address": "17 Rehoboth Ave, Rehoboth Beach, DE 19971",
+        "lat": 38.7193,
+        "lng": -75.076,
+        "notes": "Rehoboth Seawitch Festival main stage and Navy Band performances.",
+        "parking": "Metered street parking + paid lots; arrive early."
+      },
+      {
+        "name": "Rehoboth Avenue",
+        "address": "Rehoboth Ave, Rehoboth Beach, DE 19971",
+        "lat": 38.7196,
+        "lng": -75.0796,
+        "notes": "Sea Witch Costume Parade route.",
+        "parking": "Closed to vehicles during parade — use off-route paid lots."
+      },
+      {
+        "name": "Rehoboth Beach Convention Center",
+        "address": "229 Rehoboth Ave, Rehoboth Beach, DE 19971",
+        "lat": 38.7199,
+        "lng": -75.0817,
+        "notes": "Indoor exhibits and outreach programming.",
+        "parking": "Convention Center lot; paid."
+      },
+      {
+        "name": "Cape Henlopen State Park (Fort Miles)",
+        "address": "15099 Cape Henlopen Dr, Lewes, DE 19958",
+        "lat": 38.7717,
+        "lng": -75.0959,
+        "notes": "WWII coastal defense site — observation towers and historic batteries.",
+        "parking": "State park lot; entry fee for out-of-state vehicles."
+      },
+      {
+        "name": "Indian River Life-Saving Station Museum",
+        "address": "25039 Coastal Hwy, Rehoboth Beach, DE 19971",
+        "lat": 38.6353,
+        "lng": -75.0631,
+        "notes": "Historic life-saving station — maritime heritage outreach.",
+        "parking": "Delaware Seashore State Park lot; entry fee."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "Rehoboth Beach uses paid meters (typically $3/hour, free 5 PM–10 AM in shoulder season) plus seasonal lots. During the Rehoboth Seawitch Festival, Rehoboth Avenue closes to vehicles for the parade — use off-route lots and walk. Cape Henlopen State Park charges Delaware Seashore entry for out-of-state vehicles.",
+    "cost_summary": "Free. All Navy Week Sussex County events — Navy Band at the Bandstand, boardwalk exhibits, maritime heritage programming — are free. Rehoboth Seawitch Festival admission is also free; specific anchor activities (5K race) have separate registration fees.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When is Navy Week Sussex County 2026?",
+        "answer": "Navy Week Sussex County runs October 20–26, 2026, coinciding with the Rehoboth Seawitch Festival in Rehoboth Beach (the festival traditionally runs the last weekend of October).",
+        "sort_order": 0
+      },
+      {
+        "question": "Is Navy Week Sussex County free?",
+        "answer": "Yes. All official Navy Week events and Rehoboth Seawitch Festival admission are free. Some festival activities (the Sea Witch 5K race) have separate registration fees.",
+        "sort_order": 1
+      },
+      {
+        "question": "Where do I park in Rehoboth Beach?",
+        "answer": "Use paid meters or seasonal lots; expect $3/hour during the day. Rehoboth Avenue closes to vehicles during the Sea Witch parade — park on side streets and walk.",
+        "sort_order": 2
+      },
+      {
+        "question": "Can I visit Fort Miles?",
+        "answer": "Yes. Fort Miles at Cape Henlopen State Park preserves WWII coastal defense towers and batteries. Out-of-state vehicles pay a Delaware Seashore park entry fee.",
+        "sort_order": 3
+      },
+      {
+        "question": "Has Sussex County hosted Navy Week before?",
+        "answer": "No. 2026 is Sussex County's first time as a Navy Week host city, confirmed by NAVCO.",
+        "sort_order": 4
+      },
+      {
+        "question": "How far is Dover Air Force Base?",
+        "answer": "Dover AFB — the largest aerial port in the Department of Defense — is about 45 miles north of Rehoboth Beach via DE-1.",
+        "sort_order": 5
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Sussex County",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Sussex-County-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Rehoboth Seawitch Festival (anchor event)",
+        "url": "https://www.beach-fun.com/sea-witch-festival.html",
+        "sort_order": 1
+      },
+      {
+        "label": "Rehoboth Beach-Dewey Beach Chamber (host region)",
+        "url": "https://www.beach-fun.com/",
+        "sort_order": 2
+      }
+    ]
+  },
+  {
+    "sequence": 12,
+    "slug": "flagstaff",
+    "city": "Flagstaff",
+    "state": "Arizona",
+    "state_abbr": "AZ",
+    "start_date": "2026-11-09",
+    "end_date": "2026-11-16",
+    "anchor_event": "Route 66 Centennial and Ultra Run",
+    "lat": "35.1983",
+    "lng": "-111.6513",
+    "first_time": true,
+    "first_time_location": null,
+    "first_time_badge": null,
+    "status": "upcoming",
+    "anchor_event_detail": "The Route 66 Centennial celebrates the 100th anniversary of U.S. Route 66, established November 11, 1926. The \"Mother Road\" ran 2,448 miles from Chicago to Santa Monica, passing directly through Flagstaff — which sits at the highest elevation on the entire route (7,000 feet). The city retains 14.2 miles of original Route 66. The Route 66 UltraRun (November 13–16) is a 140-mile ultramarathon along the longest remaining unbroken stretch of Route 66.",
+    "first_time_note": "Flagstaff is the grand finale of the 2026 \"Road Trip to 250\" — the symbolic destination of the Navy's cross-country journey. The Navy literally operates a facility in Flagstaff.",
+    "navy_assets": [
+      "Navy bands for public performances",
+      "STEM exhibits at Northern Arizona University",
+      "Interactive displays at Heritage Square",
+      "Community outreach across Coconino County",
+      "Recruiters"
+    ],
+    "key_venues": [
+      "Heritage Square (downtown gathering space)",
+      "Historic Downtown Flagstaff / Route 66 corridor",
+      "Northern Arizona University (~30,000 students)",
+      "Wheeler Park (adjacent to City Hall)",
+      "The Orpheum Theater",
+      "Lowell Observatory (where Pluto was discovered)",
+      "Thorpe Park"
+    ],
+    "military_context": [
+      "The Navy literally operates a facility in Flagstaff. The United States Naval Observatory Flagstaff Station (NOFS), established 1955, sits 5 miles west at 7,600 feet. It houses the largest telescope operated by the U.S. Navy — the 1.55m Kaj Strand Astrometric Reflector, which discovered Pluto's moon Charon in 1978. NOFS provides critical data for NASA deep-space navigation.",
+      "Camp Navajo (12 miles west) is the largest National Guard training facility in Arizona — 28,347 acres originally built as the Navajo Ordnance Depot (1942) for WWII ammunition storage. Arizona has ~500,000+ veterans, and the nearby Navajo Nation is homeland of the legendary Navajo Code Talkers who served in WWII. The symbolism of the Navy's \"Road Trip to 250\" ending on the Mother Road during its centennial is exceptionally compelling."
+    ],
+    "navco_url": "https://outreach.navy.mil/Navy-Weeks/Flagstaff-2026/",
+    "highlights": [
+      "Route 66 Centennial — grand finale of \"Road Trip to 250\"",
+      "Naval Observatory Flagstaff Station heritage",
+      "Navy Band performances in historic downtown",
+      "STEM exhibits at Northern Arizona University",
+      "Navajo Code Talker heritage connection",
+      "Route 66 UltraRun (140-mile ultramarathon)",
+      "Community outreach across Coconino County"
+    ],
+    "anchor_event_url": "https://route66centennial.com/",
+    "venues": [
+      {
+        "name": "Heritage Square",
+        "address": "20 W Aspen Ave, Flagstaff, AZ 86001",
+        "lat": 35.1981,
+        "lng": -111.6515,
+        "notes": "Downtown gathering space — Navy Band performances and community engagement.",
+        "parking": "Metered street parking + paid downtown lots."
+      },
+      {
+        "name": "Historic Downtown Flagstaff (Route 66)",
+        "address": "E Route 66, Flagstaff, AZ 86001",
+        "lat": 35.1983,
+        "lng": -111.6513,
+        "notes": "Route 66 Centennial celebrations along the historic corridor.",
+        "parking": "Metered street and city garages."
+      },
+      {
+        "name": "Northern Arizona University",
+        "address": "1900 S Knoles Dr, Flagstaff, AZ 86011",
+        "lat": 35.1858,
+        "lng": -111.6537,
+        "notes": "STEM outreach and recruiter events; ~30,000 students.",
+        "parking": "Visitor garages (P64, P66); paid."
+      },
+      {
+        "name": "Wheeler Park",
+        "address": "212 W Aspen Ave, Flagstaff, AZ 86001",
+        "lat": 35.1984,
+        "lng": -111.6537,
+        "notes": "Adjacent to City Hall — community events.",
+        "parking": "Adjacent City Hall lot; free evenings/weekends."
+      },
+      {
+        "name": "Lowell Observatory",
+        "address": "1400 W Mars Hill Rd, Flagstaff, AZ 86001",
+        "lat": 35.2028,
+        "lng": -111.6647,
+        "notes": "Where Pluto was discovered — STEM partnership with Naval Observatory.",
+        "parking": "Free on-site lot; fills evenings."
+      }
+    ],
+    "daily_schedule": null,
+    "parking_notes": "Downtown Flagstaff uses paid meters (typically $1–$1.50/hour) plus several city garages — the Aspen Ave / Beaver St garage is centrally located. Wheeler Park lot is free evenings and weekends. NAU visitor parking is paid (P64 or P66 garages).",
+    "cost_summary": "Free. All Navy Week Flagstaff events — Navy Band performances at Heritage Square, STEM at NAU, Route 66 corridor events — are free. Lowell Observatory standard admission is ticketed by the observatory.",
+    "last_verified_at": "2026-07-13",
+    "faqs": [
+      {
+        "question": "When is Navy Week Flagstaff 2026?",
+        "answer": "Navy Week Flagstaff runs November 9–16, 2026 — the grand finale of the \"Road Trip to 250\" — coinciding with the Route 66 Centennial (Route 66 was designated November 11, 1926).",
+        "sort_order": 0
+      },
+      {
+        "question": "Is there a Navy facility in Flagstaff?",
+        "answer": "Yes. The U.S. Naval Observatory Flagstaff Station (NOFS), established 1955, sits 5 miles west of town at 7,600 feet. It houses the Navy's largest telescope (the 1.55m Kaj Strand Astrometric Reflector) and discovered Pluto's moon Charon in 1978.",
+        "sort_order": 1
+      },
+      {
+        "question": "Is Navy Week Flagstaff free?",
+        "answer": "Yes. All official Navy Week Flagstaff events are free and open to the public.",
+        "sort_order": 2
+      },
+      {
+        "question": "Where do I park downtown for Navy Week events?",
+        "answer": "Use paid meters or downtown city garages (Aspen/Beaver St garage is most central). Wheeler Park lot is free evenings and weekends.",
+        "sort_order": 3
+      },
+      {
+        "question": "How does the Route 66 Centennial tie in?",
+        "answer": "November 11, 2026 is the 100th anniversary of U.S. Route 66's 1926 designation. Flagstaff sits at the highest point on the original Mother Road (7,000 ft) and retains 14.2 miles of original Route 66.",
+        "sort_order": 4
+      },
+      {
+        "question": "What about the Navajo Code Talkers?",
+        "answer": "The Navajo Nation, homeland of the legendary WWII Navajo Code Talkers, is just east of Flagstaff. Navy Week Flagstaff includes outreach acknowledging this heritage.",
+        "sort_order": 5
+      }
+    ],
+    "sources": [
+      {
+        "label": "NAVCO — Navy Week Flagstaff",
+        "url": "https://outreach.navy.mil/Navy-Weeks/Flagstaff-2026/",
+        "sort_order": 0
+      },
+      {
+        "label": "Route 66 Centennial",
+        "url": "https://route66centennial.com/",
+        "sort_order": 1
+      },
+      {
+        "label": "Discover Flagstaff (host city tourism)",
+        "url": "https://www.flagstaffarizona.org/",
+        "sort_order": 2
+      }
+    ]
+  }
+]
