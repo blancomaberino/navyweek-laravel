@@ -8,6 +8,8 @@ use App\Domain\Pillars\Enums\DesignatorCommunity;
 use App\Domain\Pillars\Enums\HistoricRatingEra;
 use App\Domain\Pillars\Enums\RankCategory;
 use App\Domain\Pillars\Enums\RatingCommunity;
+use App\Domain\Shared\Concerns\HasFaqs;
+use App\Domain\Shared\Concerns\HasSources;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
 use Database\Factories\RankFactory;
@@ -17,7 +19,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection as SupportCollection;
 
@@ -103,6 +104,9 @@ class Rank extends Model
 {
     /** @use HasFactory<RankFactory> */
     use HasFactory;
+
+    use HasFaqs;
+    use HasSources;
 
     protected $fillable = [
         'slug',
@@ -263,25 +267,5 @@ class Rank extends Model
     public function aSchoolBase(): BelongsTo
     {
         return $this->belongsTo(Base::class, 'a_school_location_slug', 'slug');
-    }
-
-    /**
-     * Rank FAQs (shared polymorphic table), in display order.
-     *
-     * @return MorphMany<Faq, $this>
-     */
-    public function faqs(): MorphMany
-    {
-        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
-    }
-
-    /**
-     * Primary-source citations for this rank (shared polymorphic table), in order.
-     *
-     * @return MorphMany<Source, $this>
-     */
-    public function sources(): MorphMany
-    {
-        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
     }
 }

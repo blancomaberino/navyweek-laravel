@@ -7,6 +7,8 @@ namespace App\Domain\Pillars\Models;
 use App\Domain\Pillars\Enums\BaseType;
 use App\Domain\Pillars\Enums\CombatantCommand;
 use App\Domain\Pillars\Enums\RegionType;
+use App\Domain\Shared\Concerns\HasFaqs;
+use App\Domain\Shared\Concerns\HasSources;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
 use Database\Factories\BaseFactory;
@@ -15,7 +17,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -84,6 +85,9 @@ class Base extends Model
 {
     /** @use HasFactory<BaseFactory> */
     use HasFactory;
+
+    use HasFaqs;
+    use HasSources;
 
     protected $fillable = [
         'slug',
@@ -190,25 +194,5 @@ class Base extends Model
     public function overseasCountry(): BelongsTo
     {
         return $this->belongsTo(OverseasCountry::class, 'country_slug', 'slug');
-    }
-
-    /**
-     * Base FAQs (shared polymorphic table), in display order.
-     *
-     * @return MorphMany<Faq, $this>
-     */
-    public function faqs(): MorphMany
-    {
-        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
-    }
-
-    /**
-     * Primary-source citations for this base (shared polymorphic table), in order.
-     *
-     * @return MorphMany<Source, $this>
-     */
-    public function sources(): MorphMany
-    {
-        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
     }
 }

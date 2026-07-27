@@ -6,6 +6,8 @@ namespace App\Domain\Pillars\Models;
 
 use App\Domain\Pillars\Enums\Admission;
 use App\Domain\Pillars\Enums\AirShowStatus;
+use App\Domain\Shared\Concerns\HasFaqs;
+use App\Domain\Shared\Concerns\HasSources;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
 use Database\Factories\AirShowFactory;
@@ -13,7 +15,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -77,6 +78,9 @@ class AirShow extends Model
 {
     /** @use HasFactory<AirShowFactory> */
     use HasFactory;
+
+    use HasFaqs;
+    use HasSources;
 
     protected $fillable = [
         'slug',
@@ -166,25 +170,5 @@ class AirShow extends Model
         return $this->published
             && ! $this->date_unconfirmed
             && $this->canonical_override === null;
-    }
-
-    /**
-     * FAQs for this air-show guide (shared polymorphic table), in order.
-     *
-     * @return MorphMany<Faq, $this>
-     */
-    public function faqs(): MorphMany
-    {
-        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
-    }
-
-    /**
-     * Primary-source citations for this guide (shared table), in order.
-     *
-     * @return MorphMany<Source, $this>
-     */
-    public function sources(): MorphMany
-    {
-        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
     }
 }

@@ -6,6 +6,8 @@ namespace App\Domain\Catalog\Models;
 
 use App\Domain\Catalog\Enums\LocalVerification;
 use App\Domain\Pillars\Models\UsState;
+use App\Domain\Shared\Concerns\HasFaqs;
+use App\Domain\Shared\Concerns\HasSources;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
 use Database\Factories\LocalDiscountFactory;
@@ -15,7 +17,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -83,6 +84,9 @@ class LocalDiscount extends Model
 {
     /** @use HasFactory<LocalDiscountFactory> */
     use HasFactory;
+
+    use HasFaqs;
+    use HasSources;
 
     protected $fillable = [
         'state',
@@ -193,25 +197,5 @@ class LocalDiscount extends Model
     public function stores(): HasMany
     {
         return $this->hasMany(LocalStore::class)->orderBy('sort_order');
-    }
-
-    /**
-     * Primary-source citations backing this page's facts (shared table), in order.
-     *
-     * @return MorphMany<Source, $this>
-     */
-    public function sources(): MorphMany
-    {
-        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
-    }
-
-    /**
-     * Page-scoped FAQs (shared polymorphic table), in display order.
-     *
-     * @return MorphMany<Faq, $this>
-     */
-    public function faqs(): MorphMany
-    {
-        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
     }
 }

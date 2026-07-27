@@ -8,6 +8,8 @@ use App\Domain\Catalog\Enums\OfferType;
 use App\Domain\Catalog\Enums\VerificationProvider;
 use App\Domain\Crm\Models\Audience;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Shared\Concerns\HasFaqs;
+use App\Domain\Shared\Concerns\HasSources;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
 use Database\Factories\OfferFactory;
@@ -18,7 +20,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -67,6 +68,9 @@ class Offer extends Model
 {
     /** @use HasFactory<OfferFactory> */
     use HasFactory;
+
+    use HasFaqs;
+    use HasSources;
 
     protected $fillable = [
         'connection_id',
@@ -184,25 +188,5 @@ class Offer extends Model
     public function audiences(): BelongsToMany
     {
         return $this->belongsToMany(Audience::class, 'offer_audience');
-    }
-
-    /**
-     * Primary-source citations backing this offer's facts, in display order.
-     *
-     * @return MorphMany<Source, $this>
-     */
-    public function sources(): MorphMany
-    {
-        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
-    }
-
-    /**
-     * Offer-scoped FAQs (bubble to the brand page's FAQPage schema), in order.
-     *
-     * @return MorphMany<Faq, $this>
-     */
-    public function faqs(): MorphMany
-    {
-        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
     }
 }
