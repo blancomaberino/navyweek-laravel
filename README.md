@@ -168,6 +168,9 @@ command and a `*ImportTest` that runs against the real committed artifacts
 - **discount categories** (`import:discount-categories`) — the `/discount/<slug>`
   category hubs (`discount_categories`); a flat camelCase→snake_case rename with the
   intro/pinned/excluded/order arrays as JSON and no polymorphic children.
+- **veterans day meals** (`import:veterans-day-meals`) — the Veterans Day free-meal
+  roundup (`veterans_day_meals`); a flat rename with `eligibility` as an enum-string
+  array. All statuses import (pending included) — the render gate filters on read.
 
 Later slices add the remaining catalog/CRM domains (the brand → offer → research →
 page normalization of the ~990 discount records) through the same framework.

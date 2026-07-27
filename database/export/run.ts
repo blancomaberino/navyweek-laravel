@@ -12,3 +12,4 @@ import './fleet-weeks';
 import './jet-teams';
 import './navy-week-events';
 import './ranks';
+import './veterans-day-meals';

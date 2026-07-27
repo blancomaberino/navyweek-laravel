@@ -1,0 +1,417 @@
+[
+  {
+    "slug": "applebees",
+    "brand": "Applebee's",
+    "discount_slug": null,
+    "offer": "Free full-size entrée from a special Veterans Day menu (plus a $5 Bounce Back card for a future visit)",
+    "eligibility": [
+      "veteran",
+      "active",
+      "reserve",
+      "guard",
+      "retired"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Proof of service: military/Retired ID, current LES, veterans-org card, DD-214, citation, or photo in uniform",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.applebees.com/en/veterans-day-free-meals",
+    "source_label": "Applebee's official site",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Participating locations only; dine-in only; beverage and gratuity excluded; not combinable with other coupons."
+  },
+  {
+    "slug": "chilis",
+    "brand": "Chili's",
+    "discount_slug": null,
+    "offer": "Free meal from a select Veterans Day menu",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Military ID",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.chilis.com/restaurant-events/veterans-day",
+    "source_label": "Chili's official site",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Participating locations only; dine-in only; limited menu; no substitutions; not combinable."
+  },
+  {
+    "slug": "texas-roadhouse",
+    "brand": "Texas Roadhouse",
+    "discount_slug": "texas-roadhouse-military-discount",
+    "offer": "Free meal voucher (choice of entrée with sides and a beverage), redeemable on a later visit",
+    "eligibility": [
+      "veteran",
+      "active",
+      "reserve",
+      "guard"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Proof of service: military Common Access Card, VA ID card, discharge papers, or veteran-designated state ID",
+    "offer_date": "2026-11-11",
+    "nationwide": true,
+    "source_url": "https://www.texasroadhouse.com/community-impact",
+    "source_label": "Texas Roadhouse — Community Impact",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Vouchers given out on Nov 11 (commonly a set afternoon window) at all locations and redeemed on a later visit. Confirm the current-year entrée list and redemption deadline on the brand page."
+  },
+  {
+    "slug": "olive-garden",
+    "brand": "Olive Garden",
+    "discount_slug": null,
+    "offer": "Free entrée from a special Veterans Day menu",
+    "eligibility": [
+      "veteran",
+      "active",
+      "reserve",
+      "guard"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Valid military ID or proof of service (e.g., discharge papers)",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.olivegarden.com/",
+    "source_label": "Olive Garden official site",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Participating locations; dine-in only; beverages and gratuity not included; family members/guests pay full price."
+  },
+  {
+    "slug": "red-lobster",
+    "brand": "Red Lobster",
+    "discount_slug": null,
+    "offer": "Free Walt's Favorite Shrimp & Chips meal (six shrimp, fries, coleslaw)",
+    "eligibility": [
+      "veteran",
+      "active",
+      "reserve"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Proof of service",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://x.com/redlobster/status/1988230228963946560",
+    "source_label": "Red Lobster (official post)",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Participating locations; dine-in only; one per customer; no substitutions; beverage, tax, and gratuity excluded."
+  },
+  {
+    "slug": "outback-steakhouse",
+    "brand": "Outback Steakhouse",
+    "discount_slug": null,
+    "offer": "Free Bloomin' Onion and a beverage (free appetizer, not a full entrée)",
+    "eligibility": [
+      "veteran",
+      "active",
+      "retired"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Valid military ID",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.outback.com/press-room/outback-steakhouse-honors-military-mates-this-veterans-day",
+    "source_label": "Outback press room",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Free appetizer (Bloomin' Onion) + beverage, not a full meal. Participating U.S. locations; dine-in. Outback also runs a 10% everyday Military Mates discount."
+  },
+  {
+    "slug": "dennys",
+    "brand": "Denny's",
+    "discount_slug": null,
+    "offer": "Free Original Grand Slam (pancakes, bacon, sausage, and eggs)",
+    "eligibility": [
+      "veteran",
+      "active",
+      "retired"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Valid military ID or DD-214",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.dennys.com/news/dennys-honors-veterans-free-original-grand-slamr-veterans-day",
+    "source_label": "Denny's newsroom",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Participating locations; dine-in only; limited morning window (open to about noon, local time); not combinable."
+  },
+  {
+    "slug": "ihop",
+    "brand": "IHOP",
+    "discount_slug": null,
+    "offer": "Free Red, White & Blueberry Pancakes (or pancake combo)",
+    "eligibility": [
+      "veteran",
+      "active",
+      "retired"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Military ID or proof of service (DD-214, dog tags, veterans-org card, photo in uniform, etc.)",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.ihop.com/en/veterans-day",
+    "source_label": "IHOP official site",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Participating locations; dine-in only; limit one per guest. Exact item varies by year — confirm on the brand page."
+  },
+  {
+    "slug": "golden-corral",
+    "brand": "Golden Corral",
+    "discount_slug": null,
+    "offer": "Free 'Military Appreciation Night' dinner buffet and a beverage",
+    "eligibility": [
+      "veteran",
+      "active",
+      "reserve",
+      "guard",
+      "retired"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Proof of military service",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.goldencorral.com/press-room/",
+    "source_label": "Golden Corral press room",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Evening event on Nov 11 (typically 4pm to close), not all day; dine-in buffet only, no takeout; family/friends pay full price. Confirm participating locations."
+  },
+  {
+    "slug": "cracker-barrel",
+    "brand": "Cracker Barrel",
+    "discount_slug": null,
+    "offer": "Free Sunrise Pancake Special (two buttermilk pancakes plus eggs or breakfast meat)",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Proof of military service",
+    "offer_date": "2026-11-11",
+    "nationwide": true,
+    "source_url": "https://www.crackerbarrel.com/newsroom/news-releases/2025/nov/supporting-our-nations-heroes-this-november",
+    "source_label": "Cracker Barrel newsroom",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Dine-in only; limit one per order; excludes premium items, add-ons, and gratuity. Honored at all locations."
+  },
+  {
+    "slug": "bob-evans",
+    "brand": "Bob Evans",
+    "discount_slug": null,
+    "offer": "Free farm-fresh entrée from a special Veterans Day menu, served all day",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Proof of service: military/Retired ID, LES, veterans-org card, DD-214, citation, or photo in uniform",
+    "offer_date": "2026-11-11",
+    "nationwide": true,
+    "source_url": "https://www.bobevans.com/veterans-day",
+    "source_label": "Bob Evans official site",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Honored at all Bob Evans restaurants; dine-in only; beverage not included; not valid with other offers."
+  },
+  {
+    "slug": "hooters",
+    "brand": "Hooters",
+    "discount_slug": null,
+    "offer": "Free entrée from the Hooters Veterans Day menu (with purchase of a beverage)",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Valid military ID or proof of service",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.hooters.com/about/news/veterans-eat-free-on-tuesday-november-11",
+    "source_label": "Hooters newsroom",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Beverage purchase required; dine-in only; one per person; participating locations."
+  },
+  {
+    "slug": "wienerschnitzel",
+    "brand": "Wienerschnitzel",
+    "discount_slug": null,
+    "offer": "Free Original Chili Dog, small fries, and small soda",
+    "eligibility": [
+      "veteran",
+      "active",
+      "reserve"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Valid military ID, proof of service, or wearing a uniform",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.wienerschnitzel.com/wienerschnitzel-honors-u-s-military-with-free-meal-on-nov-11/",
+    "source_label": "Wienerschnitzel news",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Participating locations; all day; limit one per guest; cheese extra."
+  },
+  {
+    "slug": "krispy-kreme",
+    "brand": "Krispy Kreme",
+    "discount_slug": null,
+    "offer": "Free doughnut of choice and a coffee",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "No purchase necessary; proof of service / military ID per shop",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.krispykreme.com/offers/veteransday",
+    "source_label": "Krispy Kreme offers",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "In-shop only; limit one per guest; participating U.S. shops."
+  },
+  {
+    "slug": "dunkin",
+    "brand": "Dunkin'",
+    "discount_slug": null,
+    "offer": "Free donut of choice (no purchase necessary)",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Military ID (no purchase necessary)",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://news.dunkindonuts.com/news/dunkin-serves-a-sweet-thank-you-on-veterans-day-free-donut-to-all-veterans-and-active-duty-military-on-november-11",
+    "source_label": "Dunkin' newsroom",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "In-store only (not valid via the mobile app); limit one per guest; participating locations."
+  },
+  {
+    "slug": "starbucks",
+    "brand": "Starbucks",
+    "discount_slug": null,
+    "offer": "Free tall (12 oz) hot or iced brewed coffee",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": true,
+    "redemption": "both",
+    "proof_required": "No ID required — self-identify to the barista",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://about.starbucks.com/starbucks-commitment-to-the-military-community/",
+    "source_label": "Starbucks Stories",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Military spouses are also eligible. In-store and drive-thru; one per customer; excludes Cold Brew/Nitro and customizations; participating U.S. stores."
+  },
+  {
+    "slug": "on-the-border",
+    "brand": "On The Border",
+    "discount_slug": null,
+    "offer": "Free 'Create Your Own Combo' (two Tex-Mex items with rice and beans)",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Military ID or proof of service",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.ontheborder.com/events/veterans-day",
+    "source_label": "On The Border events",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Participating locations; dine-in."
+  },
+  {
+    "slug": "little-caesars",
+    "brand": "Little Caesars",
+    "discount_slug": null,
+    "offer": "Free HOT-N-READY Lunch Combo (4-slice deep-dish pepperoni pizza + 20 oz drink)",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "takeout",
+    "proof_required": "Proof of service (veteran-designated ID, DD-214, or current military ID)",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://information.littlecaesars.com/en-us/veterans-day-promotion-2025",
+    "source_label": "Little Caesars promotion terms",
+    "last_verified_at": "2026-06-29",
+    "status": "verified",
+    "notes": "Participating stores only (not all franchises); narrow lunchtime window (about 11am–2pm local); while supplies last; limit one per person."
+  },
+  {
+    "slug": "buffalo-wild-wings",
+    "brand": "Buffalo Wild Wings",
+    "discount_slug": null,
+    "offer": "Prior years: free boneless wings and fries (offer not confirmed on the brand site)",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Military ID or proof of service",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.buffalowildwings.com/",
+    "source_label": "Buffalo Wild Wings",
+    "last_verified_at": "2026-06-29",
+    "status": "pending",
+    "notes": "PENDING: no current Veterans Day free-meal promotion found on buffalowildwings.com. Heavily franchised; participation varies. Do not publish until the brand posts a current-year page."
+  },
+  {
+    "slug": "friendlys",
+    "brand": "Friendly's",
+    "discount_slug": null,
+    "offer": "Prior years: free All-American Burger or breakfast (brand page appears undated/older)",
+    "eligibility": [
+      "veteran",
+      "active"
+    ],
+    "dependents_eligible": false,
+    "redemption": "dine-in",
+    "proof_required": "Military ID or proof of service",
+    "offer_date": "2026-11-11",
+    "nationwide": false,
+    "source_url": "https://www.friendlysrestaurants.com/",
+    "source_label": "Friendly's",
+    "last_verified_at": "2026-06-29",
+    "status": "pending",
+    "notes": "PENDING: brand Veterans Day page appears to be an older/undated post. Regional (Northeast); franchise participation varies. Re-verify before publishing."
+  }
+]

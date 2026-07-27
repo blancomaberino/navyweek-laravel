@@ -841,8 +841,9 @@ Proven on the bases (`import:bases`), ranks (`import:ranks`, STI over `category`
 event-guide (`import:event-guides` — fleet weeks, air shows, hub), navy-week
 (`import:navy-week-events` — folding the legacy events + CityData + CityExtras into
 one row per city), jet-teams (`import:jet-teams` — hubs + schedule + city guides),
-and the discount category hubs (`import:discount-categories`) domains; one exporter +
-importer + command lands per domain in subsequent slices. A child table with no
+the discount category hubs (`import:discount-categories`), and the Veterans Day meal
+roundup (`import:veterans-day-meals`) domains; one exporter + importer + command lands
+per domain in subsequent slices. A child table with no
 natural unique key (the jet-team schedule — a city slug recurs in a season) is
 replaced wholesale per parent rather than upserted per row.
 
