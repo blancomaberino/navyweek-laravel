@@ -6,3 +6,4 @@
 // writes its own database/seed-data/*.json artifacts as a side effect.
 
 import './bases';
+import './ranks';

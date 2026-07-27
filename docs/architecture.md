@@ -837,8 +837,8 @@ Stage A is a one-time local tool (reads the sibling Astro repo); the **committed
 artifacts** make Stage B reproducible in CI without that source. Importers are
 **idempotent** (slug upsert + child replace) and enum columns validate on cast, so
 a value the enum doesn't know fails the import rather than persisting bad data.
-Proven on the bases pillar (`import:bases`); one exporter + importer + command lands
-per domain in subsequent slices.
+Proven on the bases (`import:bases`) and ranks (`import:ranks`, STI over `category`)
+pillars; one exporter + importer + command lands per domain in subsequent slices.
 
 ## References
 
