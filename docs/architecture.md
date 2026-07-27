@@ -818,6 +818,28 @@ flowchart TD
     LiveLook -->|missing| Fallback["Route::fallback 301 to /  (never 404)"]
 ```
 
+## Data migration pipeline (Stage A → Stage B)
+
+The legacy `../src/data` TypeScript is migrated into the tables above in two
+decoupled stages, joined by committed JSON artifacts.
+
+```mermaid
+flowchart LR
+    Legacy["Astro repo<br/>../src/data/**.ts"] --> Export["Stage A — exporter<br/>database/export/*.ts (tsx)<br/>explicit column map + lift faqs/sources"]
+    Export --> Artifact["database/seed-data/*.json<br/>(committed handoff contract)"]
+    Artifact --> Reader["Shared\\Import\\SeedArtifact::read()"]
+    Reader --> Importer["Stage B — domain importer<br/>upsert by slug in a txn<br/>replace polymorphic children"]
+    Importer --> Cmd["artisan import:&lt;domain&gt;"]
+    Cmd --> DB[("tables")]
+```
+
+Stage A is a one-time local tool (reads the sibling Astro repo); the **committed
+artifacts** make Stage B reproducible in CI without that source. Importers are
+**idempotent** (slug upsert + child replace) and enum columns validate on cast, so
+a value the enum doesn't know fails the import rather than persisting bad data.
+Proven on the bases pillar (`import:bases`); one exporter + importer + command lands
+per domain in subsequent slices.
+
 ## References
 
 - Module responsibilities + commands: `platform/README.md`

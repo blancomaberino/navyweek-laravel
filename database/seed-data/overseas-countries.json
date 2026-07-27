@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "bahrain",
+    "name": "Bahrain",
+    "iso2": "BH",
+    "region": "CENTCOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "british-indian-ocean-territory",
+    "name": "British Indian Ocean Territory",
+    "iso2": "IO",
+    "region": "PACOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "cuba",
+    "name": "Cuba",
+    "iso2": "CU",
+    "region": "SOUTHCOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "djibouti",
+    "name": "Djibouti",
+    "iso2": "DJ",
+    "region": "AFRICOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "greece",
+    "name": "Greece",
+    "iso2": "GR",
+    "region": "EUCOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "guam",
+    "name": "Guam",
+    "iso2": "GU",
+    "region": "PACOM",
+    "is_us_territory": true
+  },
+  {
+    "slug": "iceland",
+    "name": "Iceland",
+    "iso2": "IS",
+    "region": "EUCOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "italy",
+    "name": "Italy",
+    "iso2": "IT",
+    "region": "EUCOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "japan",
+    "name": "Japan",
+    "iso2": "JP",
+    "region": "PACOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "singapore",
+    "name": "Singapore",
+    "iso2": "SG",
+    "region": "PACOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "south-korea",
+    "name": "South Korea",
+    "iso2": "KR",
+    "region": "PACOM",
+    "is_us_territory": false
+  },
+  {
+    "slug": "spain",
+    "name": "Spain",
+    "iso2": "ES",
+    "region": "EUCOM",
+    "is_us_territory": false
+  }
+]

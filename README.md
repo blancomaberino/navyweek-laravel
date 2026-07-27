@@ -124,6 +124,32 @@ through their `LocalDiscount` parent, not a repository of their own.
 
 Supporting types: value object `Shared\ValueObjects\UrlPath`; services `Publishing\Services\LegacyPathResolver`, `Catalog\Services\AffiliateLinkTagger` (port of `withPlacement` — the outbound sub-ID tagging choke point); enums `Crm\Enums\{ConnectionStatus,Audience}`, `Catalog\Enums\{OfferType,VerificationProvider,RedemptionChannel,Placement,MealEligibility,MealRedemption,MealStatus,LocalVerification}`, `Research\Enums\{ResearchStatus,ResearchedBy}`, `Shared\Enums\{ConfidenceLevel,SourceType}` (confidence is shared by briefs + citations), `Pillars\Enums\{BaseType,CombatantCommand,RegionType,RankCategory,DesignatorCommunity,RatingCommunity,HistoricRatingEra,NavyWeekStatus,NavyWeekSourceLevel,FleetWeekSeason,FleetWeekStatus,AirShowStatus,Admission,TeamId,JetTeamStatus}`, `Publishing\Enums\{PageType,RedirectMatchType}`. Seeders: `AffiliateNetworkSeeder` (the 7 networks), `AudienceSeeder` (audience vocabulary from the enum).
 
+## Data migration (Stage A → Stage B)
+
+The legacy TypeScript data in the sibling Astro repo (`../src/data`) is migrated
+into these tables in two decoupled stages, handed off through committed JSON
+artifacts so Stage B is reproducible without the Astro source present.
+
+- **Stage A — exporter (`database/export/*.ts`, run with `npm run export:legacy`).**
+  A `tsx` script imports each legacy registry, maps it **explicitly, one line per
+  DB column** (auditable field-by-field against the migrations), lifts inline
+  `faqs`/`sources` arrays out for the shared polymorphic tables, and writes
+  `database/seed-data/<name>.json`. The artifacts are committed — that JSON is the
+  handoff contract.
+- **Stage B — importers (`app/Domain/*/Import/*Importer.php` + `app/Console/Commands/Import*Command.php`).**
+  `Shared\Import\SeedArtifact::read()` loads an artifact; each domain importer
+  upserts it **by slug inside one transaction** and replaces the polymorphic
+  children, so it is **idempotent** (re-running updates in place, never
+  duplicates). Enum columns are validated on cast — a value the enum doesn't know
+  fails the import rather than landing bad data.
+
+Proven end-to-end on the **bases pillar** (`import:bases` → `us_states` +
+`overseas_countries` lookups + `bases` with FAQs/sources; see
+`tests/Feature/BasePillarImportTest.php`, which runs the importer against the real
+committed artifacts and asserts counts, enum/JSON/soft-FK/child integrity, and
+idempotency). Later slices add one exporter + importer + `import:<domain>` command
+per domain, reusing this framework.
+
 ## Quality gates (per the rebuild workflow)
 
 Every task runs `/frontend-design` + `/seo-geo` (inform UI/page work) → implement
