@@ -156,9 +156,13 @@ command and a `*ImportTest` that runs against the real committed artifacts
 - **event guides** (`import:event-guides`) — `fleet_weeks` + `air_shows` guides and
   the single-row `air_show_hub`; a pure top-level camelCase→snake_case rename with
   the block payloads (schedule, festival, sections, …) passing through as JSON.
+- **navy week** (`import:navy-week-events`) — the `navy_week_events` stops, folding
+  the legacy `events` + `CityData` + `CityExtras` (three files, one row per city,
+  joined on slug) into one record with the display lists (navy_assets, venues,
+  daily_schedule, …) as JSON plus FAQs/sources.
 
-Later slices add the remaining domains (the navy-week + jet-team events, then
-catalog/CRM) through the same framework.
+Later slices add the remaining domains (the jet-team events, then catalog/CRM)
+through the same framework.
 
 ## Quality gates (per the rebuild workflow)
 
