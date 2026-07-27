@@ -7,6 +7,7 @@
 
 import './air-shows';
 import './bases';
+import './discount-categories';
 import './fleet-weeks';
 import './jet-teams';
 import './navy-week-events';
