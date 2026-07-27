@@ -6,6 +6,8 @@ namespace App\Domain\Pillars\Models;
 
 use App\Domain\Pillars\Enums\FleetWeekSeason;
 use App\Domain\Pillars\Enums\FleetWeekStatus;
+use App\Domain\Shared\Concerns\HasFaqs;
+use App\Domain\Shared\Concerns\HasSources;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
 use Database\Factories\FleetWeekFactory;
@@ -13,7 +15,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -76,6 +77,9 @@ class FleetWeek extends Model
 {
     /** @use HasFactory<FleetWeekFactory> */
     use HasFactory;
+
+    use HasFaqs;
+    use HasSources;
 
     protected $fillable = [
         'slug',
@@ -155,25 +159,5 @@ class FleetWeek extends Model
     protected static function newFactory(): Factory
     {
         return FleetWeekFactory::new();
-    }
-
-    /**
-     * FAQs for this fleet-week guide (shared polymorphic table), in order.
-     *
-     * @return MorphMany<Faq, $this>
-     */
-    public function faqs(): MorphMany
-    {
-        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
-    }
-
-    /**
-     * Primary-source citations for this guide (shared table), in order.
-     *
-     * @return MorphMany<Source, $this>
-     */
-    public function sources(): MorphMany
-    {
-        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
     }
 }

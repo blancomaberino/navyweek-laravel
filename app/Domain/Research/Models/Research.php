@@ -8,6 +8,7 @@ use App\Domain\Catalog\Models\Offer;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Research\Enums\ResearchedBy;
 use App\Domain\Research\Enums\ResearchStatus;
+use App\Domain\Shared\Concerns\HasSources;
 use App\Domain\Shared\Enums\ConfidenceLevel;
 use App\Domain\Shared\Models\Source;
 use Database\Factories\ResearchFactory;
@@ -17,7 +18,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -54,6 +54,8 @@ class Research extends Model
 {
     /** @use HasFactory<ResearchFactory> */
     use HasFactory;
+
+    use HasSources;
 
     /** "research" is both singular and plural — pin the table name. */
     protected $table = 'research';
@@ -126,15 +128,5 @@ class Research extends Model
         return $this->belongsToMany(Skill::class, 'research_skill')
             ->withPivot(['skill_version', 'used_for'])
             ->withTimestamps();
-    }
-
-    /**
-     * Primary-source citations this brief verified its facts against, in order.
-     *
-     * @return MorphMany<Source, $this>
-     */
-    public function sources(): MorphMany
-    {
-        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
     }
 }

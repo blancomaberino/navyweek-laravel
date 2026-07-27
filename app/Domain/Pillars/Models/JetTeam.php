@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Pillars\Models;
 
 use App\Domain\Pillars\Enums\TeamId;
+use App\Domain\Shared\Concerns\HasFaqs;
 use App\Domain\Shared\Models\Faq;
 use Database\Factories\JetTeamFactory;
 use Illuminate\Database\Eloquent\Collection;
@@ -12,7 +13,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -56,6 +56,8 @@ class JetTeam extends Model
 {
     /** @use HasFactory<JetTeamFactory> */
     use HasFactory;
+
+    use HasFaqs;
 
     protected $fillable = [
         'team',
@@ -125,15 +127,5 @@ class JetTeam extends Model
     public function cities(): HasMany
     {
         return $this->hasMany(JetTeamCity::class)->orderBy('city');
-    }
-
-    /**
-     * Hub FAQs (shared polymorphic table), in display order.
-     *
-     * @return MorphMany<Faq, $this>
-     */
-    public function faqs(): MorphMany
-    {
-        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
     }
 }

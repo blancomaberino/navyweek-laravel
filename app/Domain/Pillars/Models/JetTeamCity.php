@@ -6,6 +6,8 @@ namespace App\Domain\Pillars\Models;
 
 use App\Domain\Pillars\Enums\Admission;
 use App\Domain\Pillars\Enums\JetTeamStatus;
+use App\Domain\Shared\Concerns\HasFaqs;
+use App\Domain\Shared\Concerns\HasSources;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
 use Database\Factories\JetTeamCityFactory;
@@ -14,7 +16,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -69,6 +70,9 @@ class JetTeamCity extends Model
 {
     /** @use HasFactory<JetTeamCityFactory> */
     use HasFactory;
+
+    use HasFaqs;
+    use HasSources;
 
     protected $table = 'jet_team_cities';
 
@@ -145,25 +149,5 @@ class JetTeamCity extends Model
     public function team(): BelongsTo
     {
         return $this->belongsTo(JetTeam::class, 'jet_team_id');
-    }
-
-    /**
-     * Guide FAQs (shared polymorphic table), in display order.
-     *
-     * @return MorphMany<Faq, $this>
-     */
-    public function faqs(): MorphMany
-    {
-        return $this->morphMany(Faq::class, 'faqable')->orderBy('sort_order');
-    }
-
-    /**
-     * Primary-source citations for this guide (shared table), in order.
-     *
-     * @return MorphMany<Source, $this>
-     */
-    public function sources(): MorphMany
-    {
-        return $this->morphMany(Source::class, 'sourceable')->orderBy('sort_order');
     }
 }
