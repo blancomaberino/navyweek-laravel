@@ -838,10 +838,12 @@ artifacts** make Stage B reproducible in CI without that source. Importers are
 **idempotent** (slug upsert + child replace) and enum columns validate on cast, so
 a value the enum doesn't know fails the import rather than persisting bad data.
 Proven on the bases (`import:bases`), ranks (`import:ranks`, STI over `category`),
-event-guide (`import:event-guides` — fleet weeks, air shows, hub), and navy-week
+event-guide (`import:event-guides` — fleet weeks, air shows, hub), navy-week
 (`import:navy-week-events` — folding the legacy events + CityData + CityExtras into
-one row per city) domains; one exporter + importer + command lands per domain in
-subsequent slices.
+one row per city), and jet-teams (`import:jet-teams` — hubs + schedule + city
+guides) domains; one exporter + importer + command lands per domain in subsequent
+slices. A child table with no natural unique key (the jet-team schedule — a city
+slug recurs in a season) is replaced wholesale per parent rather than upserted per row.
 
 ## References
 

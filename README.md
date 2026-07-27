@@ -160,9 +160,13 @@ command and a `*ImportTest` that runs against the real committed artifacts
   the legacy `events` + `CityData` + `CityExtras` (three files, one row per city,
   joined on slug) into one record with the display lists (navy_assets, venues,
   daily_schedule, …) as JSON plus FAQs/sources.
+- **jet teams** (`import:jet-teams`) — the `jet_teams` hubs + their `jet_team_schedule`
+  stops + published `jet_team_cities` guides. The schedule FK comes from the
+  exporter's `team` natural key (the legacy row has no team field); a stop has no
+  natural unique key (a city slug recurs in a season), so each team's stops are
+  replaced wholesale on re-import, while hubs/cities upsert by their unique key.
 
-Later slices add the remaining domains (the jet-team events, then catalog/CRM)
-through the same framework.
+Later slices add the remaining domains (catalog/CRM) through the same framework.
 
 ## Quality gates (per the rebuild workflow)
 
