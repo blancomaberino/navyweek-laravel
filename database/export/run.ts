@@ -5,5 +5,7 @@
 // Add one import line per domain as its exporter lands. Each imported module
 // writes its own database/seed-data/*.json artifacts as a side effect.
 
+import './air-shows';
 import './bases';
+import './fleet-weeks';
 import './ranks';

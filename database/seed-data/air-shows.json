@@ -1,0 +1,1058 @@
+[
+  {
+    "slug": "oceana",
+    "short_name": "Oceana",
+    "name": "NAS Oceana Air Show",
+    "city": "Virginia Beach",
+    "state": "VA",
+    "state_name": "Virginia",
+    "year": 2026,
+    "base": "NAS Oceana",
+    "dates_label": "September 19–20, 2026",
+    "start_date": "2026-09-19",
+    "end_date": "2026-09-20",
+    "date_unconfirmed": false,
+    "gate_time": "10:00 AM – 5:00 PM daily",
+    "admission": "FREE",
+    "parking": "Free (on base)",
+    "headliner": "U.S. Navy Blue Angels",
+    "performers": [
+      "U.S. Navy Blue Angels (F/A-18 Super Hornet)",
+      "F-22 Raptor Demonstration Team",
+      "F-35C Lightning II Demonstration Team",
+      "Rhino Demonstration Team — VFA-106 \"Gladiators\" (F/A-18 Super Hornet)",
+      "World-class civilian aerobatic performers"
+    ],
+    "official_url": "https://oceanaairshow.com",
+    "phone": null,
+    "status": "scheduled",
+    "published": true,
+    "needs_verification": [
+      "2026 performer lineup",
+      "upgraded seating on-sale date"
+    ],
+    "hero_headline": "The U.S. Navy's largest open house returns to Virginia Beach September 19–20, 2026 — with the [Blue Angels](/blue-angels/) headlining and free admission.",
+    "intro": [
+      "For more than 70 years, the Navy's East Coast Master Jet Base has opened its gates to the public for a weekend of naval aviation. The 2026 NAS Oceana Air Show draws more than 300,000 visitors to watch the people and aircraft that fly from Oceana every day. This year's theme — “Celebrating 250 Years of America” — marks the nation's semiquincentennial. Here's everything you need to plan your visit."
+    ],
+    "quick_facts": [
+      {
+        "label": "Dates",
+        "value": "Saturday–Sunday, September 19–20, 2026"
+      },
+      {
+        "label": "Hours",
+        "value": "10:00 AM – 5:00 PM daily"
+      },
+      {
+        "label": "Location",
+        "value": "NAS Oceana, 1750 Tomcat Blvd, Virginia Beach, VA"
+      },
+      {
+        "label": "General admission",
+        "value": "Free"
+      },
+      {
+        "label": "Parking",
+        "value": "Free (on base)"
+      },
+      {
+        "label": "Headliner",
+        "value": "U.S. Navy Blue Angels"
+      },
+      {
+        "label": "ID required",
+        "value": "Yes — physical government-issued photo ID for everyone 18+"
+      },
+      {
+        "label": "Official site",
+        "value": "oceanaairshow.com"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "When Is the 2026 NAS Oceana Air Show?",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The 2026 NAS Oceana Air Show runs **Saturday, September 19 and Sunday, September 20**, with gates open from **10:00 AM to 5:00 PM** both days. The base also hosts a practice day on the Friday before, which includes a long-running STEM Laboratory that gives local fifth-graders an early look at the show."
+          },
+          {
+            "kind": "p",
+            "text": "Oceana holds its show in mid-to-late September most years, a few weeks before its sister Navy event, San Francisco Fleet Week, on the opposite coast. If you follow naval aviation, it's a natural anchor for an East Coast fall trip."
+          },
+          {
+            "kind": "p",
+            "text": "A note on military shows: dates and performers depend on Department of Defense scheduling and can shift. We verify this page against the official Oceana schedule and update it as the 2026 details are finalized."
+          }
+        ]
+      },
+      {
+        "heading": "Tickets & Admission",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "**General admission and parking are both free.** For most visitors, there's nothing to buy — bring a valid ID, park on base, and head to the flight line."
+          },
+          {
+            "kind": "p",
+            "text": "If you want a guaranteed seat and a better view, **upgraded seating** is available to purchase (sold exclusively through the show's official ticketing partner, AttendStar). Premium options typically include reserved flight-line seating and hospitality areas with shade and amenities. These sell out as the show approaches, so buy early once they're released."
+          },
+          {
+            "kind": "cta"
+          }
+        ]
+      },
+      {
+        "heading": "Performers & Flight Schedule",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The **U.S. Navy Blue Angels** headline, flying the F/A-18 Super Hornet. As the Navy’s Master Jet Base, Oceana is home turf for naval aviation, and the 2026 lineup leans heavily into Navy and joint-force airpower. Officially announced performers include:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "**U.S. Navy Blue Angels** (F/A-18 Super Hornet)",
+              "**F-22 Raptor Demonstration Team**",
+              "**F-35C Lightning II Demonstration Team**",
+              "**Rhino Demonstration Team** of Strike Fighter Squadron (VFA) 106 — the F/A-18 Super Hornet demo flown by Oceana's own “Gladiators”",
+              "World-class civilian aerobatic performers"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "The F-35C demo is a particularly fitting draw here: the C is the Navy's carrier variant, and seeing it fly at the Navy's own jet base is a rare treat."
+          },
+          {
+            "kind": "p",
+            "text": "*The full day-by-day flying order is released by the air show closer to the event. We update this section as the official 2026 schedule is published.*"
+          }
+        ]
+      },
+      {
+        "heading": "Parking & Directions",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "**Getting there:** NAS Oceana is in Virginia Beach, accessible from I-264. All air show parking is on the installation."
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "Follow signage toward NAS Oceana / Tomcat Blvd on show days",
+              "As you arrive, Security directs you to the next available parking area",
+              "**Free shuttles** run from the outlying parking areas to the pedestrian entry points"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "For **accessible parking**, have your placard clearly visible so Security can direct you to the appropriate area."
+          }
+        ]
+      },
+      {
+        "heading": "Know Before You Go",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Oceana is an **active Navy installation**, so entry rules are stricter than a civilian venue. Getting these right keeps you from being turned away at the gate."
+          },
+          {
+            "kind": "p",
+            "text": "**ID is required.** Every attendee **18 and older must present a valid, physical government-issued photo ID.** Digital IDs and photos of IDs are not accepted. Non-U.S. citizens should carry valid documentation of their current legal status."
+          },
+          {
+            "kind": "p",
+            "text": "**No drones.** Unmanned aerial systems are prohibited at NAS Oceana. Flying a drone within five miles of the base — including the Virginia Beach oceanfront resort area — is also not allowed."
+          },
+          {
+            "kind": "p",
+            "text": "**Come prepared.** The show runs all day with limited natural shade, so bring sunscreen, a hat, and water. The event is rain or shine; base leadership monitors weather and adjusts flying as conditions require."
+          }
+        ]
+      },
+      {
+        "heading": "About NAS Oceana",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Naval Air Station Oceana is the U.S. Navy’s East Coast **Master Jet Base** — the home of its F/A-18 Super Hornet strike-fighter squadrons. What began in 1943 as a remote auxiliary landing field grew, as Virginia Beach grew up around it, into one of the largest and most important naval aviation installations in the country."
+          },
+          {
+            "kind": "p",
+            "text": "That operational pedigree is exactly what makes the show worth attending. The jets you watch perform aren't visiting — they fly from these runways year-round, flown and maintained by the sailors who call Oceana home. It's one of the most authentically *Navy* air shows in the nation."
+          }
+        ]
+      }
+    ],
+    "related_paragraph": [
+      {
+        "before": "The ",
+        "label": "Blue Angels",
+        "href": "/blue-angels/",
+        "after": " headline Oceana — follow the team’s full national tour schedule and demonstration guide. "
+      },
+      {
+        "before": "Oceana is the Navy’s East Coast counterpart to ",
+        "label": "San Francisco Fleet Week",
+        "href": "/fleetweek/san-francisco/",
+        "after": ", held a few weeks later on the opposite coast. "
+      },
+      {
+        "before": "For the largest military air show in the country, see the ",
+        "label": "MCAS Miramar Air Show",
+        "href": "/air-show/miramar/",
+        "after": " in San Diego."
+      }
+    ],
+    "card_summary": "The U.S. Navy's largest open house at its East Coast Master Jet Base in Virginia Beach — September 19–20, 2026, headlined by the Blue Angels with free admission.",
+    "email_cta": {
+      "heading": "Want the 2026 ticket release date?",
+      "buttonLabel": "Get notified the moment seating upgrades go on sale →",
+      "placeholder": "Enter your email"
+    },
+    "schema_name": "NAS Oceana Air Show 2026",
+    "event_description": "The U.S. Navy’s largest open house, held at Naval Air Station Oceana in Virginia Beach, headlined by the U.S. Navy Blue Angels. Free general admission.",
+    "location": {
+      "placeName": "Naval Air Station Oceana",
+      "streetAddress": "1750 Tomcat Blvd",
+      "addressLocality": "Virginia Beach",
+      "addressRegion": "VA",
+      "postalCode": "23460",
+      "addressCountry": "US"
+    },
+    "offer": {
+      "name": "General Admission",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "organizer": {
+      "name": "NAS Oceana",
+      "url": "https://oceanaairshow.com"
+    },
+    "meta_title": "NAS Oceana Air Show 2026: Dates, Tickets, Blue Angels & Parking",
+    "meta_description": "2026 NAS Oceana Air Show in Virginia Beach, September 19–20 — free admission, the Blue Angels, F-22 and F-35C demos, parking, and entry rules.",
+    "h1": "NAS Oceana Air Show 2026",
+    "og_image": "/og/air-show/oceana.png",
+    "canonical_override": null,
+    "date_published": "2026-06-15",
+    "date_modified": "2026-07-13",
+    "last_verified": "July 13, 2026",
+    "faqs": [
+      {
+        "question": "Is the NAS Oceana Air Show free?",
+        "answer": "Yes. General admission and parking are both free. Optional upgraded seating is available for purchase through the show's official ticketing partner.",
+        "sort_order": 0
+      },
+      {
+        "question": "When is the Oceana Air Show in 2026?",
+        "answer": "September 19–20, 2026 (Saturday and Sunday), 10:00 AM to 5:00 PM each day.",
+        "sort_order": 1
+      },
+      {
+        "question": "Do I need ID to get in?",
+        "answer": "Yes. Everyone 18 and older must present a valid, physical government-issued photo ID. Non-U.S. citizens should bring documentation of their current legal status.",
+        "sort_order": 2
+      },
+      {
+        "question": "Who is performing in 2026?",
+        "answer": "The U.S. Navy Blue Angels headline, joined by the F-22 Raptor demo, the F-35C Lightning II demo, the VFA-106 Rhino demo, and civilian aerobatic performers.",
+        "sort_order": 3
+      },
+      {
+        "question": "Can I bring a drone?",
+        "answer": "No. Drones are prohibited at NAS Oceana and within five miles of the base, including the oceanfront.",
+        "sort_order": 4
+      },
+      {
+        "question": "Where do I park?",
+        "answer": "All parking is free and on base. Security directs you to a lot on arrival, with free shuttles from outlying areas to the entry points.",
+        "sort_order": 5
+      }
+    ],
+    "sources": [
+      {
+        "label": "Official NAS Oceana Air Show site",
+        "url": "https://oceanaairshow.com",
+        "publisher": "NAS Oceana",
+        "sort_order": 0
+      }
+    ]
+  },
+  {
+    "slug": "miramar",
+    "short_name": "Miramar",
+    "name": "MCAS Miramar Air Show",
+    "city": "San Diego",
+    "state": "CA",
+    "state_name": "California",
+    "year": 2026,
+    "base": "MCAS Miramar",
+    "dates_label": "September 25–27, 2026",
+    "start_date": "2026-09-25",
+    "end_date": "2026-09-27",
+    "date_unconfirmed": false,
+    "gate_time": "8:00 AM daily",
+    "admission": "FREE",
+    "parking": "Free",
+    "headliner": "U.S. Navy Blue Angels",
+    "performers": [
+      "U.S. Navy Blue Angels (F/A-18 Super Hornet)",
+      "USAF F-35A Lightning II demo",
+      "USMC F-35B Lightning II demo",
+      "USMC MV-22 Osprey demo",
+      "U.S. Air Force C-17 Globemaster III",
+      "U.S. SOCOM Para-Commandos jump team",
+      "Heritage and warbird static displays, including historic aircraft you can walk up to"
+    ],
+    "official_url": "https://miramarairshow.com",
+    "phone": "(858) 307-4277",
+    "status": "scheduled",
+    "published": true,
+    "needs_verification": [
+      "2026 performer lineup",
+      "preferred seating on-sale date"
+    ],
+    "hero_headline": "The largest military air show in the United States returns to San Diego September 25–27, 2026 — with the [Blue Angels](/blue-angels/) headlining and free admission.",
+    "intro": [
+      "Each fall, Marine Corps Air Station Miramar opens its flight line to roughly 700,000 people for three days of military aviation that no civilian venue can match. It runs on an active Marine Corps base, with real operational hardware, San Diego's dependable September weather, and the U.S. Navy Blue Angels closing each day. Here's everything you need to plan your visit."
+    ],
+    "quick_facts": [
+      {
+        "label": "Dates",
+        "value": "Friday–Sunday, September 25–27, 2026"
+      },
+      {
+        "label": "Location",
+        "value": "MCAS Miramar, San Diego, CA"
+      },
+      {
+        "label": "Gates open",
+        "value": "8:00 AM daily"
+      },
+      {
+        "label": "General admission",
+        "value": "Free"
+      },
+      {
+        "label": "Parking",
+        "value": "Free"
+      },
+      {
+        "label": "Headliner",
+        "value": "U.S. Navy Blue Angels"
+      },
+      {
+        "label": "ID required",
+        "value": "Yes — government-issued photo ID for everyone 18+"
+      },
+      {
+        "label": "Official site",
+        "value": "miramarairshow.com"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "When Is the 2026 Miramar Air Show?",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The 2026 MCAS Miramar Air Show runs **Friday, September 25 through Sunday, September 27**. Gates open at **8:00 AM** all three days, and flying typically continues into the late afternoon, with the Blue Angels flying the closing demonstration each day."
+          },
+          {
+            "kind": "p",
+            "text": "Miramar lands in its traditional late-September slot, the same stretch it has held for years. If you're building a West Coast air show trip, it sits one weekend before San Francisco Fleet Week — two major Navy and Marine Corps aviation events back to back."
+          },
+          {
+            "kind": "p",
+            "text": "A note on military shows: dates and performers depend on Department of Defense budgeting and can shift. We verify this page against the official schedule and update it as the 2026 lineup is confirmed."
+          }
+        ]
+      },
+      {
+        "heading": "Tickets & Admission",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "**General admission is free, and so is parking.** For most visitors, there's nothing to buy — show up with a valid ID, park on base, and walk to the flight line."
+          },
+          {
+            "kind": "p",
+            "text": "If you want shade, a seat, and a closer view, **preferred seating** is the upgrade worth considering. Miramar's flight line gets full sun for hours, and paid seating areas trade a long day on your feet for reserved chairs, shade structures, and premium sightlines. Options generally include:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "**Reserved flight-line seating** — assigned chairs in a prime viewing zone",
+              "**Preferred/club areas** — shade, seating, and upgraded amenities",
+              "**Chalets and box seating** — front-row hospitality, often with food and drink, sold by partner organizations like the Navy League of San Diego"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Preferred seating for the 2026 show is released closer to the event. If you're traveling for it or bringing family, it tends to sell out — buy early once it goes live."
+          },
+          {
+            "kind": "cta"
+          }
+        ]
+      },
+      {
+        "heading": "Performers & Flight Schedule",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The **U.S. Navy Blue Angels** headline, flying their F/A-18 Super Hornets. Miramar sits near the team’s training areas, so the Blues tend to bring an especially sharp performance to this crowd."
+          },
+          {
+            "kind": "p",
+            "text": "The 2026 program is shaping up to be one of the strongest in years — notably featuring **both the U.S. Air Force F-35A and the U.S. Marine Corps F-35B demonstration teams at the same show**, a rare pairing that lets you see the differences between the two Lightning II variants side by side, including the F-35B's signature vertical landing."
+          },
+          {
+            "kind": "p",
+            "text": "The broader lineup typically includes:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "U.S. Navy Blue Angels (F/A-18 Super Hornet)",
+              "USAF F-35A Lightning II demo",
+              "USMC F-35B Lightning II demo",
+              "USMC MV-22 Osprey demo",
+              "U.S. Air Force C-17 Globemaster III",
+              "U.S. SOCOM Para-Commandos jump team",
+              "Heritage and warbird static displays, including historic aircraft you can walk up to"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Beyond the flying, the **Air Show Expo** returns as an indoor trade-show experience, alongside acres of static aircraft displays you can get close to between demonstrations."
+          },
+          {
+            "kind": "p",
+            "text": "*Full performer announcements and the day-by-day flying order are released by the air show in the weeks before the event. We update this section as the official 2026 schedule is published.*"
+          }
+        ]
+      },
+      {
+        "heading": "Parking & Directions",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "**Getting there:** MCAS Miramar is about 15 miles north of downtown San Diego, between Interstate 15 and Interstate 805."
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "**Main (East) Gate** — take the MCAS Miramar / Miramar Way exit off I-15",
+              "**North or West Gates** — take the Miramar Road exit off I-15 or I-805"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "**Parking is free.** As you enter the gates, staff direct you to the nearest lot, and **free shuttles** run from all parking lots to the flight line. Plan to arrive early — with crowds this size, gate and parking lines build quickly in the morning."
+          },
+          {
+            "kind": "p",
+            "text": "A few logistics worth knowing:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "**No flight-line drop-offs.** You can't be dropped at the entrance before parking — everyone parks and shuttles in.",
+              "**RVs and trailers** are allowed on the station, but overnight parking, tailgating, and viewing the show from your RV are not permitted. Everyone watches from the flight line.",
+              "**Buses** enter through the West Gate off Miramar Road and are drop-off only.",
+              "**Accessible parking** is available; for specific accommodation requests, contact the air show at (858) 307-4277."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Know Before You Go",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Miramar is an **active Marine Corps installation**, so entry rules are stricter than a typical fairground. Getting these right saves you from being turned away at the gate."
+          },
+          {
+            "kind": "p",
+            "text": "**ID is required.** Every attendee **18 and older must show a valid government-issued photo ID** to enter. Non-U.S. citizens should carry valid documentation of their current legal status. No ID, no entry."
+          },
+          {
+            "kind": "p",
+            "text": "**Clear-bag policy.** Bags must meet the clear-bag standard — one clear bag or small clutch per person. Coolers, ice chests, backpacks, purses, and totes that don't conform are **not allowed.**"
+          },
+          {
+            "kind": "p",
+            "text": "**Leave these at home:**"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "Alcohol and illegal substances",
+              "Weapons of any kind, and pepper spray",
+              "Pets (service animals excepted)",
+              "Drones",
+              "Laser pointers",
+              "Pop-up canopies and umbrellas"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "**Come prepared for sun.** The flight line offers little natural shade and the show runs most of the day. Bring sunscreen, a hat, and water — and consider preferred seating if a full day in direct San Diego sun isn't for you."
+          }
+        ]
+      },
+      {
+        "heading": "About MCAS Miramar",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Marine Corps Air Station Miramar — \"Fightertown\" — is one of the Marine Corps’ premier aviation installations and the former home of the Navy’s Fighter Weapons School (TOPGUN) before it relocated. Today it hosts what’s widely regarded as **the largest military air show in the country**, drawing roughly 700,000 spectators across its three days."
+          },
+          {
+            "kind": "p",
+            "text": "What sets Miramar apart is that it’s a working military base, not a rented venue. The combination of operational infrastructure, San Diego’s reliable weather, and a dense, aviation-loving region produces conditions for flying demonstrations that few other shows can match — which is exactly why the organizers, and many who attend, simply call it \"America’s Air Show.\""
+          }
+        ]
+      }
+    ],
+    "related_paragraph": [
+      {
+        "before": "The ",
+        "label": "Blue Angels",
+        "href": "/blue-angels/",
+        "after": " headline Miramar — follow the team’s full national tour schedule and demonstration guide. "
+      },
+      {
+        "before": "Building a California Navy trip? Miramar lands one weekend before ",
+        "label": "San Francisco Fleet Week",
+        "href": "/fleetweek/san-francisco/",
+        "after": ", and its home city also hosts "
+      },
+      {
+        "label": "San Diego Fleet Week",
+        "href": "/fleetweek/san-diego/",
+        "after": ". "
+      },
+      {
+        "before": "More California air shows are coming to this guide — including ",
+        "label": "San Diego",
+        "href": "/air-show/san-diego/",
+        "after": ", "
+      },
+      {
+        "label": "Huntington Beach",
+        "href": "/air-show/huntington-beach/",
+        "after": ", and "
+      },
+      {
+        "label": "Camarillo",
+        "href": "/air-show/camarillo/",
+        "after": "."
+      }
+    ],
+    "card_summary": "The largest military air show in the U.S., headlined by the Blue Angels at MCAS Miramar in San Diego — September 25–27, 2026, with free admission and parking.",
+    "email_cta": {
+      "heading": "Want the 2026 ticket release date?",
+      "buttonLabel": "Get notified the moment preferred seating goes on sale →",
+      "placeholder": "Enter your email"
+    },
+    "schema_name": "MCAS Miramar Air Show 2026",
+    "event_description": "The largest military air show in the United States, held at MCAS Miramar in San Diego, headlined by the U.S. Navy Blue Angels. Free general admission.",
+    "location": {
+      "placeName": "Marine Corps Air Station Miramar",
+      "streetAddress": "Miramar Way",
+      "addressLocality": "San Diego",
+      "addressRegion": "CA",
+      "postalCode": "92145",
+      "addressCountry": "US"
+    },
+    "offer": {
+      "name": "General Admission",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "organizer": {
+      "name": "MCAS Miramar",
+      "url": "https://miramarairshow.com"
+    },
+    "meta_title": "Miramar Air Show 2026: Dates, Tickets, Schedule & Parking",
+    "meta_description": "Everything you need for the 2026 MCAS Miramar Air Show — dates, free general admission, ticket options, flight schedule, parking, and directions.",
+    "h1": "MCAS Miramar Air Show 2026",
+    "og_image": "/og/air-show/miramar.png",
+    "canonical_override": null,
+    "date_published": "2026-06-15",
+    "date_modified": "2026-07-13",
+    "last_verified": "July 13, 2026",
+    "faqs": [
+      {
+        "question": "Is the Miramar Air Show free?",
+        "answer": "Yes. General admission and parking are both free. Optional preferred seating and hospitality packages are available for purchase.",
+        "sort_order": 0
+      },
+      {
+        "question": "When is the Miramar Air Show in 2026?",
+        "answer": "September 25–27, 2026 (Friday through Sunday). Gates open at 8:00 AM each day.",
+        "sort_order": 1
+      },
+      {
+        "question": "Do I need ID to get in?",
+        "answer": "Yes. Everyone 18 and older must present a valid government-issued photo ID. Non-U.S. citizens should bring documentation of their current legal status.",
+        "sort_order": 2
+      },
+      {
+        "question": "Where do I park?",
+        "answer": "Free parking is on base — you'll be directed to the nearest lot as you enter, with free shuttles to the flight line. Arrive early to beat the lines.",
+        "sort_order": 3
+      },
+      {
+        "question": "Who is performing in 2026?",
+        "answer": "The U.S. Navy Blue Angels headline, with a lineup expected to include both the USAF F-35A and USMC F-35B demo teams, the MV-22 Osprey, C-17 Globemaster III, and the SOCOM Para-Commandos. Final performers are confirmed closer to the event.",
+        "sort_order": 4
+      },
+      {
+        "question": "Can I bring a bag or cooler?",
+        "answer": "Only clear bags or a small clutch (one per person) are allowed. Coolers, backpacks, and non-clear bags are prohibited.",
+        "sort_order": 5
+      },
+      {
+        "question": "Are pets allowed?",
+        "answer": "No. Pets are not permitted; service animals are the exception.",
+        "sort_order": 6
+      }
+    ],
+    "sources": [
+      {
+        "label": "Official MCAS Miramar Air Show site",
+        "url": "https://miramarairshow.com",
+        "publisher": "MCAS Miramar",
+        "sort_order": 0
+      }
+    ]
+  },
+  {
+    "slug": "san-diego",
+    "short_name": "San Diego",
+    "name": "San Diego Air Show",
+    "city": "San Diego",
+    "state": "CA",
+    "state_name": "California",
+    "year": 2026,
+    "base": "MCAS Miramar",
+    "dates_label": "September 25–27, 2026",
+    "start_date": "2026-09-25",
+    "end_date": "2026-09-27",
+    "date_unconfirmed": false,
+    "gate_time": null,
+    "admission": "FREE",
+    "parking": "Free",
+    "headliner": "U.S. Navy Blue Angels",
+    "performers": [
+      "U.S. Navy Blue Angels (F/A-18 Super Hornet)"
+    ],
+    "official_url": "https://miramarairshow.com",
+    "phone": null,
+    "status": "scheduled",
+    "published": true,
+    "needs_verification": [],
+    "hero_headline": "Searching for the \"San Diego Air Show\"? The event you’re looking for is almost certainly the [MCAS Miramar Air Show](/air-show/miramar/) — the largest military air show in the United States, held right in San Diego.",
+    "intro": [
+      "San Diego’s big annual military air show is hosted at **Marine Corps Air Station Miramar** — the legendary \"Fightertown\" and former home of TOPGUN. Locals and visitors often just call it \"the San Diego air show,\" but its official name is the **MCAS Miramar Air Show**. Here’s the quick version, with a link to our full guide."
+    ],
+    "quick_facts": [
+      {
+        "label": "Event",
+        "value": "MCAS Miramar Air Show (\"America’s Air Show\")"
+      },
+      {
+        "label": "Dates",
+        "value": "Friday–Sunday, September 25–27, 2026"
+      },
+      {
+        "label": "Location",
+        "value": "MCAS Miramar, San Diego, CA"
+      },
+      {
+        "label": "General admission",
+        "value": "Free"
+      },
+      {
+        "label": "Parking",
+        "value": "Free"
+      },
+      {
+        "label": "Headliner",
+        "value": "U.S. Navy Blue Angels"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "The San Diego Air Show Is the MCAS Miramar Air Show",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "**See our complete [MCAS Miramar Air Show 2026 guide](/air-show/miramar/)** for dates, tickets, the full performer lineup, parking, directions, and base entry rules."
+          }
+        ]
+      },
+      {
+        "heading": "Why \"San Diego Air Show\" Points to Miramar",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "San Diego is one of the most concentrated military-aviation regions in the country, and its marquee public flying event is the show at MCAS Miramar. Drawing roughly 700,000 spectators across three days, it's the largest military air show in the United States and was once voted the world's best. When people search for a “San Diego air show,” this is the event they mean."
+          },
+          {
+            "kind": "p",
+            "text": "A separate, smaller \"San Diego Air Show\" was held in past years up the coast in Carlsbad, but it is not a current annual fixture. For 2026, the show to plan around is Miramar."
+          }
+        ]
+      }
+    ],
+    "related_paragraph": [
+      {
+        "before": "For complete, regularly updated details — tickets, performers, parking, and base entry requirements — see our ",
+        "label": "MCAS Miramar Air Show 2026 guide",
+        "href": "/air-show/miramar/",
+        "after": ". Building a Southern California aviation trip? A few other shows are within driving distance: "
+      },
+      {
+        "label": "Pacific Airshow — Huntington Beach",
+        "href": "/air-show/huntington-beach/",
+        "after": " (early October), and "
+      },
+      {
+        "label": "Wings Over Camarillo",
+        "href": "/air-show/camarillo/",
+        "after": " (August)."
+      }
+    ],
+    "card_summary": "The \"San Diego Air Show\" is the MCAS Miramar Air Show — the largest military air show in the U.S., held September 25–27, 2026 with the Blue Angels and free admission.",
+    "email_cta": null,
+    "schema_name": "San Diego Air Show 2026",
+    "event_description": "The San Diego military air show is the MCAS Miramar Air Show, the largest military air show in the United States, headlined by the U.S. Navy Blue Angels. Free general admission.",
+    "location": {
+      "placeName": "Marine Corps Air Station Miramar",
+      "streetAddress": "Miramar Way",
+      "addressLocality": "San Diego",
+      "addressRegion": "CA",
+      "postalCode": "92145",
+      "addressCountry": "US"
+    },
+    "offer": {
+      "name": "General Admission",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "organizer": {
+      "name": "MCAS Miramar",
+      "url": "https://miramarairshow.com"
+    },
+    "meta_title": "San Diego Air Show 2026: The MCAS Miramar Air Show Guide",
+    "meta_description": "Looking for the San Diego Air Show? It's the MCAS Miramar Air Show, September 25–27, 2026 with the Blue Angels — dates, tickets, and parking here.",
+    "h1": "The San Diego Air Show: It’s the MCAS Miramar Air Show",
+    "og_image": "/og/air-show/san-diego.png",
+    "canonical_override": "/air-show/miramar",
+    "date_published": "2026-06-15",
+    "date_modified": "2026-07-13",
+    "last_verified": "July 13, 2026",
+    "faqs": [
+      {
+        "question": "Is there a \"San Diego Air Show\"?",
+        "answer": "The main San Diego military air show is the MCAS Miramar Air Show, held at Marine Corps Air Station Miramar. A separate Carlsbad-based event used the \"San Diego Air Show\" name in past years but is not a current annual event.",
+        "sort_order": 0
+      },
+      {
+        "question": "When is the San Diego (Miramar) Air Show in 2026?",
+        "answer": "September 25–27, 2026. Gates open at 8:00 AM each day. See our full Miramar guide for details.",
+        "sort_order": 1
+      },
+      {
+        "question": "Is it free?",
+        "answer": "Yes — general admission and parking at the Miramar Air Show are both free.",
+        "sort_order": 2
+      }
+    ],
+    "sources": [
+      {
+        "label": "Official MCAS Miramar Air Show site",
+        "url": "https://miramarairshow.com",
+        "publisher": "MCAS Miramar",
+        "sort_order": 0
+      }
+    ]
+  },
+  {
+    "slug": "andrews",
+    "short_name": "Andrews",
+    "name": "Joint Base Andrews Air Show",
+    "city": "Camp Springs",
+    "state": "MD",
+    "state_name": "Maryland",
+    "year": 2026,
+    "base": "Joint Base Andrews",
+    "dates_label": "2026 dates to be confirmed",
+    "start_date": "",
+    "end_date": "",
+    "date_unconfirmed": true,
+    "gate_time": null,
+    "admission": "FREE",
+    "parking": "Free (off-site at Northwest Stadium, with free shuttle)",
+    "headliner": "Rotating military jet teams (Thunderbirds, F-35A demo)",
+    "performers": [
+      "USAF Thunderbirds (F-16 Fighting Falcon)",
+      "F-35A Lightning II Demonstration Team",
+      "F/A-18 Rhino Demonstration Team",
+      "U.S. Army Golden Knights parachute team",
+      "Goulian Aerosports and other civilian aerobatic acts",
+      "U.S. Air Force Band and Honor Guard"
+    ],
+    "official_url": "https://jbandrewsairshow.com",
+    "phone": null,
+    "status": "scheduled",
+    "published": true,
+    "needs_verification": [
+      "2026 show date (not yet officially confirmed)",
+      "2026 performer lineup"
+    ],
+    "hero_headline": "The premier air show in the Nation's Capital — military and civilian aerial demonstrations just outside Washington, DC, with free admission.",
+    "intro": [
+      "Joint Base Andrews, best known as the home of Air Force One, opens its gates for one of the most-watched air shows on the East Coast. Held just outside Washington, DC, the JB Andrews Air Show pairs headline military jet teams with static displays, a STEAM expo, and performances by the U.S. Air Force Band and Honor Guard. Here’s what to know before you go."
+    ],
+    "quick_facts": [
+      {
+        "label": "Dates",
+        "value": "2026 dates to be confirmed — check official site"
+      },
+      {
+        "label": "Location",
+        "value": "Joint Base Andrews, Camp Springs, MD"
+      },
+      {
+        "label": "General admission",
+        "value": "Free"
+      },
+      {
+        "label": "Parking",
+        "value": "Free (off-site at Northwest Stadium, with free shuttle)"
+      },
+      {
+        "label": "Public parking on base",
+        "value": "Not available — DoD cardholders only"
+      },
+      {
+        "label": "Official site",
+        "value": "jbandrewsairshow.com"
+      }
+    ],
+    "sections": [
+      {
+        "heading": "When Is the Joint Base Andrews Air Show?",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Joint Base Andrews typically holds its air show in **September**, though the base does not host one every year and the schedule can move. The 2025 show ran September 13–14."
+          },
+          {
+            "kind": "p",
+            "text": "**The 2026 date has not yet been officially confirmed.** We're tracking the official site and will update this page — and notify our email list — the moment dates are announced."
+          },
+          {
+            "kind": "cta"
+          }
+        ]
+      },
+      {
+        "heading": "Tickets & Admission",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "**General admission is free.** There's no cost to attend, though you can purchase food or premium seating to make the day more comfortable."
+          },
+          {
+            "kind": "p",
+            "text": "Paid upgrades typically include:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "**Premium Seating** — reserved seating areas, well suited to families or groups",
+              "**Flight Line Club** — a catered premier tent with an upgraded flight-line experience"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Premium seating is released closer to the event and tends to sell out — buy early once it's live."
+          }
+        ]
+      },
+      {
+        "heading": "Performers & Flight Schedule",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Headline military jet teams rotate year to year. Recent and previously announced performers have included:"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "**USAF Thunderbirds** (F-16 Fighting Falcon)",
+              "**F-35A Lightning II Demonstration Team**",
+              "**F/A-18 Rhino Demonstration Team**",
+              "**U.S. Army Golden Knights** parachute team",
+              "**Goulian Aerosports** and other civilian aerobatic acts",
+              "**U.S. Air Force Band and Honor Guard**"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "Alongside the flying, the show runs a **STEAM expo** with science, technology, engineering, arts, and math exhibits for students and families."
+          },
+          {
+            "kind": "p",
+            "text": "*Performers vary by year and are confirmed by the show closer to the event. We update this section once the official 2026 lineup is published.*"
+          }
+        ]
+      },
+      {
+        "heading": "Parking & Directions",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "This is the most important logistics detail for Andrews: **the public cannot park on base.** Parking on Joint Base Andrews is restricted to DoD cardholders."
+          },
+          {
+            "kind": "p",
+            "text": "**For the general public:**"
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "**Park free at Northwest Stadium** — 1600 Ring Rd, Landover, MD 20785 (home of the Washington Commanders)",
+              "**Free shuttle buses** run from the stadium to the base and back",
+              "On recent show days, buses ran from roughly 8:30 AM, with the last return bus leaving the base in the late afternoon",
+              "**Metro option:** the Morgan Boulevard station (Silver/Blue Line) is the nearest rail stop"
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "**Accessibility:** accessible parking for valid placard holders is available at Northwest Stadium, with accessible buses to and from the event."
+          }
+        ]
+      },
+      {
+        "heading": "Know Before You Go",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Joint Base Andrews is an **active military installation**, and because public access runs through the off-site shuttle, planning ahead matters."
+          },
+          {
+            "kind": "ul",
+            "items": [
+              "**Arrive early.** Shuttle and security lines build quickly in the morning.",
+              "**Bring ID.** Government-issued photo ID requirements apply; check the official site for the current year’s specifics.",
+              "**Review the bag and prohibited-items policy** on the official site before you go — base security rules are stricter than a typical public event.",
+              "**Come prepared for a full day** in the sun with limited shade."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "About Joint Base Andrews",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Joint Base Andrews in Camp Springs, Maryland, is one of the best-known military installations in the country — the home of **Air Force One** and the air gateway to the Nation’s Capital. Its air show reflects that profile, drawing tens of thousands of visitors for a showcase of military airpower within sight of Washington, DC."
+          }
+        ]
+      }
+    ],
+    "related_paragraph": [
+      {
+        "before": "When Andrews fields the ",
+        "label": "Thunderbirds",
+        "href": "/thunderbirds/",
+        "after": ", you can follow the team’s full national tour schedule and demo guide. "
+      },
+      {
+        "before": "For a Navy show with a confirmed 2026 date, see the ",
+        "label": "NAS Oceana Air Show",
+        "href": "/air-show/oceana/",
+        "after": " in Virginia Beach."
+      }
+    ],
+    "card_summary": "The premier air show in the Nation’s Capital, at the home of Air Force One near Washington, DC — free admission, with the 2026 date updating as it’s announced.",
+    "email_cta": {
+      "heading": "Want the 2026 date the day it’s announced?",
+      "buttonLabel": "Get notified when Joint Base Andrews confirms its 2026 show →",
+      "placeholder": "Enter your email"
+    },
+    "schema_name": "Joint Base Andrews Air Show",
+    "event_description": "The premier air show in the Nation’s Capital, held at Joint Base Andrews near Washington, DC, with rotating military jet teams. Free general admission.",
+    "location": {
+      "placeName": "Joint Base Andrews",
+      "addressLocality": "Camp Springs",
+      "addressRegion": "MD",
+      "addressCountry": "US"
+    },
+    "offer": {
+      "name": "General Admission",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "organizer": {
+      "name": "Joint Base Andrews",
+      "url": "https://jbandrewsairshow.com"
+    },
+    "meta_title": "Joint Base Andrews Air Show 2026: Dates, Performers & Parking",
+    "meta_description": "Joint Base Andrews Air Show near Washington, DC — performers, free admission, parking and shuttle info, and entry rules. 2026 dates updating as announced.",
+    "h1": "Joint Base Andrews Air Show",
+    "og_image": "/og/air-show/andrews.png",
+    "canonical_override": null,
+    "date_published": "2026-06-15",
+    "date_modified": "2026-07-13",
+    "last_verified": "July 13, 2026",
+    "faqs": [
+      {
+        "question": "When is the Joint Base Andrews Air Show in 2026?",
+        "answer": "The 2026 date has not been officially confirmed. The base typically holds its show in September but does not host one every year. Check jbandrewsairshow.com for the latest.",
+        "sort_order": 0
+      },
+      {
+        "question": "Is the Joint Base Andrews Air Show free?",
+        "answer": "Yes. General admission and parking are both free. Optional premium seating is available for purchase.",
+        "sort_order": 1
+      },
+      {
+        "question": "Where do I park?",
+        "answer": "The public parks free at Northwest Stadium (1600 Ring Rd, Landover, MD), with a free shuttle to the base. Parking on base is limited to DoD cardholders.",
+        "sort_order": 2
+      },
+      {
+        "question": "Can I take Metro?",
+        "answer": "Yes. The Morgan Boulevard station (Silver/Blue Line) is the nearest rail option.",
+        "sort_order": 3
+      },
+      {
+        "question": "Who performs at the Andrews Air Show?",
+        "answer": "Headliners rotate by year and have included the USAF Thunderbirds, the F-35A demo team, the F/A-18 Rhino demo, and the Army Golden Knights. Check the official site for the confirmed 2026 lineup.",
+        "sort_order": 4
+      }
+    ],
+    "sources": [
+      {
+        "label": "Official Joint Base Andrews Air Show site",
+        "url": "https://jbandrewsairshow.com",
+        "publisher": "Joint Base Andrews",
+        "sort_order": 0
+      }
+    ]
+  }
+]
