@@ -143,12 +143,19 @@ artifacts so Stage B is reproducible without the Astro source present.
   duplicates). Enum columns are validated on cast — a value the enum doesn't know
   fails the import rather than landing bad data.
 
-Proven end-to-end on the **bases pillar** (`import:bases` → `us_states` +
-`overseas_countries` lookups + `bases` with FAQs/sources; see
-`tests/Feature/BasePillarImportTest.php`, which runs the importer against the real
-committed artifacts and asserts counts, enum/JSON/soft-FK/child integrity, and
-idempotency). Later slices add one exporter + importer + `import:<domain>` command
-per domain, reusing this framework.
+Domains migrated so far, each with its own exporter + importer + `import:<domain>`
+command and a `*ImportTest` that runs against the real committed artifacts
+(asserting counts, enum/JSON/soft-FK/child integrity, and idempotency):
+
+- **bases** (`import:bases`) — `us_states` + `overseas_countries` lookups + `bases`
+  with FAQs/sources.
+- **ranks** (`import:ranks`) — the single-table-inheritance `ranks` (all 6
+  categories), reproducing the slice-8 consolidations (`next_slug`/`previous_slug`,
+  the `designator_community`/`rating_community` split, unified `career_path`, the
+  `era_tags` enum collection) plus self-ref slug links and FAQs/sources.
+
+Later slices add the remaining domains (catalog/CRM, the events silo) through the
+same framework.
 
 ## Quality gates (per the rebuild workflow)
 
