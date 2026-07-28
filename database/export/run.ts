@@ -8,6 +8,7 @@
 import './air-shows';
 import './bases';
 import './discount-categories';
+import './discount-core';
 import './fleet-weeks';
 import './jet-teams';
 import './local-discounts';

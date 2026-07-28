@@ -1,0 +1,1334 @@
+[
+  {
+    "alias_slug": "1800-flowers",
+    "canonical_slug": "1800flowers"
+  },
+  {
+    "alias_slug": "511-tactical",
+    "canonical_slug": "5-11-tactical"
+  },
+  {
+    "alias_slug": "aa",
+    "canonical_slug": "american-airlines"
+  },
+  {
+    "alias_slug": "aaa-membership",
+    "canonical_slug": "aaa"
+  },
+  {
+    "alias_slug": "abercrombie-and-fitch",
+    "canonical_slug": "abercrombie"
+  },
+  {
+    "alias_slug": "academy-give",
+    "canonical_slug": "academy"
+  },
+  {
+    "alias_slug": "ace",
+    "canonical_slug": "ace-hardware"
+  },
+  {
+    "alias_slug": "ace-hardware-give",
+    "canonical_slug": "ace-hardware"
+  },
+  {
+    "alias_slug": "addidas",
+    "canonical_slug": "adidas"
+  },
+  {
+    "alias_slug": "adidas-outlet",
+    "canonical_slug": "adidas"
+  },
+  {
+    "alias_slug": "adobe-acrobat",
+    "canonical_slug": "adobe"
+  },
+  {
+    "alias_slug": "advance-auto",
+    "canonical_slug": "advance-auto-parts"
+  },
+  {
+    "alias_slug": "advanced-auto",
+    "canonical_slug": "advance-auto-parts"
+  },
+  {
+    "alias_slug": "ae",
+    "canonical_slug": "american-eagle"
+  },
+  {
+    "alias_slug": "alamo-car-rental",
+    "canonical_slug": "alamo"
+  },
+  {
+    "alias_slug": "alamo-rent-a-car",
+    "canonical_slug": "alamo"
+  },
+  {
+    "alias_slug": "alamo-rental",
+    "canonical_slug": "alamo"
+  },
+  {
+    "alias_slug": "alamo-rental-car",
+    "canonical_slug": "alamo"
+  },
+  {
+    "alias_slug": "allegiant-air",
+    "canonical_slug": "allegiant"
+  },
+  {
+    "alias_slug": "alo-give",
+    "canonical_slug": "alo"
+  },
+  {
+    "alias_slug": "alo-yoga",
+    "canonical_slug": "alo"
+  },
+  {
+    "alias_slug": "amazon-prime",
+    "canonical_slug": "amazon"
+  },
+  {
+    "alias_slug": "amazon-prime-membership",
+    "canonical_slug": "prime"
+  },
+  {
+    "alias_slug": "amc-give",
+    "canonical_slug": "amc"
+  },
+  {
+    "alias_slug": "amc-theater",
+    "canonical_slug": "amc"
+  },
+  {
+    "alias_slug": "amc-theaters",
+    "canonical_slug": "amc"
+  },
+  {
+    "alias_slug": "amc-theatres",
+    "canonical_slug": "amc"
+  },
+  {
+    "alias_slug": "american-airline",
+    "canonical_slug": "american-airlines"
+  },
+  {
+    "alias_slug": "american-airlines-give",
+    "canonical_slug": "american-airlines"
+  },
+  {
+    "alias_slug": "apple-give",
+    "canonical_slug": "apple"
+  },
+  {
+    "alias_slug": "apple-iphone",
+    "canonical_slug": "apple"
+  },
+  {
+    "alias_slug": "apple-watch",
+    "canonical_slug": "apple"
+  },
+  {
+    "alias_slug": "applebees-give",
+    "canonical_slug": "applebees"
+  },
+  {
+    "alias_slug": "applecom",
+    "canonical_slug": "apple"
+  },
+  {
+    "alias_slug": "aquatica-orlando",
+    "canonical_slug": "aquatica"
+  },
+  {
+    "alias_slug": "at-and-t",
+    "canonical_slug": "att"
+  },
+  {
+    "alias_slug": "atandt",
+    "canonical_slug": "att"
+  },
+  {
+    "alias_slug": "atandt-internet",
+    "canonical_slug": "att"
+  },
+  {
+    "alias_slug": "atlanta-aquarium",
+    "canonical_slug": "georgia-aquarium"
+  },
+  {
+    "alias_slug": "atlantis-bahamas",
+    "canonical_slug": "atlantis"
+  },
+  {
+    "alias_slug": "atlantis-resort",
+    "canonical_slug": "atlantis"
+  },
+  {
+    "alias_slug": "att-fiber",
+    "canonical_slug": "att"
+  },
+  {
+    "alias_slug": "att-internet",
+    "canonical_slug": "att"
+  },
+  {
+    "alias_slug": "auto-zone",
+    "canonical_slug": "autozone"
+  },
+  {
+    "alias_slug": "away",
+    "canonical_slug": "away-luggage"
+  },
+  {
+    "alias_slug": "backmarket",
+    "canonical_slug": "back-market"
+  },
+  {
+    "alias_slug": "bambu-labs",
+    "canonical_slug": "bambu-lab"
+  },
+  {
+    "alias_slug": "bass-pro-shops",
+    "canonical_slug": "bass-pro"
+  },
+  {
+    "alias_slug": "basspro",
+    "canonical_slug": "bass-pro"
+  },
+  {
+    "alias_slug": "becker",
+    "canonical_slug": "becker-cpa"
+  },
+  {
+    "alias_slug": "best-buy-take",
+    "canonical_slug": "best-buy"
+  },
+  {
+    "alias_slug": "bestbuy",
+    "canonical_slug": "best-buy"
+  },
+  {
+    "alias_slug": "breeze-airlines",
+    "canonical_slug": "breeze"
+  },
+  {
+    "alias_slug": "breeze-airways",
+    "canonical_slug": "breeze"
+  },
+  {
+    "alias_slug": "brooks-running",
+    "canonical_slug": "brooks"
+  },
+  {
+    "alias_slug": "brooks-shoes",
+    "canonical_slug": "brooks"
+  },
+  {
+    "alias_slug": "budget-rental",
+    "canonical_slug": "budget"
+  },
+  {
+    "alias_slug": "budget-rental-car",
+    "canonical_slug": "budget"
+  },
+  {
+    "alias_slug": "budget-truck",
+    "canonical_slug": "budget-truck-rental"
+  },
+  {
+    "alias_slug": "buffalo-wild-wings-give",
+    "canonical_slug": "buffalo-wild-wings"
+  },
+  {
+    "alias_slug": "bww",
+    "canonical_slug": "buffalo-wild-wings"
+  },
+  {
+    "alias_slug": "caesars-palace",
+    "canonical_slug": "caesars"
+  },
+  {
+    "alias_slug": "canes",
+    "canonical_slug": "raising-canes"
+  },
+  {
+    "alias_slug": "celebrity-cruise",
+    "canonical_slug": "celebrity-cruises"
+  },
+  {
+    "alias_slug": "chatgpt-plus",
+    "canonical_slug": "chatgpt"
+  },
+  {
+    "alias_slug": "chevrolet",
+    "canonical_slug": "chevy"
+  },
+  {
+    "alias_slug": "chick-fil-a-give",
+    "canonical_slug": "chick-fil"
+  },
+  {
+    "alias_slug": "chilis-give",
+    "canonical_slug": "chilis"
+  },
+  {
+    "alias_slug": "chipotle-give",
+    "canonical_slug": "chipotle"
+  },
+  {
+    "alias_slug": "coach-give",
+    "canonical_slug": "coach"
+  },
+  {
+    "alias_slug": "cobb",
+    "canonical_slug": "cobb-tuning"
+  },
+  {
+    "alias_slug": "costa",
+    "canonical_slug": "costa-del-mar"
+  },
+  {
+    "alias_slug": "costco-membership",
+    "canonical_slug": "costco"
+  },
+  {
+    "alias_slug": "cox-internet",
+    "canonical_slug": "cox"
+  },
+  {
+    "alias_slug": "cracker-barrel-give",
+    "canonical_slug": "cracker-barrel"
+  },
+  {
+    "alias_slug": "croc",
+    "canonical_slug": "crocs"
+  },
+  {
+    "alias_slug": "crunch",
+    "canonical_slug": "crunch-fitness"
+  },
+  {
+    "alias_slug": "darn-tough-socks",
+    "canonical_slug": "darn-tough"
+  },
+  {
+    "alias_slug": "deer-valley",
+    "canonical_slug": "deer-valley-resort"
+  },
+  {
+    "alias_slug": "dell-computer",
+    "canonical_slug": "dell"
+  },
+  {
+    "alias_slug": "dell-computers",
+    "canonical_slug": "dell"
+  },
+  {
+    "alias_slug": "delta-give",
+    "canonical_slug": "delta"
+  },
+  {
+    "alias_slug": "dennys-give",
+    "canonical_slug": "dennys"
+  },
+  {
+    "alias_slug": "dicks-sporting-good",
+    "canonical_slug": "dicks"
+  },
+  {
+    "alias_slug": "discount-apple",
+    "canonical_slug": "apple"
+  },
+  {
+    "alias_slug": "discount-asics",
+    "canonical_slug": "asics"
+  },
+  {
+    "alias_slug": "discount-chipotle",
+    "canonical_slug": "chipotle"
+  },
+  {
+    "alias_slug": "discount-cracker-barrel",
+    "canonical_slug": "cracker-barrel"
+  },
+  {
+    "alias_slug": "discount-fanatics",
+    "canonical_slug": "fanatics"
+  },
+  {
+    "alias_slug": "discount-gymshark",
+    "canonical_slug": "gymshark"
+  },
+  {
+    "alias_slug": "discount-hoka",
+    "canonical_slug": "hoka"
+  },
+  {
+    "alias_slug": "discount-kohls",
+    "canonical_slug": "kohls"
+  },
+  {
+    "alias_slug": "discount-regal",
+    "canonical_slug": "regal"
+  },
+  {
+    "alias_slug": "discount-tesla",
+    "canonical_slug": "tesla"
+  },
+  {
+    "alias_slug": "discounts-disney-world",
+    "canonical_slug": "disney-world"
+  },
+  {
+    "alias_slug": "disney-annual-pass",
+    "canonical_slug": "disney-world"
+  },
+  {
+    "alias_slug": "disney-give",
+    "canonical_slug": "disney"
+  },
+  {
+    "alias_slug": "disney-hotel",
+    "canonical_slug": "disney-world"
+  },
+  {
+    "alias_slug": "disney-hulu-bundle",
+    "canonical_slug": "disney-plus-hulu-bundle"
+  },
+  {
+    "alias_slug": "disney-plus-bundle",
+    "canonical_slug": "disney-plus-hulu-bundle"
+  },
+  {
+    "alias_slug": "disney-resort",
+    "canonical_slug": "disney-world"
+  },
+  {
+    "alias_slug": "disney-ticket",
+    "canonical_slug": "disney-tickets"
+  },
+  {
+    "alias_slug": "disney-world-tickets",
+    "canonical_slug": "disney-world"
+  },
+  {
+    "alias_slug": "disneyland-california",
+    "canonical_slug": "disneyland"
+  },
+  {
+    "alias_slug": "disneyland-hotels",
+    "canonical_slug": "disneyland-hotel"
+  },
+  {
+    "alias_slug": "disneyland-park-tickets",
+    "canonical_slug": "disneyland"
+  },
+  {
+    "alias_slug": "disneyland-ticket",
+    "canonical_slug": "disneyland"
+  },
+  {
+    "alias_slug": "disneyland-tickets",
+    "canonical_slug": "disneyland"
+  },
+  {
+    "alias_slug": "dollar-rental-car",
+    "canonical_slug": "dollar-car-rental"
+  },
+  {
+    "alias_slug": "dollywood-tickets",
+    "canonical_slug": "dollywood"
+  },
+  {
+    "alias_slug": "duluth-trading",
+    "canonical_slug": "duluth"
+  },
+  {
+    "alias_slug": "dunkin",
+    "canonical_slug": "dunkin-donuts"
+  },
+  {
+    "alias_slug": "enterprise-give",
+    "canonical_slug": "enterprise"
+  },
+  {
+    "alias_slug": "enterprise-rent-a-car",
+    "canonical_slug": "enterprise"
+  },
+  {
+    "alias_slug": "enterprise-rental",
+    "canonical_slug": "enterprise"
+  },
+  {
+    "alias_slug": "enterprise-rental-car",
+    "canonical_slug": "enterprise"
+  },
+  {
+    "alias_slug": "epcot-tickets",
+    "canonical_slug": "epcot"
+  },
+  {
+    "alias_slug": "factor-meals",
+    "canonical_slug": "factor"
+  },
+  {
+    "alias_slug": "finishline",
+    "canonical_slug": "finish-line"
+  },
+  {
+    "alias_slug": "fios",
+    "canonical_slug": "verizon-fios"
+  },
+  {
+    "alias_slug": "fubo-tv",
+    "canonical_slug": "fubotv"
+  },
+  {
+    "alias_slug": "ga-aquarium",
+    "canonical_slug": "georgia-aquarium"
+  },
+  {
+    "alias_slug": "garmin-watch",
+    "canonical_slug": "garmin"
+  },
+  {
+    "alias_slug": "ge-appliances",
+    "canonical_slug": "ge"
+  },
+  {
+    "alias_slug": "gmc",
+    "canonical_slug": "gm"
+  },
+  {
+    "alias_slug": "go-pro",
+    "canonical_slug": "gopro"
+  },
+  {
+    "alias_slug": "great-wolf",
+    "canonical_slug": "great-wolf-lodge"
+  },
+  {
+    "alias_slug": "gunmagwarehouse",
+    "canonical_slug": "gunmag-warehouse"
+  },
+  {
+    "alias_slug": "h-and-r-block",
+    "canonical_slug": "handr-block"
+  },
+  {
+    "alias_slug": "harbor-freight-give",
+    "canonical_slug": "harbor-freight"
+  },
+  {
+    "alias_slug": "harley",
+    "canonical_slug": "harley-davidson"
+  },
+  {
+    "alias_slug": "hbo",
+    "canonical_slug": "hbo-max"
+  },
+  {
+    "alias_slug": "hello-fresh",
+    "canonical_slug": "hellofresh"
+  },
+  {
+    "alias_slug": "hersheypark",
+    "canonical_slug": "hershey-park"
+  },
+  {
+    "alias_slug": "hertz-car-rental",
+    "canonical_slug": "hertz"
+  },
+  {
+    "alias_slug": "hertz-rental-car",
+    "canonical_slug": "hertz"
+  },
+  {
+    "alias_slug": "hey-dudes",
+    "canonical_slug": "hey-dude"
+  },
+  {
+    "alias_slug": "hobby-lobby-give",
+    "canonical_slug": "hobby-lobby"
+  },
+  {
+    "alias_slug": "home-depots",
+    "canonical_slug": "home-depot"
+  },
+  {
+    "alias_slug": "homedepot",
+    "canonical_slug": "home-depot"
+  },
+  {
+    "alias_slug": "homedepotcom",
+    "canonical_slug": "home-depot"
+  },
+  {
+    "alias_slug": "hr-block",
+    "canonical_slug": "handr-block"
+  },
+  {
+    "alias_slug": "hulu-live",
+    "canonical_slug": "hulu"
+  },
+  {
+    "alias_slug": "hulu-live-tv",
+    "canonical_slug": "hulu"
+  },
+  {
+    "alias_slug": "hydroflask",
+    "canonical_slug": "hydro-flask"
+  },
+  {
+    "alias_slug": "icon-pass",
+    "canonical_slug": "ikon-pass"
+  },
+  {
+    "alias_slug": "ikon",
+    "canonical_slug": "ikon-pass"
+  },
+  {
+    "alias_slug": "insta-360",
+    "canonical_slug": "insta360"
+  },
+  {
+    "alias_slug": "ipad",
+    "canonical_slug": "apple"
+  },
+  {
+    "alias_slug": "iphone",
+    "canonical_slug": "apple"
+  },
+  {
+    "alias_slug": "jcrew",
+    "canonical_slug": "j-crew"
+  },
+  {
+    "alias_slug": "journey",
+    "canonical_slug": "journeys"
+  },
+  {
+    "alias_slug": "kane",
+    "canonical_slug": "kane-footwear"
+  },
+  {
+    "alias_slug": "kay",
+    "canonical_slug": "kay-jewelers"
+  },
+  {
+    "alias_slug": "kays",
+    "canonical_slug": "kay-jewelers"
+  },
+  {
+    "alias_slug": "kitchen-aid",
+    "canonical_slug": "kitchenaid"
+  },
+  {
+    "alias_slug": "knotts",
+    "canonical_slug": "knotts-berry-farm"
+  },
+  {
+    "alias_slug": "kohls-give",
+    "canonical_slug": "kohls"
+  },
+  {
+    "alias_slug": "legoland-california",
+    "canonical_slug": "legoland"
+  },
+  {
+    "alias_slug": "legoland-florida",
+    "canonical_slug": "legoland"
+  },
+  {
+    "alias_slug": "legoland-ny",
+    "canonical_slug": "legoland"
+  },
+  {
+    "alias_slug": "legoland-tickets",
+    "canonical_slug": "legoland"
+  },
+  {
+    "alias_slug": "levi",
+    "canonical_slug": "levis"
+  },
+  {
+    "alias_slug": "lifetime",
+    "canonical_slug": "lifetime-fitness"
+  },
+  {
+    "alias_slug": "longhorn-steakhouse",
+    "canonical_slug": "longhorn"
+  },
+  {
+    "alias_slug": "lowescom",
+    "canonical_slug": "lowes"
+  },
+  {
+    "alias_slug": "lulu",
+    "canonical_slug": "lululemon"
+  },
+  {
+    "alias_slug": "lulu-lemon",
+    "canonical_slug": "lululemon"
+  },
+  {
+    "alias_slug": "lululemon-give",
+    "canonical_slug": "lululemon"
+  },
+  {
+    "alias_slug": "macbook",
+    "canonical_slug": "apple"
+  },
+  {
+    "alias_slug": "macy",
+    "canonical_slug": "macys"
+  },
+  {
+    "alias_slug": "macys-give",
+    "canonical_slug": "macys"
+  },
+  {
+    "alias_slug": "magic-kingdom",
+    "canonical_slug": "disney-world"
+  },
+  {
+    "alias_slug": "margaritaville-at-sea",
+    "canonical_slug": "margaritaville-cruise"
+  },
+  {
+    "alias_slug": "mavis-tire",
+    "canonical_slug": "mavis"
+  },
+  {
+    "alias_slug": "max",
+    "canonical_slug": "hbo-max"
+  },
+  {
+    "alias_slug": "menards-give",
+    "canonical_slug": "menards"
+  },
+  {
+    "alias_slug": "mercedes-benz",
+    "canonical_slug": "mercedes"
+  },
+  {
+    "alias_slug": "meta-glasses",
+    "canonical_slug": "meta"
+  },
+  {
+    "alias_slug": "meta-quest-3",
+    "canonical_slug": "meta-quest"
+  },
+  {
+    "alias_slug": "micro-center",
+    "canonical_slug": "microcenter"
+  },
+  {
+    "alias_slug": "midwayusa",
+    "canonical_slug": "midway-usa"
+  },
+  {
+    "alias_slug": "milwaukee",
+    "canonical_slug": "milwaukee-tools"
+  },
+  {
+    "alias_slug": "mlb",
+    "canonical_slug": "mlb-shop"
+  },
+  {
+    "alias_slug": "mlbtv",
+    "canonical_slug": "mlb-tv"
+  },
+  {
+    "alias_slug": "msc-cruise",
+    "canonical_slug": "msc"
+  },
+  {
+    "alias_slug": "msc-cruises",
+    "canonical_slug": "msc"
+  },
+  {
+    "alias_slug": "napa-auto-parts",
+    "canonical_slug": "napa"
+  },
+  {
+    "alias_slug": "napa-milwaukee-tools",
+    "canonical_slug": "napa"
+  },
+  {
+    "alias_slug": "netflix-give",
+    "canonical_slug": "netflix"
+  },
+  {
+    "alias_slug": "nfl",
+    "canonical_slug": "nfl-plus"
+  },
+  {
+    "alias_slug": "nflshop",
+    "canonical_slug": "nfl-shop"
+  },
+  {
+    "alias_slug": "nike-app",
+    "canonical_slug": "nike"
+  },
+  {
+    "alias_slug": "nike-give",
+    "canonical_slug": "nike"
+  },
+  {
+    "alias_slug": "nike-outlet",
+    "canonical_slug": "nike"
+  },
+  {
+    "alias_slug": "nikecom",
+    "canonical_slug": "nike"
+  },
+  {
+    "alias_slug": "nintendo-switch-2",
+    "canonical_slug": "nintendo"
+  },
+  {
+    "alias_slug": "nord-vpn",
+    "canonical_slug": "nordvpn"
+  },
+  {
+    "alias_slug": "northface",
+    "canonical_slug": "north-face"
+  },
+  {
+    "alias_slug": "norton",
+    "canonical_slug": "norton-antivirus"
+  },
+  {
+    "alias_slug": "norwegian",
+    "canonical_slug": "norwegian-cruise-line"
+  },
+  {
+    "alias_slug": "norwegian-cruise",
+    "canonical_slug": "norwegian-cruise-line"
+  },
+  {
+    "alias_slug": "o-reilly",
+    "canonical_slug": "oreilly"
+  },
+  {
+    "alias_slug": "oakley-sunglasses",
+    "canonical_slug": "oakley"
+  },
+  {
+    "alias_slug": "oakleys",
+    "canonical_slug": "oakley"
+  },
+  {
+    "alias_slug": "office-365",
+    "canonical_slug": "microsoft-office"
+  },
+  {
+    "alias_slug": "old-navy-give",
+    "canonical_slug": "old-navy"
+  },
+  {
+    "alias_slug": "on-cloud-shoes",
+    "canonical_slug": "on-cloud"
+  },
+  {
+    "alias_slug": "on-running",
+    "canonical_slug": "on-cloud"
+  },
+  {
+    "alias_slug": "on-shoes",
+    "canonical_slug": "on-cloud"
+  },
+  {
+    "alias_slug": "optics-planet",
+    "canonical_slug": "opticsplanet"
+  },
+  {
+    "alias_slug": "oreillys",
+    "canonical_slug": "oreilly"
+  },
+  {
+    "alias_slug": "outback-give",
+    "canonical_slug": "outback"
+  },
+  {
+    "alias_slug": "outback-steakhouse",
+    "canonical_slug": "outback"
+  },
+  {
+    "alias_slug": "outer-banks-hotel",
+    "canonical_slug": "outer-banks-hotels"
+  },
+  {
+    "alias_slug": "pandora-jewelry",
+    "canonical_slug": "pandora"
+  },
+  {
+    "alias_slug": "parking-spot",
+    "canonical_slug": "the-parking-spot"
+  },
+  {
+    "alias_slug": "peacock-premium-plus",
+    "canonical_slug": "peacock"
+  },
+  {
+    "alias_slug": "peacock-subscription",
+    "canonical_slug": "peacock"
+  },
+  {
+    "alias_slug": "peacock-tv",
+    "canonical_slug": "peacock"
+  },
+  {
+    "alias_slug": "peacocktv",
+    "canonical_slug": "peacock"
+  },
+  {
+    "alias_slug": "penske",
+    "canonical_slug": "penske-truck-rental"
+  },
+  {
+    "alias_slug": "pga-tour-superstore",
+    "canonical_slug": "pga-superstore"
+  },
+  {
+    "alias_slug": "planet-fitness-give",
+    "canonical_slug": "planet-fitness"
+  },
+  {
+    "alias_slug": "playstation-plus",
+    "canonical_slug": "playstation"
+  },
+  {
+    "alias_slug": "polo",
+    "canonical_slug": "ralph-lauren"
+  },
+  {
+    "alias_slug": "polo-ralph-lauren",
+    "canonical_slug": "ralph-lauren"
+  },
+  {
+    "alias_slug": "princess",
+    "canonical_slug": "princess-cruises"
+  },
+  {
+    "alias_slug": "princess-cruise",
+    "canonical_slug": "princess-cruises"
+  },
+  {
+    "alias_slug": "progressive-give",
+    "canonical_slug": "progressive"
+  },
+  {
+    "alias_slug": "ps5",
+    "canonical_slug": "playstation"
+  },
+  {
+    "alias_slug": "purple",
+    "canonical_slug": "purple-mattress"
+  },
+  {
+    "alias_slug": "ray-ban-meta",
+    "canonical_slug": "ray-ban"
+  },
+  {
+    "alias_slug": "ray-bans",
+    "canonical_slug": "ray-ban"
+  },
+  {
+    "alias_slug": "rayban",
+    "canonical_slug": "ray-ban"
+  },
+  {
+    "alias_slug": "raybans",
+    "canonical_slug": "ray-ban"
+  },
+  {
+    "alias_slug": "real-truck",
+    "canonical_slug": "realtruck"
+  },
+  {
+    "alias_slug": "red-lobster-give",
+    "canonical_slug": "red-lobster"
+  },
+  {
+    "alias_slug": "redwing",
+    "canonical_slug": "red-wing"
+  },
+  {
+    "alias_slug": "regal-cinema",
+    "canonical_slug": "regal"
+  },
+  {
+    "alias_slug": "regal-cinemas",
+    "canonical_slug": "regal"
+  },
+  {
+    "alias_slug": "regal-movies",
+    "canonical_slug": "regal"
+  },
+  {
+    "alias_slug": "rei-give",
+    "canonical_slug": "rei"
+  },
+  {
+    "alias_slug": "rockauto",
+    "canonical_slug": "rock-auto"
+  },
+  {
+    "alias_slug": "rooms-to-go-give",
+    "canonical_slug": "rooms-to-go"
+  },
+  {
+    "alias_slug": "ross-give",
+    "canonical_slug": "ross"
+  },
+  {
+    "alias_slug": "royal-caribbean-cruise",
+    "canonical_slug": "royal-caribbean"
+  },
+  {
+    "alias_slug": "royal-caribbean-cruises",
+    "canonical_slug": "royal-caribbean"
+  },
+  {
+    "alias_slug": "royal-carribean",
+    "canonical_slug": "royal-caribbean"
+  },
+  {
+    "alias_slug": "saks",
+    "canonical_slug": "saks-fifth-avenue"
+  },
+  {
+    "alias_slug": "sams",
+    "canonical_slug": "sams-club"
+  },
+  {
+    "alias_slug": "sams-club-give",
+    "canonical_slug": "sams-club"
+  },
+  {
+    "alias_slug": "sams-club-membership",
+    "canonical_slug": "sams-club"
+  },
+  {
+    "alias_slug": "san-diego-zoo-tickets",
+    "canonical_slug": "san-diego-zoo"
+  },
+  {
+    "alias_slug": "secret-lab",
+    "canonical_slug": "secretlab"
+  },
+  {
+    "alias_slug": "sephora-give",
+    "canonical_slug": "sephora"
+  },
+  {
+    "alias_slug": "sirius-xm",
+    "canonical_slug": "siriusxm"
+  },
+  {
+    "alias_slug": "six-flags-great-adventure",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-great-america",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-great-escape",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-magic-mountain",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-md",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-new-england",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-nj",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-over-georgia",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-over-texas",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-san-antonio",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-san-antonio-tx",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-season-pass",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-st-louis",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-texas-san-antonio",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-tickets",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "six-flags-white-water",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "sixflags",
+    "canonical_slug": "six-flags"
+  },
+  {
+    "alias_slug": "sixt-car-rental",
+    "canonical_slug": "sixt"
+  },
+  {
+    "alias_slug": "sling",
+    "canonical_slug": "sling-tv"
+  },
+  {
+    "alias_slug": "smith",
+    "canonical_slug": "smith-optics"
+  },
+  {
+    "alias_slug": "southwest-give",
+    "canonical_slug": "southwest"
+  },
+  {
+    "alias_slug": "spectrum-internet",
+    "canonical_slug": "spectrum"
+  },
+  {
+    "alias_slug": "sports-clips",
+    "canonical_slug": "sport-clips"
+  },
+  {
+    "alias_slug": "sportsman-warehouse",
+    "canonical_slug": "sportsmans-warehouse"
+  },
+  {
+    "alias_slug": "sportsmans",
+    "canonical_slug": "sportsmans-warehouse"
+  },
+  {
+    "alias_slug": "stanley-cup",
+    "canonical_slug": "stanley"
+  },
+  {
+    "alias_slug": "starbucks-give",
+    "canonical_slug": "starbucks"
+  },
+  {
+    "alias_slug": "state-farm-give",
+    "canonical_slug": "state-farm"
+  },
+  {
+    "alias_slug": "sunglasses-hut",
+    "canonical_slug": "sunglass-hut"
+  },
+  {
+    "alias_slug": "target-take",
+    "canonical_slug": "target"
+  },
+  {
+    "alias_slug": "taylor-made",
+    "canonical_slug": "taylormade"
+  },
+  {
+    "alias_slug": "tecova",
+    "canonical_slug": "tecovas"
+  },
+  {
+    "alias_slug": "tempurpedic",
+    "canonical_slug": "tempur-pedic"
+  },
+  {
+    "alias_slug": "texas-roadhouse-give",
+    "canonical_slug": "texas-roadhouse"
+  },
+  {
+    "alias_slug": "therabody",
+    "canonical_slug": "theragun"
+  },
+  {
+    "alias_slug": "thrifty-car-rental",
+    "canonical_slug": "thrifty"
+  },
+  {
+    "alias_slug": "topgolf",
+    "canonical_slug": "top-golf"
+  },
+  {
+    "alias_slug": "total-wine",
+    "canonical_slug": "total-wine-and-more"
+  },
+  {
+    "alias_slug": "tsc",
+    "canonical_slug": "tractor-supply"
+  },
+  {
+    "alias_slug": "turbo-tax",
+    "canonical_slug": "turbotax"
+  },
+  {
+    "alias_slug": "turtle-box",
+    "canonical_slug": "turtlebox"
+  },
+  {
+    "alias_slug": "ua",
+    "canonical_slug": "under-armour"
+  },
+  {
+    "alias_slug": "uggs",
+    "canonical_slug": "ugg"
+  },
+  {
+    "alias_slug": "uhaul",
+    "canonical_slug": "u-haul"
+  },
+  {
+    "alias_slug": "uhaul-give",
+    "canonical_slug": "u-haul"
+  },
+  {
+    "alias_slug": "ulta-beauty",
+    "canonical_slug": "ulta"
+  },
+  {
+    "alias_slug": "ulta-give",
+    "canonical_slug": "ulta"
+  },
+  {
+    "alias_slug": "under-armor",
+    "canonical_slug": "under-armour"
+  },
+  {
+    "alias_slug": "under-armour-give",
+    "canonical_slug": "under-armour"
+  },
+  {
+    "alias_slug": "underarmour",
+    "canonical_slug": "under-armour"
+  },
+  {
+    "alias_slug": "united-airline",
+    "canonical_slug": "united-airlines"
+  },
+  {
+    "alias_slug": "universal-hollywood",
+    "canonical_slug": "universal-studios-california"
+  },
+  {
+    "alias_slug": "universal-studio",
+    "canonical_slug": "universal-studios"
+  },
+  {
+    "alias_slug": "universal-studios-florida",
+    "canonical_slug": "universal-studios-orlando"
+  },
+  {
+    "alias_slug": "universal-studios-hollywood-tickets",
+    "canonical_slug": "universal-studios-california"
+  },
+  {
+    "alias_slug": "uscellular",
+    "canonical_slug": "us-cellular"
+  },
+  {
+    "alias_slug": "valvoline-oil-change",
+    "canonical_slug": "valvoline"
+  },
+  {
+    "alias_slug": "verizon-business",
+    "canonical_slug": "verizon"
+  },
+  {
+    "alias_slug": "verizon-give",
+    "canonical_slug": "verizon"
+  },
+  {
+    "alias_slug": "verizon-home-internet",
+    "canonical_slug": "verizon-fios"
+  },
+  {
+    "alias_slug": "verizon-internet",
+    "canonical_slug": "verizon-fios"
+  },
+  {
+    "alias_slug": "verizons",
+    "canonical_slug": "verizon"
+  },
+  {
+    "alias_slug": "victorias-secret",
+    "canonical_slug": "victoria-secret"
+  },
+  {
+    "alias_slug": "volcano-bay",
+    "canonical_slug": "universal-orlando"
+  },
+  {
+    "alias_slug": "vortex-optics",
+    "canonical_slug": "vortex"
+  },
+  {
+    "alias_slug": "vzw",
+    "canonical_slug": "verizon"
+  },
+  {
+    "alias_slug": "walmart-take",
+    "canonical_slug": "walmart"
+  },
+  {
+    "alias_slug": "walt-disney-world",
+    "canonical_slug": "disney-world"
+  },
+  {
+    "alias_slug": "wayfair-give",
+    "canonical_slug": "wayfair"
+  },
+  {
+    "alias_slug": "william-sonoma",
+    "canonical_slug": "williams-sonoma"
+  },
+  {
+    "alias_slug": "xfinity-internet",
+    "canonical_slug": "xfinity"
+  },
+  {
+    "alias_slug": "xfinity-mobile",
+    "canonical_slug": "xfinity"
+  },
+  {
+    "alias_slug": "youtube-nfl-sunday-ticket",
+    "canonical_slug": "youtube-tv"
+  },
+  {
+    "alias_slug": "youtube-sunday-ticket",
+    "canonical_slug": "youtube-tv"
+  },
+  {
+    "alias_slug": "youtube-tv-nfl-sunday-ticket",
+    "canonical_slug": "youtube-tv"
+  },
+  {
+    "alias_slug": "youtube-tv-sunday-ticket",
+    "canonical_slug": "youtube-tv"
+  }
+]

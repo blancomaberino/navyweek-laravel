@@ -12,6 +12,9 @@ import { dirname, resolve } from 'node:path';
 /** Absolute path to platform/database/seed-data (this file lives in export/lib). */
 const SEED_DIR = resolve(import.meta.dirname, '../../seed-data');
 
+/** Kebab-slug guard — the same shape Stage B validates before building a path. */
+const SLUG = /^[a-z0-9-]+$/;
+
 /**
  * Serialize one domain's records to database/seed-data/<name>.json, pretty-printed
  * with a trailing newline so the artifacts are stable and diff-friendly.
@@ -21,4 +24,19 @@ export function writeArtifact(name: string, records: readonly unknown[]): void {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, `${JSON.stringify(records, null, 2)}\n`, 'utf8');
   console.log(`wrote ${name}.json — ${records.length} records`);
+}
+
+/**
+ * Copy a text corpus file (e.g. a research brief) into
+ * database/seed-data/<dir>/<slug>.md so Stage B can read the verbatim content
+ * from a committed artifact — the same handoff contract as the JSON, for payloads
+ * too large to inline into one file. The slug is a bare kebab key, never a path.
+ */
+export function writeSeedText(dir: string, slug: string, contents: string): void {
+  if (!SLUG.test(dir) || !SLUG.test(slug)) {
+    throw new Error(`writeSeedText: unsafe dir/slug "${dir}/${slug}"`);
+  }
+  const path = resolve(SEED_DIR, dir, `${slug}.md`);
+  mkdirSync(dirname(path), { recursive: true });
+  writeFileSync(path, contents, 'utf8');
 }

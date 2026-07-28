@@ -1,0 +1,21 @@
+# Gitleaks configuration for the NavyWeek Laravel platform.
+#
+# Extends the full default ruleset. The ONLY allowlisted paths are the machine-
+# generated Stage-A seed-data JSON artifacts (database/seed-data/*.json). Those are
+# column dumps of PUBLIC brand data — brand name, slug, category, and a `key` field
+# that is literally the brand slug (e.g. "key": "ar15discounts"). Gitleaks'
+# generic-api-key heuristic false-positives on the field named "key". These files
+# are exporter output derived from public discount data and never contain secrets.
+#
+# Everything else — all application code AND the markdown research briefs under
+# database/seed-data/research-briefs/ — is still fully scanned.
+title = "NavyWeek platform gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Generated seed-data JSON column dumps carry only public brand data, not secrets"
+paths = [
+  '''database/seed-data/[a-z0-9-]+\.json''',
+]

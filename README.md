@@ -176,9 +176,26 @@ command and a `*ImportTest` that runs against the real committed artifacts
   the parent upserts on its `state`+`city`+`business_slug` composite key and
   replaces FAQs/sources; stores/hours (no natural key) are replaced wholesale per
   parent, their FKs + `sort_order` synthesized from the nesting.
+- **discount core** (`import:discount-core`) — the whole brand universe normalized:
+  `connections` (the ~15.3k reconciled queue brands, overlaid with the 981 published
+  brands' editorial/asset fields) + `connection_aliases`, then `offers` (one primary
+  offer per connection) with `offer_tiers`, `redemption_steps`, the `offer_audience`
+  pivot, FAQs/sources, and `affiliate_links`, then the discount-brand `pages`
+  (pageable → the primary offer) and the `research` briefs (a manifest plus each
+  brief's verbatim Markdown, copied to `database/seed-data/research-briefs/<slug>.md`
+  at export so Stage B reads `raw_markdown` from a committed artifact). The join key is the
+  discount **file basename** (= queue slug = brief stem = `connection.slug`), not the
+  record's own long slug (that stays the offer/page slug). Two resolution passes wire
+  the self-referential `duplicate_of` and each alias's `connection_id`. The legacy
+  9-boolean audience collapses to the 5 relevant `Audience` enum cases
+  (`firstResponders` has no enum case and is intentionally dropped); the per-brand
+  default affiliate network is unset in legacy data, so links fall back to the
+  seeded `direct` network. The importers read scalar artifact fields through the new
+  fail-loud `Shared\Import\Row` helper. Runs `import:discount-core` (Audience +
+  AffiliateNetwork lookups seeded first).
 
-Later slices add the remaining catalog/CRM domains (the brand → offer → research →
-page normalization of the ~990 discount records) through the same framework.
+This completes the discount data migration; the flat legacy `Discount` (+ the brand
+queue) is now fully normalized across the catalog/CRM/publishing/research aggregates.
 
 ## Quality gates (per the rebuild workflow)
 
