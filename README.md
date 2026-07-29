@@ -198,6 +198,14 @@ command and a `*ImportTest` that runs against the real committed artifacts
 This completes the discount data migration; the flat legacy `Discount` (+ the brand
 queue) is now fully normalized across the catalog/CRM/publishing/research aggregates.
 
+## Ops commands
+
+- `php artisan skills:check-hashes` — reports skills whose on-disk content
+  (`SKILL.md` + `references/*.md` under `config('research.skills_path')`) no longer
+  matches their stored `content_hash` (changed / missing / never-hashed). **Read-only**;
+  `--check` exits non-zero on drift so CI/scheduling can gate on it. Bumping the skill
+  version + flagging the research that cited an older version is a deliberate follow-up.
+
 ## Quality gates (per the rebuild workflow)
 
 Every task runs `/frontend-design` + `/seo-geo` (inform UI/page work) → implement
