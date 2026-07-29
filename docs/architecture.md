@@ -829,9 +829,19 @@ are the editorial/CRM surface over the migrated domain models; each is independe
   for that scale: search on the indexed identity columns (`brand`/`slug`/`key`), a
   live-status badge, an `offers` count, and pipeline/category/backlog filters
   (`audiences` filtered via `whereJsonContains`). The form groups identity /
-  pipeline / links, with the imported search-metric columns surfaced read-only. The
-  domain enums (`ConnectionStatus`, `Audience`) stay framework-agnostic — their
-  `value => label()` is mapped in the Filament layer, not via a `HasLabel` contract.
+  pipeline / links, with the imported search-metric columns surfaced read-only.
+- **OfferResource** (`Catalog` nav group) — one row per brand offer. Table: brand
+  (via the `connection` relation), offer-type badge, primary/published flags, tier
+  count; filters by type / connection / the flags. The form groups identity /
+  discount detail / the `audiences` pivot, with the simple string-list JSON columns
+  (eligibility/exclusions/key_facts) edited as tag inputs. **Relation managers**
+  for the offer's `tiers` and `redemptionSteps` (channel-badged) edit those keyless
+  children inline.
+
+Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
+plain `label(): string`, no Filament dependency); the Filament layer's
+`Support\EnumOptions::map()` turns any `HasLabel` enum's cases into the
+`value => label` option array every resource form/table/filter uses.
 
 ## Data migration pipeline (Stage A → Stage B)
 
