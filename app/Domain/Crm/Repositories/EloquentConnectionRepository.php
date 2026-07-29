@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Crm\Repositories;
 
+use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Crm\Models\ConnectionAlias;
 use DateTimeInterface;
@@ -39,6 +40,34 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
         return Connection::query()
             ->where('next_review_due', '<=', $asOf->format('Y-m-d'))
             ->orderBy('next_review_due')
+            ->get();
+    }
+
+    public function publishedPagesMissingResearch(array $publishedIds, array $researchedIds): Collection
+    {
+        return Connection::query()
+            ->whereIn('id', $publishedIds)
+            ->whereNotIn('id', $researchedIds)
+            ->orderBy('slug')
+            ->get();
+    }
+
+    public function liveNotMarkedPublished(array $publishedIds): Collection
+    {
+        return Connection::query()
+            ->whereIn('id', $publishedIds)
+            ->whereNull('duplicate_of')
+            ->where('status', '!=', ConnectionStatus::Published->value)
+            ->orderBy('slug')
+            ->get();
+    }
+
+    public function duplicatesNotMarkedDuplicate(): Collection
+    {
+        return Connection::query()
+            ->whereNotNull('duplicate_of')
+            ->where('status', '!=', ConnectionStatus::Duplicate->value)
+            ->orderBy('slug')
             ->get();
     }
 }

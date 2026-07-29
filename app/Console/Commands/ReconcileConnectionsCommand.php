@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Domain\Catalog\Models\Offer;
-use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
-use App\Domain\Publishing\Enums\PageType;
-use App\Domain\Publishing\Models\Page;
-use App\Domain\Research\Models\Research;
+use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
+use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Research\Repositories\ResearchRepositoryInterface;
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 /**
  * Reports pipeline-state drift between a connection's `status` and the facts the DB
@@ -25,42 +23,27 @@ final class ReconcileConnectionsCommand extends Command
 
     protected $description = 'Report pipeline-state drift: live pages without research (YMYL) and status that disagrees with the DB facts.';
 
-    public function handle(): int
-    {
-        // Connections that own a published discount-brand page (a "live" brand).
-        $publishedConnectionIds = Offer::query()
-            ->whereIn('id', Page::query()
-                ->where('page_type', PageType::DiscountBrand)
-                ->where('is_published', true)
-                ->where('pageable_type', (new Offer)->getMorphClass())
-                ->select('pageable_id'))
-            ->pluck('connection_id');
+    public function handle(
+        PageRepositoryInterface $pages,
+        ResearchRepositoryInterface $research,
+        ConnectionRepositoryInterface $connections,
+    ): int {
+        $publishedIds = $pages->connectionIdsWithPublishedDiscountBrandPage();
+        $researchedIds = $research->connectionIdsWithBriefs();
 
-        $researchedConnectionIds = Research::query()->distinct()->pluck('connection_id');
-
-        /** @var array<int, array{0: string, 1: Builder<Connection>}> $sections */
+        /** @var array<int, array{0: string, 1: Collection<int, Connection>}> $sections */
         $sections = [
             // YMYL: a live page with no research brief behind it (the R6 invariant).
-            ['YMYL — published page, no research brief', Connection::query()
-                ->whereIn('id', $publishedConnectionIds)
-                ->whereNotIn('id', $researchedConnectionIds)
-                ->orderBy('slug')],
+            ['YMYL — published page, no research brief', $connections->publishedPagesMissingResearch($publishedIds, $researchedIds)],
             // A live page whose connection isn't marked published.
-            ['Status drift — live page not marked published', Connection::query()
-                ->whereIn('id', $publishedConnectionIds)
-                ->whereNull('duplicate_of')
-                ->where('status', '!=', ConnectionStatus::Published->value)
-                ->orderBy('slug')],
+            ['Status drift — live page not marked published', $connections->liveNotMarkedPublished($publishedIds)],
             // A duplicate (duplicate_of set) not marked as such.
-            ['Status drift — duplicate not marked duplicate', Connection::query()
-                ->whereNotNull('duplicate_of')
-                ->where('status', '!=', ConnectionStatus::Duplicate->value)
-                ->orderBy('slug')],
+            ['Status drift — duplicate not marked duplicate', $connections->duplicatesNotMarkedDuplicate()],
         ];
 
         $total = 0;
-        foreach ($sections as [$label, $query]) {
-            $count = (clone $query)->count();
+        foreach ($sections as [$label, $rows]) {
+            $count = $rows->count();
             $total += $count;
 
             if ($count === 0) {
@@ -69,7 +52,7 @@ final class ReconcileConnectionsCommand extends Command
                 continue;
             }
 
-            $sample = (clone $query)->limit(10)->pluck('slug')->implode(', ');
+            $sample = $rows->take(10)->pluck('slug')->implode(', ');
             $this->warn("✗ {$label}: {$count}");
             $this->line("    e.g. {$sample}");
         }

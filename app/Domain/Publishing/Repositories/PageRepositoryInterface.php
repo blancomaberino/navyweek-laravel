@@ -23,4 +23,12 @@ interface PageRepositoryInterface
      * return null (the middleware has already 301'd those).
      */
     public function findPublishedByPath(string $urlPath): ?Page;
+
+    /**
+     * Connection ids that own a published discount-brand page (a "live" brand) —
+     * the reconcile gate's notion of "published".
+     *
+     * @return array<int, int>
+     */
+    public function connectionIdsWithPublishedDiscountBrandPage(): array;
 }
