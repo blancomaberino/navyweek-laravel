@@ -882,9 +882,12 @@ through** (see the request pipeline) — without that exemption its catch-all wo
 
 - **ConnectionResource** (`CRM` nav group) — the ~15.3k brand universe. Table tuned
   for that scale: search on the indexed identity columns (`brand`/`slug`/`key`), a
-  live-status badge, an `offers` count, and pipeline/category/backlog filters
-  (`audiences` filtered via `whereJsonContains`). The form groups identity /
-  pipeline / links, with the imported search-metric columns surfaced read-only.
+  live-status badge, an `offers` count, review-cadence columns (`next_review_due`,
+  `priority_tier`), and pipeline/category/backlog filters (`audiences` filtered via
+  `whereJsonContains`) plus a **"Due for review"** filter (`next_review_due <= today`).
+  The form groups identity / pipeline / links, with the imported search-metric columns
+  surfaced read-only. **Relation managers** show the brand's `offers` and versioned
+  `research` briefs read-only inline (editing lives in the Offer/Research resources).
 - **OfferResource** (`Catalog` nav group) — one row per brand offer. Table: brand
   (via the `connection` relation), offer-type badge, primary/published flags, tier
   count; filters by type / connection / the flags. The form groups identity /

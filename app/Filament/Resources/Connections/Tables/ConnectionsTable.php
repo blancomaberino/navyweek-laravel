@@ -15,6 +15,7 @@ use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
@@ -66,6 +67,16 @@ class ConnectionsTable
                     ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('next_review_due')
+                    ->date()
+                    ->label('Review due')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('priority_tier')
+                    ->numeric()
+                    ->label('Priority')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('status')
@@ -79,6 +90,11 @@ class ConnectionsTable
                         : $query),
                 TernaryFilter::make('is_backlog')
                     ->label('Backlog'),
+                Filter::make('due_for_review')
+                    ->label('Due for review')
+                    ->query(fn (Builder $query): Builder => $query
+                        ->whereNotNull('next_review_due')
+                        ->whereDate('next_review_due', '<=', now())),
                 TrashedFilter::make(),
             ])
             ->recordActions([
