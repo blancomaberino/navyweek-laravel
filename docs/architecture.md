@@ -105,10 +105,14 @@ flowchart TB
         Skill["Skill (model)"]
         ResearchIface["ResearchRepositoryInterface"]
         ResearchRepo["EloquentResearchRepository"]
+        SkillIface["SkillRepositoryInterface"]
+        SkillRepo["EloquentSkillRepository"]
         ResearchStatus["enum ResearchStatus"]
         ResearchedBy["enum ResearchedBy"]
         ResearchRepo -. implements .-> ResearchIface
         ResearchRepo --> ResearchModel
+        SkillRepo -. implements .-> SkillIface
+        SkillRepo --> Skill
         ResearchModel -->|"belongsToMany (research_skill: skill_version, used_for)"| Skill
     end
 

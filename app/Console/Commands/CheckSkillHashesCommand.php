@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Domain\Research\Models\Skill;
+use App\Domain\Research\Repositories\SkillRepositoryInterface;
 use App\Domain\Research\Services\SkillHasher;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
@@ -23,12 +23,12 @@ final class CheckSkillHashesCommand extends Command
 
     protected $description = 'Report skills whose on-disk content no longer matches their stored content_hash.';
 
-    public function handle(SkillHasher $hasher): int
+    public function handle(SkillHasher $hasher, SkillRepositoryInterface $skills): int
     {
         $base = rtrim(Config::string('research.skills_path'), '/');
         $issues = 0;
 
-        foreach (Skill::query()->orderBy('key')->get() as $skill) {
+        foreach ($skills->all() as $skill) {
             $current = $hasher->hash("{$base}/{$skill->key}");
 
             if ($current === null) {

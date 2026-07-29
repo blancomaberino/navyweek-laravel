@@ -35,7 +35,9 @@ use App\Domain\Publishing\Repositories\EloquentRedirectRepository;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
 use App\Domain\Publishing\Repositories\RedirectRepositoryInterface;
 use App\Domain\Research\Repositories\EloquentResearchRepository;
+use App\Domain\Research\Repositories\EloquentSkillRepository;
 use App\Domain\Research\Repositories\ResearchRepositoryInterface;
+use App\Domain\Research\Repositories\SkillRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -65,6 +67,7 @@ class DomainServiceProvider extends ServiceProvider
         VeteransDayMealRepositoryInterface::class => EloquentVeteransDayMealRepository::class,
         LocalDiscountRepositoryInterface::class => EloquentLocalDiscountRepository::class,
         ResearchRepositoryInterface::class => EloquentResearchRepository::class,
+        SkillRepositoryInterface::class => EloquentSkillRepository::class,
         BaseRepositoryInterface::class => EloquentBaseRepository::class,
         RankRepositoryInterface::class => EloquentRankRepository::class,
         NavyWeekEventRepositoryInterface::class => EloquentNavyWeekEventRepository::class,
