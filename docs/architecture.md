@@ -863,6 +863,15 @@ assigned `users` (`author_id`/`reviewer_id`, eager-loaded) rather than hardcoded
 so the byline is set per-page from the admin panel. `EditorialTeamSeeder` seeds the
 two default byline users (`config('site.editorial.*')`) and the importer assigns
 them to new pages; a page with no author/reviewer simply omits those nodes.
+
+A **`discount_category_hub`** page renders `pages.discount-category` — the ordered
+brand grid for one `DiscountCategory` (`pageable`). The controller takes the
+repository's `orderedConnections` sort and keeps only brands with a published
+discount-brand page (the card links straight to it); JSON-LD is built by
+`DiscountCategorySchema` (Breadcrumb + Article + **ItemList** — the first ItemList
+node in the SEO layer; no WebSite/FAQPage, and the Article is Organization-authored,
+no Person byline).
+
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
 
