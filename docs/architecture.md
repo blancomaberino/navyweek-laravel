@@ -832,9 +832,17 @@ The per-page SEO block is serialized by `App\Domain\Publishing\Seo\SeoHead`
 `&#x27;`), the `<` → `<` JSON-LD guard, and the two `alternate` feeds
 (`/data/navy-week-2026.json`, `/llms.txt`). `OrganizationSchema` is auto-prepended
 to the JSON-LD on indexable pages only; noindex pages emit `noindex, nofollow`
-instead of the site-wide index directive. The page **body** is a minimal shell for
-now — the per-page-type views (discount guides, ranks, bases, …) layer onto this
-foundation one page-family per follow-up PR, as does response caching.
+instead of the site-wide index directive.
+
+The body is dispatched by `page_type`. A **`discount_brand`** page renders
+`pages.discount` from its primary Offer (`pageable`) — hero + CTA, savings-tier
+table, eligibility/exclusions/key-facts, online/in-store redemption steps, FAQs,
+cited sources, and the independence disclosure — and builds its JSON-LD at render
+via `DiscountGuideSchema` (a 1:1 port of the legacy `DiscountDetail.getSeoData`:
+Breadcrumb + Article + WebSite + WebPage + author/reviewer Person + FAQPage,
+passed to `SeoHead::forPage($page, $schemas)` which still prepends Organization).
+Every other page type falls back to the minimal shell until its own page-family
+view lands, as does response caching.
 
 ## Data migration pipeline (Stage A → Stage B)
 
