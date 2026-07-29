@@ -120,7 +120,7 @@ it('does not self-redirect the /navy-ranks/ list page itself', function () {
 
     getRaw('http://localhost/navy-ranks/')
         ->assertOk()
-        ->assertSee('OK: /navy-ranks/');
+        ->assertSee('https://www.navyweek.org/navy-ranks/'); // canonical, emitted by the render
 });
 
 // --- Step 6: legacy fuzzy resolve ----------------------------------------
@@ -155,7 +155,7 @@ it('renders a published page', function () {
 
     getRaw('http://localhost/discount/nike/')
         ->assertOk()
-        ->assertSee('OK: /discount/nike/');
+        ->assertSee('https://www.navyweek.org/discount/nike/'); // canonical, emitted by the render
 });
 
 it('301s an unpublished page path to the homepage', function () {
