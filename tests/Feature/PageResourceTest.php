@@ -71,3 +71,31 @@ it('rejects a duplicate url_path on edit', function () {
         ->call('save')
         ->assertHasFormErrors(['url_path']);
 });
+
+it('assigns the author and reviewer byline from the form selects', function () {
+    $author = User::factory()->create(['name' => 'T Madden Alford', 'slug' => 't-alford']);
+    $reviewer = User::factory()->create(['name' => 'Erik Rivera', 'slug' => 'erik-rivera']);
+    $page = makePage();
+
+    Livewire::test(EditPage::class, ['record' => $page->getRouteKey()])
+        ->fillForm(['author_id' => $author->id, 'reviewer_id' => $reviewer->id])
+        ->call('save')
+        ->assertHasNoFormErrors();
+
+    $page->refresh();
+    expect($page->author_id)->toBe($author->id)
+        ->and($page->reviewer_id)->toBe($reviewer->id)
+        ->and($page->author->name)->toBe('T Madden Alford');
+});
+
+it('clears the byline back to null from the form', function () {
+    $author = User::factory()->create(['slug' => 'someone']);
+    $page = makePage(['author_id' => $author->id]);
+
+    Livewire::test(EditPage::class, ['record' => $page->getRouteKey()])
+        ->fillForm(['author_id' => null])
+        ->call('save')
+        ->assertHasNoFormErrors();
+
+    expect($page->refresh()->author_id)->toBeNull();
+});

@@ -893,10 +893,13 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   for the offer's `tiers` and `redemptionSteps` (channel-badged) edit those keyless
   children inline.
 - **PageResource** (`Publishing` nav group) — the published-URL registry. Table:
-  `url_path`, page-type badge, publish/noindex flags, the polymorphic target class;
-  filters by type and the flags. Form groups routing (url_path unique + kebab, type,
-  publish/noindex) and SEO (title/description/canonical/og/dates); the render-built
-  `json_ld` and the `pageable` morph are set by the import/render layer, not edited.
+  `url_path`, page-type badge, publish/noindex flags, the polymorphic target class,
+  a toggleable author column; filters by type and the flags. Form groups routing
+  (url_path unique + kebab, type, publish/noindex), SEO (title/description/canonical/
+  og/dates), and **Byline** — searchable `author`/`reviewer` relationship selects
+  (→ `users`) that set the per-page E-E-A-T byline the discount-guide Person JSON-LD
+  reads. The render-built `json_ld` and the `pageable` morph are set by the
+  import/render layer, not edited.
 - **ResearchResource** (`Research` nav group) — the brief registry, one row per
   (connection, version). Table: brand, version, status badge (colored), researcher,
   a `raw_markdown`-present boolean, last-verified; filters by status / researcher.

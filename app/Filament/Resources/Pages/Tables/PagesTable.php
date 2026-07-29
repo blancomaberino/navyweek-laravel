@@ -48,6 +48,10 @@ class PagesTable
                     ->label('Target')
                     ->formatStateUsing(fn (?string $state): string => $state !== null ? class_basename($state) : '—')
                     ->toggleable(),
+                TextColumn::make('author.name')
+                    ->label('Author')
+                    ->placeholder('—')
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('page_type')
