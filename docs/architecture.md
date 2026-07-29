@@ -906,6 +906,12 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   Form edits provenance (status/researcher/confidence/date/skill); the verbatim
   `raw_markdown` is shown read-only + `dehydrated(false)` (the auditable source of
   record), and the deferred structured columns are left to a later parsing pass.
+- **SkillResource** (`Research` nav group) — the skill provenance registry
+  (`military-discount-research`, `seo-geo`, …). Table: key, name, current version
+  badge, short content-hash, and the count of briefs citing the skill (`research`
+  relation). Read-mostly form — identity/version/source_ref are editable; the
+  `content_hash` is shown read-only (`dehydrated(false)`) because the skill-hash
+  detector maintains it.
 
 Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
 plain `label(): string`, no Filament dependency); the Filament layer's
