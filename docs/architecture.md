@@ -888,6 +888,8 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   The form groups identity / pipeline / links, with the imported search-metric columns
   surfaced read-only. **Relation managers** show the brand's `offers` and versioned
   `research` briefs read-only inline (editing lives in the Offer/Research resources).
+  **Bulk actions** manage the 15k universe at scale: set pipeline status, promote out
+  of the backlog (alongside the soft-delete/restore trio).
 - **OfferResource** (`Catalog` nav group) — one row per brand offer. Table: brand
   (via the `connection` relation), offer-type badge, primary/published flags, tier
   count; filters by type / connection / the flags. The form groups identity /

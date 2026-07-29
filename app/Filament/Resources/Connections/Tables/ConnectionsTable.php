@@ -8,11 +8,13 @@ use App\Domain\Crm\Enums\Audience;
 use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use App\Filament\Support\EnumOptions;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -21,6 +23,7 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 
 /**
@@ -102,6 +105,26 @@ class ConnectionsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    BulkAction::make('setStatus')
+                        ->label('Set pipeline status')
+                        ->icon('heroicon-o-flag')
+                        ->schema([
+                            Select::make('status')
+                                ->options(EnumOptions::map(ConnectionStatus::cases()))
+                                ->required(),
+                        ])
+                        ->action(fn (array $data, EloquentCollection $records): int => Connection::query()
+                            ->whereKey($records->modelKeys())
+                            ->update(['status' => $data['status']]))
+                        ->deselectRecordsAfterCompletion(),
+                    BulkAction::make('promoteFromBacklog')
+                        ->label('Promote from backlog')
+                        ->icon('heroicon-o-arrow-up-circle')
+                        ->requiresConfirmation()
+                        ->action(fn (EloquentCollection $records): int => Connection::query()
+                            ->whereKey($records->modelKeys())
+                            ->update(['is_backlog' => false]))
+                        ->deselectRecordsAfterCompletion(),
                     DeleteBulkAction::make(),
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
