@@ -7,6 +7,7 @@ namespace App\Filament\Resources\Connections\Tables;
 use App\Domain\Crm\Enums\Audience;
 use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
 use App\Filament\Support\EnumOptions;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
@@ -113,17 +114,21 @@ class ConnectionsTable
                                 ->options(EnumOptions::map(ConnectionStatus::cases()))
                                 ->required(),
                         ])
-                        ->action(fn (array $data, EloquentCollection $records): int => Connection::query()
-                            ->whereKey($records->modelKeys())
-                            ->update(['status' => $data['status']]))
+                        ->action(function (array $data, EloquentCollection $records): void {
+                            $status = $data['status'] ?? null;
+                            if (is_string($status)) {
+                                app(ConnectionRepositoryInterface::class)
+                                    ->updateStatusForIds($records->modelKeys(), ConnectionStatus::from($status));
+                            }
+                        })
                         ->deselectRecordsAfterCompletion(),
                     BulkAction::make('promoteFromBacklog')
                         ->label('Promote from backlog')
                         ->icon('heroicon-o-arrow-up-circle')
                         ->requiresConfirmation()
-                        ->action(fn (EloquentCollection $records): int => Connection::query()
-                            ->whereKey($records->modelKeys())
-                            ->update(['is_backlog' => false]))
+                        ->action(function (EloquentCollection $records): void {
+                            app(ConnectionRepositoryInterface::class)->clearBacklogForIds($records->modelKeys());
+                        })
                         ->deselectRecordsAfterCompletion(),
                     DeleteBulkAction::make(),
                     ForceDeleteBulkAction::make(),

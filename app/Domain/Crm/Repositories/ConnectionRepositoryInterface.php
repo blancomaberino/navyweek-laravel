@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Crm\Repositories;
 
+use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use DateTimeInterface;
 use Illuminate\Support\Collection;
@@ -39,4 +40,20 @@ interface ConnectionRepositoryInterface
      * @return Collection<int, Connection>
      */
     public function dueForReview(DateTimeInterface $asOf): Collection;
+
+    /**
+     * Bulk-set the pipeline status on the given connection ids (CRM bulk action).
+     *
+     * @param  array<int, int|string>  $ids
+     * @return int  rows affected
+     */
+    public function updateStatusForIds(array $ids, ConnectionStatus $status): int;
+
+    /**
+     * Bulk-clear `is_backlog` on the given connection ids (promote from backlog).
+     *
+     * @param  array<int, int|string>  $ids
+     * @return int  rows affected
+     */
+    public function clearBacklogForIds(array $ids): int;
 }
