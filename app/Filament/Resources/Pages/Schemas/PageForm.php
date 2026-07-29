@@ -58,6 +58,24 @@ class PageForm
                         DateTimePicker::make('date_published'),
                         DateTimePicker::make('date_modified'),
                     ]),
+
+                Section::make('Byline')
+                    ->columns(2)
+                    ->description('The editorial author + reviewer (E-E-A-T). Drives the discount guide’s Article `author` and WebPage `reviewedBy` Person JSON-LD; left empty, those nodes are omitted.')
+                    ->schema([
+                        Select::make('author_id')
+                            ->label('Author')
+                            ->relationship('author', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->helperText('Byline author — the Article author Person node.'),
+                        Select::make('reviewer_id')
+                            ->label('Reviewer')
+                            ->relationship('reviewer', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->helperText('Who verified the page — the WebPage reviewedBy Person node.'),
+                    ]),
             ]);
     }
 }
