@@ -837,6 +837,17 @@ are the editorial/CRM surface over the migrated domain models; each is independe
   (eligibility/exclusions/key_facts) edited as tag inputs. **Relation managers**
   for the offer's `tiers` and `redemptionSteps` (channel-badged) edit those keyless
   children inline.
+- **PageResource** (`Publishing` nav group) — the published-URL registry. Table:
+  `url_path`, page-type badge, publish/noindex flags, the polymorphic target class;
+  filters by type and the flags. Form groups routing (url_path unique + kebab, type,
+  publish/noindex) and SEO (title/description/canonical/og/dates); the render-built
+  `json_ld` and the `pageable` morph are set by the import/render layer, not edited.
+- **ResearchResource** (`Research` nav group) — the brief registry, one row per
+  (connection, version). Table: brand, version, status badge (colored), researcher,
+  a `raw_markdown`-present boolean, last-verified; filters by status / researcher.
+  Form edits provenance (status/researcher/confidence/date/skill); the verbatim
+  `raw_markdown` is shown read-only + `dehydrated(false)` (the auditable source of
+  record), and the deferred structured columns are left to a later parsing pass.
 
 Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
 plain `label(): string`, no Filament dependency); the Filament layer's
