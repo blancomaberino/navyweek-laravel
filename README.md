@@ -198,6 +198,14 @@ command and a `*ImportTest` that runs against the real committed artifacts
 This completes the discount data migration; the flat legacy `Discount` (+ the brand
 queue) is now fully normalized across the catalog/CRM/publishing/research aggregates.
 
+## Ops commands
+
+- `php artisan connections:reconcile` — reports pipeline-state drift between a
+  connection's `status` and the DB facts: published pages with no research brief
+  (the YMYL/R6 invariant), live pages not marked `published`, and duplicates not
+  marked `duplicate`. **Read-only** (never writes); `--check` exits non-zero on drift
+  so CI/scheduling can gate on it. The Laravel successor to `tools/reconcile-state.py`.
+
 ## Quality gates (per the rebuild workflow)
 
 Every task runs `/frontend-design` + `/seo-geo` (inform UI/page work) → implement
