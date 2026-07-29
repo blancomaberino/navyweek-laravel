@@ -827,7 +827,7 @@ decoupled stages, joined by committed JSON artifacts.
 flowchart LR
     Legacy["Astro repo<br/>../src/data/**.ts"] --> Export["Stage A — exporter<br/>database/export/*.ts (tsx)<br/>explicit column map + lift faqs/sources"]
     Export --> Artifact["database/seed-data/*.json<br/>(committed handoff contract)"]
-    Artifact --> Reader["Shared\\Import\\SeedArtifact::read()"]
+    Artifact --> Reader["Shared\\Import\\SeedArtifact::read()<br/>+ Shared\\Import\\Row (fail-loud field reads)"]
     Reader --> Importer["Stage B — domain importer<br/>upsert by slug in a txn<br/>replace polymorphic children"]
     Importer --> Cmd["artisan import:&lt;domain&gt;"]
     Cmd --> DB[("tables")]
@@ -842,11 +842,17 @@ event-guide (`import:event-guides` — fleet weeks, air shows, hub), navy-week
 (`import:navy-week-events` — folding the legacy events + CityData + CityExtras into
 one row per city), jet-teams (`import:jet-teams` — hubs + schedule + city guides),
 the discount category hubs (`import:discount-categories`), the Veterans Day meal
-roundup (`import:veterans-day-meals`), and the local discount guides
-(`import:local-discounts` — a nested discounts→stores→hours aggregate) domains; one
-exporter + importer + command lands per domain in subsequent slices. A child table
-with no natural unique key (the jet-team schedule; local stores/hours) is replaced
-wholesale per parent rather than upserted per row.
+roundup (`import:veterans-day-meals`), the local discount guides
+(`import:local-discounts` — a nested discounts→stores→hours aggregate), and the
+**discount core** (`import:discount-core` — the ~15.3k-brand connection universe
+overlaid with the 981 published brands, normalized into offers + tiers/steps/
+audience/faqs/sources + affiliate links + pages + research briefs, joined on the
+discount file basename and wired by two slug-resolution passes for `duplicate_of`
+and the aliases) domains; one exporter + importer + command lands per domain in
+subsequent slices. A child table with no natural unique key (the jet-team schedule;
+local stores/hours; offer tiers/steps/links) is replaced wholesale per parent
+rather than upserted per row. Scalar artifact fields are read through the fail-loud
+`Shared\Import\Row` helper so a malformed handoff throws instead of coercing.
 
 ## References
 

@@ -49,4 +49,21 @@ final class SeedArtifact
         /** @var array<int, array<string, mixed>> $decoded */
         return $decoded;
     }
+
+    /**
+     * Read one text corpus file (a research brief) from
+     * database/seed-data/<dir>/<slug>.md. Both segments are bare kebab slugs, so
+     * no caller input can `../`-escape the seed-data directory. Returns null when
+     * the file is absent.
+     */
+    public static function readText(string $dir, string $slug): ?string
+    {
+        if (! preg_match('/^[a-z0-9-]+$/', $dir) || ! preg_match('/^[a-z0-9-]+$/', $slug)) {
+            throw new RuntimeException("Invalid seed corpus path: {$dir}/{$slug}");
+        }
+
+        $path = database_path("seed-data/{$dir}/{$slug}.md");
+
+        return is_file($path) ? (string) file_get_contents($path) : null;
+    }
 }
