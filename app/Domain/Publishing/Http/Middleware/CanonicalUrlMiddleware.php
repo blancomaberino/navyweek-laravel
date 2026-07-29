@@ -43,6 +43,15 @@ final class CanonicalUrlMiddleware
     {
         $origin = $request->getSchemeAndHttpHost();
         $pathname = $request->getPathInfo();
+
+        // The Filament admin panel (path 'admin' in AdminPanelProvider) is not a
+        // legacy public route: it owns its own routing, auth, and redirects. The
+        // canonical/redirect pipeline must pass it straight through — otherwise the
+        // catch-all (step 7) 301s every /admin/** path to "/" and the panel is
+        // unreachable.
+        if ($pathname === '/admin' || str_starts_with($pathname, '/admin/')) {
+            return $next($request);
+        }
         // Use the RAW query string, not getQueryString(): Symfony's normalize step
         // ksort()s and RFC3986-re-encodes params, which would reorder/rewrite UTM
         // and other query bytes on every 301. The legacy edge preserves them verbatim.

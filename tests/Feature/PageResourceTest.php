@@ -11,7 +11,7 @@ use Filament\Facades\Filament;
 use Livewire\Livewire;
 
 beforeEach(function () {
-    $this->actingAs(User::factory()->create());
+    $this->actingAs(User::factory()->admin()->create());
     Filament::setCurrentPanel(Filament::getPanel('admin'));
 });
 

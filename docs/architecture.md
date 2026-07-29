@@ -799,7 +799,9 @@ erDiagram
 
 `CanonicalUrlMiddleware` is registered **global + first**, before the (Phase 6)
 response cache, so 301s are never mis-cached. It ports the legacy Vercel
-`middleware.ts` order 1:1.
+`middleware.ts` order 1:1. Before any of that it **short-circuits `/admin/**`**
+(the Filament panel owns its own routing/redirects); without the exemption the
+catch-all below would 301 every panel path to `/`.
 
 ```mermaid
 flowchart TD
@@ -824,6 +826,13 @@ The back-office is a Filament v4 panel at `/admin` (`AdminPanelProvider`,
 auth-gated), auto-discovering resources under `app/Filament/Resources`. Resources
 are the editorial/CRM surface over the migrated domain models; each is independent
 (no shared registration), so they land one cluster per PR.
+
+**Access is deny-by-default.** `User implements FilamentUser::canAccessPanel`,
+which returns the guarded `users.is_admin` flag — a plain authenticated account
+cannot reach the CRM/CMS; only `is_admin` users can (`UserFactory::admin()`
+force-fills the flag). `CanonicalUrlMiddleware` **passes `/admin/**` straight
+through** (see the request pipeline) — without that exemption its catch-all would
+301 the whole panel to `/`.
 
 - **ConnectionResource** (`CRM` nav group) — the ~15.3k brand universe. Table tuned
   for that scale: search on the indexed identity columns (`brand`/`slug`/`key`), a
