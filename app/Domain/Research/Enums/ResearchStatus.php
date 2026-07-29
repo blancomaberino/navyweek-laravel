@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\Domain\Research\Enums;
 
+use App\Domain\Shared\Enums\HasLabel;
+
 /**
  * Lifecycle status of a research brief. Re-running research supersedes the prior
  * row; time- or skill-based staleness flips a `complete` brief to `stale`.
  */
-enum ResearchStatus: string
+enum ResearchStatus: string implements HasLabel
 {
     case Draft = 'draft';
     case Complete = 'complete';

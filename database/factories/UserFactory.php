@@ -42,4 +42,13 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * A back-office admin (may access the Filament panel). `is_admin` is guarded,
+     * so it is force-filled rather than mass-assigned.
+     */
+    public function admin(): static
+    {
+        return $this->afterMaking(fn (User $user) => $user->forceFill(['is_admin' => true]));
+    }
 }

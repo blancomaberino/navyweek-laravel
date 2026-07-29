@@ -814,7 +814,9 @@ erDiagram
 
 `CanonicalUrlMiddleware` is registered **global + first**, before the (Phase 6)
 response cache, so 301s are never mis-cached. It ports the legacy Vercel
-`middleware.ts` order 1:1.
+`middleware.ts` order 1:1. Before any of that it **short-circuits `/admin/**`**
+(the Filament panel owns its own routing/redirects); without the exemption the
+catch-all below would 301 every panel path to `/`.
 
 ```mermaid
 flowchart TD
@@ -863,6 +865,49 @@ two default byline users (`config('site.editorial.*')`) and the importer assigns
 them to new pages; a page with no author/reviewer simply omits those nodes.
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
+
+## Admin panel (Filament v4)
+
+The back-office is a Filament v4 panel at `/admin` (`AdminPanelProvider`,
+auth-gated), auto-discovering resources under `app/Filament/Resources`. Resources
+are the editorial/CRM surface over the migrated domain models; each is independent
+(no shared registration), so they land one cluster per PR.
+
+**Access is deny-by-default.** `User implements FilamentUser::canAccessPanel`,
+which returns the guarded `users.is_admin` flag — a plain authenticated account
+cannot reach the CRM/CMS; only `is_admin` users can (`UserFactory::admin()`
+force-fills the flag). `CanonicalUrlMiddleware` **passes `/admin/**` straight
+through** (see the request pipeline) — without that exemption its catch-all would
+301 the whole panel to `/`.
+
+- **ConnectionResource** (`CRM` nav group) — the ~15.3k brand universe. Table tuned
+  for that scale: search on the indexed identity columns (`brand`/`slug`/`key`), a
+  live-status badge, an `offers` count, and pipeline/category/backlog filters
+  (`audiences` filtered via `whereJsonContains`). The form groups identity /
+  pipeline / links, with the imported search-metric columns surfaced read-only.
+- **OfferResource** (`Catalog` nav group) — one row per brand offer. Table: brand
+  (via the `connection` relation), offer-type badge, primary/published flags, tier
+  count; filters by type / connection / the flags. The form groups identity /
+  discount detail / the `audiences` pivot, with the simple string-list JSON columns
+  (eligibility/exclusions/key_facts) edited as tag inputs. **Relation managers**
+  for the offer's `tiers` and `redemptionSteps` (channel-badged) edit those keyless
+  children inline.
+- **PageResource** (`Publishing` nav group) — the published-URL registry. Table:
+  `url_path`, page-type badge, publish/noindex flags, the polymorphic target class;
+  filters by type and the flags. Form groups routing (url_path unique + kebab, type,
+  publish/noindex) and SEO (title/description/canonical/og/dates); the render-built
+  `json_ld` and the `pageable` morph are set by the import/render layer, not edited.
+- **ResearchResource** (`Research` nav group) — the brief registry, one row per
+  (connection, version). Table: brand, version, status badge (colored), researcher,
+  a `raw_markdown`-present boolean, last-verified; filters by status / researcher.
+  Form edits provenance (status/researcher/confidence/date/skill); the verbatim
+  `raw_markdown` is shown read-only + `dehydrated(false)` (the auditable source of
+  record), and the deferred structured columns are left to a later parsing pass.
+
+Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
+plain `label(): string`, no Filament dependency); the Filament layer's
+`Support\EnumOptions::map()` turns any `HasLabel` enum's cases into the
+`value => label` option array every resource form/table/filter uses.
 
 ## Data migration pipeline (Stage A → Stage B)
 

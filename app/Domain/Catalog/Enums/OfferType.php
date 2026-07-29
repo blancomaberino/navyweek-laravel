@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Catalog\Enums;
 
+use App\Domain\Shared\Enums\HasLabel;
+
 /**
  * The kind of offer a Connection carries. A connection can hold several — an
  * everyday discount, a stacked promo, a membership perk, or an advisory note
  * documenting that the brand has no first-party military discount.
  */
-enum OfferType: string
+enum OfferType: string implements HasLabel
 {
     case Everyday = 'everyday';
     case Promo = 'promo';

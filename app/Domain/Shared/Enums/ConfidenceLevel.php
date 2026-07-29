@@ -9,7 +9,7 @@ namespace App\Domain\Shared\Enums;
  * facts overall, and an individual Source rates its own reliability (mirrors the
  * per-fact High/Medium/Low column in the legacy research briefs).
  */
-enum ConfidenceLevel: string
+enum ConfidenceLevel: string implements HasLabel
 {
     case High = 'high';
     case Medium = 'medium';

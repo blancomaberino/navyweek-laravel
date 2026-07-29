@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Crm\Enums;
 
+use App\Domain\Shared\Enums\HasLabel;
+
 /**
  * Pipeline status for a Connection (a brand in the CRM).
  *
@@ -11,7 +13,7 @@ namespace App\Domain\Crm\Enums;
  * reconcile-state.py rules. `needs-reverify` is the skill-upgrade / staleness
  * trigger described in the rebuild plan.
  */
-enum ConnectionStatus: string
+enum ConnectionStatus: string implements HasLabel
 {
     case Pending = 'pending';
     case Drafted = 'drafted';

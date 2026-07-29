@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Catalog\Enums;
 
+use App\Domain\Shared\Enums\HasLabel;
+
 /**
  * Identity-verification provider used to unlock an offer. Ported verbatim from
  * the legacy `VerificationProvider` union; backing values match the strings the
  * legacy records (and rendered copy) already use.
  */
-enum VerificationProvider: string
+enum VerificationProvider: string implements HasLabel
 {
     case IdMe = 'ID.me';
     case GovX = 'GovX';
