@@ -866,6 +866,22 @@ them to new pages; a page with no author/reviewer simply omits those nodes.
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
 
+### Editable URLs (auto-301, zero deploys)
+
+Renaming a page's canonical `url_path` in the admin panel creates its redirect
+automatically — the #1 requirement, and the reason `redirects` is a DB table, not
+hand-coded rules. The flow:
+
+`PageResource` EditPage save → **`ChangeUrlPathAction`** (moves the page + fires the
+event, one transaction) → **`PageUrlChanged`** event → **`CreateRedirectListener`**
+(writes the `slug-change` 301, and **collapses chains** so an existing `/a/ → /old/`
+is repointed straight to `/new/` — never a two-hop; drops any stale rule pointing
+away from the now-live new path). `CanonicalUrlMiddleware` already consults the
+`redirects` store (pipeline step 5b), so the new rule is live on the next request
+with no build. The listener is wired in `DomainServiceProvider::boot` (it lives under
+`app/Domain`, outside Laravel's default listener auto-discovery). `PageUrlChanged` is
+also the future hook for response-cache invalidation (Phase 6).
+
 ## Admin panel (Filament v4)
 
 The back-office is a Filament v4 panel at `/admin` (`AdminPanelProvider`,
@@ -906,6 +922,11 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   Form edits provenance (status/researcher/confidence/date/skill); the verbatim
   `raw_markdown` is shown read-only + `dehydrated(false)` (the auditable source of
   record), and the deferred structured columns are left to a later parsing pass.
+- **RedirectResource** (`Publishing` nav group) — the redirect store, one row per 301
+  rule. Table: from/to path, status, provenance (`reason`) + match-type badges, active
+  toggle, live hit counter; filters by match type / reason / active. Editors add manual
+  rules; the `slug-change` rows the editable-URL loop writes surface here too. `hits`
+  is a read-only middleware-maintained counter.
 
 Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
 plain `label(): string`, no Filament dependency); the Filament layer's
