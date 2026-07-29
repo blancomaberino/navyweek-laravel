@@ -68,7 +68,7 @@ same PR that introduces the model/repo (enforced by `CLAUDE.md`).
 |---|---|---|---|
 | Model | `Crm\Models\Connection` | Crm | A brand in the CRM — identity, pipeline status, search-volume metrics, research cadence. First of the four lifecycles split out of the legacy flat `Discount`. |
 | Model | `Crm\Models\ConnectionAlias` | Crm | Keyword-variant slug that resolves to a canonical `Connection` (replaces `aliases.json`). |
-| Repository | `Crm\Repositories\ConnectionRepositoryInterface` → `EloquentConnectionRepository` | Crm | Connection data access: `findBySlug`, `findByAliasSlug` (alias → canonical), `upsertBySlug` (idempotent import), `dueForReview` (cadence/staleness query). |
+| Repository | `Crm\Repositories\ConnectionRepositoryInterface` → `EloquentConnectionRepository` | Crm | Connection data access: `findBySlug`, `findByAliasSlug` (alias → canonical), `upsertBySlug` (idempotent import), `dueForReview` (cadence/staleness query), and pipeline aggregates (`total`, `countByStatus`, `dueForReviewCount`, `backlogCount`) for the dashboard. |
 | Model | `Catalog\Models\Offer` | Catalog | A discount offer a `Connection` carries — headline facts, verification, and the page-scoped display-JSON units. Many per connection (everyday, promo, membership, advisory). |
 | Model | `Catalog\Models\OfferTier` | Catalog | A per-audience savings row on an offer (was the legacy `tiers[]`), individually orderable. |
 | Model | `Catalog\Models\RedemptionStep` | Catalog | A numbered redemption step on an offer, discriminated by `channel` (online/in-store); merges the legacy `redeemOnline[]`/`redeemInStore[]`. |

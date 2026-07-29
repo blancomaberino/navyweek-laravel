@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Widgets;
 
 use App\Domain\Crm\Enums\ConnectionStatus;
-use App\Domain\Crm\Models\Connection;
+use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -21,22 +21,17 @@ class PipelineStatsWidget extends StatsOverviewWidget
      */
     protected function getStats(): array
     {
+        $connections = app(ConnectionRepositoryInterface::class);
+
         return [
-            Stat::make('Connections', (string) Connection::query()->count())
+            Stat::make('Connections', (string) $connections->total())
                 ->description('Brands in the universe'),
-            Stat::make('Published', (string) Connection::query()
-                ->where('status', ConnectionStatus::Published->value)
-                ->count())
+            Stat::make('Published', (string) $connections->countByStatus(ConnectionStatus::Published))
                 ->description('Live pages'),
-            Stat::make('Due for review', (string) Connection::query()
-                ->whereNotNull('next_review_due')
-                ->whereDate('next_review_due', '<=', now())
-                ->count())
+            Stat::make('Due for review', (string) $connections->dueForReviewCount(now()))
                 ->description('Past the research cadence')
                 ->color('warning'),
-            Stat::make('Backlog', (string) Connection::query()
-                ->where('is_backlog', true)
-                ->count())
+            Stat::make('Backlog', (string) $connections->backlogCount())
                 ->description('Not yet promoted'),
         ];
     }
