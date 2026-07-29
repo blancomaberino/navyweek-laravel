@@ -10,6 +10,7 @@ use App\Domain\Catalog\Repositories\DiscountCategoryRepositoryInterface;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
+use App\Domain\Publishing\Repositories\PageRepositoryInterface;
 use App\Domain\Publishing\Seo\DiscountCategorySchema;
 use App\Domain\Publishing\Seo\DiscountGuideSchema;
 use App\Domain\Publishing\Seo\SeoHead;
@@ -31,6 +32,7 @@ use Symfony\Component\HttpFoundation\Response;
 final class PageController
 {
     public function __construct(
+        private readonly PageRepositoryInterface $pages,
         private readonly DiscountCategoryRepositoryInterface $categories,
     ) {}
 
@@ -40,10 +42,7 @@ final class PageController
         // validated — re-normalizing here (lowercasing/slash-collapsing) would use
         // a different key than the middleware's existence check and could serve a
         // page for a non-canonical URL the middleware meant to 301.
-        $page = Page::query()
-            ->where('is_published', true)
-            ->where('url_path', $request->getPathInfo())
-            ->first();
+        $page = $this->pages->findPublishedByPath($request->getPathInfo());
 
         if ($page === null) {
             abort(404);
@@ -92,15 +91,10 @@ final class PageController
     {
         $ordered = $this->categories->orderedConnections($category);
 
-        // The live discount-brand pages for this category's connections, in one
-        // query scoped by a subquery on the relevant offers (no morph closure).
-        $brandPages = Page::query()
-            ->where('page_type', PageType::DiscountBrand)
-            ->where('is_published', true)
-            ->where('pageable_type', (new Offer)->getMorphClass())
-            ->whereIn('pageable_id', Offer::query()->whereIn('connection_id', $ordered->pluck('id'))->select('id'))
-            ->with('pageable')
-            ->get();
+        // The live discount-brand pages for this category's connections (repository
+        // owns the query; a brand shows only when it has a published page).
+        $connectionIds = $ordered->map(static fn (Connection $connection): int => $connection->id)->all();
+        $brandPages = $this->pages->liveDiscountBrandPagesForConnections($connectionIds);
 
         /** @var array<int, array{url: string, audience: string|null}> $liveByConnectionId */
         $liveByConnectionId = [];
