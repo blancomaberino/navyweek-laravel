@@ -818,6 +818,24 @@ flowchart TD
     LiveLook -->|missing| Fallback["Route::fallback 301 to /  (never 404)"]
 ```
 
+### Public page rendering
+
+`PageController` looks the page up by the middleware-canonicalized `url_path` and
+renders the `layouts.base` Blade view. The layout ports the legacy
+`BaseLayout.astro` `<head>` **byte-for-byte** — the 8 favicon/manifest links,
+`theme-color #0A1628`, the Bebas Neue + IBM Plex font link, Ahrefs Analytics, and
+the PostHog snippet (`partials.posthog`, key/host from `config('site.posthog')`).
+
+The per-page SEO block is serialized by `App\Domain\Publishing\Seo\SeoHead`
+(injected via `{!! $seoHead !!}`), a 1:1 port of `src/lib/seo.ts`
+`buildSEOData`/`renderSEOToHTML`: identical tag order, `&<>"'` escaping (`'` →
+`&#x27;`), the `<` → `<` JSON-LD guard, and the two `alternate` feeds
+(`/data/navy-week-2026.json`, `/llms.txt`). `OrganizationSchema` is auto-prepended
+to the JSON-LD on indexable pages only; noindex pages emit `noindex, nofollow`
+instead of the site-wide index directive. The page **body** is a minimal shell for
+now — the per-page-type views (discount guides, ranks, bases, …) layer onto this
+foundation one page-family per follow-up PR, as does response caching.
+
 ## Data migration pipeline (Stage A → Stage B)
 
 The legacy `../src/data` TypeScript is migrated into the tables above in two
