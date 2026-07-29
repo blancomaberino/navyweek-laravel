@@ -9,13 +9,22 @@
 #
 # Everything else — all application code AND the markdown research briefs under
 # database/seed-data/research-briefs/ — is still fully scanned.
+#
+# The `regexes` allowlist covers the site's PUBLIC, client-side analytics keys.
+# These are shipped in every page's HTML by design (PostHog project key, Ahrefs
+# analytics key) — identical to the live legacy site — so they are not secrets;
+# gitleaks' generic-api-key heuristic flags them on entropy alone.
 title = "NavyWeek platform gitleaks config"
 
 [extend]
 useDefault = true
 
 [allowlist]
-description = "Generated seed-data JSON column dumps carry only public brand data, not secrets"
+description = "Generated seed-data JSON dumps (public brand data) + the public client-side analytics keys"
 paths = [
   '''database/seed-data/[a-z0-9-]+\.json''',
+]
+regexes = [
+  '''phc_[A-Za-z0-9]{40,}''',       # PostHog project API key — public, client-side (in the browser bundle)
+  '''cyBzsvylryte/RFYYCOQMg''',      # Ahrefs Analytics key — public, embedded in <head>
 ]

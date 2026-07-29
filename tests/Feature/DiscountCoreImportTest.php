@@ -15,6 +15,7 @@ use App\Domain\Research\Models\Research;
 use App\Domain\Shared\Import\SeedArtifact;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
+use Database\Seeders\EditorialTeamSeeder;
 
 /**
  * Importing the whole ~15.3k-brand universe is expensive, so the suite runs the
@@ -48,6 +49,10 @@ function offerChildTotal(string $key): int
 }
 
 it('imports and normalizes the full discount core from the committed artifacts', function () {
+    // The editorial byline exists first, so the importer can assign the default
+    // author + reviewer to every page it creates.
+    $this->seed(EditorialTeamSeeder::class);
+
     $this->artisan('import:discount-core')->assertSuccessful();
 
     // Every table lands the artifact's row counts.
@@ -81,7 +86,10 @@ it('imports and normalizes the full discount core from the committed artifacts',
 
     $page = Page::query()->where('url_path', '/discount/yeti-military-veteran/')->sole();
     expect($page->pageable_id)->toBe($offer->id)
-        ->and($page->pageable_type)->toBe($offer->getMorphClass());
+        ->and($page->pageable_type)->toBe($offer->getMorphClass())
+        // the default byline was assigned from the seeded editorial users
+        ->and($page->author?->slug)->toBe('t-alford')
+        ->and($page->reviewer?->slug)->toBe('erik-rivera');
 
     // The two self-referential slug resolutions: a duplicate brand → its canonical,
     // and an alias → its canonical connection.

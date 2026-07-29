@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace App\Domain\Publishing\Http\Controllers;
 
+use App\Domain\Catalog\Models\Offer;
+use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
+use App\Domain\Publishing\Seo\DiscountGuideSchema;
+use App\Domain\Publishing\Seo\SeoHead;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -13,8 +17,11 @@ use Symfony\Component\HttpFoundation\Response;
  * reaches here CanonicalUrlMiddleware has already resolved every redirect, so an
  * unknown path is a genuine 404 (the middleware sends stray legacy URLs to "/").
  *
- * This slice returns a minimal 200 to prove routing end-to-end; Phase 3 swaps the
- * body for the Blade + JSON-LD render behind the response cache.
+ * The base layout ports the legacy `<head>` furniture 1:1 and `SeoHead` serializes
+ * the per-page SEO block. The body is dispatched by `page_type`: a discount-brand
+ * page renders the full guide from its primary Offer; every other type falls back
+ * to the minimal shell until its own page-family view lands. Response caching is a
+ * later slice.
  */
 final class PageController
 {
@@ -33,8 +40,33 @@ final class PageController
             abort(404);
         }
 
-        // Placeholder until Phase 3 renders real page bodies.
-        return response("OK: {$page->url_path}")
-            ->header('Content-Type', 'text/plain');
+        if ($page->page_type === PageType::DiscountBrand && $page->pageable instanceof Offer) {
+            return $this->renderDiscountGuide($page, $page->pageable);
+        }
+
+        $seo = SeoHead::forPage($page);
+
+        return response()->view('pages.show', [
+            'page' => $page,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    private function renderDiscountGuide(Page $page, Offer $offer): Response
+    {
+        // Every child relation already orders by sort_order in its definition.
+        $offer->load(['connection', 'tiers', 'redemptionSteps', 'faqs', 'sources', 'audiences']);
+        // The byline persons for the Article/WebPage JSON-LD.
+        $page->load(['author', 'reviewer']);
+
+        $seo = SeoHead::forPage($page, DiscountGuideSchema::build($page, $offer));
+
+        return response()->view('pages.discount', [
+            'page' => $page,
+            'offer' => $offer,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
     }
 }
