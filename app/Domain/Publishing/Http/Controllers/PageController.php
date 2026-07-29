@@ -57,6 +57,8 @@ final class PageController
     {
         // Every child relation already orders by sort_order in its definition.
         $offer->load(['connection', 'tiers', 'redemptionSteps', 'faqs', 'sources', 'audiences']);
+        // The byline persons for the Article/WebPage JSON-LD.
+        $page->load(['author', 'reviewer']);
 
         $seo = SeoHead::forPage($page, DiscountGuideSchema::build($page, $offer));
 

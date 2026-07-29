@@ -8,16 +8,46 @@ use App\Domain\Catalog\Models\Offer;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
+use App\Models\User;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 use Illuminate\Testing\TestResponse;
 
 /**
- * Build a full discount-brand page: connection → primary offer (+ tiers, steps,
- * FAQs, sources) → page pointing its pageable at that offer.
+ * Create the default editorial byline (author + reviewer users), the way
+ * EditorialTeamSeeder does — so the JSON-LD Person nodes have data to read.
+ *
+ * @return array{author: User, reviewer: User}
  */
-function discountPage(): Page
+function editorialTeam(): array
 {
+    $author = User::factory()->create([
+        'name' => 'T Madden Alford',
+        'slug' => 't-alford',
+        'job_title' => 'Editor, NavyWeek.org',
+        'credentials' => "U.S. Naval Academy '02 · Former submarine officer, USS Key West",
+        'avatar_path' => '/authors/t-alford.jpg',
+        'knows_about' => ['military discounts', 'veteran benefits'],
+    ]);
+    $reviewer = User::factory()->create([
+        'name' => 'Erik Rivera',
+        'slug' => 'erik-rivera',
+        'credentials' => "U.S. Naval Academy '04 · Former U.S. Navy EOD officer",
+    ]);
+
+    return ['author' => $author, 'reviewer' => $reviewer];
+}
+
+/**
+ * Build a full discount-brand page: connection → primary offer (+ tiers, steps,
+ * FAQs, sources) → page pointing its pageable at that offer, with the given byline
+ * (defaults to the seeded editorial team).
+ *
+ * @param  array{author: User, reviewer: User}|null  $byline
+ */
+function discountPage(?array $byline = null): Page
+{
+    $byline ??= editorialTeam();
     $connection = Connection::factory()->create(['brand' => 'YETI', 'slug' => 'yeti']);
 
     $offer = $connection->offers()->create([
@@ -53,6 +83,8 @@ function discountPage(): Page
         'date_modified' => '2026-07-20',
         'is_published' => true,
         'noindex' => false,
+        'author_id' => $byline['author']->id,
+        'reviewer_id' => $byline['reviewer']->id,
     ]);
     $page->pageable()->associate($offer)->save();
 
@@ -104,6 +136,34 @@ it('emits the discount JSON-LD graph: Organization + Article + Person + FAQPage'
         // Article dates come from the page's build-clock columns
         ->assertSee('"datePublished":"2026-06-10"', false)
         ->assertSee('"dateModified":"2026-07-20"', false);
+});
+
+it('drives the author/reviewer Person nodes from the assigned users (not hardcoded)', function () {
+    // A different byline than the default — proves the graph is data-driven.
+    $byline = [
+        'author' => User::factory()->create([
+            'name' => 'Dana Okonkwo',
+            'slug' => 'dana-okonkwo',
+            'job_title' => 'Contributing Editor',
+            'credentials' => 'USMC veteran · benefits researcher',
+        ]),
+        'reviewer' => User::factory()->create([
+            'name' => 'Sam Petrov',
+            'slug' => 'sam-petrov',
+            'credentials' => 'Former ID.me verification lead',
+        ]),
+    ];
+    discountPage($byline);
+
+    $res = fetch('/discount/yeti-military-veteran/')->assertOk();
+
+    $res->assertSee('"@id":"https://www.navyweek.org/authors/dana-okonkwo/#person"', false)
+        ->assertSee('"name":"Dana Okonkwo"', false)
+        ->assertSee('"jobTitle":"Contributing Editor"', false)
+        ->assertSee('"name":"Sam Petrov"', false)
+        // no trace of the previous hardcoded persons
+        ->assertDontSee('t-alford', false)
+        ->assertDontSee('Erik Rivera', false);
 });
 
 it('still renders the minimal shell for a non-discount page type', function () {

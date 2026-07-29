@@ -244,6 +244,8 @@ erDiagram
     AFFILIATE_NETWORKS ||--o| CONNECTIONS : "default network"
     OFFERS ||--o{ PAGES : "presented by (pageable morph)"
     CONNECTIONS ||--o{ PAGES : "presented by (pageable morph)"
+    USERS ||--o{ PAGES : "byline author (author_id)"
+    USERS ||--o{ PAGES : "reviewed by (reviewer_id)"
     OFFERS ||--o{ OFFER_AUDIENCE : "targets cohorts"
     AUDIENCES ||--o{ OFFER_AUDIENCE : "served by offers"
     OFFERS ||--o{ SOURCES : "cited by (sourceable morph)"
@@ -388,9 +390,22 @@ erDiagram
         datetimetz date_published "build-clock, first build"
         datetimetz date_modified "build-clock, every build"
         json json_ld "page-specific EXTRA schema nodes"
+        bigint author_id FK "byline author → users, nullable"
+        bigint reviewer_id FK "reviewer → users, nullable"
         string pageable_type "polymorphic owner, nullable"
         bigint pageable_id "Offer / Connection / pillar, nullable"
         bool is_published
+    }
+
+    USERS {
+        bigint id PK
+        string name
+        string email UK
+        string slug UK "author profile → /authors/{slug}/, nullable"
+        string job_title "Person.jobTitle, nullable"
+        text credentials "Person.description / bio, nullable"
+        string avatar_path "Person.image, nullable"
+        json knows_about "Person.knowsAbout, nullable"
     }
 
     REDIRECTS {
@@ -841,6 +856,11 @@ cited sources, and the independence disclosure — and builds its JSON-LD at ren
 via `DiscountGuideSchema` (a 1:1 port of the legacy `DiscountDetail.getSeoData`:
 Breadcrumb + Article + WebSite + WebPage + author/reviewer Person + FAQPage,
 passed to `SeoHead::forPage($page, $schemas)` which still prepends Organization).
+The **author + reviewer `Person` nodes are data-driven**, built from the page's
+assigned `users` (`author_id`/`reviewer_id`, eager-loaded) rather than hardcoded —
+so the byline is set per-page from the admin panel. `EditorialTeamSeeder` seeds the
+two default byline users (`config('site.editorial.*')`) and the importer assigns
+them to new pages; a page with no author/reviewer simply omits those nodes.
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
 

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             RedirectSeeder::class,
             AffiliateNetworkSeeder::class,
             AudienceSeeder::class,
+            EditorialTeamSeeder::class,
         ]);
     }
 }

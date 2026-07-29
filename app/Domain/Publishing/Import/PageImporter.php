@@ -9,6 +9,8 @@ use App\Domain\Crm\Models\Connection;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Shared\Import\Row;
 use App\Domain\Shared\Import\SeedArtifact;
+use App\Models\User;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -33,6 +35,12 @@ final class PageImporter
                 ->pluck('id', 'connection_id')
                 ->all();
 
+            // The default byline (author + reviewer), resolved from the editorial
+            // users EditorialTeamSeeder creates. A page keeps any assignment it
+            // already has (an admin override); only unassigned pages get the default.
+            $defaultAuthorId = self::userIdBySlug(Config::string('site.editorial.default_author_slug'));
+            $defaultReviewerId = self::userIdBySlug(Config::string('site.editorial.default_reviewer_slug'));
+
             $rows = SeedArtifact::read('pages');
 
             foreach ($rows as $row) {
@@ -46,6 +54,12 @@ final class PageImporter
                 // clear it) and upsert the page in a single write, keyed on url_path.
                 $page = Page::query()->firstOrNew(['url_path' => $row['url_path']]);
                 $page->fill($row);
+                if ($page->author_id === null && $defaultAuthorId !== null) {
+                    $page->author_id = $defaultAuthorId;
+                }
+                if ($page->reviewer_id === null && $defaultReviewerId !== null) {
+                    $page->reviewer_id = $defaultReviewerId;
+                }
                 if ($offerId !== null) {
                     $offer = new Offer;
                     $offer->id = $offerId;
@@ -58,5 +72,16 @@ final class PageImporter
 
             return ['pages' => count($rows)];
         });
+    }
+
+    /**
+     * The id of the user with this profile slug, or null when no such user exists
+     * yet (the byline seeder hasn't run) — in which case the byline is left empty.
+     */
+    private static function userIdBySlug(string $slug): ?int
+    {
+        $id = User::query()->where('slug', $slug)->value('id');
+
+        return is_int($id) ? $id : null;
     }
 }
