@@ -905,7 +905,12 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   a `raw_markdown`-present boolean, last-verified; filters by status / researcher.
   Form edits provenance (status/researcher/confidence/date/skill); the verbatim
   `raw_markdown` is shown read-only + `dehydrated(false)` (the auditable source of
-  record), and the deferred structured columns are left to a later parsing pass.
+  record), and the deferred structured columns are left to a later parsing pass. A
+  **"Mark verified"** record action runs `Research\Actions\MarkResearchVerifiedAction`
+  — sets the brief Complete + stamps `last_verified`, then recomputes the connection's
+  `last_verified_at` / `next_review_due` (= last-verified + `research_cadence_days`).
+  Per the build-clock rule it never touches `pages.date_*`; it is the cadence-recompute
+  foundation the automation spine (FlagStaleResearch, the research job) reuses.
 
 Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
 plain `label(): string`, no Filament dependency); the Filament layer's

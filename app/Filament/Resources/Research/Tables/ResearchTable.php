@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Research\Tables;
 
+use App\Domain\Research\Actions\MarkResearchVerifiedAction;
 use App\Domain\Research\Enums\ResearchedBy;
 use App\Domain\Research\Enums\ResearchStatus;
 use App\Domain\Research\Models\Research;
 use App\Filament\Support\EnumOptions;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -64,6 +66,16 @@ class ResearchTable
                     ->options(EnumOptions::map(ResearchedBy::cases())),
             ])
             ->recordActions([
+                Action::make('markVerified')
+                    ->label('Mark verified')
+                    ->icon('heroicon-o-check-badge')
+                    ->color('success')
+                    ->requiresConfirmation()
+                    ->modalDescription('Marks the brief Complete and recomputes the connection’s next review date from its cadence. Does not change page dates.')
+                    ->successNotificationTitle('Brief marked verified')
+                    ->action(function (Research $record): void {
+                        app(MarkResearchVerifiedAction::class)($record);
+                    }),
                 EditAction::make(),
             ])
             ->toolbarActions([
