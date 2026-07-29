@@ -907,6 +907,10 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   `raw_markdown` is shown read-only + `dehydrated(false)` (the auditable source of
   record), and the deferred structured columns are left to a later parsing pass.
 
+The **dashboard** carries a `PipelineStatsWidget` (auto-discovered under
+`app/Filament/Widgets`) — a stats-overview of the pipeline: total connections,
+published (live pages), due-for-review (past the research cadence), and backlog.
+
 Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
 plain `label(): string`, no Filament dependency); the Filament layer's
 `Support\EnumOptions::map()` turns any `HasLabel` enum's cases into the
