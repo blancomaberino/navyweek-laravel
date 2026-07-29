@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Domain\Crm\Enums;
 
+use App\Domain\Shared\Enums\HasLabel;
+
 /**
  * Eligible-audience tags a Connection (and later an Offer) can target.
  *
  * Ported verbatim from the legacy queue `audiences[]` vocabulary. Stored on
  * `connections.audiences` as a JSON array and cast to a collection of this enum.
  */
-enum Audience: string
+enum Audience: string implements HasLabel
 {
     case Military = 'military';
     case Veteran = 'veteran';

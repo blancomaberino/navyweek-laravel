@@ -818,6 +818,21 @@ flowchart TD
     LiveLook -->|missing| Fallback["Route::fallback 301 to /  (never 404)"]
 ```
 
+## Admin panel (Filament v4)
+
+The back-office is a Filament v4 panel at `/admin` (`AdminPanelProvider`,
+auth-gated), auto-discovering resources under `app/Filament/Resources`. Resources
+are the editorial/CRM surface over the migrated domain models; each is independent
+(no shared registration), so they land one cluster per PR.
+
+- **ConnectionResource** (`CRM` nav group) — the ~15.3k brand universe. Table tuned
+  for that scale: search on the indexed identity columns (`brand`/`slug`/`key`), a
+  live-status badge, an `offers` count, and pipeline/category/backlog filters
+  (`audiences` filtered via `whereJsonContains`). The form groups identity /
+  pipeline / links, with the imported search-metric columns surfaced read-only. The
+  domain enums (`ConnectionStatus`, `Audience`) stay framework-agnostic — their
+  `value => label()` is mapped in the Filament layer, not via a `HasLabel` contract.
+
 ## Data migration pipeline (Stage A → Stage B)
 
 The legacy `../src/data` TypeScript is migrated into the tables above in two
