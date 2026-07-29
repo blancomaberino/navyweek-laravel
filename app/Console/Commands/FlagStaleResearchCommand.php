@@ -8,6 +8,7 @@ use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
 use App\Domain\Research\Enums\ResearchStatus;
+use App\Domain\Research\Repositories\ResearchRepositoryInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -27,7 +28,7 @@ final class FlagStaleResearchCommand extends Command
 
     protected $description = 'Flag connections past their research cadence: latest brief → stale, connection → needs-reverify.';
 
-    public function handle(ConnectionRepositoryInterface $connections): int
+    public function handle(ConnectionRepositoryInterface $connections, ResearchRepositoryInterface $research): int
     {
         $dryRun = (bool) $this->option('dry-run');
 
@@ -41,8 +42,8 @@ final class FlagStaleResearchCommand extends Command
         $flagged = 0;
         foreach ($due as $connection) {
             if (! $dryRun) {
-                DB::transaction(function () use ($connection): void {
-                    $latest = $connection->research()->orderByDesc('version')->first();
+                DB::transaction(function () use ($connection, $research): void {
+                    $latest = $research->latestForConnection($connection->id);
                     if ($latest !== null
                         && ! in_array($latest->status, [ResearchStatus::Stale, ResearchStatus::Superseded], true)) {
                         $latest->status = ResearchStatus::Stale;
