@@ -31,20 +31,26 @@ final class SeoHead
         private readonly array $schemas,
     ) {}
 
-    public static function forPage(Page $page): self
+    /**
+     * @param  list<array<string, mixed>>|null  $schemas  Computed JSON-LD for
+     *                                                    page types that build it
+     *                                                    at render; falls back to
+     *                                                    the page's stored json_ld.
+     */
+    public static function forPage(Page $page, ?array $schemas = null): self
     {
-        $siteUrl = rtrim(Config::string('site.url'), '/');
+        $siteUrl = SeoUrl::site();
         $title = (string) $page->title;
         $noindex = (bool) $page->noindex;
 
         $canonicalPath = $page->canonical_path ?? $page->url_path;
-        $canonicalUrl = $siteUrl.self::withTrailingSlash((string) $canonicalPath);
+        $canonicalUrl = SeoUrl::absolute((string) $canonicalPath);
 
         $ogImage = $page->og_image_path !== null && $page->og_image_path !== ''
             ? $siteUrl.$page->og_image_path
             : $siteUrl.Config::string('site.default_og_image');
 
-        $userSchemas = self::normalizeSchemas($page->json_ld);
+        $userSchemas = $schemas ?? self::normalizeSchemas($page->json_ld);
         // Organization is prepended on indexable pages only (matches buildSEOData).
         $schemas = $noindex ? $userSchemas : array_merge([OrganizationSchema::build()], $userSchemas);
 
@@ -71,7 +77,7 @@ final class SeoHead
      */
     public function render(): string
     {
-        $siteUrl = rtrim(Config::string('site.url'), '/');
+        $siteUrl = SeoUrl::site();
         $siteName = Config::string('site.name');
 
         $parts = [];
@@ -142,18 +148,5 @@ final class SeoHead
         $schemas = array_is_list($jsonLd) ? $jsonLd : [$jsonLd];
 
         return $schemas;
-    }
-
-    /**
-     * Ensure a single trailing slash without disturbing an existing one or a file
-     * extension — the stored canonical paths are already canonical, this is a guard.
-     */
-    private static function withTrailingSlash(string $path): string
-    {
-        if ($path === '' || $path === '/') {
-            return '/';
-        }
-
-        return str_ends_with($path, '/') ? $path : $path.'/';
     }
 }

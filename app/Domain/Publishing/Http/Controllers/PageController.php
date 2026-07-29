@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Publishing\Http\Controllers;
 
+use App\Domain\Catalog\Models\Offer;
+use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
+use App\Domain\Publishing\Seo\DiscountGuideSchema;
 use App\Domain\Publishing\Seo\SeoHead;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +18,10 @@ use Symfony\Component\HttpFoundation\Response;
  * unknown path is a genuine 404 (the middleware sends stray legacy URLs to "/").
  *
  * The base layout ports the legacy `<head>` furniture 1:1 and `SeoHead` serializes
- * the per-page SEO block; the page body is a minimal shell until the per-page-type
- * views land (one page-family per follow-up PR). Response caching is a later slice.
+ * the per-page SEO block. The body is dispatched by `page_type`: a discount-brand
+ * page renders the full guide from its primary Offer; every other type falls back
+ * to the minimal shell until its own page-family view lands. Response caching is a
+ * later slice.
  */
 final class PageController
 {
@@ -35,10 +40,31 @@ final class PageController
             abort(404);
         }
 
+        if ($page->page_type === PageType::DiscountBrand && $page->pageable instanceof Offer) {
+            return $this->renderDiscountGuide($page, $page->pageable);
+        }
+
         $seo = SeoHead::forPage($page);
 
         return response()->view('pages.show', [
             'page' => $page,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    private function renderDiscountGuide(Page $page, Offer $offer): Response
+    {
+        // Every child relation already orders by sort_order in its definition.
+        $offer->load(['connection', 'tiers', 'redemptionSteps', 'faqs', 'sources', 'audiences']);
+        // The byline persons for the Article/WebPage JSON-LD.
+        $page->load(['author', 'reviewer']);
+
+        $seo = SeoHead::forPage($page, DiscountGuideSchema::build($page, $offer));
+
+        return response()->view('pages.discount', [
+            'page' => $page,
+            'offer' => $offer,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

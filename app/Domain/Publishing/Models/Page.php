@@ -9,11 +9,13 @@ use App\Domain\Shared\Concerns\HasFaqs;
 use App\Domain\Shared\Concerns\HasSources;
 use App\Domain\Shared\Models\Faq;
 use App\Domain\Shared\Models\Source;
+use App\Models\User;
 use Database\Factories\PageFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 
@@ -34,12 +36,16 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $date_published
  * @property Carbon|null $date_modified
  * @property array<int, array<string, mixed>>|null $json_ld
+ * @property int|null $author_id
+ * @property int|null $reviewer_id
  * @property string|null $pageable_type
  * @property int|null $pageable_id
  * @property bool $is_published
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Model|null $pageable
+ * @property-read User|null $author
+ * @property-read User|null $reviewer
  * @property-read Collection<int, Source> $sources
  * @property-read Collection<int, Faq> $faqs
  *
@@ -66,6 +72,8 @@ class Page extends Model
         'date_published',
         'date_modified',
         'json_ld',
+        'author_id',
+        'reviewer_id',
         'pageable_type',
         'pageable_id',
         'is_published',
@@ -104,5 +112,27 @@ class Page extends Model
     public function pageable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * The byline author — a `users` row, assignable from the admin panel. The
+     * discount-guide Article `author` Person node is built from this user.
+     *
+     * @return BelongsTo<User, $this>
+     */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    /**
+     * The reviewer who verified the page — a `users` row, assignable from the admin
+     * panel. Drives the WebPage `reviewedBy` Person node.
+     *
+     * @return BelongsTo<User, $this>
+     */
+    public function reviewer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'reviewer_id');
     }
 }

@@ -16,6 +16,15 @@ return [
     'name' => 'NavyWeek.org',
     'default_og_image' => '/og/home.png',
 
+    // The default byline. New discount pages (and any page missing an assignment)
+    // fall back to the `users` rows with these profile slugs as author + reviewer —
+    // seeded by EditorialTeamSeeder. Authors/reviewers are otherwise assigned
+    // per-page from the admin panel; this is only the initial default.
+    'editorial' => [
+        'default_author_slug' => env('SITE_DEFAULT_AUTHOR_SLUG', 't-alford'),
+        'default_reviewer_slug' => env('SITE_DEFAULT_REVIEWER_SLUG', 'erik-rivera'),
+    ],
+
     // PostHog product analytics, ported from src/components/PostHog.astro. The
     // project key is a PUBLIC client-side key by design (shipped in the browser).
     // Ingestion goes through the first-party reverse proxy so it survives blockers.
