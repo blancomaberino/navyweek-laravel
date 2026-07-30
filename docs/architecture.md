@@ -913,7 +913,8 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   `ConnectionRepository::recordVerification`, each `lockForUpdate`) inside one
   transaction — no model queries in the action. Only the **latest** brief may be
   verified: a non-latest/superseded one throws `CannotVerifyNonLatestResearchException`
-  (and the table hides the action for superseded rows), so cadence is never stamped
+  (the table hides the action for superseded rows and catches the exception into a
+  danger notification for any other non-latest row), so cadence is never stamped
   from stale research. Per the build-clock rule it never touches `pages.date_*`; it is
   the cadence-recompute foundation the automation spine (FlagStaleResearch, the
   research job) reuses.

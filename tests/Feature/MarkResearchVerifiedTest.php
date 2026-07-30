@@ -64,6 +64,25 @@ it('refuses to verify a superseded (non-latest) brief and writes nothing', funct
         ->and($connection->next_review_due)->toBeNull();
 });
 
+it('surfaces a notice instead of erroring when the table verifies a non-latest brief', function () {
+    $this->actingAs(User::factory()->admin()->create());
+    Filament::setCurrentPanel(Filament::getPanel('admin'));
+
+    // Both Complete, so hidden() (which only hides Superseded) does NOT hide the older
+    // one — the action must catch the guard exception and notify, not 500.
+    $connection = Connection::factory()->create();
+    $old = Research::factory()->create(['connection_id' => $connection->id, 'version' => 1, 'status' => ResearchStatus::Complete, 'last_verified' => null]);
+    Research::factory()->create(['connection_id' => $connection->id, 'version' => 2, 'status' => ResearchStatus::Complete]);
+
+    Livewire::test(ListResearch::class)
+        ->callTableAction('markVerified', $old)
+        ->assertHasNoTableActionErrors()
+        ->assertNotified('Only the latest brief can be verified');
+
+    // The guard rejected the write — the old brief was never stamped verified.
+    expect($old->refresh()->last_verified)->toBeNull();
+});
+
 it('does not touch page build-clock dates when verifying research', function () {
     $connection = Connection::factory()->create();
     $research = Research::factory()->create(['connection_id' => $connection->id]);
