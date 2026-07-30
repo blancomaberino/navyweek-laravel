@@ -114,6 +114,11 @@ class ConnectionsTable
                                 ->options(EnumOptions::map(ConnectionStatus::cases()))
                                 ->required(),
                         ])
+                        // Rewrites the pipeline status of every selected row with no
+                        // undo — confirm before a select-all mis-click reassigns
+                        // thousands of connections (matches promoteFromBacklog).
+                        ->requiresConfirmation()
+                        ->modalDescription('This overwrites the pipeline status of all selected connections. There is no undo.')
                         ->action(function (array $data, EloquentCollection $records): void {
                             $status = $data['status'] ?? null;
                             if (is_string($status)) {
