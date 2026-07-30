@@ -40,6 +40,43 @@ it('hashes content deterministically and returns null when absent', function () 
     File::deleteDirectory($dir);
 });
 
+it('changes the hash when a reference file is added or renamed', function () {
+    $dir = makeSkillsDir();
+    $skill = "{$dir}/s";
+    writeSkillFixture($dir, 's', 'root body'); // SKILL.md only
+    $hasher = app(SkillHasher::class);
+
+    $base = $hasher->hash($skill);
+
+    // Adding a references/*.md file must change the hash.
+    File::ensureDirectoryExists("{$skill}/references");
+    File::put("{$skill}/references/a.md", 'ref body');
+    $withRef = $hasher->hash($skill);
+
+    // Renaming a reference with identical content must also change it (basename is
+    // folded into the payload).
+    File::move("{$skill}/references/a.md", "{$skill}/references/b.md");
+    $renamed = $hasher->hash($skill);
+
+    expect($withRef)->not->toBe($base)
+        ->and($renamed)->not->toBe($withRef);
+
+    File::deleteDirectory($dir);
+});
+
+it('fails --check when a registered skill has never been hashed (null content_hash)', function () {
+    $dir = makeSkillsDir();
+    writeSkillFixture($dir, 'seo-geo', 'body'); // files are present on disk…
+    // …but the row was never hashed.
+    Skill::create(['key' => 'seo-geo', 'name' => 'SEO / GEO', 'current_version' => '1.0.0', 'content_hash' => null]);
+
+    $this->artisan('skills:check-hashes', ['--check' => true])
+        ->expectsOutputToContain('never hashed')
+        ->assertFailed();
+
+    File::deleteDirectory($dir);
+});
+
 it('passes --check when the on-disk skill matches its stored hash', function () {
     $dir = makeSkillsDir();
     writeSkillFixture($dir, 'seo-geo', "# SEO / GEO\nrules");
