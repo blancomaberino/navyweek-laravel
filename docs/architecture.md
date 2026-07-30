@@ -915,11 +915,17 @@ plain `label(): string`, no Filament dependency); the Filament layer's
 ## Scheduled tasks
 
 `routes/console.php` schedules the research-cadence sweep: **`research:flag-stale`**
-(daily) reuses `ConnectionRepository::dueForReview(now())` and, for each past-due
-active connection (published/drafted only), marks its latest brief `stale` and the
-connection `needs-reverify` — surfacing it in the CRM's "Due for review" filter and
-the dashboard. `--dry-run` reports the count without writing. Auto-dispatching the
-research job for high-priority brands lands with that job (queue + CLI creds).
+(daily) reuses `ConnectionRepository::dueForReview(now())`, batch-loads the latest
+brief per due connection via `ResearchRepository::latestForConnections` (no
+per-connection query), and for each past-due active connection (published/drafted
+only) moves it to `needs-reverify` and marks its latest brief `stale` — but only when
+that brief is `Complete` (a mid-flight `Draft` is never clobbered). Both writes go
+through the repositories (`ResearchRepository::markStale`,
+`ConnectionRepository::markNeedsReverify`, each `lockForUpdate`) inside a
+per-connection transaction — no model queries in the command. It surfaces the brand
+in the CRM's "Due for review" filter and the dashboard. `--dry-run` reports the count
+without writing. Auto-dispatching the research job for high-priority brands lands with
+that job (queue + CLI creds).
 
 ## Data migration pipeline (Stage A → Stage B)
 

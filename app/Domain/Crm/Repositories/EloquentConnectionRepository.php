@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Crm\Repositories;
 
+use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Crm\Models\ConnectionAlias;
 use DateTimeInterface;
@@ -40,5 +41,12 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
             ->where('next_review_due', '<=', $asOf->format('Y-m-d'))
             ->orderBy('next_review_due')
             ->get();
+    }
+
+    public function markNeedsReverify(Connection $connection): void
+    {
+        $locked = Connection::query()->whereKey($connection->getKey())->lockForUpdate()->firstOrFail();
+        $locked->status = ConnectionStatus::NeedsReverify;
+        $locked->save();
     }
 }

@@ -39,4 +39,11 @@ interface ConnectionRepositoryInterface
      * @return Collection<int, Connection>
      */
     public function dueForReview(DateTimeInterface $asOf): Collection;
+
+    /**
+     * Lock the connection and move it to `needs-reverify` (the cadence sweep's
+     * signal that a past-due brand needs re-checking). Must run inside the caller's
+     * transaction.
+     */
+    public function markNeedsReverify(Connection $connection): void;
 }

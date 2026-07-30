@@ -7,17 +7,18 @@ namespace App\Console\Commands;
 use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
-use App\Domain\Research\Enums\ResearchStatus;
 use App\Domain\Research\Repositories\ResearchRepositoryInterface;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Daily cadence sweep: connections past their `next_review_due` get their latest
- * brief marked `stale` and their status moved to `needs-reverify`, so the CRM (and
- * the "Due for review" filter / dashboard) surface them. Reuses the existing
+ * Daily cadence sweep: connections past their `next_review_due` get their status
+ * moved to `needs-reverify` and their latest brief marked `stale` (only when it is
+ * `Complete` — a mid-flight Draft is never clobbered), so the CRM (and the "Due for
+ * review" filter / dashboard) surface them. Reuses the existing
  * `ConnectionRepository::dueForReview`. Only active states (published/drafted) are
  * swept — duplicates, skipped, pending, and already-flagged brands are left alone.
+ * All writes go through the repositories (each `lockForUpdate`).
  *
  * Auto-dispatching the research job for high-priority brands lands with that job
  * (it needs the queue + CLI creds); this command only flags.
@@ -39,19 +40,24 @@ final class FlagStaleResearchCommand extends Command
                 true,
             ));
 
+        // One batched read of the latest brief per due connection (keyed by
+        // connection_id) instead of a query per iteration.
+        $latestByConnection = $research->latestForConnections(
+            $due->map(static fn (Connection $c): int => $c->id)->all()
+        );
+
         $flagged = 0;
         foreach ($due as $connection) {
             if (! $dryRun) {
-                DB::transaction(function () use ($connection, $research): void {
-                    $latest = $research->latestForConnection($connection->id);
-                    if ($latest !== null
-                        && ! in_array($latest->status, [ResearchStatus::Stale, ResearchStatus::Superseded], true)) {
-                        $latest->status = ResearchStatus::Stale;
-                        $latest->save();
+                $latest = $latestByConnection->get($connection->id);
+                DB::transaction(function () use ($connection, $latest, $research, $connections): void {
+                    // markStale is a no-op unless the brief is Complete (a Draft is
+                    // mid-flight; Superseded/Stale are terminal) — the sweep never
+                    // clobbers in-progress research.
+                    if ($latest !== null) {
+                        $research->markStale($latest);
                     }
-
-                    $connection->status = ConnectionStatus::NeedsReverify;
-                    $connection->save();
+                    $connections->markNeedsReverify($connection);
                 });
             }
             $flagged++;
