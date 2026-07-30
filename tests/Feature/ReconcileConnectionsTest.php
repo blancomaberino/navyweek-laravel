@@ -54,6 +54,23 @@ it('flags a live page whose connection is not marked published', function () {
         ->assertFailed();
 });
 
+it('does not flag a live page whose connection is a legitimately-marked duplicate', function () {
+    // The `liveNotMarkedPublished` check excludes rows with `duplicate_of` set: a live
+    // page on a connection that IS correctly marked Duplicate is intentional, not drift.
+    $canonical = Connection::factory()->create();
+    $dupe = connectionWithLivePage([
+        'status' => ConnectionStatus::Duplicate,
+        'duplicate_of' => $canonical->id,
+    ]);
+    Research::factory()->create(['connection_id' => $dupe->id]); // keep YMYL clean
+
+    // The status-drift section reports "none" (the duplicate is excluded by the
+    // whereNull('duplicate_of') guard); without it, this would be "✗ …: 1".
+    $this->artisan('connections:reconcile', ['--check' => true])
+        ->expectsOutputToContain('✓ Status drift — live page not marked published: none')
+        ->assertSuccessful();
+});
+
 it('flags a duplicate that is not marked as a duplicate', function () {
     $canonical = Connection::factory()->create();
     Connection::factory()->create([
