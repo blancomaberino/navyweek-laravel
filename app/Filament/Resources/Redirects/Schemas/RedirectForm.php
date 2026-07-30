@@ -12,6 +12,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 /**
  * Edit form for a `redirects` row. `hits` is a read-only counter maintained by the
@@ -41,7 +42,13 @@ class RedirectForm
                         TextInput::make('from_path')
                             ->required()
                             ->maxLength(2048)
-                            ->unique(Redirect::class, 'from_path', ignoreRecord: true)
+                            // Unique per (from_path, match_type): the same path may carry
+                            // both an exact rule and a prefix (descendants) rule.
+                            ->unique(Redirect::class, 'from_path', ignoreRecord: true, modifyRuleUsing: function (Unique $rule, callable $get): Unique {
+                                $matchType = $get('match_type');
+
+                                return $rule->where('match_type', is_string($matchType) ? $matchType : null);
+                            })
                             ->helperText('Incoming path, leading + trailing slash (e.g. /discount/old-brand/).')
                             ->columnSpanFull(),
                         TextInput::make('to_path')

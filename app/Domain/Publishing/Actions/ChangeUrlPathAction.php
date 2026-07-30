@@ -21,18 +21,29 @@ final class ChangeUrlPathAction
 {
     public function __invoke(Page $page, string $newUrlPath): void
     {
-        $oldUrlPath = $page->url_path;
+        DB::transaction(function () use ($page, $newUrlPath): void {
+            // Lock + reload the current row so concurrent renames from the same
+            // original path serialize: A→B and A→C can't both derive their redirect
+            // from a stale in-memory "A" and leave one of B/C without a redirect.
+            $locked = Page::query()->whereKey($page->getKey())->lockForUpdate()->first();
+            if ($locked === null) {
+                return; // deleted concurrently
+            }
 
-        if ($oldUrlPath === $newUrlPath) {
-            return;
-        }
+            $oldUrlPath = $locked->url_path;
+            if ($oldUrlPath === $newUrlPath) {
+                return;
+            }
 
-        DB::transaction(function () use ($page, $oldUrlPath, $newUrlPath): void {
-            $page->url_path = $newUrlPath;
-            $page->save();
+            $locked->url_path = $newUrlPath;
+            $locked->save();
 
-            // Synchronous listener → the redirect bookkeeping runs inside this txn.
-            PageUrlChanged::dispatch($page, $oldUrlPath, $newUrlPath);
+            // Keep the caller's instance in sync with the persisted change.
+            $page->setRawAttributes($locked->getAttributes(), sync: true);
+
+            // Synchronous listener → the redirect bookkeeping runs inside this txn,
+            // keyed on the locked current path (not the caller's snapshot).
+            PageUrlChanged::dispatch($locked, $oldUrlPath, $newUrlPath);
         });
     }
 }

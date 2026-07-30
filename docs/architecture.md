@@ -410,11 +410,11 @@ erDiagram
 
     REDIRECTS {
         bigint id PK
-        string from_path UK
+        string from_path "unique with match_type"
         string to_path
         int status "default 301"
         string reason
-        string match_type "exact or prefix"
+        string match_type "exact or prefix (unique with from_path)"
         bool is_active
         int hits
     }

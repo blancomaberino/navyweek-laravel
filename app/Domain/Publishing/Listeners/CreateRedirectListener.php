@@ -29,29 +29,33 @@ final class CreateRedirectListener
             return;
         }
 
-        // The new path is now a live page — it must never 301 away. Drop any stale
-        // rule pointing FROM it (including a reverse `/new/ → /old/` from an earlier
-        // rename that we're about to undo).
-        Redirect::query()->where('from_path', $new)->delete();
+        // Only EXACT rules are ever touched here. A PREFIX rule that shares a path is
+        // an admin-managed rule for that path's *descendants* — it can never redirect
+        // the now-live exact page itself, so it must be left intact.
+        $exact = RedirectMatchType::Exact;
 
-        // Collapse inbound chains: whatever used to land on the old path now lands
-        // on the new one directly.
-        Redirect::query()->where('to_path', $old)->update(['to_path' => $new]);
+        // The new path is now a live exact page — drop any stale EXACT rule pointing
+        // FROM it (including a reverse `/new/ → /old/` from an earlier rename).
+        Redirect::query()->where('from_path', $new)->where('match_type', $exact)->delete();
 
-        // The old path 301s to the new one (idempotent on re-rename back and forth).
+        // Collapse inbound EXACT chains: whatever used to 301 to the old path now
+        // lands on the new one directly (prefix rules pointing at old are preserved).
+        Redirect::query()->where('to_path', $old)->where('match_type', $exact)->update(['to_path' => $new]);
+
+        // The old path 301s to the new one — an EXACT slug-change rule. Keying the
+        // upsert on (from_path, match_type=exact) means a prefix rule at `$old` is
+        // never matched and overwritten.
         Redirect::query()->updateOrCreate(
-            ['from_path' => $old],
+            ['from_path' => $old, 'match_type' => $exact],
             [
                 'to_path' => $new,
                 'status' => 301,
                 'reason' => 'slug-change',
-                'match_type' => RedirectMatchType::Exact,
                 'is_active' => true,
             ],
         );
 
-        // Never leave a self-redirect behind (a collapse can only produce one if the
-        // data was already inconsistent, but guard anyway — a self-301 is a loop).
-        Redirect::query()->whereColumn('from_path', 'to_path')->delete();
+        // Never leave an EXACT self-redirect behind (a self-301 is a loop).
+        Redirect::query()->whereColumn('from_path', 'to_path')->where('match_type', $exact)->delete();
     }
 }

@@ -115,3 +115,40 @@ it('never leaves a self-redirect after a rename back and forth', function () {
     hitPath('/guides/a/')->assertOk();
     hitPath('/guides/b/')->assertRedirect('http://localhost/guides/a/')->assertStatus(301);
 });
+
+it('preserves an admin-managed prefix rule at the same path (only exact rules are touched)', function () {
+    // A prefix rule redirects the DESCENDANTS of /guides/old/ to a hub — it can never
+    // match the live exact page /guides/old/ itself, so a rename must not clobber it.
+    Redirect::create([
+        'from_path' => '/guides/old/',
+        'to_path' => '/guides-hub/',
+        'status' => 301,
+        'reason' => 'manual',
+        'match_type' => RedirectMatchType::Prefix,
+        'is_active' => true,
+    ]);
+    $page = staticPage('/guides/old/');
+
+    movePage($page, '/guides/new/');
+
+    // The prefix rule survives untouched…
+    expect(Redirect::query()->where('from_path', '/guides/old/')->where('match_type', RedirectMatchType::Prefix)->sole()->to_path)
+        ->toBe('/guides-hub/');
+    // …and a *separate* exact slug-change rule now 301s the old page path to the new one.
+    expect(Redirect::query()->where('from_path', '/guides/old/')->where('match_type', RedirectMatchType::Exact)->sole()->to_path)
+        ->toBe('/guides/new/');
+});
+
+it('derives the redirect from the current DB path, not a stale in-memory snapshot', function () {
+    $page = staticPage('/guides/old/');
+    // A concurrent rename already moved the row in the DB; $page still holds /old/.
+    Page::query()->whereKey($page->getKey())->update(['url_path' => '/guides/intermediate/']);
+
+    movePage($page, '/guides/final/');
+
+    // The action locked + reloaded, so the redirect is keyed on the current DB path,
+    // not the caller's stale snapshot.
+    expect(Redirect::query()->where('from_path', '/guides/intermediate/')->sole()->to_path)->toBe('/guides/final/')
+        ->and(Redirect::query()->where('from_path', '/guides/old/')->exists())->toBeFalse()
+        ->and($page->fresh()?->url_path)->toBe('/guides/final/');
+});
