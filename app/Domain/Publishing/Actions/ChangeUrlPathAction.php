@@ -6,6 +6,7 @@ namespace App\Domain\Publishing\Actions;
 
 use App\Domain\Publishing\Events\PageUrlChanged;
 use App\Domain\Publishing\Models\Page;
+use App\Domain\Publishing\Repositories\PageRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -19,13 +20,17 @@ use Illuminate\Support\Facades\DB;
  */
 final class ChangeUrlPathAction
 {
+    public function __construct(
+        private readonly PageRepositoryInterface $pages,
+    ) {}
+
     public function __invoke(Page $page, string $newUrlPath): void
     {
         DB::transaction(function () use ($page, $newUrlPath): void {
             // Lock + reload the current row so concurrent renames from the same
             // original path serialize: A→B and A→C can't both derive their redirect
             // from a stale in-memory "A" and leave one of B/C without a redirect.
-            $locked = Page::query()->whereKey($page->getKey())->lockForUpdate()->first();
+            $locked = $this->pages->findForUpdate($page);
             if ($locked === null) {
                 return; // deleted concurrently
             }
@@ -35,8 +40,7 @@ final class ChangeUrlPathAction
                 return;
             }
 
-            $locked->url_path = $newUrlPath;
-            $locked->save();
+            $this->pages->updateUrlPath($locked, $newUrlPath);
 
             // Keep the caller's instance in sync with the persisted change.
             $page->setRawAttributes($locked->getAttributes(), sync: true);

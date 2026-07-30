@@ -872,11 +872,15 @@ Renaming a page's canonical `url_path` in the admin panel creates its redirect
 automatically — the #1 requirement, and the reason `redirects` is a DB table, not
 hand-coded rules. The flow:
 
-`PageResource` EditPage save → **`ChangeUrlPathAction`** (moves the page + fires the
-event, one transaction) → **`PageUrlChanged`** event → **`CreateRedirectListener`**
-(writes the `slug-change` 301, and **collapses chains** so an existing `/a/ → /old/`
-is repointed straight to `/new/` — never a two-hop; drops any stale rule pointing
-away from the now-live new path). `CanonicalUrlMiddleware` already consults the
+`PageResource` EditPage save → **`ChangeUrlPathAction`** (locks + reloads the row via
+`PageRepository::findForUpdate`, persists the new path via `updateUrlPath`, and fires
+the event — one transaction) → **`PageUrlChanged`** event → **`CreateRedirectListener`**
+→ **`RedirectRepository::recordSlugChange`** (writes the `slug-change` 301, and
+**collapses chains** so an existing `/a/ → /old/` is repointed straight to `/new/` —
+never a two-hop; drops any stale rule pointing away from the now-live new path; all
+scoped to EXACT rules, so admin-managed prefix rules survive). Every read and write
+goes through a repository — no model queries in the action or listener.
+`CanonicalUrlMiddleware` already consults the
 `redirects` store (pipeline step 5b), so the new rule is live on the next request
 with no build. The listener is wired in `DomainServiceProvider::boot` (it lives under
 `app/Domain`, outside Laravel's default listener auto-discovery). `PageUrlChanged` is
