@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Domain\Crm\Models\Connection;
+use App\Domain\Research\Models\Research;
 use App\Domain\Research\Models\Skill;
 use App\Filament\Resources\Skills\Pages\CreateSkill;
 use App\Filament\Resources\Skills\Pages\EditSkill;
@@ -56,6 +58,25 @@ it('does not persist the read-only content_hash from the form', function () {
     // Name updates; the automation-maintained hash is untouched by the form.
     expect($skill->name)->toBe('SEO and GEO')
         ->and($skill->content_hash)->toBe('abc123');
+});
+
+it('disables deleting a skill that is cited by a research brief', function () {
+    // research_skill.skill_id cascades on delete, so deleting a cited skill would
+    // wipe brief provenance — the Edit page must disable the delete action.
+    $skill = Skill::create(['key' => 'seo-geo', 'name' => 'SEO / GEO', 'current_version' => '1.0.0']);
+    $connection = Connection::factory()->create();
+    $research = Research::factory()->create(['connection_id' => $connection->id]);
+    $skill->research()->attach($research->id, ['skill_version' => '1.0.0']);
+
+    Livewire::test(EditSkill::class, ['record' => $skill->getRouteKey()])
+        ->assertActionDisabled('delete');
+});
+
+it('allows deleting a skill that no brief cites', function () {
+    $skill = Skill::create(['key' => 'brand-archetypes', 'name' => 'Brand Archetypes', 'current_version' => '1.0.0']);
+
+    Livewire::test(EditSkill::class, ['record' => $skill->getRouteKey()])
+        ->assertActionEnabled('delete');
 });
 
 it('rejects a duplicate skill key', function () {

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Skills\Tables;
 
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -46,11 +44,10 @@ class SkillsTable
             ])
             ->recordActions([
                 EditAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
+        // No bulk delete: skills are a small curated registry and
+        // `research_skill.skill_id` cascadeOnDelete means a bulk delete would wipe
+        // brief provenance en masse. Deletion is per-skill via the Edit page, guarded
+        // against cited skills there.
     }
 }
