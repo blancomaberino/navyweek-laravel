@@ -7,12 +7,31 @@ use App\Domain\Crm\Models\Connection;
 use App\Filament\Widgets\PipelineStatsWidget;
 use App\Models\User;
 use Filament\Facades\Filament;
+use Filament\Widgets\StatsOverviewWidget\Stat;
 use Livewire\Livewire;
 
 beforeEach(function () {
     $this->actingAs(User::factory()->admin()->create());
     Filament::setCurrentPanel(Filament::getPanel('admin'));
 });
+
+/**
+ * The widget's computed stats keyed by label, so a test can assert the actual number
+ * each card shows (StatsOverviewWidget::getStats is protected).
+ *
+ * @return \Illuminate\Support\Collection<string, string>
+ */
+function pipelineStatValues(): \Illuminate\Support\Collection
+{
+    $widget = Livewire::test(PipelineStatsWidget::class)->instance();
+    $method = new ReflectionMethod($widget, 'getStats');
+    /** @var array<int, Stat> $stats */
+    $stats = $method->invoke($widget);
+
+    return collect($stats)->mapWithKeys(
+        static fn (Stat $stat): array => [(string) $stat->getLabel() => (string) $stat->getValue()],
+    );
+}
 
 it('renders the four pipeline stat cards', function () {
     Connection::factory()->published()->create();
@@ -32,18 +51,25 @@ it('renders with an empty universe (no connections)', function () {
         ->assertSee('Connections');
 });
 
-it('shows the past-due count on the due-for-review card', function () {
+it('computes each stat value from the connection universe', function () {
+    // Disjoint fixtures so every card has an unambiguous expected count:
+    Connection::factory()->count(2)->published()->create();                 // Published (next_review_due null)
+    Connection::factory()->create(['status' => ConnectionStatus::Pending]); // plain Pending
+    Connection::factory()->backlog()->create();                             // Pending + is_backlog
+    Connection::factory()->dueForReview('2020-01-01')->create();            // Pending + past-due
+
+    $stats = pipelineStatValues();
+
+    expect($stats['Connections'])->toBe('5')      // every row
+        ->and($stats['Published'])->toBe('2')     // only the two published
+        ->and($stats['Due for review'])->toBe('1') // only the past-due one (nulls excluded)
+        ->and($stats['Backlog'])->toBe('1');      // only the is_backlog one
+});
+
+it('excludes future and never-verified connections from the due-for-review count', function () {
     Connection::factory()->dueForReview('2020-01-01')->create(); // past → due
     Connection::factory()->dueForReview('2999-01-01')->create(); // future → not due
-    Connection::factory()->create();                             // null → not due
+    Connection::factory()->create();                             // null next_review_due → not due
 
-    // Reproduce the widget's own query to assert the intended count independent of
-    // the StatsOverview card DOM order (value renders before label).
-    $due = Connection::query()
-        ->whereNotNull('next_review_due')
-        ->whereDate('next_review_due', '<=', now())
-        ->count();
-
-    expect($due)->toBe(1);
-    Livewire::test(PipelineStatsWidget::class)->assertOk()->assertSee('Due for review');
+    expect(pipelineStatValues()['Due for review'])->toBe('1');
 });
