@@ -36,6 +36,9 @@ final class EloquentPageRepository implements PageRepositoryInterface
             ->where('pageable_type', (new Offer)->getMorphClass())
             ->whereIn('pageable_id', Offer::query()->whereIn('connection_id', $connectionIds)->select('id'))
             ->with('pageable')
+            // Stable order so a connection with more than one published brand page
+            // resolves to the same card deterministically (lowest page id wins).
+            ->orderBy('id')
             ->get();
     }
 }

@@ -118,6 +118,19 @@ it('excludes a same-category brand that has no published page', function () {
         ->assertDontSee('GhostBrand');
 });
 
+it('renders the empty state when no brand in the category has a live page', function () {
+    outdoorHub();
+    // A same-category connection but with no published discount-brand page, so the
+    // whole grid is empty.
+    Connection::factory()->create(['brand' => 'GhostBrand', 'slug' => 'ghostbrand', 'category' => 'outdoor']);
+
+    renderPath('/discount/outdoor/')
+        ->assertOk()
+        ->assertSee('No brands in this category yet')
+        ->assertSee('"numberOfItems":0', false)
+        ->assertDontSee('GhostBrand');
+});
+
 it('uses the audience-specific ItemList name when the offer has an audience label', function () {
     outdoorHub();
     liveBrand('Merrell', 'merrell', 'outdoor', 'First Responder');

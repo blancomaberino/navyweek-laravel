@@ -29,8 +29,10 @@ final class DiscountCategorySchema
         $slug = $page->slug;
         $pageUrl = "{$site}/discount/{$slug}/";
         $orgId = "{$site}/#organization";
-        $ogImage = $category->og_image !== ''
-            ? $site.$category->og_image
+        // Source the image from the page (matches SeoHead's emitted og:image and
+        // DiscountGuideSchema), so the JSON-LD image can't diverge from the head tag.
+        $ogImage = $page->og_image_path !== null && $page->og_image_path !== ''
+            ? $site.$page->og_image_path
             : $site.Config::string('site.default_og_image');
         $datePublished = self::isoDate($page->date_published);
         $dateModified = self::isoDate($page->date_modified);

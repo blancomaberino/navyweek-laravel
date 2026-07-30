@@ -100,7 +100,9 @@ final class PageController
         $liveByConnectionId = [];
         foreach ($brandPages as $brandPage) {
             $offer = $brandPage->pageable;
-            if ($offer instanceof Offer) {
+            // First live page per connection wins (pages are id-ordered), so the card
+            // is deterministic if a connection ever has more than one published page.
+            if ($offer instanceof Offer && ! isset($liveByConnectionId[$offer->connection_id])) {
                 $liveByConnectionId[$offer->connection_id] = [
                     'url' => $brandPage->url_path,
                     'audience' => $offer->audience_label,
