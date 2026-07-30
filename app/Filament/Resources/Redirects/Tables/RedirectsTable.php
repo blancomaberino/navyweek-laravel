@@ -39,6 +39,9 @@ class RedirectsTable
                     ->sortable(),
                 TextColumn::make('reason')
                     ->badge()
+                    // Show the admin-facing label (form + filter use Redirect::REASONS),
+                    // falling back to the raw key for any unmapped legacy value.
+                    ->formatStateUsing(fn (string $state): string => Redirect::REASONS[$state] ?? $state)
                     ->toggleable(),
                 TextColumn::make('match_type')
                     ->badge()
