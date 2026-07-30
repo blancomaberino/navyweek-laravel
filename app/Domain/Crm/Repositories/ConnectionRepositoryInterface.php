@@ -39,4 +39,12 @@ interface ConnectionRepositoryInterface
      * @return Collection<int, Connection>
      */
     public function dueForReview(DateTimeInterface $asOf): Collection;
+
+    /**
+     * Lock the connection's row, stamp `last_verified_at = $verifiedAt`, recompute
+     * `next_review_due = $verifiedAt + research_cadence_days` (read from the locked
+     * row so a concurrent cadence edit can't be lost), and persist. Must be called
+     * inside a transaction so the lock is held; returns the locked/updated model.
+     */
+    public function recordVerification(Connection $connection, DateTimeInterface $verifiedAt): Connection;
 }

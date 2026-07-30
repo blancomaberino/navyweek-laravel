@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Research\Repositories;
 
 use App\Domain\Research\Models\Research;
+use DateTimeInterface;
 use Illuminate\Support\Collection;
 
 /**
@@ -25,4 +26,11 @@ interface ResearchRepositoryInterface
      * @return Collection<int, Research>
      */
     public function historyForConnection(int $connectionId): Collection;
+
+    /**
+     * Lock the brief's row, stamp it Complete with `last_verified = $verifiedAt`, and
+     * persist. Must be called inside a transaction so the lock is held; returns the
+     * locked/updated model.
+     */
+    public function markVerified(Research $research, DateTimeInterface $verifiedAt): Research;
 }

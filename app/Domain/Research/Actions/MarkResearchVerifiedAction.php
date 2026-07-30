@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Research\Actions;
 
-use App\Domain\Research\Enums\ResearchStatus;
+use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
+use App\Domain\Research\Exceptions\CannotVerifyNonLatestResearchException;
 use App\Domain\Research\Models\Research;
+use App\Domain\Research\Repositories\ResearchRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -16,22 +18,30 @@ use Illuminate\Support\Facades\DB;
  * `last_verified_at` and recomputes `next_review_due = last_verified_at +
  * research_cadence_days`. Per the build-clock rule it NEVER touches `pages.date_*` —
  * only `last_verified` traces to research; page dates come from the build.
+ *
+ * Only the current (highest-version) brief may be verified — verifying a superseded
+ * one would stamp the cadence from stale research and leave two Complete briefs for
+ * one connection. Both writes go through the repositories and run in one transaction
+ * (each repo locks its row), so a concurrent edit can't tear the update.
  */
 final class MarkResearchVerifiedAction
 {
+    public function __construct(
+        private readonly ResearchRepositoryInterface $research,
+        private readonly ConnectionRepositoryInterface $connections,
+    ) {}
+
     public function __invoke(Research $research): void
     {
         DB::transaction(function () use ($research): void {
+            $latest = $this->research->latestForConnection($research->connection_id);
+            if ($latest === null || $latest->getKey() !== $research->getKey()) {
+                throw CannotVerifyNonLatestResearchException::forConnection($research->connection_id);
+            }
+
             $now = now();
-
-            $research->last_verified = $now;
-            $research->status = ResearchStatus::Complete;
-            $research->save();
-
-            $connection = $research->connection;
-            $connection->last_verified_at = $now;
-            $connection->next_review_due = $now->copy()->addDays($connection->research_cadence_days);
-            $connection->save();
+            $this->research->markVerified($research, $now);
+            $this->connections->recordVerification($research->connection, $now);
         });
     }
 }

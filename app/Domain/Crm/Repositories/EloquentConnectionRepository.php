@@ -7,6 +7,7 @@ namespace App\Domain\Crm\Repositories;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Crm\Models\ConnectionAlias;
 use DateTimeInterface;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 final class EloquentConnectionRepository implements ConnectionRepositoryInterface
@@ -40,5 +41,15 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
             ->where('next_review_due', '<=', $asOf->format('Y-m-d'))
             ->orderBy('next_review_due')
             ->get();
+    }
+
+    public function recordVerification(Connection $connection, DateTimeInterface $verifiedAt): Connection
+    {
+        $locked = Connection::query()->whereKey($connection->getKey())->lockForUpdate()->firstOrFail();
+        $locked->last_verified_at = Carbon::instance($verifiedAt);
+        $locked->next_review_due = Carbon::instance($verifiedAt)->addDays($locked->research_cadence_days);
+        $locked->save();
+
+        return $locked;
     }
 }

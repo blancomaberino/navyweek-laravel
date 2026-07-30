@@ -909,8 +909,14 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   **"Mark verified"** record action runs `Research\Actions\MarkResearchVerifiedAction`
   — sets the brief Complete + stamps `last_verified`, then recomputes the connection's
   `last_verified_at` / `next_review_due` (= last-verified + `research_cadence_days`).
-  Per the build-clock rule it never touches `pages.date_*`; it is the cadence-recompute
-  foundation the automation spine (FlagStaleResearch, the research job) reuses.
+  Both writes go through the repositories (`ResearchRepository::markVerified`,
+  `ConnectionRepository::recordVerification`, each `lockForUpdate`) inside one
+  transaction — no model queries in the action. Only the **latest** brief may be
+  verified: a non-latest/superseded one throws `CannotVerifyNonLatestResearchException`
+  (and the table hides the action for superseded rows), so cadence is never stamped
+  from stale research. Per the build-clock rule it never touches `pages.date_*`; it is
+  the cadence-recompute foundation the automation spine (FlagStaleResearch, the
+  research job) reuses.
 
 Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
 plain `label(): string`, no Filament dependency); the Filament layer's

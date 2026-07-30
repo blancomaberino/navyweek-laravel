@@ -70,6 +70,9 @@ class ResearchTable
                     ->label('Mark verified')
                     ->icon('heroicon-o-check-badge')
                     ->color('success')
+                    // Superseded briefs are never the source of truth; the action
+                    // itself also rejects any non-latest brief (authoritative guard).
+                    ->hidden(fn (Research $record): bool => $record->status === ResearchStatus::Superseded)
                     ->requiresConfirmation()
                     ->modalDescription('Marks the brief Complete and recomputes the connection’s next review date from its cadence. Does not change page dates.')
                     ->successNotificationTitle('Brief marked verified')

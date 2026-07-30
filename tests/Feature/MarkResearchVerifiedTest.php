@@ -8,6 +8,7 @@ use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Research\Actions\MarkResearchVerifiedAction;
 use App\Domain\Research\Enums\ResearchStatus;
+use App\Domain\Research\Exceptions\CannotVerifyNonLatestResearchException;
 use App\Domain\Research\Models\Research;
 use App\Filament\Resources\Research\Pages\ListResearch;
 use App\Models\User;
@@ -35,6 +36,32 @@ it('marks the brief verified and recomputes the connection review cadence', func
         ->and($research->last_verified?->toDateString())->toBe(now()->toDateString())
         ->and($connection->last_verified_at?->toDateString())->toBe(now()->toDateString())
         ->and($connection->next_review_due?->toDateString())->toBe(now()->addDays(30)->toDateString());
+});
+
+it('refuses to verify a superseded (non-latest) brief and writes nothing', function () {
+    $connection = Connection::factory()->create(['last_verified_at' => null, 'next_review_due' => null]);
+    $old = Research::factory()->create([
+        'connection_id' => $connection->id,
+        'version' => 1,
+        'status' => ResearchStatus::Superseded,
+        'last_verified' => null,
+    ]);
+    // A newer version is the current source of truth.
+    Research::factory()->create([
+        'connection_id' => $connection->id,
+        'version' => 2,
+        'status' => ResearchStatus::Complete,
+    ]);
+
+    expect(fn () => app(MarkResearchVerifiedAction::class)($old))
+        ->toThrow(CannotVerifyNonLatestResearchException::class);
+
+    // The transaction rolled back / never wrote: the old brief and the connection
+    // cadence are untouched.
+    expect($old->refresh()->status)->toBe(ResearchStatus::Superseded)
+        ->and($old->last_verified)->toBeNull()
+        ->and($connection->refresh()->last_verified_at)->toBeNull()
+        ->and($connection->next_review_due)->toBeNull();
 });
 
 it('does not touch page build-clock dates when verifying research', function () {
