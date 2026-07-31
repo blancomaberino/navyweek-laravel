@@ -956,6 +956,14 @@ offers/organizer). City guides are published-only (`GenerateJetTeamPagesAction` 
 `pages:generate-jet-teams` generates hubs + published cities); `renderJetTeamCity` also
 re-checks `published` at render (the repo's `findCity` doesn't filter it).
 
+The **`static`** type is dispatched by slug (`renderStatic`): the first is the
+**`/discount/` directory landing** (slug `discount`, no pageable) — `DiscountIndexSchema`
+emits Breadcrumb + Article + an ItemList over **every published discount-brand page**
+(`PageRepository::allPublishedDiscountBrandPages`) + FAQPage (the legacy HUB_FAQS seeded
+on the page via `GenerateDiscountIndexPageAction` / `pages:generate-discount-index`).
+Other static/content pages (privacy, terms, …) add a `renderStatic` arm; an unknown
+static slug returns the minimal shell.
+
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
 

@@ -32,6 +32,7 @@ use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
 use App\Domain\Publishing\Seo\DiscountCategorySchema;
 use App\Domain\Publishing\Seo\DiscountGuideSchema;
+use App\Domain\Publishing\Seo\DiscountIndexSchema;
 use App\Domain\Publishing\Seo\SeoHead;
 use App\Domain\Publishing\Seo\SeoUrl;
 use Illuminate\Http\Request;
@@ -118,8 +119,42 @@ final class PageController
             PageType::JetTeamCity => $pageable instanceof JetTeamCity
                 ? $this->renderJetTeamCity($page, $pageable)
                 : null,
+            // Static hubs/content pages are dispatched by slug; unknown slugs → shell.
+            PageType::Static => $this->renderStatic($page),
             default => null,
         };
+    }
+
+    /**
+     * Static pages, dispatched by slug. The `/discount/` directory is the first; other
+     * static/content pages (privacy, terms, …) add an arm here. An unrecognized static
+     * slug returns null → the minimal shell.
+     */
+    private function renderStatic(Page $page): ?Response
+    {
+        return match ($page->slug) {
+            'discount' => $this->renderDiscountIndex($page),
+            default => null,
+        };
+    }
+
+    /**
+     * The `/discount/` directory landing page: the JSON-LD ItemList over every
+     * published discount-brand page + the hub FAQs (seeded on the page).
+     */
+    private function renderDiscountIndex(Page $page): Response
+    {
+        $page->load('faqs');
+        $brandPages = $this->pages->allPublishedDiscountBrandPages();
+
+        $seo = SeoHead::forPage($page, DiscountIndexSchema::build($page, $brandPages, $page->faqs));
+
+        return response()->view('pages.discount-index', [
+            'page' => $page,
+            'brandPages' => $brandPages,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
     }
 
     /** The minimal shell for a page type that has no dedicated view yet. */
