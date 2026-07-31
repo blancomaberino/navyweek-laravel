@@ -8,6 +8,7 @@ use App\Domain\Publishing\Models\Redirect;
 use App\Domain\Publishing\Enums\RedirectMatchType;
 use App\Domain\Shared\ValueObjects\UrlPath;
 use App\Filament\Support\EnumOptions;
+use App\Filament\Support\PathField;
 use Closure;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -47,9 +48,7 @@ class RedirectForm
                             // Persist the normalized canonical path (leading + trailing
                             // slash, lowercased, collapsed slashes) so what's stored is
                             // exactly what the middleware matches against.
-                            ->dehydrateStateUsing(static fn (mixed $state): string => is_string($state) && trim($state) !== ''
-                                ? UrlPath::from($state)->value()
-                                : '')
+                            ->dehydrateStateUsing(PathField::canonicalDehydrator())
                             // Reject a normalized self-redirect and a normalized-duplicate
                             // source (per match_type) with a friendly message, rather than
                             // letting a malformed/looping rule go live or hit the DB unique.

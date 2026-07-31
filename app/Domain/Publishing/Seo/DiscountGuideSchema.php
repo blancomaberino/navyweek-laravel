@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Config;
  */
 final class DiscountGuideSchema
 {
+    use BuildsSeoSchema;
+
     /**
      * @return list<array<string, mixed>>
      */
@@ -37,9 +39,7 @@ final class DiscountGuideSchema
         $audienceLabel = $offer->audience_label;
         $title = (string) $page->title;
         $description = (string) $page->meta_description;
-        $ogImage = $page->og_image_path !== null && $page->og_image_path !== ''
-            ? $site.$page->og_image_path
-            : $site.Config::string('site.default_og_image');
+        $ogImage = self::ogImage($site, $page);
         $datePublished = self::isoDate($page->date_published);
         $dateModified = self::isoDate($page->date_modified);
 
@@ -97,7 +97,7 @@ final class DiscountGuideSchema
         // author Person, reviewer Person, FAQPage. The two Person nodes are appended
         // only when the page has that byline assigned.
         $nodes = [
-            self::breadcrumb($site, [
+            self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
                 ['name' => 'Military Discounts', 'url' => '/discount/'],
                 ['name' => $crumbLabel, 'url' => "/discount/{$slug}/"],
@@ -122,28 +122,6 @@ final class DiscountGuideSchema
         $nodes[] = self::faqPage($offer);
 
         return $nodes;
-    }
-
-    /**
-     * @param  list<array{name: string, url: string}>  $items
-     * @return array<string, mixed>
-     */
-    private static function breadcrumb(string $site, array $items): array
-    {
-        return [
-            '@context' => 'https://schema.org',
-            '@type' => 'BreadcrumbList',
-            'itemListElement' => array_map(
-                static fn (array $item, int $i): array => [
-                    '@type' => 'ListItem',
-                    'position' => $i + 1,
-                    'name' => $item['name'],
-                    'item' => SeoUrl::absolute($item['url']),
-                ],
-                $items,
-                array_keys($items),
-            ),
-        ];
     }
 
     /**
@@ -231,10 +209,5 @@ final class DiscountGuideSchema
                 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq->answer],
             ])->all(),
         ];
-    }
-
-    private static function isoDate(mixed $date): string
-    {
-        return $date instanceof \DateTimeInterface ? $date->format('Y-m-d') : '';
     }
 }
