@@ -15,6 +15,7 @@ use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
@@ -66,6 +67,16 @@ class ConnectionsTable
                     ->date()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('next_review_due')
+                    ->date()
+                    ->label('Review due')
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('priority_tier')
+                    ->numeric()
+                    ->label('Priority')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 SelectFilter::make('status')
@@ -79,6 +90,16 @@ class ConnectionsTable
                         : $query),
                 TernaryFilter::make('is_backlog')
                     ->label('Backlog'),
+                Filter::make('due_for_review')
+                    ->label('Due for review')
+                    // Compare the raw `date` column (no DATE() wrap) so the
+                    // `next_review_due` index is usable and the predicate matches the
+                    // canonical `ConnectionRepository::dueForReview`; `<= today`
+                    // already excludes NULLs, so no `whereNotNull` is needed.
+                    ->query(function (Builder $query): Builder {
+                        /** @var Builder<Connection> $query */
+                        return $query->where('next_review_due', '<=', now()->toDateString());
+                    }),
                 TrashedFilter::make(),
             ])
             ->recordActions([

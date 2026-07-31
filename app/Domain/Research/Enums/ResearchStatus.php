@@ -26,4 +26,18 @@ enum ResearchStatus: string implements HasLabel
             self::Superseded => 'Superseded',
         };
     }
+
+    /**
+     * Badge color for admin surfaces — the single source so every table/relation
+     * manager that renders this status stays visually consistent.
+     */
+    public function color(): string
+    {
+        return match ($this) {
+            self::Complete => 'success',
+            self::Draft => 'gray',
+            self::Stale => 'warning',
+            self::Superseded => 'danger',
+        };
+    }
 }
