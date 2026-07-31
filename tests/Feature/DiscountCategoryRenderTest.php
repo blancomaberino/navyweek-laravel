@@ -131,6 +131,37 @@ it('renders the empty state when no brand in the category has a live page', func
         ->assertDontSee('GhostBrand');
 });
 
+it('links the lowest-id page when a connection has more than one published brand page', function () {
+    outdoorHub();
+    $connection = Connection::factory()->create(['brand' => 'Patagonia', 'slug' => 'patagonia', 'category' => 'outdoor']);
+
+    $publish = function (string $urlPath) use ($connection): void {
+        $offer = $connection->offers()->create([
+            'offer_type' => OfferType::Everyday,
+            'audience_label' => 'Military & Veteran',
+            'is_primary' => false,
+            'is_published' => true,
+        ]);
+        $page = Page::create([
+            'page_type' => PageType::DiscountBrand,
+            'slug' => trim($urlPath, '/'),
+            'url_path' => $urlPath,
+            'title' => 'Patagonia Discount',
+            'is_published' => true,
+        ]);
+        $page->pageable()->associate($offer)->save();
+    };
+    $publish('/discount/patagonia-a/'); // created first → lower page id
+    $publish('/discount/patagonia-b/');
+
+    // Deduped to one card, deterministically the lowest-id page (orderBy('id') + first-wins).
+    renderPath('/discount/outdoor/')
+        ->assertOk()
+        ->assertSee('"numberOfItems":1', false)
+        ->assertSee('/discount/patagonia-a/')
+        ->assertDontSee('/discount/patagonia-b/');
+});
+
 it('uses the audience-specific ItemList name when the offer has an audience label', function () {
     outdoorHub();
     liveBrand('Merrell', 'merrell', 'outdoor', 'First Responder');
