@@ -34,8 +34,14 @@ final class SkillHasher
 
         $payload = '';
         foreach ($files as $file) {
+            // Normalize CRLF→LF so the hash is line-ending independent — the skills live
+            // in the parent repo, which has no `.gitattributes eol=lf`, so a Windows /
+            // autocrlf checkout would otherwise hash the same bytes differently and make
+            // the "deterministic" hash flap against the stored one.
+            $content = str_replace("\r\n", "\n", (string) file_get_contents($file));
+
             // Include the basename so a rename changes the hash even if content is identical.
-            $payload .= basename($file)."\0".(string) file_get_contents($file)."\0";
+            $payload .= basename($file)."\0".$content."\0";
         }
 
         return hash('sha256', $payload);

@@ -40,6 +40,22 @@ it('hashes content deterministically and returns null when absent', function () 
     File::deleteDirectory($dir);
 });
 
+it('hashes CRLF and LF content identically (line-ending independent)', function () {
+    $dir = makeSkillsDir();
+    $hasher = app(SkillHasher::class);
+
+    writeSkillFixture($dir, 's', "line one\nline two\n");     // LF
+    $lf = $hasher->hash("{$dir}/s");
+    writeSkillFixture($dir, 's', "line one\r\nline two\r\n"); // CRLF, same logical content
+    $crlf = $hasher->hash("{$dir}/s");
+
+    // The skills repo has no eol=lf gitattributes, so the hash must not depend on
+    // checkout line endings or it would flap against the stored value.
+    expect($crlf)->toBe($lf);
+
+    File::deleteDirectory($dir);
+});
+
 it('changes the hash when a reference file is added or renamed', function () {
     $dir = makeSkillsDir();
     $skill = "{$dir}/s";
