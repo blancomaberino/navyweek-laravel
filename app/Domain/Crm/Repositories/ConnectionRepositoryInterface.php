@@ -42,6 +42,21 @@ interface ConnectionRepositoryInterface
     public function dueForReview(DateTimeInterface $asOf): Collection;
 
     /**
+     * Lock the connection's row, stamp `last_verified_at = $verifiedAt`, recompute
+     * `next_review_due = $verifiedAt + research_cadence_days` (read from the locked
+     * row so a concurrent cadence edit can't be lost), and persist. Must be called
+     * inside a transaction so the lock is held; returns the locked/updated model.
+     */
+    public function recordVerification(Connection $connection, DateTimeInterface $verifiedAt): Connection;
+
+    /**
+     * Lock the connection's row `FOR UPDATE` and return it (null if absent/trashed),
+     * so a caller can serialize a read-then-write sequence on the connection. Must be
+     * called inside a transaction.
+     */
+    public function lockById(int $connectionId): ?Connection;
+
+    /**
      * Reconcile drift: connections that own a live page but have no research brief
      * (the YMYL/R6 violation). Both id sets are supplied by the Page/Research repos.
      *

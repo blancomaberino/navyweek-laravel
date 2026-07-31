@@ -939,7 +939,21 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   a `raw_markdown`-present boolean, last-verified; filters by status / researcher.
   Form edits provenance (status/researcher/confidence/date/skill); the verbatim
   `raw_markdown` is shown read-only + `dehydrated(false)` (the auditable source of
-  record), and the deferred structured columns are left to a later parsing pass.
+  record), and the deferred structured columns are left to a later parsing pass. A
+  **"Mark verified"** record action runs `Research\Actions\MarkResearchVerifiedAction`
+  — sets the brief Complete + stamps `last_verified`, then recomputes the connection's
+  `last_verified_at` / `next_review_due` (= last-verified + `research_cadence_days`).
+  Both writes go through the repositories (`ResearchRepository::markVerified`,
+  `ConnectionRepository::recordVerification`, each `lockForUpdate`) inside one
+  transaction — no model queries in the action. The parent connection is locked
+  (`ConnectionRepository::lockById`) **before** the latest-version guard reads, so
+  concurrent verifies of the same connection serialize. Only the **latest** brief may be
+  verified: a non-latest/superseded one throws `CannotVerifyNonLatestResearchException`
+  (the table hides the action for superseded rows and catches the exception into a
+  danger notification for any other non-latest row), so cadence is never stamped
+  from stale research. Per the build-clock rule it never touches `pages.date_*`; it is
+  the cadence-recompute foundation the automation spine (FlagStaleResearch, the
+  research job) reuses.
 - **SkillResource** (`Research` nav group) — the skill provenance registry
   (`military-discount-research`, `seo-geo`, …). Table: key, name, current version
   badge, short content-hash, and the count of briefs citing the skill (`research`

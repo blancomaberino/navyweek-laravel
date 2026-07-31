@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Research\Tables;
 
+use App\Domain\Research\Actions\MarkResearchVerifiedAction;
 use App\Domain\Research\Enums\ResearchedBy;
 use App\Domain\Research\Enums\ResearchStatus;
+use App\Domain\Research\Exceptions\CannotVerifyNonLatestResearchException;
 use App\Domain\Research\Models\Research;
 use App\Filament\Support\EnumOptions;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -59,6 +63,30 @@ class ResearchTable
                     ->options(EnumOptions::map(ResearchedBy::cases())),
             ])
             ->recordActions([
+                Action::make('markVerified')
+                    ->label('Mark verified')
+                    ->icon('heroicon-o-check-badge')
+                    ->color('success')
+                    // Superseded briefs are never the source of truth; the action
+                    // itself also rejects any non-latest brief (authoritative guard).
+                    ->hidden(fn (Research $record): bool => $record->status === ResearchStatus::Superseded)
+                    ->requiresConfirmation()
+                    ->modalDescription('Marks the brief Complete and recomputes the connection’s next review date from its cadence. Does not change page dates.')
+                    ->successNotificationTitle('Brief marked verified')
+                    ->action(function (Research $record): void {
+                        try {
+                            app(MarkResearchVerifiedAction::class)($record);
+                        } catch (CannotVerifyNonLatestResearchException $e) {
+                            // A newer version exists (and no auto-supersede write path
+                            // marks the old one Superseded yet, so hidden() may not
+                            // catch it) — surface a friendly notice instead of a 500.
+                            Notification::make()
+                                ->title('Only the latest brief can be verified')
+                                ->body($e->getMessage())
+                                ->danger()
+                                ->send();
+                        }
+                    }),
                 EditAction::make(),
             ])
             ->toolbarActions([
