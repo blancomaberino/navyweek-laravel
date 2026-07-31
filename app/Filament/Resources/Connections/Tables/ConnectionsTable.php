@@ -54,7 +54,7 @@ class ConnectionsTable
                 TextColumn::make('status')
                     ->badge()
                     ->formatStateUsing(fn (ConnectionStatus $state): string => $state->label())
-                    ->color(fn (ConnectionStatus $state): string => self::statusColor($state))
+                    ->color(fn (ConnectionStatus $state): string => $state->color())
                     ->sortable(),
                 TextColumn::make('offers_count')
                     ->counts('offers')
@@ -178,19 +178,6 @@ class ConnectionsTable
             ->body('Skipped rows are archived (trashed) and were left unchanged.')
             ->warning()
             ->send();
-    }
-
-    private static function statusColor(ConnectionStatus $status): string
-    {
-        return match ($status) {
-            ConnectionStatus::Published => 'success',
-            ConnectionStatus::Drafted => 'info',
-            ConnectionStatus::Pending => 'gray',
-            ConnectionStatus::Duplicate,
-            ConnectionStatus::NeedsInfo,
-            ConnectionStatus::NeedsReverify => 'warning',
-            ConnectionStatus::Skipped => 'danger',
-        };
     }
 
     /**

@@ -6,8 +6,8 @@ namespace App\Filament\Resources\Pages\Schemas;
 
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
-use App\Domain\Shared\ValueObjects\UrlPath;
 use App\Filament\Support\EnumOptions;
+use App\Filament\Support\PathField;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -36,9 +36,7 @@ class PageForm
                             // Store the canonical form (leading + trailing slash, lowercased,
                             // collapsed slashes) so it's exactly what the router matches and
                             // what ChangeUrlPathAction derives the 301 from.
-                            ->dehydrateStateUsing(static fn (mixed $state): string => is_string($state) && trim($state) !== ''
-                                ? UrlPath::from($state)->value()
-                                : '')
+                            ->dehydrateStateUsing(PathField::canonicalDehydrator())
                             ->unique(Page::class, 'url_path', ignoreRecord: true)
                             ->helperText('Canonical path, leading + trailing slash (e.g. /discount/yeti/).'),
                         TextInput::make('slug')

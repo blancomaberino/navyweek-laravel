@@ -41,4 +41,31 @@ enum ConnectionStatus: string implements HasLabel
     {
         return $this === self::Published;
     }
+
+    /**
+     * The active pipeline states a cadence sweep may move to `needs-reverify` — the
+     * single source for "an active brand" shared by the sweep command's pre-filter and
+     * the repository's under-lock re-check (they must agree, or the dry-run count drifts
+     * from what actually transitions).
+     *
+     * @return list<self>
+     */
+    public static function activeForReview(): array
+    {
+        return [self::Published, self::Drafted];
+    }
+
+    /** Filament badge color for this status — the single source for every status badge. */
+    public function color(): string
+    {
+        return match ($this) {
+            self::Published => 'success',
+            self::Drafted => 'info',
+            self::Pending => 'gray',
+            self::Duplicate,
+            self::NeedsInfo,
+            self::NeedsReverify => 'warning',
+            self::Skipped => 'danger',
+        };
+    }
 }

@@ -6,7 +6,6 @@ namespace App\Domain\Publishing\Seo;
 
 use App\Domain\Catalog\Models\DiscountCategory;
 use App\Domain\Publishing\Models\Page;
-use Illuminate\Support\Facades\Config;
 
 /**
  * JSON-LD for a discount CATEGORY hub (`/discount/{slug}/`), a 1:1 port of the legacy
@@ -19,6 +18,8 @@ use Illuminate\Support\Facades\Config;
  */
 final class DiscountCategorySchema
 {
+    use BuildsSeoSchema;
+
     /**
      * @param  list<BrandItem>  $brandItems  Ordered live brands (absolute URL + ItemList name).
      * @return list<array<string, mixed>>
@@ -29,11 +30,7 @@ final class DiscountCategorySchema
         $slug = $page->slug;
         $pageUrl = "{$site}/discount/{$slug}/";
         $orgId = "{$site}/#organization";
-        // Source the image from the page (matches SeoHead's emitted og:image and
-        // DiscountGuideSchema), so the JSON-LD image can't diverge from the head tag.
-        $ogImage = $page->og_image_path !== null && $page->og_image_path !== ''
-            ? $site.$page->og_image_path
-            : $site.Config::string('site.default_og_image');
+        $ogImage = self::ogImage($site, $page);
         $datePublished = self::isoDate($page->date_published);
         $dateModified = self::isoDate($page->date_modified);
 
@@ -44,20 +41,7 @@ final class DiscountCategorySchema
         ];
 
         return [
-            [
-                '@context' => 'https://schema.org',
-                '@type' => 'BreadcrumbList',
-                'itemListElement' => array_map(
-                    static fn (array $item, int $i): array => [
-                        '@type' => 'ListItem',
-                        'position' => $i + 1,
-                        'name' => $item['name'],
-                        'item' => SeoUrl::absolute($item['url']),
-                    ],
-                    $crumbs,
-                    array_keys($crumbs),
-                ),
-            ],
+            self::breadcrumb($crumbs),
             [
                 '@context' => 'https://schema.org',
                 '@type' => 'Article',
@@ -91,10 +75,5 @@ final class DiscountCategorySchema
                 ),
             ],
         ];
-    }
-
-    private static function isoDate(mixed $date): string
-    {
-        return $date instanceof \DateTimeInterface ? $date->format('Y-m-d') : '';
     }
 }

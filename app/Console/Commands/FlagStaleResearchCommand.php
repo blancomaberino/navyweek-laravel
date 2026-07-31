@@ -36,7 +36,7 @@ final class FlagStaleResearchCommand extends Command
         $due = $connections->dueForReview(now())
             ->filter(static fn (Connection $c): bool => in_array(
                 $c->status,
-                [ConnectionStatus::Published, ConnectionStatus::Drafted],
+                ConnectionStatus::activeForReview(),
                 true,
             ));
 

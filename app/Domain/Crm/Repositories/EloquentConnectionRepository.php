@@ -8,6 +8,7 @@ use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Crm\Models\ConnectionAlias;
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -36,20 +37,31 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
 
     public function dueForReview(DateTimeInterface $asOf): Collection
     {
-        // Compare the raw `date` column (no DATE() wrap) so the `next_review_due`
-        // index is usable; the `<=` predicate already excludes NULLs.
-        return Connection::query()
-            ->where('next_review_due', '<=', $asOf->format('Y-m-d'))
+        return $this->dueForReviewQuery($asOf)
             ->orderBy('next_review_due')
             ->get();
     }
 
+    /**
+     * The canonical "past its review cadence as of `$asOf`" predicate, shared by
+     * `dueForReview` and `dueForReviewCount` so the two can't drift. Compares the raw
+     * `date` column (no DATE() wrap) so the `next_review_due` index is usable; the `<=`
+     * predicate already excludes NULLs.
+     *
+     * @return Builder<Connection>
+     */
+    private function dueForReviewQuery(DateTimeInterface $asOf): Builder
+    {
+        return Connection::query()
+            ->where('next_review_due', '<=', $asOf->format('Y-m-d'));
+    }
+
     public function markNeedsReverify(Connection $connection): bool
     {
-        $locked = Connection::query()->whereKey($connection->getKey())->lockForUpdate()->first();
+        $locked = $this->lockById((int) $connection->getKey());
 
         // Re-check the precondition under the lock: only an active brand transitions.
-        if ($locked === null || ! in_array($locked->status, [ConnectionStatus::Published, ConnectionStatus::Drafted], true)) {
+        if ($locked === null || ! in_array($locked->status, ConnectionStatus::activeForReview(), true)) {
             return false;
         }
 
@@ -114,9 +126,7 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
 
     public function dueForReviewCount(DateTimeInterface $asOf): int
     {
-        return Connection::query()
-            ->where('next_review_due', '<=', $asOf->format('Y-m-d'))
-            ->count();
+        return $this->dueForReviewQuery($asOf)->count();
     }
 
     public function backlogCount(): int
