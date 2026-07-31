@@ -112,3 +112,23 @@ it('shows the research relation manager on the connection page', function () {
         ->assertCanSeeTableRecords([$brief])
         ->assertCanRenderTableColumn('status');
 });
+
+it('bulk-sets the pipeline status on the selected connections', function () {
+    $a = Connection::factory()->create(['status' => ConnectionStatus::Pending]);
+    $b = Connection::factory()->create(['status' => ConnectionStatus::Pending]);
+
+    Livewire::test(ListConnections::class)
+        ->callTableBulkAction('setStatus', [$a, $b], data: ['status' => ConnectionStatus::Skipped->value]);
+
+    expect($a->refresh()->status)->toBe(ConnectionStatus::Skipped)
+        ->and($b->refresh()->status)->toBe(ConnectionStatus::Skipped);
+});
+
+it('bulk-promotes connections out of the backlog', function () {
+    $backlogged = Connection::factory()->backlog()->create();
+
+    Livewire::test(ListConnections::class)
+        ->callTableBulkAction('promoteFromBacklog', [$backlogged]);
+
+    expect($backlogged->refresh()->is_backlog)->toBeFalse();
+});

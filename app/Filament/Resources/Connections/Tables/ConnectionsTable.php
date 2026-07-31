@@ -7,12 +7,16 @@ namespace App\Filament\Resources\Connections\Tables;
 use App\Domain\Crm\Enums\Audience;
 use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
 use App\Filament\Support\EnumOptions;
+use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
+use Filament\Forms\Components\Select;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -21,6 +25,7 @@ use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 
 /**
@@ -107,11 +112,72 @@ class ConnectionsTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
+                    BulkAction::make('setStatus')
+                        ->label('Set pipeline status')
+                        ->icon('heroicon-o-flag')
+                        ->schema([
+                            Select::make('status')
+                                ->options(EnumOptions::map(ConnectionStatus::cases()))
+                                ->required(),
+                        ])
+                        // Rewrites the pipeline status of every selected row with no
+                        // undo — confirm before a select-all mis-click reassigns
+                        // thousands of connections (matches promoteFromBacklog).
+                        ->requiresConfirmation()
+                        ->modalDescription('This overwrites the pipeline status of all selected connections. There is no undo.')
+                        // Report the real affected count instead of Filament's blanket
+                        // success — a selection that includes trashed rows updates fewer
+                        // than were selected, and that shouldn't read as full success.
+                        ->successNotification(null)
+                        ->action(function (array $data, EloquentCollection $records): void {
+                            $status = $data['status'] ?? null;
+                            if (! is_string($status)) {
+                                return;
+                            }
+                            $affected = app(ConnectionRepositoryInterface::class)
+                                ->updateStatusForIds($records->modelKeys(), ConnectionStatus::from($status));
+                            self::notifyBulkResult($affected, $records->count(), 'updated');
+                        })
+                        ->deselectRecordsAfterCompletion(),
+                    BulkAction::make('promoteFromBacklog')
+                        ->label('Promote from backlog')
+                        ->icon('heroicon-o-arrow-up-circle')
+                        ->requiresConfirmation()
+                        ->successNotification(null)
+                        ->action(function (EloquentCollection $records): void {
+                            $affected = app(ConnectionRepositoryInterface::class)->clearBacklogForIds($records->modelKeys());
+                            self::notifyBulkResult($affected, $records->count(), 'promoted');
+                        })
+                        ->deselectRecordsAfterCompletion(),
                     DeleteBulkAction::make(),
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
                 ]),
             ]);
+    }
+
+    /**
+     * Surface the real affected count for a bulk action. When fewer rows changed than
+     * were selected (e.g. trashed rows are excluded by the soft-delete scope), warn
+     * instead of reporting a blanket success.
+     */
+    private static function notifyBulkResult(int $affected, int $selected, string $verb): void
+    {
+        if ($affected >= $selected) {
+            Notification::make()
+                ->title("{$affected} connection(s) {$verb}.")
+                ->success()
+                ->send();
+
+            return;
+        }
+
+        $skipped = $selected - $affected;
+        Notification::make()
+            ->title("{$affected} of {$selected} {$verb} — {$skipped} skipped")
+            ->body('Skipped rows are archived (trashed) and were left unchanged.')
+            ->warning()
+            ->send();
     }
 
     private static function statusColor(ConnectionStatus $status): string

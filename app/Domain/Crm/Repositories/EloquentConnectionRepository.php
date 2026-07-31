@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Crm\Repositories;
 
+use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Crm\Models\ConnectionAlias;
 use DateTimeInterface;
@@ -40,5 +41,15 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
             ->where('next_review_due', '<=', $asOf->format('Y-m-d'))
             ->orderBy('next_review_due')
             ->get();
+    }
+
+    public function updateStatusForIds(array $ids, ConnectionStatus $status): int
+    {
+        return Connection::query()->whereKey($ids)->update(['status' => $status->value]);
+    }
+
+    public function clearBacklogForIds(array $ids): int
+    {
+        return Connection::query()->whereKey($ids)->update(['is_backlog' => false]);
     }
 }
