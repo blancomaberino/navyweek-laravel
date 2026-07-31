@@ -19,8 +19,9 @@ interface AirShowRepositoryInterface
     public function findBySlug(string $slug): ?AirShow;
 
     /**
-     * Published guides only (the render gate for the hub listing), ordered by
-     * short name.
+     * Published guides only (the render gate for the hub listing + ItemList),
+     * ordered by start date with date-unconfirmed shows last — the legacy list
+     * order that fixes the hub ItemList positions.
      *
      * @return Collection<int, AirShow>
      */

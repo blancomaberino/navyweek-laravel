@@ -9,9 +9,13 @@ use App\Domain\Catalog\Models\Offer;
 use App\Domain\Catalog\Repositories\DiscountCategoryRepositoryInterface;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Pillars\Enums\RankCategory;
+use App\Domain\Pillars\Models\AirShow;
+use App\Domain\Pillars\Models\AirShowHubMeta;
 use App\Domain\Pillars\Models\Base;
 use App\Domain\Pillars\Models\Rank;
+use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
 use App\Domain\Pillars\Repositories\RankRepositoryInterface;
+use App\Domain\Pillars\Seo\AirShowPageSchema;
 use App\Domain\Pillars\Seo\BasePageSchema;
 use App\Domain\Pillars\Seo\RankListSchema;
 use App\Domain\Publishing\Enums\PageType;
@@ -41,6 +45,7 @@ final class PageController
         private readonly PageRepositoryInterface $pages,
         private readonly DiscountCategoryRepositoryInterface $categories,
         private readonly RankRepositoryInterface $ranks,
+        private readonly AirShowRepositoryInterface $airShows,
     ) {}
 
     public function show(Request $request): Response
@@ -83,6 +88,12 @@ final class PageController
             // whole rank pillar at render.
             PageType::Rank => $this->renderRankList($page),
             PageType::Rating => $this->renderRatingList($page),
+            // Air-show detail and hub share the type, split by pageable class.
+            PageType::AirShow => match (true) {
+                $pageable instanceof AirShow => $this->renderAirShow($page, $pageable),
+                $pageable instanceof AirShowHubMeta => $this->renderAirShowHub($page, $pageable),
+                default => null,
+            },
             default => null,
         };
     }
@@ -189,6 +200,51 @@ final class PageController
             'page' => $page,
             'activeByCommunity' => $activeByCommunity,
             'historic' => $historic,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * A single air-show guide (`/air-show/{slug}/`). Emits the guide graph
+     * (Article + WebPage + author/reviewer Person + FAQPage) and, when the show is
+     * published with a confirmed date and no canonical override, an Event node.
+     */
+    private function renderAirShow(Page $page, AirShow $show): Response
+    {
+        // Defensive gate: a show unpublished after its page was generated must not keep
+        // serving the guide (page generation only ever creates/updates, never prunes).
+        if (! $show->published) {
+            return $this->renderShell($page);
+        }
+
+        $show->load(['faqs', 'sources']);
+        $page->load(['author', 'reviewer']);
+
+        $seo = SeoHead::forPage($page, AirShowPageSchema::buildDetail($page, $show));
+
+        return response()->view('pages.air-show', [
+            'page' => $page,
+            'show' => $show,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * The air-show hub (`/air-show/`): the published-show directory + JSON-LD ItemList.
+     */
+    private function renderAirShowHub(Page $page, AirShowHubMeta $hub): Response
+    {
+        $hub->load('faqs');
+        $shows = $this->airShows->published();
+
+        $seo = SeoHead::forPage($page, AirShowPageSchema::buildHub($page, $hub, $shows));
+
+        return response()->view('pages.air-show-hub', [
+            'page' => $page,
+            'hub' => $hub,
+            'shows' => $shows,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

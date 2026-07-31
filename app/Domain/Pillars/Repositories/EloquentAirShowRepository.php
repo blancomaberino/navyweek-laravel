@@ -17,9 +17,13 @@ final class EloquentAirShowRepository implements AirShowRepositoryInterface
 
     public function published(): Collection
     {
+        // Legacy list order (airshows/index.ts): by start_date ascending, with
+        // date-unconfirmed shows (empty start_date) forced last. This drives the hub
+        // ItemList positions, so it must match the legacy byte-for-byte.
         return AirShow::query()
             ->where('published', true)
-            ->orderBy('short_name')
+            ->orderByRaw("CASE WHEN start_date IS NULL OR start_date = '' THEN 1 ELSE 0 END")
+            ->orderBy('start_date')
             ->get();
     }
 
