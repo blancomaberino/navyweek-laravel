@@ -37,12 +37,7 @@ class ResearchTable
                 TextColumn::make('status')
                     ->badge()
                     ->formatStateUsing(fn (ResearchStatus $state): string => $state->label())
-                    ->color(fn (ResearchStatus $state): string => match ($state) {
-                        ResearchStatus::Complete => 'success',
-                        ResearchStatus::Draft => 'gray',
-                        ResearchStatus::Stale => 'warning',
-                        ResearchStatus::Superseded => 'danger',
-                    })
+                    ->color(fn (ResearchStatus $state): string => $state->color())
                     ->sortable(),
                 TextColumn::make('researched_by')
                     ->badge()

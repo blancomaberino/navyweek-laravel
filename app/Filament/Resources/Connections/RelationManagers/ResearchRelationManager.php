@@ -35,7 +35,8 @@ class ResearchRelationManager extends RelationManager
                     ->sortable(),
                 TextColumn::make('status')
                     ->badge()
-                    ->formatStateUsing(fn (ResearchStatus $state): string => $state->label()),
+                    ->formatStateUsing(fn (ResearchStatus $state): string => $state->label())
+                    ->color(fn (ResearchStatus $state): string => $state->color()),
                 TextColumn::make('researched_by')
                     ->badge()
                     ->formatStateUsing(fn (ResearchedBy $state): string => $state->label()),

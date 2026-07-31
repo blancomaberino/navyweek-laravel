@@ -97,9 +97,14 @@ class ConnectionsTable
                     ->label('Backlog'),
                 Filter::make('due_for_review')
                     ->label('Due for review')
-                    ->query(fn (Builder $query): Builder => $query
-                        ->whereNotNull('next_review_due')
-                        ->whereDate('next_review_due', '<=', now())),
+                    // Compare the raw `date` column (no DATE() wrap) so the
+                    // `next_review_due` index is usable and the predicate matches the
+                    // canonical `ConnectionRepository::dueForReview`; `<= today`
+                    // already excludes NULLs, so no `whereNotNull` is needed.
+                    ->query(function (Builder $query): Builder {
+                        /** @var Builder<Connection> $query */
+                        return $query->where('next_review_due', '<=', now()->toDateString());
+                    }),
                 TrashedFilter::make(),
             ])
             ->recordActions([
