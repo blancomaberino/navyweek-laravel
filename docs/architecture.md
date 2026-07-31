@@ -414,11 +414,11 @@ erDiagram
 
     REDIRECTS {
         bigint id PK
-        string from_path UK
+        string from_path "unique with match_type"
         string to_path
         int status "default 301"
         string reason
-        string match_type "exact or prefix"
+        string match_type "exact or prefix (unique with from_path)"
         bool is_active
         int hits
     }
@@ -867,8 +867,37 @@ assigned `users` (`author_id`/`reviewer_id`, eager-loaded) rather than hardcoded
 so the byline is set per-page from the admin panel. `EditorialTeamSeeder` seeds the
 two default byline users (`config('site.editorial.*')`) and the importer assigns
 them to new pages; a page with no author/reviewer simply omits those nodes.
+
+A **`discount_category_hub`** page renders `pages.discount-category` — the ordered
+brand grid for one `DiscountCategory` (`pageable`). The controller takes the
+repository's `orderedConnections` sort and keeps only brands with a published
+discount-brand page (the card links straight to it); JSON-LD is built by
+`DiscountCategorySchema` (Breadcrumb + Article + **ItemList** — the first ItemList
+node in the SEO layer; no WebSite/FAQPage, and the Article is Organization-authored,
+no Person byline).
+
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
+
+### Editable URLs (auto-301, zero deploys)
+
+Renaming a page's canonical `url_path` in the admin panel creates its redirect
+automatically — the #1 requirement, and the reason `redirects` is a DB table, not
+hand-coded rules. The flow:
+
+`PageResource` EditPage save → **`ChangeUrlPathAction`** (locks + reloads the row via
+`PageRepository::findForUpdate`, persists the new path via `updateUrlPath`, and fires
+the event — one transaction) → **`PageUrlChanged`** event → **`CreateRedirectListener`**
+→ **`RedirectRepository::recordSlugChange`** (writes the `slug-change` 301, and
+**collapses chains** so an existing `/a/ → /old/` is repointed straight to `/new/` —
+never a two-hop; drops any stale rule pointing away from the now-live new path; all
+scoped to EXACT rules, so admin-managed prefix rules survive). Every read and write
+goes through a repository — no model queries in the action or listener.
+`CanonicalUrlMiddleware` already consults the
+`redirects` store (pipeline step 5b), so the new rule is live on the next request
+with no build. The listener is wired in `DomainServiceProvider::boot` (it lives under
+`app/Domain`, outside Laravel's default listener auto-discovery). `PageUrlChanged` is
+also the future hook for response-cache invalidation (Phase 6).
 
 ## Admin panel (Filament v4)
 
@@ -886,9 +915,14 @@ through** (see the request pipeline) — without that exemption its catch-all wo
 
 - **ConnectionResource** (`CRM` nav group) — the ~15.3k brand universe. Table tuned
   for that scale: search on the indexed identity columns (`brand`/`slug`/`key`), a
-  live-status badge, an `offers` count, and pipeline/category/backlog filters
-  (`audiences` filtered via `whereJsonContains`). The form groups identity /
-  pipeline / links, with the imported search-metric columns surfaced read-only.
+  live-status badge, an `offers` count, review-cadence columns (`next_review_due`,
+  `priority_tier`), and pipeline/category/backlog filters (`audiences` filtered via
+  `whereJsonContains`) plus a **"Due for review"** filter (`next_review_due <= today`).
+  The form groups identity / pipeline / links, with the imported search-metric columns
+  surfaced read-only. **Relation managers** show the brand's `offers` and versioned
+  `research` briefs read-only inline (editing lives in the Offer/Research resources).
+  **Bulk actions** manage the 15k universe at scale: set pipeline status, promote out
+  of the backlog (alongside the soft-delete/restore trio).
 - **OfferResource** (`Catalog` nav group) — one row per brand offer. Table: brand
   (via the `connection` relation), offer-type badge, primary/published flags, tier
   count; filters by type / connection / the flags. The form groups identity /
@@ -909,12 +943,56 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   a `raw_markdown`-present boolean, last-verified; filters by status / researcher.
   Form edits provenance (status/researcher/confidence/date/skill); the verbatim
   `raw_markdown` is shown read-only + `dehydrated(false)` (the auditable source of
-  record), and the deferred structured columns are left to a later parsing pass.
+  record), and the deferred structured columns are left to a later parsing pass. A
+  **"Mark verified"** record action runs `Research\Actions\MarkResearchVerifiedAction`
+  — sets the brief Complete + stamps `last_verified`, then recomputes the connection's
+  `last_verified_at` / `next_review_due` (= last-verified + `research_cadence_days`).
+  Both writes go through the repositories (`ResearchRepository::markVerified`,
+  `ConnectionRepository::recordVerification`, each `lockForUpdate`) inside one
+  transaction — no model queries in the action. The parent connection is locked
+  (`ConnectionRepository::lockById`) **before** the latest-version guard reads, so
+  concurrent verifies of the same connection serialize. Only the **latest** brief may be
+  verified: a non-latest/superseded one throws `CannotVerifyNonLatestResearchException`
+  (the table hides the action for superseded rows and catches the exception into a
+  danger notification for any other non-latest row), so cadence is never stamped
+  from stale research. Per the build-clock rule it never touches `pages.date_*`; it is
+  the cadence-recompute foundation the automation spine (FlagStaleResearch, the
+  research job) reuses.
+- **SkillResource** (`Research` nav group) — the skill provenance registry
+  (`military-discount-research`, `seo-geo`, …). Table: key, name, current version
+  badge, short content-hash, and the count of briefs citing the skill (`research`
+  relation). Read-mostly form — identity/version/source_ref are editable; the
+  `content_hash` is shown read-only (`dehydrated(false)`) because the skill-hash
+  detector maintains it.
+- **RedirectResource** (`Publishing` nav group) — the redirect store, one row per 301
+  rule. Table: from/to path, status, provenance (`reason`) + match-type badges, active
+  toggle, live hit counter; filters by match type / reason / active. Editors add manual
+  rules; the `slug-change` rows the editable-URL loop writes surface here too. `hits`
+  is a read-only middleware-maintained counter.
+
+The **dashboard** carries a `PipelineStatsWidget` (auto-discovered under
+`app/Filament/Widgets`) — a stats-overview of the pipeline: total connections,
+published (live pages), due-for-review (past the research cadence), and backlog.
 
 Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
 plain `label(): string`, no Filament dependency); the Filament layer's
 `Support\EnumOptions::map()` turns any `HasLabel` enum's cases into the
 `value => label` option array every resource form/table/filter uses.
+
+## Scheduled tasks
+
+`routes/console.php` schedules the research-cadence sweep: **`research:flag-stale`**
+(daily) reuses `ConnectionRepository::dueForReview(now())`, batch-loads the latest
+brief per due connection via `ResearchRepository::latestForConnections` (no
+per-connection query), and for each past-due active connection (published/drafted
+only) moves it to `needs-reverify` and marks its latest brief `stale` — but only when
+that brief is `Complete` (a mid-flight `Draft` is never clobbered). Both writes go
+through the repositories (`ResearchRepository::markStale`,
+`ConnectionRepository::markNeedsReverify`, each `lockForUpdate`) inside a
+per-connection transaction — no model queries in the command. It surfaces the brand
+in the CRM's "Due for review" filter and the dashboard. `--dry-run` reports the count
+without writing. Auto-dispatching the research job for high-priority brands lands with
+that job (queue + CLI creds).
 
 ## Data migration pipeline (Stage A → Stage B)
 
