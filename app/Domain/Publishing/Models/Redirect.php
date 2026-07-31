@@ -19,6 +19,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Redirect extends Model
 {
+    /**
+     * Provenance values for `reason` → their admin-facing labels. Single source for
+     * the RedirectResource form select and table filter.
+     *
+     * @var array<string, string>
+     */
+    public const REASONS = [
+        'manual' => 'Manual',
+        'slug-change' => 'Slug change (auto)',
+        'retirement' => 'Retirement',
+        'import-legacy' => 'Imported legacy rule',
+    ];
+
     protected $fillable = [
         'from_path',
         'to_path',

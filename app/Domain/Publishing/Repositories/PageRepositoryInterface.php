@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Publishing\Repositories;
 
 use App\Domain\Publishing\Models\Page;
+use Illuminate\Database\Eloquent\Collection;
 
 interface PageRepositoryInterface
 {
@@ -23,4 +24,26 @@ interface PageRepositoryInterface
      * return null (the middleware has already 301'd those).
      */
     public function findPublishedByPath(string $urlPath): ?Page;
+
+    /**
+     * Published discount-brand pages whose Offer belongs to one of the given
+     * connections, with `pageable` (the Offer) eager-loaded. Powers the category
+     * hub's "live brands" grid — a brand renders only when it has a live page.
+     *
+     * @param  array<int, int>  $connectionIds
+     * @return Collection<int, Page>
+     */
+    public function liveDiscountBrandPagesForConnections(array $connectionIds): Collection;
+
+    /**
+     * Re-read the given page's row under a `FOR UPDATE` row lock, so a rename can
+     * serialize against concurrent writers. Must be called inside a transaction;
+     * returns null if the row was deleted concurrently.
+     */
+    public function findForUpdate(Page $page): ?Page;
+
+    /**
+     * Persist a new canonical `url_path` on an already-loaded page.
+     */
+    public function updateUrlPath(Page $page, string $newUrlPath): void;
 }
