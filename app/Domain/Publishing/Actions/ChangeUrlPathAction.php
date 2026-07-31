@@ -7,6 +7,7 @@ namespace App\Domain\Publishing\Actions;
 use App\Domain\Publishing\Events\PageUrlChanged;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Shared\ValueObjects\UrlPath;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -26,6 +27,12 @@ final class ChangeUrlPathAction
 
     public function __invoke(Page $page, string $newUrlPath): void
     {
+        // Canonicalize at the boundary so the stored `url_path` AND the derived
+        // redirect (`from_path`/`to_path`) are the exact form the middleware matches
+        // (it lowercases + trailing-slashes). A non-canonical input would otherwise
+        // store a page the router can't serve and a redirect that never fires.
+        $newUrlPath = UrlPath::from($newUrlPath)->value();
+
         DB::transaction(function () use ($page, $newUrlPath): void {
             // Lock + reload the current row so concurrent renames from the same
             // original path serialize: A→B and A→C can't both derive their redirect

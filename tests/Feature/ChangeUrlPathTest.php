@@ -59,6 +59,22 @@ it('renames a page and 301s the old path to the new one, with no deploy', functi
     hitPath('/guides/new/')->assertOk();
 });
 
+it('canonicalizes a non-canonical new path so the page and its 301 both work', function () {
+    $page = staticPage('/guides/old/');
+
+    // Uppercase + missing trailing slash — a plausible admin typo.
+    movePage($page, '/Guides/New-Page');
+
+    // The stored path is canonical (lowercased, trailing slash)…
+    expect($page->fresh()?->url_path)->toBe('/guides/new-page/');
+
+    // …and the derived 301 uses the canonical form, so the middleware (which matches a
+    // lowercased path) actually fires it and the renamed page is reachable.
+    expect(Redirect::query()->where('from_path', '/guides/old/')->sole()->to_path)->toBe('/guides/new-page/');
+    hitPath('/guides/old/')->assertRedirect('http://localhost/guides/new-page/')->assertStatus(301);
+    hitPath('/guides/new-page/')->assertOk();
+});
+
 it('collapses an inbound chain to a single hop', function () {
     // An older URL already 301s to /guides/old/.
     Redirect::create([
