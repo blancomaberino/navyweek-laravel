@@ -52,4 +52,9 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
 
         return $locked;
     }
+
+    public function lockById(int $connectionId): ?Connection
+    {
+        return Connection::query()->whereKey($connectionId)->lockForUpdate()->first();
+    }
 }

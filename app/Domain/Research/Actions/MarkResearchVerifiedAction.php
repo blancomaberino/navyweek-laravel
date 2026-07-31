@@ -23,6 +23,12 @@ use Illuminate\Support\Facades\DB;
  * one would stamp the cadence from stale research and leave two Complete briefs for
  * one connection. Both writes go through the repositories and run in one transaction
  * (each repo locks its row), so a concurrent edit can't tear the update.
+ *
+ * The parent connection is locked FIRST, before the latest-version guard reads, so two
+ * concurrent verifies of the same connection serialize on it. (A brand-new version
+ * inserted by a writer that doesn't take this lock — the importer or the research form —
+ * is still possible but benign: it supersedes the prior brief, so the guard's stale
+ * `$latest` is at worst verified a beat early and the next research run reconciles it.)
  */
 final class MarkResearchVerifiedAction
 {
@@ -34,6 +40,12 @@ final class MarkResearchVerifiedAction
     public function __invoke(Research $research): void
     {
         DB::transaction(function () use ($research): void {
+            // Lock the connection before the guard read so concurrent verifies serialize.
+            $connection = $this->connections->lockById($research->connection_id);
+            if ($connection === null) {
+                return; // connection deleted/trashed concurrently
+            }
+
             $latest = $this->research->latestForConnection($research->connection_id);
             if ($latest === null || $latest->getKey() !== $research->getKey()) {
                 throw CannotVerifyNonLatestResearchException::forConnection($research->connection_id);
@@ -41,7 +53,7 @@ final class MarkResearchVerifiedAction
 
             $now = now();
             $this->research->markVerified($research, $now);
-            $this->connections->recordVerification($research->connection, $now);
+            $this->connections->recordVerification($connection, $now);
         });
     }
 }

@@ -47,4 +47,11 @@ interface ConnectionRepositoryInterface
      * inside a transaction so the lock is held; returns the locked/updated model.
      */
     public function recordVerification(Connection $connection, DateTimeInterface $verifiedAt): Connection;
+
+    /**
+     * Lock the connection's row `FOR UPDATE` and return it (null if absent/trashed),
+     * so a caller can serialize a read-then-write sequence on the connection. Must be
+     * called inside a transaction.
+     */
+    public function lockById(int $connectionId): ?Connection;
 }

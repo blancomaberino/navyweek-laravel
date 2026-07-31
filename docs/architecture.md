@@ -911,7 +911,9 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   `last_verified_at` / `next_review_due` (= last-verified + `research_cadence_days`).
   Both writes go through the repositories (`ResearchRepository::markVerified`,
   `ConnectionRepository::recordVerification`, each `lockForUpdate`) inside one
-  transaction — no model queries in the action. Only the **latest** brief may be
+  transaction — no model queries in the action. The parent connection is locked
+  (`ConnectionRepository::lockById`) **before** the latest-version guard reads, so
+  concurrent verifies of the same connection serialize. Only the **latest** brief may be
   verified: a non-latest/superseded one throws `CannotVerifyNonLatestResearchException`
   (the table hides the action for superseded rows and catches the exception into a
   danger notification for any other non-latest row), so cadence is never stamped
