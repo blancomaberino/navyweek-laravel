@@ -23,6 +23,24 @@ incomplete.
   listener, or request-flow step** must update that diagram in the same PR. Treat a
   stale diagram as a failing gate — reviewers check it against the diff.
 
+## Data access (repositories)
+
+All data access in running-application code (controllers, console commands,
+Filament widgets/pages, domain actions/listeners) goes through the repository
+**interfaces** bound in `DomainServiceProvider` — never `Model::query()`/`::where`/
+`::find` directly. (Filament Resource/Table/Form/RelationManager model binding is
+the framework's own layer and is exempt; Stage-B ETL importers under
+`app/Domain/*/Import/` are the one approved exception.)
+
+- **Reuse before writing.** Before adding a new method to a repository — or writing
+  any new function — first check whether one that already covers the need exists,
+  and reuse it. Read the repository interface and its Eloquent implementation, and
+  grep for similar signatures across the aggregate. Extend or compose an existing
+  method rather than duplicating one that differs only trivially (e.g. batch
+  `latestForConnection` into `latestForConnections` instead of adding a parallel
+  query; call a repo method that already encodes a predicate instead of re-inlining
+  it). Duplicate near-identical queries drift apart and cause bugs.
+
 ## Everything else
 
 The mandated per-task skill/quality-gate workflow (`/frontend-design` + `/seo-geo`
