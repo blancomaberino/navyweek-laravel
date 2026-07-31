@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Crm\Repositories;
 
+use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use DateTimeInterface;
 use Illuminate\Support\Collection;
@@ -65,4 +66,32 @@ interface ConnectionRepositoryInterface
      * @return Collection<int, Connection>
      */
     public function duplicatesNotMarkedDuplicate(): Collection;
+
+    /** Total connections in the universe. */
+    public function total(): int;
+
+    /** Connections in the given pipeline status. */
+    public function countByStatus(ConnectionStatus $status): int;
+
+    /** Connections whose research is due for re-verification as of `$asOf`. */
+    public function dueForReviewCount(DateTimeInterface $asOf): int;
+
+    /** Connections still in the backlog (`is_backlog`). */
+    public function backlogCount(): int;
+
+    /**
+     * Bulk-set the pipeline status on the given connection ids (CRM bulk action).
+     *
+     * @param  array<int, int|string>  $ids
+     * @return int  rows affected
+     */
+    public function updateStatusForIds(array $ids, ConnectionStatus $status): int;
+
+    /**
+     * Bulk-clear `is_backlog` on the given connection ids (promote from backlog).
+     *
+     * @param  array<int, int|string>  $ids
+     * @return int  rows affected
+     */
+    public function clearBacklogForIds(array $ids): int;
 }

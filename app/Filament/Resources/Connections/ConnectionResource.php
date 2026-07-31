@@ -53,7 +53,8 @@ class ConnectionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\OffersRelationManager::class,
+            RelationManagers\ResearchRelationManager::class,
         ];
     }
 

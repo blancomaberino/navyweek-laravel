@@ -10,7 +10,7 @@ use Illuminate\Database\Seeder;
 
 /**
  * Seeds the hand-coded 301s from the legacy `middleware.ts` as `redirects` rows.
- * Idempotent (keyed on from_path). Paths are stored lowercase and trailing-slash-
+ * Idempotent (keyed on (from_path, match_type)). Paths are stored lowercase and trailing-slash-
  * normalized, because CanonicalUrlMiddleware matches after its trailing-slash 301.
  *
  * NOT seeded here (they are algorithmic, handled in code, not data):
@@ -56,13 +56,15 @@ class RedirectSeeder extends Seeder
 
     private function upsert(string $from, string $to, RedirectMatchType $matchType, string $reason): void
     {
+        // Key on (from_path, match_type) to match the composite unique — a path may
+        // carry both an exact and a prefix rule, so from_path alone no longer
+        // identifies a row.
         Redirect::query()->updateOrCreate(
-            ['from_path' => $from],
+            ['from_path' => $from, 'match_type' => $matchType],
             [
                 'to_path' => $to,
                 'status' => 301,
                 'reason' => $reason,
-                'match_type' => $matchType,
                 'is_active' => true,
             ],
         );
