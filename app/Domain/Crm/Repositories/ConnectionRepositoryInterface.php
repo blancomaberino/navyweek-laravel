@@ -42,6 +42,15 @@ interface ConnectionRepositoryInterface
     public function dueForReview(DateTimeInterface $asOf): Collection;
 
     /**
+     * Lock the connection and move it to `needs-reverify` — but ONLY from an active
+     * (`published`/`drafted`) state, re-checked under the lock so a connection that
+     * left the active set since it was read (e.g. edited to `skipped`/`duplicate`)
+     * isn't clobbered. Returns true if it transitioned, false if skipped/absent. Must
+     * run inside the caller's transaction. Mirrors `ResearchRepository::markStale`.
+     */
+    public function markNeedsReverify(Connection $connection): bool;
+
+    /**
      * Lock the connection's row, stamp `last_verified_at = $verifiedAt`, recompute
      * `next_review_due = $verifiedAt + research_cadence_days` (read from the locked
      * row so a concurrent cadence edit can't be lost), and persist. Must be called

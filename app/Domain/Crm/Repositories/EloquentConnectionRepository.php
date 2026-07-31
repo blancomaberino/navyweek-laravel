@@ -44,6 +44,21 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
             ->get();
     }
 
+    public function markNeedsReverify(Connection $connection): bool
+    {
+        $locked = Connection::query()->whereKey($connection->getKey())->lockForUpdate()->first();
+
+        // Re-check the precondition under the lock: only an active brand transitions.
+        if ($locked === null || ! in_array($locked->status, [ConnectionStatus::Published, ConnectionStatus::Drafted], true)) {
+            return false;
+        }
+
+        $locked->status = ConnectionStatus::NeedsReverify;
+        $locked->save();
+
+        return true;
+    }
+
     public function recordVerification(Connection $connection, DateTimeInterface $verifiedAt): Connection
     {
         $locked = Connection::query()->whereKey($connection->getKey())->lockForUpdate()->firstOrFail();
