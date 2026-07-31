@@ -12,11 +12,14 @@ use App\Domain\Pillars\Enums\RankCategory;
 use App\Domain\Pillars\Models\AirShow;
 use App\Domain\Pillars\Models\AirShowHubMeta;
 use App\Domain\Pillars\Models\Base;
+use App\Domain\Pillars\Models\FleetWeek;
 use App\Domain\Pillars\Models\Rank;
 use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
+use App\Domain\Pillars\Repositories\FleetWeekRepositoryInterface;
 use App\Domain\Pillars\Repositories\RankRepositoryInterface;
 use App\Domain\Pillars\Seo\AirShowPageSchema;
 use App\Domain\Pillars\Seo\BasePageSchema;
+use App\Domain\Pillars\Seo\FleetWeekPageSchema;
 use App\Domain\Pillars\Seo\RankListSchema;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
@@ -46,6 +49,7 @@ final class PageController
         private readonly DiscountCategoryRepositoryInterface $categories,
         private readonly RankRepositoryInterface $ranks,
         private readonly AirShowRepositoryInterface $airShows,
+        private readonly FleetWeekRepositoryInterface $fleetWeeks,
     ) {}
 
     public function show(Request $request): Response
@@ -94,6 +98,10 @@ final class PageController
                 $pageable instanceof AirShowHubMeta => $this->renderAirShowHub($page, $pageable),
                 default => null,
             },
+            // Fleet-week city (pageable = FleetWeek) vs the hub (no pageable).
+            PageType::FleetWeek => $pageable instanceof FleetWeek
+                ? $this->renderFleetWeek($page, $pageable)
+                : $this->renderFleetWeekHub($page),
             default => null,
         };
     }
@@ -245,6 +253,44 @@ final class PageController
             'page' => $page,
             'hub' => $hub,
             'shows' => $shows,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * A single fleet-week city guide (`/fleetweek/{slug}/`). Emits the guide graph +
+     * a Festival node when the city has an official event (Tier-3 cities omit it).
+     */
+    private function renderFleetWeek(Page $page, FleetWeek $week): Response
+    {
+        $week->load(['faqs', 'sources']);
+        $page->load(['author', 'reviewer']);
+
+        $seo = SeoHead::forPage($page, FleetWeekPageSchema::buildDetail($page, $week));
+
+        return response()->view('pages.fleet-week', [
+            'page' => $page,
+            'week' => $week,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * The fleet-week hub (`/fleetweek/`): the city directory + JSON-LD ItemList. The
+     * hub FAQs live on the page's own polymorphic `faqs` (seeded from the legacy consts).
+     */
+    private function renderFleetWeekHub(Page $page): Response
+    {
+        $page->load('faqs');
+        $weeks = $this->fleetWeeks->all();
+
+        $seo = SeoHead::forPage($page, FleetWeekPageSchema::buildHub($page, $weeks, $page->faqs));
+
+        return response()->view('pages.fleet-week-hub', [
+            'page' => $page,
+            'weeks' => $weeks,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);
