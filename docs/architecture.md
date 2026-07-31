@@ -1157,6 +1157,28 @@ connection is flagged in an isolated transaction (mirroring the stale sweep), so
 bad row can't abort the run or force a version re-bump — no model queries in the
 action.
 
+## Sitemap generation
+
+`sitemap:generate` regenerates the custom **9-file sitemap split + index** — a hand-port
+of the legacy `scripts/generate-sitemap.mjs` (not a generic package; byte-parity with the
+old output is load-bearing for search). The platform adaptation: the `pages` table is the
+single route registry, so `Publishing\Sitemap\SitemapGenerator` reads
+`PageRepository::allPublishedIndexable()` (published + not `noindex`, url-ordered) instead
+of re-deriving routes from the TypeScript registries and scraping built HTML for
+`noindex`/canonical. Each page is assigned to a bucket **purely by `url_path` prefix**
+(events / guides / reference / discounts / local-discounts / fleetweek / jetteams /
+air-show), mirroring how the legacy script constructed each bucket's paths — decoupled
+from `PageType`, so a new family buckets automatically once its prefix is listed.
+`lastmod` comes from the build-clock `date_modified` (falling back to `date_published`,
+then a fixed date), which already encodes the legacy "only bump when the record changed"
+rule. The non-HTML **`data`** bucket (`/llms.txt`, `/data/navy-week-2026.json`, produced
+by `feed:generate`) is added for whichever of those files exist in `public/`, each with
+no trailing slash. The generator is **pure** (returns a `SitemapResult` of filename → XML
+body); the command owns the writes to `public/`. A published, indexable page whose path
+matches **no** bucket is excluded from the output and reported as a warning — the
+reconciliation net ported from the legacy `walkDist` sweep, so a new page category can't
+silently vanish from every sitemap.
+
 ## Data migration pipeline (Stage A → Stage B)
 
 The legacy `../src/data` TypeScript is migrated into the tables above in two

@@ -169,6 +169,15 @@ final class EloquentPageRepository implements PageRepositoryInterface
             ->get();
     }
 
+    public function allPublishedIndexable(): Collection
+    {
+        return Page::query()
+            ->where('is_published', true)
+            ->where('noindex', false)
+            ->orderBy('url_path')
+            ->get();
+    }
+
     public function findForUpdate(Page $page): ?Page
     {
         return Page::query()
