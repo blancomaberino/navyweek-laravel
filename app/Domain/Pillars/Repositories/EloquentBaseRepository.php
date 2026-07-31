@@ -16,6 +16,11 @@ final class EloquentBaseRepository implements BaseRepositoryInterface
         return Base::query()->where('slug', $slug)->first();
     }
 
+    public function all(): Collection
+    {
+        return Base::query()->orderBy('name')->get();
+    }
+
     public function forState(string $stateSlug): Collection
     {
         return Base::query()

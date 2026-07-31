@@ -19,6 +19,14 @@ interface BaseRepositoryInterface
     public function findBySlug(string $slug): ?Base;
 
     /**
+     * Every base, ordered by name — the read behind pillar-page generation (one
+     * `pages` row per base) and any full-directory build.
+     *
+     * @return Collection<int, Base>
+     */
+    public function all(): Collection;
+
+    /**
      * State-based bases in a state, by state slug (the `/bases/<state>/` hub).
      *
      * @return Collection<int, Base>

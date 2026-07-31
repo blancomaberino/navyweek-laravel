@@ -29,10 +29,6 @@ final class DiscountCategorySchema
         $site = SeoUrl::site();
         $slug = $page->slug;
         $pageUrl = "{$site}/discount/{$slug}/";
-        $orgId = "{$site}/#organization";
-        $ogImage = self::ogImage($site, $page);
-        $datePublished = self::isoDate($page->date_published);
-        $dateModified = self::isoDate($page->date_modified);
 
         $crumbs = [
             ['name' => 'Home', 'url' => '/'],
@@ -42,21 +38,16 @@ final class DiscountCategorySchema
 
         return [
             self::breadcrumb($crumbs),
-            [
-                '@context' => 'https://schema.org',
-                '@type' => 'Article',
-                'headline' => $category->h1,
-                'description' => $category->meta_description,
-                'url' => $pageUrl,
-                'image' => $ogImage,
-                'datePublished' => $datePublished,
-                'dateModified' => $dateModified,
-                'isAccessibleForFree' => true,
-                'inLanguage' => 'en-US',
-                'author' => ['@id' => $orgId],
-                'publisher' => ['@id' => $orgId],
-                'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $pageUrl],
-            ],
+            // The generic org-authored Article (no Person byline) shared by every
+            // pillar/hub page — see BuildsSeoSchema::article().
+            self::article(
+                headline: $category->h1,
+                description: $category->meta_description,
+                path: "/discount/{$slug}/",
+                imagePath: $page->og_image_path,
+                datePublished: self::isoDate($page->date_published),
+                dateModified: self::isoDate($page->date_modified),
+            ),
             [
                 '@context' => 'https://schema.org',
                 '@type' => 'ItemList',

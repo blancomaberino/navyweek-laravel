@@ -39,7 +39,7 @@ final class DiscountGuideSchema
         $audienceLabel = $offer->audience_label;
         $title = (string) $page->title;
         $description = (string) $page->meta_description;
-        $ogImage = self::ogImage($site, $page);
+        $ogImage = self::ogImage($page);
         $datePublished = self::isoDate($page->date_published);
         $dateModified = self::isoDate($page->date_modified);
 
@@ -119,7 +119,7 @@ final class DiscountGuideSchema
         if ($reviewer !== null) {
             $nodes[] = self::reviewerPerson($reviewer, $reviewerPersonId);
         }
-        $nodes[] = self::faqPage($offer);
+        $nodes[] = self::faqPageFrom($offer->faqs);
 
         return $nodes;
     }
@@ -193,21 +193,5 @@ final class DiscountGuideSchema
         }
 
         return SeoUrl::absolute("/authors/{$user->slug}");
-    }
-
-    /**
-     * @return array<string, mixed>
-     */
-    private static function faqPage(Offer $offer): array
-    {
-        return [
-            '@context' => 'https://schema.org',
-            '@type' => 'FAQPage',
-            'mainEntity' => $offer->faqs->map(static fn ($faq): array => [
-                '@type' => 'Question',
-                'name' => $faq->question,
-                'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq->answer],
-            ])->all(),
-        ];
     }
 }
