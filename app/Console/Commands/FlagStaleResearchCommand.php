@@ -46,25 +46,53 @@ final class FlagStaleResearchCommand extends Command
             $due->map(static fn (Connection $c): int => $c->id)->all()
         );
 
+        if ($dryRun) {
+            $this->info("[dry-run] {$due->count()} connection(s) would be flagged for re-verification.");
+
+            return self::SUCCESS;
+        }
+
         $flagged = 0;
+        $failed = 0;
         foreach ($due as $connection) {
-            if (! $dryRun) {
-                $latest = $latestByConnection->get($connection->id);
-                DB::transaction(function () use ($connection, $latest, $research, $connections): void {
+            $latest = $latestByConnection->get($connection->id);
+
+            // Per-connection transaction, isolated: one bad row (e.g. deleted mid-sweep)
+            // is logged and skipped so it can't abort the rest of a daily, idempotent run.
+            try {
+                $didFlag = DB::transaction(function () use ($connection, $latest, $research, $connections): bool {
+                    // markNeedsReverify re-checks under the lock that the connection is
+                    // still active; if it isn't (edited to skipped/duplicate since the
+                    // read), skip both writes — don't stale the brief of a brand we're
+                    // no longer flagging.
+                    if (! $connections->markNeedsReverify($connection)) {
+                        return false;
+                    }
+
                     // markStale is a no-op unless the brief is Complete (a Draft is
-                    // mid-flight; Superseded/Stale are terminal) — the sweep never
-                    // clobbers in-progress research.
+                    // mid-flight; Superseded/Stale are terminal) — never clobbers
+                    // in-progress research.
                     if ($latest !== null) {
                         $research->markStale($latest);
                     }
-                    $connections->markNeedsReverify($connection);
+
+                    return true;
                 });
+
+                if ($didFlag) {
+                    $flagged++;
+                }
+            } catch (\Throwable $e) {
+                $failed++;
+                report($e);
+                $this->warn("Skipped connection {$connection->id}: {$e->getMessage()}");
             }
-            $flagged++;
         }
 
-        $prefix = $dryRun ? '[dry-run] ' : '';
-        $this->info("{$prefix}{$flagged} connection(s) flagged for re-verification.");
+        $this->info("{$flagged} connection(s) flagged for re-verification.");
+        if ($failed > 0) {
+            $this->warn("{$failed} connection(s) skipped due to errors (see logs).");
+        }
 
         return self::SUCCESS;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
 use App\Domain\Research\Enums\ResearchStatus;
 use App\Domain\Research\Models\Research;
 
@@ -77,4 +78,16 @@ it('writes nothing in --dry-run', function () {
     $this->artisan('research:flag-stale', ['--dry-run' => true])->assertSuccessful();
 
     expect($due->refresh()->status)->toBe(ConnectionStatus::Published);
+});
+
+it('markNeedsReverify only transitions an active connection (re-checked under lock)', function () {
+    $repo = app(ConnectionRepositoryInterface::class);
+    $active = Connection::factory()->published()->create();
+    // Simulates a connection edited out of the active set after the batch read.
+    $skipped = Connection::factory()->create(['status' => ConnectionStatus::Skipped]);
+
+    expect($repo->markNeedsReverify($active))->toBeTrue()
+        ->and($active->refresh()->status)->toBe(ConnectionStatus::NeedsReverify)
+        ->and($repo->markNeedsReverify($skipped))->toBeFalse()
+        ->and($skipped->refresh()->status)->toBe(ConnectionStatus::Skipped);
 });
