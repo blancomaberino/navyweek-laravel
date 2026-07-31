@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Publishing\Repositories;
 
+use App\Domain\Catalog\Models\Offer;
+use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
+use Illuminate\Database\Eloquent\Collection;
 
 final class EloquentPageRepository implements PageRepositoryInterface
 {
@@ -23,5 +26,33 @@ final class EloquentPageRepository implements PageRepositoryInterface
             ->where('is_published', true)
             ->where('url_path', $urlPath)
             ->first();
+    }
+
+    public function liveDiscountBrandPagesForConnections(array $connectionIds): Collection
+    {
+        return Page::query()
+            ->where('page_type', PageType::DiscountBrand)
+            ->where('is_published', true)
+            ->where('pageable_type', (new Offer)->getMorphClass())
+            ->whereIn('pageable_id', Offer::query()->whereIn('connection_id', $connectionIds)->select('id'))
+            ->with('pageable')
+            // Stable order so a connection with more than one published brand page
+            // resolves to the same card deterministically (lowest page id wins).
+            ->orderBy('id')
+            ->get();
+    }
+
+    public function findForUpdate(Page $page): ?Page
+    {
+        return Page::query()
+            ->whereKey($page->getKey())
+            ->lockForUpdate()
+            ->first();
+    }
+
+    public function updateUrlPath(Page $page, string $newUrlPath): void
+    {
+        $page->url_path = $newUrlPath;
+        $page->save();
     }
 }
