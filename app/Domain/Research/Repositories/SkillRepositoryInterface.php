@@ -19,4 +19,13 @@ interface SkillRepositoryInterface
      * @return Collection<int, Skill>
      */
     public function all(): Collection;
+
+    /**
+     * Lock the skill's row, store `$hash` as its `content_hash`, and — when
+     * `$bumpVersion` is true (a real content change, not the first-time baseline) —
+     * increment `current_version`. Locking serializes concurrent detectors so a
+     * single change can't double-bump. Must run inside the caller's transaction;
+     * returns the fresh model.
+     */
+    public function recordContentHash(Skill $skill, string $hash, bool $bumpVersion): Skill;
 }
