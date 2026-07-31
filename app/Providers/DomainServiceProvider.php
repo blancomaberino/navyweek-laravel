@@ -30,12 +30,15 @@ use App\Domain\Pillars\Repositories\FleetWeekRepositoryInterface;
 use App\Domain\Pillars\Repositories\JetTeamRepositoryInterface;
 use App\Domain\Pillars\Repositories\NavyWeekEventRepositoryInterface;
 use App\Domain\Pillars\Repositories\RankRepositoryInterface;
+use App\Domain\Publishing\Events\PageUrlChanged;
+use App\Domain\Publishing\Listeners\CreateRedirectListener;
 use App\Domain\Publishing\Repositories\EloquentPageRepository;
 use App\Domain\Publishing\Repositories\EloquentRedirectRepository;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
 use App\Domain\Publishing\Repositories\RedirectRepositoryInterface;
 use App\Domain\Research\Repositories\EloquentResearchRepository;
 use App\Domain\Research\Repositories\ResearchRepositoryInterface;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -78,5 +81,13 @@ class DomainServiceProvider extends ServiceProvider
         foreach ($this->repositories as $interface => $concrete) {
             $this->app->bind($interface, $concrete);
         }
+    }
+
+    public function boot(): void
+    {
+        // Editable URLs: a page rename auto-creates its 301 (+ collapses chains).
+        // The listener lives under app/Domain, outside Laravel's default listener
+        // auto-discovery path, so it is wired explicitly here.
+        Event::listen(PageUrlChanged::class, CreateRedirectListener::class);
     }
 }

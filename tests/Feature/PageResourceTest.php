@@ -72,6 +72,24 @@ it('rejects a duplicate url_path on edit', function () {
         ->assertHasFormErrors(['url_path']);
 });
 
+it('rolls back the whole edit when the url rename fails at the database layer', function () {
+    // Another page already occupies the target path, so a rename into it violates the
+    // pages.url_path unique index at write time — the concurrent-conflict case that
+    // slips past form validation. handleRecordUpdate must commit the plain-column
+    // write and the rename together, so this failure rolls the title change back too.
+    makePage(['url_path' => '/discount/taken/', 'slug' => 'taken']);
+    $page = makePage(['title' => 'Original']);
+
+    $component = Livewire::test(EditPage::class, ['record' => $page->getRouteKey()])->instance();
+    $handle = new ReflectionMethod($component, 'handleRecordUpdate');
+
+    expect(fn () => $handle->invoke($component, $page, ['title' => 'Changed', 'url_path' => '/discount/taken/']))
+        ->toThrow(Illuminate\Database\QueryException::class);
+
+    // The non-URL column change must NOT have persisted — the transaction rolled back.
+    expect($page->fresh()->title)->toBe('Original');
+});
+
 it('assigns the author and reviewer byline from the form selects', function () {
     $author = User::factory()->create(['name' => 'T Madden Alford', 'slug' => 't-alford']);
     $reviewer = User::factory()->create(['name' => 'Erik Rivera', 'slug' => 'erik-rivera']);

@@ -64,4 +64,14 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
     {
         return Connection::query()->where('is_backlog', true)->count();
     }
+
+    public function updateStatusForIds(array $ids, ConnectionStatus $status): int
+    {
+        return Connection::query()->whereKey($ids)->update(['status' => $status->value]);
+    }
+
+    public function clearBacklogForIds(array $ids): int
+    {
+        return Connection::query()->whereKey($ids)->update(['is_backlog' => false]);
+    }
 }
