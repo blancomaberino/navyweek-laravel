@@ -18,10 +18,15 @@ class EditSkill extends EditRecord
             // would silently drop every brief's "which skill + version produced this"
             // provenance link. Block it while any brief cites the skill.
             DeleteAction::make()
-                ->disabled(fn (Skill $record): bool => $record->research()->exists())
-                ->tooltip(fn (Skill $record): ?string => $record->research()->exists()
+                ->disabled(fn (Skill $record): bool => self::isCited($record))
+                ->tooltip(fn (Skill $record): ?string => self::isCited($record)
                     ? 'Cited by research briefs — deleting would drop their skill provenance.'
                     : null),
         ];
+    }
+
+    private static function isCited(Skill $skill): bool
+    {
+        return $skill->research()->exists();
     }
 }

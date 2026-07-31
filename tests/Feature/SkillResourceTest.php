@@ -87,3 +87,22 @@ it('rejects a duplicate skill key', function () {
         ->call('create')
         ->assertHasFormErrors(['key']);
 });
+
+it('normalizes the key to canonical kebab-case on create', function () {
+    Livewire::test(CreateSkill::class)
+        ->fillForm(['key' => 'SEO / GEO Research ', 'name' => 'SEO GEO', 'current_version' => '1.0.0'])
+        ->call('create')
+        ->assertHasNoFormErrors();
+
+    // Stored canonical, so the on-disk hash detector's exact match still finds it.
+    expect(Skill::query()->latest('id')->sole()->key)->toBe('seo-geo-research');
+});
+
+it('rejects a key that collides with an existing one only after normalization', function () {
+    Skill::create(['key' => 'seo-geo', 'name' => 'SEO / GEO', 'current_version' => '1.0.0']);
+
+    Livewire::test(CreateSkill::class)
+        ->fillForm(['key' => 'SEO GEO', 'name' => 'Dupe', 'current_version' => '1.0.0']) // → seo-geo
+        ->call('create')
+        ->assertHasFormErrors(['key']);
+});
