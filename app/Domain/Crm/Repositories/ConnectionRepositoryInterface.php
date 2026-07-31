@@ -97,6 +97,16 @@ interface ConnectionRepositoryInterface
     /** Connections in the given pipeline status. */
     public function countByStatus(ConnectionStatus $status): int;
 
+    /**
+     * The top `$limit` connections in a pipeline status, highest opportunity first
+     * (`total_volume` desc, nulls last, `brand` as a stable tiebreak) — one column of
+     * the pipeline board. Capped because a single status can hold thousands of the
+     * ~15k-connection universe; the board pairs this with `countByStatus` for the total.
+     *
+     * @return Collection<int, Connection>
+     */
+    public function forStatus(ConnectionStatus $status, int $limit): Collection;
+
     /** Connections whose research is due for re-verification as of `$asOf`. */
     public function dueForReviewCount(DateTimeInterface $asOf): int;
 
