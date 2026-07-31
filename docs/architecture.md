@@ -9,9 +9,10 @@ entities with dashed borders; with the Phase-2 schema complete, none remain.)
 
 Last updated: Phase 3 rendering — reference pillars + first event family. Base pages
 (`/navy-bases/{slug}/`), ranks/ratings list pages (`/navy-ranks/`, `/navy-ratings/`),
-air shows (`/air-show/{slug}/` guides + `/air-show/` hub — `AirShowPageSchema` with
-a gated Event node), and fleet weeks (`/fleetweek/{slug}/` + `/fleetweek/` hub —
-`FleetWeekPageSchema` with a gated Festival node + hardcoded hub FAQs seeded on the page).
+air shows, fleet weeks, Navy Week cities (`/city/{slug}/` — `NavyWeekCitySchema`, the
+richest Event graph), and jet teams (`/{team}/` hubs + `/{team}/{slug}/` city guides —
+`JetTeamPageSchema`). The events silo (air-show, fleet-week, navy-week-city, jet-team,
+jet-team-city) is complete.
 Data model unchanged since Phase 2
 slice 10b; these slices add only the rendering/page-generation path
 (`PageRepository::upsertPillarPage` — null-pageable-aware, applies the default byline).
@@ -944,6 +945,16 @@ matching the migrated data.) All rich detail lives in the `NavyWeekEvent` row's 
 columns. `GenerateNavyWeekPagesAction` (`pages:generate-navy-week`) generates one page
 per event (no publish gate); the schema also owns the `metaTitle`/`metaDescription`
 derivations. (The `/schedule/` hub — a separate list page — is not yet built.)
+
+The **`jet_team`** (`/{team}/`, pageable → JetTeam) and **`jet_team_city`**
+(`/{team}/{slug}/`, pageable → JetTeamCity) types complete the events silo.
+`JetTeamPageSchema::buildHub` emits Breadcrumb + Article + a **name-only** ItemList
+(one entry per season schedule stop, no url — distinct from the other hubs) + FAQPage.
+`buildCity` emits the guide graph (Breadcrumb + Article + WebPage + author/reviewer
+Person + FAQPage) + a plain **Event** (performer = the team, Place location, no
+offers/organizer). City guides are published-only (`GenerateJetTeamPagesAction` /
+`pages:generate-jet-teams` generates hubs + published cities); `renderJetTeamCity` also
+re-checks `published` at render (the repo's `findCity` doesn't filter it).
 
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
