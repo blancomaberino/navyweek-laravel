@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Crm\Models\ConnectionAlias;
 use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
@@ -58,4 +59,25 @@ it('returns only connections due for review as of a date', function () {
 
     expect($due)->toHaveCount(1)
         ->and($due->first()->slug)->toBe('stale');
+});
+
+it('bulk-sets status only on the given live ids and returns the affected count', function () {
+    $a = Connection::factory()->create(['status' => ConnectionStatus::Pending]);
+    $b = Connection::factory()->create(['status' => ConnectionStatus::Pending]);
+    $trashed = Connection::factory()->create(['status' => ConnectionStatus::Pending]);
+    $trashed->delete(); // soft-deleted → excluded by the scope
+    $untouched = Connection::factory()->create(['status' => ConnectionStatus::Pending]);
+
+    $affected = $this->repository->updateStatusForIds(
+        [$a->id, $b->id, $trashed->id],
+        ConnectionStatus::Published,
+    );
+
+    // The count reflects only the rows actually changed (the two live ones), so the
+    // UI can warn that the trashed selection was skipped rather than report success.
+    expect($affected)->toBe(2)
+        ->and($a->refresh()->status)->toBe(ConnectionStatus::Published)
+        ->and($b->refresh()->status)->toBe(ConnectionStatus::Published)
+        ->and(Connection::withTrashed()->findOrFail($trashed->id)->status)->toBe(ConnectionStatus::Pending)
+        ->and($untouched->refresh()->status)->toBe(ConnectionStatus::Pending);
 });

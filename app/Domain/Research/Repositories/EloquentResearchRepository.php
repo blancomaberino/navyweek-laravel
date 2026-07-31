@@ -37,4 +37,12 @@ final class EloquentResearchRepository implements ResearchRepositoryInterface
 
         return $locked;
     }
+
+    public function connectionIdsWithBriefs(): array
+    {
+        /** @var array<int, int> $ids */
+        $ids = Research::query()->distinct()->pluck('connection_id')->all();
+
+        return $ids;
+    }
 }

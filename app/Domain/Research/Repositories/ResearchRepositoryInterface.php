@@ -33,4 +33,11 @@ interface ResearchRepositoryInterface
      * locked/updated model.
      */
     public function markVerified(Research $research, DateTimeInterface $verifiedAt): Research;
+
+    /**
+     * Distinct connection ids that have at least one research brief (reconcile gate).
+     *
+     * @return array<int, int>
+     */
+    public function connectionIdsWithBriefs(): array;
 }

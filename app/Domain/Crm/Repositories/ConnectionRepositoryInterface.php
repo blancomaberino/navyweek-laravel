@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Crm\Repositories;
 
+use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use DateTimeInterface;
 use Illuminate\Support\Collection;
@@ -54,4 +55,58 @@ interface ConnectionRepositoryInterface
      * called inside a transaction.
      */
     public function lockById(int $connectionId): ?Connection;
+
+    /**
+     * Reconcile drift: connections that own a live page but have no research brief
+     * (the YMYL/R6 violation). Both id sets are supplied by the Page/Research repos.
+     *
+     * @param  array<int, int>  $publishedIds
+     * @param  array<int, int>  $researchedIds
+     * @return Collection<int, Connection>
+     */
+    public function publishedPagesMissingResearch(array $publishedIds, array $researchedIds): Collection;
+
+    /**
+     * Reconcile drift: connections with a live page whose status isn't `published`
+     * (and aren't duplicates).
+     *
+     * @param  array<int, int>  $publishedIds
+     * @return Collection<int, Connection>
+     */
+    public function liveNotMarkedPublished(array $publishedIds): Collection;
+
+    /**
+     * Reconcile drift: connections with `duplicate_of` set but not marked `duplicate`.
+     *
+     * @return Collection<int, Connection>
+     */
+    public function duplicatesNotMarkedDuplicate(): Collection;
+
+    /** Total connections in the universe. */
+    public function total(): int;
+
+    /** Connections in the given pipeline status. */
+    public function countByStatus(ConnectionStatus $status): int;
+
+    /** Connections whose research is due for re-verification as of `$asOf`. */
+    public function dueForReviewCount(DateTimeInterface $asOf): int;
+
+    /** Connections still in the backlog (`is_backlog`). */
+    public function backlogCount(): int;
+
+    /**
+     * Bulk-set the pipeline status on the given connection ids (CRM bulk action).
+     *
+     * @param  array<int, int|string>  $ids
+     * @return int  rows affected
+     */
+    public function updateStatusForIds(array $ids, ConnectionStatus $status): int;
+
+    /**
+     * Bulk-clear `is_backlog` on the given connection ids (promote from backlog).
+     *
+     * @param  array<int, int|string>  $ids
+     * @return int  rows affected
+     */
+    public function clearBacklogForIds(array $ids): int;
 }
