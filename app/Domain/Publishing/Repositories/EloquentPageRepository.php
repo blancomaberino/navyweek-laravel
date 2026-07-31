@@ -41,4 +41,18 @@ final class EloquentPageRepository implements PageRepositoryInterface
             ->orderBy('id')
             ->get();
     }
+
+    public function findForUpdate(Page $page): ?Page
+    {
+        return Page::query()
+            ->whereKey($page->getKey())
+            ->lockForUpdate()
+            ->first();
+    }
+
+    public function updateUrlPath(Page $page, string $newUrlPath): void
+    {
+        $page->url_path = $newUrlPath;
+        $page->save();
+    }
 }

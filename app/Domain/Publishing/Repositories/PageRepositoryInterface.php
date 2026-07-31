@@ -34,4 +34,16 @@ interface PageRepositoryInterface
      * @return Collection<int, Page>
      */
     public function liveDiscountBrandPagesForConnections(array $connectionIds): Collection;
+
+    /**
+     * Re-read the given page's row under a `FOR UPDATE` row lock, so a rename can
+     * serialize against concurrent writers. Must be called inside a transaction;
+     * returns null if the row was deleted concurrently.
+     */
+    public function findForUpdate(Page $page): ?Page;
+
+    /**
+     * Persist a new canonical `url_path` on an already-loaded page.
+     */
+    public function updateUrlPath(Page $page, string $newUrlPath): void;
 }
