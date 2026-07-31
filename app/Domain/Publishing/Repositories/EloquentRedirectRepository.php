@@ -42,4 +42,40 @@ final class EloquentRedirectRepository implements RedirectRepositoryInterface
     {
         $redirect->increment('hits');
     }
+
+    public function recordSlugChange(string $oldPath, string $newPath): void
+    {
+        if ($oldPath === $newPath) {
+            return;
+        }
+
+        // Only EXACT rules are ever touched here. A PREFIX rule that shares a path is
+        // an admin-managed rule for that path's *descendants* — it can never redirect
+        // the now-live exact page itself, so it must be left intact.
+        $exact = RedirectMatchType::Exact;
+
+        // The new path is now a live exact page — drop any stale EXACT rule pointing
+        // FROM it (including a reverse `/new/ → /old/` from an earlier rename).
+        Redirect::query()->where('from_path', $newPath)->where('match_type', $exact)->delete();
+
+        // Collapse inbound EXACT chains: whatever used to 301 to the old path now
+        // lands on the new one directly (prefix rules pointing at old are preserved).
+        Redirect::query()->where('to_path', $oldPath)->where('match_type', $exact)->update(['to_path' => $newPath]);
+
+        // The old path 301s to the new one — an EXACT slug-change rule. Keying the
+        // upsert on (from_path, match_type=exact) means a prefix rule at `$oldPath`
+        // is never matched and overwritten.
+        Redirect::query()->updateOrCreate(
+            ['from_path' => $oldPath, 'match_type' => $exact],
+            [
+                'to_path' => $newPath,
+                'status' => 301,
+                'reason' => 'slug-change',
+                'is_active' => true,
+            ],
+        );
+
+        // Never leave an EXACT self-redirect behind (a self-301 is a loop).
+        Redirect::query()->whereColumn('from_path', 'to_path')->where('match_type', $exact)->delete();
+    }
 }

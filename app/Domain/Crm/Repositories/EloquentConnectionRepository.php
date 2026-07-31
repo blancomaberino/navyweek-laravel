@@ -8,6 +8,7 @@ use App\Domain\Crm\Enums\ConnectionStatus;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Crm\Models\ConnectionAlias;
 use DateTimeInterface;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 final class EloquentConnectionRepository implements ConnectionRepositoryInterface
@@ -56,5 +57,80 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
         $locked->save();
 
         return true;
+    }
+
+    public function recordVerification(Connection $connection, DateTimeInterface $verifiedAt): Connection
+    {
+        $locked = Connection::query()->whereKey($connection->getKey())->lockForUpdate()->firstOrFail();
+        $locked->last_verified_at = Carbon::instance($verifiedAt);
+        $locked->next_review_due = Carbon::instance($verifiedAt)->addDays($locked->research_cadence_days);
+        $locked->save();
+
+        return $locked;
+    }
+
+    public function lockById(int $connectionId): ?Connection
+    {
+        return Connection::query()->whereKey($connectionId)->lockForUpdate()->first();
+    }
+
+    public function publishedPagesMissingResearch(array $publishedIds, array $researchedIds): Collection
+    {
+        return Connection::query()
+            ->whereIn('id', $publishedIds)
+            ->whereNotIn('id', $researchedIds)
+            ->orderBy('slug')
+            ->get();
+    }
+
+    public function liveNotMarkedPublished(array $publishedIds): Collection
+    {
+        return Connection::query()
+            ->whereIn('id', $publishedIds)
+            ->whereNull('duplicate_of')
+            ->where('status', '!=', ConnectionStatus::Published->value)
+            ->orderBy('slug')
+            ->get();
+    }
+
+    public function duplicatesNotMarkedDuplicate(): Collection
+    {
+        return Connection::query()
+            ->whereNotNull('duplicate_of')
+            ->where('status', '!=', ConnectionStatus::Duplicate->value)
+            ->orderBy('slug')
+            ->get();
+    }
+
+    public function total(): int
+    {
+        return Connection::query()->count();
+    }
+
+    public function countByStatus(ConnectionStatus $status): int
+    {
+        return Connection::query()->where('status', $status->value)->count();
+    }
+
+    public function dueForReviewCount(DateTimeInterface $asOf): int
+    {
+        return Connection::query()
+            ->where('next_review_due', '<=', $asOf->format('Y-m-d'))
+            ->count();
+    }
+
+    public function backlogCount(): int
+    {
+        return Connection::query()->where('is_backlog', true)->count();
+    }
+
+    public function updateStatusForIds(array $ids, ConnectionStatus $status): int
+    {
+        return Connection::query()->whereKey($ids)->update(['status' => $status->value]);
+    }
+
+    public function clearBacklogForIds(array $ids): int
+    {
+        return Connection::query()->whereKey($ids)->update(['is_backlog' => false]);
     }
 }

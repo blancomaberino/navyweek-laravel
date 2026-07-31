@@ -6,6 +6,8 @@ namespace App\Domain\Research\Repositories;
 
 use App\Domain\Research\Enums\ResearchStatus;
 use App\Domain\Research\Models\Research;
+use DateTimeInterface;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 final class EloquentResearchRepository implements ResearchRepositoryInterface
@@ -49,5 +51,23 @@ final class EloquentResearchRepository implements ResearchRepositoryInterface
             $locked->status = ResearchStatus::Stale;
             $locked->save();
         }
+    }
+
+    public function markVerified(Research $research, DateTimeInterface $verifiedAt): Research
+    {
+        $locked = Research::query()->whereKey($research->getKey())->lockForUpdate()->firstOrFail();
+        $locked->status = ResearchStatus::Complete;
+        $locked->last_verified = Carbon::instance($verifiedAt);
+        $locked->save();
+
+        return $locked;
+    }
+
+    public function connectionIdsWithBriefs(): array
+    {
+        /** @var array<int, int> $ids */
+        $ids = Research::query()->distinct()->pluck('connection_id')->all();
+
+        return $ids;
     }
 }
