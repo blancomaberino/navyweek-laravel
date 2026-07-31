@@ -43,6 +43,28 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
             ->get();
     }
 
+    public function total(): int
+    {
+        return Connection::query()->count();
+    }
+
+    public function countByStatus(ConnectionStatus $status): int
+    {
+        return Connection::query()->where('status', $status->value)->count();
+    }
+
+    public function dueForReviewCount(DateTimeInterface $asOf): int
+    {
+        return Connection::query()
+            ->where('next_review_due', '<=', $asOf->format('Y-m-d'))
+            ->count();
+    }
+
+    public function backlogCount(): int
+    {
+        return Connection::query()->where('is_backlog', true)->count();
+    }
+
     public function updateStatusForIds(array $ids, ConnectionStatus $status): int
     {
         return Connection::query()->whereKey($ids)->update(['status' => $status->value]);

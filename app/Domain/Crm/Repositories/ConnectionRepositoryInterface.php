@@ -41,6 +41,18 @@ interface ConnectionRepositoryInterface
      */
     public function dueForReview(DateTimeInterface $asOf): Collection;
 
+    /** Total connections in the universe. */
+    public function total(): int;
+
+    /** Connections in the given pipeline status. */
+    public function countByStatus(ConnectionStatus $status): int;
+
+    /** Connections whose research is due for re-verification as of `$asOf`. */
+    public function dueForReviewCount(DateTimeInterface $asOf): int;
+
+    /** Connections still in the backlog (`is_backlog`). */
+    public function backlogCount(): int;
+
     /**
      * Bulk-set the pipeline status on the given connection ids (CRM bulk action).
      *
