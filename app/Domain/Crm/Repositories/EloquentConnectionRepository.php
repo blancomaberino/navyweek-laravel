@@ -43,6 +43,34 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
             ->get();
     }
 
+    public function publishedPagesMissingResearch(array $publishedIds, array $researchedIds): Collection
+    {
+        return Connection::query()
+            ->whereIn('id', $publishedIds)
+            ->whereNotIn('id', $researchedIds)
+            ->orderBy('slug')
+            ->get();
+    }
+
+    public function liveNotMarkedPublished(array $publishedIds): Collection
+    {
+        return Connection::query()
+            ->whereIn('id', $publishedIds)
+            ->whereNull('duplicate_of')
+            ->where('status', '!=', ConnectionStatus::Published->value)
+            ->orderBy('slug')
+            ->get();
+    }
+
+    public function duplicatesNotMarkedDuplicate(): Collection
+    {
+        return Connection::query()
+            ->whereNotNull('duplicate_of')
+            ->where('status', '!=', ConnectionStatus::Duplicate->value)
+            ->orderBy('slug')
+            ->get();
+    }
+
     public function total(): int
     {
         return Connection::query()->count();

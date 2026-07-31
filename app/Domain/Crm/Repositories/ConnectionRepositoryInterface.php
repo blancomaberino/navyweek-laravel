@@ -41,6 +41,32 @@ interface ConnectionRepositoryInterface
      */
     public function dueForReview(DateTimeInterface $asOf): Collection;
 
+    /**
+     * Reconcile drift: connections that own a live page but have no research brief
+     * (the YMYL/R6 violation). Both id sets are supplied by the Page/Research repos.
+     *
+     * @param  array<int, int>  $publishedIds
+     * @param  array<int, int>  $researchedIds
+     * @return Collection<int, Connection>
+     */
+    public function publishedPagesMissingResearch(array $publishedIds, array $researchedIds): Collection;
+
+    /**
+     * Reconcile drift: connections with a live page whose status isn't `published`
+     * (and aren't duplicates).
+     *
+     * @param  array<int, int>  $publishedIds
+     * @return Collection<int, Connection>
+     */
+    public function liveNotMarkedPublished(array $publishedIds): Collection;
+
+    /**
+     * Reconcile drift: connections with `duplicate_of` set but not marked `duplicate`.
+     *
+     * @return Collection<int, Connection>
+     */
+    public function duplicatesNotMarkedDuplicate(): Collection;
+
     /** Total connections in the universe. */
     public function total(): int;
 

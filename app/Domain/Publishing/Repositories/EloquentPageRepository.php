@@ -28,6 +28,21 @@ final class EloquentPageRepository implements PageRepositoryInterface
             ->first();
     }
 
+    public function connectionIdsWithPublishedDiscountBrandPage(): array
+    {
+        /** @var array<int, int> $ids */
+        $ids = Offer::query()
+            ->whereIn('id', Page::query()
+                ->where('page_type', PageType::DiscountBrand)
+                ->where('is_published', true)
+                ->where('pageable_type', (new Offer)->getMorphClass())
+                ->select('pageable_id'))
+            ->pluck('connection_id')
+            ->all();
+
+        return $ids;
+    }
+
     public function liveDiscountBrandPagesForConnections(array $connectionIds): Collection
     {
         return Page::query()

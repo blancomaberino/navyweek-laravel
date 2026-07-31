@@ -24,4 +24,12 @@ final class EloquentResearchRepository implements ResearchRepositoryInterface
             ->orderByDesc('version')
             ->get();
     }
+
+    public function connectionIdsWithBriefs(): array
+    {
+        /** @var array<int, int> $ids */
+        $ids = Research::query()->distinct()->pluck('connection_id')->all();
+
+        return $ids;
+    }
 }

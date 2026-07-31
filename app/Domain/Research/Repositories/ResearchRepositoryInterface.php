@@ -25,4 +25,11 @@ interface ResearchRepositoryInterface
      * @return Collection<int, Research>
      */
     public function historyForConnection(int $connectionId): Collection;
+
+    /**
+     * Distinct connection ids that have at least one research brief (reconcile gate).
+     *
+     * @return array<int, int>
+     */
+    public function connectionIdsWithBriefs(): array;
 }

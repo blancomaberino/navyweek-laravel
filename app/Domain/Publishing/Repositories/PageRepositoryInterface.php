@@ -26,6 +26,14 @@ interface PageRepositoryInterface
     public function findPublishedByPath(string $urlPath): ?Page;
 
     /**
+     * Connection ids that own a published discount-brand page (a "live" brand) —
+     * the reconcile gate's notion of "published".
+     *
+     * @return array<int, int>
+     */
+    public function connectionIdsWithPublishedDiscountBrandPage(): array;
+
+    /**
      * Published discount-brand pages whose Offer belongs to one of the given
      * connections, with `pageable` (the Offer) eager-loaded. Powers the category
      * hub's "live brands" grid — a brand renders only when it has a live page.
