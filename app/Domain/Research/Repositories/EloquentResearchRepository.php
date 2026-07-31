@@ -23,7 +23,7 @@ final class EloquentResearchRepository implements ResearchRepositoryInterface
     public function latestForConnections(array $connectionIds): Collection
     {
         if ($connectionIds === []) {
-            return new Collection();
+            return new Collection;
         }
 
         // One query for the whole set, then keep the highest-version row per

@@ -58,7 +58,7 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
 
     public function markNeedsReverify(Connection $connection): bool
     {
-        $locked = $this->lockById((int) $connection->getKey());
+        $locked = $this->lockById($connection->id);
 
         // Re-check the precondition under the lock: only an active brand transitions.
         if ($locked === null || ! in_array($locked->status, ConnectionStatus::activeForReview(), true)) {
