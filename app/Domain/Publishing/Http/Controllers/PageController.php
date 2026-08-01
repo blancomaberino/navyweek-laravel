@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Publishing\Http\Controllers;
 
 use App\Domain\Catalog\Models\DiscountCategory;
+use App\Domain\Catalog\Models\LocalDiscount;
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Catalog\Repositories\DiscountCategoryRepositoryInterface;
 use App\Domain\Crm\Models\Connection;
@@ -33,6 +34,7 @@ use App\Domain\Publishing\Repositories\PageRepositoryInterface;
 use App\Domain\Publishing\Seo\DiscountCategorySchema;
 use App\Domain\Publishing\Seo\DiscountGuideSchema;
 use App\Domain\Publishing\Seo\DiscountIndexSchema;
+use App\Domain\Publishing\Seo\LocalDiscountSchema;
 use App\Domain\Publishing\Seo\SeoHead;
 use App\Domain\Publishing\Seo\SeoUrl;
 use Illuminate\Http\Request;
@@ -119,6 +121,11 @@ final class PageController
             PageType::JetTeamCity => $pageable instanceof JetTeamCity
                 ? $this->renderJetTeamCity($page, $pageable)
                 : null,
+            // Local-business detail (pageable = LocalDiscount); the /discounts/ rollup
+            // hubs (null pageable) are a follow-up → shell for now.
+            PageType::LocalDiscount => $pageable instanceof LocalDiscount
+                ? $this->renderLocalDiscount($page, $pageable)
+                : null,
             // Static hubs/content pages are dispatched by slug; unknown slugs → shell.
             PageType::Static => $this->renderStatic($page),
             default => null,
@@ -181,6 +188,26 @@ final class PageController
         return response()->view('pages.discount', [
             'page' => $page,
             'offer' => $offer,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * A local-business discount detail page (`/discounts/{state}/{city}/{business}/`).
+     * The graph is the discount-guide E-E-A-T graph plus a LocalBusiness node
+     * (address + geo + opening hours from the primary store).
+     */
+    private function renderLocalDiscount(Page $page, LocalDiscount $discount): Response
+    {
+        $discount->load(['stores.hours', 'faqs', 'sources']);
+        $page->load(['author', 'reviewer']);
+
+        $seo = SeoHead::forPage($page, LocalDiscountSchema::build($page, $discount));
+
+        return response()->view('pages.local-discount', [
+            'page' => $page,
+            'discount' => $discount,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

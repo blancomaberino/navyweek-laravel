@@ -22,6 +22,15 @@ interface LocalDiscountRepositoryInterface
     public function find(string $state, string $city, string $businessSlug): ?LocalDiscount;
 
     /**
+     * Every local page, with `stores.hours` eager-loaded — the page-generation sweep
+     * (and the source for the state/city rollups). Ordered by state, city, company for
+     * a deterministic build.
+     *
+     * @return Collection<int, LocalDiscount>
+     */
+    public function all(): Collection;
+
+    /**
      * Every local page in a state (the `/discounts/<state>/` rollup), by state slug.
      *
      * @return Collection<int, LocalDiscount>

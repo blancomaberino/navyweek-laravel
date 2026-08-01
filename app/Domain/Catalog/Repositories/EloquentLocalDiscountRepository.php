@@ -18,6 +18,16 @@ final class EloquentLocalDiscountRepository implements LocalDiscountRepositoryIn
             ->first();
     }
 
+    public function all(): Collection
+    {
+        return LocalDiscount::query()
+            ->with('stores.hours')
+            ->orderBy('state')
+            ->orderBy('city')
+            ->orderBy('company')
+            ->get();
+    }
+
     public function forState(string $stateSlug): Collection
     {
         return LocalDiscount::query()
