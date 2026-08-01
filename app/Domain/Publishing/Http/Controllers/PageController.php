@@ -159,8 +159,52 @@ final class PageController
                 ['name' => 'Home', 'url' => '/'],
                 ['name' => 'Contact', 'url' => '/contact/'],
             ]),
+            'va-disability' => $this->renderYmylGuide(
+                $page,
+                'VA Disability Benefits Guide (2026 Pay Rates, Ratings, How to File)',
+                'VA Disability Benefits Guide (2026 Pay Rates, Ratings, How to File)',
+                'An independent, plain-language guide to VA disability compensation — 2026 pay rates, how ratings work, how to file, and where to get free accredited help.',
+            ),
+            'veterans-home-care' => $this->renderYmylGuide(
+                $page,
+                "Veterans Home Care: A Family's Guide to VA Benefits, Eligibility, and Options",
+                "Veterans Home Care: A Family's Guide to VA Benefits, Eligibility, and Options",
+                'An independent guide to veterans home care — VA-arranged services vs. the Aid and Attendance pension, 2026 rates, who qualifies, and how to apply.',
+            ),
             default => null,
         };
+    }
+
+    /**
+     * A YMYL guide content page (`/va-disability/`, `/veterans-home-care/`): the graph is
+     * Article + author Person + reviewer Person + WebPage, and deliberately NO FAQPage
+     * (`ContentPageSchema` with `emitWebPage`). Body is the editor-managed `body_blocks`.
+     */
+    private function renderYmylGuide(Page $page, string $heading, string $articleHeadline, string $description): Response
+    {
+        $page->load(['author', 'reviewer']);
+        $crumbs = [
+            ['name' => 'Home', 'url' => '/'],
+            ['name' => 'Navy Reference', 'url' => '/navy-reference/'],
+            ['name' => $heading, 'url' => $page->url_path],
+        ];
+
+        $seo = SeoHead::forPage($page, ContentPageSchema::build(
+            $page,
+            $crumbs,
+            headline: $articleHeadline,
+            articleDescription: $description,
+            emitWebPage: true,
+        ));
+
+        return response()->view('pages.content', [
+            'page' => $page,
+            'crumbs' => $crumbs,
+            'heading' => $heading,
+            'blocks' => $page->body_blocks ?? [],
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
     }
 
     /**
