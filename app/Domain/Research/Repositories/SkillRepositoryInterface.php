@@ -28,4 +28,7 @@ interface SkillRepositoryInterface
      * returns the fresh model.
      */
     public function recordContentHash(Skill $skill, string $hash, bool $bumpVersion): Skill;
+
+    /** The skill registered under this key, or null — used to stamp its current version onto a run. */
+    public function findByKey(string $key): ?Skill;
 }

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Domain\Research\Repositories;
 
+use App\Domain\Research\Enums\ResearchedBy;
 use App\Domain\Research\Enums\ResearchStatus;
 use App\Domain\Research\Models\Research;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 final class EloquentResearchRepository implements ResearchRepositoryInterface
 {
@@ -110,5 +112,48 @@ final class EloquentResearchRepository implements ResearchRepositoryInterface
             ->all();
 
         return $connectionIds;
+    }
+
+    public function createDraftRun(int $connectionId, array $skills): Research
+    {
+        return DB::transaction(function () use ($connectionId, $skills): Research {
+            $primary = $skills[0];
+
+            // Lock the connection's briefs so two concurrent launches can't mint the
+            // same version. max() over an empty set is null → the first run is v1.
+            $currentMax = Research::query()
+                ->where('connection_id', $connectionId)
+                ->lockForUpdate()
+                ->max('version');
+            $nextVersion = (is_numeric($currentMax) ? (int) $currentMax : 0) + 1;
+
+            $research = Research::query()->create([
+                'connection_id' => $connectionId,
+                'status' => ResearchStatus::Draft,
+                'researched_by' => ResearchedBy::ClaudePipeline,
+                'skill_key' => $primary['key'],
+                'skill_version' => $primary['version'],
+                'version' => $nextVersion,
+                // Filled by storeRawOutput once the headless run returns; the row exists
+                // up-front so the skill-version provenance is captured either way.
+                'raw_markdown' => '',
+            ]);
+
+            foreach ($skills as $skill) {
+                $research->skills()->attach($skill['id'], [
+                    'skill_version' => $skill['version'],
+                    'used_for' => $skill['used_for'],
+                ]);
+            }
+
+            return $research;
+        });
+    }
+
+    public function storeRawOutput(Research $research, string $rawMarkdown): void
+    {
+        $locked = $this->lockForUpdate($research);
+        $locked->raw_markdown = $rawMarkdown;
+        $locked->save();
     }
 }

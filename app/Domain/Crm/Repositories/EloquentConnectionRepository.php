@@ -14,6 +14,11 @@ use Illuminate\Support\Collection;
 
 final class EloquentConnectionRepository implements ConnectionRepositoryInterface
 {
+    public function findById(int $id): ?Connection
+    {
+        return Connection::query()->whereKey($id)->first();
+    }
+
     public function findBySlug(string $slug): ?Connection
     {
         return Connection::query()->where('slug', $slug)->first();
