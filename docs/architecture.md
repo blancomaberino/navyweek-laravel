@@ -26,10 +26,12 @@ DB-driven **content pages** (the editorial pages, not derived from a data regist
 their body in a CMS-editable `pages.body_blocks` JSON column (ordered typed blocks —
 heading/paragraph/list/note), managed in the Filament PageForm block Repeater and rendered
 by the generic `pages.content` view. This foundation slice ships the Breadcrumb-only
-legal/utility pages (`/privacy/`, `/terms/`, `/contact/` — `ContentPageSchema`, seeded by
-`pages:generate-content`, which never clobbers an editor's body). The richer YMYL pages
-(veterans-day → +Article+Person+FAQPage; va-disability/veterans-home-care →
-+Article+Person×2+WebPage, no FAQPage) layer their schema on in follow-up slices.
+legal/utility pages (`/privacy/`, `/terms/`, `/contact/` — `ContentPageSchema` breadcrumb-only,
+seeded by `pages:generate-content`, which never clobbers an editor's body). `ContentPageSchema`
+also builds the richer variants: **`/veterans-day/`** (Article + author Person + FAQPage —
+`pages:generate-veterans-day` migrates the prose + 9 FAQs verbatim; `PageType::VeteransDayHub`
+→ `PageController::renderVeteransDay`). The remaining `va-disability`/`veterans-home-care`
+(Article + author/reviewer Person + WebPage, no FAQPage — `emitWebPage`) are the last slice.
 Data model unchanged since Phase 2
 slice 10b; these slices add only the rendering/page-generation path
 (`PageRepository::upsertPillarPage` — null-pageable-aware, applies the default byline).

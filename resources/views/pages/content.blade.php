@@ -8,6 +8,7 @@
 @php
     /** @var list<array{name: string, url: string}> $crumbs */
     /** @var list<array<string, mixed>> $blocks */
+    /** @var string $heading */
 @endphp
 
 @section('content')
@@ -24,7 +25,7 @@
         </nav>
 
         <article>
-            <h1>{{ $page->title }}</h1>
+            <h1>{{ $heading }}</h1>
 
             @foreach ($blocks as $block)
                 @switch($block['type'] ?? 'paragraph')
