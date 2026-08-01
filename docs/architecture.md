@@ -1179,6 +1179,26 @@ matches **no** bucket is excluded from the output and reported as a warning — 
 reconciliation net ported from the legacy `walkDist` sweep, so a new page category can't
 silently vanish from every sitemap.
 
+## LLM feed generation
+
+`feed:generate` regenerates the two machine-readable citability resources — `public/llms.txt`
+and `public/data/navy-week-2026.json` — a hand-port of the parent repo's
+`scripts/generate-llm-feed.mjs`. `Publishing\Feed\FeedGenerator` reads every aggregate
+through its repository (`NavyWeekEventRepository`, `FleetWeekRepository`, `JetTeamRepository`,
+`AirShowRepository`, `DiscountCategoryRepository`, and `PageRepository::publishedDiscountBrandPagesWithOffer`
+for the discount section — the Page carries the build-clock `date_published`/`date_modified`
+each discount record reports) instead of the legacy TypeScript registries. The static
+envelope (program, methodology, source hierarchy, licence, and the `llms.txt` prose) is
+copied verbatim so the citability signals stay byte-identical; the live `discountResearchStats`
+(sources cited, savings tables, documented-no-discount findings, verification-provider
+histogram) are computed over the discount set. The generator is **pure** (returns a
+`FeedResult` of the two file bodies); the command owns the writes to `public/`. The JSON is
+pretty-printed with PHP's 4-space indent (vs the legacy 2-space — cosmetic in a
+machine-parsed file; every key/value is faithful). Two documented gaps: `feed.faqs` (the
+legacy site-wide Navy Week FAQ block) has no platform source yet and is emitted empty, and
+byte-parity against the legacy output is a deploy-time validation (like the sitemap). Once
+generated, the sitemap's `data` bucket lists `/llms.txt` + `/data/navy-week-2026.json`.
+
 ## Data migration pipeline (Stage A → Stage B)
 
 The legacy `../src/data` TypeScript is migrated into the tables above in two

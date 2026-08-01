@@ -178,6 +178,26 @@ final class EloquentPageRepository implements PageRepositoryInterface
             ->get();
     }
 
+    public function publishedDiscountBrandPagesWithOffer(): Collection
+    {
+        return Page::query()
+            ->where('pages.page_type', PageType::DiscountBrand)
+            ->where('pages.is_published', true)
+            ->where('pages.pageable_type', (new Offer)->getMorphClass())
+            ->with([
+                'pageable.connection',
+                'pageable.tiers',
+                'pageable.audiences',
+                'pageable.faqs',
+                'pageable.sources',
+            ])
+            ->join('offers', 'pages.pageable_id', '=', 'offers.id')
+            ->join('connections', 'offers.connection_id', '=', 'connections.id')
+            ->orderBy('connections.brand')
+            ->select('pages.*')
+            ->get();
+    }
+
     public function findForUpdate(Page $page): ?Page
     {
         return Page::query()
