@@ -9,11 +9,14 @@ use App\Domain\Publishing\Models\Page;
 use App\Filament\Support\EnumOptions;
 use App\Filament\Support\PathField;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
 /**
@@ -80,6 +83,37 @@ class PageForm
                             ->searchable()
                             ->preload()
                             ->helperText('Who verified the page — the WebPage reviewedBy Person node.'),
+                    ]),
+
+                Section::make('Content body')
+                    ->description('The CMS-editable body for content pages (privacy, terms, veterans-day, …), rendered as ordered blocks. Data-driven pages (discounts, bases, events) leave this empty — their body comes from their aggregate.')
+                    ->collapsed()
+                    ->schema([
+                        Repeater::make('body_blocks')
+                            ->hiddenLabel()
+                            ->addActionLabel('Add block')
+                            ->reorderable()
+                            ->collapsible()
+                            ->schema([
+                                Select::make('type')
+                                    ->options([
+                                        'paragraph' => 'Paragraph',
+                                        'heading' => 'Heading',
+                                        'list' => 'List',
+                                        'note' => 'Note',
+                                    ])
+                                    ->default('paragraph')
+                                    ->live()
+                                    ->required(),
+                                Textarea::make('text')
+                                    ->rows(3)
+                                    ->columnSpanFull()
+                                    ->visible(fn (Get $get): bool => $get('type') !== 'list'),
+                                TagsInput::make('items')
+                                    ->helperText('One entry per list item.')
+                                    ->columnSpanFull()
+                                    ->visible(fn (Get $get): bool => $get('type') === 'list'),
+                            ]),
                     ]),
             ]);
     }
