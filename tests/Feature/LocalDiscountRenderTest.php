@@ -90,7 +90,8 @@ it('generates a page per local discount, honoring the build clock', function () 
 
     $count = app(GenerateLocalDiscountPagesAction::class)();
 
-    expect($count)->toBe(2);
+    // 2 details + root + texas state + houston city + austin city = 6.
+    expect($count)->toBe(6);
     $page = Page::query()->where('url_path', '/discounts/texas/houston/houston-zoo/')->firstOrFail();
     expect($page->page_type)->toBe(PageType::LocalDiscount)
         ->and($page->pageable)->toBeInstanceOf(LocalDiscount::class)
@@ -120,4 +121,54 @@ it('renders the detail page with the LocalBusiness + FAQ JSON-LD', function () {
         ->assertSee('"@type":"OpeningHoursSpecification"', false)
         ->assertSee('"@type":"Organization"', false)   // prepended by SeoHead
         ->assertSee('"@type":"FAQPage"', false);
+});
+
+it('generates the three rollup hub levels alongside the detail pages', function () {
+    localEditorialTeam();
+    localWithStore(['state' => 'texas', 'city' => 'houston', 'business_slug' => 'zoo', 'company' => 'Zoo']);
+    localWithStore(['state' => 'texas', 'city' => 'austin', 'business_slug' => 'cafe', 'company' => 'Cafe']);
+    localWithStore(['state' => 'ohio', 'state_name' => 'Ohio', 'state_abbr' => 'OH', 'city' => 'columbus', 'city_name' => 'Columbus', 'business_slug' => 'gym', 'company' => 'Gym']);
+
+    // 3 detail + 1 root + 2 state (texas, ohio) + 3 city (houston, austin, columbus) = 9.
+    $count = app(GenerateLocalDiscountPagesAction::class)();
+    expect($count)->toBe(9);
+
+    foreach (['/discounts/', '/discounts/texas/', '/discounts/texas/houston/', '/discounts/ohio/columbus/'] as $hubPath) {
+        $hub = Page::query()->where('url_path', $hubPath)->first();
+        expect($hub)->not->toBeNull()
+            ->and($hub->page_type)->toBe(PageType::LocalDiscount)
+            ->and($hub->pageable)->toBeNull();   // hubs own no aggregate
+    }
+});
+
+it('renders the root hub listing states with an ItemList', function () {
+    localEditorialTeam();
+    localWithStore(['state' => 'texas', 'state_name' => 'Texas', 'business_slug' => 'zoo', 'company' => 'Zoo']);
+    localWithStore(['state' => 'ohio', 'state_name' => 'Ohio', 'state_abbr' => 'OH', 'city' => 'columbus', 'city_name' => 'Columbus', 'business_slug' => 'gym', 'company' => 'Gym']);
+    app(GenerateLocalDiscountPagesAction::class)();
+
+    $res = localFetch('/discounts/')->assertOk();
+
+    $res->assertSee('by State')
+        ->assertSee('href="/discounts/texas/"', false)
+        ->assertSee('href="/discounts/ohio/"', false)
+        ->assertSee('"@type":"ItemList"', false)
+        ->assertSee('"@type":"WebSite"', false)
+        // Hubs carry no LocalBusiness or FAQPage node.
+        ->assertDontSee('"@type":"LocalBusiness"', false)
+        ->assertDontSee('"@type":"FAQPage"', false);
+});
+
+it('renders a city hub listing its businesses', function () {
+    localEditorialTeam();
+    localWithStore(['state' => 'texas', 'city' => 'houston', 'city_name' => 'Houston', 'business_slug' => 'houston-zoo', 'company' => 'Houston Zoo']);
+    localWithStore(['state' => 'texas', 'city' => 'houston', 'city_name' => 'Houston', 'business_slug' => 'houston-museum', 'company' => 'Houston Museum']);
+    app(GenerateLocalDiscountPagesAction::class)();
+
+    $res = localFetch('/discounts/texas/houston/')->assertOk();
+
+    $res->assertSee('Houston')
+        ->assertSee('href="/discounts/texas/houston/houston-zoo/"', false)
+        ->assertSee('href="/discounts/texas/houston/houston-museum/"', false)
+        ->assertSee('"@type":"ItemList"', false);
 });

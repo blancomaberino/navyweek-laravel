@@ -8,6 +8,7 @@ use App\Domain\Catalog\Models\DiscountCategory;
 use App\Domain\Catalog\Models\LocalDiscount;
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Catalog\Repositories\DiscountCategoryRepositoryInterface;
+use App\Domain\Catalog\Repositories\LocalDiscountRepositoryInterface;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Pillars\Enums\RankCategory;
 use App\Domain\Pillars\Models\AirShow;
@@ -34,6 +35,7 @@ use App\Domain\Publishing\Repositories\PageRepositoryInterface;
 use App\Domain\Publishing\Seo\DiscountCategorySchema;
 use App\Domain\Publishing\Seo\DiscountGuideSchema;
 use App\Domain\Publishing\Seo\DiscountIndexSchema;
+use App\Domain\Publishing\Seo\LocalDiscountHubSchema;
 use App\Domain\Publishing\Seo\LocalDiscountSchema;
 use App\Domain\Publishing\Seo\SeoHead;
 use App\Domain\Publishing\Seo\SeoUrl;
@@ -60,6 +62,7 @@ final class PageController
         private readonly AirShowRepositoryInterface $airShows,
         private readonly FleetWeekRepositoryInterface $fleetWeeks,
         private readonly JetTeamRepositoryInterface $jetTeams,
+        private readonly LocalDiscountRepositoryInterface $localDiscounts,
     ) {}
 
     public function show(Request $request): Response
@@ -121,11 +124,11 @@ final class PageController
             PageType::JetTeamCity => $pageable instanceof JetTeamCity
                 ? $this->renderJetTeamCity($page, $pageable)
                 : null,
-            // Local-business detail (pageable = LocalDiscount); the /discounts/ rollup
-            // hubs (null pageable) are a follow-up → shell for now.
+            // Local-business detail (pageable = LocalDiscount) vs the /discounts/ rollup
+            // hubs (null pageable — root / per-state / per-city, split by url depth).
             PageType::LocalDiscount => $pageable instanceof LocalDiscount
                 ? $this->renderLocalDiscount($page, $pageable)
-                : null,
+                : $this->renderLocalDiscountHub($page),
             // Static hubs/content pages are dispatched by slug; unknown slugs → shell.
             PageType::Static => $this->renderStatic($page),
             default => null,
@@ -208,6 +211,78 @@ final class PageController
         return response()->view('pages.local-discount', [
             'page' => $page,
             'discount' => $discount,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * A local-discount rollup hub, split by url depth: `/discounts/` lists states,
+     * `/discounts/{state}/` lists that state's cities, and `/discounts/{state}/{city}/`
+     * lists that city's businesses. The rollup is read at request time; the JSON-LD is
+     * Breadcrumb + Article + WebSite + ItemList.
+     */
+    private function renderLocalDiscountHub(Page $page): Response
+    {
+        $segments = array_values(array_filter(explode('/', $page->url_path), static fn (string $s): bool => $s !== ''));
+        $crumbs = [
+            ['name' => 'Home', 'url' => '/'],
+            ['name' => 'Local Discounts', 'url' => '/discounts/'],
+        ];
+
+        if (count($segments) <= 1) {
+            $heading = 'Local Military & Veteran Discounts by State';
+            $items = $this->localDiscounts->states()->map(static fn (array $s): array => [
+                'url' => "/discounts/{$s['state']}/",
+                'name' => $s['state_name'],
+                'meta' => $s['count'].' listed',
+            ])->values()->all();
+        } elseif (count($segments) === 2) {
+            $state = $segments[1];
+            $inState = $this->localDiscounts->forState($state);
+            $firstInState = $inState->first();
+            $stateName = $firstInState === null ? $state : $firstInState->state_name;
+            $crumbs[] = ['name' => $stateName, 'url' => "/discounts/{$state}/"];
+            $heading = "Military & Veteran Discounts in {$stateName}";
+            // One entry per distinct city (unique keeps the first row per city).
+            $items = $inState->unique('city')
+                ->map(static fn (LocalDiscount $ld): array => [
+                    'url' => "/discounts/{$ld->state}/{$ld->city}/",
+                    'name' => $ld->city_name,
+                    'meta' => $inState->where('city', $ld->city)->count().' listed',
+                ])
+                ->sortBy('name')
+                ->values()
+                ->all();
+        } else {
+            [$state, $city] = [$segments[1], $segments[2]];
+            $inCity = $this->localDiscounts->forCity($state, $city);
+            $first = $inCity->first();
+            if ($first === null) {
+                return $this->renderShell($page); // hub with no live children → shell
+            }
+            $crumbs[] = ['name' => $first->state_name, 'url' => "/discounts/{$state}/"];
+            $crumbs[] = ['name' => $first->city_name, 'url' => "/discounts/{$state}/{$city}/"];
+            $heading = "Military & Veteran Discounts in {$first->city_name}, {$first->state_abbr}";
+            $items = $inCity->map(static fn (LocalDiscount $ld): array => [
+                'url' => "/discounts/{$ld->state}/{$ld->city}/{$ld->business_slug}/",
+                'name' => $ld->company,
+                'meta' => $ld->headline_discount,
+            ])->values()->all();
+        }
+
+        /** @var list<array{url: string, name: string}> $schemaItems */
+        $schemaItems = array_map(
+            static fn (array $i): array => ['url' => $i['url'], 'name' => $i['name']],
+            $items,
+        );
+        $seo = SeoHead::forPage($page, LocalDiscountHubSchema::build($page, $heading, $crumbs, $schemaItems));
+
+        return response()->view('pages.local-discount-hub', [
+            'page' => $page,
+            'crumbs' => $crumbs,
+            'heading' => $heading,
+            'items' => $items,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

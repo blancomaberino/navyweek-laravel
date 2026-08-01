@@ -34,3 +34,14 @@ it('rolls up pages by state and by city, ordered by company', function () {
     expect($this->repository->forState('texas')->pluck('company')->all())->toBe(['Cafe', 'Museum', 'Zoo'])
         ->and($this->repository->forCity('texas', 'houston')->pluck('company')->all())->toBe(['Museum', 'Zoo']);
 });
+
+it('rolls up distinct states with counts, ordered by state name', function () {
+    LocalDiscount::factory()->create(['state' => 'texas', 'state_name' => 'Texas', 'city' => 'houston', 'business_slug' => 'a']);
+    LocalDiscount::factory()->create(['state' => 'texas', 'state_name' => 'Texas', 'city' => 'austin', 'business_slug' => 'b']);
+    LocalDiscount::factory()->create(['state' => 'ohio', 'state_name' => 'Ohio', 'city' => 'columbus', 'business_slug' => 'c']);
+
+    $states = $this->repository->states();
+
+    expect($states->pluck('state_name')->all())->toBe(['Ohio', 'Texas']); // alphabetical
+    expect($states->firstWhere('state', 'texas'))->toMatchArray(['state' => 'texas', 'state_name' => 'Texas', 'count' => 2]);
+});

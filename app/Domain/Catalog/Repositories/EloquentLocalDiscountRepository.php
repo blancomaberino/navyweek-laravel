@@ -28,6 +28,24 @@ final class EloquentLocalDiscountRepository implements LocalDiscountRepositoryIn
             ->get();
     }
 
+    public function states(): Collection
+    {
+        return LocalDiscount::query()
+            ->selectRaw('state, state_name, COUNT(*) as aggregate_count')
+            ->groupBy('state', 'state_name')
+            ->orderBy('state_name')
+            ->get()
+            ->map(static function (LocalDiscount $row): array {
+                $count = $row->getAttribute('aggregate_count');
+
+                return [
+                    'state' => $row->state,
+                    'state_name' => $row->state_name,
+                    'count' => is_numeric($count) ? (int) $count : 0,
+                ];
+            });
+    }
+
     public function forState(string $stateSlug): Collection
     {
         return LocalDiscount::query()

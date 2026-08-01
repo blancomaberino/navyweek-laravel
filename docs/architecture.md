@@ -17,8 +17,10 @@ page and the **local-business discount detail pages** (`/discounts/{state}/{city
 — `LocalDiscountSchema`: the discount-guide E-E-A-T graph plus a `LocalBusiness` node with
 the primary store's address, geo, and `OpeningHoursSpecification`); the author/reviewer
 `Person` builders shared by the guide + local-business graphs now live on the
-`BuildsSeoSchema` trait. The `/discounts/` rollup hubs (state/city index pages) are a
-follow-up.
+`BuildsSeoSchema` trait. The `/discounts/` rollup **hubs** (root state index, per-state
+city index, per-city business index — `LocalDiscountHubSchema`: Breadcrumb + Article +
+WebSite + ItemList) are generated with null pageable and split at render by url depth in
+`PageController::renderLocalDiscountHub`. The **local-discounts family is complete**.
 Data model unchanged since Phase 2
 slice 10b; these slices add only the rendering/page-generation path
 (`PageRepository::upsertPillarPage` — null-pageable-aware, applies the default byline).
