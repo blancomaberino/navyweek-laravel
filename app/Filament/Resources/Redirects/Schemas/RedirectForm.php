@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Redirects\Schemas;
 
-use App\Domain\Publishing\Models\Redirect;
 use App\Domain\Publishing\Enums\RedirectMatchType;
+use App\Domain\Publishing\Models\Redirect;
 use App\Domain\Shared\ValueObjects\UrlPath;
 use App\Filament\Support\EnumOptions;
 use App\Filament\Support\PathField;

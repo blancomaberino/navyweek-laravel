@@ -8,6 +8,7 @@ use App\Filament\Widgets\PipelineStatsWidget;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+use Illuminate\Support\Collection;
 use Livewire\Livewire;
 
 beforeEach(function () {
@@ -19,9 +20,9 @@ beforeEach(function () {
  * The widget's computed stats keyed by label, so a test can assert the actual number
  * each card shows (StatsOverviewWidget::getStats is protected).
  *
- * @return \Illuminate\Support\Collection<string, string>
+ * @return Collection<string, string>
  */
-function pipelineStatValues(): \Illuminate\Support\Collection
+function pipelineStatValues(): Collection
 {
     $widget = Livewire::test(PipelineStatsWidget::class)->instance();
     $method = new ReflectionMethod($widget, 'getStats');

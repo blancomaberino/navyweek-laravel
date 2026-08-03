@@ -8,6 +8,7 @@ use App\Filament\Resources\Pages\Pages\EditPage;
 use App\Filament\Resources\Pages\Pages\ListPages;
 use App\Models\User;
 use Filament\Facades\Filament;
+use Illuminate\Database\QueryException;
 use Livewire\Livewire;
 
 beforeEach(function () {
@@ -84,7 +85,7 @@ it('rolls back the whole edit when the url rename fails at the database layer', 
     $handle = new ReflectionMethod($component, 'handleRecordUpdate');
 
     expect(fn () => $handle->invoke($component, $page, ['title' => 'Changed', 'url_path' => '/discount/taken/']))
-        ->toThrow(Illuminate\Database\QueryException::class);
+        ->toThrow(QueryException::class);
 
     // The non-URL column change must NOT have persisted — the transaction rolled back.
     expect($page->fresh()->title)->toBe('Original');
