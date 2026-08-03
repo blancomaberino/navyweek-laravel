@@ -28,4 +28,9 @@ final class EloquentSkillRepository implements SkillRepositoryInterface
 
         return $locked;
     }
+
+    public function findByKey(string $key): ?Skill
+    {
+        return Skill::query()->where('key', $key)->first();
+    }
 }

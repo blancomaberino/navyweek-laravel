@@ -70,4 +70,24 @@ interface ResearchRepositoryInterface
      * @return array<int, int>
      */
     public function connectionIdsWithStaleSkillProvenance(int $skillId, string $currentVersion): array;
+
+    /**
+     * Open a new draft research run for a connection: a `Draft` row at the next version
+     * (`max(version)+1`), researched by the Claude pipeline, stamped with the primary
+     * skill's key/version, and linked to every supplied skill in the `research_skill`
+     * pivot (with its version + `used_for`). This is the provenance record the headless
+     * run fills in — created up-front so the run's skill versions are captured even if
+     * the process later fails. Runs in one transaction; the fresh model is returned.
+     *
+     * @param  non-empty-list<array{id: int, key: string, version: string, used_for: string}>  $skills
+     *                                                                                                  the run's skills; the FIRST is primary (stamped on the row).
+     */
+    public function createDraftRun(int $connectionId, array $skills): Research;
+
+    /**
+     * Store the headless run's raw brief output on a draft row (`raw_markdown`), locked.
+     * The verbatim brief is the auditable source of record; parsing it into the
+     * structured columns is a later pass. Must run inside a transaction.
+     */
+    public function storeRawOutput(Research $research, string $rawMarkdown): void;
 }

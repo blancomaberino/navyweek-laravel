@@ -1199,6 +1199,37 @@ legacy site-wide Navy Week FAQ block) has no platform source yet and is emitted 
 byte-parity against the legacy output is a deploy-time validation (like the sitemap). Once
 generated, the sitemap's `data` bucket lists `/llms.txt` + `/data/navy-week-2026.json`.
 
+## Headless research automation (LaunchResearchJob)
+
+"Launch research from the CRM" is `Research\Jobs\LaunchResearchJob` (queued via Horizon)
+→ `Research\Actions\LaunchResearchAction`. The action:
+
+1. **Guards on `research.automation.enabled`** — OFF by default. The run spawns the
+   Claude CLI with `--dangerously-skip-permissions`, so it must never run unless a
+   controlled host (CLI + credentials installed) sets `RESEARCH_AUTOMATION_ENABLED=true`.
+   When disabled it throws `ResearchAutomationDisabledException` **before** spawning
+   anything. Merging the feature therefore cannot enable live spawning anywhere.
+2. **Opens a provenance-stamped Draft** via `ResearchRepository::createDraftRun` — a
+   `Draft` row at `max(version)+1` (row-locked so concurrent launches can't collide),
+   researched by the Claude pipeline, stamped with the primary skill's `skill_key`/
+   `skill_version` and linked to every configured skill (`research.automation.skills`,
+   resolved to current versions via `SkillRepository::findByKey`) in the `research_skill`
+   pivot. Provenance is captured up-front, so it survives a later process failure.
+3. **Runs the CLI** with Laravel's `Process` facade as an **array of argv entries**
+   (never a shell string) in the configured working directory with a wall-clock timeout —
+   the brand/slug are separate arguments, so no value can inject into a shell.
+4. On success **stores the returned brief verbatim** in `raw_markdown`
+   (`ResearchRepository::storeRawOutput`); on a non-zero exit it throws, leaving the
+   Draft (with its provenance) for inspection/retry. The job is `tries = 1` — an
+   expensive external spawn is not silently retried; a failure lands in `failed_jobs`.
+
+The job carries only the connection id (resolved through `ConnectionRepository::findById`
+in `handle`, never a serialized model). Parsing the verbatim brief into the structured
+columns (`ResearchBriefParser`) and dispatching `ResearchCompleted` (whose listeners flip
+the connection to `drafted`, recompute the cadence, and notify) is a **deferred
+follow-up** — `raw_markdown` is the auditable source of record in the meantime, and the
+CRM "Launch research" button + priority-tier auto-dispatch wire onto this same job.
+
 ## Data migration pipeline (Stage A → Stage B)
 
 The legacy `../src/data` TypeScript is migrated into the tables above in two

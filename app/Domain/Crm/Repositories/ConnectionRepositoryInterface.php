@@ -15,6 +15,9 @@ use Illuminate\Support\Collection;
  */
 interface ConnectionRepositoryInterface
 {
+    /** The connection with this id, or null — the plain (unlocked) read for a queued job. */
+    public function findById(int $id): ?Connection;
+
     /** The canonical connection owning this exact slug, or null. */
     public function findBySlug(string $slug): ?Connection;
 
