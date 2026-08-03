@@ -40,6 +40,7 @@ use App\Domain\Publishing\Seo\LocalDiscountHubSchema;
 use App\Domain\Publishing\Seo\LocalDiscountSchema;
 use App\Domain\Publishing\Seo\SeoHead;
 use App\Domain\Publishing\Seo\SeoUrl;
+use App\Domain\Publishing\Support\PagePaths;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -336,30 +337,35 @@ final class PageController
      */
     private function renderLocalDiscountHub(Page $page): Response
     {
-        $segments = array_values(array_filter(explode('/', $page->url_path), static fn (string $s): bool => $s !== ''));
+        // The hub level + its state/city come from the stable generation_key, not the
+        // (renameable) url_path: "local-hub:root" | "local-hub:state:{state}" |
+        // "local-hub:city:{state}:{city}". Every link is built via PagePaths so the whole
+        // family tracks config('publishing.paths.local_discounts').
+        $parts = explode(':', (string) $page->generation_key);
+        $level = $parts[1] ?? 'root';
         $crumbs = [
             ['name' => 'Home', 'url' => '/'],
-            ['name' => 'Local Discounts', 'url' => '/discounts/'],
+            ['name' => 'Local Discounts', 'url' => PagePaths::root('local_discounts')],
         ];
 
-        if (count($segments) <= 1) {
+        if ($level === 'root') {
             $heading = 'Local Military & Veteran Discounts by State';
             $items = $this->localDiscounts->states()->map(static fn (array $s): array => [
-                'url' => "/discounts/{$s['state']}/",
+                'url' => PagePaths::child('local_discounts', $s['state']),
                 'name' => $s['state_name'],
                 'meta' => $s['count'].' listed',
             ])->values()->all();
-        } elseif (count($segments) === 2) {
-            $state = $segments[1];
+        } elseif ($level === 'state') {
+            $state = $parts[2] ?? '';
             $inState = $this->localDiscounts->forState($state);
             $firstInState = $inState->first();
             $stateName = $firstInState === null ? $state : $firstInState->state_name;
-            $crumbs[] = ['name' => $stateName, 'url' => "/discounts/{$state}/"];
+            $crumbs[] = ['name' => $stateName, 'url' => $page->url_path];
             $heading = "Military & Veteran Discounts in {$stateName}";
             // One entry per distinct city (unique keeps the first row per city).
             $items = $inState->unique('city')
                 ->map(static fn (LocalDiscount $ld): array => [
-                    'url' => "/discounts/{$ld->state}/{$ld->city}/",
+                    'url' => PagePaths::child('local_discounts', $ld->state, $ld->city),
                     'name' => $ld->city_name,
                     'meta' => $inState->where('city', $ld->city)->count().' listed',
                 ])
@@ -367,17 +373,18 @@ final class PageController
                 ->values()
                 ->all();
         } else {
-            [$state, $city] = [$segments[1], $segments[2]];
+            $state = $parts[2] ?? '';
+            $city = $parts[3] ?? '';
             $inCity = $this->localDiscounts->forCity($state, $city);
             $first = $inCity->first();
             if ($first === null) {
                 return $this->renderShell($page); // hub with no live children → shell
             }
-            $crumbs[] = ['name' => $first->state_name, 'url' => "/discounts/{$state}/"];
-            $crumbs[] = ['name' => $first->city_name, 'url' => "/discounts/{$state}/{$city}/"];
+            $crumbs[] = ['name' => $first->state_name, 'url' => PagePaths::child('local_discounts', $state)];
+            $crumbs[] = ['name' => $first->city_name, 'url' => $page->url_path];
             $heading = "Military & Veteran Discounts in {$first->city_name}, {$first->state_abbr}";
             $items = $inCity->map(static fn (LocalDiscount $ld): array => [
-                'url' => "/discounts/{$ld->state}/{$ld->city}/{$ld->business_slug}/",
+                'url' => PagePaths::child('local_discounts', $ld->state, $ld->city, $ld->business_slug),
                 'name' => $ld->company,
                 'meta' => $ld->headline_discount,
             ])->values()->all();
@@ -431,7 +438,7 @@ final class PageController
         $warrant = $this->ranks->forCategoryByPaygrade(RankCategory::OfficerWarrant);
         $enlisted = $this->ranks->forCategoryByPaygrade(RankCategory::EnlistedPaygrade);
 
-        $seo = SeoHead::forPage($page, RankListSchema::build($page, '/navy-ranks/', 'Navy Ranks', [
+        $seo = SeoHead::forPage($page, RankListSchema::build($page, $page->url_path, 'Navy Ranks', [
             'U.S. Navy Officer Ranks' => $commissioned->concat($warrant),
             'U.S. Navy Enlisted Paygrades' => $enlisted,
         ]));
@@ -456,7 +463,7 @@ final class PageController
         $active = $this->ranks->activeRatings();
         $historic = $this->ranks->historicRatings();
 
-        $seo = SeoHead::forPage($page, RankListSchema::build($page, '/navy-ratings/', 'Navy Ratings', [
+        $seo = SeoHead::forPage($page, RankListSchema::build($page, $page->url_path, 'Navy Ratings', [
             'U.S. Navy Active Enlisted Ratings' => $active,
             'U.S. Navy Historic Enlisted Ratings' => $historic,
         ]));

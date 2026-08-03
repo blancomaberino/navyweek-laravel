@@ -7,6 +7,7 @@ namespace App\Domain\Pillars\Pages;
 use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Support\PagePaths;
 
 /**
  * Generates the air-show `pages`: one published detail page per published show
@@ -47,13 +48,13 @@ final class GenerateAirShowPagesAction
                 $attributes['canonical_path'] = $show->canonical_override;
             }
 
-            $this->pages->upsertPillarPage("/air-show/{$show->slug}/", $attributes, $show);
+            $this->pages->upsertPillarPage("air-show:{$show->slug}", PagePaths::child('air_shows', $show->slug), $attributes, $show);
             $count++;
         }
 
         $hub = $this->airShows->hub();
         if ($hub !== null) {
-            $this->pages->upsertPillarPage('/air-show/', [
+            $this->pages->upsertPillarPage('air-show-hub', PagePaths::root('air_shows'), [
                 'page_type' => PageType::AirShow,
                 'slug' => 'air-show',
                 'title' => $hub->meta_title,

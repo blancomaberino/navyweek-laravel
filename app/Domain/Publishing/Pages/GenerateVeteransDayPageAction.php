@@ -11,12 +11,14 @@ use App\Domain\Publishing\Repositories\PageRepositoryInterface;
  * Seeds the `/veterans-day/` content page — a DB-driven editorial page (body in
  * `body_blocks`, FAQs on the polymorphic `faqs`), migrated VERBATIM from the legacy
  * `src/page-views/VeteransDay.tsx`. Its JSON-LD is Article + author Person + FAQPage
- * (built by `ContentPageSchema` with `emitFaqPage`). Idempotent: upserts by url_path
- * and does NOT clobber an editor's body/FAQs on re-run.
+ * (built by `ContentPageSchema` with `emitFaqPage`). Idempotent: upserts by the stable
+ * `generation_key` and does NOT clobber an editor's body/FAQs (or rename) on re-run.
  */
 final class GenerateVeteransDayPageAction
 {
     private const URL_PATH = '/veterans-day/';
+
+    private const GENERATION_KEY = 'content:veterans-day';
 
     public function __construct(
         private readonly PageRepositoryInterface $pages,
@@ -24,7 +26,11 @@ final class GenerateVeteransDayPageAction
 
     public function __invoke(): void
     {
-        $existing = $this->pages->findPublishedByPath(self::URL_PATH);
+        // Identity by generation_key (not path) so an editor-renamed page is recognized
+        // and its body/FAQs are preserved on re-run; fall back to a path lookup for a
+        // pre-generation_key (keyless) legacy row.
+        $existing = $this->pages->findByGenerationKey(self::GENERATION_KEY)
+            ?? $this->pages->findPublishedByPath(self::URL_PATH);
         $isNew = $existing === null || $existing->body_blocks === null || $existing->body_blocks === [];
 
         $attributes = [
@@ -41,7 +47,7 @@ final class GenerateVeteransDayPageAction
             $attributes['body_blocks'] = $this->bodyBlocks();
         }
 
-        $page = $this->pages->upsertPillarPage(self::URL_PATH, $attributes);
+        $page = $this->pages->upsertPillarPage(self::GENERATION_KEY, self::URL_PATH, $attributes);
 
         if ($isNew || $page->faqs()->count() === 0) {
             $page->replaceFaqs($this->faqs());

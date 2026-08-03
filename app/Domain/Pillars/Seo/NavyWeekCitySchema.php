@@ -48,11 +48,11 @@ final class NavyWeekCitySchema
             self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
                 ['name' => 'Schedule', 'url' => '/schedule/'],
-                ['name' => $event->city, 'url' => "/city/{$slug}/"],
+                ['name' => $event->city, 'url' => $page->url_path],
             ]),
             self::usNavyOrganization(),
             self::navcoOrganization(),
-            self::eventNode($event),
+            self::eventNode($page, $event),
         ];
 
         if ($event->faqs->isNotEmpty()) {
@@ -103,11 +103,11 @@ final class NavyWeekCitySchema
     }
 
     /** @return array<string, mixed> */
-    private static function eventNode(NavyWeekEvent $event): array
+    private static function eventNode(Page $page, NavyWeekEvent $event): array
     {
         $site = SeoUrl::site();
         $slug = $event->slug;
-        $pageUrl = "{$site}/city/{$slug}/";
+        $pageUrl = $site.$page->url_path;
         $ogImage = "{$site}/og/{$slug}.png";
 
         $performers = self::performers($event->navy_assets ?? []);

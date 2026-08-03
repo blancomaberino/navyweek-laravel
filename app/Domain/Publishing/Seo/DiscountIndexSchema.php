@@ -58,12 +58,12 @@ final class DiscountIndexSchema
         return [
             self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
-                ['name' => 'Military Discounts', 'url' => '/discount/'],
+                ['name' => 'Military Discounts', 'url' => $page->url_path],
             ]),
             self::article(
                 headline: 'Military & Veteran Discounts Directory',
                 description: self::ARTICLE_DESCRIPTION,
-                path: '/discount/',
+                path: $page->url_path,
                 imagePath: $page->og_image_path,
                 datePublished: self::isoDate($page->date_published),
                 dateModified: self::isoDate($page->date_modified),
@@ -72,7 +72,7 @@ final class DiscountIndexSchema
                 '@context' => 'https://schema.org',
                 '@type' => 'ItemList',
                 'name' => 'Military & Veteran Discounts Directory',
-                'url' => SeoUrl::absolute('/discount/'),
+                'url' => SeoUrl::absolute($page->url_path),
                 'numberOfItems' => count($items),
                 'itemListElement' => $items,
             ],

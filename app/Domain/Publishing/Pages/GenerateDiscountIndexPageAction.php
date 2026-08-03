@@ -7,6 +7,7 @@ namespace App\Domain\Publishing\Pages;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Support\PagePaths;
 use Illuminate\Support\Carbon;
 
 /**
@@ -61,7 +62,7 @@ final class GenerateDiscountIndexPageAction
             .($count > 1 ? " — {$count}+ Brands" : '')
             .' | NavyWeek.org';
 
-        $page = $this->pages->upsertPillarPage('/discount/', [
+        $page = $this->pages->upsertPillarPage('discount-index', PagePaths::root('discounts'), [
             'page_type' => PageType::Static,
             'slug' => 'discount',
             'title' => $title,

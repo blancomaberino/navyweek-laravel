@@ -8,6 +8,7 @@ use App\Domain\Pillars\Repositories\NavyWeekEventRepositoryInterface;
 use App\Domain\Pillars\Seo\NavyWeekCitySchema;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Support\PagePaths;
 use Illuminate\Support\Carbon;
 
 /**
@@ -33,7 +34,7 @@ final class GenerateNavyWeekPagesAction
         $count = 0;
 
         foreach ($this->events->all() as $event) {
-            $this->pages->upsertPillarPage("/city/{$event->slug}/", [
+            $this->pages->upsertPillarPage("navy-week-city:{$event->slug}", PagePaths::child('navy_week_cities', $event->slug), [
                 'page_type' => PageType::NavyWeekCity,
                 'slug' => $event->slug,
                 'title' => NavyWeekCitySchema::metaTitle($event),

@@ -45,7 +45,9 @@ it('renames a page and 301s the old path to the new one, with no deploy', functi
 
     movePage($page, '/guides/new/');
 
-    expect($page->fresh()?->url_path)->toBe('/guides/new/');
+    expect($page->fresh()?->url_path)->toBe('/guides/new/')
+        // An editor rename pins the path so regeneration won't snap it back.
+        ->and($page->fresh()?->url_path_is_custom)->toBeTrue();
 
     $redirect = Redirect::query()->where('from_path', '/guides/old/')->sole();
     expect($redirect->to_path)->toBe('/guides/new/')

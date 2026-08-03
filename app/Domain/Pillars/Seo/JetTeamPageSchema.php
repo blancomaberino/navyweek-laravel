@@ -44,7 +44,7 @@ final class JetTeamPageSchema
      */
     public static function buildHub(Page $page, JetTeam $team, Collection $schedule): array
     {
-        $hubPath = "{$team->base_path}/";
+        $hubPath = $page->url_path;
 
         return [
             self::breadcrumb([
@@ -81,7 +81,7 @@ final class JetTeamPageSchema
     public static function buildCity(Page $page, JetTeamCity $city, JetTeam $team): array
     {
         $site = SeoUrl::site();
-        $path = "{$team->base_path}/{$city->slug}/";
+        $path = $page->url_path;
         $url = "{$site}{$path}";
         $author = $page->author;
         $reviewer = $page->reviewer;

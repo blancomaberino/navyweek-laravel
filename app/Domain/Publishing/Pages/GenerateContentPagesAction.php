@@ -16,9 +16,10 @@ use Illuminate\Support\Carbon;
  * va-disability, veterans-home-care) land in follow-up slices with their Article/Person/
  * WebPage graphs.
  *
- * Idempotent: upserts by url_path, so the build clock preserves `date_published` and an
- * editor's later body edits are NOT clobbered on re-run — the seed only establishes the
- * initial content for a page that doesn't exist yet (a present page keeps its body).
+ * Idempotent: upserts by the stable `generation_key` ("content:{slug}"), so the build
+ * clock preserves `date_published`, an editor's later body edits are NOT clobbered on
+ * re-run, and a page an editor renamed is still recognized (the seed only establishes the
+ * initial content for a page that doesn't exist yet; a present page keeps its body/path).
  */
 final class GenerateContentPagesAction
 {
@@ -32,7 +33,12 @@ final class GenerateContentPagesAction
         $count = 0;
 
         foreach ($this->seedPages() as $seed) {
-            $page = $this->pages->findPublishedByPath($seed['url_path']);
+            $generationKey = "content:{$seed['slug']}";
+            // Track identity by generation_key, not path — so a page an editor renamed is
+            // still recognized as existing and its body is NOT re-seeded/clobbered. Fall
+            // back to a path lookup for a pre-generation_key (keyless) legacy row.
+            $page = $this->pages->findByGenerationKey($generationKey)
+                ?? $this->pages->findPublishedByPath($seed['url_path']);
 
             // Don't clobber an editor's body on re-run — only seed a page that's new or
             // has no body yet.
@@ -49,7 +55,7 @@ final class GenerateContentPagesAction
                 $attributes['body_blocks'] = $seed['blocks'];
             }
 
-            $this->pages->upsertPillarPage($seed['url_path'], $attributes);
+            $this->pages->upsertPillarPage($generationKey, $seed['url_path'], $attributes);
             $count++;
         }
 
