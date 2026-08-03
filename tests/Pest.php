@@ -1,12 +1,16 @@
 <?php
 
-pest()->extend(DuskTestCase::class)
-//  ->use(Illuminate\Foundation\Testing\DatabaseMigrations::class)
-    ->in('Browser');
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\DuskTestCase;
 use Tests\TestCase;
+
+// NOTE: these `use` imports must stay ABOVE the pest() calls below. A `use` alias
+// only affects references that appear textually after it (lexical scoping — true on
+// every PHP version), so with the import below, `DuskTestCase::class` resolves to the
+// global `\DuskTestCase` and Pest aborts every run with "class `DuskTestCase` was not found."
+pest()->extend(DuskTestCase::class)
+//  ->use(Illuminate\Foundation\Testing\DatabaseMigrations::class)
+    ->in('Browser');
 
 /*
 |--------------------------------------------------------------------------

@@ -73,6 +73,7 @@ Domain-first (modular monolith) under `app/Domain/*`:
 | `Publishing` | Pages, redirects, SEO/JSON-LD, sitemap |
 | `Research` | Briefs, cadence, skill provenance, automation |
 | `Pillars` | Bases, ranks, events, air shows, etc. |
+| `Navigation` | Editable header/footer/legal menus (the site chrome) |
 | `Shared` | Value objects, enums, cross-cutting DTOs |
 
 Data access is behind **repository interfaces** bound in `DomainServiceProvider`;
@@ -140,6 +141,9 @@ same PR that introduces the model/repo (enforced by `CLAUDE.md`).
 | Model | `Pillars\Models\JetTeamScheduleRow` | Pillars | One stop on a team's season tour (port of `JetTeamScheduleRow`) — factual hub-table data; `slug` links only when a published guide exists, and is non-unique (a city can appear twice a season). |
 | Model | `Pillars\Models\JetTeamCity` | Pillars | A published jet-team city guide (`/{team}/{slug}/`; port of `JetTeamCity`). `published` gates the route; the optional `second_*` window handles a twice-a-season city; FAQs/sources via the shared polymorphic tables. |
 | Repository | `Pillars\Repositories\JetTeamRepositoryInterface` → `EloquentJetTeamRepository` | Pillars | Jet-team reads: `findTeam`/`findByBasePath`, `allTeams`, `schedule` (authored order), `publishedCities` (the render gate), `findCity` (team + slug). |
+| Model | `Navigation\Models\Menu` | Navigation | An editable navigation menu — one named, ordered list of links rendered in a region of the site chrome (`Navigation\Enums\MenuLocation`: header / footer / legal). `key` is the stable identity the seeder + render fallback pin to; `location` + `sort_order` place it (footer columns share `footer` and order among themselves); `name` is the visible heading. Replaces the arrays that were hardcoded in the header/footer Blade partials. Exposes `activeItems` (active, top-level, ordered) as the render relation. |
+| Model | `Navigation\Models\MenuItem` | Navigation | A single link in a `Menu`. `url` is stored verbatim (root-relative path or absolute external URL) — nav links point *at* pages, so they are deliberately decoupled from the page-identity/`url_path` machinery. Self-referential `parent_id` (one level) makes an item a dropdown parent (`activeChildren` is the ordered render relation); `target`/`rel` carry external-link attributes; `sort_order` is the drag-reorder position. |
+| Repository | `Navigation\Repositories\MenuRepositoryInterface` → `EloquentMenuRepository` | Navigation | Menu reads for the site chrome: `activeMenusForLocation` (active menus for a region, ordered, with active top-level items + their active children eager-loaded) — the single read backing the header, footer columns and legal row via the view composer, with a hardcoded fallback (`Navigation\Support\NavigationDefaults`) when a region has no active menu. |
 
 Reads for the shared/lookup tables (`audiences`, `sources`, `faqs`, `us_states`,
 `overseas_countries`) route through the aggregate they hang off (the Offer

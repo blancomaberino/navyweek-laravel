@@ -424,23 +424,67 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
 }
 .nw-header-cta:hover { background: var(--gold-light); color: var(--navy); text-decoration: none; }
 
+/* Dropdown nav items — only rendered when a menu item has editable children;
+   the default seeded nav is flat, so these rules stay inert until an editor
+   nests an item in the admin panel. */
+.nw-nav-item { position: relative; display: inline-flex; align-items: center; }
+.nw-has-children > .nw-navlink::after { content: "\25be"; margin-left: 4px; font-size: 0.7em; }
+.nw-dropdown {
+    position: absolute; top: 100%; left: 0; z-index: 50;
+    display: none; flex-direction: column; min-width: 180px;
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    padding: var(--space-xs) 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.nw-nav-item:hover > .nw-dropdown, .nw-nav-item:focus-within > .nw-dropdown { display: flex; }
+.nw-dropdown-link {
+    padding: 8px 16px;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--nw-gray-light);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+.nw-dropdown-link:hover, .nw-dropdown-link.is-active { color: var(--gold); text-decoration: none; }
+
 /* Mobile menu — checkbox toggle, no JS */
 .nw-mob-check { position: absolute; opacity: 0; width: 0; height: 0; }
 .nw-hamburger { margin-left: auto; display: none; color: var(--gold); cursor: pointer; padding: 8px; font-size: 1.4rem; }
 @media (max-width: 860px) {
     .nw-nav, .nw-header-cta { display: none; }
     .nw-hamburger { display: inline-flex; }
-    .nw-mob-check:checked ~ .nw-nav {
+    /* Anchor for the revealed nav overlay (the bar is a fixed-height flex row, so
+       the nav drops below it as an absolute panel rather than growing the row). */
+    .nw-header-bar { position: relative; }
+    .nw-mob-check:checked ~ .nw-header-bar .nw-nav {
         display: flex; flex-direction: column; align-items: flex-start;
-        gap: 0; width: 100%;
+        gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
         background: var(--navy-mid);
         padding: var(--space-sm) var(--space-lg) var(--space-lg);
         border-top: 1px solid rgba(201, 168, 76, 0.1);
     }
-    .nw-mob-check:checked ~ .nw-nav .nw-navlink {
+    .nw-mob-check:checked ~ .nw-header-bar .nw-nav .nw-navlink {
         width: 100%; padding: 12px 0;
         border-bottom: 1px solid rgba(201, 168, 76, 0.08);
         font-size: 0.8rem;
+    }
+    /* Dropdowns flatten to an indented inline list on mobile (no hover). */
+    .nw-mob-check:checked ~ .nw-header-bar .nw-nav .nw-nav-item {
+        width: 100%; flex-direction: column; align-items: flex-start;
+    }
+    .nw-mob-check:checked ~ .nw-header-bar .nw-nav .nw-nav-item .nw-navlink { border-bottom: none; }
+    .nw-mob-check:checked ~ .nw-header-bar .nw-nav .nw-dropdown {
+        position: static; display: flex;
+        background: transparent; border: none; box-shadow: none;
+        padding: 0 0 8px var(--space-md); min-width: 0; width: 100%;
+    }
+    .nw-mob-check:checked ~ .nw-header-bar .nw-nav .nw-dropdown-link {
+        width: 100%; padding: 10px 0; font-size: 0.72rem;
     }
 }
 
