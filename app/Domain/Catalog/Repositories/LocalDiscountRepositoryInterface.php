@@ -31,6 +31,14 @@ interface LocalDiscountRepositoryInterface
     public function all(): Collection;
 
     /**
+     * The distinct states that have local pages, for the `/discounts/` root hub —
+     * each `{state, state_name, count}`, ordered by state name.
+     *
+     * @return Collection<int, array{state: string, state_name: string, count: int}>
+     */
+    public function states(): Collection;
+
+    /**
      * Every local page in a state (the `/discounts/<state>/` rollup), by state slug.
      *
      * @return Collection<int, LocalDiscount>
