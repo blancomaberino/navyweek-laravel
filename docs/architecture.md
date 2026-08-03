@@ -12,7 +12,13 @@ Last updated: Phase 3 rendering — reference pillars + first event family. Base
 air shows, fleet weeks, Navy Week cities (`/city/{slug}/` — `NavyWeekCitySchema`, the
 richest Event graph), and jet teams (`/{team}/` hubs + `/{team}/{slug}/` city guides —
 `JetTeamPageSchema`). The events silo (air-show, fleet-week, navy-week-city, jet-team,
-jet-team-city) is complete.
+jet-team-city) is complete. Catalog rendering adds the `/discount/` directory landing
+page and the **local-business discount detail pages** (`/discounts/{state}/{city}/{business}/`
+— `LocalDiscountSchema`: the discount-guide E-E-A-T graph plus a `LocalBusiness` node with
+the primary store's address, geo, and `OpeningHoursSpecification`); the author/reviewer
+`Person` builders shared by the guide + local-business graphs now live on the
+`BuildsSeoSchema` trait. The `/discounts/` rollup hubs (state/city index pages) are a
+follow-up.
 Data model unchanged since Phase 2
 slice 10b; these slices add only the rendering/page-generation path
 (`PageRepository::upsertPillarPage` — null-pageable-aware, applies the default byline).

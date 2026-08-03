@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Publishing\Seo;
 
 use App\Domain\Publishing\Models\Page;
+use App\Models\User;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -116,6 +117,77 @@ trait BuildsSeoSchema
             '@type' => 'FAQPage',
             'mainEntity' => $questions,
         ];
+    }
+
+    /**
+     * The author Person node, built from a byline user's public editorial profile.
+     * Optional fields (image, jobTitle, description, knowsAbout) are emitted only when
+     * populated. Shared by the discount-guide + local-business detail graphs.
+     *
+     * @return array<string, mixed>
+     */
+    private static function authorPerson(string $site, User $author, string $profileUrl): array
+    {
+        $node = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Person',
+            '@id' => $profileUrl.'#person',
+            'name' => $author->name,
+            'url' => $profileUrl,
+        ];
+        if ($author->avatar_path !== null && $author->avatar_path !== '') {
+            $node['image'] = $site.$author->avatar_path;
+        }
+        if ($author->job_title !== null && $author->job_title !== '') {
+            $node['jobTitle'] = $author->job_title;
+        }
+        if ($author->credentials !== null && $author->credentials !== '') {
+            $node['description'] = $author->credentials;
+        }
+        if ($author->knows_about !== null && $author->knows_about !== []) {
+            $node['knowsAbout'] = $author->knows_about;
+        }
+
+        return $node;
+    }
+
+    /**
+     * The reviewer Person — a lighter node (name + credentials + profile link), keyed
+     * per-page as in the legacy graph.
+     *
+     * @return array<string, mixed>
+     */
+    private static function reviewerPerson(User $reviewer, string $personId): array
+    {
+        $node = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Person',
+            '@id' => $personId,
+            'name' => $reviewer->name,
+        ];
+        if ($reviewer->credentials !== null && $reviewer->credentials !== '') {
+            $node['description'] = $reviewer->credentials;
+        }
+        $url = self::authorProfileUrl($reviewer);
+        if ($url !== null) {
+            $node['url'] = $url;
+        }
+
+        return $node;
+    }
+
+    /**
+     * The `/authors/{slug}/` profile URL for a byline user, or null when the user has
+     * no profile slug. Routes through {@see SeoUrl::absolute} so the trailing slash
+     * matches every other canonical/@id/breadcrumb URL.
+     */
+    private static function authorProfileUrl(?User $user): ?string
+    {
+        if ($user === null || $user->slug === null || $user->slug === '') {
+            return null;
+        }
+
+        return SeoUrl::absolute("/authors/{$user->slug}");
     }
 
     /**
