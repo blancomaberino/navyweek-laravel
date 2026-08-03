@@ -38,6 +38,17 @@ authoritative VA source for exact pay figures rather than transcribing them. **T
 content-page family is complete** (the deep section prose is editorial data-entry in the
 CMS body editor, per the DB-backed decision).
 
+**The `/veterans-day/free-meals/` roundup** is data-driven rather than content-backed: a
+`Static` page (slug `veterans-day-free-meals`, `generation_key content:veterans-day-free-meals`,
+seeded by `pages:generate-veterans-day-free-meals` → `GenerateVeteransDayFreeMealsPageAction`)
+whose offers table, headline stats, JSON-LD ItemList, and stat-interpolated FAQ answers are all
+computed at render from the `verified()` meals (the YMYL gate: `status = verified` + a primary
+`source_url`). `PageController::renderVeteransDayFreeMeals` (dispatched via `renderStatic` slug)
+drives `Catalog\Support\VeteransDayFreeMealsPresenter` + `Publishing\Seo\VeteransDayFreeMealsSchema`
+(Breadcrumb + Article + author Person + ItemList + FAQPage; `dateModified` tracks the freshest
+verification) into the `pages.veterans-day-free-meals` view (SSR-first table, progressively
+enhanced with client-side filter/sort). Non-persisted FAQ pairs use `Publishing\Support\FaqItem`.
+
 **Path flexibility (identity vs. location).** A generated page's IDENTITY is its stable
 `pages.generation_key` (e.g. `base:norfolk`, `local-hub:city:ca:san-diego`), assigned by
 the generator; its `url_path` is mutable LOCATION. `upsertPillarPage(generationKey,

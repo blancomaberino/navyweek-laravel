@@ -114,4 +114,31 @@ class VeteransDayMeal extends Model
     {
         return $this->belongsTo(Connection::class, 'discount_slug', 'slug');
     }
+
+    /** Who-qualifies cell: the eligibility labels joined, e.g. "Veterans, Active duty". */
+    public function eligibilityLabelList(): string
+    {
+        return $this->eligibility
+            ->map(static fn (MealEligibility $e): string => $e->label())
+            ->implode(', ');
+    }
+
+    /** The green "Verified <Mon YYYY>" badge text, from `last_verified_at` (UTC), e.g. "Verified Jun 2026". */
+    public function verifiedBadge(): string
+    {
+        return 'Verified '.$this->last_verified_at->format('M Y');
+    }
+
+    /**
+     * The "When" cell: an ISO `Y-m-d` offer_date renders as "Nov 11, 2026"; any other
+     * string (a human date range) passes through verbatim, matching the legacy.
+     */
+    public function whenLabel(): string
+    {
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $this->offer_date) === 1) {
+            return Carbon::parse($this->offer_date)->format('M j, Y');
+        }
+
+        return $this->offer_date;
+    }
 }
