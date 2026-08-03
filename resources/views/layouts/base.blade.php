@@ -26,6 +26,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
+    {{-- NavyWeek design system (tokens + chrome + components). Without this the pages
+         render as unstyled HTML — see CLAUDE.md "Visual verification is part of done". --}}
+    @vite(['resources/css/app.css'])
+
     {{-- Ahrefs Analytics --}}
     <script async src="https://analytics.ahrefs.com/analytics.js" data-key="cyBzsvylryte/RFYYCOQMg"></script>
 
@@ -34,6 +38,8 @@
     @stack('head')
   </head>
   <body>
+    @include('partials.header')
     @yield('content')
+    @include('partials.footer')
   </body>
 </html>
