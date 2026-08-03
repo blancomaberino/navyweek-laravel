@@ -917,7 +917,23 @@ The per-page SEO block is serialized by `App\Domain\Publishing\Seo\SeoHead`
 to the JSON-LD on indexable pages only; noindex pages emit `noindex, nofollow`
 instead of the site-wide index directive.
 
-The body is dispatched by `page_type`. A **`discount_brand`** page renders
+The body is dispatched by `page_type`. The **`home`** type is the site root (`/`, no
+`pageable`) — a 1:1 content port of the legacy `Home.tsx` and a **data-driven hub, not a
+`body_blocks` CMS page**: `PageController::renderHome` reads the 12-city schedule from the
+`NavyWeekEvent` pillar (`NavyWeekEventRepository::all`), derives the current/next stop
+(first `Active`, else first `Upcoming`), and renders `pages.home` (hero, key facts,
+schedule grid, mission, partners, map teaser, FAQ). `HomePageSchema` builds the JSON-LD —
+WebSite + Breadcrumb(Home) + two `GovernmentOrganization` nodes (US Navy + NAVCO) + the
+schedule **ItemList** (city URLs via `PagePaths`, never a hardcoded `/city/`) + FAQPage —
+reusing the `webSite`/`usNavyOrganization`/`navcoOrganization` builders now shared on the
+`BuildsSeoSchema` trait (the Navy Week city graph uses the same two org builders). The
+`pages` row + the home FAQs (port of `generalFaqs`) are seeded by
+`GenerateHomePageAction` (`pages:generate-home`), keyed on the stable `generation_key`
+`content:home`; `/` is a genuine one-off (it owns its full path, not a
+`config('publishing.paths')` family, so no `PagePaths` knob or hygiene-allowlist entry —
+`/` isn't route-shaped).
+
+A **`discount_brand`** page renders
 `pages.discount` from its primary Offer (`pageable`) — hero + CTA, savings-tier
 table, eligibility/exclusions/key-facts, online/in-store redemption steps, FAQs,
 cited sources, and the independence disclosure — and builds its JSON-LD at render

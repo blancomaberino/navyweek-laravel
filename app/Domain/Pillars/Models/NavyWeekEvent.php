@@ -137,4 +137,20 @@ class NavyWeekEvent extends Model
     {
         return $this->first_time || (bool) $this->first_time_location;
     }
+
+    /**
+     * This stop's date range as a display label — "September 26 – 28, 2026" within one
+     * month, else "September 26 – October 3, 2026" (en-dash, surrounding spaces; start
+     * year for both). Port of `formatDateRange` (data.ts); the single home for the rule,
+     * reused by the city JSON-LD (NavyWeekCitySchema) and the home landing view.
+     */
+    public function dateRangeLabel(): string
+    {
+        $start = $this->start_date;
+        $end = $this->end_date;
+
+        return $start->month === $end->month
+            ? $start->format('F j').' – '.$end->format('j').', '.$start->format('Y')
+            : $start->format('F j').' – '.$end->format('F j').', '.$start->format('Y');
+    }
 }

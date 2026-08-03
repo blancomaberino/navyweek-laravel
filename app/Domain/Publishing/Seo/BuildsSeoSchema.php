@@ -191,6 +191,78 @@ trait BuildsSeoSchema
     }
 
     /**
+     * The site-wide WebSite node (port of legacy `buildWebSiteSchema`): id `#website`,
+     * publisher → the Organization. Emitted by the home landing graph.
+     *
+     * @return array<string, mixed>
+     */
+    private static function webSite(): array
+    {
+        $site = SeoUrl::site();
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            '@id' => "{$site}/#website",
+            'name' => Config::string('site.name'),
+            'url' => $site,
+            'publisher' => ['@id' => "{$site}/#organization"],
+        ];
+    }
+
+    /**
+     * The United States Navy GovernmentOrganization node (port of legacy
+     * `buildUsNavyOrganizationSchema`), id `#us-navy`. Shared by the Navy Week city
+     * graph and the home landing graph.
+     *
+     * @return array<string, mixed>
+     */
+    private static function usNavyOrganization(): array
+    {
+        $site = SeoUrl::site();
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'GovernmentOrganization',
+            '@id' => "{$site}/#us-navy",
+            'name' => 'United States Navy',
+            'alternateName' => 'U.S. Navy',
+            'url' => 'https://www.navy.mil/',
+            'sameAs' => [
+                'https://www.navy.mil/',
+                'https://en.wikipedia.org/wiki/United_States_Navy',
+            ],
+        ];
+    }
+
+    /**
+     * The Navy Office of Community Outreach GovernmentOrganization node (port of legacy
+     * `buildNavcoOrganizationSchema`), id `#navco`, parented to `#us-navy`. Shared by the
+     * Navy Week city graph and the home landing graph.
+     *
+     * @return array<string, mixed>
+     */
+    private static function navcoOrganization(): array
+    {
+        $site = SeoUrl::site();
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'GovernmentOrganization',
+            '@id' => "{$site}/#navco",
+            'name' => 'Navy Office of Community Outreach',
+            'alternateName' => 'NAVCO',
+            'url' => 'https://outreach.navy.mil/Navy-Weeks/',
+            'description' => "The Navy Office of Community Outreach (NAVCO), based in Millington, TN, manages the U.S. Navy Week program — the Navy's flagship community outreach effort in cities without a significant Navy presence.",
+            'parentOrganization' => ['@id' => "{$site}/#us-navy"],
+            'sameAs' => [
+                'https://outreach.navy.mil/Navy-Weeks/',
+                'https://outreach.navy.mil/',
+            ],
+        ];
+    }
+
+    /**
      * A schema.org BreadcrumbList node from ordered `{name, url}` crumbs. Each crumb
      * URL runs through {@see SeoUrl::absolute} so the trailing slash matches every
      * other canonical/@id URL.
