@@ -90,6 +90,16 @@ interface PageRepositoryInterface
     public function allPublishedDiscountBrandPages(): Collection;
 
     /**
+     * Every published, indexable page (`is_published` and not `noindex`), ordered by
+     * `url_path` for a deterministic, diff-stable sweep. The route universe the
+     * sitemap generator buckets — the DB successor to the legacy build-time route
+     * enumeration + built-HTML indexability scrape.
+     *
+     * @return Collection<int, Page>
+     */
+    public function allPublishedIndexable(): Collection;
+
+    /**
      * Re-read the given page's row under a `FOR UPDATE` row lock, so a rename can
      * serialize against concurrent writers. Must be called inside a transaction;
      * returns null if the row was deleted concurrently.
