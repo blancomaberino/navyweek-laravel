@@ -100,6 +100,16 @@ interface PageRepositoryInterface
     public function allPublishedIndexable(): Collection;
 
     /**
+     * Every published discount-brand page with its primary Offer + the Offer's
+     * connection, tiers, audiences, faqs, and sources eager-loaded — the discount
+     * section of the LLM feed. Ordered by brand for a deterministic feed. Each page
+     * also carries the build-clock `date_published`/`date_modified` the feed reports.
+     *
+     * @return Collection<int, Page>
+     */
+    public function publishedDiscountBrandPagesWithOffer(): Collection;
+
+    /**
      * Re-read the given page's row under a `FOR UPDATE` row lock, so a rename can
      * serialize against concurrent writers. Must be called inside a transaction;
      * returns null if the row was deleted concurrently.
