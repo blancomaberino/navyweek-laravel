@@ -13,14 +13,18 @@ use App\Domain\Pillars\Models\AirShow;
 use App\Domain\Pillars\Models\AirShowHubMeta;
 use App\Domain\Pillars\Models\Base;
 use App\Domain\Pillars\Models\FleetWeek;
+use App\Domain\Pillars\Models\JetTeam;
+use App\Domain\Pillars\Models\JetTeamCity;
 use App\Domain\Pillars\Models\NavyWeekEvent;
 use App\Domain\Pillars\Models\Rank;
 use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
 use App\Domain\Pillars\Repositories\FleetWeekRepositoryInterface;
+use App\Domain\Pillars\Repositories\JetTeamRepositoryInterface;
 use App\Domain\Pillars\Repositories\RankRepositoryInterface;
 use App\Domain\Pillars\Seo\AirShowPageSchema;
 use App\Domain\Pillars\Seo\BasePageSchema;
 use App\Domain\Pillars\Seo\FleetWeekPageSchema;
+use App\Domain\Pillars\Seo\JetTeamPageSchema;
 use App\Domain\Pillars\Seo\NavyWeekCitySchema;
 use App\Domain\Pillars\Seo\RankListSchema;
 use App\Domain\Publishing\Enums\PageType;
@@ -52,6 +56,7 @@ final class PageController
         private readonly RankRepositoryInterface $ranks,
         private readonly AirShowRepositoryInterface $airShows,
         private readonly FleetWeekRepositoryInterface $fleetWeeks,
+        private readonly JetTeamRepositoryInterface $jetTeams,
     ) {}
 
     public function show(Request $request): Response
@@ -106,6 +111,12 @@ final class PageController
                 : $this->renderFleetWeekHub($page),
             PageType::NavyWeekCity => $pageable instanceof NavyWeekEvent
                 ? $this->renderNavyWeekCity($page, $pageable)
+                : null,
+            PageType::JetTeam => $pageable instanceof JetTeam
+                ? $this->renderJetTeamHub($page, $pageable)
+                : null,
+            PageType::JetTeamCity => $pageable instanceof JetTeamCity
+                ? $this->renderJetTeamCity($page, $pageable)
                 : null,
             default => null,
         };
@@ -258,6 +269,54 @@ final class PageController
             'page' => $page,
             'hub' => $hub,
             'shows' => $shows,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * A jet-team hub (`/{team}/`): the season schedule directory + JSON-LD ItemList.
+     */
+    private function renderJetTeamHub(Page $page, JetTeam $team): Response
+    {
+        $team->load('faqs');
+        $schedule = $this->jetTeams->schedule($team->team);
+        // Slugs that have a published city guide, so the schedule table links only
+        // stops that resolve to a real page.
+        $guideSlugs = $this->jetTeams->publishedCities($team->team)->pluck('slug')->all();
+
+        $seo = SeoHead::forPage($page, JetTeamPageSchema::buildHub($page, $team, $schedule));
+
+        return response()->view('pages.jet-team-hub', [
+            'page' => $page,
+            'team' => $team,
+            'schedule' => $schedule,
+            'guideSlugs' => $guideSlugs,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * A jet-team city guide (`/{team}/{slug}/`). Emits the guide graph + a show-stop
+     * Event. Defensive published gate: a city unpublished after its page was generated
+     * falls through to the shell (findCity doesn't filter published).
+     */
+    private function renderJetTeamCity(Page $page, JetTeamCity $city): Response
+    {
+        if (! $city->published) {
+            return $this->renderShell($page);
+        }
+
+        $city->load(['team', 'faqs', 'sources']);
+        $page->load(['author', 'reviewer']);
+
+        $seo = SeoHead::forPage($page, JetTeamPageSchema::buildCity($page, $city, $city->team));
+
+        return response()->view('pages.jet-team-city', [
+            'page' => $page,
+            'city' => $city,
+            'team' => $city->team,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);
