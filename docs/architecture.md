@@ -974,6 +974,16 @@ The **dashboard** carries a `PipelineStatsWidget` (auto-discovered under
 `app/Filament/Widgets`) — a stats-overview of the pipeline: total connections,
 published (live pages), due-for-review (past the research cadence), and backlog.
 
+**PipelineBoard** (`Filament\Pages\PipelineBoard`, `CRM` nav group, auto-discovered
+under `app/Filament/Pages`) — the pipeline as a Kanban board: one column per
+`ConnectionStatus`, showing the top `COLUMN_LIMIT` brands per column by `total_volume`
+(`ConnectionRepository::forStatus`) alongside the true `countByStatus` total (a status
+can hold thousands of the ~15k universe, so columns are capped, not full loads). A card's
+status control moves it between columns through `ConnectionRepository::updateStatusForIds`
+— the same bulk mutation the CRM table's bulk action uses — so the board never touches the
+model directly; an unknown/tampered target status is validated against the enum and
+ignored.
+
 Domain enums stay framework-agnostic via the `Shared\Enums\HasLabel` contract (a
 plain `label(): string`, no Filament dependency); the Filament layer's
 `Support\EnumOptions::map()` turns any `HasLabel` enum's cases into the

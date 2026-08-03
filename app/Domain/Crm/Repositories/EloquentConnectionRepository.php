@@ -124,6 +124,19 @@ final class EloquentConnectionRepository implements ConnectionRepositoryInterfac
         return Connection::query()->where('status', $status->value)->count();
     }
 
+    public function forStatus(ConnectionStatus $status, int $limit): Collection
+    {
+        return Connection::query()
+            ->where('status', $status->value)
+            // Highest opportunity first, nulls last (portable across MySQL/SQLite),
+            // `brand` as a deterministic tiebreak.
+            ->orderByRaw('total_volume IS NULL')
+            ->orderByDesc('total_volume')
+            ->orderBy('brand')
+            ->limit($limit)
+            ->get();
+    }
+
     public function dueForReviewCount(DateTimeInterface $asOf): int
     {
         return $this->dueForReviewQuery($asOf)->count();
