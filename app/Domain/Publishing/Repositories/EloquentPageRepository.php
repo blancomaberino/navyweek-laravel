@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 final class EloquentPageRepository implements PageRepositoryInterface
 {
-    public function upsertPillarPage(string $urlPath, array $attributes, Model $pageable): Page
+    public function upsertPillarPage(string $urlPath, array $attributes, ?Model $pageable = null): Page
     {
         $page = Page::query()->firstOrNew(['url_path' => $urlPath]);
 
@@ -23,7 +23,14 @@ final class EloquentPageRepository implements PageRepositoryInterface
         }
 
         $page->fill($attributes);
-        $page->pageable()->associate($pageable);
+
+        // A list/hub page owns no single aggregate — clear any pageable link.
+        if ($pageable === null) {
+            $page->pageable()->dissociate();
+        } else {
+            $page->pageable()->associate($pageable);
+        }
+
         $page->save();
 
         return $page;

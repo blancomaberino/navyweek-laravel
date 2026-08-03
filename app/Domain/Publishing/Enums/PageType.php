@@ -17,6 +17,7 @@ enum PageType: string implements HasLabel
     case LocalDiscount = 'local_discount';
     case Base = 'base';
     case Rank = 'rank';
+    case Rating = 'rating';
     case NavyWeekCity = 'navy_week_city';
     case FleetWeek = 'fleet_week';
     case AirShow = 'air_show';
@@ -33,6 +34,7 @@ enum PageType: string implements HasLabel
             self::LocalDiscount => 'Local discount',
             self::Base => 'Base',
             self::Rank => 'Rank',
+            self::Rating => 'Rating',
             self::NavyWeekCity => 'Navy Week city',
             self::FleetWeek => 'Fleet Week',
             self::AirShow => 'Air show',

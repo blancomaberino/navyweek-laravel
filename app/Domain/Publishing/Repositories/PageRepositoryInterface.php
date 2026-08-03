@@ -19,8 +19,11 @@ interface PageRepositoryInterface
      *
      * @param  array<string, mixed>  $attributes  Page columns (title, meta_description,
      *                                            og_image_path, page_type, dates, …).
+     * @param  Model|null  $pageable  The aggregate the page presents, or null for a
+     *                                list/hub page that owns no single aggregate
+     *                                (e.g. the /navy-ranks/ and /navy-ratings/ lists).
      */
-    public function upsertPillarPage(string $urlPath, array $attributes, Model $pageable): Page;
+    public function upsertPillarPage(string $urlPath, array $attributes, ?Model $pageable = null): Page;
 
     /**
      * Whether a published page owns this exact canonical `url_path`. The DB

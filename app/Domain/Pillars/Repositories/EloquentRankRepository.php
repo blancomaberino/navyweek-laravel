@@ -27,4 +27,41 @@ final class EloquentRankRepository implements RankRepositoryInterface
             ->orderBy('name')
             ->get();
     }
+
+    public function forCategoryByPaygrade(RankCategory $category): Collection
+    {
+        // Numeric paygrade sort done in PHP — portable across SQLite/MySQL, unlike a
+        // CAST(SUBSTRING(...)) orderByRaw. Paygrades are unique within a category, so
+        // no tiebreak is needed (and PHP's sortBy is stable regardless).
+        return Rank::query()
+            ->where('category', $category->value)
+            ->get()
+            ->sortBy(fn (Rank $rank): int => self::paygradeNumber($rank->paygrade))
+            ->values();
+    }
+
+    public function activeRatings(): Collection
+    {
+        return Rank::query()
+            ->where('category', RankCategory::RatingActive->value)
+            ->orderBy('name')
+            ->get();
+    }
+
+    public function historicRatings(): Collection
+    {
+        return Rank::query()
+            ->where('category', RankCategory::RatingHistorical->value)
+            ->orderByDesc('decommissioned_year')
+            ->orderBy('name')
+            ->get();
+    }
+
+    /** The integer after the paygrade's tier letter ("O-10" → 10, "E-1" → 1). */
+    private static function paygradeNumber(string $paygrade): int
+    {
+        $dash = strpos($paygrade, '-');
+
+        return $dash === false ? 0 : (int) substr($paygrade, $dash + 1);
+    }
 }

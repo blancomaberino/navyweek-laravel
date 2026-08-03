@@ -8,8 +8,12 @@ use App\Domain\Catalog\Models\DiscountCategory;
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Catalog\Repositories\DiscountCategoryRepositoryInterface;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Pillars\Enums\RankCategory;
 use App\Domain\Pillars\Models\Base;
+use App\Domain\Pillars\Models\Rank;
+use App\Domain\Pillars\Repositories\RankRepositoryInterface;
 use App\Domain\Pillars\Seo\BasePageSchema;
+use App\Domain\Pillars\Seo\RankListSchema;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
@@ -36,6 +40,7 @@ final class PageController
     public function __construct(
         private readonly PageRepositoryInterface $pages,
         private readonly DiscountCategoryRepositoryInterface $categories,
+        private readonly RankRepositoryInterface $ranks,
     ) {}
 
     public function show(Request $request): Response
@@ -74,6 +79,10 @@ final class PageController
             PageType::Base => $pageable instanceof Base
                 ? $this->renderBase($page, $pageable)
                 : null,
+            // The two consolidated reference lists own no pageable — they read the
+            // whole rank pillar at render.
+            PageType::Rank => $this->renderRankList($page),
+            PageType::Rating => $this->renderRatingList($page),
             default => null,
         };
     }
@@ -121,6 +130,65 @@ final class PageController
         return response()->view('pages.base', [
             'page' => $page,
             'base' => $base,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * The `/navy-ranks/` list page — every officer + enlisted rank on one page, in
+     * three paygrade-ordered sections (per-entry anchors). The JSON-LD carries two
+     * ItemLists (officer, enlisted); the officer list concatenates commissioned +
+     * warrant to match the legacy graph.
+     */
+    private function renderRankList(Page $page): Response
+    {
+        $commissioned = $this->ranks->forCategoryByPaygrade(RankCategory::OfficerCommissioned);
+        $warrant = $this->ranks->forCategoryByPaygrade(RankCategory::OfficerWarrant);
+        $enlisted = $this->ranks->forCategoryByPaygrade(RankCategory::EnlistedPaygrade);
+
+        $seo = SeoHead::forPage($page, RankListSchema::build($page, '/navy-ranks/', 'Navy Ranks', [
+            'U.S. Navy Officer Ranks' => $commissioned->concat($warrant),
+            'U.S. Navy Enlisted Paygrades' => $enlisted,
+        ]));
+
+        return response()->view('pages.rank-list', [
+            'page' => $page,
+            'commissioned' => $commissioned,
+            'warrant' => $warrant,
+            'enlisted' => $enlisted,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * The `/navy-ratings/` list page — every enlisted rating on one page: active
+     * ratings grouped by community (community anchors) plus a historic section. Two
+     * ItemLists (active, historic) in the JSON-LD.
+     */
+    private function renderRatingList(Page $page): Response
+    {
+        $active = $this->ranks->activeRatings();
+        $historic = $this->ranks->historicRatings();
+
+        $seo = SeoHead::forPage($page, RankListSchema::build($page, '/navy-ratings/', 'Navy Ratings', [
+            'U.S. Navy Active Enlisted Ratings' => $active,
+            'U.S. Navy Historic Enlisted Ratings' => $historic,
+        ]));
+
+        // Group active ratings by community for the sectioned display; the view walks
+        // RatingCommunity in its canonical order and renders the non-empty groups.
+        $activeByCommunity = $active->groupBy(static function (Rank $rank): string {
+            $community = $rank->rating_community;
+
+            return $community === null ? '' : $community->value;
+        });
+
+        return response()->view('pages.rating-list', [
+            'page' => $page,
+            'activeByCommunity' => $activeByCommunity,
+            'historic' => $historic,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);
