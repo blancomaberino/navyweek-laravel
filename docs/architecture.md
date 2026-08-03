@@ -30,8 +30,13 @@ legal/utility pages (`/privacy/`, `/terms/`, `/contact/` — `ContentPageSchema`
 seeded by `pages:generate-content`, which never clobbers an editor's body). `ContentPageSchema`
 also builds the richer variants: **`/veterans-day/`** (Article + author Person + FAQPage —
 `pages:generate-veterans-day` migrates the prose + 9 FAQs verbatim; `PageType::VeteransDayHub`
-→ `PageController::renderVeteransDay`). The remaining `va-disability`/`veterans-home-care`
-(Article + author/reviewer Person + WebPage, no FAQPage — `emitWebPage`) are the last slice.
+→ `PageController::renderVeteransDay`). `va-disability`/`veterans-home-care`
+(Article + author/reviewer Person + WebPage, no FAQPage — `ContentPageSchema` `emitWebPage`,
+seeded by `pages:generate-ymyl-guides`, dispatched via `renderStatic` slug →
+`renderYmylGuide`) migrate the legacy intro verbatim + section overview, pointing to the
+authoritative VA source for exact pay figures rather than transcribing them. **The
+content-page family is complete** (the deep section prose is editorial data-entry in the
+CMS body editor, per the DB-backed decision).
 Data model unchanged since Phase 2
 slice 10b; these slices add only the rendering/page-generation path
 (`PageRepository::upsertPillarPage` — null-pageable-aware, applies the default byline).
