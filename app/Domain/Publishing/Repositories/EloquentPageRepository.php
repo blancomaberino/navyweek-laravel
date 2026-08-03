@@ -7,8 +7,10 @@ namespace App\Domain\Publishing\Repositories;
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 
 final class EloquentPageRepository implements PageRepositoryInterface
 {
@@ -31,9 +33,32 @@ final class EloquentPageRepository implements PageRepositoryInterface
             $page->pageable()->associate($pageable);
         }
 
+        // Default editorial byline (author + reviewer), matching PageImporter — so the
+        // E-E-A-T Person graph on pages that emit one (air shows, fleet weeks, …) is
+        // populated. A page keeps any assignment it already has (an admin override).
+        if ($page->author_id === null) {
+            $page->author_id = self::userIdBySlug(Config::string('site.editorial.default_author_slug'));
+        }
+        if ($page->reviewer_id === null) {
+            $page->reviewer_id = self::userIdBySlug(Config::string('site.editorial.default_reviewer_slug'));
+        }
+
         $page->save();
 
         return $page;
+    }
+
+    /**
+     * The id of the editorial user with this profile slug, or null when none exists.
+     * Deliberately a plain per-call lookup (no static memo): pillar-page generation is
+     * an occasional, off-hot-path command, and a static cache would leak resolved ids
+     * across test cases (which reset the DB but not static state).
+     */
+    private static function userIdBySlug(string $slug): ?int
+    {
+        $id = User::query()->where('slug', $slug)->value('id');
+
+        return is_int($id) ? $id : null;
     }
 
     public function publishedPathExists(string $urlPath): bool
