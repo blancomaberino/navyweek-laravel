@@ -16,8 +16,13 @@ use Illuminate\Support\Facades\DB;
 /**
  * Stage-B importer for the discount-brand `pages`. Each row points its polymorphic
  * `pageable` at the brand's primary Offer (resolved connection slug → connection
- * → primary offer). Idempotent upsert on the unique `url_path`, one transaction.
- * Offers must already be imported.
+ * → primary offer). Idempotent upsert on the stable `generation_key`
+ * ("discount-brand:{connection_slug}"), one transaction. Offers must already be imported.
+ *
+ * Identity vs. location: keying on generation_key (not url_path) lets an editor rename a
+ * discount page in the admin panel (url_path_is_custom) and keep that path across a
+ * re-import — the CSV url_path is only (re)applied to pages the editor hasn't pinned.
+ * As a migration seed this does not emit redirects (that is ChangeUrlPathAction's job).
  */
 final class PageImporter
 {
@@ -51,8 +56,26 @@ final class PageImporter
                 $offerId = $connectionId !== null ? ($primaryOfferByConnectionId[$connectionId] ?? null) : null;
 
                 // Point the polymorphic `pageable` at the brand's primary offer (or
-                // clear it) and upsert the page in a single write, keyed on url_path.
-                $page = Page::query()->firstOrNew(['url_path' => $row['url_path']]);
+                // clear it) and upsert the page in a single write, keyed on the stable
+                // generation_key so an editor-renamed page is found again (not duplicated).
+                $page = Page::query()->firstOrNew(['generation_key' => "discount-brand:{$slug}"]);
+                // Adopt a pre-generation_key row (keyless) at this path instead of
+                // inserting a duplicate that collides on the unique url_path.
+                if (! $page->exists) {
+                    $legacy = Page::query()
+                        ->whereNull('generation_key')
+                        ->where('url_path', $row['url_path'])
+                        ->first();
+                    if ($legacy !== null) {
+                        $page = $legacy;
+                        $page->generation_key = "discount-brand:{$slug}";
+                    }
+                }
+                // An editor rename pins the path: keep it instead of snapping back to the
+                // CSV default. A page the editor hasn't renamed tracks the CSV url_path.
+                if ($page->exists && $page->url_path_is_custom) {
+                    unset($row['url_path']);
+                }
                 $page->fill($row);
                 if ($page->author_id === null && $defaultAuthorId !== null) {
                     $page->author_id = $defaultAuthorId;

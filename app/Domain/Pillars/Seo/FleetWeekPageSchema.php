@@ -8,6 +8,7 @@ use App\Domain\Pillars\Models\FleetWeek;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Seo\BuildsSeoSchema;
 use App\Domain\Publishing\Seo\SeoUrl;
+use App\Domain\Publishing\Support\PagePaths;
 use App\Models\User;
 use Illuminate\Support\Collection;
 
@@ -42,7 +43,7 @@ final class FleetWeekPageSchema
     public static function buildDetail(Page $page, FleetWeek $week): array
     {
         $site = SeoUrl::site();
-        $path = "/fleetweek/{$week->slug}/";
+        $path = $page->url_path;
         $url = "{$site}{$path}";
         $author = $page->author;
         $reviewer = $page->reviewer;
@@ -50,7 +51,7 @@ final class FleetWeekPageSchema
         $nodes = [
             self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
-                ['name' => 'Fleet Week', 'url' => '/fleetweek/'],
+                ['name' => 'Fleet Week', 'url' => PagePaths::root('fleet_weeks')],
                 ['name' => "{$week->city} Fleet Week", 'url' => $path],
             ]),
             self::article(
@@ -88,17 +89,17 @@ final class FleetWeekPageSchema
      */
     public static function buildHub(Page $page, Collection $weeks, iterable $hubFaqs): array
     {
-        $listUrl = SeoUrl::absolute('/fleetweek/');
+        $listUrl = SeoUrl::absolute(PagePaths::root('fleet_weeks'));
 
         return [
             self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
-                ['name' => 'Fleet Week', 'url' => '/fleetweek/'],
+                ['name' => 'Fleet Week', 'url' => PagePaths::root('fleet_weeks')],
             ]),
             self::article(
                 headline: 'U.S. Fleet Week Guide, City by City',
                 description: self::HUB_ARTICLE_DESCRIPTION,
-                path: '/fleetweek/',
+                path: $page->url_path,
                 imagePath: $page->og_image_path,
                 datePublished: self::isoDate($page->date_published),
                 dateModified: self::isoDate($page->date_modified),
@@ -118,7 +119,7 @@ final class FleetWeekPageSchema
                 'itemListElement' => $weeks->values()->map(static fn (FleetWeek $c, int $i): array => [
                     '@type' => 'ListItem',
                     'position' => $i + 1,
-                    'url' => SeoUrl::absolute("/fleetweek/{$c->slug}/"),
+                    'url' => SeoUrl::absolute(PagePaths::child('fleet_weeks', $c->slug)),
                     'name' => "{$c->branding_name} {$c->year}",
                 ])->all(),
             ],

@@ -37,9 +37,29 @@ seeded by `pages:generate-ymyl-guides`, dispatched via `renderStatic` slug →
 authoritative VA source for exact pay figures rather than transcribing them. **The
 content-page family is complete** (the deep section prose is editorial data-entry in the
 CMS body editor, per the DB-backed decision).
-Data model unchanged since Phase 2
-slice 10b; these slices add only the rendering/page-generation path
-(`PageRepository::upsertPillarPage` — null-pageable-aware, applies the default byline).
+
+**Path flexibility (identity vs. location).** A generated page's IDENTITY is its stable
+`pages.generation_key` (e.g. `base:norfolk`, `local-hub:city:ca:san-diego`), assigned by
+the generator; its `url_path` is mutable LOCATION. `upsertPillarPage(generationKey,
+defaultUrlPath, …)` keys on the generation_key, so a page is found again across every path
+change. Family prefixes live in ONE place — `config('publishing.paths.*')`, read through
+`App\Domain\Publishing\Support\PagePaths` by both the generators (which seed `url_path`)
+and the SEO schemas (which build breadcrumb-ancestor + hub/child links). Two ways a path
+changes: (1) an editor renames one page (`ChangeUrlPathAction` sets `url_path_is_custom`,
+preserved on regeneration); (2) a family prefix changes in config — re-running
+`pages:generate-*` moves every NON-custom page and auto-creates the 301 (`upsertPillarPage`
+→ `PageUrlChanged` → `CreateRedirectListener`, the same graph rewrite an editor rename
+uses). Every SEO schema derives its own `@id`/canonical from `$page->url_path` (never a
+rebuilt slug), so the JSON-LD always matches the served URL. Jet-team paths are data-driven
+(`JetTeam.base_path`); imported discount pages carry `generation_key` too
+(`discount-brand:{connection_slug}`). (Legacy-compat redirect rules in
+`CanonicalUrlMiddleware`/`LegacyPathResolver` remain fixed historic mappings, independent
+of this knob.)
+
+Data model adds `pages.generation_key` + `pages.url_path_is_custom` (this slice);
+otherwise unchanged since Phase 2 slice 10b. These slices add only the rendering/
+page-generation path (`PageRepository::upsertPillarPage` — generation-key-keyed,
+null-pageable-aware, applies the default byline).
 
 ## Domain modules & data access
 
@@ -412,7 +432,9 @@ erDiagram
         bigint id PK
         string page_type "enum PageType"
         string slug
-        string url_path UK "canonical routing key"
+        string generation_key UK "stable generator identity, nullable"
+        string url_path UK "canonical routing key (mutable location)"
+        bool url_path_is_custom "editor-renamed → preserved on regen"
         string title "head/og/twitter title"
         text meta_description
         string canonical_path "canonical override, nullable"
@@ -422,6 +444,7 @@ erDiagram
         datetimetz date_published "build-clock, first build"
         datetimetz date_modified "build-clock, every build"
         json json_ld "page-specific EXTRA schema nodes"
+        json body_blocks "CMS-editable typed blocks, nullable"
         bigint author_id FK "byline author → users, nullable"
         bigint reviewer_id FK "reviewer → users, nullable"
         string pageable_type "polymorphic owner, nullable"

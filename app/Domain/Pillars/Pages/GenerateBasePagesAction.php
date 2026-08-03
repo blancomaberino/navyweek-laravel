@@ -7,13 +7,16 @@ namespace App\Domain\Pillars\Pages;
 use App\Domain\Pillars\Repositories\BaseRepositoryInterface;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Support\PagePaths;
 
 /**
  * Derives the `pages` routing/SEO rows for every naval base from the base records
  * themselves (each base carries its own meta_title/meta_description). One published
- * `pages` row per base at `/navy-bases/{slug}/`, `pageable` → the Base. Idempotent:
- * re-running upserts by url_path and preserves each page's original `date_published`
- * (the build clock lives in the repository). The base's `last_updated` seeds the
+ * `pages` row per base under `config('publishing.paths.bases')` (default `/navy-bases/`),
+ * `pageable` → the Base. Idempotent: re-running upserts by the stable `generation_key`
+ * ("base:{slug}") and preserves each page's original `date_published` and any editor
+ * rename (the build clock + path rules live in the repository). The base's `last_updated`
+ * seeds the
  * build-clock dates on first generation, matching the legacy Article dates.
  */
 final class GenerateBasePagesAction
@@ -32,7 +35,8 @@ final class GenerateBasePagesAction
 
         foreach ($this->bases->all() as $base) {
             $this->pages->upsertPillarPage(
-                "/navy-bases/{$base->slug}/",
+                "base:{$base->slug}",
+                PagePaths::child('bases', $base->slug),
                 [
                     'page_type' => PageType::Base,
                     'slug' => $base->slug,

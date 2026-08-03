@@ -29,7 +29,7 @@ final class GenerateJetTeamPagesAction
         $count = 0;
 
         foreach ($this->jetTeams->allTeams() as $team) {
-            $this->pages->upsertPillarPage("{$team->base_path}/", [
+            $this->pages->upsertPillarPage("jet-team:{$team->team->value}", "{$team->base_path}/", [
                 'page_type' => PageType::JetTeam,
                 'slug' => trim($team->base_path, '/'),
                 'title' => $team->meta_title,
@@ -42,7 +42,7 @@ final class GenerateJetTeamPagesAction
             $count++;
 
             foreach ($this->jetTeams->publishedCities($team->team) as $city) {
-                $this->pages->upsertPillarPage("{$team->base_path}/{$city->slug}/", [
+                $this->pages->upsertPillarPage("jet-team-city:{$team->team->value}:{$city->slug}", "{$team->base_path}/{$city->slug}/", [
                     'page_type' => PageType::JetTeamCity,
                     'slug' => $city->slug,
                     'title' => $city->meta_title,

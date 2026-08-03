@@ -8,6 +8,7 @@ use App\Domain\Catalog\Models\LocalDiscount;
 use App\Domain\Catalog\Repositories\LocalDiscountRepositoryInterface;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Support\PagePaths;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -37,7 +38,8 @@ final class GenerateLocalDiscountPagesAction
 
         foreach ($locals as $local) {
             $this->pages->upsertPillarPage(
-                "/discounts/{$local->state}/{$local->city}/{$local->business_slug}/",
+                "local-discount:{$local->state}:{$local->city}:{$local->business_slug}",
+                PagePaths::child('local_discounts', $local->state, $local->city, $local->business_slug),
                 [
                     'page_type' => PageType::LocalDiscount,
                     'slug' => $local->business_slug,
@@ -71,7 +73,7 @@ final class GenerateLocalDiscountPagesAction
         $count = 0;
 
         // Root hub.
-        $this->hub('/discounts/', 'discounts',
+        $this->hub('local-hub:root', PagePaths::root('local_discounts'), 'discounts',
             'Local Military & Veteran Discounts by State | NavyWeek.org',
             'Browse verified local-business military and veteran discounts by state and city.',
             $this->freshest($locals));
@@ -80,7 +82,7 @@ final class GenerateLocalDiscountPagesAction
         foreach ($locals->groupBy('state') as $inState) {
             /** @var LocalDiscount $first */
             $first = $inState->first();
-            $this->hub("/discounts/{$first->state}/", $first->state,
+            $this->hub("local-hub:state:{$first->state}", PagePaths::child('local_discounts', $first->state), $first->state,
                 "Military & Veteran Discounts in {$first->state_name} | NavyWeek.org",
                 "Verified local-business military and veteran discounts across {$first->state_name}.",
                 $this->freshest($inState));
@@ -89,7 +91,7 @@ final class GenerateLocalDiscountPagesAction
             foreach ($inState->groupBy('city') as $inCity) {
                 /** @var LocalDiscount $c */
                 $c = $inCity->first();
-                $this->hub("/discounts/{$c->state}/{$c->city}/", $c->city,
+                $this->hub("local-hub:city:{$c->state}:{$c->city}", PagePaths::child('local_discounts', $c->state, $c->city), $c->city,
                     "Military & Veteran Discounts in {$c->city_name}, {$c->state_abbr} | NavyWeek.org",
                     "Verified local-business military and veteran discounts in {$c->city_name}, {$c->state_name}.",
                     $this->freshest($inCity));
@@ -100,9 +102,9 @@ final class GenerateLocalDiscountPagesAction
         return $count;
     }
 
-    private function hub(string $urlPath, string $slug, string $title, string $meta, Carbon $date): void
+    private function hub(string $generationKey, string $urlPath, string $slug, string $title, string $meta, Carbon $date): void
     {
-        $this->pages->upsertPillarPage($urlPath, [
+        $this->pages->upsertPillarPage($generationKey, $urlPath, [
             'page_type' => PageType::LocalDiscount,
             'slug' => $slug,
             'title' => $title,

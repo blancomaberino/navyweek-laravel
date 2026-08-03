@@ -8,6 +8,7 @@ use App\Domain\Pillars\Models\Base;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Seo\BuildsSeoSchema;
 use App\Domain\Publishing\Seo\SeoUrl;
+use App\Domain\Publishing\Support\PagePaths;
 
 /**
  * JSON-LD for a single naval-base page (`/navy-bases/{slug}/`), a 1:1 port of
@@ -33,7 +34,11 @@ final class BasePageSchema
     {
         $site = SeoUrl::site();
         $slug = $base->slug;
-        $path = "/navy-bases/{$slug}/";
+        // The page's own canonical path comes from the stored url_path (never rebuilt),
+        // so the JSON-LD @id/canonical follows an editor rename or a family-prefix change.
+        // Breadcrumb ANCESTORS derive from the family root (PagePaths) so they move too.
+        $path = $page->url_path;
+        $basesRoot = PagePaths::root('bases');
         $imagePath = "/og/bases/{$slug}.png";
         $url = SeoUrl::absolute($path);
         $image = $site.$imagePath;
@@ -43,14 +48,14 @@ final class BasePageSchema
         // middle differs (Overseas → country for OCONUS, else the state).
         $crumbs = [
             ['name' => 'Home', 'url' => '/'],
-            ['name' => 'Navy Bases', 'url' => '/navy-bases/'],
+            ['name' => 'Navy Bases', 'url' => $basesRoot],
             ...($overseas
                 ? [
-                    ['name' => 'Overseas', 'url' => '/navy-bases/overseas/'],
-                    ['name' => (string) $base->country, 'url' => "/navy-bases/{$base->country_slug}/"],
+                    ['name' => 'Overseas', 'url' => PagePaths::child('bases', 'overseas')],
+                    ['name' => (string) $base->country, 'url' => PagePaths::child('bases', (string) $base->country_slug)],
                 ]
                 : [
-                    ['name' => (string) $base->state_name, 'url' => "/navy-bases/{$base->state}/"],
+                    ['name' => (string) $base->state_name, 'url' => PagePaths::child('bases', (string) $base->state)],
                 ]),
             ['name' => $base->name, 'url' => $path],
         ];

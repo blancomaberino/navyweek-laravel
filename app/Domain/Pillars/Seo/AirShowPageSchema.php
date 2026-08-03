@@ -11,6 +11,7 @@ use App\Domain\Pillars\Models\AirShowHubMeta;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Seo\BuildsSeoSchema;
 use App\Domain\Publishing\Seo\SeoUrl;
+use App\Domain\Publishing\Support\PagePaths;
 use App\Models\User;
 use Illuminate\Support\Collection;
 
@@ -39,7 +40,7 @@ final class AirShowPageSchema
     public static function buildDetail(Page $page, AirShow $show): array
     {
         $site = SeoUrl::site();
-        $path = "/air-show/{$show->slug}/";
+        $path = $page->url_path;
         $url = "{$site}{$path}";
         $author = $page->author;
         $reviewer = $page->reviewer;
@@ -47,7 +48,7 @@ final class AirShowPageSchema
         $nodes = [
             self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
-                ['name' => 'Air Shows', 'url' => '/air-show/'],
+                ['name' => 'Air Shows', 'url' => PagePaths::root('air_shows')],
                 ['name' => $show->short_name, 'url' => $path],
             ]),
             self::article(
@@ -84,17 +85,17 @@ final class AirShowPageSchema
      */
     public static function buildHub(Page $page, AirShowHubMeta $hub, Collection $shows): array
     {
-        $listUrl = SeoUrl::absolute('/air-show/');
+        $listUrl = SeoUrl::absolute(PagePaths::root('air_shows'));
 
         return [
             self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
-                ['name' => 'Air Shows', 'url' => '/air-show/'],
+                ['name' => 'Air Shows', 'url' => PagePaths::root('air_shows')],
             ]),
             self::article(
                 headline: $hub->seo_headline,
                 description: $hub->meta_description,
-                path: '/air-show/',
+                path: $page->url_path,
                 imagePath: $hub->og_image,
                 datePublished: self::isoDate($page->date_published),
                 dateModified: self::isoDate($page->date_modified),
@@ -108,7 +109,7 @@ final class AirShowPageSchema
                 'itemListElement' => $shows->values()->map(static fn (AirShow $s, int $i): array => [
                     '@type' => 'ListItem',
                     'position' => $i + 1,
-                    'url' => SeoUrl::absolute("/air-show/{$s->slug}/"),
+                    'url' => SeoUrl::absolute(PagePaths::child('air_shows', $s->slug)),
                     'name' => "{$s->name} {$s->year}",
                 ])->all(),
             ],

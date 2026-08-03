@@ -7,6 +7,7 @@ namespace App\Domain\Publishing\Seo;
 use App\Domain\Catalog\Models\LocalDiscount;
 use App\Domain\Catalog\Models\LocalStore;
 use App\Domain\Publishing\Models\Page;
+use App\Domain\Publishing\Support\PagePaths;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -28,7 +29,7 @@ final class LocalDiscountSchema
     public static function build(Page $page, LocalDiscount $ld): array
     {
         $site = SeoUrl::site();
-        $path = "/discounts/{$ld->state}/{$ld->city}/{$ld->business_slug}/";
+        $path = $page->url_path;
         $pageUrl = $site.$path;
         $title = (string) $page->title;
         $description = (string) $page->meta_description;
@@ -81,8 +82,8 @@ final class LocalDiscountSchema
         $nodes = [
             self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
-                ['name' => $ld->state_name, 'url' => "/discounts/{$ld->state}/"],
-                ['name' => $ld->city_name, 'url' => "/discounts/{$ld->state}/{$ld->city}/"],
+                ['name' => $ld->state_name, 'url' => PagePaths::child('local_discounts', $ld->state)],
+                ['name' => $ld->city_name, 'url' => PagePaths::child('local_discounts', $ld->state, $ld->city)],
                 ['name' => $ld->company, 'url' => $path],
             ]),
             $article,

@@ -8,6 +8,7 @@ use App\Domain\Pillars\Enums\RankCategory;
 use App\Domain\Pillars\Repositories\RankRepositoryInterface;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Support\PagePaths;
 
 /**
  * Generates the two consolidated reference-list `pages`: `/navy-ranks/` and
@@ -37,7 +38,7 @@ final class GenerateRankPagesAction
         $active = $this->ranks->activeRatings()->count();
         $historic = $this->ranks->historicRatings()->count();
 
-        $this->pages->upsertPillarPage('/navy-ranks/', [
+        $this->pages->upsertPillarPage('rank-list', PagePaths::root('ranks'), [
             'page_type' => PageType::Rank,
             'slug' => 'navy-ranks',
             'title' => 'U.S. Navy Ranks — Every Officer & Enlisted Rank Listed | NavyWeek.org',
@@ -48,7 +49,7 @@ final class GenerateRankPagesAction
             'is_published' => true,
         ]);
 
-        $this->pages->upsertPillarPage('/navy-ratings/', [
+        $this->pages->upsertPillarPage('rating-list', PagePaths::root('ratings'), [
             'page_type' => PageType::Rating,
             'slug' => 'navy-ratings',
             'title' => "U.S. Navy Ratings — All {$active} Active Enlisted Ratings Listed | NavyWeek.org",

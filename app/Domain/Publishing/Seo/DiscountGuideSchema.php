@@ -6,6 +6,7 @@ namespace App\Domain\Publishing\Seo;
 
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Publishing\Models\Page;
+use App\Domain\Publishing\Support\PagePaths;
 use Illuminate\Support\Facades\Config;
 
 /**
@@ -32,8 +33,7 @@ final class DiscountGuideSchema
     public static function build(Page $page, Offer $offer): array
     {
         $site = SeoUrl::site();
-        $slug = $page->slug;
-        $pageUrl = "{$site}/discount/{$slug}/";
+        $pageUrl = "{$site}{$page->url_path}";
         $brand = $offer->connection->brand;
         $audienceLabel = $offer->audience_label;
         $title = (string) $page->title;
@@ -98,8 +98,8 @@ final class DiscountGuideSchema
         $nodes = [
             self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
-                ['name' => 'Military Discounts', 'url' => '/discount/'],
-                ['name' => $crumbLabel, 'url' => "/discount/{$slug}/"],
+                ['name' => 'Military Discounts', 'url' => PagePaths::root('discounts')],
+                ['name' => $crumbLabel, 'url' => $page->url_path],
             ]),
             $article,
             [

@@ -6,6 +6,7 @@ namespace App\Domain\Publishing\Repositories;
 
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Publishing\Enums\PageType;
+use App\Domain\Publishing\Events\PageUrlChanged;
 use App\Domain\Publishing\Models\Page;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,17 +15,52 @@ use Illuminate\Support\Facades\Config;
 
 final class EloquentPageRepository implements PageRepositoryInterface
 {
-    public function upsertPillarPage(string $urlPath, array $attributes, ?Model $pageable = null): Page
+    public function upsertPillarPage(string $generationKey, string $defaultUrlPath, array $attributes, ?Model $pageable = null): Page
     {
-        $page = Page::query()->firstOrNew(['url_path' => $urlPath]);
+        // Identity is the stable generation_key, NOT the url_path — so a page is found
+        // again across both a per-page rename and a family-wide prefix change.
+        $page = Page::query()->firstOrNew(['generation_key' => $generationKey]);
+
+        // Self-healing adoption: a row created before generation_key existed (or before
+        // this page carried one) is keyless. Adopt it by its default url_path and stamp
+        // the key, so regeneration never inserts a duplicate that collides on the unique
+        // url_path. Legacy rows predate editor renames, so they sit at the default path.
+        if (! $page->exists) {
+            $legacy = Page::query()
+                ->whereNull('generation_key')
+                ->where('url_path', $defaultUrlPath)
+                ->first();
+            if ($legacy !== null) {
+                $page = $legacy;
+                $page->generation_key = $generationKey;
+            }
+        }
+
+        $isNew = ! $page->exists;
+        // The path the page currently lives at (empty string for a new page — never used,
+        // since a move is only possible for an existing, non-custom page below).
+        $oldUrlPath = $isNew ? '' : $page->url_path;
 
         // Build clock: the first generation sets date_published; later runs preserve
         // it verbatim and only ever refresh date_modified (never re-stamp published).
-        if ($page->exists) {
+        if (! $isNew) {
             unset($attributes['date_published']);
         }
 
         $page->fill($attributes);
+
+        // Location vs. identity. A new page lands at the family default. An editor
+        // rename (url_path_is_custom) is preserved across regeneration. Otherwise the
+        // page tracks the family default, so changing config('publishing.paths.*') and
+        // re-running generation moves it — and records a 301 from its old path below.
+        $moved = false;
+        if ($isNew) {
+            $page->url_path = $defaultUrlPath;
+            $page->url_path_is_custom = false;
+        } elseif (! $page->url_path_is_custom && $page->url_path !== $defaultUrlPath) {
+            $page->url_path = $defaultUrlPath;
+            $moved = true;
+        }
 
         // A list/hub page owns no single aggregate — clear any pageable link.
         if ($pageable === null) {
@@ -45,6 +81,12 @@ final class EloquentPageRepository implements PageRepositoryInterface
 
         $page->save();
 
+        // A family-wide prefix change auto-creates the 301 from the old path, reusing
+        // the exact redirect-graph rewrite an editor rename fires (CreateRedirectListener).
+        if ($moved && $oldUrlPath !== $page->url_path) {
+            PageUrlChanged::dispatch($page, $oldUrlPath, $page->url_path);
+        }
+
         return $page;
     }
 
@@ -59,6 +101,13 @@ final class EloquentPageRepository implements PageRepositoryInterface
         $id = User::query()->where('slug', $slug)->value('id');
 
         return is_int($id) ? $id : null;
+    }
+
+    public function findByGenerationKey(string $generationKey): ?Page
+    {
+        return Page::query()
+            ->where('generation_key', $generationKey)
+            ->first();
     }
 
     public function publishedPathExists(string $urlPath): bool
@@ -131,6 +180,9 @@ final class EloquentPageRepository implements PageRepositoryInterface
     public function updateUrlPath(Page $page, string $newUrlPath): void
     {
         $page->url_path = $newUrlPath;
+        // An editor rename pins the path: `pages:generate-*` preserves it instead of
+        // snapping the page back to its family default.
+        $page->url_path_is_custom = true;
         $page->save();
     }
 }

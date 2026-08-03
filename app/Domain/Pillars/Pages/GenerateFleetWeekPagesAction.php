@@ -8,6 +8,7 @@ use App\Domain\Pillars\Repositories\FleetWeekRepositoryInterface;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Support\PagePaths;
 use Illuminate\Support\Carbon;
 
 /**
@@ -62,7 +63,7 @@ final class GenerateFleetWeekPagesAction
         $count = 0;
 
         foreach ($this->fleetWeeks->all() as $week) {
-            $this->pages->upsertPillarPage("/fleetweek/{$week->slug}/", [
+            $this->pages->upsertPillarPage("fleetweek:{$week->slug}", PagePaths::child('fleet_weeks', $week->slug), [
                 'page_type' => PageType::FleetWeek,
                 'slug' => $week->slug,
                 'title' => $week->meta_title,
@@ -76,7 +77,7 @@ final class GenerateFleetWeekPagesAction
             $count++;
         }
 
-        $hub = $this->pages->upsertPillarPage('/fleetweek/', [
+        $hub = $this->pages->upsertPillarPage('fleetweek-hub', PagePaths::root('fleet_weeks'), [
             'page_type' => PageType::FleetWeek,
             'slug' => 'fleetweek',
             'title' => self::HUB_TITLE,

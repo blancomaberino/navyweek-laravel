@@ -31,7 +31,12 @@ final class GenerateYmylGuidePagesAction
     {
         $count = 0;
         foreach ($this->guides() as $guide) {
-            $existing = $this->pages->findPublishedByPath($guide['url_path']);
+            $generationKey = "content:{$guide['slug']}";
+            // Identity by generation_key (not path) so an editor-renamed page is
+            // recognized and its body is preserved on re-run; fall back to a path lookup
+            // for a pre-generation_key (keyless) legacy row.
+            $existing = $this->pages->findByGenerationKey($generationKey)
+                ?? $this->pages->findPublishedByPath($guide['url_path']);
             $isNew = $existing === null || $existing->body_blocks === null || $existing->body_blocks === [];
 
             $attributes = [
@@ -48,7 +53,7 @@ final class GenerateYmylGuidePagesAction
                 $attributes['body_blocks'] = $guide['blocks'];
             }
 
-            $this->pages->upsertPillarPage($guide['url_path'], $attributes);
+            $this->pages->upsertPillarPage($generationKey, $guide['url_path'], $attributes);
             $count++;
         }
 

@@ -20,13 +20,20 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
 
 /**
- * A public route, keyed on the canonical `url_path`. Carries the SEO / JSON-LD head
+ * A public route served at the canonical `url_path`. Carries the SEO / JSON-LD head
  * meta and points at the aggregate it presents via the polymorphic `pageable`.
+ *
+ * Identity vs. location: a generated page is identified by its stable `generation_key`
+ * (assigned by `pages:generate-*`), while `url_path` is mutable — an editor can rename
+ * it (`url_path_is_custom` = true, preserved across regeneration) and a family-wide
+ * prefix change (config('publishing.paths.*')) moves every non-custom page.
  *
  * @property int $id
  * @property PageType $page_type
  * @property string $slug
+ * @property string|null $generation_key
  * @property string $url_path
+ * @property bool $url_path_is_custom
  * @property string|null $title
  * @property string|null $meta_description
  * @property string|null $canonical_path
@@ -63,7 +70,9 @@ class Page extends Model
     protected $fillable = [
         'page_type',
         'slug',
+        'generation_key',
         'url_path',
+        'url_path_is_custom',
         'title',
         'meta_description',
         'canonical_path',
@@ -86,6 +95,7 @@ class Page extends Model
         return [
             'page_type' => PageType::class,
             'noindex' => 'boolean',
+            'url_path_is_custom' => 'boolean',
             'date_published' => 'datetime',
             'date_modified' => 'datetime',
             'json_ld' => 'array',

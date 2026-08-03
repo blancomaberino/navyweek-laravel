@@ -6,6 +6,7 @@ namespace App\Domain\Publishing\Seo;
 
 use App\Domain\Catalog\Models\DiscountCategory;
 use App\Domain\Publishing\Models\Page;
+use App\Domain\Publishing\Support\PagePaths;
 
 /**
  * JSON-LD for a discount CATEGORY hub (`/discount/{slug}/`), a 1:1 port of the legacy
@@ -26,14 +27,14 @@ final class DiscountCategorySchema
      */
     public static function build(Page $page, DiscountCategory $category, array $brandItems): array
     {
-        $site = SeoUrl::site();
-        $slug = $page->slug;
-        $pageUrl = "{$site}/discount/{$slug}/";
+        // The category's own canonical URL comes from its stored url_path (follows an
+        // editor rename / family-prefix change); ancestors derive from the family root.
+        $pageUrl = SeoUrl::absolute($page->url_path);
 
         $crumbs = [
             ['name' => 'Home', 'url' => '/'],
-            ['name' => 'Military Discounts', 'url' => '/discount/'],
-            ['name' => $category->name, 'url' => "/discount/{$slug}/"],
+            ['name' => 'Military Discounts', 'url' => PagePaths::root('discounts')],
+            ['name' => $category->name, 'url' => $page->url_path],
         ];
 
         return [
@@ -43,7 +44,7 @@ final class DiscountCategorySchema
             self::article(
                 headline: $category->h1,
                 description: $category->meta_description,
-                path: "/discount/{$slug}/",
+                path: $page->url_path,
                 imagePath: $page->og_image_path,
                 datePublished: self::isoDate($page->date_published),
                 dateModified: self::isoDate($page->date_modified),
