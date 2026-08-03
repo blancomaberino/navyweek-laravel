@@ -32,6 +32,7 @@ use App\Domain\Pillars\Seo\RankListSchema;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Seo\ContentPageSchema;
 use App\Domain\Publishing\Seo\DiscountCategorySchema;
 use App\Domain\Publishing\Seo\DiscountGuideSchema;
 use App\Domain\Publishing\Seo\DiscountIndexSchema;
@@ -144,8 +145,40 @@ final class PageController
     {
         return match ($page->slug) {
             'discount' => $this->renderDiscountIndex($page),
+            'privacy' => $this->renderContentPage($page, [
+                ['name' => 'Home', 'url' => '/'],
+                ['name' => 'Privacy Policy', 'url' => '/privacy/'],
+            ]),
+            'terms' => $this->renderContentPage($page, [
+                ['name' => 'Home', 'url' => '/'],
+                ['name' => 'Terms of Use', 'url' => '/terms/'],
+            ]),
+            'contact' => $this->renderContentPage($page, [
+                ['name' => 'Home', 'url' => '/'],
+                ['name' => 'Contact', 'url' => '/contact/'],
+            ]),
             default => null,
         };
+    }
+
+    /**
+     * A DB-driven content page: renders the CMS-editable `body_blocks` under a
+     * breadcrumb. The JSON-LD is Organization (prepended by SeoHead) + BreadcrumbList
+     * (`ContentPageSchema`); richer content-page graphs add their nodes in later slices.
+     *
+     * @param  list<array{name: string, url: string}>  $crumbs
+     */
+    private function renderContentPage(Page $page, array $crumbs): Response
+    {
+        $seo = SeoHead::forPage($page, ContentPageSchema::build($page, $crumbs));
+
+        return response()->view('pages.content', [
+            'page' => $page,
+            'crumbs' => $crumbs,
+            'blocks' => $page->body_blocks ?? [],
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
     }
 
     /**

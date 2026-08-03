@@ -36,6 +36,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $date_published
  * @property Carbon|null $date_modified
  * @property array<int, array<string, mixed>>|null $json_ld
+ * @property array<int, array<string, mixed>>|null $body_blocks
  * @property int|null $author_id
  * @property int|null $reviewer_id
  * @property string|null $pageable_type
@@ -72,6 +73,7 @@ class Page extends Model
         'date_published',
         'date_modified',
         'json_ld',
+        'body_blocks',
         'author_id',
         'reviewer_id',
         'pageable_type',
@@ -87,6 +89,7 @@ class Page extends Model
             'date_published' => 'datetime',
             'date_modified' => 'datetime',
             'json_ld' => 'array',
+            'body_blocks' => 'array',
             'is_published' => 'boolean',
         ];
     }

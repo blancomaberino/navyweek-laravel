@@ -21,6 +21,15 @@ the primary store's address, geo, and `OpeningHoursSpecification`); the author/r
 city index, per-city business index — `LocalDiscountHubSchema`: Breadcrumb + Article +
 WebSite + ItemList) are generated with null pageable and split at render by url depth in
 `PageController::renderLocalDiscountHub`. The **local-discounts family is complete**.
+
+DB-driven **content pages** (the editorial pages, not derived from a data registry) store
+their body in a CMS-editable `pages.body_blocks` JSON column (ordered typed blocks —
+heading/paragraph/list/note), managed in the Filament PageForm block Repeater and rendered
+by the generic `pages.content` view. This foundation slice ships the Breadcrumb-only
+legal/utility pages (`/privacy/`, `/terms/`, `/contact/` — `ContentPageSchema`, seeded by
+`pages:generate-content`, which never clobbers an editor's body). The richer YMYL pages
+(veterans-day → +Article+Person+FAQPage; va-disability/veterans-home-care →
++Article+Person×2+WebPage, no FAQPage) layer their schema on in follow-up slices.
 Data model unchanged since Phase 2
 slice 10b; these slices add only the rendering/page-generation path
 (`PageRepository::upsertPillarPage` — null-pageable-aware, applies the default byline).
