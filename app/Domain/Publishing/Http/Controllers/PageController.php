@@ -8,6 +8,8 @@ use App\Domain\Catalog\Models\DiscountCategory;
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Catalog\Repositories\DiscountCategoryRepositoryInterface;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Pillars\Models\Base;
+use App\Domain\Pillars\Seo\BasePageSchema;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
@@ -48,14 +50,37 @@ final class PageController
             abort(404);
         }
 
-        if ($page->page_type === PageType::DiscountBrand && $page->pageable instanceof Offer) {
-            return $this->renderDiscountGuide($page, $page->pageable);
-        }
+        // Dispatch to the page-family renderer; a page whose pageable isn't the
+        // aggregate its type expects falls through to the minimal shell (null → shell).
+        return $this->renderBody($page) ?? $this->renderShell($page);
+    }
 
-        if ($page->page_type === PageType::DiscountCategoryHub && $page->pageable instanceof DiscountCategory) {
-            return $this->renderDiscountCategory($page, $page->pageable);
-        }
+    /**
+     * Render the body for a live page keyed on its `page_type`, or null to fall back
+     * to the shell. Each new page family adds one match arm here instead of growing
+     * `show()` — the `instanceof` guard keeps a type-mismatched pageable on the shell.
+     */
+    private function renderBody(Page $page): ?Response
+    {
+        $pageable = $page->pageable;
 
+        return match ($page->page_type) {
+            PageType::DiscountBrand => $pageable instanceof Offer
+                ? $this->renderDiscountGuide($page, $pageable)
+                : null,
+            PageType::DiscountCategoryHub => $pageable instanceof DiscountCategory
+                ? $this->renderDiscountCategory($page, $pageable)
+                : null,
+            PageType::Base => $pageable instanceof Base
+                ? $this->renderBase($page, $pageable)
+                : null,
+            default => null,
+        };
+    }
+
+    /** The minimal shell for a page type that has no dedicated view yet. */
+    private function renderShell(Page $page): Response
+    {
         $seo = SeoHead::forPage($page);
 
         return response()->view('pages.show', [
@@ -77,6 +102,25 @@ final class PageController
         return response()->view('pages.discount', [
             'page' => $page,
             'offer' => $offer,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * A single naval-base page (`/navy-bases/{slug}/`). The JSON-LD graph
+     * (Breadcrumb + Article + Place + GovernmentOrganization + FAQPage) is built
+     * from the base; FAQs and sources feed both the visible sections and the schema.
+     */
+    private function renderBase(Page $page, Base $base): Response
+    {
+        $base->load(['faqs', 'sources']);
+
+        $seo = SeoHead::forPage($page, BasePageSchema::build($page, $base));
+
+        return response()->view('pages.base', [
+            'page' => $page,
+            'base' => $base,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

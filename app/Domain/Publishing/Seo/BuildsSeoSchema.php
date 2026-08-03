@@ -21,15 +21,101 @@ trait BuildsSeoSchema
     }
 
     /**
-     * The absolute og:image URL for a page — the page's own image, falling back to the
-     * site default. Mirrors SeoHead's emitted og:image so the JSON-LD image can't
-     * diverge from the head tag.
+     * The absolute og:image URL for a page's JSON-LD `image` — the page's own image,
+     * falling back to the site default, via the shared resolver.
      */
-    private static function ogImage(string $site, Page $page): string
+    private static function ogImage(Page $page): string
     {
-        return $page->og_image_path !== null && $page->og_image_path !== ''
-            ? $site.$page->og_image_path
-            : $site.Config::string('site.default_og_image');
+        return self::absoluteImage($page->og_image_path);
+    }
+
+    /**
+     * Absolute URL for a JSON-LD `image` path: an `http(s)` path is kept as-is, a
+     * site-relative path is prefixed with the canonical origin, and a null/empty path
+     * falls back to the site default. Matches the legacy `buildArticleSchema` image rule
+     * (src/lib/seo.ts).
+     *
+     * NOTE: this is intentionally http-aware, whereas the head `og:image` in
+     * {@see SeoHead} is NOT (it mirrors legacy `buildSEOData`). For a site-relative or
+     * null path the two agree; do not "unify" them to remove the asymmetry, or the
+     * og:image byte-parity with the legacy head breaks.
+     */
+    private static function absoluteImage(?string $path): string
+    {
+        $site = SeoUrl::site();
+
+        if ($path === null || $path === '') {
+            return $site.Config::string('site.default_og_image');
+        }
+
+        return str_starts_with($path, 'http') ? $path : $site.$path;
+    }
+
+    /**
+     * The generic schema.org Article node, ported 1:1 from the legacy
+     * `buildArticleSchema` (`src/lib/seo.ts`): org-authored by default, no WebPage /
+     * WebSite / Person graph (that richer graph is the discount guide's, in
+     * {@see DiscountGuideSchema}). Pillar pages (bases, ranks, events) emit this
+     * lighter Article. The image path is absolutized the same way as the head
+     * og:image; a null/empty image falls back to the site default.
+     *
+     * @param  array<string, mixed>|null  $author  Author node/ref; defaults to the Organization @id.
+     * @return array<string, mixed>
+     */
+    private static function article(
+        string $headline,
+        string $description,
+        string $path,
+        ?string $imagePath,
+        string $datePublished,
+        string $dateModified,
+        ?array $author = null,
+    ): array {
+        $site = SeoUrl::site();
+        $url = SeoUrl::absolute($path);
+        $image = self::absoluteImage($imagePath);
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'Article',
+            'headline' => $headline,
+            'description' => $description,
+            'url' => $url,
+            'image' => $image,
+            'datePublished' => $datePublished,
+            'dateModified' => $dateModified,
+            'isAccessibleForFree' => true,
+            'inLanguage' => 'en-US',
+            'author' => $author ?? ['@id' => "{$site}/#organization"],
+            'publisher' => ['@id' => "{$site}/#organization"],
+            'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $url],
+        ];
+    }
+
+    /**
+     * A schema.org FAQPage node from ordered `{question, answer}` FAQ models —
+     * ported from the legacy `buildFAQSchema`. The caller decides whether to emit
+     * it at all (the legacy graphs omit the node entirely when there are no FAQs).
+     *
+     * @param  iterable<object{question: string, answer: string}>  $faqs
+     * @return array<string, mixed>
+     */
+    private static function faqPageFrom(iterable $faqs): array
+    {
+        $questions = [];
+        foreach ($faqs as $faq) {
+            $questions[] = [
+                '@type' => 'Question',
+                'name' => $faq->question,
+                'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq->answer],
+            ];
+        }
+
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'FAQPage',
+            'mainEntity' => $questions,
+        ];
     }
 
     /**

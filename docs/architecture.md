@@ -7,11 +7,11 @@ or request-flow step must update this file in the same PR (see `platform/CLAUDE.
 Scope reflects what is **built so far**. (Earlier revisions drew planned-but-not-yet-built
 entities with dashed borders; with the Phase-2 schema complete, none remain.)
 
-Last updated: Phase 2 slice 10b — Jet-teams sub-silo: `jet_teams` (Blue Angels /
-Thunderbirds hubs) with `jet_team_schedule` (every tour stop) and `jet_team_cities`
-(published city guides) children; guides reuse the shared polymorphic `faqs`/`sources`.
-This completes the Phase-2 schema work — the full data migration (Stage-A/Stage-B) is next.
-(Slice 10a: navy week / fleet weeks / air shows guides.)
+Last updated: Phase 3 rendering — naval base pages (`/navy-bases/{slug}/`): the first
+reference-pillar render family (`BasePageSchema` JSON-LD + `pages.base` view +
+`GenerateBasePagesAction`/`pages:generate-bases` deriving `pages` rows from base
+records). Data model unchanged since Phase 2 slice 10b (jet-teams sub-silo completed the
+Phase-2 schema); this slice adds only the rendering/page-generation path above.
 
 ## Domain modules & data access
 
@@ -875,6 +875,20 @@ discount-brand page (the card links straight to it); JSON-LD is built by
 `DiscountCategorySchema` (Breadcrumb + Article + **ItemList** — the first ItemList
 node in the SEO layer; no WebSite/FAQPage, and the Article is Organization-authored,
 no Person byline).
+
+A **`base`** page renders `pages.base` — a single naval installation
+(`/navy-bases/{slug}/`, `pageable` → `Base`): header, quick facts, overview,
+key facts, history, major units, location, host-nation context (overseas), notable
+events, FAQs, and cited sources. JSON-LD is built by
+`App\Domain\Pillars\Seo\BasePageSchema` (a 1:1 port of `NavyBaseDetail.getSeoData` +
+`src/data/bases/seo.ts`): Breadcrumb + Article + **Place** + **GovernmentOrganization**
++ FAQPage (the FAQPage node is emitted only when the base has FAQs). The base `pages`
+rows are generated from the base records by **`GenerateBasePagesAction`** (artisan
+`pages:generate-bases`), which upserts one published page per base via
+`PageRepository::upsertPillarPage` — the build clock lives there: `date_published` is
+set once and preserved, `date_modified` refreshed each run. The generic (org-authored)
+Article + the FAQPage node now live as shared helpers on the `BuildsSeoSchema` trait so
+every pillar schema reuses them.
 
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.

@@ -8,9 +8,27 @@ use App\Domain\Catalog\Models\Offer;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 final class EloquentPageRepository implements PageRepositoryInterface
 {
+    public function upsertPillarPage(string $urlPath, array $attributes, Model $pageable): Page
+    {
+        $page = Page::query()->firstOrNew(['url_path' => $urlPath]);
+
+        // Build clock: the first generation sets date_published; later runs preserve
+        // it verbatim and only ever refresh date_modified (never re-stamp published).
+        if ($page->exists) {
+            unset($attributes['date_published']);
+        }
+
+        $page->fill($attributes);
+        $page->pageable()->associate($pageable);
+        $page->save();
+
+        return $page;
+    }
+
     public function publishedPathExists(string $urlPath): bool
     {
         return Page::query()

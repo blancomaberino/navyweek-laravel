@@ -6,9 +6,22 @@ namespace App\Domain\Publishing\Repositories;
 
 use App\Domain\Publishing\Models\Page;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 interface PageRepositoryInterface
 {
+    /**
+     * Idempotently create-or-update the `pages` row for a pillar entity (base, rank,
+     * event, …), keyed on the canonical `url_path`, pointing `pageable` at the given
+     * model. Honors the build clock: `date_published` is set only when the row is
+     * first created and preserved verbatim on every later regeneration; every call
+     * refreshes `date_modified`. Returns the persisted page.
+     *
+     * @param  array<string, mixed>  $attributes  Page columns (title, meta_description,
+     *                                            og_image_path, page_type, dates, …).
+     */
+    public function upsertPillarPage(string $urlPath, array $attributes, Model $pageable): Page;
+
     /**
      * Whether a published page owns this exact canonical `url_path`. The DB
      * successor to the legacy build-time route manifest (`VALID_ROUTES`): a hit
