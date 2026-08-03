@@ -36,6 +36,32 @@ $php84 artisan serve            # dev server
 Or via composer scripts: `composer pest`, `composer stan`, `composer lint`,
 `composer lint:test`.
 
+## Front-end & design system
+
+The visual language ("Road Trip to 250" — Fleet Navy `#0A1628` background, Service Gold
+`#C9A84C` accents, Bebas Neue display / IBM Plex Sans + Mono) is ported from the legacy
+`src/styles/global.css` into **`resources/css/app.css`** (design tokens + base typography +
+component vocabulary + the header/footer chrome). The base layout **must** `@vite` this
+stylesheet — a page with no linked CSS renders as raw HTML (see the "Visual verification"
+rule in `CLAUDE.md`). Site chrome lives in `resources/views/partials/{header,footer}.blade.php`
+(CSS-only, no JS). Build assets with `npm run build` (Vite 8; on Apple Silicon the
+`@rolldown/binding-darwin-arm64` native binding may need a one-off install — see the local-run notes).
+
+## Browser (E2E) tests — Laravel Dusk
+
+Every user-facing page ships a **Dusk** end-to-end test (`tests/Browser/*`) that loads the
+real page in headless Chrome and asserts what Pest feature tests cannot — that the design
+system is applied (stylesheet linked, Fleet-Navy body, Bebas-Neue headings) and interactive
+controls work. Dusk tests are excluded from the default `pest` run; run them separately:
+
+```sh
+php84 artisan serve --host=127.0.0.1 --port=8000 &          # serve the app + real DB
+vendor/bin/../laravel/dusk/bin/chromedriver-mac-intel --port=9515 &  # arm64: start driver manually
+APP_URL=http://127.0.0.1:8000 php84 artisan dusk            # run the browser suite
+```
+
+(On Linux CI the matching chromedriver auto-starts; the manual step is an Apple-Silicon quirk.)
+
 ## Architecture
 
 Domain-first (modular monolith) under `app/Domain/*`:

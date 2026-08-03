@@ -70,9 +70,45 @@ for a CMS with editable URLs. When porting or repeating a pattern, first list th
 assumptions the new architecture invalidates, and ask "is there a single source of truth
 for this value, and is identity coupled to a mutable attribute?" — before writing the code.
 
+## Visual verification is part of "done" (non-negotiable for any rendered page)
+
+A page is NOT done because it returns HTTP 200 and its DOM/JSON-LD greps clean.
+`curl` + status-code + content-grep prove the page is *functionally* and *SEO*
+correct; they say NOTHING about whether it is styled or looks right. This is a
+website — visual fidelity is a first-class requirement, not a follow-up.
+
+For ANY task that renders or changes a user-facing page, before you call it done:
+
+- **Never verify UI with `curl`.** `curl` + status + content-grep is not acceptable
+  proof for a rendered feature. Use a real browser (headless or the in-app browser /
+  `mcp__Claude_Browser__*`).
+- **Actually look at it.** Open the running app in the browser and screenshot the page
+  at desktop AND mobile widths. Confirm a stylesheet is linked and applied (the base
+  layout must `@vite` the built CSS), the design tokens render (Fleet Navy background,
+  Service Gold accents, Bebas Neue / IBM Plex fonts), and the chrome (header + footer)
+  is present.
+- **E2E-test every user-facing feature.** A rendered feature ships with a browser-driven
+  end-to-end test (Laravel Dusk) that loads the real page in a headless browser and
+  asserts the user-visible behavior — the page paints, the design system is applied
+  (e.g. a known brand token/CSS rule is in effect, not just present in markup), links
+  navigate, and any interactive control (filters, accordions, mobile menu) works.
+  Pest feature tests over the HTTP kernel check the response body but NOT rendering,
+  CSS, or JS — they are necessary but NOT sufficient. Both are required.
+- **Compare to the legacy.** This is a 1:1 rebuild — put the platform page next to
+  the legacy page (`_scratch/source/` or the live site) and check they read the same.
+- **Treat "renders but unstyled" as a failing gate**, exactly like a red test. A
+  missing/again-unlinked stylesheet, a page with no header/footer, or a view whose
+  classes have no CSS is a defect to fix now, not later.
+
+(Root cause of the 2026-08-03 miss: pages were verified only by `curl`/status/DOM,
+so an entire un-ported design system — no CSS even linked in the base layout — shipped
+invisibly. Never verify a rendered page without viewing it.)
+
 ## Everything else
 
 The mandated per-task skill/quality-gate workflow (`/frontend-design` + `/seo-geo`
 → implement → `/simplify` → `/security-review` → commit; Pest + Larastan max + Pint
 green; every task ships as a PR) is documented in `platform/README.md` and the root
-`CLAUDE.md`. Follow it as written.
+`CLAUDE.md`. Follow it as written. **`/frontend-design` is not optional** — the design
+system exists (`design/` + legacy `src/styles/global.css` tokens); port it faithfully
+and view the result.

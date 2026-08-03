@@ -74,7 +74,9 @@ it('falls through to the minimal shell for a Base page whose pageable is not a B
 
     fetchBase('/navy-bases/orphan-base/')
         ->assertOk()
-        ->assertDontSee('Navy Bases'); // the base view breadcrumb — absent on the shell
+        ->assertSee('Orphan Base')            // the shell renders the title
+        ->assertDontSee('base-detail', false); // the base view's root class — absent on the shell
+    // (NB: don't assert on nav text like "Navy Bases" — the global header links it on every page.)
 });
 
 it('emits the base JSON-LD graph: Organization + Breadcrumb + Article + Place + GovernmentOrganization + FAQPage', function () {
