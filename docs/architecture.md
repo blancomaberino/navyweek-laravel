@@ -9,8 +9,10 @@ entities with dashed borders; with the Phase-2 schema complete, none remain.)
 
 Last updated: Phase 3 rendering — reference pillars + first event family. Base pages
 (`/navy-bases/{slug}/`), ranks/ratings list pages (`/navy-ranks/`, `/navy-ratings/`),
-and air shows (`/air-show/{slug}/` guides + `/air-show/` hub — `AirShowPageSchema` with
-a gated Event node + `pages:generate-air-shows`). Data model unchanged since Phase 2
+air shows (`/air-show/{slug}/` guides + `/air-show/` hub — `AirShowPageSchema` with
+a gated Event node), and fleet weeks (`/fleetweek/{slug}/` + `/fleetweek/` hub —
+`FleetWeekPageSchema` with a gated Festival node + hardcoded hub FAQs seeded on the page).
+Data model unchanged since Phase 2
 slice 10b; these slices add only the rendering/page-generation path
 (`PageRepository::upsertPillarPage` — null-pageable-aware, applies the default byline).
 
@@ -915,6 +917,19 @@ constants); a canonical-override show gets a page that canonicalizes to its prim
 `GenerateAirShowPagesAction` (`pages:generate-air-shows`) generates the published
 detail pages + hub via `upsertPillarPage`, which now also applies the **default
 editorial byline** (author + reviewer) to every generated page, mirroring PageImporter.
+
+The **`fleet_week`** type covers the city guide (`/fleetweek/{slug}/`, pageable →
+`FleetWeek`) and the hub (`/fleetweek/`, no pageable). `FleetWeekPageSchema::buildDetail`
+emits the guide graph (Breadcrumb + Article + WebPage + author/reviewer Person + FAQPage)
+plus a **Festival** node when the city has a `festival` block (Tier-3 cities omit it);
+`buildHub` emits Breadcrumb + Article + ItemList + FAQPage. Fleet weeks have no publish
+gate (every city renders). The hub's title/description/dates and FAQs are the legacy
+hardcoded hub constants — the FAQs are **seeded onto the hub page's polymorphic `faqs`**
+by `GenerateFleetWeekPagesAction` (`pages:generate-fleet-weeks`) so the FAQPage stays
+data-driven. (Accepted deviation: the hub ItemList lists cities alphabetically rather
+than the legacy curated registry order — the `fleet_weeks` table has no display-order
+column; a shared follow-up with the `/navy-ratings/` ItemList would add an
+import-populated sort column. Item set, names, and URLs match — only position differs.)
 
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
