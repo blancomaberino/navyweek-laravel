@@ -130,9 +130,11 @@ final class PageController
             PageType::LocalDiscount => $pageable instanceof LocalDiscount
                 ? $this->renderLocalDiscount($page, $pageable)
                 : $this->renderLocalDiscountHub($page),
+            // DB-driven content page: Article + author Person + FAQPage.
+            PageType::VeteransDayHub => $this->renderVeteransDay($page),
             // Static hubs/content pages are dispatched by slug; unknown slugs → shell.
+            // (Every PageType now has an arm — no default; a new case is caught by PHPStan.)
             PageType::Static => $this->renderStatic($page),
-            default => null,
         };
     }
 
@@ -175,6 +177,39 @@ final class PageController
         return response()->view('pages.content', [
             'page' => $page,
             'crumbs' => $crumbs,
+            'heading' => (string) $page->title,
+            'blocks' => $page->body_blocks ?? [],
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * The `/veterans-day/` reference article — a DB-driven content page whose graph is
+     * Article + author Person + FAQPage (`ContentPageSchema` with `emitFaqPage`). The
+     * body + FAQs are editor-managed; the byline drives the author Person.
+     */
+    private function renderVeteransDay(Page $page): Response
+    {
+        $page->load(['author', 'reviewer', 'faqs']);
+        $crumbs = [
+            ['name' => 'Home', 'url' => '/'],
+            ['name' => 'Navy Reference', 'url' => '/navy-reference/'],
+            ['name' => 'Veterans Day', 'url' => '/veterans-day/'],
+        ];
+
+        $seo = SeoHead::forPage($page, ContentPageSchema::build(
+            $page,
+            $crumbs,
+            headline: 'Veterans Day 2026: History, Meaning, and How the Navy Observes It',
+            articleDescription: 'An independent guide to Veterans Day 2026 (Wednesday, November 11): its history from Armistice Day, how it differs from Memorial Day and Armed Forces Day, how the U.S. Navy observes it, and ways to honor Navy veterans — including the Flagstaff Navy Week tie-in.',
+            emitFaqPage: true,
+        ));
+
+        return response()->view('pages.content', [
+            'page' => $page,
+            'crumbs' => $crumbs,
+            'heading' => 'Veterans Day 2026: History, Meaning & How the Navy Observes It',
             'blocks' => $page->body_blocks ?? [],
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
