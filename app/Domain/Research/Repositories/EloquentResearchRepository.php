@@ -7,6 +7,7 @@ namespace App\Domain\Research\Repositories;
 use App\Domain\Research\Enums\ResearchStatus;
 use App\Domain\Research\Models\Research;
 use DateTimeInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -79,5 +80,35 @@ final class EloquentResearchRepository implements ResearchRepositoryInterface
         $ids = Research::query()->distinct()->pluck('connection_id')->all();
 
         return $ids;
+    }
+
+    public function connectionIdsWithStaleSkillProvenance(int $skillId, string $currentVersion): array
+    {
+        // The latest (highest-version) brief id per connection — determined in PHP to
+        // mirror latestForConnections (briefs per connection are few). Only the latest
+        // brief drives the live page, so a superseded brief citing the old skill must
+        // not flag a connection whose newest brief already uses the current version.
+        $latestIds = Research::query()
+            ->get(['id', 'connection_id', 'version'])
+            ->sortByDesc('version')
+            ->unique('connection_id')
+            ->pluck('id')
+            ->all();
+
+        if ($latestIds === []) {
+            return [];
+        }
+
+        /** @var array<int, int> $connectionIds */
+        $connectionIds = Research::query()
+            ->whereIn('id', $latestIds)
+            ->whereHas('skills', function (Builder $query) use ($skillId, $currentVersion): void {
+                $query->where('skills.id', $skillId)
+                    ->where('research_skill.skill_version', '!=', $currentVersion);
+            })
+            ->pluck('connection_id')
+            ->all();
+
+        return $connectionIds;
     }
 }

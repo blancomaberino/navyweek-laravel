@@ -58,4 +58,16 @@ interface ResearchRepositoryInterface
      * @return array<int, int>
      */
     public function connectionIdsWithBriefs(): array;
+
+    /**
+     * Connection ids whose LATEST brief (highest `version`) cited the given skill at
+     * a version other than `$currentVersion` — i.e. their live page's provenance
+     * predates a skill bump and needs re-verification. Compares against the
+     * `research_skill` pivot (a brief can cite several skills); a connection whose
+     * latest brief doesn't reference the skill, or already cites the current version,
+     * is not returned.
+     *
+     * @return array<int, int>
+     */
+    public function connectionIdsWithStaleSkillProvenance(int $skillId, string $currentVersion): array;
 }

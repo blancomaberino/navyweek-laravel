@@ -84,8 +84,8 @@ same PR that introduces the model/repo (enforced by `CLAUDE.md`).
 | Repository | `Publishing\Repositories\RedirectRepositoryInterface` → `EloquentRedirectRepository` | Publishing | Redirect resolution (exact, then longest-prefix strict-descendant match). |
 | Model | `Research\Models\Research` | Research | A sourced, versioned research brief for a connection (fourth lifecycle). Stores the brief `raw_markdown` verbatim plus parsed facts/copy; only `last_verified` traces to research (build-clock rule). |
 | Model | `Research\Models\Skill` | Research | A research/QA skill in the provenance registry (`military-discount-research`, `seo-geo`); `content_hash`/`current_version` drive skill-upgrade re-research triggers. |
-| Repository | `Research\Repositories\ResearchRepositoryInterface` → `EloquentResearchRepository` | Research | Brief reads/writes for a connection: `latestForConnection` (highest version), `historyForConnection`, `connectionIdsWithBriefs` (reconcile), plus the locked cadence writes `markVerified` / `markStale`. |
-| Repository | `Research\Repositories\SkillRepositoryInterface` → `EloquentSkillRepository` | Research | Skill-registry reads: `all` (ordered by key), used by the `skills:check-hashes` drift command. |
+| Repository | `Research\Repositories\ResearchRepositoryInterface` → `EloquentResearchRepository` | Research | Brief reads/writes for a connection: `latestForConnection` (highest version), `historyForConnection`, `connectionIdsWithBriefs` (reconcile), `connectionIdsWithStaleSkillProvenance` (latest brief cited a superseded skill version — drives `skills:detect-updates`), plus the locked cadence writes `markVerified` / `markStale`. |
+| Repository | `Research\Repositories\SkillRepositoryInterface` → `EloquentSkillRepository` | Research | Skill-registry access: `all` (ordered by key, drives `skills:check-hashes`); `recordContentHash` (locks the row, stores the new hash + bumps `current_version` on a real change) for the `skills:detect-updates` write-detector. |
 | Model | `Crm\Models\Audience` | Crm | A first-class eligible cohort (military, veteran, student, …) an Offer targets via the `offer_audience` pivot — the joinable form of the `Crm\Enums\Audience` vocabulary; replaces the legacy 9 `DiscountAudience` booleans (consolidated to 7 cases). |
 | Model | `Shared\Models\Source` | Shared | A primary-source citation attached polymorphically (`sourceable`) to an Offer / Research / Page. The shared backbone of the YMYL "every claim traces to a verified source" invariant. |
 | Model | `Shared\Models\Faq` | Shared | A question/answer pair attached polymorphically (`faqable`) to a Page / Offer / pillar. Single source for both the rendered FAQ and its FAQPage JSON-LD (parity gate). |
@@ -204,8 +204,13 @@ queue) is now fully normalized across the catalog/CRM/publishing/research aggreg
 - `php artisan skills:check-hashes` — reports skills whose on-disk content
   (`SKILL.md` + `references/*.md` under `config('research.skills_path')`) no longer
   matches their stored `content_hash` (changed / missing / never-hashed). **Read-only**;
-  `--check` exits non-zero on drift so CI/scheduling can gate on it. Bumping the skill
-  version + flagging the research that cited an older version is a deliberate follow-up.
+  `--check` exits non-zero on drift so CI/scheduling can gate on it.
+- `php artisan skills:detect-updates` — the **write** counterpart of the above (thin
+  wrapper over `Research\Actions\DetectSkillUpdatesAction`). On a real content change it
+  bumps the skill's `current_version` + stores the new hash, then flags every connection
+  whose **latest** brief cited that skill at the superseded version as `needs-reverify`.
+  A first-time hash only records the baseline (no bump/flag); a skill missing on disk is
+  reported and skipped. Scheduled daily at 06:15, after `research:flag-stale`.
 - `php artisan connections:reconcile` — reports pipeline-state drift between a
   connection's `status` and the DB facts: published pages with no research brief
   (the YMYL/R6 invariant), live pages not marked `published`, and duplicates not

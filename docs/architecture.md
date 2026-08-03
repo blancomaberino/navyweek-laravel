@@ -994,6 +994,24 @@ in the CRM's "Due for review" filter and the dashboard. `--dry-run` reports the 
 without writing. Auto-dispatching the research job for high-priority brands lands with
 that job (queue + CLI creds).
 
+**Skill-provenance drift** has a read-only detector and a write counterpart.
+**`skills:check-hashes`** (`--check` exits non-zero on drift, for CI) only *reports*
+skills whose on-disk content (SKILL.md + references, under `research.skills_path`) no
+longer matches their stored `content_hash`. **`skills:detect-updates`** is the write
+half: a thin wrapper over `Research\Actions\DetectSkillUpdatesAction`, scheduled after
+the daily research run. For each skill it re-hashes the on-disk content and, on a real
+change, (1) bumps `current_version` + stores the new hash via
+`SkillRepository::recordContentHash` (locks the row; increments the monotonic
+integer-string version), then (2) flags every connection whose **latest** brief cited
+that skill at the superseded version — `ResearchRepository::connectionIdsWithStaleSkillProvenance`
+(reads the `research_skill` pivot, latest brief only) feeds
+`ConnectionRepository::markNeedsReverify`. A skill hashed for the first time (null
+`content_hash`) only records the baseline (no bump, no flag); a skill with no files on
+disk is reported and skipped. The version bump commits in its own transaction and each
+connection is flagged in an isolated transaction (mirroring the stale sweep), so one
+bad row can't abort the run or force a version re-bump — no model queries in the
+action.
+
 ## Data migration pipeline (Stage A → Stage B)
 
 The legacy `../src/data` TypeScript is migrated into the tables above in two
