@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Domain\Pillars\Enums\NavyWeekStatus;
 use App\Domain\Pillars\Models\NavyWeekEvent;
+use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Pages\GenerateHomePageAction;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
@@ -75,6 +76,29 @@ it('shows "Next Stop" when no stop is active', function () {
     fetchHome()->assertOk()
         ->assertSee('Next Stop')
         ->assertDontSee('Happening Now');
+});
+
+it('omits the FAQPage node (and section) when the page has no FAQs', function () {
+    NavyWeekEvent::factory()->create(['sequence' => 1, 'slug' => 'mcallen', 'city' => 'McAllen']);
+    app(GenerateHomePageAction::class)();
+    // An editor cleared every FAQ — the graph must drop FAQPage, not emit an empty one.
+    Page::query()->where('url_path', '/')->firstOrFail()->faqs()->delete();
+
+    fetchHome()->assertOk()
+        ->assertDontSee('"@type":"FAQPage"', false)
+        ->assertDontSee('Frequently Asked Questions')
+        // The rest of the graph is still present.
+        ->assertSee('"@type":"ItemList"', false);
+});
+
+it('renders the empty-state schedule when no events exist', function () {
+    app(GenerateHomePageAction::class)();
+
+    fetchHome()->assertOk()
+        ->assertSee('The 2026 schedule is coming soon.')
+        // No current/next stop section, and the ItemList reports zero items.
+        ->assertDontSee('Next Stop')
+        ->assertSee('"numberOfItems":0', false);
 });
 
 it('counts first-time locations in the key facts', function () {

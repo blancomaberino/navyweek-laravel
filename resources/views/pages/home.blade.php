@@ -6,12 +6,16 @@
      byte-locked by SeoHead + HomePageSchema; this body is a clean semantic rebuild (visual
      styling is a later slice, consistent with the other ported hub views). --}}
 @php
+    use App\Domain\Publishing\Support\PagePaths;
+
     /** @var \Illuminate\Support\Collection<int, \App\Domain\Pillars\Models\NavyWeekEvent> $events */
     /** @var \App\Domain\Pillars\Models\NavyWeekEvent|null $activeEvent */
     /** @var \App\Domain\Pillars\Models\NavyWeekEvent|null $currentOrNext */
     /** @var int $firstTimeCount */
     // Date ranges use NavyWeekEvent::dateRangeLabel() — the single formatter shared with
-    // the city JSON-LD, so the home schedule never drifts from the per-city pages.
+    // the city JSON-LD, so the home schedule never drifts from the per-city pages. City
+    // links go through PagePaths (same knob the schedule ItemList uses), so the visible
+    // links and the JSON-LD stay in lockstep if the /city/ prefix ever changes.
 @endphp
 
 @section('content')
@@ -67,7 +71,7 @@
                 @if ($activeEvent)
                     <p class="live-badge">Live This Week</p>
                 @endif
-                <a class="next-link" href="/city/{{ $currentOrNext->slug }}/">View Details</a>
+                <a class="next-link" href="{{ PagePaths::child('navy_week_cities', $currentOrNext->slug) }}">View Details</a>
             </section>
         @endif
 
@@ -81,7 +85,7 @@
                 <ul class="schedule-list">
                     @foreach ($events as $event)
                         <li class="schedule-card">
-                            <a href="/city/{{ $event->slug }}/">
+                            <a href="{{ PagePaths::child('navy_week_cities', $event->slug) }}">
                                 <span class="city-name">{{ $event->city }}, {{ $event->state_abbr }}</span>
                                 <span class="city-dates">{{ $event->dateRangeLabel() }}</span>
                                 <span class="city-anchor">{{ $event->anchor_event }}</span>
