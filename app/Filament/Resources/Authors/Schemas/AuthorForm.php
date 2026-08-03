@@ -18,12 +18,11 @@ use Filament\Schemas\Schema;
  * editorial profile (the fields the `Person` JSON-LD + `/authors/{slug}/` page
  * read) and account/access.
  *
- * `password` is never edited here: an author is a byline profile, so a random,
- * unusable password is generated on create ({@see CreateAuthor})
- * and real login credentials are set out of band (per `EditorialTeamSeeder`).
- * `avatar_path` is a site-relative path (e.g. `/authors/name.jpg`) served by the
- * static site and prefixed with the host in the JSON-LD — a plain path input, not
- * a disk upload, so the stored value matches what the schema builder expects.
+ * `password` is never edited here — see {@see CreateAuthor} for the byline-profile
+ * credential policy. `avatar_path` is a site-relative path (e.g. `/authors/name.jpg`)
+ * served by the static site and prefixed with the host in the JSON-LD — a plain
+ * path input, not a disk upload, so the stored value matches what the schema
+ * builder expects.
  */
 class AuthorForm
 {
@@ -49,7 +48,10 @@ class AuthorForm
                             ->helperText('schema.org Person.jobTitle, e.g. "Editor, NavyWeek.org".'),
                         TextInput::make('avatar_path')
                             ->maxLength(255)
-                            ->rule('regex:#^/#')
+                            // A single leading slash but NOT a second one: reject a
+                            // protocol-relative `//host/…` value that would resolve to
+                            // an external host when rendered as an <img src>.
+                            ->rule('regex:#^/(?!/)#')
                             ->helperText('Site-relative avatar path, e.g. /authors/name.jpg. Prefixed with the host in JSON-LD.'),
                         TextInput::make('linkedin_url')
                             ->url()
@@ -80,7 +82,10 @@ class AuthorForm
                             ->helperText('Account identity — not published.'),
                         Toggle::make('is_admin')
                             ->label('Admin panel access')
-                            ->helperText('Let this account sign in to /admin. Off = byline-only profile.'),
+                            // Byline profiles created here get a random, unusable password
+                            // and there is no self-service reset — this flag alone can't
+                            // produce a working login; a password is set out of band.
+                            ->helperText('Marks the account as panel-eligible. A login password must still be set out of band (see EditorialTeamSeeder). Off = byline-only profile.'),
                     ]),
             ]);
     }

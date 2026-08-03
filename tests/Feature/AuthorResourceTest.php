@@ -111,6 +111,20 @@ it('requires the avatar path to be site-relative', function () {
         ->assertHasFormErrors(['avatar_path']);
 });
 
+it('rejects a protocol-relative avatar path', function () {
+    // `//host/x.jpg` starts with a slash but would resolve to an external host as
+    // an <img src> — the regex must reject the double leading slash.
+    Livewire::test(CreateAuthor::class)
+        ->fillForm([
+            'name' => 'Sneaky Avatar',
+            'slug' => 'sneaky-avatar',
+            'email' => 'sneaky@navyweek.org',
+            'avatar_path' => '//cdn.evil.com/x.jpg',
+        ])
+        ->call('create')
+        ->assertHasFormErrors(['avatar_path']);
+});
+
 it('rejects a non-URL linkedin value', function () {
     Livewire::test(CreateAuthor::class)
         ->fillForm([

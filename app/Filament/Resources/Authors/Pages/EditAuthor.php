@@ -23,12 +23,15 @@ class EditAuthor extends EditRecord
 
     /**
      * `is_admin` is guarded (see CreateAuthor), so a plain `update()`/`fill()` would
-     * silently drop toggling panel access. `forceFill` the validated form data so the
-     * flag persists; `password` is not in the form, so it is left untouched.
+     * silently drop toggling panel access. Mass-assign the ordinary fields via
+     * `fill()` (guard stays active for everything else), then `forceFill` only the
+     * guarded `is_admin`. `password` is not in the form, so it is left untouched.
      */
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        $record->forceFill($data)->save();
+        $record->fill($data)->forceFill([
+            'is_admin' => (bool) ($data['is_admin'] ?? false),
+        ])->save();
 
         return $record;
     }
