@@ -1,9 +1,5 @@
 <?php
 
-pest()->extend(DuskTestCase::class)
-//  ->use(Illuminate\Foundation\Testing\DatabaseMigrations::class)
-    ->in('Browser');
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\DuskTestCase;
 use Tests\TestCase;
@@ -17,7 +13,17 @@ use Tests\TestCase;
 | case class. By default, that class is "PHPUnit\Framework\TestCase". Of course, you may
 | need to change it using the "pest()" function to bind different classes or traits.
 |
+| NOTE: the `use` imports above MUST stay above the first `pest()->extend()` call. PHP
+| resolves a `Class::class` reference against the aliases known at that point in the file,
+| so a `use` placed *after* the call leaves `DuskTestCase::class` pointing at the global
+| `\DuskTestCase` (which doesn't exist) and Pest fails to collect ANY suite with
+| "class DuskTestCase not found".
+|
 */
+
+pest()->extend(DuskTestCase::class)
+//  ->use(Illuminate\Foundation\Testing\DatabaseMigrations::class)
+    ->in('Browser');
 
 pest()->extend(TestCase::class)
     ->use(RefreshDatabase::class)

@@ -38,6 +38,16 @@ class EditorialTeamSeeder extends Seeder
                 'credentials' => "U.S. Naval Academy '02 · U.S. Navy Reserve Captain (O-6) · Former submarine officer, USS Key West",
                 'avatar_path' => '/authors/t-alford.jpg',
                 'knows_about' => ['military discounts', 'veteran benefits', 'U.S. Navy', 'ID.me verification'],
+                // Bio prose migrated verbatim from the legacy AuthorTAlford profile page.
+                'bio' => 'T Madden Alford is a U.S. Naval Academy graduate, a Captain (O-6) in the '
+                    .'U.S. Navy Reserve, and a former submarine officer who served aboard the '
+                    .'fast-attack submarine USS Key West (SSN-722). After active duty he managed '
+                    ."the Defense Threat Reduction Agency's Nuclear Weapon Surety Program, then "
+                    .'moved into the private sector with leadership roles at ExxonMobil and XTO '
+                    .'Energy before co-founding Triton Well Services, Cloud Clinic, and Honest '
+                    .'Paws. He writes for NavyWeek.org on Navy service, veteran benefits, and '
+                    .'topics that connect the two.',
+                'linkedin_url' => 'https://www.linkedin.com/in/t-madden-alford-8281b04',
                 'password' => Hash::make(Str::random(40)),
                 'email_verified_at' => now(),
             ],
@@ -48,7 +58,27 @@ class EditorialTeamSeeder extends Seeder
             [
                 'name' => 'Erik Rivera',
                 'slug' => Config::string('site.editorial.default_reviewer_slug'),
+                'job_title' => 'Expert Reviewer, NavyWeek.org',
                 'credentials' => "U.S. Naval Academy '04 · Former U.S. Navy Explosive Ordnance Disposal (EOD) officer",
+                'avatar_path' => '/authors/erik-rivera.jpg',
+                'knows_about' => [
+                    'U.S. Navy service & culture',
+                    'Naval Explosive Ordnance Disposal (EOD)',
+                    'Naval Special Operations',
+                    'Officer career paths',
+                    'U.S. Naval Academy',
+                    'Veteran entrepreneurship',
+                ],
+                // Bio prose migrated verbatim from the legacy AuthorErikRivera profile page.
+                'bio' => 'Erik Rivera is a U.S. Naval Academy graduate (Class of 2004, B.S. in '
+                    .'Weapons & Systems Engineering) and a former U.S. Navy Explosive Ordnance '
+                    .'Disposal (EOD) / Naval Special Operations officer. After his Navy service '
+                    .'he became an entrepreneur and investor — he is the CEO of OnePet and a '
+                    .'founder of Honest Paws and CertaPet, and was an early investor in Sellbrite '
+                    .'and AdEspresso. Based in San Juan, Puerto Rico, he reviews NavyWeek.org '
+                    .'reference content for accuracy and plain-language clarity, drawing on his '
+                    .'firsthand experience as a commissioned U.S. Navy officer.',
+                'linkedin_url' => 'https://www.linkedin.com/in/erik-rivera',
                 'password' => Hash::make(Str::random(40)),
                 'email_verified_at' => now(),
             ],

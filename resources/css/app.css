@@ -193,6 +193,66 @@ li { margin-bottom: var(--space-xs); }
 .byline-name { margin: 2px 0; font-weight: 600; color: var(--nw-off-white); }
 .byline-verified { font-family: var(--font-mono); font-size: 0.72rem; color: var(--nw-gray); margin: 0; }
 
+/* Author profile (/authors/{slug}/) */
+.author-page { max-width: 860px; }
+.author-hero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xl);
+    align-items: center;
+    margin-bottom: var(--space-2xl);
+}
+.author-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold);
+    background: var(--navy-mid);
+    flex-shrink: 0;
+}
+.author-hero-body { flex: 1 1 320px; min-width: 0; }
+.author-hero-body h1 { margin-bottom: var(--space-sm); }
+.author-role { font-size: 1.05rem; color: var(--gold-light); margin: 0 0 var(--space-xs); }
+.author-credentials {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.5px;
+    color: var(--nw-gray-light);
+    margin: 0;
+}
+.author-bio { margin-bottom: var(--space-2xl); }
+.author-section { margin-bottom: var(--space-2xl); }
+.author-chips {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-md) 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+.author-chips li {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    color: var(--gold-light);
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    padding: 6px 12px;
+    border-radius: 2px;
+    margin: 0;
+}
+.author-links { list-style: none; padding: 0; margin: var(--space-md) 0 0; }
+.author-links li { margin-bottom: var(--space-sm); }
+.author-links a { text-decoration: underline; }
+.author-disclosure {
+    font-size: 0.85rem;
+    color: var(--nw-gray);
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    padding-top: var(--space-lg);
+    margin-top: var(--space-2xl);
+}
+
 /* Section headings with a gold underline */
 main section > h2 {
     padding-bottom: var(--space-sm);

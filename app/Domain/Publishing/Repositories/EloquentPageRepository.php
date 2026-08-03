@@ -198,6 +198,34 @@ final class EloquentPageRepository implements PageRepositoryInterface
             ->get();
     }
 
+    public function publishedIndexableAuthoredBy(int $userId): Collection
+    {
+        return $this->publishedIndexableByByline('author_id', $userId);
+    }
+
+    public function publishedIndexableReviewedBy(int $userId): Collection
+    {
+        return $this->publishedIndexableByByline('reviewer_id', $userId);
+    }
+
+    /**
+     * Shared query for the author profile's "writes for" / "reviews for" lists:
+     * published + indexable pages whose given byline column points at the user,
+     * minus the author-profile pages themselves, ordered by title.
+     *
+     * @return Collection<int, Page>
+     */
+    private function publishedIndexableByByline(string $column, int $userId): Collection
+    {
+        return Page::query()
+            ->where($column, $userId)
+            ->where('is_published', true)
+            ->where('noindex', false)
+            ->where('page_type', '!=', PageType::Author)
+            ->orderBy('title')
+            ->get();
+    }
+
     public function findForUpdate(Page $page): ?Page
     {
         return Page::query()

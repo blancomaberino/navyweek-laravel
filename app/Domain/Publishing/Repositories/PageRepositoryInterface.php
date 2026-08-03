@@ -110,6 +110,25 @@ interface PageRepositoryInterface
     public function publishedDiscountBrandPagesWithOffer(): Collection;
 
     /**
+     * Published, indexable pages this user is the byline AUTHOR of — the "writes for"
+     * list + the author-profile ItemList. Excludes the author-profile pages themselves
+     * (`PageType::Author`), so a user's own profile never lists itself. Ordered by
+     * title for a stable, readable list.
+     *
+     * @return Collection<int, Page>
+     */
+    public function publishedIndexableAuthoredBy(int $userId): Collection;
+
+    /**
+     * Published, indexable pages this user has REVIEWED — the "reviews for" list on the
+     * author profile. Excludes the author-profile pages themselves (`PageType::Author`).
+     * Ordered by title.
+     *
+     * @return Collection<int, Page>
+     */
+    public function publishedIndexableReviewedBy(int $userId): Collection;
+
+    /**
      * Re-read the given page's row under a `FOR UPDATE` row lock, so a rename can
      * serialize against concurrent writers. Must be called inside a transaction;
      * returns null if the row was deleted concurrently.

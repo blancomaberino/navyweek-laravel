@@ -32,6 +32,8 @@ use App\Domain\Pillars\Repositories\NavyWeekEventRepositoryInterface;
 use App\Domain\Pillars\Repositories\RankRepositoryInterface;
 use App\Domain\Publishing\Events\PageUrlChanged;
 use App\Domain\Publishing\Listeners\CreateRedirectListener;
+use App\Domain\Publishing\Repositories\AuthorRepositoryInterface;
+use App\Domain\Publishing\Repositories\EloquentAuthorRepository;
 use App\Domain\Publishing\Repositories\EloquentPageRepository;
 use App\Domain\Publishing\Repositories\EloquentRedirectRepository;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
@@ -62,6 +64,7 @@ class DomainServiceProvider extends ServiceProvider
     public array $repositories = [
         RedirectRepositoryInterface::class => EloquentRedirectRepository::class,
         PageRepositoryInterface::class => EloquentPageRepository::class,
+        AuthorRepositoryInterface::class => EloquentAuthorRepository::class,
         ConnectionRepositoryInterface::class => EloquentConnectionRepository::class,
         OfferRepositoryInterface::class => EloquentOfferRepository::class,
         AffiliateNetworkRepositoryInterface::class => EloquentAffiliateNetworkRepository::class,

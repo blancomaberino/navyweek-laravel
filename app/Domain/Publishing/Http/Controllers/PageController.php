@@ -34,6 +34,7 @@ use App\Domain\Pillars\Seo\RankListSchema;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Seo\AuthorPageSchema;
 use App\Domain\Publishing\Seo\ContentPageSchema;
 use App\Domain\Publishing\Seo\DiscountCategorySchema;
 use App\Domain\Publishing\Seo\DiscountGuideSchema;
@@ -44,6 +45,7 @@ use App\Domain\Publishing\Seo\SeoHead;
 use App\Domain\Publishing\Seo\SeoUrl;
 use App\Domain\Publishing\Seo\VeteransDayFreeMealsSchema;
 use App\Domain\Publishing\Support\PagePaths;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -137,6 +139,10 @@ final class PageController
                 : $this->renderLocalDiscountHub($page),
             // DB-driven content page: Article + author Person + FAQPage.
             PageType::VeteransDayHub => $this->renderVeteransDay($page),
+            // Author profile page (pageable = the byline User): ProfilePage/Person graph.
+            PageType::Author => $pageable instanceof User
+                ? $this->renderAuthor($page, $pageable)
+                : null,
             // Static hubs/content pages are dispatched by slug; unknown slugs → shell.
             // (Every PageType now has an arm — no default; a new case is caught by PHPStan.)
             PageType::Static => $this->renderStatic($page),
@@ -261,6 +267,34 @@ final class PageController
             'crumbs' => $crumbs,
             'heading' => 'Veterans Day 2026: History, Meaning & How the Navy Observes It',
             'blocks' => $page->body_blocks ?? [],
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * An `/authors/{slug}/` author profile page. The page's `pageable` is the byline
+     * User; the graph is Person (mainEntity) + Breadcrumb + ProfilePage + an ItemList
+     * of the articles they've authored. The visible "writes for" / "reviews for" lists
+     * come from the pages that cite this user as author / reviewer.
+     */
+    private function renderAuthor(Page $page, User $author): Response
+    {
+        $authored = $this->pages->publishedIndexableAuthoredBy($author->id);
+        $reviewed = $this->pages->publishedIndexableReviewedBy($author->id);
+
+        $crumbs = [
+            ['name' => 'Home', 'url' => '/'],
+            ['name' => $author->name, 'url' => $page->url_path],
+        ];
+
+        $seo = SeoHead::forPage($page, AuthorPageSchema::build($page, $author, $crumbs, $authored));
+
+        return response()->view('pages.author', [
+            'page' => $page,
+            'author' => $author,
+            'authored' => $authored,
+            'reviewed' => $reviewed,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);
