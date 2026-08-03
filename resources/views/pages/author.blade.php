@@ -75,7 +75,7 @@
             </section>
         @endif
 
-        @if ($author->linkedin_url)
+        @if ($author->linkedin_url && \Illuminate\Support\Str::startsWith($author->linkedin_url, ['https://', 'http://']))
             <section class="author-section" aria-labelledby="connect-heading">
                 <h2 id="connect-heading">Connect</h2>
                 <ul class="author-links">

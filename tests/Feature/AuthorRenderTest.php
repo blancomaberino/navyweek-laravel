@@ -77,16 +77,25 @@ it('omits the authored ItemList when the author has written nothing', function (
         ->assertDontSee('"@type":"ItemList"', false);
 });
 
-it('never lists the author-profile pages themselves in the writes-for list', function () {
+it('excludes author-profile pages from the writes-for list even when they carry a byline', function () {
     $author = User::factory()->create(['slug' => 't-alford']);
-    // Generation assigns the default byline to author pages; the profile must not
-    // list its own (or a peer's) profile page as an authored "article".
-    User::factory()->create(['slug' => 'erik-rivera']);
 
-    app(GenerateAuthorPagesAction::class)();
+    // A real article this user wrote — SHOULD be listed.
+    Page::factory()->create([
+        'author_id' => $author->id,
+        'page_type' => PageType::Static,
+        'title' => 'A Real Guide',
+    ]);
+    // A defensively byline-carrying author-profile page must NEVER appear as one of
+    // their "articles" — the page_type filter is what guarantees that.
+    Page::factory()->create([
+        'author_id' => $author->id,
+        'page_type' => PageType::Author,
+        'title' => 'Some Author Profile',
+    ]);
 
-    $authored = app(PageRepositoryInterface::class)
-        ->publishedIndexableAuthoredBy($author->id);
+    $authored = app(PageRepositoryInterface::class)->publishedIndexableAuthoredBy($author->id);
 
-    expect($authored->every(fn (Page $p): bool => $p->page_type !== PageType::Author))->toBeTrue();
+    expect($authored->pluck('title')->all())->toBe(['A Real Guide'])
+        ->and($authored->every(fn (Page $p): bool => $p->page_type !== PageType::Author))->toBeTrue();
 });
