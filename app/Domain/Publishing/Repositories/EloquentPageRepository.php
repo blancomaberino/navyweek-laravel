@@ -93,6 +93,19 @@ final class EloquentPageRepository implements PageRepositoryInterface
         return $ids;
     }
 
+    public function allPublishedDiscountBrandPages(): Collection
+    {
+        // Every published discount-brand page (with its Offer eager-loaded) for the
+        // /discount/ directory ItemList. Ordered by url_path for a deterministic list.
+        return Page::query()
+            ->where('page_type', PageType::DiscountBrand)
+            ->where('is_published', true)
+            ->where('pageable_type', (new Offer)->getMorphClass())
+            ->with('pageable.connection')
+            ->orderBy('url_path')
+            ->get();
+    }
+
     public function liveDiscountBrandPagesForConnections(array $connectionIds): Collection
     {
         return Page::query()

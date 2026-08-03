@@ -60,6 +60,14 @@ interface PageRepositoryInterface
     public function liveDiscountBrandPagesForConnections(array $connectionIds): Collection;
 
     /**
+     * Every published discount-brand page (with its Offer + connection eager-loaded),
+     * ordered by `url_path` — the /discount/ directory ItemList over all brands.
+     *
+     * @return Collection<int, Page>
+     */
+    public function allPublishedDiscountBrandPages(): Collection;
+
+    /**
      * Re-read the given page's row under a `FOR UPDATE` row lock, so a rename can
      * serialize against concurrent writers. Must be called inside a transaction;
      * returns null if the row was deleted concurrently.
