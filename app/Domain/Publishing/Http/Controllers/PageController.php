@@ -13,6 +13,7 @@ use App\Domain\Pillars\Models\AirShow;
 use App\Domain\Pillars\Models\AirShowHubMeta;
 use App\Domain\Pillars\Models\Base;
 use App\Domain\Pillars\Models\FleetWeek;
+use App\Domain\Pillars\Models\NavyWeekEvent;
 use App\Domain\Pillars\Models\Rank;
 use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
 use App\Domain\Pillars\Repositories\FleetWeekRepositoryInterface;
@@ -20,6 +21,7 @@ use App\Domain\Pillars\Repositories\RankRepositoryInterface;
 use App\Domain\Pillars\Seo\AirShowPageSchema;
 use App\Domain\Pillars\Seo\BasePageSchema;
 use App\Domain\Pillars\Seo\FleetWeekPageSchema;
+use App\Domain\Pillars\Seo\NavyWeekCitySchema;
 use App\Domain\Pillars\Seo\RankListSchema;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
@@ -102,6 +104,9 @@ final class PageController
             PageType::FleetWeek => $pageable instanceof FleetWeek
                 ? $this->renderFleetWeek($page, $pageable)
                 : $this->renderFleetWeekHub($page),
+            PageType::NavyWeekCity => $pageable instanceof NavyWeekEvent
+                ? $this->renderNavyWeekCity($page, $pageable)
+                : null,
             default => null,
         };
     }
@@ -253,6 +258,24 @@ final class PageController
             'page' => $page,
             'hub' => $hub,
             'shows' => $shows,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * A Navy Week city page (`/city/{slug}/`). Emits Breadcrumb + two
+     * GovernmentOrganization nodes + the rich Event (with per-day subEvents) + FAQPage.
+     */
+    private function renderNavyWeekCity(Page $page, NavyWeekEvent $event): Response
+    {
+        $event->load('faqs');
+
+        $seo = SeoHead::forPage($page, NavyWeekCitySchema::build($page, $event));
+
+        return response()->view('pages.navy-week-city', [
+            'page' => $page,
+            'event' => $event,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

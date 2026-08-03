@@ -931,6 +931,20 @@ than the legacy curated registry order — the `fleet_weeks` table has no displa
 column; a shared follow-up with the `/navy-ratings/` ItemList would add an
 import-populated sort column. Item set, names, and URLs match — only position differs.)
 
+The **`navy_week_city`** type renders a city page (`/city/{slug}/`, pageable →
+`NavyWeekEvent`). `NavyWeekCitySchema` emits Breadcrumb + two `GovernmentOrganization`
+nodes (US Navy + NAVCO) + the rich **Event** node + FAQPage — no Article/WebPage/Person.
+The Event is the most involved builder in the port: performers are regex-derived from
+`navy_assets` (with a Navy-Band/Leap-Frogs fallback), and one nested `subEvent` is
+emitted per **stored** daily-schedule item, located at its matched venue (from the
+`venues` JSON) or the parent city location. (Accepted deviation: the legacy renderer
+synthesized placeholder "TBA" subEvents for cities with no published schedule; the
+Stage-A exporter did not store that synthesis, so those cities emit no subEvent —
+matching the migrated data.) All rich detail lives in the `NavyWeekEvent` row's JSON
+columns. `GenerateNavyWeekPagesAction` (`pages:generate-navy-week`) generates one page
+per event (no publish gate); the schema also owns the `metaTitle`/`metaDescription`
+derivations. (The `/schedule/` hub — a separate list page — is not yet built.)
+
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
 
