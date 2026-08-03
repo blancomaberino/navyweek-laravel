@@ -60,7 +60,7 @@
                 </section>
             @endif
 
-            @foreach (['eligibility' => 'Who is eligible', 'exclusions' => 'Exclusions', 'key_facts' => 'Key facts'] as $field => $label)
+            @foreach (['eligibility' => 'Who is eligible', 'exclusions' => 'Exclusions'] as $field => $label)
                 @php($items = $offer->{$field})
                 @if (filled($items))
                     <section aria-labelledby="{{ $field }}-heading">
@@ -73,6 +73,23 @@
                     </section>
                 @endif
             @endforeach
+
+            {{-- key_facts is a list of {label, value} pairs (not flat strings) — render as a <dl>. --}}
+            @if (filled($offer->key_facts))
+                <section aria-labelledby="key_facts-heading" class="key-facts" data-llm-key-facts="1">
+                    <h2 id="key_facts-heading">Key facts</h2>
+                    <dl>
+                        @foreach ($offer->key_facts as $fact)
+                            @if (is_array($fact))
+                                <dt>{{ $fact['label'] ?? '' }}</dt>
+                                <dd>{{ $fact['value'] ?? '' }}</dd>
+                            @else
+                                <dd>{{ $fact }}</dd>
+                            @endif
+                        @endforeach
+                    </dl>
+                </section>
+            @endif
 
             @php($online = $offer->redemptionSteps->where('channel', \App\Domain\Catalog\Enums\RedemptionChannel::Online))
             @php($inStore = $offer->redemptionSteps->where('channel', \App\Domain\Catalog\Enums\RedemptionChannel::InStore))

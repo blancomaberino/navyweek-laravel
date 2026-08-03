@@ -58,7 +58,10 @@ function discountPage(?array $byline = null): Page
         'audience_label' => 'Military & Veteran',
         'eligibility' => ['Active duty', 'Veterans'],
         'exclusions' => ['Not stackable with sales'],
-        'key_facts' => ['Verified through ID.me'],
+        'key_facts' => [
+            ['label' => 'National discount', 'value' => '20% off sitewide'],
+            ['label' => 'Verification', 'value' => 'ID.me badge at checkout'],
+        ],
         'official_url' => 'https://www.yeti.com/id-me-deals',
         'cta_label' => 'Shop YETI with ID.me',
         'is_primary' => true,
@@ -109,6 +112,10 @@ it('renders the discount guide body from the primary offer', function () {
         ->assertSee('Shop YETI with ID.me')
         ->assertSee('Savings by audience')
         ->assertSee('Who is eligible')
+        // key_facts is a list of {label, value} pairs — rendered as a <dl>, not flat <li> strings
+        ->assertSee('Key facts')
+        ->assertSee('National discount')
+        ->assertSee('20% off sitewide')
         ->assertSee('How to redeem')
         ->assertSee('Verify with ID.me')
         ->assertSee('Show your ID')
