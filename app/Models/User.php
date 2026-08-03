@@ -18,9 +18,10 @@ use Illuminate\Support\Carbon;
 
 /**
  * A login account that also doubles as the editorial byline. The `slug`,
- * `job_title`, `credentials`, `avatar_path`, and `knows_about` columns are the
- * PUBLIC author profile the discount-guide `Person` JSON-LD reads from — nullable,
- * so an account with no byline simply omits them.
+ * `job_title`, `credentials`, `avatar_path`, `knows_about`, `bio`, and
+ * `linkedin_url` columns are the PUBLIC author profile the discount-guide `Person`
+ * JSON-LD and the `/authors/{slug}/` profile page read from — nullable, so an
+ * account with no byline simply omits them.
  *
  * @property int $id
  * @property string $name
@@ -30,6 +31,8 @@ use Illuminate\Support\Carbon;
  * @property string|null $credentials
  * @property string|null $avatar_path
  * @property array<int, string>|null $knows_about
+ * @property string|null $bio
+ * @property string|null $linkedin_url
  * @property bool $is_admin
  * @property Carbon|null $email_verified_at
  * @property string $password
@@ -39,7 +42,7 @@ use Illuminate\Support\Carbon;
  * @property-read Collection<int, Page> $authoredPages
  * @property-read Collection<int, Page> $reviewedPages
  */
-#[Fillable(['name', 'email', 'slug', 'job_title', 'credentials', 'avatar_path', 'knows_about', 'password'])]
+#[Fillable(['name', 'email', 'slug', 'job_title', 'credentials', 'avatar_path', 'knows_about', 'bio', 'linkedin_url', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser
 {
