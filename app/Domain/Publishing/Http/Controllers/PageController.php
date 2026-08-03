@@ -9,6 +9,8 @@ use App\Domain\Catalog\Models\LocalDiscount;
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Catalog\Repositories\DiscountCategoryRepositoryInterface;
 use App\Domain\Catalog\Repositories\LocalDiscountRepositoryInterface;
+use App\Domain\Catalog\Repositories\VeteransDayMealRepositoryInterface;
+use App\Domain\Catalog\Support\VeteransDayFreeMealsPresenter;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Pillars\Enums\RankCategory;
 use App\Domain\Pillars\Models\AirShow;
@@ -40,6 +42,7 @@ use App\Domain\Publishing\Seo\LocalDiscountHubSchema;
 use App\Domain\Publishing\Seo\LocalDiscountSchema;
 use App\Domain\Publishing\Seo\SeoHead;
 use App\Domain\Publishing\Seo\SeoUrl;
+use App\Domain\Publishing\Seo\VeteransDayFreeMealsSchema;
 use App\Domain\Publishing\Support\PagePaths;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -65,6 +68,7 @@ final class PageController
         private readonly FleetWeekRepositoryInterface $fleetWeeks,
         private readonly JetTeamRepositoryInterface $jetTeams,
         private readonly LocalDiscountRepositoryInterface $localDiscounts,
+        private readonly VeteransDayMealRepositoryInterface $meals,
     ) {}
 
     public function show(Request $request): Response
@@ -148,6 +152,7 @@ final class PageController
     {
         return match ($page->slug) {
             'discount' => $this->renderDiscountIndex($page),
+            'veterans-day-free-meals' => $this->renderVeteransDayFreeMeals($page),
             'privacy' => $this->renderContentPage($page, [
                 ['name' => 'Home', 'url' => '/'],
                 ['name' => 'Privacy Policy', 'url' => '/privacy/'],
@@ -275,6 +280,50 @@ final class PageController
         return response()->view('pages.discount-index', [
             'page' => $page,
             'brandPages' => $brandPages,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * The `/veterans-day/free-meals/` roundup: the offers table + JSON-LD
+     * Breadcrumb + Article + author Person + ItemList + FAQPage. The table, stats,
+     * ItemList, and FAQ answers are all computed live from the `verified()` meals
+     * (YMYL gate: verified + primary source), so the page tracks the data, not a
+     * stored body. dateModified follows the freshest verification (legacy parity).
+     */
+    private function renderVeteransDayFreeMeals(Page $page): Response
+    {
+        $page->load('author');
+        $meals = $this->meals->verified();
+        $presenter = new VeteransDayFreeMealsPresenter($meals);
+
+        $crumbs = [
+            ['name' => 'Home', 'url' => '/'],
+            ['name' => 'Veterans Day', 'url' => '/veterans-day/'],
+            ['name' => 'Free Meals 2026', 'url' => $page->url_path],
+        ];
+        $faqs = $presenter->faqs();
+        $dateModified = $presenter->dateModified() !== ''
+            ? $presenter->dateModified()
+            : ($page->date_published?->format('Y-m-d') ?? '');
+
+        $seo = SeoHead::forPage($page, VeteransDayFreeMealsSchema::build(
+            $page,
+            $crumbs,
+            (string) $page->meta_description,
+            $presenter->itemListEntries(),
+            $dateModified,
+            $faqs,
+        ));
+
+        return response()->view('pages.veterans-day-free-meals', [
+            'page' => $page,
+            'crumbs' => $crumbs,
+            'meals' => $meals,
+            'stats' => $presenter->stats(),
+            'lastUpdatedLabel' => $presenter->lastUpdatedLabel(),
+            'faqs' => $faqs,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);
