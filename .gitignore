@@ -25,3 +25,8 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Generated at build/deploy by sitemap:generate + feed:generate (not committed)
+/public/sitemap*.xml
+/public/llms.txt
+/public/data/navy-week-2026.json
