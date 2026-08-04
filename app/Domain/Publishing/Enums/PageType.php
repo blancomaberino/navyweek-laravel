@@ -25,6 +25,7 @@ enum PageType: string implements HasLabel
     case JetTeam = 'jet_team';
     case JetTeamCity = 'jet_team_city';
     case VeteransDayHub = 'veterans_day_hub';
+    case Author = 'author';
     case Static = 'static';
 
     public function label(): string
@@ -43,6 +44,7 @@ enum PageType: string implements HasLabel
             self::JetTeam => 'Jet team',
             self::JetTeamCity => 'Jet team city',
             self::VeteransDayHub => 'Veterans Day hub',
+            self::Author => 'Author profile',
             self::Static => 'Static',
         };
     }

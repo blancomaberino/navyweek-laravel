@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
@@ -12,15 +13,17 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 
 /**
  * A login account that also doubles as the editorial byline. The `slug`,
- * `job_title`, `credentials`, `avatar_path`, and `knows_about` columns are the
- * PUBLIC author profile the discount-guide `Person` JSON-LD reads from — nullable,
- * so an account with no byline simply omits them.
+ * `job_title`, `credentials`, `avatar_path`, `knows_about`, `bio`, and
+ * `linkedin_url` columns are the PUBLIC author profile the discount-guide `Person`
+ * JSON-LD and the `/authors/{slug}/` profile page read from — nullable, so an
+ * account with no byline simply omits them.
  *
  * @property int $id
  * @property string $name
@@ -30,6 +33,8 @@ use Illuminate\Support\Carbon;
  * @property string|null $credentials
  * @property string|null $avatar_path
  * @property array<int, string>|null $knows_about
+ * @property string|null $bio
+ * @property string|null $linkedin_url
  * @property bool $is_admin
  * @property Carbon|null $email_verified_at
  * @property string $password
@@ -38,8 +43,9 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Page> $authoredPages
  * @property-read Collection<int, Page> $reviewedPages
+ * @property-read Page|null $authorProfilePage
  */
-#[Fillable(['name', 'email', 'slug', 'job_title', 'credentials', 'avatar_path', 'knows_about', 'password'])]
+#[Fillable(['name', 'email', 'slug', 'job_title', 'credentials', 'avatar_path', 'knows_about', 'bio', 'linkedin_url', 'password'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser
 {
@@ -88,5 +94,18 @@ class User extends Authenticatable implements FilamentUser
     public function reviewedPages(): HasMany
     {
         return $this->hasMany(Page::class, 'reviewer_id');
+    }
+
+    /**
+     * This user's public author-profile page (`/authors/{slug}/`), or null when none has
+     * been generated. It is the page whose polymorphic `pageable` is this user and whose
+     * type is `Author`. The canonical LOCATION the byline `Person` @id/url resolves to, so
+     * an editor rename of the profile's `url_path` is honored (identity vs. location).
+     *
+     * @return MorphOne<Page, $this>
+     */
+    public function authorProfilePage(): MorphOne
+    {
+        return $this->morphOne(Page::class, 'pageable')->where('page_type', PageType::Author);
     }
 }

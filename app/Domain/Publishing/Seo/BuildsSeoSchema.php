@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Publishing\Seo;
 
 use App\Domain\Publishing\Models\Page;
+use App\Domain\Publishing\Support\PagePaths;
 use App\Models\User;
 use Illuminate\Support\Facades\Config;
 
@@ -178,8 +179,9 @@ trait BuildsSeoSchema
 
     /**
      * The `/authors/{slug}/` profile URL for a byline user, or null when the user has
-     * no profile slug. Routes through {@see SeoUrl::absolute} so the trailing slash
-     * matches every other canonical/@id/breadcrumb URL.
+     * no profile slug. The family prefix comes from {@see PagePaths} (the single
+     * `config('publishing.paths.authors')` knob), and {@see SeoUrl::absolute} forces the
+     * trailing slash that matches every other canonical/@id/breadcrumb URL.
      */
     private static function authorProfileUrl(?User $user): ?string
     {
@@ -187,7 +189,16 @@ trait BuildsSeoSchema
             return null;
         }
 
-        return SeoUrl::absolute("/authors/{$user->slug}");
+        // Prefer the profile page's PERSISTED canonical url_path (honors an editor rename of
+        // the profile's URL — identity vs. location). Fall back to the family-default path
+        // only when no profile page has been generated yet, so a byline that cites this
+        // author still gets a stable Person @id on pages built before `pages:generate-authors`.
+        $profilePage = $user->authorProfilePage;
+        if ($profilePage !== null) {
+            return SeoUrl::absolute($profilePage->url_path);
+        }
+
+        return SeoUrl::absolute(PagePaths::child('authors', $user->slug));
     }
 
     /**

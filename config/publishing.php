@@ -28,5 +28,6 @@ return [
         'navy_week_cities' => env('PATH_NAVY_WEEK_CITIES', '/city/'),
         'local_discounts' => env('PATH_LOCAL_DISCOUNTS', '/discounts/'),
         'discounts' => env('PATH_DISCOUNTS', '/discount/'),
+        'authors' => env('PATH_AUTHORS', '/authors/'),
     ],
 ];

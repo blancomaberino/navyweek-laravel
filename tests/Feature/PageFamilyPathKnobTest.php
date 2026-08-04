@@ -15,7 +15,9 @@ use App\Domain\Pillars\Pages\GenerateNavyWeekPagesAction;
 use App\Domain\Pillars\Pages\GenerateRankPagesAction;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Models\Redirect;
+use App\Domain\Publishing\Pages\GenerateAuthorPagesAction;
 use App\Domain\Publishing\Pages\GenerateDiscountIndexPageAction;
+use App\Models\User;
 
 /**
  * Behavioral guard for the "single-knob URL family" contract: for every generated page
@@ -105,6 +107,23 @@ function knobFamilyCases(): array
             'oldPath' => '/discount/',
             'newRoot' => '/deals-x/',
             'newPath' => '/deals-x/',
+        ],
+        'authors' => [
+            'configKey' => 'authors',
+            // Force a known id so the generation_key (`author:{id}`, the immutable identity)
+            // is deterministic; forceCreate bypasses mass-assignment guarding to set the PK.
+            'seed' => fn () => User::forceCreate([
+                'id' => 987654,
+                'name' => 'Knob Author',
+                'email' => 'knob-author@example.test',
+                'slug' => 'knob-author',
+                'password' => 'x',
+            ]),
+            'action' => GenerateAuthorPagesAction::class,
+            'generationKey' => 'author:987654',
+            'oldPath' => '/authors/knob-author/',
+            'newRoot' => '/writers-x/',
+            'newPath' => '/writers-x/knob-author/',
         ],
     ];
 }
