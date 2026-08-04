@@ -21,6 +21,7 @@ use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Models\Redirect;
 use App\Domain\Publishing\Pages\GenerateAuthorPagesAction;
 use App\Domain\Publishing\Pages\GenerateDiscountIndexPageAction;
+use App\Domain\Publishing\Pages\GenerateNavyReferenceHubPageAction;
 use App\Models\User;
 
 /**
@@ -55,6 +56,15 @@ function knobFamilyCases(): array
             'oldPath' => '/navy-ranks/',
             'newRoot' => '/ranks-x/',
             'newPath' => '/ranks-x/',
+        ],
+        'navy_reference' => [
+            'configKey' => 'navy_reference',
+            'seed' => fn () => null, // the library landing page aggregates at render
+            'action' => GenerateNavyReferenceHubPageAction::class,
+            'generationKey' => 'navy-reference-hub',
+            'oldPath' => '/navy-reference/',
+            'newRoot' => '/reference-x/',
+            'newPath' => '/reference-x/',
         ],
         'designators' => [
             'configKey' => 'designators',
@@ -160,7 +170,7 @@ dataset('knob families', knobFamilyCases());
  */
 function knobPendingFamilies(): array
 {
-    return ['navy_reference'];
+    return [];
 }
 
 it('has a knob-test case for every configured page family', function () {

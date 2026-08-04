@@ -132,6 +132,7 @@ final class PageController
             PageType::Rating => $this->renderRatingList($page),
             // Officer designators: hub + community hubs aggregate the pillar; the
             // detail page carries its Rank (category `officer-designator`).
+            PageType::NavyReferenceHub => $this->renderNavyReferenceHub($page),
             PageType::DesignatorHub => $this->renderDesignatorHub($page),
             PageType::DesignatorCommunityHub => $this->renderDesignatorCommunityHub($page),
             PageType::Designator => $pageable instanceof Rank
@@ -666,6 +667,37 @@ final class PageController
         return $bases->filter(static fn (Base $b): bool => filled($region($b)))
             ->groupBy(static fn (Base $b): string => (string) $region($b))
             ->sortKeys();
+    }
+
+    /**
+     * `/navy-reference/` — the reference library landing page. Card counts are
+     * read live from each pillar so they can never drift from the pages they link.
+     */
+    private function renderNavyReferenceHub(Page $page): Response
+    {
+        $allBases = $this->bases->all();
+        $overseas = $allBases->filter(static fn (Base $b): bool => filled($b->country_slug))->count();
+        $ranks = $this->ranks->forCategoryByPaygrade(RankCategory::OfficerCommissioned)->count()
+            + $this->ranks->forCategoryByPaygrade(RankCategory::OfficerWarrant)->count()
+            + $this->ranks->forCategoryByPaygrade(RankCategory::EnlistedPaygrade)->count();
+
+        $cards = [
+            ['badge' => "{$allBases->count()} Installations", 'title' => 'Navy Bases', 'href' => PagePaths::root('bases'), 'description' => 'Naval Stations, Naval Air Stations, Submarine Bases, and Joint Bases across the United States.'],
+            ['badge' => "{$overseas} Overseas Bases", 'title' => 'Overseas Bases', 'href' => PagePaths::child('bases', 'overseas'), 'description' => 'Forward-deployed U.S. Navy installations in Japan, Bahrain, Italy, Spain, and more.'],
+            ['badge' => "{$ranks} Ranks", 'title' => 'Navy Ranks', 'href' => PagePaths::root('ranks'), 'description' => 'Commissioned officers (O-1 to O-10), warrant officers (W-1 to W-5), and enlisted paygrades (E-1 to E-9).'],
+            ['badge' => $this->ranks->activeRatings()->count().' Ratings', 'title' => 'Navy Ratings', 'href' => PagePaths::root('ratings'), 'description' => "Every active enlisted rating — the Navy's job specialties, from Hospital Corpsman to Boatswain's Mate."],
+            ['badge' => $this->ranks->designators()->count().' Designators', 'title' => 'Officer Designators', 'href' => PagePaths::root('designators'), 'description' => 'Four-digit codes for every Navy officer community — Unrestricted Line, Restricted Line, and Staff Corps.'],
+            ['badge' => 'Veteran Benefits', 'title' => 'VA Disability', 'href' => '/va-disability/', 'description' => 'Plain-language guide to VA disability compensation — pay rates, ratings, and how to file.'],
+            ['badge' => 'Veteran Benefits', 'title' => 'Veterans Home Care', 'href' => '/veterans-home-care/', 'description' => 'How the VA pays for in-home care — VA-arranged services vs. the Aid and Attendance benefit.'],
+            ['badge' => 'Military Observances', 'title' => 'Veterans Day', 'href' => '/veterans-day/', 'description' => 'History and meaning of Veterans Day, and how it differs from Memorial Day.'],
+            ['badge' => $this->pages->allPublishedDiscountBrandPages()->count().' Brands', 'title' => 'Military Discounts', 'href' => PagePaths::root('discounts'), 'description' => 'Verified military, veteran, and first-responder discounts from major brands — eligibility and how to redeem.'],
+        ];
+
+        return response()->view('pages.navy-reference-hub', [
+            'page' => $page,
+            'cards' => $cards,
+            'upcoming' => $this->navyWeekEvents->byStatus(NavyWeekStatus::Upcoming)->take(3),
+        ] + $this->seoVars($page));
     }
 
     /**
