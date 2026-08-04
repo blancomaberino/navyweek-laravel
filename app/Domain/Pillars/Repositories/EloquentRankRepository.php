@@ -48,6 +48,14 @@ final class EloquentRankRepository implements RankRepositoryInterface
             ->get();
     }
 
+    public function designators(): Collection
+    {
+        return Rank::query()
+            ->where('category', RankCategory::OfficerDesignator->value)
+            ->orderBy('designator_code')
+            ->get();
+    }
+
     public function historicRatings(): Collection
     {
         return Rank::query()

@@ -48,4 +48,13 @@ interface RankRepositoryInterface
      * @return Collection<int, Rank>
      */
     public function historicRatings(): Collection;
+
+    /**
+     * Every officer designator (category `officer-designator`), ordered by its
+     * four-digit code — the source for the designators hub, its community hubs,
+     * and each detail page.
+     *
+     * @return Collection<int, Rank>
+     */
+    public function designators(): Collection;
 }

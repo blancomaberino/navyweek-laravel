@@ -12,6 +12,7 @@ use App\Domain\Catalog\Repositories\LocalDiscountRepositoryInterface;
 use App\Domain\Catalog\Repositories\VeteransDayMealRepositoryInterface;
 use App\Domain\Catalog\Support\VeteransDayFreeMealsPresenter;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Pillars\Enums\DesignatorCommunity;
 use App\Domain\Pillars\Enums\NavyWeekStatus;
 use App\Domain\Pillars\Enums\RankCategory;
 use App\Domain\Pillars\Models\AirShow;
@@ -129,6 +130,13 @@ final class PageController
             // whole rank pillar at render.
             PageType::Rank => $this->renderRankList($page),
             PageType::Rating => $this->renderRatingList($page),
+            // Officer designators: hub + community hubs aggregate the pillar; the
+            // detail page carries its Rank (category `officer-designator`).
+            PageType::DesignatorHub => $this->renderDesignatorHub($page),
+            PageType::DesignatorCommunityHub => $this->renderDesignatorCommunityHub($page),
+            PageType::Designator => $pageable instanceof Rank
+                ? $this->renderDesignator($page, $pageable)
+                : null,
             // Air-show detail and hub share the type, split by pageable class.
             PageType::AirShow => match (true) {
                 $pageable instanceof AirShow => $this->renderAirShow($page, $pageable),
@@ -658,6 +666,50 @@ final class PageController
         return $bases->filter(static fn (Base $b): bool => filled($region($b)))
             ->groupBy(static fn (Base $b): string => (string) $region($b))
             ->sortKeys();
+    }
+
+    /**
+     * `/navy-designators/` — every officer designator grouped by community.
+     */
+    private function renderDesignatorHub(Page $page): Response
+    {
+        return response()->view('pages.designator-hub', [
+            'page' => $page,
+            'byCommunity' => $this->ranks->designators()
+                ->groupBy(static fn (Rank $r): string => $r->designator_community?->label() ?? 'Other'),
+        ] + $this->seoVars($page));
+    }
+
+    /**
+     * `/navy-designators/{community}/` — one officer community's designators. The
+     * community is carried by the page slug (this hub owns no pageable).
+     */
+    private function renderDesignatorCommunityHub(Page $page): ?Response
+    {
+        $community = DesignatorCommunity::tryFrom($page->slug);
+
+        if ($community === null) {
+            return null;
+        }
+
+        return response()->view('pages.designator-community-hub', [
+            'page' => $page,
+            'communityLabel' => $community->label(),
+            'designators' => $this->ranks->designators()
+                ->filter(static fn (Rank $r): bool => $r->designator_community === $community)
+                ->values(),
+        ] + $this->seoVars($page));
+    }
+
+    /**
+     * `/navy-designators/{slug}/` — a single officer designator.
+     */
+    private function renderDesignator(Page $page, Rank $designator): Response
+    {
+        return response()->view('pages.designator', [
+            'page' => $page,
+            'designator' => $designator,
+        ] + $this->seoVars($page));
     }
 
     private function renderRankList(Page $page): Response
