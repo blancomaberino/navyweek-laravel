@@ -27,6 +27,8 @@ enum PageType: string implements HasLabel
     case DesignatorHub = 'designator_hub';
     case DesignatorCommunityHub = 'designator_community_hub';
     case NavyReferenceHub = 'navy_reference_hub';
+    case Schedule = 'schedule';
+    case RouteMap = 'route_map';
     case NavyWeekCity = 'navy_week_city';
     case FleetWeek = 'fleet_week';
     case AirShow = 'air_show';
@@ -54,6 +56,8 @@ enum PageType: string implements HasLabel
             self::DesignatorHub => 'Officer designators hub',
             self::DesignatorCommunityHub => 'Officer designator community hub',
             self::NavyReferenceHub => 'Navy reference hub',
+            self::Schedule => 'Navy Week schedule',
+            self::RouteMap => 'Navy Week route map',
             self::NavyWeekCity => 'Navy Week city',
             self::FleetWeek => 'Fleet Week',
             self::AirShow => 'Air show',

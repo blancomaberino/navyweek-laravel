@@ -1256,3 +1256,53 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
 }
 .reference-hub-title { color: var(--nw-white); font-family: var(--font-display); font-size: 1.35rem; letter-spacing: 1px; }
 .reference-hub-desc { color: var(--nw-gray-light); font-size: 0.88rem; line-height: 1.5; }
+
+/* ==========================================================================
+   Navy Week programme pages — /schedule/ and /map/
+   ========================================================================== */
+.schedule-hero { margin-bottom: var(--space-xl); }
+.schedule-page h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+}
+.schedule-list { list-style: none; margin: 0; padding: 0; }
+.schedule-row a {
+    align-items: baseline;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+    color: var(--nw-off-white);
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 160px 1fr auto;
+    padding: 14px 4px;
+}
+.schedule-row a:hover { background: rgba(201, 168, 76, 0.06); text-decoration: none; }
+.schedule-dates { color: var(--gold); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 1px; }
+.schedule-city { color: var(--nw-white); font-family: var(--font-display); font-size: 1.35rem; letter-spacing: 1px; }
+.schedule-anchor { color: var(--nw-gray-light); font-size: 0.88rem; }
+.schedule-badge {
+    background: rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+}
+.route-map-svg {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    display: block;
+    margin-bottom: var(--space-lg);
+    width: 100%;
+}
+.route-map-svg circle { fill: var(--gold); }
+@media (max-width: 720px) {
+    .schedule-row a { gap: 4px; grid-template-columns: 1fr; }
+}

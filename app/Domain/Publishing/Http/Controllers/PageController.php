@@ -133,6 +133,9 @@ final class PageController
             // Officer designators: hub + community hubs aggregate the pillar; the
             // detail page carries its Rank (category `officer-designator`).
             PageType::NavyReferenceHub => $this->renderNavyReferenceHub($page),
+            // Navy Week programme pages — both aggregate the navy-week pillar.
+            PageType::Schedule => $this->renderSchedulePage($page, 'pages.schedule'),
+            PageType::RouteMap => $this->renderSchedulePage($page, 'pages.route-map'),
             PageType::DesignatorHub => $this->renderDesignatorHub($page),
             PageType::DesignatorCommunityHub => $this->renderDesignatorCommunityHub($page),
             PageType::Designator => $pageable instanceof Rank
@@ -667,6 +670,17 @@ final class PageController
         return $bases->filter(static fn (Base $b): bool => filled($region($b)))
             ->groupBy(static fn (Base $b): string => (string) $region($b))
             ->sortKeys();
+    }
+
+    /**
+     * `/schedule/` and `/map/` — both list every Navy Week host city in tour order.
+     */
+    private function renderSchedulePage(Page $page, string $view): Response
+    {
+        return response()->view($view, [
+            'page' => $page,
+            'events' => $this->navyWeekEvents->all()->sortBy('sequence')->values(),
+        ] + $this->seoVars($page));
     }
 
     /**
