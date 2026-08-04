@@ -17,6 +17,10 @@ enum PageType: string implements HasLabel
     case DiscountCategoryHub = 'discount_category_hub';
     case LocalDiscount = 'local_discount';
     case Base = 'base';
+    case BaseHub = 'base_hub';
+    case BaseStateHub = 'base_state_hub';
+    case BaseCountryHub = 'base_country_hub';
+    case BaseOverseasHub = 'base_overseas_hub';
     case Rank = 'rank';
     case Rating = 'rating';
     case NavyWeekCity = 'navy_week_city';
@@ -36,6 +40,10 @@ enum PageType: string implements HasLabel
             self::DiscountCategoryHub => 'Discount category hub',
             self::LocalDiscount => 'Local discount',
             self::Base => 'Base',
+            self::BaseHub => 'Navy bases directory',
+            self::BaseStateHub => 'Navy bases by state',
+            self::BaseCountryHub => 'Navy bases by country',
+            self::BaseOverseasHub => 'Navy bases overseas',
             self::Rank => 'Rank',
             self::Rating => 'Rating',
             self::NavyWeekCity => 'Navy Week city',

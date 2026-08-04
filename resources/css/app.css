@@ -1117,3 +1117,54 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     .rank-row { grid-template-columns: 44px 44px 1fr; }
     .rank-row .nato { display: none; }
 }
+
+/* ==========================================================================
+   Navy bases hubs — /navy-bases/, /navy-bases/overseas/, state + country hubs
+   ========================================================================== */
+.base-hub-hero { margin-bottom: var(--space-xl); }
+.base-hub-group, .base-hub-regions, .base-hub-all, .base-hub-map, .base-hub-host-nation, .base-hub-faqs {
+    margin-bottom: var(--space-2xl);
+}
+.base-hub h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+}
+.base-region-list {
+    display: grid;
+    gap: var(--space-sm) var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.base-region-list .count { color: var(--nw-gray); font-family: var(--font-mono); font-size: 0.72rem; }
+.base-card-list {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.base-card a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 3px;
+    color: var(--nw-off-white);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+    padding: var(--space-md) var(--space-lg);
+}
+.base-card a:hover { border-color: var(--gold); text-decoration: none; }
+.base-card-name { color: var(--nw-white); font-family: var(--font-display); font-size: 1.25rem; letter-spacing: 1px; }
+.base-card-loc { color: var(--gold); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; }
+.base-card-tagline { color: var(--nw-gray-light); font-size: 0.88rem; line-height: 1.5; }
+.base-nearby ul { list-style: none; margin: 0; padding: 0; }
+.base-nearby li { padding: 4px 0; }

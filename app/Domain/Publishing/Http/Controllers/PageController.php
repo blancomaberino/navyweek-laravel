@@ -23,6 +23,7 @@ use App\Domain\Pillars\Models\JetTeamCity;
 use App\Domain\Pillars\Models\NavyWeekEvent;
 use App\Domain\Pillars\Models\Rank;
 use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
+use App\Domain\Pillars\Repositories\BaseRepositoryInterface;
 use App\Domain\Pillars\Repositories\FleetWeekRepositoryInterface;
 use App\Domain\Pillars\Repositories\JetTeamRepositoryInterface;
 use App\Domain\Pillars\Repositories\NavyWeekEventRepositoryInterface;
@@ -50,6 +51,8 @@ use App\Domain\Publishing\Seo\VeteransDayFreeMealsSchema;
 use App\Domain\Publishing\Support\PagePaths;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -75,6 +78,7 @@ final class PageController
         private readonly LocalDiscountRepositoryInterface $localDiscounts,
         private readonly VeteransDayMealRepositoryInterface $meals,
         private readonly NavyWeekEventRepositoryInterface $navyWeekEvents,
+        private readonly BaseRepositoryInterface $bases,
     ) {}
 
     public function show(Request $request): Response
@@ -115,6 +119,12 @@ final class PageController
             PageType::Base => $pageable instanceof Base
                 ? $this->renderBase($page, $pageable)
                 : null,
+            // The bases hubs own no pageable — like the rank/rating lists they
+            // aggregate the whole bases pillar at render, keyed by the page slug.
+            PageType::BaseHub => $this->renderBaseHub($page),
+            PageType::BaseOverseasHub => $this->renderBaseOverseasHub($page),
+            PageType::BaseStateHub => $this->renderBaseRegionHub($page, 'state'),
+            PageType::BaseCountryHub => $this->renderBaseRegionHub($page, 'country'),
             // The two consolidated reference lists own no pageable — they read the
             // whole rank pillar at render.
             PageType::Rank => $this->renderRankList($page),
@@ -563,6 +573,93 @@ final class PageController
      * ItemLists (officer, enlisted); the officer list concatenates commissioned +
      * warrant to match the legacy graph.
      */
+    /**
+     * `/navy-bases/` — the directory root: browse-by-state, overseas, and the A–Z list.
+     */
+    private function renderBaseHub(Page $page): Response
+    {
+        $all = $this->bases->all()->sortBy('name')->values();
+
+        return response()->view('pages.base-hub', [
+            'page' => $page,
+            'states' => $this->groupBases($all, static fn (Base $b): ?string => $b->state),
+            'countries' => $this->groupBases($all, static fn (Base $b): ?string => $b->country_slug),
+            'allBases' => $all,
+        ] + $this->seoVars($page));
+    }
+
+    /**
+     * `/navy-bases/overseas/` — the overseas rollup, grouped by combatant command.
+     */
+    private function renderBaseOverseasHub(Page $page): Response
+    {
+        $overseas = $this->bases->all()
+            ->filter(static fn (Base $b): bool => filled($b->country_slug))
+            ->sortBy('name')
+            ->values();
+
+        return response()->view('pages.base-overseas-hub', [
+            'page' => $page,
+            'countries' => $this->groupBases($overseas, static fn (Base $b): ?string => $b->country_slug),
+            'byRegion' => $overseas->groupBy(static fn (Base $b): string => $b->region?->label() ?? 'Other')->sortKeys(),
+            'allBases' => $overseas,
+        ] + $this->seoVars($page));
+    }
+
+    /**
+     * `/navy-bases/{state|country}/` — one region's installations, grouped by base
+     * type. The region is carried by the page slug (these hubs own no pageable).
+     */
+    private function renderBaseRegionHub(Page $page, string $kind): ?Response
+    {
+        $bases = $kind === 'state'
+            ? $this->bases->forState($page->slug)
+            : $this->bases->forCountry($page->slug);
+
+        if ($bases->isEmpty()) {
+            return null;
+        }
+
+        $first = $bases->first();
+
+        return response()->view($kind === 'state' ? 'pages.base-state-hub' : 'pages.base-country-hub', [
+            'page' => $page,
+            'regionName' => $kind === 'state' ? (string) $first->state_name : (string) $first->country,
+            'grouped' => $bases->sortBy('name')
+                ->groupBy(static fn (Base $b): string => Str::plural($b->type->label()))
+                ->sortKeys(),
+            'hostNationContext' => $kind === 'country' ? $first->host_nation_context : null,
+        ] + $this->seoVars($page));
+    }
+
+    /**
+     * The SEO view vars every page body needs: the serialized head block plus the
+     * robots flag the base layout reads. Hubs that build no bespoke JSON-LD graph
+     * use this directly.
+     *
+     * @return array{seoHead: string, noindex: bool}
+     */
+    private function seoVars(Page $page): array
+    {
+        $seo = SeoHead::forPage($page);
+
+        return ['seoHead' => $seo->render(), 'noindex' => $seo->isNoindex()];
+    }
+
+    /**
+     * Group bases by a region column, dropping rows with no value, keyed by slug.
+     *
+     * @param  Collection<int, Base>  $bases
+     * @param  callable(Base): ?string  $region
+     * @return Collection<string, Collection<int, Base>>
+     */
+    private function groupBases(Collection $bases, callable $region): Collection
+    {
+        return $bases->filter(static fn (Base $b): bool => filled($region($b)))
+            ->groupBy(static fn (Base $b): string => (string) $region($b))
+            ->sortKeys();
+    }
+
     private function renderRankList(Page $page): Response
     {
         $commissioned = $this->ranks->forCategoryByPaygrade(RankCategory::OfficerCommissioned);
