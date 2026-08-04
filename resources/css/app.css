@@ -584,8 +584,10 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     display: block;
     left: 0;
     max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
     opacity: 0;
     overflow-y: auto;
+    overscroll-behavior: contain;
     padding: var(--space-xl) var(--space-2xl);
     position: absolute;
     right: 0;
@@ -638,7 +640,9 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     display: none;
     flex-direction: column;
     max-height: calc(100vh - 64px);
+    max-height: calc(100dvh - 64px);
     overflow-y: auto;
+    overscroll-behavior: contain;
     padding: var(--space-lg) var(--space-2xl) var(--space-xl);
 }
 .nw-mob-check:checked ~ .nw-mobile-panel { display: flex; }

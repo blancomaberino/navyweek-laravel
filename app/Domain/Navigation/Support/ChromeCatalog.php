@@ -19,7 +19,7 @@ use App\Domain\Publishing\Repositories\PageRepositoryInterface;
  */
 final class ChromeCatalog
 {
-    /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, audience: string|null}>|null */
+    /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null}>|null */
     private ?array $deals = null;
 
     public function __construct(private readonly PageRepositoryInterface $pages) {}
@@ -28,7 +28,7 @@ final class ChromeCatalog
      * Every published discount-brand deal, newest published first (mirrors the
      * legacy DealsSection sort), for the mega-menu and the Deals section.
      *
-     * @return list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, audience: string|null}>
+     * @return list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null}>
      */
     public function deals(): array
     {
@@ -50,7 +50,6 @@ final class ChromeCatalog
                 'headline' => $offer->headline_discount,
                 'category' => $connection->category,
                 'logo' => $connection->logo_url,
-                'audience' => $offer->audience_label,
                 'published' => $page->date_published?->toDateString() ?? '',
             ];
         }
@@ -66,7 +65,6 @@ final class ChromeCatalog
                 'headline' => $d['headline'],
                 'category' => $d['category'],
                 'logo' => $d['logo'],
-                'audience' => $d['audience'],
             ],
             $rows,
         );

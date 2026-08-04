@@ -5,6 +5,8 @@ declare(strict_types=1);
 use App\Domain\Pillars\Enums\RatingCommunity;
 use App\Domain\Pillars\Models\Rank;
 use App\Domain\Pillars\Pages\GenerateRankPagesAction;
+use App\Domain\Publishing\Models\Page;
+use App\Models\User;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 use Illuminate\Testing\TestResponse;
@@ -113,4 +115,54 @@ it('keeps a null-community active rating visible (HTML) and counted (JSON-LD) �
         ->assertSee('id="orphan-rating"', false)          // rendered in the body
         ->assertSee('/navy-ratings/#orphan-rating', false) // present in the JSON-LD ItemList
         ->assertSee('"numberOfItems":2', false);          // both active ratings counted
+});
+
+it('renders the trust chrome from the page CMS columns', function () {
+    // The byline renders from the page's ASSIGNED users, so the default editorial
+    // team must exist before generation for the page to pick them up.
+    User::factory()->create([
+        'name' => 'T Madden Alford',
+        'slug' => config('site.editorial.default_author_slug'),
+        'credentials' => "U.S. Naval Academy '02",
+        'avatar_path' => '/authors/t-alford.jpg',
+    ]);
+    User::factory()->create([
+        'name' => 'Erik Rivera',
+        'slug' => config('site.editorial.default_reviewer_slug'),
+        'credentials' => "U.S. Naval Academy '04",
+    ]);
+    Rank::factory()->create(['slug' => 'ensign', 'name' => 'Ensign', 'abbreviation' => 'ENS', 'paygrade' => 'O-1']);
+    app(GenerateRankPagesAction::class)();
+
+    fetchRankList('/navy-ranks/')
+        ->assertOk()
+        ->assertSee('Disclosure')                          // independence disclosure
+        ->assertSee('Written by')                          // author/reviewer byline
+        ->assertSee('Reviewed by')
+        ->assertSee('U.S. Navy Ranks — Key Facts', false)  // KeyFacts block (from key_facts)
+        ->assertSee('Master Chief Petty Officer of the Navy (MCPON)')
+        ->assertSee('Editorial policy')                    // editorial policy box
+        ->assertSee('Report an outdated fact')             // corrections link
+        ->assertSee('&larr; Navy Reference', false);       // reference back link
+});
+
+it('neutralizes a dangerous scheme in an editor-supplied key_facts source url', function () {
+    // `key_facts` is editor-controlled, so its source URL must go through the same
+    // scheme allowlist as editable nav links — a stored `javascript:` value must
+    // never reach the rendered href.
+    Rank::factory()->create(['slug' => 'ensign', 'name' => 'Ensign', 'abbreviation' => 'ENS', 'paygrade' => 'O-1']);
+    app(GenerateRankPagesAction::class)();
+
+    Page::query()->where('generation_key', 'rank-list')->firstOrFail()->update([
+        'key_facts' => [
+            'title' => 'Key Facts',
+            'facts' => [['label' => 'Ranks', 'value' => '24']],
+            'source' => ['label' => 'Evil', 'url' => 'javascript:alert(document.cookie)'],
+        ],
+    ]);
+
+    $res = fetchRankList('/navy-ranks/')->assertOk();
+
+    $res->assertDontSee('javascript:', false)
+        ->assertSee('href="#"', false); // neutralized to the safe placeholder
 });

@@ -25,7 +25,12 @@
             <p class="key-facts-source">
                 @if ($source)
                     Source:
-                    <a href="{{ $source['url'] }}" target="_blank" rel="{{ $source['rel'] ?? 'noopener noreferrer' }}">{{ $source['label'] }}</a>
+                    {{-- `key_facts` is editor-supplied, so the source URL goes through the
+                         same scheme allowlist as editable nav links (LinkUrl) — a stored
+                         `javascript:`/`data:` value must never become an executable href. --}}
+                    <a href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize((string) ($source['url'] ?? '')) }}"
+                       target="_blank"
+                       rel="{{ $source['rel'] ?? 'noopener noreferrer' }}">{{ $source['label'] ?? '' }}</a>
                 @endif
                 @if ($source && $lastVerified) <span>&middot;</span> @endif
                 @if ($lastVerified) Last verified: {{ $lastVerified }} @endif
