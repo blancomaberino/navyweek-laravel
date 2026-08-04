@@ -72,11 +72,15 @@ final class EloquentPageRepository implements PageRepositoryInterface
         // Default editorial byline (author + reviewer), matching PageImporter — so the
         // E-E-A-T Person graph on pages that emit one (air shows, fleet weeks, …) is
         // populated. A page keeps any assignment it already has (an admin override).
-        if ($page->author_id === null) {
-            $page->author_id = self::userIdBySlug(Config::string('site.editorial.default_author_slug'));
-        }
-        if ($page->reviewer_id === null) {
-            $page->reviewer_id = self::userIdBySlug(Config::string('site.editorial.default_reviewer_slug'));
+        // Author-profile pages are the exception: the page IS a person's profile, it is
+        // not "written by" the editorial byline, so it carries no author/reviewer.
+        if ($page->page_type !== PageType::Author) {
+            if ($page->author_id === null) {
+                $page->author_id = self::userIdBySlug(Config::string('site.editorial.default_author_slug'));
+            }
+            if ($page->reviewer_id === null) {
+                $page->reviewer_id = self::userIdBySlug(Config::string('site.editorial.default_reviewer_slug'));
+            }
         }
 
         $page->save();
@@ -195,6 +199,34 @@ final class EloquentPageRepository implements PageRepositoryInterface
             ->join('connections', 'offers.connection_id', '=', 'connections.id')
             ->orderBy('connections.brand')
             ->select('pages.*')
+            ->get();
+    }
+
+    public function publishedIndexableAuthoredBy(int $userId): Collection
+    {
+        return $this->publishedIndexableByByline('author_id', $userId);
+    }
+
+    public function publishedIndexableReviewedBy(int $userId): Collection
+    {
+        return $this->publishedIndexableByByline('reviewer_id', $userId);
+    }
+
+    /**
+     * Shared query for the author profile's "writes for" / "reviews for" lists:
+     * published + indexable pages whose given byline column points at the user,
+     * minus the author-profile pages themselves, ordered by title.
+     *
+     * @return Collection<int, Page>
+     */
+    private function publishedIndexableByByline(string $column, int $userId): Collection
+    {
+        return Page::query()
+            ->where($column, $userId)
+            ->where('is_published', true)
+            ->where('noindex', false)
+            ->where('page_type', '!=', PageType::Author)
+            ->orderBy('title')
             ->get();
     }
 

@@ -51,6 +51,21 @@ drives `Catalog\Support\VeteransDayFreeMealsPresenter` + `Publishing\Seo\Veteran
 verification) into the `pages.veterans-day-free-meals` view (SSR-first table, progressively
 enhanced with client-side filter/sort). Non-persisted FAQ pairs use `Publishing\Support\FaqItem`.
 
+**The author-profile page family** (`/authors/{slug}/`) renders one profile page per
+editorial byline `users` row that has a public `slug`. Like the home hub, it is data-driven
+from the account (the page's `pageable` is the `User`), NOT a `body_blocks` CMS body:
+`GenerateAuthorPagesAction` (`pages:generate-authors`) sweeps `AuthorRepository::publicProfiles`
+and `upsertPillarPage`s each, keyed on the stable `author:{slug}` `generation_key`, at the
+`authors` family prefix (`config('publishing.paths.authors')` → `PagePaths`, so the family is
+single-knob and 301-on-move like every other). `PageType::Author` → `PageController::renderAuthor`
+loads the author's authored + reviewed pages (`PageRepository::publishedIndexableAuthoredBy` /
+`publishedIndexableReviewedBy`, author-profile pages excluded) and drives
+`Publishing\Seo\AuthorPageSchema` (Person mainEntity + Breadcrumb + ProfilePage + an
+authored-articles ItemList — all `@id`/URLs derived from `$page->url_path`) into the
+`pages.author` view (hero, bio prose, expertise chips, writes-for/reviews-for, Connect). This is
+what makes the byline links the discount/data-driven pages emit (`/authors/{slug}/`) resolve
+instead of 404. The public byline columns `users.bio` + `users.linkedin_url` back the profile.
+
 **Path flexibility (identity vs. location).** A generated page's IDENTITY is its stable
 `pages.generation_key` (e.g. `base:norfolk`, `local-hub:city:ca:san-diego`), assigned by
 the generator; its `url_path` is mutable LOCATION. `upsertPillarPage(generationKey,
@@ -494,8 +509,8 @@ erDiagram
         text credentials "Person.description / bio, nullable"
         string avatar_path "Person.image, nullable"
         json knows_about "Person.knowsAbout, nullable"
-        text bio "long-form profile-page prose, nullable"
-        string linkedin_url "Person.sameAs, nullable"
+        text bio "Person.description — long-form author-page bio, nullable"
+        string linkedin_url "Person.sameAs — LinkedIn profile, nullable"
     }
 
     REDIRECTS {
@@ -1094,6 +1109,9 @@ emits Breadcrumb + Article + an ItemList over **every published discount-brand p
 on the page via `GenerateDiscountIndexPageAction` / `pages:generate-discount-index`).
 Other static/content pages (privacy, terms, …) add a `renderStatic` arm; an unknown
 static slug returns the minimal shell.
+
+The **`author`** type (`PageType::Author`) is dispatched straight from `renderBody` (its
+`pageable` is a `User`) to `renderAuthor` — see the author-profile page family above.
 
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.

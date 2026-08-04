@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use Database\Factories\UserFactory;
 use Filament\Models\Contracts\FilamentUser;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -41,6 +43,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $updated_at
  * @property-read Collection<int, Page> $authoredPages
  * @property-read Collection<int, Page> $reviewedPages
+ * @property-read Page|null $authorProfilePage
  */
 #[Fillable(['name', 'email', 'slug', 'job_title', 'credentials', 'avatar_path', 'knows_about', 'bio', 'linkedin_url', 'password'])]
 #[Hidden(['password', 'remember_token'])]
@@ -91,5 +94,18 @@ class User extends Authenticatable implements FilamentUser
     public function reviewedPages(): HasMany
     {
         return $this->hasMany(Page::class, 'reviewer_id');
+    }
+
+    /**
+     * This user's public author-profile page (`/authors/{slug}/`), or null when none has
+     * been generated. It is the page whose polymorphic `pageable` is this user and whose
+     * type is `Author`. The canonical LOCATION the byline `Person` @id/url resolves to, so
+     * an editor rename of the profile's `url_path` is honored (identity vs. location).
+     *
+     * @return MorphOne<Page, $this>
+     */
+    public function authorProfilePage(): MorphOne
+    {
+        return $this->morphOne(Page::class, 'pageable')->where('page_type', PageType::Author);
     }
 }
