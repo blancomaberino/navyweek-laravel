@@ -13,7 +13,9 @@
 
         <article>
             <header class="guide-hero">
-                <h1>{{ $page->title }}</h1>
+                {{-- The legacy records carry a separate on-page `h1` distinct from the
+                     <title> (`metaTitle`), so prefer it and fall back to the title. --}}
+                <h1>{{ $page->h1 ?? $page->title }}</h1>
                 @if ($offer->headline_discount)
                     <p class="headline-discount">{{ $offer->headline_discount }}</p>
                 @endif
@@ -40,6 +42,22 @@
                 @endif
             </header>
 
+            {{-- Author/reviewer byline. Discount guides use the publish-date variant
+                 ("Publish date · Last reviewed"), matching the legacy TrustByline. --}}
+            @include('partials.trust.byline', ['publishDate' => true, 'processLinkNewTab' => true])
+
+            {{-- KeyFacts block. Discount pages key off the OFFER's key_facts (the
+                 per-brand facts), not the page-level column. --}}
+            @include('partials.trust.key-facts', ['keyFacts' => filled($offer->key_facts) ? [
+                'title' => ($offer->connection?->brand ?? 'Discount').' Military Discount — Key Facts',
+                'facts' => $offer->key_facts,
+                'source' => $offer->official_url ? [
+                    'label' => 'Official '.($offer->connection?->brand ?? 'brand').' page',
+                    'url' => $offer->official_url,
+                    'rel' => 'sponsored noopener noreferrer',
+                ] : null,
+            ] : null])
+
             @if (filled($offer->tiers))
                 <section aria-labelledby="savings-heading" class="savings-tiers">
                     <h2 id="savings-heading">Savings by audience</h2>
@@ -60,11 +78,13 @@
                 </section>
             @endif
 
-            @foreach (['eligibility' => 'Who is eligible', 'exclusions' => 'Exclusions'] as $field => $label)
+            {{-- Headings match the legacy guide verbatim: "WHO QUALIFIES" is an h2;
+                 exclusions are an h3 ("Exclusions & fine print"). --}}
+            @foreach (['eligibility' => ['WHO QUALIFIES', 'h2'], 'exclusions' => ['Exclusions & fine print', 'h3']] as $field => [$label, $tag])
                 @php($items = $offer->{$field})
                 @if (filled($items))
                     <section aria-labelledby="{{ $field }}-heading">
-                        <h2 id="{{ $field }}-heading">{{ $label }}</h2>
+                        <{{ $tag }} id="{{ $field }}-heading">{{ $label }}</{{ $tag }}>
                         <ul>
                             @foreach ($items as $item)
                                 <li>{{ $item }}</li>
@@ -74,29 +94,18 @@
                 @endif
             @endforeach
 
-            {{-- key_facts is a list of {label, value} pairs (not flat strings) — render as a <dl>. --}}
-            @if (filled($offer->key_facts))
-                <section aria-labelledby="key_facts-heading" class="key-facts" data-llm-key-facts="1">
-                    <h2 id="key_facts-heading">Key facts</h2>
-                    <dl>
-                        @foreach ($offer->key_facts as $fact)
-                            @if (is_array($fact))
-                                <dt>{{ $fact['label'] ?? '' }}</dt>
-                                <dd>{{ $fact['value'] ?? '' }}</dd>
-                            @else
-                                <dd>{{ $fact }}</dd>
-                            @endif
-                        @endforeach
-                    </dl>
-                </section>
-            @endif
+            {{-- The KeyFacts block moved above the fold (shared partials.trust.key-facts,
+                 fed from $offer->key_facts) to match the legacy guide layout. --}}
 
             @php($online = $offer->redemptionSteps->where('channel', \App\Domain\Catalog\Enums\RedemptionChannel::Online))
             @php($inStore = $offer->redemptionSteps->where('channel', \App\Domain\Catalog\Enums\RedemptionChannel::InStore))
             @if ($online->isNotEmpty() || $inStore->isNotEmpty())
                 <section aria-labelledby="redeem-heading" class="how-to-redeem">
-                    <h2 id="redeem-heading">How to redeem</h2>
-                    @foreach (['Online' => $online, 'In store' => $inStore] as $channelLabel => $steps)
+                    <h2 id="redeem-heading">HOW TO REDEEM</h2>
+                    {{-- The legacy guide labels the online channel with the brand's host
+                         ("Online at www.yeti.com"), falling back to a bare "Online". --}}
+                    @php($onlineHost = $offer->official_url ? parse_url($offer->official_url, PHP_URL_HOST) : null)
+                    @foreach ([($onlineHost ? "Online at {$onlineHost}" : 'Online') => $online, 'In store' => $inStore] as $channelLabel => $steps)
                         @if ($steps->isNotEmpty())
                             <h3>{{ $channelLabel }}</h3>
                             <ol>
@@ -116,10 +125,10 @@
 
             @if ($offer->faqs->isNotEmpty())
                 <section aria-labelledby="faq-heading" class="faqs">
-                    <h2 id="faq-heading">Frequently asked questions</h2>
+                    <h2 id="faq-heading">FREQUENTLY ASKED QUESTIONS</h2>
                     @foreach ($offer->faqs as $faq)
                         <details>
-                            <summary>{{ $faq->question }}</summary>
+                            <summary><h3>{{ $faq->question }}</h3></summary>
                             <div>{{ $faq->answer }}</div>
                         </details>
                     @endforeach
@@ -128,7 +137,7 @@
 
             @if ($offer->sources->isNotEmpty())
                 <section aria-labelledby="sources-heading" class="sources">
-                    <h2 id="sources-heading">Sources</h2>
+                    <h2 id="sources-heading">SOURCES</h2>
                     <ol>
                         @foreach ($offer->sources as $source)
                             <li>
@@ -149,6 +158,8 @@
                     </a>
                 </footer>
             @endif
+
+            @include('partials.trust.editorial-policy')
         </article>
     </main>
 @endsection
