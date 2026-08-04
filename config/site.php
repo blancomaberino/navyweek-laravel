@@ -16,6 +16,11 @@ return [
     'name' => 'NavyWeek.org',
     'default_og_image' => '/og/home.png',
 
+    // Site-wide "Last updated" timestamp shown in the header banner + footer,
+    // ported from the legacy `meta.lastUpdated`. Set to the build clock (ISO 8601
+    // with the America/New_York offset) on every build; overridable per-env.
+    'last_updated' => env('SITE_LAST_UPDATED', '2026-08-04T12:00:00-04:00'),
+
     // The default byline. New discount pages (and any page missing an assignment)
     // fall back to the `users` rows with these profile slugs as author + reviewer —
     // seeded by EditorialTeamSeeder. Authors/reviewers are otherwise assigned

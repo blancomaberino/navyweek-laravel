@@ -35,6 +35,7 @@ use Illuminate\Support\Carbon;
  * @property string $url_path
  * @property bool $url_path_is_custom
  * @property string|null $title
+ * @property string|null $h1
  * @property string|null $meta_description
  * @property string|null $canonical_path
  * @property string $og_type
@@ -44,6 +45,13 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $date_modified
  * @property array<int, array<string, mixed>>|null $json_ld
  * @property array<int, array<string, mixed>>|null $body_blocks
+ * @property Carbon|null $last_reviewed
+ * @property Carbon|null $sources_checked
+ * @property array<string, mixed>|null $key_facts
+ * @property string|null $editorial_source_priority
+ * @property string|null $editorial_review_cadence
+ * @property string|null $trust_page_label
+ * @property bool $shows_reference_backlink
  * @property int|null $author_id
  * @property int|null $reviewer_id
  * @property string|null $pageable_type
@@ -74,6 +82,7 @@ class Page extends Model
         'url_path',
         'url_path_is_custom',
         'title',
+        'h1',
         'meta_description',
         'canonical_path',
         'og_type',
@@ -83,6 +92,13 @@ class Page extends Model
         'date_modified',
         'json_ld',
         'body_blocks',
+        'last_reviewed',
+        'sources_checked',
+        'key_facts',
+        'editorial_source_priority',
+        'editorial_review_cadence',
+        'trust_page_label',
+        'shows_reference_backlink',
         'author_id',
         'reviewer_id',
         'pageable_type',
@@ -100,6 +116,10 @@ class Page extends Model
             'date_modified' => 'datetime',
             'json_ld' => 'array',
             'body_blocks' => 'array',
+            'last_reviewed' => 'date',
+            'sources_checked' => 'date',
+            'key_facts' => 'array',
+            'shows_reference_backlink' => 'boolean',
             'is_published' => 'boolean',
         ];
     }

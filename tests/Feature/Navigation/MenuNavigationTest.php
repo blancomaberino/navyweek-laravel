@@ -73,7 +73,7 @@ it('builds the tree from seeded menus, preserving external target/rel and nestin
         ->and($tree->legal())->toHaveCount(3);
 
     // The one external footer link keeps its target/rel.
-    $navco = collect($tree->footerGroups()[0]['links'])->firstWhere('label', 'NAVCO (Official)');
+    $navco = collect($tree->footerGroups()[0]['links'])->firstWhere('label', 'Official NAVCO Site');
     expect($navco['target'])->toBe('_blank')
         ->and($navco['rel'])->toBe('noopener noreferrer')
         ->and($navco['href'])->toBe('https://outreach.navy.mil/Navy-Weeks/');
@@ -85,14 +85,23 @@ it('builds the tree from seeded menus, preserving external target/rel and nestin
 |--------------------------------------------------------------------------
 */
 
-it('renders the header nav from the seeded menu data', function () {
-    (new NavigationSeeder)->run();
-
+it('renders the fixed header chrome ported from the legacy Header', function () {
+    // The header top bar is FIXED chrome (Deals / Schedule / Events / Partners / FAQ /
+    // Contact + the NAVCO button), matching the live site 1:1 — only the Deals
+    // mega-menu and the Events dropdown are data-driven. It is deliberately NOT
+    // menu-editable; the footer columns are.
     $html = view('partials.header')->render();
 
-    expect($html)->toContain('href="/schedule/"')
-        ->and($html)->toContain('Discounts')
-        ->and($html)->toContain('aria-label="Primary"');
+    expect($html)->toContain('aria-label="Main navigation"')
+        ->and($html)->toContain('>Deals<')
+        ->and($html)->toContain('>Schedule<')
+        ->and($html)->toContain('>Events<')
+        ->and($html)->toContain('>Partners<')
+        ->and($html)->toContain('>FAQ<')
+        ->and($html)->toContain('>Contact<')
+        ->and($html)->toContain('Official NAVCO Site')
+        ->and($html)->toContain('href="/air-show/"')          // Events dropdown
+        ->and($html)->toContain('href="/thunderbirds/"');
 });
 
 it('renders footer columns and the legal row from seeded menu data', function () {
@@ -108,35 +117,23 @@ it('renders footer columns and the legal row from seeded menu data', function ()
         ->and($html)->toContain('aria-label="Legal"');
 });
 
-it('reflects an editor renaming a link', function () {
+it('reflects an editor renaming a footer link', function () {
     (new NavigationSeeder)->run();
-    Menu::query()->where('key', 'header-primary')->firstOrFail()
-        ->items()->where('label', 'Discounts')->update(['label' => 'Savings']);
+    Menu::query()->where('key', 'footer-navy-reference')->firstOrFail()
+        ->items()->where('label', 'Navy Ratings')->update(['label' => 'Enlisted Ratings']);
 
-    $html = view('partials.header')->render();
+    $html = view('partials.footer')->render();
 
-    expect($html)->toContain('Savings')
-        ->and($html)->not->toContain('>Discounts<');
+    expect($html)->toContain('Enlisted Ratings')
+        ->and($html)->not->toContain('>Navy Ratings<');
 });
 
-it('renders a dropdown when an item has active children', function () {
-    $menu = Menu::factory()->location(MenuLocation::Header)->create(['key' => 'header-primary']);
-    $parent = MenuItem::factory()->for($menu)->create(['label' => 'Reference', 'url' => '/navy-reference/']);
-    MenuItem::factory()->for($menu)->childOf($parent)->create(['label' => 'Bases', 'url' => '/navy-bases/']);
-
-    $html = view('partials.header')->render();
-
-    expect($html)->toContain('nw-has-children')
-        ->and($html)->toContain('nw-dropdown')
-        ->and($html)->toContain('>Bases<');
-});
-
-it('falls back to the default header when the request-scoped menus are empty', function () {
-    // No menus seeded: the partial must still paint the hardcoded nav, not empty.
+it('renders the header chrome even with no menus seeded', function () {
+    // The header owns no menu data, so an empty menus table must not blank the nav.
     $html = view('partials.header')->render();
 
     expect($html)->toContain('href="/schedule/"')
-        ->and($html)->toContain('Veterans Day');
+        ->and($html)->toContain('Official NAVCO Site');
 });
 
 it('marks the current-page link active, trailing-slash-insensitively', function () {
@@ -223,7 +220,7 @@ it('seeds the exact default structure and is idempotent', function () {
     (new NavigationSeeder)->run(); // second run must not duplicate
 
     expect(Menu::query()->count())->toBe(6)
-        ->and(MenuItem::query()->count())->toBe(29);
+        ->and(MenuItem::query()->count())->toBe(31);
 
     $header = Menu::query()->where('key', 'header-primary')->firstOrFail();
     expect($header->location)->toBe(MenuLocation::Header)

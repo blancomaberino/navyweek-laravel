@@ -171,9 +171,11 @@ it('drives the author/reviewer Person nodes from the assigned users (not hardcod
         // the author's linkedin_url drives Person.sameAs
         ->assertSee('"sameAs":["https://www.linkedin.com/in/dana-okonkwo"]', false)
         ->assertSee('"name":"Sam Petrov"', false)
-        // no trace of the previous hardcoded persons
-        ->assertDontSee('t-alford', false)
-        ->assertDontSee('Erik Rivera', false);
+        // No trace of the previous hardcoded persons in the GRAPH. (Scoped to the
+        // JSON-LD @id / name rather than the whole document: the global footer
+        // legitimately links "About the Editor" → the default author's profile.)
+        ->assertDontSee('"@id":"https://www.navyweek.org/authors/t-alford/#person"', false)
+        ->assertDontSee('"name":"Erik Rivera"', false);
 });
 
 it('omits Person.sameAs when the byline user has no linkedin_url', function () {

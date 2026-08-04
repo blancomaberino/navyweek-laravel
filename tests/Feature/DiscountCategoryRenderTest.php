@@ -155,11 +155,14 @@ it('links the lowest-id page when a connection has more than one published brand
     $publish('/discount/patagonia-b/');
 
     // Deduped to one card, deterministically the lowest-id page (orderBy('id') + first-wins).
+    // Asserted against the absolute JSON-LD url, not the raw path: the global header's
+    // Deals mega-menu links EVERY published brand page, so a whole-document
+    // assertDontSee('/discount/patagonia-b/') would match the chrome, not the hub.
     renderPath('/discount/outdoor/')
         ->assertOk()
         ->assertSee('"numberOfItems":1', false)
-        ->assertSee('/discount/patagonia-a/')
-        ->assertDontSee('/discount/patagonia-b/');
+        ->assertSee('https://www.navyweek.org/discount/patagonia-a/', false)
+        ->assertDontSee('https://www.navyweek.org/discount/patagonia-b/', false);
 });
 
 it('uses the audience-specific ItemList name when the offer has an audience label', function () {

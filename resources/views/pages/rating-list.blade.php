@@ -11,17 +11,24 @@
 
 @section('content')
     <main class="rating-list">
+        @include('partials.trust.back-link')
+
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="/">Home</a>
             <span aria-hidden="true">/</span>
             <span aria-current="page">Navy Ratings</span>
         </nav>
 
+        @include('partials.trust.disclosure')
+
         <header class="rating-hero">
             <p class="eyebrow">// U.S. Navy Reference</p>
-            <h1>Navy Ratings</h1>
+            <h1>{{ $page->h1 ?? 'NAVY RATINGS' }}</h1>
             <p class="intro">{{ $page->meta_description }}</p>
         </header>
+
+        @include('partials.trust.byline')
+        @include('partials.trust.key-facts')
 
         {{-- Active ratings, one section per community in the enum's canonical order. --}}
         @foreach (RatingCommunity::cases() as $community)
@@ -70,7 +77,7 @@
 
         @if ($historic->isNotEmpty())
             <section id="historic" class="rating-section historic" aria-label="Historic ratings">
-                <h2>Historic (Disestablished) Ratings</h2>
+                <h2>HISTORIC RATINGS (DISESTABLISHED)</h2>
                 <ul class="rating-rows">
                     @foreach ($historic as $rating)
                         <li id="{{ $rating->slug }}" class="rating-row">
@@ -87,7 +94,9 @@
         @endif
 
         <footer class="rating-footer">
-            <a href="/navy-ranks/">← Navy Ranks</a>
+            <a href="{{ \App\Domain\Publishing\Support\PagePaths::root('ranks') }}">← Navy Ranks</a>
         </footer>
+
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection

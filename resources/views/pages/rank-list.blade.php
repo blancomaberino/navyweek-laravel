@@ -8,26 +8,34 @@
     /** @var \Illuminate\Support\Collection<int, \App\Domain\Pillars\Models\Rank> $commissioned */
     /** @var \Illuminate\Support\Collection<int, \App\Domain\Pillars\Models\Rank> $warrant */
     /** @var \Illuminate\Support\Collection<int, \App\Domain\Pillars\Models\Rank> $enlisted */
+    // Section headings match the legacy NavyRanksHub verbatim (uppercase, high→low).
     $sections = [
-        'Commissioned Officers' => $commissioned,
-        'Warrant Officers' => $warrant,
-        'Enlisted Paygrades' => $enlisted,
+        'COMMISSIONED OFFICERS (HIGH → LOW)' => $commissioned,
+        'WARRANT OFFICERS (HIGH → LOW)' => $warrant,
+        'ENLISTED PAYGRADES (HIGH → LOW)' => $enlisted,
     ];
 @endphp
 
 @section('content')
     <main class="rank-list">
+        @include('partials.trust.back-link')
+
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="/">Home</a>
             <span aria-hidden="true">/</span>
             <span aria-current="page">Navy Ranks</span>
         </nav>
 
+        @include('partials.trust.disclosure')
+
         <header class="rank-hero">
-            <p class="eyebrow">// U.S. Navy Reference</p>
-            <h1>Navy Ranks</h1>
-            <p class="intro">{{ $page->meta_description }}</p>
+            <p class="eyebrow">// U.S. Navy Hierarchy</p>
+            <h1>{{ $page->h1 ?? 'NAVY RANKS' }}</h1>
+            <p class="intro">The complete United States Navy rank structure on a single page — commissioned officers, warrant officers, and enlisted paygrades, each listed high to low with paygrade, pixel-art insignia, abbreviation, and NATO code.</p>
         </header>
+
+        @include('partials.trust.byline')
+        @include('partials.trust.key-facts')
 
         @foreach ($sections as $heading => $ranks)
             @continue($ranks->isEmpty())
@@ -43,7 +51,7 @@
                             @endif
                             <span class="rank-name">{{ $rank->name }} <span class="abbr">({{ $rank->abbreviation }})</span></span>
                             @if ($rank->nato_code)
-                                <span class="nato">{{ $rank->nato_code }}</span>
+                                <span class="nato">NATO {{ $rank->nato_code }}</span>
                             @endif
                         </li>
                     @endforeach
@@ -51,8 +59,22 @@
             </section>
         @endforeach
 
-        <footer class="rank-footer">
-            <a href="/navy-ratings/">Navy Ratings →</a>
-        </footer>
+        {{-- Cross-link cards to the sibling reference hubs (legacy NavyRanksHub). --}}
+        <div class="reference-cards">
+            <a class="reference-card" href="{{ \App\Domain\Publishing\Support\PagePaths::root('ratings') }}">
+                <div class="reference-card-eyebrow">Enlisted Ratings</div>
+                <div class="reference-card-title">Navy Ratings</div>
+                <div class="reference-card-body">The {{ $ratingsActiveTotal ?? 90 }} active enlisted job specialties — Hospital Corpsman, Boatswain's Mate, Master-at-Arms, and every other rating.</div>
+                <div class="reference-card-cta">Browse Navy Ratings &rarr;</div>
+            </a>
+            <a class="reference-card" href="{{ \App\Domain\Publishing\Support\PagePaths::root('designators') }}">
+                <div class="reference-card-eyebrow">Officer Designators</div>
+                <div class="reference-card-title">4-Digit Codes</div>
+                <div class="reference-card-body">URL, Restricted Line, and Staff Corps officer communities — every Navy officer carries a four-digit designator.</div>
+                <div class="reference-card-cta">Browse Officer Designators &rarr;</div>
+            </a>
+        </div>
+
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection
