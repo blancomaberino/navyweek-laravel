@@ -31,7 +31,9 @@
         </header>
 
         <section class="brand-grid-section" aria-label="{{ $category->name }}">
-            <h2>{{ $category->name }} <span class="count">({{ $brands->count() }} {{ \Illuminate\Support\Str::plural('brand', $brands->count()) }})</span></h2>
+            {{-- Heading is the bare category name, matching the legacy hub (the live
+                 site shows no brand count here). --}}
+            <h2>{{ $category->name }}</h2>
 
             @if ($brands->isEmpty())
                 <p class="empty-state">
@@ -57,5 +59,6 @@
         <footer class="category-footer">
             <a href="/discount/">← All military discounts</a>
         </footer>
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection
