@@ -111,12 +111,12 @@ it('renders the discount guide body from the primary offer', function () {
         ->assertSee('not affiliated', false) // independence disclosure
         ->assertSee('Shop YETI with ID.me')
         ->assertSee('Savings by audience')
-        ->assertSee('Who is eligible')
+        ->assertSee('WHO QUALIFIES', false)
         // key_facts is a list of {label, value} pairs — rendered as a <dl>, not flat <li> strings
-        ->assertSee('Key facts')
+        ->assertSee('Key Facts', false)
         ->assertSee('National discount')
         ->assertSee('20% off sitewide')
-        ->assertSee('How to redeem')
+        ->assertSee('HOW TO REDEEM', false)
         ->assertSee('Verify with ID.me')
         ->assertSee('Show your ID')
         ->assertSee('Who qualifies?')
