@@ -40,7 +40,9 @@
 
         <header class="base-hero">
             <p class="eyebrow">// {{ $base->type->label() }} · {{ $regionLabel }}</p>
-            <h1>{{ $base->h1 }}</h1>
+            {{-- The legacy detail page renders the installation name uppercased in the
+                 markup (not via CSS), so the h1 matches the live site byte-for-byte. --}}
+            <h1>{{ mb_strtoupper((string) ($page->h1 ?? $base->h1)) }}</h1>
             @if (! empty($base->aka))
                 <p class="aka">Also known as: {{ implode(', ', $base->aka) }}</p>
             @endif
@@ -78,7 +80,7 @@
 
         @if ($overview !== [])
             <section class="base-overview" aria-label="Overview">
-                <h2>Overview</h2>
+                <h2>OVERVIEW</h2>
                 @foreach ($overview as $paragraph)
                     <p>{{ $paragraph }}</p>
                 @endforeach
@@ -87,7 +89,7 @@
 
         @if (! empty($base->key_facts))
             <section class="base-key-facts" aria-label="Key facts">
-                <h2>Key Facts</h2>
+                <h2>KEY FACTS</h2>
                 <dl>
                     @foreach ($base->key_facts as $fact)
                         <div><dt>{{ $fact['label'] ?? '' }}</dt><dd>{{ $fact['value'] ?? '' }}</dd></div>
@@ -98,7 +100,7 @@
 
         @if ($history !== [])
             <section class="base-history" aria-label="History">
-                <h2>History</h2>
+                <h2>HISTORY</h2>
                 @foreach ($history as $paragraph)
                     <p>{{ $paragraph }}</p>
                 @endforeach
@@ -107,7 +109,7 @@
 
         @if (! empty($base->major_units))
             <section class="base-units" aria-label="Major commands and tenant units">
-                <h2>Major Commands &amp; Tenant Units</h2>
+                <h2>MAJOR COMMANDS &amp; TENANT UNITS</h2>
                 <ul>
                     @foreach ($base->major_units as $unit)
                         <li>{{ $unit }}</li>
@@ -117,7 +119,7 @@
         @endif
 
         <section class="base-location" aria-label="Location and geography">
-            <h2>Location &amp; Geography</h2>
+            <h2>LOCATION &amp; GEOGRAPHY</h2>
             <p class="coordinates">{{ $base->lat }}, {{ $base->lng }}</p>
             <p>
                 <a href="https://www.google.com/maps/search/?api=1&amp;query={{ $base->lat }},{{ $base->lng }}"
@@ -130,7 +132,7 @@
 
         @if ($base->isOverseas() && $hostNationContext !== [])
             <section class="base-host-nation" aria-label="Host nation context">
-                <h2>Host Nation Context</h2>
+                <h2>HOST NATION CONTEXT</h2>
                 <dl>
                     @if ($base->host_nation)
                         <div><dt>Host nation</dt><dd>{{ $base->host_nation }}</dd></div>
@@ -153,7 +155,7 @@
 
         @if (! empty($base->notable_events))
             <section class="base-events" aria-label="Notable events">
-                <h2>Notable Events</h2>
+                <h2>NOTABLE EVENTS</h2>
                 <ul>
                     @foreach ($base->notable_events as $event)
                         <li>
@@ -166,21 +168,41 @@
             </section>
         @endif
 
+        {{-- Nearby bases — the legacy detail page links each sibling installation. --}}
+        @if (filled($base->nearby_bases))
+            <section class="base-nearby" aria-label="Nearby bases">
+                <h2>NEARBY BASES</h2>
+                <ul>
+                    @foreach ($base->nearby_bases as $nearby)
+                        @php($nearbySlug = is_array($nearby) ? ($nearby['slug'] ?? null) : $nearby)
+                        @php($nearbyName = is_array($nearby) ? ($nearby['name'] ?? $nearbySlug) : $nearby)
+                        <li>
+                            @if ($nearbySlug)
+                                <a href="{{ \App\Domain\Publishing\Support\PagePaths::child('bases', (string) $nearbySlug) }}">{{ $nearbyName }}</a>
+                            @else
+                                {{ $nearbyName }}
+                            @endif
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
+
         @if ($base->faqs->isNotEmpty())
             <section class="base-faqs" aria-label="Frequently asked questions">
-                <h2>Frequently Asked Questions</h2>
-                <dl>
-                    @foreach ($base->faqs as $faq)
-                        <dt>{{ $faq->question }}</dt>
-                        <dd>{{ $faq->answer }}</dd>
-                    @endforeach
-                </dl>
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
+                @foreach ($base->faqs as $faq)
+                    <details>
+                        <summary><h3>{{ $faq->question }}</h3></summary>
+                        <div>{{ $faq->answer }}</div>
+                    </details>
+                @endforeach
             </section>
         @endif
 
         @if ($base->sources->isNotEmpty())
             <footer class="base-sources">
-                <h2>Sources</h2>
+                <h2>SOURCES</h2>
                 <ul>
                     @foreach ($base->sources as $source)
                         <li>
