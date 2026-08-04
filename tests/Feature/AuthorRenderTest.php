@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Pages\GenerateAuthorPagesAction;
+use App\Domain\Publishing\Pages\GenerateVeteransDayPageAction;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
 use App\Models\User;
 use Illuminate\Contracts\Http\Kernel;
@@ -98,4 +99,27 @@ it('excludes author-profile pages from the writes-for list even when they carry 
 
     expect($authored->pluck('title')->all())->toBe(['A Real Guide'])
         ->and($authored->every(fn (Page $p): bool => $p->page_type !== PageType::Author))->toBeTrue();
+});
+
+it('resolves the byline Person @id to the custom profile path, not the family default', function () {
+    // The default byline author (config site.editorial.default_author_slug = t-alford).
+    $author = User::factory()->create(['slug' => 't-alford', 'credentials' => 'USNA']);
+    // Their profile page, renamed by an editor to a custom canonical url_path.
+    Page::factory()->create([
+        'pageable_type' => (new User)->getMorphClass(),
+        'pageable_id' => $author->id,
+        'page_type' => PageType::Author,
+        'url_path' => '/crew/alford/',
+        'url_path_is_custom' => true,
+    ]);
+
+    // A page that cites this user as its byline author (veterans-day takes the default byline).
+    app(GenerateVeteransDayPageAction::class)();
+
+    authorFetch('/veterans-day/')
+        ->assertOk()
+        // The byline Person resolves to the PERSISTED custom path, honoring the rename…
+        ->assertSee('"@id":"https://www.navyweek.org/crew/alford/#person"', false)
+        // …not the synthesized family-default path.
+        ->assertDontSee('/authors/t-alford/#person', false);
 });

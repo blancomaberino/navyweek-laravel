@@ -286,6 +286,13 @@ final class PageController
      */
     private function renderAuthor(Page $page, User $author): Response
     {
+        // A cleared profile slug retires the public profile: it no longer has a canonical
+        // /authors/{slug}/ identity, so it stops serving the rich profile (defensive gate,
+        // mirroring the published-gate pattern on air-show/jet-team-city).
+        if ($author->slug === null || $author->slug === '') {
+            return $this->renderShell($page);
+        }
+
         $authored = $this->pages->publishedIndexableAuthoredBy($author->id);
         $reviewed = $this->pages->publishedIndexableReviewedBy($author->id);
 

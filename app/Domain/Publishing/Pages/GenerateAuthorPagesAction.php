@@ -18,10 +18,13 @@ use Illuminate\Support\Str;
  * The page presents the User (its `pageable`) directly, so the profile is data-driven
  * from the account, not a CMS `body_blocks` body (the hub pattern, like the home page).
  *
- * Idempotent: keyed on the stable `author:{slug}` `generation_key`, so the build clock
- * preserves `date_published`, an editor rename is preserved, and a `config('publishing
- * .paths.authors')` prefix change moves every profile (auto-301). The url_path is built
- * via `PagePaths` (never a hardcoded `/authors/` literal), keeping the family single-knob.
+ * Idempotent: keyed on the IMMUTABLE `author:{user-id}` `generation_key` — NOT the slug,
+ * which an editor can rename. Identity is the surrogate id; the slug is mutable LOCATION
+ * (it drives the url_path). So renaming a user's slug MOVES the one profile page to the
+ * new path and auto-301s the old one, instead of orphaning `author:{old-slug}` and
+ * creating a duplicate. The build clock preserves `date_published`; an editor rename of
+ * the url_path is preserved; a `config('publishing.paths.authors')` prefix change moves
+ * every profile. The url_path is built via `PagePaths` (never a hardcoded `/authors/`).
  */
 final class GenerateAuthorPagesAction
 {
@@ -39,7 +42,7 @@ final class GenerateAuthorPagesAction
             $slug = (string) $author->slug;
 
             $this->pages->upsertPillarPage(
-                "author:{$slug}",
+                "author:{$author->id}",
                 PagePaths::child('authors', $slug),
                 [
                     'page_type' => PageType::Author,
