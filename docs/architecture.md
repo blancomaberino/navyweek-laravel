@@ -472,6 +472,8 @@ erDiagram
         text credentials "Person.description / bio, nullable"
         string avatar_path "Person.image, nullable"
         json knows_about "Person.knowsAbout, nullable"
+        text bio "long-form profile-page prose, nullable"
+        string linkedin_url "Person.sameAs, nullable"
     }
 
     REDIRECTS {
@@ -1098,7 +1100,12 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   random, unusable one (a byline is not a login), and the guarded `is_admin`/`password`
   are `forceFill`ed in the Create/Edit pages. Deleting an author clears the byline on
   citing pages (`nullOnDelete`) — the pages survive. (The `bio`/`linkedin_url` columns
-  it edits are added by `add_bio_and_linkedin_to_users`.)
+  it edits are added by `add_bio_and_linkedin_to_users`.) `linkedin_url` feeds
+  `Person.sameAs` on every byline Person node — the shared `BuildsSeoSchema::personSameAs()`
+  helper is merged into the author + reviewer builders in the trait and in the
+  air-show/jet-team/fleet-week pillar schemas, emitted only when set (so a profile with no
+  LinkedIn is byte-unchanged). `bio` is long-form prose for the `/authors/{slug}/` profile
+  page (rendered HTML, not JSON-LD — that page is a separate render family).
 - **ResearchResource** (`Research` nav group) — the brief registry, one row per
   (connection, version). Table: brand, version, status badge (colored), researcher,
   a `raw_markdown`-present boolean, last-verified; filters by status / researcher.

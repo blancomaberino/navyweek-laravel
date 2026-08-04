@@ -153,6 +153,7 @@ it('drives the author/reviewer Person nodes from the assigned users (not hardcod
             'slug' => 'dana-okonkwo',
             'job_title' => 'Contributing Editor',
             'credentials' => 'USMC veteran · benefits researcher',
+            'linkedin_url' => 'https://www.linkedin.com/in/dana-okonkwo',
         ]),
         'reviewer' => User::factory()->create([
             'name' => 'Sam Petrov',
@@ -167,10 +168,20 @@ it('drives the author/reviewer Person nodes from the assigned users (not hardcod
     $res->assertSee('"@id":"https://www.navyweek.org/authors/dana-okonkwo/#person"', false)
         ->assertSee('"name":"Dana Okonkwo"', false)
         ->assertSee('"jobTitle":"Contributing Editor"', false)
+        // the author's linkedin_url drives Person.sameAs
+        ->assertSee('"sameAs":["https://www.linkedin.com/in/dana-okonkwo"]', false)
         ->assertSee('"name":"Sam Petrov"', false)
         // no trace of the previous hardcoded persons
         ->assertDontSee('t-alford', false)
         ->assertDontSee('Erik Rivera', false);
+});
+
+it('omits Person.sameAs when the byline user has no linkedin_url', function () {
+    // The seeded default byline has no linkedin_url, so no sameAs key is emitted —
+    // existing pages/JSON-LD are byte-unchanged until an editor fills the field in.
+    discountPage();
+
+    fetch('/discount/yeti-military-veteran/')->assertOk()->assertDontSee('sameAs', false);
 });
 
 it('still renders the minimal shell for a non-discount page type', function () {
