@@ -104,6 +104,24 @@ For ANY task that renders or changes a user-facing page, before you call it done
 so an entire un-ported design system — no CSS even linked in the base layout — shipped
 invisibly. Never verify a rendered page without viewing it.)
 
+## CSS authoring — alphabetical property order (enforced)
+
+Within every declaration block of our **authored** CSS, list properties in
+**alphabetical order**. Scope: `resources/css/*.css` and every hand-written `<style>`
+block in a Blade view. Enforced fail-closed by `tests/Feature/CssPropertyOrderTest.php`
+(it names the offending block and prints the expected order) — treat a failure there as
+a real defect, exactly like the other guards.
+
+- **Keep inline comments OUT of declaration blocks** — put the note above the selector.
+  The guard strips comments before checking, so a mid-block comment can neither hide an
+  out-of-order property nor be reordered relative to a declaration.
+- **Machine-generated CSS is out of scope** (e.g. the compiled Tailwind dump in the stock
+  `welcome.blade.php`); the test skips any `<style>` carrying the Tailwind banner. Never
+  hand-order generated output.
+- Alphabetical order is cascade-safe here because a shorthand always sorts before its
+  longhands (`border` before `border-top`), which is the correct override order — so don't
+  reintroduce a longhand-before-shorthand pairing to "fix" the cascade.
+
 ## Everything else
 
 The mandated per-task skill/quality-gate workflow (`/frontend-design` + `/seo-geo`
