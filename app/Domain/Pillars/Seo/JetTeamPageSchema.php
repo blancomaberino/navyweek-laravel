@@ -166,6 +166,7 @@ final class JetTeamPageSchema
             $node['description'] = $author->credentials;
         }
         $node['knowsAbout'] = [$team->name, $team->branch, 'air shows', "{$city->city} air show", $city->show];
+        $node += self::personSameAs($author);
 
         return $node;
     }
@@ -182,6 +183,7 @@ final class JetTeamPageSchema
             'name' => $reviewer->name,
             'description' => (string) $reviewer->credentials,
             'url' => "{$site}/authors/{$reviewer->slug}/",
+            ...self::personSameAs($reviewer),
         ];
     }
 

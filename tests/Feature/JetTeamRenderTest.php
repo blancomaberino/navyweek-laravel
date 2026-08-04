@@ -27,8 +27,9 @@ function jetTeamRenderSetup(): JetTeam
         'slug' => 't-alford', 'name' => 'T Madden Alford',
         'job_title' => 'Editor, NavyWeek.org', 'credentials' => 'USNA 02',
         'avatar_path' => '/authors/t-alford.jpg',
+        'linkedin_url' => 'https://www.linkedin.com/in/t-alford',
     ]);
-    User::factory()->create(['slug' => 'erik-rivera', 'name' => 'Erik Rivera', 'credentials' => 'USNA 04']);
+    User::factory()->create(['slug' => 'erik-rivera', 'name' => 'Erik Rivera', 'credentials' => 'USNA 04', 'linkedin_url' => 'https://www.linkedin.com/in/erik-rivera']);
 
     return JetTeam::factory()->create([
         'name' => 'Blue Angels', 'full_name' => 'U.S. Navy Blue Angels',
@@ -84,6 +85,8 @@ it('renders a jet-team city guide with the full graph incl. a plain Event', func
         ->assertSee('"@id":"https://www.navyweek.org/authors/t-alford/#person"', false)
         ->assertSee('"image":"https://www.navyweek.org/authors/t-alford.jpg"', false) // author image
         ->assertSee('"Anchorage air show"', false)          // author knowsAbout
+        ->assertSee('"sameAs":["https://www.linkedin.com/in/t-alford"]', false)      // author linkedin_url (+= path)
+        ->assertSee('"sameAs":["https://www.linkedin.com/in/erik-rivera"]', false)   // reviewer linkedin_url (spread path)
         ->assertSee('"@id":"https://www.navyweek.org/blue-angels/anchorage/#reviewer"', false)
         ->assertSee('"@type":"FAQPage"', false)
         ->assertSee('"@type":"Event"', false)

@@ -176,6 +176,7 @@ final class FleetWeekPageSchema
             $node['description'] = $author->credentials;
         }
         $node['knowsAbout'] = ['Fleet Week', 'U.S. Navy', 'Blue Angels', "{$week->city} Fleet Week", 'Navy ship tours'];
+        $node += self::personSameAs($author);
 
         return $node;
     }
@@ -192,6 +193,7 @@ final class FleetWeekPageSchema
             'name' => $reviewer->name,
             'description' => (string) $reviewer->credentials,
             'url' => "{$site}/authors/{$reviewer->slug}/",
+            ...self::personSameAs($reviewer),
         ];
     }
 

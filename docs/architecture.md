@@ -1175,6 +1175,26 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   (→ `users`) that set the per-page E-E-A-T byline the discount-guide Person JSON-LD
   reads. The render-built `json_ld` and the `pageable` morph are set by the
   import/render layer, not edited.
+- **AuthorResource** (`Publishing` nav group) — CRUD over the editorial byline
+  (`users` rows) that `PageResource`'s author/reviewer selects point at; before it,
+  these profiles could only be created by `EditorialTeamSeeder`. It does **not** add
+  a model — an author IS a `User`. It tells editorial profiles apart from plain
+  ops/login accounts by the presence of the public author `slug` (an ops admin has
+  none): `getEloquentQuery()` is scoped `whereNotNull('slug')`, so the list shows
+  only bylines. Form: an **Editorial profile** section (name, unique kebab `slug` →
+  `/authors/{slug}/`, `job_title`, site-relative `avatar_path`, `linkedin_url`,
+  `credentials`, long-form `bio`, `knows_about` tags — the `Person` JSON-LD +
+  `/authors/{slug}/` fields) and an **Account & access** section (unique `email`, an
+  `is_admin` toggle for panel login). `password` is never edited: create generates a
+  random, unusable one (a byline is not a login), and the guarded `is_admin`/`password`
+  are `forceFill`ed in the Create/Edit pages. Deleting an author clears the byline on
+  citing pages (`nullOnDelete`) — the pages survive. (The `bio`/`linkedin_url` columns
+  it edits are added by `add_bio_and_linkedin_to_users`.) `linkedin_url` feeds
+  `Person.sameAs` on every byline Person node — the shared `BuildsSeoSchema::personSameAs()`
+  helper is merged into the author + reviewer builders in the trait and in the
+  air-show/jet-team/fleet-week pillar schemas, emitted only when set (so a profile with no
+  LinkedIn is byte-unchanged). `bio` is long-form prose for the `/authors/{slug}/` profile
+  page (rendered HTML, not JSON-LD — that page is a separate render family).
 - **ResearchResource** (`Research` nav group) — the brief registry, one row per
   (connection, version). Table: brand, version, status badge (colored), researcher,
   a `raw_markdown`-present boolean, last-verified; filters by status / researcher.

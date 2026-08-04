@@ -172,6 +172,7 @@ final class AirShowPageSchema
             $node['description'] = $author->credentials;
         }
         $node['knowsAbout'] = ['military air shows', "{$show->city} air show", $show->name, $show->headliner];
+        $node += self::personSameAs($author);
 
         return $node;
     }
@@ -191,6 +192,7 @@ final class AirShowPageSchema
             'name' => $reviewer->name,
             'description' => (string) $reviewer->credentials,
             'url' => "{$site}/authors/{$reviewer->slug}/",
+            ...self::personSameAs($reviewer),
         ];
     }
 

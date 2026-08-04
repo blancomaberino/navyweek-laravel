@@ -22,8 +22,9 @@ function fleetWeekRenderSetup(): void
     User::factory()->create([
         'slug' => 't-alford', 'name' => 'T Madden Alford',
         'job_title' => 'Editor, NavyWeek.org', 'credentials' => 'USNA 02',
+        'linkedin_url' => 'https://www.linkedin.com/in/t-alford',
     ]);
-    User::factory()->create(['slug' => 'erik-rivera', 'name' => 'Erik Rivera', 'credentials' => 'USNA 04']);
+    User::factory()->create(['slug' => 'erik-rivera', 'name' => 'Erik Rivera', 'credentials' => 'USNA 04', 'linkedin_url' => 'https://www.linkedin.com/in/erik-rivera']);
 }
 
 it('renders a fleet-week guide with the full JSON-LD graph incl. Festival', function () {
@@ -49,6 +50,8 @@ it('renders a fleet-week guide with the full JSON-LD graph incl. Festival', func
         ->assertSee('"@type":"WebPage"', false)
         ->assertSee('"@id":"https://www.navyweek.org/authors/t-alford/#person"', false)
         ->assertSee('"San Francisco Fleet Week"', false)   // author knowsAbout entry
+        ->assertSee('"sameAs":["https://www.linkedin.com/in/t-alford"]', false)      // author linkedin_url (+= path)
+        ->assertSee('"sameAs":["https://www.linkedin.com/in/erik-rivera"]', false)   // reviewer linkedin_url (spread path)
         ->assertSee('"@id":"https://www.navyweek.org/fleetweek/san-francisco/#reviewer"', false)
         ->assertSee('"@type":"FAQPage"', false)
         ->assertSee('"@type":"Festival"', false)

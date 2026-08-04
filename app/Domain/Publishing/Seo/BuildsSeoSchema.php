@@ -148,6 +148,7 @@ trait BuildsSeoSchema
         if ($author->knows_about !== null && $author->knows_about !== []) {
             $node['knowsAbout'] = $author->knows_about;
         }
+        $node += self::personSameAs($author);
 
         return $node;
     }
@@ -173,8 +174,25 @@ trait BuildsSeoSchema
         if ($url !== null) {
             $node['url'] = $url;
         }
+        $node += self::personSameAs($reviewer);
 
         return $node;
+    }
+
+    /**
+     * The `sameAs` external-identity fragment for a byline Person — the author or
+     * reviewer's public `linkedin_url` (schema.org Person.sameAs). Empty when unset,
+     * so the key is omitted for a profile that has no LinkedIn. Shared by every Person
+     * builder (this trait + the pillar page schemas) so the field renders identically
+     * wherever a byline appears.
+     *
+     * @return array{sameAs?: array<int, string>}
+     */
+    protected static function personSameAs(User $user): array
+    {
+        return $user->linkedin_url !== null && $user->linkedin_url !== ''
+            ? ['sameAs' => [$user->linkedin_url]]
+            : [];
     }
 
     /**
