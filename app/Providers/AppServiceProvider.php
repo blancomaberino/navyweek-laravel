@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Domain\Navigation\Support\ChromeCatalog;
 use App\Domain\Navigation\Support\NavigationTree;
 use App\Domain\Navigation\View\NavigationComposer;
 use Illuminate\Support\Facades\View;
@@ -18,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
         // NavigationTree instance (and its per-request memo of the menu reads),
         // rebuilt fresh on the next request.
         $this->app->scoped(NavigationTree::class);
+
+        // Request-scoped so the header (Deals mega-menu) and footer (Deals section)
+        // composers share one discount-brand query per request.
+        $this->app->scoped(ChromeCatalog::class);
     }
 
     /**

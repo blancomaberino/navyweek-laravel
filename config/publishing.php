@@ -29,5 +29,7 @@ return [
         'local_discounts' => env('PATH_LOCAL_DISCOUNTS', '/discounts/'),
         'discounts' => env('PATH_DISCOUNTS', '/discount/'),
         'authors' => env('PATH_AUTHORS', '/authors/'),
+        'navy_reference' => env('PATH_NAVY_REFERENCE', '/navy-reference/'),
+        'designators' => env('PATH_DESIGNATORS', '/navy-designators/'),
     ],
 ];

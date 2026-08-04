@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" shape-rendering="crispEdges">
+    <rect width="80" height="80" fill="transparent"/>
+    <path d="M28 14 L40 6 L52 14 L48 14 L40 10 L32 14 Z" fill="#7A6A30"/>
+    <circle cx="40" cy="14" r="3" fill="#7A6A30"/>
+    <rect x="26" y="22" width="28" height="22" fill="#0E1830" stroke="#7A6A30" stroke-width="1"/>
+    <text x="40" y="38" text-anchor="middle" font-family="monospace" font-size="13" font-weight="bold" fill="#7A6A30" letter-spacing="1">SK</text>
+    <polygon points="20,56 40,46 60,56 60,60 40,50 20,60" fill="#A33" stroke="#0E1830" stroke-width="0.5"/>
+  </svg>

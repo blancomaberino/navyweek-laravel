@@ -31,9 +31,10 @@ it('renders /navy-ranks/ with paygrade-ordered sections and the ItemList JSON-LD
     $res = fetchRankList('/navy-ranks/')->assertOk();
 
     // Body: hero + section headings + a couple of anchored rows.
+    // Section headings are uppercase + "(HIGH → LOW)", matching the legacy hub verbatim.
     $res->assertSee('Navy Ranks')
-        ->assertSee('Commissioned Officers')
-        ->assertSee('Enlisted Paygrades')
+        ->assertSee('COMMISSIONED OFFICERS (HIGH → LOW)', false)
+        ->assertSee('ENLISTED PAYGRADES (HIGH → LOW)', false)
         ->assertSee('id="ensign"', false)
         ->assertSee('Chief Petty Officer');
 

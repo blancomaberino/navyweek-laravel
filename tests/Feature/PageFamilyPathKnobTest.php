@@ -130,11 +130,31 @@ function knobFamilyCases(): array
 
 dataset('knob families', knobFamilyCases());
 
+/**
+ * Families whose ROOT path is already configured (so cross-links elsewhere resolve
+ * through PagePaths instead of a hardcoded literal) but which have no generator
+ * yet — they are still being built out. A deliberate, reviewed opt-out: delete the
+ * entry and add a real knobFamilyCases() row the moment the family's generator
+ * lands, or the guard stops meaning anything.
+ *
+ * @return list<string>
+ */
+function knobPendingFamilies(): array
+{
+    return ['navy_reference', 'designators'];
+}
+
 it('has a knob-test case for every configured page family', function () {
     // Fail-closed: a new config('publishing.paths') family with no case above turns this
     // red, forcing a behavioral test (and thus PagePaths usage) for the new family.
-    expect(array_keys(knobFamilyCases()))
+    expect([...array_keys(knobFamilyCases()), ...knobPendingFamilies()])
         ->toEqualCanonicalizing(array_keys(config('publishing.paths')));
+});
+
+it('has no pending family that already has a generator', function () {
+    // The pending list is temporary scaffolding — once a family can generate pages it
+    // must graduate to a real knob case.
+    expect(array_intersect(knobPendingFamilies(), array_keys(knobFamilyCases())))->toBe([]);
 });
 
 it('moves a family to a new prefix and 301s the old path when its config knob changes', function (

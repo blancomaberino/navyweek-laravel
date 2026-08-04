@@ -53,7 +53,7 @@ final class NavigationDefaults
                     ['label' => 'Schedule', 'url' => '/schedule/'],
                     ['label' => 'Map', 'url' => '/map/'],
                     ['label' => 'Contact', 'url' => '/contact/'],
-                    ['label' => 'NAVCO (Official)', 'url' => 'https://outreach.navy.mil/Navy-Weeks/', 'target' => '_blank', 'rel' => 'noopener noreferrer'],
+                    ['label' => 'Official NAVCO Site', 'url' => 'https://outreach.navy.mil/Navy-Weeks/', 'target' => '_blank', 'rel' => 'noopener noreferrer'],
                 ],
             ],
             [
@@ -92,7 +92,9 @@ final class NavigationDefaults
                     ['label' => 'Veterans Day', 'url' => '/veterans-day/'],
                     ['label' => 'Veterans Day Free Meals', 'url' => '/veterans-day/free-meals/'],
                     ['label' => 'Military Discounts', 'url' => '/discount/'],
+                    ['label' => 'About the Editor', 'url' => '/authors/t-alford/'],
                     ['label' => 'Our Process', 'url' => '/our-process/'],
+                    ['label' => 'Service Dogs', 'url' => 'https://www.servicedogs.com', 'target' => '_blank', 'rel' => 'noopener noreferrer'],
                 ],
             ],
             [

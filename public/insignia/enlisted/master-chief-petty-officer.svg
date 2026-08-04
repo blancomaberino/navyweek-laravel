@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" shape-rendering="crispEdges" image-rendering="pixelated">
+    <rect width="80" height="80" fill="transparent"/>
+    
+      <rect x="31" y="3" width="2" height="10" fill="#C0C2C9"/>
+      <rect x="27" y="7" width="10" height="2" fill="#C0C2C9"/>
+      <rect x="28" y="4" width="2" height="2" fill="#C0C2C9" transform="rotate(45 32 8)"/>
+      <rect x="28" y="10" width="2" height="2" fill="#C0C2C9" transform="rotate(45 32 8)"/>
+      <rect x="47" y="3" width="2" height="10" fill="#C0C2C9"/>
+      <rect x="43" y="7" width="10" height="2" fill="#C0C2C9"/>
+      <rect x="44" y="4" width="2" height="2" fill="#C0C2C9" transform="rotate(45 48 8)"/>
+      <rect x="44" y="10" width="2" height="2" fill="#C0C2C9" transform="rotate(45 48 8)"/><path d="M28 18 L40 10 L52 18 L48 18 L40 14 L32 18 Z" fill="#C9A84C"/><circle cx="40" cy="18" r="3" fill="#C9A84C"/><path d="M16 28 Q40 20 64 28 L64 32 Q40 24 16 32 Z" fill="#C9A84C" stroke="#0E1830" stroke-width="0.5"/><polygon points="20,46 40,36 60,46 60,50 40,40 20,50" fill="#C9A84C" stroke="#0E1830" stroke-width="0.5"/><polygon points="20,58 40,48 60,58 60,62 40,52 20,62" fill="#C9A84C" stroke="#0E1830" stroke-width="0.5"/><polygon points="20,70 40,60 60,70 60,74 40,64 20,74" fill="#C9A84C" stroke="#0E1830" stroke-width="0.5"/>
+  </svg>
