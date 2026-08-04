@@ -12,6 +12,7 @@ use App\Domain\Shared\Enums\HasLabel;
  */
 enum PageType: string implements HasLabel
 {
+    case Home = 'home';
     case DiscountBrand = 'discount_brand';
     case DiscountCategoryHub = 'discount_category_hub';
     case LocalDiscount = 'local_discount';
@@ -30,6 +31,7 @@ enum PageType: string implements HasLabel
     public function label(): string
     {
         return match ($this) {
+            self::Home => 'Home',
             self::DiscountBrand => 'Discount brand',
             self::DiscountCategoryHub => 'Discount category hub',
             self::LocalDiscount => 'Local discount',

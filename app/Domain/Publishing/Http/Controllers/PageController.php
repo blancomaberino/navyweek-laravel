@@ -12,6 +12,7 @@ use App\Domain\Catalog\Repositories\LocalDiscountRepositoryInterface;
 use App\Domain\Catalog\Repositories\VeteransDayMealRepositoryInterface;
 use App\Domain\Catalog\Support\VeteransDayFreeMealsPresenter;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Pillars\Enums\NavyWeekStatus;
 use App\Domain\Pillars\Enums\RankCategory;
 use App\Domain\Pillars\Models\AirShow;
 use App\Domain\Pillars\Models\AirShowHubMeta;
@@ -24,6 +25,7 @@ use App\Domain\Pillars\Models\Rank;
 use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
 use App\Domain\Pillars\Repositories\FleetWeekRepositoryInterface;
 use App\Domain\Pillars\Repositories\JetTeamRepositoryInterface;
+use App\Domain\Pillars\Repositories\NavyWeekEventRepositoryInterface;
 use App\Domain\Pillars\Repositories\RankRepositoryInterface;
 use App\Domain\Pillars\Seo\AirShowPageSchema;
 use App\Domain\Pillars\Seo\BasePageSchema;
@@ -39,6 +41,7 @@ use App\Domain\Publishing\Seo\ContentPageSchema;
 use App\Domain\Publishing\Seo\DiscountCategorySchema;
 use App\Domain\Publishing\Seo\DiscountGuideSchema;
 use App\Domain\Publishing\Seo\DiscountIndexSchema;
+use App\Domain\Publishing\Seo\HomePageSchema;
 use App\Domain\Publishing\Seo\LocalDiscountHubSchema;
 use App\Domain\Publishing\Seo\LocalDiscountSchema;
 use App\Domain\Publishing\Seo\SeoHead;
@@ -71,6 +74,7 @@ final class PageController
         private readonly JetTeamRepositoryInterface $jetTeams,
         private readonly LocalDiscountRepositoryInterface $localDiscounts,
         private readonly VeteransDayMealRepositoryInterface $meals,
+        private readonly NavyWeekEventRepositoryInterface $navyWeekEvents,
     ) {}
 
     public function show(Request $request): Response
@@ -100,6 +104,8 @@ final class PageController
         $pageable = $page->pageable;
 
         return match ($page->page_type) {
+            // The site root: a data-driven landing (schedule from the pillar), no pageable.
+            PageType::Home => $this->renderHome($page),
             PageType::DiscountBrand => $pageable instanceof Offer
                 ? $this->renderDiscountGuide($page, $pageable)
                 : null,
@@ -295,6 +301,41 @@ final class PageController
             'author' => $author,
             'authored' => $authored,
             'reviewed' => $reviewed,
+            'seoHead' => $seo->render(),
+            'noindex' => $seo->isNoindex(),
+        ]);
+    }
+
+    /**
+     * The home landing page (`/`), a 1:1 port of the legacy `Home.tsx`. A data-driven hub:
+     * the 12-city Navy Week schedule + the current/next stop are read live from the pillar,
+     * so the page stores no body (only its FAQs, on the polymorphic `faqs`). The JSON-LD is
+     * WebSite + Breadcrumb + two GovernmentOrganizations + the schedule ItemList + FAQPage
+     * ({@see HomePageSchema}). `currentOrNext` mirrors the legacy `getActiveEvent() ||
+     * getNextEvent()`: the first Active stop, else the first Upcoming one.
+     */
+    private function renderHome(Page $page): Response
+    {
+        $page->load('faqs');
+        $events = $this->navyWeekEvents->all();
+
+        $activeEvent = $events->firstWhere('status', NavyWeekStatus::Active);
+        $currentOrNext = $activeEvent ?? $events->firstWhere('status', NavyWeekStatus::Upcoming);
+
+        // A stop counts toward the "first-time locations" total if it is a full first-time
+        // host OR introduces a new first-time location (the model owns the rule).
+        $firstTimeCount = $events
+            ->filter(static fn (NavyWeekEvent $e): bool => $e->isFirstTimeLocation())
+            ->count();
+
+        $seo = SeoHead::forPage($page, HomePageSchema::build($page, $events, $page->faqs));
+
+        return response()->view('pages.home', [
+            'page' => $page,
+            'events' => $events,
+            'activeEvent' => $activeEvent,
+            'currentOrNext' => $currentOrNext,
+            'firstTimeCount' => $firstTimeCount,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

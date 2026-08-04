@@ -76,6 +76,8 @@ it('page generators spell no route literal outside the allowlist', function () {
     // /og/ image assets + the one-off content pages that legitimately own a fixed path.
     // A NEW page family must NOT appear here — it belongs in config('publishing.paths')
     // and must build its url_path via PagePaths.
+    // (The home root `/` is also a reviewed one-off but needs no entry: it isn't
+    // route-shaped, so the regex above never collects it — GenerateHomePageAction.)
     $allow = ['/og/', '/privacy/', '/terms/', '/contact/', '/va-disability/', '/veterans-day/', '/veterans-home-care/'];
 
     $violations = [];

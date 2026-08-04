@@ -8,7 +8,6 @@ use App\Domain\Pillars\Models\NavyWeekEvent;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Seo\BuildsSeoSchema;
 use App\Domain\Publishing\Seo\SeoUrl;
-use Illuminate\Support\Carbon;
 
 /**
  * JSON-LD for a Navy Week city page (`/city/{slug}/`), a 1:1 port of
@@ -42,8 +41,6 @@ final class NavyWeekCitySchema
      */
     public static function build(Page $page, NavyWeekEvent $event): array
     {
-        $slug = $event->slug;
-
         $nodes = [
             self::breadcrumb([
                 ['name' => 'Home', 'url' => '/'],
@@ -63,46 +60,6 @@ final class NavyWeekCitySchema
     }
 
     /** @return array<string, mixed> */
-    private static function usNavyOrganization(): array
-    {
-        $site = SeoUrl::site();
-
-        return [
-            '@context' => 'https://schema.org',
-            '@type' => 'GovernmentOrganization',
-            '@id' => "{$site}/#us-navy",
-            'name' => 'United States Navy',
-            'alternateName' => 'U.S. Navy',
-            'url' => 'https://www.navy.mil/',
-            'sameAs' => [
-                'https://www.navy.mil/',
-                'https://en.wikipedia.org/wiki/United_States_Navy',
-            ],
-        ];
-    }
-
-    /** @return array<string, mixed> */
-    private static function navcoOrganization(): array
-    {
-        $site = SeoUrl::site();
-
-        return [
-            '@context' => 'https://schema.org',
-            '@type' => 'GovernmentOrganization',
-            '@id' => "{$site}/#navco",
-            'name' => 'Navy Office of Community Outreach',
-            'alternateName' => 'NAVCO',
-            'url' => 'https://outreach.navy.mil/Navy-Weeks/',
-            'description' => "The Navy Office of Community Outreach (NAVCO), based in Millington, TN, manages the U.S. Navy Week program — the Navy's flagship community outreach effort in cities without a significant Navy presence.",
-            'parentOrganization' => ['@id' => "{$site}/#us-navy"],
-            'sameAs' => [
-                'https://outreach.navy.mil/Navy-Weeks/',
-                'https://outreach.navy.mil/',
-            ],
-        ];
-    }
-
-    /** @return array<string, mixed> */
     private static function eventNode(Page $page, NavyWeekEvent $event): array
     {
         $site = SeoUrl::site();
@@ -112,7 +69,7 @@ final class NavyWeekCitySchema
 
         $performers = self::performers($event->navy_assets ?? []);
         $highlights = $event->highlights ?? [];
-        $range = self::formatDateRange($event->start_date, $event->end_date);
+        $range = $event->dateRangeLabel();
 
         // Two description variants, keyed on whether the city has rich detail (the
         // legacy `cityData` — folded here into navy_assets/highlights). The Stage-A
@@ -338,7 +295,7 @@ final class NavyWeekCitySchema
     public static function metaDescription(NavyWeekEvent $event): string
     {
         $highlights = $event->highlights ?? [];
-        $head = "{$event->city} Navy Week 2026 runs ".self::formatDateRange($event->start_date, $event->end_date)." with the {$event->anchor_event}. ";
+        $head = "{$event->city} Navy Week 2026 runs ".$event->dateRangeLabel()." with the {$event->anchor_event}. ";
         $tail = 'See the full schedule, venues, parking, and costs.';
 
         $best = $head.$tail;
@@ -351,19 +308,5 @@ final class NavyWeekCitySchema
         }
 
         return $best;
-    }
-
-    /**
-     * Port of `formatDateRange` (data.ts): "September 26 – 28, 2026" within one month,
-     * else "September 26 – October 3, 2026". En-dash with surrounding spaces; the start
-     * year is used for both.
-     */
-    private static function formatDateRange(Carbon $start, Carbon $end): string
-    {
-        if ($start->month === $end->month) {
-            return $start->format('F j').' – '.$end->format('j').', '.$start->format('Y');
-        }
-
-        return $start->format('F j').' – '.$end->format('F j').', '.$start->format('Y');
     }
 }

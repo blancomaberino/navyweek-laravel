@@ -12,7 +12,9 @@ Last updated: Phase 3 rendering — reference pillars + first event family. Base
 air shows, fleet weeks, Navy Week cities (`/city/{slug}/` — `NavyWeekCitySchema`, the
 richest Event graph), and jet teams (`/{team}/` hubs + `/{team}/{slug}/` city guides —
 `JetTeamPageSchema`). The events silo (air-show, fleet-week, navy-week-city, jet-team,
-jet-team-city) is complete. Catalog rendering adds the `/discount/` directory landing
+jet-team-city) is complete. The site chrome (header/footer/legal navigation) is now
+**editable** — a `Navigation` module (`menus` + `menu_items`) drives the header/footer
+Blade partials through a view composer, replacing the hardcoded nav arrays. Catalog rendering adds the `/discount/` directory landing
 page and the **local-business discount detail pages** (`/discounts/{state}/{city}/{business}/`
 — `LocalDiscountSchema`: the discount-guide E-E-A-T graph plus a `LocalBusiness` node with
 the primary store's address, geo, and `OpeningHoursSpecification`); the author/reviewer
@@ -272,6 +274,23 @@ flowchart TB
         JetTeam -->|hasMany| JetCity
     end
 
+    subgraph Navigation["Navigation module (editable site chrome)"]
+        Menu["Menu (model)"]
+        MenuItem["MenuItem (model)"]
+        MenuLocation["enum MenuLocation<br/>header / footer / legal"]
+        MenuIface["MenuRepositoryInterface"]
+        MenuRepo["EloquentMenuRepository"]
+        NavTree["NavigationTree (view-model)<br/>+ NavigationDefaults fallback"]
+        NavComposer["NavigationComposer<br/>(view composer → header/footer)"]
+        MenuRepo -. implements .-> MenuIface
+        MenuRepo --> Menu
+        Menu -->|"hasMany (activeItems)"| MenuItem
+        MenuItem -->|"self-ref (activeChildren)"| MenuItem
+        Menu --> MenuLocation
+        NavTree --> MenuIface
+        NavComposer --> NavTree
+    end
+
     BaseModel -.->|"morphMany sources"| Source
     BaseModel -.->|"morphMany faqs"| Faq
     RankModel -.->|"morphMany sources"| Source
@@ -301,6 +320,7 @@ flowchart TB
     DSP -.binds.-> FleetWeekIface
     DSP -.binds.-> AirShowIface
     DSP -.binds.-> JetTeamIface
+    DSP -.binds.-> MenuIface
 ```
 
 ## Data model (built so far)
@@ -331,6 +351,8 @@ erDiagram
     PAGES ||--o{ SOURCES : "cited by (sourceable morph)"
     PAGES ||--o{ FAQS : "has (faqable morph)"
     OFFERS ||--o{ FAQS : "has (faqable morph)"
+    MENUS ||--o{ MENU_ITEMS : "has links"
+    MENU_ITEMS ||--o{ MENU_ITEMS : "parent_id (dropdown, one level)"
 
     CONNECTIONS {
         bigint id PK
@@ -763,6 +785,27 @@ erDiagram
         json body "intro, quick_facts, sections, related_paragraph, needs_verification"
         date date_published_modified "build clock"
     }
+
+    MENUS {
+        bigint id PK
+        string key UK "stable identity (header-primary, footer-navy-week, …)"
+        string name "visible heading (footer columns) / label"
+        string location "enum MenuLocation: header/footer/legal"
+        int sort_order "order among menus in a region"
+        bool is_active "hidden from the site when false"
+    }
+
+    MENU_ITEMS {
+        bigint id PK
+        bigint menu_id FK
+        bigint parent_id FK "nullable — self-ref dropdown parent (one level)"
+        string label
+        string url "root-relative path or absolute external URL (verbatim)"
+        string target "nullable — e.g. _blank"
+        string rel "nullable — e.g. noopener noreferrer"
+        int sort_order "drag-reorder position"
+        bool is_active "hidden from the site when false"
+    }
 ```
 
 > `pages` now carries the full SEO/JSON-LD head-meta layer (title, description,
@@ -926,6 +969,18 @@ renders the `layouts.base` Blade view. The layout ports the legacy
 `theme-color #0A1628`, the Bebas Neue + IBM Plex font link, Ahrefs Analytics, and
 the PostHog snippet (`partials.posthog`, key/host from `config('site.posthog')`).
 
+The chrome — `partials.header` (primary nav + brand + CTA) and `partials.footer`
+(link columns + disclosure + legal row) — is **data-driven**. `NavigationComposer`
+(a view composer bound to both partials in `AppServiceProvider`) shares the editable
+menus into them via the request-scoped `NavigationTree`, which reads
+`MenuRepository::activeMenusForLocation` and normalizes each region to a plain
+view-model array. If a region has no active menu (or the tables are missing) it falls
+back to `NavigationDefaults` — the same source the seeder uses — so the chrome never
+paints empty and matches the legacy nav on a fresh install. Each stored `url` is run
+through `Navigation\Support\LinkUrl` at render (and validated on write), so a
+disallowed scheme (e.g. `javascript:`) can never become an executable `href`. The
+brand mark and the "2026 Schedule" CTA stay fixed chrome, not menu-managed.
+
 The per-page SEO block is serialized by `App\Domain\Publishing\Seo\SeoHead`
 (injected via `{!! $seoHead !!}`), a 1:1 port of `src/lib/seo.ts`
 `buildSEOData`/`renderSEOToHTML`: identical tag order, `&<>"'` escaping (`'` →
@@ -934,7 +989,23 @@ The per-page SEO block is serialized by `App\Domain\Publishing\Seo\SeoHead`
 to the JSON-LD on indexable pages only; noindex pages emit `noindex, nofollow`
 instead of the site-wide index directive.
 
-The body is dispatched by `page_type`. A **`discount_brand`** page renders
+The body is dispatched by `page_type`. The **`home`** type is the site root (`/`, no
+`pageable`) — a 1:1 content port of the legacy `Home.tsx` and a **data-driven hub, not a
+`body_blocks` CMS page**: `PageController::renderHome` reads the 12-city schedule from the
+`NavyWeekEvent` pillar (`NavyWeekEventRepository::all`), derives the current/next stop
+(first `Active`, else first `Upcoming`), and renders `pages.home` (hero, key facts,
+schedule grid, mission, partners, map teaser, FAQ). `HomePageSchema` builds the JSON-LD —
+WebSite + Breadcrumb(Home) + two `GovernmentOrganization` nodes (US Navy + NAVCO) + the
+schedule **ItemList** (city URLs via `PagePaths`, never a hardcoded `/city/`) + FAQPage —
+reusing the `webSite`/`usNavyOrganization`/`navcoOrganization` builders now shared on the
+`BuildsSeoSchema` trait (the Navy Week city graph uses the same two org builders). The
+`pages` row + the home FAQs (port of `generalFaqs`) are seeded by
+`GenerateHomePageAction` (`pages:generate-home`), keyed on the stable `generation_key`
+`content:home`; `/` is a genuine one-off (it owns its full path, not a
+`config('publishing.paths')` family, so no `PagePaths` knob or hygiene-allowlist entry —
+`/` isn't route-shaped).
+
+A **`discount_brand`** page renders
 `pages.discount` from its primary Offer (`pageable`) — hero + CTA, savings-tier
 table, eligibility/exclusions/key-facts, online/in-store redemption steps, FAQs,
 cited sources, and the independence disclosure — and builds its JSON-LD at render
@@ -1135,6 +1206,18 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   toggle, live hit counter; filters by match type / reason / active. Editors add manual
   rules; the `slug-change` rows the editable-URL loop writes surface here too. `hits`
   is a read-only middleware-maintained counter.
+- **MenuResource** (`Publishing` nav group) — the editable site navigation, one row per
+  menu (the header primary nav, each footer column, the legal row). Table: name, `key`,
+  `location` badge, a links count, active toggle — **drag-reorderable on `sort_order`**
+  (reorders the footer columns). Form: `key` (kebab-normalized + uniqueness-checked, the
+  seeder/fallback identity), name, `location`, sort_order, active. A **`MenuItemsRelationManager`**
+  edits the links inline — also drag-reorderable on `sort_order` — with label, url,
+  external `target`/`rel`, and an optional `parent` select (scoped to the same menu's
+  top-level items, disabled for a link that already has children) that nests a link as
+  a one-level dropdown. The `key` field shares the slug-normalize + uniqueness helper
+  (`Filament\Support\SlugKeyField`, also used by `SkillResource`); `location` rejects a
+  second menu in the singular header/legal regions; `url` rejects a disallowed scheme.
+  Rendering reads through `MenuRepository`; nothing here bypasses it.
 
 The **dashboard** carries a `PipelineStatsWidget` (auto-discovered under
 `app/Filament/Widgets`) — a stats-overview of the pipeline: total connections,

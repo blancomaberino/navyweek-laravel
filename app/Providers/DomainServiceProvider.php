@@ -18,6 +18,8 @@ use App\Domain\Catalog\Repositories\OfferRepositoryInterface;
 use App\Domain\Catalog\Repositories\VeteransDayMealRepositoryInterface;
 use App\Domain\Crm\Repositories\ConnectionRepositoryInterface;
 use App\Domain\Crm\Repositories\EloquentConnectionRepository;
+use App\Domain\Navigation\Repositories\EloquentMenuRepository;
+use App\Domain\Navigation\Repositories\MenuRepositoryInterface;
 use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
 use App\Domain\Pillars\Repositories\BaseRepositoryInterface;
 use App\Domain\Pillars\Repositories\EloquentAirShowRepository;
@@ -80,6 +82,7 @@ class DomainServiceProvider extends ServiceProvider
         FleetWeekRepositoryInterface::class => EloquentFleetWeekRepository::class,
         AirShowRepositoryInterface::class => EloquentAirShowRepository::class,
         JetTeamRepositoryInterface::class => EloquentJetTeamRepository::class,
+        MenuRepositoryInterface::class => EloquentMenuRepository::class,
     ];
 
     public function register(): void

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             AffiliateNetworkSeeder::class,
             AudienceSeeder::class,
             EditorialTeamSeeder::class,
+            NavigationSeeder::class,
         ]);
     }
 }

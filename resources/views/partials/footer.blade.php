@@ -1,38 +1,24 @@
-{{-- Site footer — four nav groups + disclosure + legal row (ported from the legacy Footer). --}}
+{{-- Site footer — editable nav columns + disclosure + legal row (ported from the
+     legacy Footer). $footerGroups and $legalNav are shared by
+     App\Domain\Navigation\View\NavigationComposer (with a hardcoded fallback in
+     NavigationTree). The independent-publisher disclosure is fixed chrome. --}}
+@php
+    $footerGroups ??= \App\Domain\Navigation\Support\NavigationDefaults::footerGroups();
+    $legalNav ??= \App\Domain\Navigation\Support\NavigationDefaults::legalItems();
+@endphp
 <footer class="nw-footer">
     <div class="nw-footer-inner">
         <div class="nw-footer-grid">
-            <div class="nw-footer-group">
-                <div class="nw-footer-group-heading">Navy Week</div>
-                <a href="/schedule/">Schedule</a>
-                <a href="/map/">Map</a>
-                <a href="/contact/">Contact</a>
-                <a href="https://outreach.navy.mil/Navy-Weeks/" target="_blank" rel="noopener noreferrer">NAVCO (Official)</a>
-            </div>
-            <div class="nw-footer-group">
-                <div class="nw-footer-group-heading">Navy Reference</div>
-                <a href="/navy-reference/">Navy Reference</a>
-                <a href="/navy-bases/">Navy Bases</a>
-                <a href="/navy-ranks/">Navy Ranks</a>
-                <a href="/navy-ratings/">Navy Ratings</a>
-                <a href="/navy-designators/">Designators</a>
-            </div>
-            <div class="nw-footer-group">
-                <div class="nw-footer-group-heading">Shows &amp; Fleet Week</div>
-                <a href="/air-show/">Air Shows</a>
-                <a href="/fleetweek/">Fleet Week</a>
-                <a href="/blue-angels/">Blue Angels</a>
-                <a href="/thunderbirds/">Thunderbirds</a>
-            </div>
-            <div class="nw-footer-group">
-                <div class="nw-footer-group-heading">Veterans &amp; Benefits</div>
-                <a href="/va-disability/">VA Disability</a>
-                <a href="/veterans-home-care/">Veterans Home Care</a>
-                <a href="/veterans-day/">Veterans Day</a>
-                <a href="/veterans-day/free-meals/">Veterans Day Free Meals</a>
-                <a href="/discount/">Military Discounts</a>
-                <a href="/our-process/">Our Process</a>
-            </div>
+            @foreach ($footerGroups as $group)
+                <div class="nw-footer-group">
+                    <div class="nw-footer-group-heading">{{ $group['heading'] }}</div>
+                    @foreach ($group['links'] as $link)
+                        <a href="{{ $link['href'] }}"
+                           @if (! empty($link['target'])) target="{{ $link['target'] }}" @endif
+                           @if (! empty($link['rel'])) rel="{{ $link['rel'] }}" @endif>{{ $link['label'] }}</a>
+                    @endforeach
+                </div>
+            @endforeach
         </div>
         <p class="nw-footer-disclosure">
             NavyWeek.org is an independent, unofficial guide to the U.S. Navy Week program. It is not
@@ -40,9 +26,11 @@
             Community Outreach (NAVCO).
         </p>
         <nav class="nw-footer-legal" aria-label="Legal">
-            <a href="/privacy/">Privacy Policy</a>
-            <a href="/terms/">Terms</a>
-            <a href="/contact/">Contact Us</a>
+            @foreach ($legalNav as $link)
+                <a href="{{ $link['href'] }}"
+                   @if (! empty($link['target'])) target="{{ $link['target'] }}" @endif
+                   @if (! empty($link['rel'])) rel="{{ $link['rel'] }}" @endif>{{ $link['label'] }}</a>
+            @endforeach
         </nav>
     </div>
 </footer>
