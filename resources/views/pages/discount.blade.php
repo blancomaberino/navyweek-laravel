@@ -13,19 +13,18 @@
             <span aria-current="page">{{ $offer->connection?->brand ?? $page->title }}</span>
         </nav>
 
-        <p class="independence-disclosure" role="note">
-            NavyWeek.org is an independent editorial publisher and is
-            <strong>not affiliated</strong> with {{ $offer->connection?->brand ?? $page->title }} or the U.S. Navy.
-            We may earn a commission from links on this page.
-        </p>
-
         <article>
             <header class="guide-hero">
-                @if ($offer->connection?->logo_url)
-                    <div class="guide-logo-chip" style="background: {{ $offer->connection->logo_background ?? '#ffffff' }}">
-                        <img src="{{ $offer->connection->logo_url }}" alt="{{ $offer->connection->brand }} logo" loading="eager">
-                    </div>
-                @endif
+                <div class="guide-brandrow">
+                    @if ($offer->connection?->logo_url)
+                        <div class="guide-logo-chip" style="background: {{ $offer->connection->logo_background ?? '#ffffff' }}">
+                            <img src="{{ $offer->connection->logo_url }}" alt="{{ $offer->connection->brand }} logo" loading="eager">
+                        </div>
+                    @endif
+                    @if ($offer->connection?->category)
+                        <span class="guide-category">{{ $offer->connection->category }}</span>
+                    @endif
+                </div>
                 {{-- The legacy records carry a separate on-page `h1` distinct from the
                      <title> (`metaTitle`), so prefer it and fall back to the title. --}}
                 <h1>{{ $page->h1 ?? $page->title }}</h1>
@@ -33,23 +32,6 @@
                     <p class="discount-summary">{{ $offer->hero_tagline ?: $offer->discount_summary }}</p>
                 @endif
 
-                @if ($offer->official_url)
-                    <p class="cta">
-                        <a class="cta-primary" href="{{ $offer->official_url }}" rel="sponsored noopener noreferrer" target="_blank">
-                            {{ $offer->cta_label ?: 'Verify & redeem at '.($offer->connection?->brand ?? 'the brand') }}
-                        </a>
-                        @if ($offer->cta_subnote)
-                            <span class="cta-subnote">{{ $offer->cta_subnote }}</span>
-                        @endif
-                    </p>
-                @endif
-
-                @if ($offer->verification)
-                    <p class="verification">
-                        Verification: {{ $offer->verification->label() }}@if ($offer->verification_url)
-                            — <a href="{{ $offer->verification_url }}" rel="noopener noreferrer" target="_blank">verify eligibility</a>@endif
-                    </p>
-                @endif
             </header>
 
             {{-- Author/reviewer byline. Discount guides use the publish-date variant
@@ -73,6 +55,31 @@
                 </div>
             </aside>
 
+
+            @if ($offer->official_url)
+                <p class="cta">
+                    <a class="cta-primary" href="{{ $offer->official_url }}" rel="sponsored noopener noreferrer" target="_blank">
+                        {{ $offer->cta_label ?: 'Verify & redeem at '.($offer->connection?->brand ?? 'the brand') }}
+                    </a>
+                    @if ($offer->cta_subnote)
+                        <span class="cta-subnote">{{ $offer->cta_subnote }}</span>
+                    @endif
+                </p>
+            @endif
+
+            @if ($offer->verification)
+                <p class="verification">
+                    Verification: {{ $offer->verification->label() }}@if ($offer->verification_url)
+                        — <a href="{{ $offer->verification_url }}" rel="noopener noreferrer" target="_blank">verify eligibility</a>@endif
+                </p>
+            @endif
+
+            <p class="independence-disclosure" role="note">
+                NavyWeek.org is an independent editorial publisher and is
+                <strong>not affiliated</strong> with {{ $offer->connection?->brand ?? $page->title }} or the U.S. Navy.
+                We may earn a commission from links on this page.
+            </p>
+
             @include('partials.trust.byline', ['publishDate' => true, 'processLinkNewTab' => true])
 
             {{-- KeyFacts block. Discount pages key off the OFFER's key_facts (the
@@ -87,23 +94,30 @@
                 ] : null,
             ] : null])
 
+            {{-- Tier table: two columns (Audience / Discount) with the note stacked
+                 under the audience, captioned "{brand} discount by community" —
+                 ported from DiscountDetail.tsx. --}}
             @if (filled($offer->tiers))
                 <section aria-label="Savings by audience" class="savings-tiers">
-                    
-                    <table>
-                        <thead>
-                            <tr><th scope="col">Who</th><th scope="col">Discount</th><th scope="col">Notes</th></tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($offer->tiers as $tier)
-                                <tr>
-                                    <th scope="row">{{ $tier->audience }}</th>
-                                    <td>{{ $tier->amount }}</td>
-                                    <td>{{ $tier->note }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="tier-table-wrap">
+                        <table>
+                            <caption>{{ $offer->connection?->brand }} discount by community</caption>
+                            <thead>
+                                <tr><th scope="col">Audience</th><th scope="col">Discount</th></tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($offer->tiers as $tier)
+                                    <tr>
+                                        <th scope="row">
+                                            {{ $tier->audience }}
+                                            @if ($tier->note)<span class="tier-note">{{ $tier->note }}</span>@endif
+                                        </th>
+                                        <td>{{ $tier->amount }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             @endif
 

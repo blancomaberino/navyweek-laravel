@@ -1728,3 +1728,46 @@ section.editorial-policy h2 {
     margin: 0 0 var(--space-lg);
     max-width: 720px;
 }
+
+/* Discount tier table — ported from DiscountDetail.tsx inline styles. */
+.tier-table-wrap { border: 1px solid rgba(201, 168, 76, 0.2); border-radius: 4px; overflow-x: auto; }
+.tier-table-wrap table { border-collapse: collapse; font-family: var(--font-body); font-size: 14px; width: 100%; }
+.tier-table-wrap caption {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: var(--space-md) var(--space-md) 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+.tier-table-wrap thead tr { border-bottom: 1px solid rgba(201, 168, 76, 0.25); }
+.tier-table-wrap th[scope="col"] {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 12px var(--space-md);
+    text-align: left;
+    text-transform: uppercase;
+}
+.tier-table-wrap tbody tr { border-bottom: 1px solid rgba(201, 168, 76, 0.1); }
+.tier-table-wrap tbody tr:last-child { border-bottom: none; }
+.tier-table-wrap th[scope="row"] {
+    color: var(--nw-off-white);
+    font-weight: 400;
+    padding: 12px var(--space-md);
+    text-align: left;
+    vertical-align: top;
+}
+.tier-table-wrap td {
+    color: var(--gold-light);
+    font-weight: 600;
+    padding: 12px var(--space-md);
+    vertical-align: top;
+    white-space: nowrap;
+}
+.tier-note { color: var(--nw-gray); display: block; font-size: 12px; margin-top: 4px; }
+
+.guide-brandrow { align-items: center; display: flex; flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-md); }
+.guide-category { color: var(--gold); font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
