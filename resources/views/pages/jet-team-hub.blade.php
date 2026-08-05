@@ -39,8 +39,13 @@
             </section>
         @endif
 
+        @include('partials.trust.key-facts', ['keyFacts' => filled($team->key_facts) ? [
+            'title' => $team->name.' '.($team->year ?? now()->year).' — Key Facts',
+            'facts' => $team->key_facts,
+        ] : null])
+
         <section class="hub-schedule" aria-label="{{ $team->name }} schedule">
-            <h2>{{ $team->seo_headline }}</h2>
+            <h2>{{ $team->year ?? now()->year }} TOUR SCHEDULE</h2>
             @if ($schedule->isEmpty())
                 <p class="empty-state">The schedule is being finalized.</p>
             @else
@@ -61,9 +66,14 @@
             @endif
         </section>
 
-        @foreach ($about as $paragraph)
-            <section class="hub-about"><p>{{ $paragraph }}</p></section>
-        @endforeach
+        @if ($about !== [])
+            <section class="hub-about" aria-label="About">
+                <h2>{{ mb_strtoupper('About the '.$team->name) }}</h2>
+                @foreach ($about as $paragraph)
+                    <p>{{ $paragraph }}</p>
+                @endforeach
+            </section>
+        @endif
 
         @if ($team->faqs->isNotEmpty())
             <section class="hub-faqs" aria-label="Frequently asked questions">
