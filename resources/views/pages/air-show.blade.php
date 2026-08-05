@@ -28,19 +28,14 @@
             @endforeach
         </header>
 
-        @if (! empty($show->quick_facts))
-            <section class="quick-facts" aria-label="Quick facts">
-                <dl>
-                    @foreach ($show->quick_facts as $fact)
-                        <div><dt>{{ $fact['label'] ?? '' }}</dt><dd>{{ $fact['value'] ?? '' }}</dd></div>
-                    @endforeach
-                </dl>
-            </section>
-        @endif
+        @include('partials.trust.key-facts', ['keyFacts' => filled($show->quick_facts) ? [
+            'title' => $show->name.' '.$show->year.' — Key Facts',
+            'facts' => $show->quick_facts,
+        ] : null])
 
         @foreach ($show->sections as $section)
             <section class="air-show-section">
-                @isset($section['heading'])<h2>{{ $section['heading'] }}</h2>@endisset
+                @isset($section['heading'])<h2>{{ mb_strtoupper($section['heading']) }}</h2>@endisset
                 @foreach ($section['paragraphs'] ?? [] as $paragraph)
                     <p>{{ $paragraph }}</p>
                 @endforeach
@@ -56,10 +51,10 @@
 
         @if ($show->faqs->isNotEmpty())
             <section class="air-show-faqs" aria-label="Frequently asked questions">
-                <h2>Frequently Asked Questions</h2>
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
                 <dl>
                     @foreach ($show->faqs as $faq)
-                        <dt>{{ $faq->question }}</dt>
+                        <dt><h3>{{ $faq->question }}</h3></dt>
                         <dd>{{ $faq->answer }}</dd>
                     @endforeach
                 </dl>
@@ -68,7 +63,7 @@
 
         @if ($show->sources->isNotEmpty())
             <footer class="air-show-sources">
-                <h2>Sources</h2>
+                <h2>SOURCES</h2>
                 <ul>
                     @foreach ($show->sources as $source)
                         <li>
@@ -82,5 +77,22 @@
                 </ul>
             </footer>
         @endif
+
+        @if (filled($show->related_paragraph))
+            <section class="nearby-related" aria-label="Nearby and related">
+                <h2>NEARBY &amp; RELATED</h2>
+                {{-- `related_paragraph` is either a plain string/list of strings or a
+                     list of {before,label,href,after} link fragments. --}}
+                @foreach ((array) $show->related_paragraph as $relatedPara)
+                    @if (is_array($relatedPara))
+                        <p>{{ $relatedPara['before'] ?? '' }}@if (! empty($relatedPara['href']))<a href="{{ $relatedPara['href'] }}">{{ $relatedPara['label'] ?? $relatedPara['href'] }}</a>@endif{{ $relatedPara['after'] ?? '' }}</p>
+                    @else
+                        <p>{{ $relatedPara }}</p>
+                    @endif
+                @endforeach
+            </section>
+        @endif
+
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection

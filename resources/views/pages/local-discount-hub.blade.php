@@ -40,5 +40,6 @@
                 @endforeach
             </ul>
         @endif
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection

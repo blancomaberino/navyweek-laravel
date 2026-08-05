@@ -59,7 +59,7 @@
         @foreach ($activeByCommunity as $key => $group)
             @continue(in_array($key, $known, true) || $group->isEmpty())
             <section class="rating-section" aria-label="Other ratings">
-                <h2>Other</h2>
+                <h2>OTHER</h2>
                 <ul class="rating-rows">
                     @foreach ($group as $rating)
                         <li id="{{ $rating->slug }}" class="rating-row">

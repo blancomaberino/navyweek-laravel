@@ -67,14 +67,15 @@
 
         @if ($team->faqs->isNotEmpty())
             <section class="hub-faqs" aria-label="Frequently asked questions">
-                <h2>Frequently Asked Questions</h2>
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
                 <dl>
                     @foreach ($team->faqs as $faq)
-                        <dt>{{ $faq->question }}</dt>
+                        <dt><h3>{{ $faq->question }}</h3></dt>
                         <dd>{{ $faq->answer }}</dd>
                     @endforeach
                 </dl>
             </section>
         @endif
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection

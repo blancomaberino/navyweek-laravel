@@ -6,5 +6,6 @@
 @section('content')
     <main>
         <h1>{{ $page->title }}</h1>
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection

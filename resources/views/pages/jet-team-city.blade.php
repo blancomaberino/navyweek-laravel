@@ -28,19 +28,14 @@
             @endforeach
         </header>
 
-        @if (! empty($city->quick_facts))
-            <section class="quick-facts" aria-label="Quick facts">
-                <dl>
-                    @foreach ($city->quick_facts as $fact)
-                        <div><dt>{{ $fact['label'] ?? '' }}</dt><dd>{{ $fact['value'] ?? '' }}</dd></div>
-                    @endforeach
-                </dl>
-            </section>
-        @endif
+        @include('partials.trust.key-facts', ['keyFacts' => filled($city->quick_facts) ? [
+            'title' => trim(($city->team?->name ?? '').' '.$city->city.' '.$city->year).' — Key Facts',
+            'facts' => $city->quick_facts,
+        ] : null])
 
         @foreach ($sections as $section)
             <section class="jet-team-section">
-                @isset($section['heading'])<h2>{{ $section['heading'] }}</h2>@endisset
+                @isset($section['heading'])<h2>{{ mb_strtoupper($section['heading']) }}</h2>@endisset
                 @foreach ($section['paragraphs'] ?? [] as $paragraph)
                     <p>{{ $paragraph }}</p>
                 @endforeach
@@ -56,10 +51,10 @@
 
         @if ($city->faqs->isNotEmpty())
             <section class="jet-team-faqs" aria-label="Frequently asked questions">
-                <h2>Frequently Asked Questions</h2>
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
                 <dl>
                     @foreach ($city->faqs as $faq)
-                        <dt>{{ $faq->question }}</dt>
+                        <dt><h3>{{ $faq->question }}</h3></dt>
                         <dd>{{ $faq->answer }}</dd>
                     @endforeach
                 </dl>
@@ -68,7 +63,7 @@
 
         @if ($city->sources->isNotEmpty())
             <footer class="jet-team-sources">
-                <h2>Sources</h2>
+                <h2>SOURCES</h2>
                 <ul>
                     @foreach ($city->sources as $source)
                         <li>
@@ -82,5 +77,22 @@
                 </ul>
             </footer>
         @endif
+
+        @if (filled($city->related_paragraph))
+            <section class="nearby-related" aria-label="Nearby and related">
+                <h2>NEARBY &amp; RELATED</h2>
+                {{-- `related_paragraph` is either a plain string/list of strings or a
+                     list of {before,label,href,after} link fragments. --}}
+                @foreach ((array) $city->related_paragraph as $relatedPara)
+                    @if (is_array($relatedPara))
+                        <p>{{ $relatedPara['before'] ?? '' }}@if (! empty($relatedPara['href']))<a href="{{ $relatedPara['href'] }}">{{ $relatedPara['label'] ?? $relatedPara['href'] }}</a>@endif{{ $relatedPara['after'] ?? '' }}</p>
+                    @else
+                        <p>{{ $relatedPara }}</p>
+                    @endif
+                @endforeach
+            </section>
+        @endif
+
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection

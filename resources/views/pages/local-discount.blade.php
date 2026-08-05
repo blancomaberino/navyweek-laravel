@@ -53,7 +53,7 @@
 
         @if ($discount->tiers !== [])
             <section class="savings-tiers" aria-label="Savings by audience">
-                <h2>Who saves</h2>
+                <h2>WHO SAVES</h2>
                 <ul>
                     @foreach ($discount->tiers as $tier)
                         <li><strong>{{ $tier['audience'] }}:</strong> {{ $tier['amount'] }}@if (! empty($tier['note'])) — {{ $tier['note'] }}@endif</li>
@@ -64,7 +64,7 @@
 
         @if ($discount->redeem_in_store !== [])
             <section class="redeem" aria-label="How to redeem in store">
-                <h2>How to redeem in store</h2>
+                <h2>HOW TO REDEEM IN STORE</h2>
                 <ol>
                     @foreach ($discount->redeem_in_store as $step)
                         <li><strong>{{ $step['title'] }}</strong> — {{ $step['detail'] }}</li>
@@ -75,7 +75,7 @@
 
         @if ($discount->stores->isNotEmpty())
             <section class="stores" aria-label="Store locations">
-                <h2>Locations</h2>
+                <h2>LOCATIONS</h2>
                 @foreach ($discount->stores->sortBy('sort_order') as $store)
                     <article class="store">
                         <h3>{{ $store->name }}</h3>
@@ -100,7 +100,7 @@
 
         @if ($discount->exclusions !== [])
             <section class="exclusions" aria-label="Exclusions">
-                <h2>Exclusions</h2>
+                <h2>EXCLUSIONS</h2>
                 <ul>
                     @foreach ($discount->exclusions as $exclusion)
                         <li>{{ $exclusion }}</li>
@@ -115,7 +115,7 @@
 
         @if ($discount->faqs->isNotEmpty())
             <section class="faqs" aria-label="Frequently asked questions">
-                <h2>FAQs</h2>
+                <h2>FAQS</h2>
                 @foreach ($discount->faqs as $faq)
                     <details>
                         <summary>{{ $faq->question }}</summary>
@@ -127,7 +127,7 @@
 
         @if ($discount->sources->isNotEmpty())
             <section class="sources" aria-label="Sources">
-                <h2>Sources</h2>
+                <h2>SOURCES</h2>
                 <ul>
                     @foreach ($discount->sources as $source)
                         <li><a href="{{ $source->url }}" target="_blank" rel="noopener nofollow">{{ $source->label }}</a>@if ($source->publisher) — {{ $source->publisher }}@endif</li>
@@ -135,5 +135,6 @@
                 </ul>
             </section>
         @endif
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection

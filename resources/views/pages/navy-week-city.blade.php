@@ -32,7 +32,7 @@
 
         @if ($highlights !== [])
             <section class="navy-week-highlights" aria-label="Highlights">
-                <h2>Free Public Events</h2>
+                <h2>FREE PUBLIC EVENTS</h2>
                 <ul>
                     @foreach ($highlights as $highlight)
                         <li>{{ $highlight }}</li>
@@ -43,7 +43,7 @@
 
         @if ($navyAssets !== [])
             <section class="navy-week-assets" aria-label="Navy assets">
-                <h2>Navy Assets &amp; Performers</h2>
+                <h2>NAVY ASSETS &AMP; PERFORMERS</h2>
                 <ul>
                     @foreach ($navyAssets as $asset)
                         <li>{{ $asset }}</li>
@@ -54,7 +54,7 @@
 
         @if ($dailySchedule !== [])
             <section class="navy-week-schedule" aria-label="Daily schedule">
-                <h2>Schedule</h2>
+                <h2>SCHEDULE</h2>
                 @foreach ($dailySchedule as $day)
                     <div class="schedule-day">
                         @isset($day['date'])<h3>{{ \Illuminate\Support\Carbon::parse($day['date'])->format('l, F j') }}</h3>@endisset
@@ -74,7 +74,7 @@
 
         @if ($keyVenues !== [])
             <section class="navy-week-venues" aria-label="Key venues">
-                <h2>Key Venues</h2>
+                <h2>KEY VENUES</h2>
                 <ul>
                     @foreach ($keyVenues as $venue)
                         <li>{{ $venue }}</li>
@@ -85,28 +85,29 @@
 
         @if ($event->parking_notes)
             <section class="navy-week-parking" aria-label="Parking">
-                <h2>Parking</h2>
+                <h2>PARKING</h2>
                 <p>{{ $event->parking_notes }}</p>
             </section>
         @endif
 
         @if ($event->cost_summary)
             <section class="navy-week-cost" aria-label="Cost">
-                <h2>Cost</h2>
+                <h2>COST</h2>
                 <p>{{ $event->cost_summary }}</p>
             </section>
         @endif
 
         @if ($event->faqs->isNotEmpty())
             <section class="navy-week-faqs" aria-label="Frequently asked questions">
-                <h2>Frequently Asked Questions</h2>
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
                 <dl>
                     @foreach ($event->faqs as $faq)
-                        <dt>{{ $faq->question }}</dt>
+                        <dt><h3>{{ $faq->question }}</h3></dt>
                         <dd>{{ $faq->answer }}</dd>
                     @endforeach
                 </dl>
             </section>
         @endif
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection
