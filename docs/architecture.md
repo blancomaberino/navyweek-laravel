@@ -1116,6 +1116,42 @@ The **`author`** type (`PageType::Author`) is dispatched straight from `renderBo
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
 
+### Site-parity page families (2026-08-05)
+
+The parity pass added the families the live site serves that the platform had
+never built, plus the CMS columns the shared "trust" chrome reads. All of them
+follow the existing contract: a stable `generation_key`, a `config('publishing.paths')`
+prefix resolved through `PagePaths`, and a `renderBody` match arm.
+
+| PageType | Route | Pageable | Renderer |
+|---|---|---|---|
+| `BaseHub` | `/navy-bases/` | — | `renderBaseHub` |
+| `BaseOverseasHub` | `/navy-bases/overseas/` | — | `renderBaseOverseasHub` |
+| `BaseStateHub` | `/navy-bases/{state}/` | — (region = page slug) | `renderBaseRegionHub` |
+| `BaseCountryHub` | `/navy-bases/{country}/` | — (region = page slug) | `renderBaseRegionHub` |
+| `DesignatorHub` | `/navy-designators/` | — | `renderDesignatorHub` |
+| `DesignatorCommunityHub` | `/navy-designators/{community}/` | — (community = page slug) | `renderDesignatorCommunityHub` |
+| `Designator` | `/navy-designators/{slug}/` | `Rank` (`officer-designator`) | `renderDesignator` |
+| `NavyReferenceHub` | `/navy-reference/` | — | `renderNavyReferenceHub` |
+| `Schedule` | `/schedule/` | — | `renderSchedulePage` |
+| `RouteMap` | `/map/` | — | `renderSchedulePage` |
+| `DiscountCategoryHub` | `/discount/{category}/` | `DiscountCategory` | `renderDiscountCategory` (generator was the missing piece) |
+
+**New columns.** `pages`: `h1` (distinct from the `<title>`), `last_reviewed`,
+`sources_checked`, `key_facts`, `editorial_source_priority`,
+`editorial_review_cadence`, `trust_page_label`, `shows_reference_backlink` — read
+by the shared partials under `resources/views/partials/trust/`. `offers.details`
+holds the "How it works" paragraphs. `users.military_service` /
+`users.civilian_career` back the author-profile sections.
+
+**New repository method.** `RankRepositoryInterface::designators()` returns the
+officer designators ordered by four-digit code.
+
+**New importers** (Stage-B, reading committed seed artifacts):
+`import:content-bodies` (long-form page bodies → `pages.body_blocks`) and
+`import:discount-details` (`offers.details`). Both are idempotent and fill only
+NULLs unless `--force`.
+
 ### Editable URLs (auto-301, zero deploys)
 
 Renaming a page's canonical `url_path` in the admin panel creates its redirect
