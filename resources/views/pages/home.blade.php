@@ -20,19 +20,29 @@
 
 @section('content')
     <main class="home-page">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-            <span aria-current="page">Home</span>
-        </nav>
-
-        {{-- Hero --}}
+        {{-- Full-bleed hero: photo at 20% opacity under a 40px grid overlay and a
+             bottom fade to --navy, with the copy centred on top. Ported from
+             src/page-views/Home.tsx. The legacy home has no breadcrumb. --}}
         <section class="home-hero" aria-label="Navy Week 2026 hero">
-            <p class="eyebrow">// Road Trip to 250</p>
-            <h1>NAVY WEEK 2026</h1>
-            <p class="lede">Bringing the Navy to your community. Experience the pride, professionalism, and equipment of the United States Navy in 12 cities across America.</p>
-            <p class="intro">From Blue Angels flight demonstrations and Leap Frogs parachute jumps to Navy Band concerts and hands-on STEM exhibits, Navy Week 2026 offers free, family-friendly events in cities from coast to coast. Now in its 22nd year, the program connects Americans with the sailors, technology, and missions that keep the nation safe.</p>
-            <div class="home-cta">
-                <a class="btn btn-primary" href="/schedule/">View Full Schedule</a>
-                <a class="btn btn-secondary" href="/map/">See the Map</a>
+            <picture>
+                <source type="image/avif" srcset="/images/hero-navy-week-704.avif 704w, /images/hero-navy-week-1408.avif 1408w" sizes="100vw">
+                <source type="image/webp" srcset="/images/hero-navy-week-704.webp 704w, /images/hero-navy-week-1408.webp 1408w" sizes="100vw">
+                <img class="home-hero-img" src="/images/hero-navy-week.png" width="1280" height="720"
+                     loading="eager" decoding="async" fetchpriority="high"
+                     alt="U.S. Navy destroyer at sea during sunset with American flag — Navy Week 2026 hero image">
+            </picture>
+            <div class="home-hero-grid" aria-hidden="true"></div>
+            <div class="home-hero-fade" aria-hidden="true"></div>
+
+            <div class="home-hero-body">
+                <div class="home-hero-eyebrow">// ROAD TRIP TO 250</div>
+                <h1>NAVY WEEK 2026</h1>
+                <p class="home-hero-lede">Bringing the Navy to your community. Experience the pride, professionalism, and equipment of the United States Navy in 12 cities across America.</p>
+                <p class="home-hero-sub">From Blue Angels flight demonstrations and Leap Frogs parachute jumps to Navy Band concerts and hands-on STEM exhibits, Navy Week 2026 offers free, family-friendly events in cities from coast to coast. Now in its 22nd year, the program connects Americans with the sailors, technology, and missions that keep the nation safe.</p>
+                <div class="home-hero-cta">
+                    <a class="home-cta-primary" href="/schedule/">View Full Schedule <span aria-hidden="true">&rarr;</span></a>
+                    <a class="home-cta-secondary" href="/map/">See the Map <span aria-hidden="true">&#9679;</span></a>
+                </div>
             </div>
         </section>
 

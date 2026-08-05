@@ -1471,3 +1471,108 @@ section.editorial-policy h2 {
 .status-badge-pill.is-active { background: rgba(26, 92, 58, 0.4); color: #6dc28a; }
 .status-badge-pill.is-completed { background: rgba(140, 140, 122, 0.1); color: #8c8c7a; }
 .status-badge-pill.is-firsttime { background: rgba(30, 58, 95, 0.6); color: #7aa8d8; }
+
+/* ==========================================================================
+   Home hero — ported from src/page-views/Home.tsx (inline styles)
+   ========================================================================== */
+.home-page { max-width: none; padding: 0; }
+.home-hero {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 60vh;
+    overflow: hidden;
+    padding: var(--space-3xl) var(--space-2xl);
+    position: relative;
+    text-align: center;
+}
+.home-hero-img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+.home-hero-grid {
+    background-image: linear-gradient(rgba(201, 168, 76, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(201, 168, 76, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+.home-hero-fade {
+    background: linear-gradient(to top, var(--navy), transparent);
+    bottom: 0;
+    height: 150px;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    z-index: 0;
+}
+.home-hero-body { max-width: 800px; position: relative; z-index: 1; }
+.home-hero-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+}
+.home-hero h1 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: clamp(64px, 10vw, 96px);
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: var(--space-lg);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+.home-hero-lede {
+    color: var(--nw-off-white);
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 auto var(--space-md);
+    max-width: 600px;
+}
+.home-hero-sub {
+    color: var(--nw-gray-light);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 auto var(--space-xl);
+    max-width: 600px;
+}
+.home-hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: center; }
+.home-cta-primary, .home-cta-secondary {
+    align-items: center;
+    border-radius: 2px;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 8px;
+    letter-spacing: 1.5px;
+    padding: 12px 32px;
+    text-transform: uppercase;
+}
+.home-cta-primary { background: var(--gold); border: none; color: var(--navy); font-weight: 600; }
+.home-cta-secondary { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-weight: 500; }
+.home-cta-primary:hover, .home-cta-secondary:hover { text-decoration: none; }
+
+/* The remaining home sections are full-bleed bands with their own inner width. */
+.home-page > section:not(.home-hero) {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: var(--space-3xl) var(--space-2xl);
+    width: 100%;
+}
