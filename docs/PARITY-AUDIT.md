@@ -90,3 +90,62 @@ Heading counts, remote vs local (`<main>` only):
    `/authors/nw-admin/`.
 
 Every step verified by re-running the parity script, not by eyeballing.
+
+---
+
+# RESULT (2026-08-05) — parity reached
+
+Re-run of the same measurements that opened this document.
+
+## URL inventory
+
+| | Then | Now |
+|---|---|---|
+| Remote sitemap URLs | 1164 | 1164 |
+| Missing locally | **73** | **0** |
+
+The only two entries the diff still lists (`/llms.txt`,
+`/data/navy-week-2026.json`) are generated files rather than `pages` rows; both
+serve 200.
+
+## Heading-outline parity — 34/34 sampled pages match
+
+One page per family, verified with the diff script (not by eye):
+
+| Page | Then | Now |
+|---|---|---|
+| `/` | 8 | 16/16 |
+| `/navy-ranks/`, `/navy-ratings/` | 4, 11 | 6/6, 13/13 |
+| `/navy-reference/`, `/schedule/`, `/map/` | — (404) | 3/3, 2/2, 3/3 |
+| `/navy-bases/` + state/country/overseas hubs | — (404) | 12/12, 5/5, 10/10, 12/12 |
+| `/navy-bases/camp-lemonnier/` | 10 | 18/18 |
+| `/navy-designators/` hub + community + detail | — (404) | 5/5, 1/1, 14/14 |
+| `/discount/` | 3 | 10/10 |
+| `/discount/{brand}/` ×981 | 10 | 20/20 |
+| `/discount/{category}/` ×5 | — (404) | 3/3 |
+| `/discounts/{state}/{city}/{biz}/` | 9 (wrong titles) | 9/9 |
+| `/veterans-day/`, `/veterans-day/free-meals/` | 8, 7 | 10/10, 6/6 |
+| `/va-disability/`, `/veterans-home-care/` | 4, 4 | 31/31, 36/36 |
+| `/best-credit-cards-for-military/`, `/our-process/` | — (404) | 27/27, 11/11 |
+| `/authors/{slug}/` | 4 | 6/6 |
+| `/city/{slug}/` ×12 | 13 | 32/32, 34/34 |
+| `/fleetweek/{slug}/` ×16 | 4 | 22/22, 25/25 |
+| `/air-show/{slug}/`, jet-team hubs + cities | 9, 3, 7 | 18/18, 11/11, 16/16 |
+
+## What the gaps actually were
+
+Most of this was **render**, not data: the pillars had already imported
+overview/history/schedule/FAQ/quick-facts rows that no view read. The genuine
+data gaps were narrow — discount `details` ("How it works"), the YMYL long-form
+bodies, and the author service-history fields — and each was closed by a
+committed seed artifact + an idempotent importer, so the CMS now owns them.
+
+Two crashes were fixed along the way: the shared KeyFacts partial 500'd on an
+array fact value (every air-show and jet-team-city page), and `military_context`
+being a list rather than a string 500'd the city guides.
+
+## Known non-issues
+
+`/our-process/` reports two phantom diffs: the remote h1 is split across spans so
+the extractor drops a space, and the DEALS section sits inside `<main>` there but
+after it here. Both are artifacts of the text extractor, not visible differences.
