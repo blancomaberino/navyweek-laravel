@@ -22,7 +22,7 @@ use App\Domain\Publishing\Support\PagePaths;
  */
 final class ChromeCatalog
 {
-    /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null}>|null */
+    /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null}>|null */
     private ?array $deals = null;
 
     public function __construct(
@@ -34,7 +34,7 @@ final class ChromeCatalog
      * Every published discount-brand deal, newest published first (mirrors the
      * legacy DealsSection sort), for the mega-menu and the Deals section.
      *
-     * @return list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null}>
+     * @return list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null}>
      */
     public function deals(): array
     {
@@ -56,6 +56,10 @@ final class ChromeCatalog
                 'headline' => $offer->headline_discount,
                 'category' => $connection->category,
                 'logo' => $connection->logo_url,
+                // Per-brand chip colour (the legacy `logoBackground`). Most marks
+                // need a white plate, but ~120 ship a light-on-dark logo and set
+                // navy/black — hardcoding white made those chips glare.
+                'logoBackground' => self::hexColour($connection->logo_background),
                 'published' => $page->date_published?->toDateString() ?? '',
                 'order' => $offer->sort_order ?? PHP_INT_MAX,
             ];
@@ -73,9 +77,26 @@ final class ChromeCatalog
                 'headline' => $d['headline'],
                 'category' => $d['category'],
                 'logo' => $d['logo'],
+                'logoBackground' => $d['logoBackground'],
             ],
             $rows,
         );
+    }
+
+    /**
+     * A stored colour, but only if it really is one.
+     *
+     * This value is editor-supplied and ends up inside a `style` attribute, where
+     * Blade's HTML escaping stops an attribute break-out but not CSS injection
+     * (`#fff; background-image: url(…)`). Restricting it to a 3/6-digit hex literal
+     * means a stored string can never become anything but a colour; anything else
+     * falls back to the stylesheet's default plate.
+     */
+    private static function hexColour(?string $value): ?string
+    {
+        $value = trim((string) $value);
+
+        return preg_match('/^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i', $value) === 1 ? $value : null;
     }
 
     /**
