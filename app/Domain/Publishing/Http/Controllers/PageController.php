@@ -927,6 +927,11 @@ final class PageController
         return response()->view('pages.navy-week-city', [
             'page' => $page,
             'event' => $event,
+            // "More Navy Week cities" — the rest of the tour, in tour order.
+            'otherCities' => $this->navyWeekEvents->all()
+                ->reject(static fn (NavyWeekEvent $other): bool => $other->slug === $event->slug)
+                ->sortBy('sequence')
+                ->values(),
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);
