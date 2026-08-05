@@ -13,22 +13,38 @@
 
 @section('content')
     <main class="navy-week-city">
-        <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="/">Home</a>
-            <span aria-hidden="true">/</span>
-            <a href="/schedule/">Schedule</a>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page">{{ $event->city }}</span>
-        </nav>
+        {{-- Full-bleed hero: the city photo at 25% opacity under a radial tint,
+             with a back-link, the h1 and the stat row on top. Ported from
+             src/page-views/CityDetail.tsx. Falls back to the generic Navy Week
+             photo when a city has no dedicated image, as the legacy does. --}}
+        @php
+            $heroSlug = file_exists(public_path("images/hero-{$event->slug}-1408.avif")) ? "hero-{$event->slug}" : 'hero-navy-week-event';
+            $heroSlug = file_exists(public_path("images/{$heroSlug}-1408.avif")) ? $heroSlug : 'hero-navy-week';
+        @endphp
+        <section class="city-hero" aria-label="Navy Week {{ $event->city }} overview">
+            <picture>
+                <source type="image/avif" srcset="/images/{{ $heroSlug }}-704.avif 704w, /images/{{ $heroSlug }}-1408.avif 1408w" sizes="100vw">
+                <source type="image/webp" srcset="/images/{{ $heroSlug }}-704.webp 704w, /images/{{ $heroSlug }}-1408.webp 1408w" sizes="100vw">
+                <img class="city-hero-img" src="/images/{{ $heroSlug }}.png" width="1600" height="900"
+                     loading="eager" decoding="async" fetchpriority="high"
+                     alt="Navy Week {{ $event->city }} 2026 — {{ $event->anchor_event }}">
+            </picture>
+            <div class="city-hero-tint" aria-hidden="true"></div>
 
-        <header class="navy-week-hero">
-            <p class="eyebrow">// U.S. Navy Week 2026</p>
-            <h1>{{ $event->city }} Navy Week 2026: Dates, Schedule, Events &amp; {{ $event->anchor_event }}</h1>
-            <p class="dates">{{ \Illuminate\Support\Carbon::parse($event->start_date)->format('F j') }} – {{ \Illuminate\Support\Carbon::parse($event->end_date)->format('F j, Y') }}</p>
-            @if ($event->anchor_event_detail)
-                <p class="anchor">{{ $event->anchor_event_detail }}</p>
-            @endif
-        </header>
+            <div class="city-hero-body">
+                <div class="city-hero-back">
+                    <a href="/schedule/"><span aria-hidden="true">&larr;</span> Back to Full Schedule</a>
+                </div>
+
+                <h1>{{ $event->city }} Navy Week 2026: Dates, Schedule, Events &amp; {{ $event->anchor_event }}</h1>
+
+                <div class="city-hero-stats">
+                    <div><span class="city-stat-label">State</span><span class="city-stat-value">{{ $event->state_name ?? $event->state }}</span></div>
+                    <div><span class="city-stat-label">Dates</span><span class="city-stat-value">{{ $event->start_date->format('F j') }} – {{ $event->end_date->format('F j, Y') }}</span></div>
+                    <div><span class="city-stat-label">Anchor Event</span><span class="city-stat-value">{{ $event->anchor_event }}</span></div>
+                </div>
+            </div>
+        </section>
 
         @include('partials.trust.key-facts', ['keyFacts' => filled($event->quick_facts ?? null) ? [
             'title' => 'Navy Week '.$event->city.' '.\Illuminate\Support\Carbon::parse($event->start_date)->format('Y').' — Key Facts',

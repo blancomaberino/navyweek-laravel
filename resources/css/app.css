@@ -1582,3 +1582,79 @@ section.editorial-policy h2 {
     padding: var(--space-3xl) var(--space-2xl);
     width: 100%;
 }
+
+/* ==========================================================================
+   City guide hero — ported from src/page-views/CityDetail.tsx (inline styles)
+   ========================================================================== */
+.navy-week-city { max-width: none; padding: 0; }
+.navy-week-city > *:not(.city-hero) { margin: 0 auto; max-width: 1100px; padding-left: var(--space-2xl); padding-right: var(--space-2xl); width: 100%; }
+.city-hero {
+    background: var(--navy);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    overflow: hidden;
+    padding: var(--space-3xl) var(--space-2xl);
+    position: relative;
+}
+.city-hero-img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    opacity: 0.25;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+.city-hero-tint {
+    background: radial-gradient(circle at center, rgba(30, 58, 95, 0.2) 0%, transparent 100%);
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+.city-hero-body { margin: 0 auto; max-width: 1100px; position: relative; z-index: 1; }
+.city-hero-back { margin-bottom: var(--space-lg); }
+.city-hero-back a {
+    align-items: center;
+    color: var(--gold-light);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: var(--space-xs);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.city-hero h1 {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 56px);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin: 0 0 var(--space-md);
+    text-transform: uppercase;
+}
+.city-hero-stats {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+.city-hero-stats > div { display: flex; flex-direction: column; gap: var(--space-xs); }
+.city-stat-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.city-stat-value {
+    color: var(--nw-off-white);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
