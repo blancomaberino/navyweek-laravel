@@ -57,7 +57,7 @@ main {
     flex: 1 0 auto;
     margin: 0 auto;
     max-width: var(--nw-maxw);
-    padding: var(--space-2xl) var(--space-lg) var(--space-3xl);
+    padding: var(--space-2xl);
     width: 100%;
 }
 
@@ -921,12 +921,13 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     margin: var(--space-lg) 0;
     padding: var(--space-lg) var(--space-xl);
 }
-.key-facts h2 {
+.key-facts[data-llm-key-facts] h2 {
     color: var(--gold);
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 2px;
+    line-height: 1.6;
     margin: 0 0 var(--space-md);
     text-transform: uppercase;
 }
@@ -969,12 +970,13 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     margin-top: var(--space-2xl);
     padding: var(--space-lg) var(--space-xl);
 }
-.editorial-policy h2 {
+section.editorial-policy h2 {
     color: var(--gold);
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 2px;
+    line-height: 1.6;
     margin: 0 0 var(--space-md);
     text-transform: uppercase;
 }
@@ -1261,15 +1263,6 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
    Navy Week programme pages — /schedule/ and /map/
    ========================================================================== */
 .schedule-hero { margin-bottom: var(--space-xl); }
-.schedule-page h2 {
-    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-    color: var(--gold);
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    letter-spacing: 1.5px;
-    margin-bottom: var(--space-md);
-    padding-bottom: var(--space-sm);
-}
 .schedule-list { list-style: none; margin: 0; padding: 0; }
 .schedule-row a {
     align-items: baseline;
@@ -1306,3 +1299,175 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
 @media (max-width: 720px) {
     .schedule-row a { gap: 4px; grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   /schedule/ + /map/ — ported from src/page-views/Schedule.tsx (inline styles)
+   ========================================================================== */
+.schedule-page { max-width: 1100px; }
+.schedule-head { margin-bottom: var(--space-2xl); }
+.schedule-page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 72px);
+    letter-spacing: 4px;
+    line-height: 1.1;
+    margin: 0;
+}
+.schedule-intro {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-top: var(--space-sm);
+}
+.schedule-verified {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-top: var(--space-lg);
+    text-transform: uppercase;
+}
+.schedule-official {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+.schedule-official-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.schedule-official a {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1px;
+    text-decoration: underline;
+}
+
+.schedule-filterbar {
+    align-items: center;
+    background: var(--navy-mid);
+    border-radius: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-md);
+}
+.schedule-filter-group { display: flex; flex-wrap: wrap; gap: var(--space-md); }
+.schedule-status-buttons { display: flex; gap: var(--space-xs); }
+.schedule-status-buttons button,
+.schedule-filter-group select {
+    background: transparent;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 2px;
+    color: var(--gold);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 8px 16px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+.schedule-filter-group select { min-width: 140px; outline: none; }
+.schedule-status-buttons button.is-on { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.schedule-view-buttons { display: flex; gap: var(--space-xs); }
+.schedule-view-buttons button {
+    background: transparent;
+    border: none;
+    border-radius: 2px;
+    color: var(--nw-gray);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px;
+    transition: all 0.2s;
+}
+.schedule-view-buttons button.is-on { background: rgba(201, 168, 76, 0.1); color: var(--gold); }
+
+.schedule-grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.schedule-grid[data-view="table"] { grid-template-columns: 1fr; }
+
+.event-card {
+    background: var(--navy-mid);
+    border-radius: 2px;
+    border-top: 3px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.event-card.status-upcoming { border-top-color: var(--gold); }
+.event-card.status-active { border: 1px solid var(--nw-green); border-top: 3px solid var(--nw-green); }
+.event-card.is-past { filter: grayscale(30%); opacity: 0.6; }
+.event-card-dates {
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.event-card-city {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.event-card-state { color: var(--nw-gray); font-family: var(--font-body); font-size: 12px; font-weight: 300; }
+.event-card-anchor {
+    color: var(--nw-off-white);
+    flex: 1;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+.event-card-foot {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-xs);
+}
+.event-card-foot a {
+    align-items: center;
+    color: var(--gold);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: 4px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.event-card-foot a:hover { text-decoration: none; }
+.status-badge { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.status-badge-pill {
+    border-radius: 2px;
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    text-transform: uppercase;
+}
+.status-badge-pill.is-upcoming { background: rgba(201, 168, 76, 0.15); color: #e8c96a; }
+.status-badge-pill.is-active { background: rgba(26, 92, 58, 0.4); color: #6dc28a; }
+.status-badge-pill.is-completed { background: rgba(140, 140, 122, 0.1); color: #8c8c7a; }
+.status-badge-pill.is-firsttime { background: rgba(30, 58, 95, 0.6); color: #7aa8d8; }

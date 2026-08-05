@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Domain\Publishing\Pages;
 
+use App\Domain\Pillars\Models\NavyWeekEvent;
 use App\Domain\Pillars\Repositories\NavyWeekEventRepositoryInterface;
 use App\Domain\Publishing\Enums\PageType;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use Illuminate\Support\Carbon;
 
 /**
  * Generates the two Navy Week programme pages: `/schedule/` (the full 2026
@@ -20,6 +22,9 @@ final class GenerateSchedulePagesAction
 {
     private const YEAR = 2026;
 
+    /** The legacy `meta.lastChecked` — drives "Last verified" on both pages. */
+    private const LAST_CHECKED = '2026-07-12';
+
     public function __construct(
         private readonly NavyWeekEventRepositoryInterface $events,
         private readonly PageRepositoryInterface $pages,
@@ -30,8 +35,20 @@ final class GenerateSchedulePagesAction
      */
     public function __invoke(): int
     {
-        $count = $this->events->all()->count();
+        $all = $this->events->all()->sortBy('sequence')->values();
+        $count = $all->count();
         $year = self::YEAR;
+        $firstTime = $all->filter(fn ($e) => $e->first_time || filled($e->first_time_location))->count();
+        $label = static function (?NavyWeekEvent $e): string {
+            if ($e === null) {
+                return '';
+            }
+            $range = $e->start_date->format('M d').' – '.$e->end_date->format('M d, Y');
+
+            return "{$e->city}, {$e->state_abbr} ({$range})";
+        };
+        $firstLabel = $label($all->first());
+        $lastLabel = $label($all->last());
 
         $this->pages->upsertPillarPage('schedule', '/schedule/', [
             'page_type' => PageType::Schedule,
@@ -43,13 +60,18 @@ final class GenerateSchedulePagesAction
             'key_facts' => [
                 'title' => "{$year} Schedule — Key Facts",
                 'facts' => [
-                    ['label' => 'Host cities', 'value' => (string) $count],
-                    ['label' => 'Programme', 'value' => "U.S. Navy Week {$year} — the Navy's flagship community outreach tour"],
-                    ['label' => 'Operator', 'value' => 'Navy Office of Community Outreach (NAVCO), Millington, Tennessee'],
-                    ['label' => 'Cost to attend', 'value' => 'Free — every Navy Week event is open to the public at no charge'],
+                    ['label' => 'Total host cities', 'value' => (string) $count],
+                    ['label' => 'First-time locations', 'value' => (string) $firstTime],
+                    ['label' => 'First stop', 'value' => $firstLabel],
+                    ['label' => 'Final stop', 'value' => $lastLabel],
+                    ['label' => 'Events per city', 'value' => '75–100 free, public-facing events'],
+                    ['label' => 'Theme', 'value' => '"Road Trip to 250" — celebrating the 250th birthday of the U.S. Navy and the United States'],
                 ],
-                'source' => ['label' => 'Navy Office of Community Outreach (outreach.navy.mil)', 'url' => 'https://outreach.navy.mil/Navy-Weeks/'],
+                'source' => ['label' => 'outreach.navy.mil/Navy-Weeks', 'url' => 'https://outreach.navy.mil/Navy-Weeks/'],
+                'lastVerified' => Carbon::parse(self::LAST_CHECKED)->format('F j, Y'),
             ],
+            'last_reviewed' => self::LAST_CHECKED,
+            'sources_checked' => self::LAST_CHECKED,
             'is_published' => true,
         ]);
 
@@ -67,8 +89,11 @@ final class GenerateSchedulePagesAction
                     ['label' => 'Programme year', 'value' => "{$year} — the \"Road Trip to 250\" tour"],
                     ['label' => 'Operator', 'value' => 'Navy Office of Community Outreach (NAVCO)'],
                 ],
-                'source' => ['label' => 'Navy Office of Community Outreach (outreach.navy.mil)', 'url' => 'https://outreach.navy.mil/Navy-Weeks/'],
+                'source' => ['label' => 'outreach.navy.mil/Navy-Weeks', 'url' => 'https://outreach.navy.mil/Navy-Weeks/'],
+                'lastVerified' => Carbon::parse(self::LAST_CHECKED)->format('F j, Y'),
             ],
+            'last_reviewed' => self::LAST_CHECKED,
+            'sources_checked' => self::LAST_CHECKED,
             'is_published' => true,
         ]);
 
