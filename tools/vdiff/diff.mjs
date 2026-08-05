@@ -31,8 +31,20 @@ async function shoot(page, url, file, height) {
     content: `*,*::before,*::after{transition:none!important;animation:none!important}
       iframe[title*="hat"],div[id*="crisp"],div[class*="crisp"],#hubspot-messages-iframe-container{display:none!important}`,
   }).catch(() => {});
+  // The live site injects a third-party chat bubble with no id or class to target
+  // — a fixed 50x50 div at the max z-index. Hide anything with that signature so it
+  // stops showing up as a difference the port is supposed to fix.
+  await page.evaluate(() => {
+    for (const el of document.body.querySelectorAll('div')) {
+      const cs = getComputedStyle(el);
+      if (cs.position === 'fixed' && Number(cs.zIndex) > 2000000000) el.style.display = 'none';
+    }
+  }).catch(() => {});
   await page.waitForTimeout(400);
-  await page.screenshot({ path: file, clip: { x: 0, y: 0, width: page.viewportSize().width, height } });
+  // fullPage, NOT clip: Playwright clamps `clip` to the viewport, so a clipped
+  // shot only ever compared the top ~900px and everything below the fold went
+  // unmeasured. Pad both shots to a common height so the compare is apples-to-apples.
+  await page.screenshot({ path: file, fullPage: true });
 }
 
 const browser = await chromium.launch();
@@ -55,9 +67,19 @@ for (const vp of VIEWPORTS) {
       await shoot(page, REMOTE + p, bFile, H);
       const a = PNG.sync.read(fs.readFileSync(aFile));
       const b = PNG.sync.read(fs.readFileSync(bFile));
-      const { width, height } = a;
+      // Full-page shots differ in length whenever content does; compare over the
+      // taller of the two so missing/extra content counts as a difference.
+      const width = Math.min(a.width, b.width);
+      const height = Math.max(a.height, b.height);
+      const pad = (img) => {
+        if (img.height === height && img.width === width) return img;
+        const out = new PNG({ width, height });
+        PNG.bitblt(img, out, 0, 0, Math.min(width, img.width), Math.min(height, img.height), 0, 0);
+        return out;
+      };
+      const A = pad(a), B = pad(b);
       const diff = new PNG({ width, height });
-      const n = pixelmatch(a.data, b.data, diff.data, width, height, { threshold: 0.12 });
+      const n = pixelmatch(A.data, B.data, diff.data, width, height, { threshold: 0.12 });
       const pct = (n / (width * height)) * 100;
       if (pct > 0.5) fs.writeFileSync(path.join(OUT, `${slug}.diff.png`), PNG.sync.write(diff));
       rows.push({ path: p, vp: vp.name, pct });
