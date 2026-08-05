@@ -63,6 +63,8 @@ use Illuminate\Support\Carbon;
  * @property bool $shows_reference_backlink
  * @property int|null $author_id
  * @property int|null $reviewer_id
+ * @property string|null $author_credentials
+ * @property string|null $reviewer_credentials
  * @property string|null $pageable_type
  * @property int|null $pageable_id
  * @property bool $is_published
@@ -119,6 +121,8 @@ class Page extends Model
         'shows_reference_backlink',
         'author_id',
         'reviewer_id',
+        'author_credentials',
+        'reviewer_credentials',
         'pageable_type',
         'pageable_id',
         'is_published',

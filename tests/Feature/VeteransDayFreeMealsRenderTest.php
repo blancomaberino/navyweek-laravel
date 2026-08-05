@@ -61,7 +61,7 @@ it('renders only verified meals, with the discount link, badge, and full JSON-LD
     $res = freeMealsFetch('/veterans-day/free-meals/')->assertOk();
 
     $res->assertSee('Veterans Day Free Meals 2026')
-        ->assertSee('Showing 2 of 2 verified offers')
+        ->assertSee('Showing <strong>2</strong> of 2 verified offers', false) // the count is emphasised, as on the live page
         ->assertSee('Applebees')
         ->assertSee('Texas Roadhouse')
         ->assertDontSee('Friendlys')                                       // pending → gated out
@@ -88,6 +88,6 @@ it('shows the empty state when no meals are verified', function () {
 
     freeMealsFetch('/veterans-day/free-meals/')
         ->assertOk()
-        ->assertSee('Showing 0 of 0 verified offers')
+        ->assertSee('Showing <strong>0</strong> of 0 verified offers', false)
         ->assertSee('"numberOfItems":0', false);
 });

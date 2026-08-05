@@ -340,9 +340,16 @@ final class BackfillEditorialPolicyCommand extends Command
         $brand = $offer->connection->brand;
         $verification = $provider->value;
 
+        // The legacy guide renders `d.sourcePriorityNote ?? {generic default}` — a
+        // brand that documents its own sourcing (roughly half of them do) states it
+        // in its own words, so the record's note wins over the house sentence.
+        $note = $offer->source_priority_note;
+
         return [
             'label' => "{$brand} military discount page",
-            'source' => "We cite {$brand}'s official discount page and the identity-verification provider ({$verification}) first. Discount amounts, eligibility, and exclusions are quoted from those sources and confirmed on the \"Last verified\" date above.",
+            'source' => filled($note)
+                ? $note
+                : "We cite {$brand}'s official discount page and the identity-verification provider ({$verification}) first. Discount amounts, eligibility, and exclusions are quoted from those sources and confirmed on the \"Last verified\" date above.",
             'cadence' => "Because {$brand} can change these terms at any time, the offer is re-verified against the official page on a recurring basis and whenever a reader reports a change.",
         ];
     }

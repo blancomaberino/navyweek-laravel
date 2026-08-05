@@ -121,6 +121,25 @@
     max-width: 800px;
 }
 
+/* The legacy `EditorialPolicyBox` heading sets no line-height, so it takes the
+   document's 1.5 (11px → 17px); anything taller pushes every bullet down a pixel. */
+.content-page .editorial-policy h2 {
+    line-height: 1.5;
+}
+
+/* Both trust boxes close the legacy section stack, so they sit a full section gap
+   below the body — 48px on the pages whose stack uses `--space-2xl`. */
+.content-page .corrections-box {
+    margin-top: var(--space-2xl);
+}
+
+/* The legacy byline closes with `marginBottom: var(--space-2xl)` before the
+   KeyFacts card; the shared partial leaves a 32px gap, so the guide pages restate
+   the 48 here (adjacent margins collapse to the larger). */
+.content-page .key-facts {
+    margin-top: var(--space-2xl);
+}
+
 /* The shared trust cards carry their own type scale — keep the body-copy rule
    above from reaching into them. The card title takes this page's 1.5 heading
    leading, not the 1.6 the pillar pages use. */
@@ -756,6 +775,15 @@
     margin-top: var(--space-2xl);
 }
 
+/* The editorial-policy and corrections boxes are the last two items of the section
+   stack, so they take the same 64px gap these two pages keep between sections. */
+.content-page--va-disability .editorial-policy,
+.content-page--va-disability .corrections-box,
+.content-page--veterans-day .editorial-policy,
+.content-page--veterans-day .corrections-box {
+    margin-top: var(--space-3xl);
+}
+
 /* -- /veterans-home-care/ ------------------------------------------------- */
 .content-page--veterans-home-care h1 {
     font-size: clamp(34px, 5.5vw, 50px);
@@ -776,9 +804,12 @@
     gap: 6px var(--space-lg);
 }
 
+/* This guide's jump links set no line-height in the legacy (the VA guide's set
+   1.6), which makes each grid row a fraction of a pixel shorter. */
 .content-page--veterans-home-care .content-toc li span,
 .content-page--veterans-home-care .content-toc li a {
     border-bottom: 0;
+    line-height: 1.5;
 }
 
 /* This guide's rate table is body-face, has no head fill and no top offset. */
@@ -1497,5 +1528,556 @@
     .content-page--our-process .op-grid,
     .content-page--our-process .op-grid--gate {
         grid-template-columns: 1fr;
+    }
+}
+
+/* The two VA guides ship their own EditorialPolicyBox rather than the shared
+   ReferenceTrust one, and its list inherits the page's 16px body type instead of
+   the 14px the reference pages use (VaDisability.tsx / VeteransHomeCare.tsx —
+   the `ul` const sets no font-size). At 14px the bullets wrap a line early, which
+   made the box ~90-115px short. Every other family is correct at 14px. */
+.content-page--va-disability .editorial-policy ul,
+.content-page--veterans-home-care .editorial-policy ul {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Their heading carries no gold underline either — the box is the page's own
+   component, not the shared ReferenceTrust one. */
+.content-page--va-disability .editorial-policy h2,
+.content-page--veterans-home-care .editorial-policy h2 {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* ==========================================================================
+   /veterans-day/free-meals/ — pages/veterans-day-free-meals.blade.php.
+   Ported from the inline styles + EXPLORER_CSS in
+   src/page-views/VeteransDayFreeMeals.tsx. The `.vdm-*` rules here restate the
+   legacy explorer CSS so it outranks the generic table rules in app.css.
+   ========================================================================== */
+.veterans-day-free-meals {
+    margin: 0 auto;
+    max-width: 1080px;
+    padding: var(--space-3xl) var(--space-2xl);
+}
+
+.veterans-day-free-meals .fm-backlink {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .fm-hero {
+    margin-bottom: var(--space-xl);
+    margin-top: var(--space-lg);
+}
+
+.veterans-day-free-meals .fm-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals h1 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 56px);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.veterans-day-free-meals .fm-intro {
+    color: var(--nw-off-white);
+    font-size: 18px;
+    line-height: 1.7;
+    margin: var(--space-lg) 0 0;
+    max-width: 760px;
+}
+
+.veterans-day-free-meals .fm-hero-meta {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: var(--space-md);
+}
+
+.veterans-day-free-meals .fm-hero-meta span,
+.veterans-day-free-meals .fm-byline-verified span {
+    color: var(--nw-off-white);
+}
+
+.veterans-day-free-meals .fm-byline {
+    align-items: flex-start;
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.veterans-day-free-meals .fm-byline-avatar {
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 56px;
+    object-fit: cover;
+    width: 56px;
+}
+
+.veterans-day-free-meals .fm-byline-body {
+    flex: 1 1 300px;
+    font-size: 13px;
+    line-height: 1.6;
+    min-width: 0;
+}
+
+.veterans-day-free-meals .fm-byline-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .fm-byline-name {
+    margin-bottom: 6px;
+}
+
+.veterans-day-free-meals .fm-byline-name a {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.veterans-day-free-meals .fm-byline-name span {
+    color: var(--nw-gray-light);
+}
+
+.veterans-day-free-meals .fm-byline-verified {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.veterans-day-free-meals .fm-headline-stat {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: var(--space-xl) 0;
+    padding: var(--space-lg) var(--space-xl);
+}
+
+.veterans-day-free-meals .fm-stat-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .fm-headline-stat p {
+    color: var(--nw-white);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Section headings + body, matching the guide pages' `Section()` treatment. */
+.veterans-day-free-meals .fm-supporting {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+    margin-top: var(--space-3xl);
+}
+
+/* app.css gives every `section` a block margin; the legacy stack spaces them
+   with the flex `gap` alone. */
+.veterans-day-free-meals .fm-supporting > section {
+    margin: 0;
+}
+
+.veterans-day-free-meals .fm-supporting h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-md);
+    padding-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .fm-section-body {
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    gap: var(--space-md);
+    line-height: 1.75;
+}
+
+.veterans-day-free-meals .fm-section-body p {
+    margin: 0;
+}
+
+.veterans-day-free-meals .fm-section-body ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0 0;
+    padding-left: var(--space-lg);
+}
+
+/* `border: 0` drops the 1px box app.css puts round `.fm-callout`; the legacy
+   Callout is a gold rule on the left only, with no margin of its own. */
+.veterans-day-free-meals .fm-callout {
+    background: var(--navy);
+    border: 0;
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+    padding: var(--space-md) var(--space-lg);
+}
+
+/* Legacy wraps the disclosure cards in their own 8px-gap stack. */
+.veterans-day-free-meals .fm-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.veterans-day-free-meals .fm-faqs details {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    padding: var(--space-md) var(--space-lg);
+}
+
+.veterans-day-free-meals .fm-faqs summary {
+    color: var(--nw-white);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.75;
+    list-style: revert;
+    padding: 0;
+}
+
+.veterans-day-free-meals .fm-faqs summary::-webkit-details-marker {
+    display: revert;
+}
+
+.veterans-day-free-meals .fm-faqs summary::before {
+    content: none;
+}
+
+.veterans-day-free-meals .fm-faqs details > div {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: var(--space-sm);
+    padding: 0;
+}
+
+/* -- the offers explorer (legacy EXPLORER_CSS) ---------------------------- */
+.veterans-day-free-meals .vdm-controls {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 6px;
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: var(--space-lg);
+}
+
+.veterans-day-free-meals .vdm-control {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.veterans-day-free-meals .vdm-search {
+    grid-column: 1 / -1;
+}
+
+.veterans-day-free-meals .vdm-control label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .vdm-control input,
+.veterans-day-free-meals .vdm-control select {
+    background: var(--navy);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 4px;
+    color: var(--nw-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 9px 11px;
+    width: 100%;
+}
+
+.veterans-day-free-meals .vdm-control input:focus,
+.veterans-day-free-meals .vdm-control select:focus {
+    border-color: var(--gold);
+    outline: none;
+}
+
+.veterans-day-free-meals .vdm-control select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.veterans-day-free-meals .vdm-resultbar {
+    align-items: center;
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: var(--space-md);
+    justify-content: space-between;
+    letter-spacing: 0.5px;
+    margin: var(--space-lg) 0 var(--space-md);
+}
+
+.veterans-day-free-meals .vdm-resultbar strong {
+    color: var(--gold);
+}
+
+.veterans-day-free-meals .vdm-reset {
+    background: var(--gold);
+    border: none;
+    border-radius: 3px;
+    color: var(--navy);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 7px 14px;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .vdm-reset:hover {
+    background: var(--gold-light);
+}
+
+.veterans-day-free-meals .vdm-empty {
+    align-items: center;
+    background: var(--navy-mid);
+    border: 1px dashed rgba(201, 168, 76, 0.3);
+    border-radius: 6px;
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-3xl) var(--space-lg);
+    text-align: center;
+}
+
+.veterans-day-free-meals .vdm-empty[hidden] {
+    display: none;
+}
+
+.veterans-day-free-meals .vdm-tablewrap {
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+/* `overflow-wrap: normal` undoes app.css's `anywhere` — the legacy table lets
+   columns size to their words, and breaking mid-word doubles every row. */
+.veterans-day-free-meals .vdm-table {
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 0;
+    overflow-wrap: normal;
+    width: 100%;
+}
+
+.veterans-day-free-meals .vdm-table thead th {
+    background: var(--navy-mid);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 12px 14px;
+    position: sticky;
+    text-align: left;
+    text-transform: uppercase;
+    top: 0;
+    white-space: nowrap;
+}
+
+.veterans-day-free-meals .vdm-table td {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    color: var(--nw-off-white);
+    line-height: 1.5;
+    padding: 14px;
+    vertical-align: top;
+}
+
+.veterans-day-free-meals .vdm-table tbody tr:hover {
+    background: rgba(21, 35, 64, 0.5);
+}
+
+.veterans-day-free-meals .vdm-brand {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.veterans-day-free-meals .vdm-brand-link {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.veterans-day-free-meals .vdm-brand-name {
+    color: var(--nw-white);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.veterans-day-free-meals .vdm-badge {
+    background: rgba(26, 92, 58, 0.18);
+    border: 1px solid rgba(26, 92, 58, 0.5);
+    border-radius: 3px;
+    color: var(--nw-green);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.veterans-day-free-meals .vdm-tag {
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-radius: 3px;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .vdm-note {
+    color: var(--nw-gray-light);
+    font-size: 12.5px;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.veterans-day-free-meals .vdm-source {
+    color: var(--gold);
+    font-size: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.veterans-day-free-meals .vdm-source:hover {
+    text-decoration: underline;
+}
+
+/* Legacy `@media (max-width: 760px)`: the full table stays in the HTML and CSS
+   restacks it into one card per row. */
+@media (max-width: 760px) {
+    .veterans-day-free-meals .vdm-tablewrap {
+        border: none;
+        overflow-x: visible;
+    }
+
+    .veterans-day-free-meals .vdm-table,
+    .veterans-day-free-meals .vdm-table tbody,
+    .veterans-day-free-meals .vdm-table tr,
+    .veterans-day-free-meals .vdm-table td {
+        display: block;
+        white-space: normal;
+        width: 100%;
+    }
+
+    .veterans-day-free-meals .vdm-table {
+        overflow-x: visible;
+    }
+
+    .veterans-day-free-meals .vdm-table thead {
+        clip: rect(0 0 0 0);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+    }
+
+    .veterans-day-free-meals .vdm-table tr {
+        background: var(--navy-mid);
+        border: 1px solid rgba(201, 168, 76, 0.18);
+        border-radius: 6px;
+        margin-bottom: var(--space-md);
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .veterans-day-free-meals .vdm-table tr:hover {
+        background: var(--navy-mid);
+    }
+
+    .veterans-day-free-meals .vdm-table td {
+        border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+        display: grid;
+        gap: var(--space-md);
+        grid-template-columns: 40% 60%;
+        padding: 9px 0;
+    }
+
+    .veterans-day-free-meals .vdm-table td:last-child {
+        border-bottom: none;
+    }
+
+    .veterans-day-free-meals .vdm-table td::before {
+        align-self: center;
+        color: var(--gold);
+        content: attr(data-label);
+        font-family: var(--font-mono);
+        font-size: 9.5px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .veterans-day-free-meals .vdm-table td[data-label='Brand'] {
+        grid-template-columns: 1fr;
+    }
+
+    .veterans-day-free-meals .vdm-table td[data-label='Brand']::before {
+        display: none;
     }
 }

@@ -254,8 +254,12 @@
                     <p class="{{ $paragraphClass($heroBlock) }}">{!! isset($heroBlock['spans']) ? $inline($heroBlock['spans']) : e($plain($heroBlock)) !!}</p>
                 @endforeach
 
+                {{-- The credit-cards guide uses the legacy `TrustByline` variant that
+                     leads with the publish date (BestCreditCardsForMilitary.tsx:529);
+                     the other guides carry their own "last reviewed / sources checked"
+                     line. --}}
                 @if ($showsByline)
-                    @include('partials.trust.byline')
+                    @include('partials.trust.byline', ['publishDate' => $page->slug === 'best-credit-cards-for-military'])
                 @endif
             </div>
 
@@ -390,7 +394,7 @@
                                         <tr>
                                             @foreach ($row as $cell)
                                                 <td @class(['is-right' => ($cell['align'] ?? '') === 'right', 'is-accent' => $cell['accent'] ?? false])
-                                                    @if (filled($cell['label'] ?? null)) data-label="{{ $cell['label'] }}" @endif>{!! $inline($cell['spans'] ?? []) !!}@if (filled($cell['sub'] ?? null))<span class="content-cell-sub">{{ $cell['sub'] }}</span>@endif</td>
+                                                    @if (filled($cell['label'] ?? null)) data-label="{{ $cell['label'] }}" @endif>{!! $inline($cell['spans'] ?? []) !!}@if (filled($cell['sub'] ?? null))<div class="content-cell-sub">{{ $cell['sub'] }}</div>@endif</td>
                                             @endforeach
                                         </tr>
                                     @endforeach
