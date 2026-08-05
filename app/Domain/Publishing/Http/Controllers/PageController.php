@@ -12,6 +12,7 @@ use App\Domain\Catalog\Repositories\LocalDiscountRepositoryInterface;
 use App\Domain\Catalog\Repositories\VeteransDayMealRepositoryInterface;
 use App\Domain\Catalog\Support\VeteransDayFreeMealsPresenter;
 use App\Domain\Crm\Models\Connection;
+use App\Domain\Navigation\Support\ChromeCatalog;
 use App\Domain\Pillars\Enums\DesignatorCommunity;
 use App\Domain\Pillars\Enums\NavyWeekStatus;
 use App\Domain\Pillars\Enums\RankCategory;
@@ -467,6 +468,17 @@ final class PageController
         return response()->view('pages.discount', [
             'page' => $page,
             'offer' => $offer,
+            // "More military discounts" — sibling brands, reusing the request-scoped
+            // chrome catalog so this costs no extra query.
+            'relatedBrands' => collect(app(ChromeCatalog::class)->deals())
+                ->reject(static fn (array $deal): bool => $deal['url'] === $page->url_path)
+                ->when(
+                    filled($offer->connection->category),
+                    static fn ($deals) => $deals->where('category', $offer->connection->category)
+                )
+                ->take(8)
+                ->values()
+                ->all(),
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

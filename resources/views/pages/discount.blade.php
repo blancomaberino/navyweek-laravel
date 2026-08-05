@@ -59,8 +59,8 @@
             ] : null])
 
             @if (filled($offer->tiers))
-                <section aria-labelledby="savings-heading" class="savings-tiers">
-                    <h2 id="savings-heading">Savings by audience</h2>
+                <section aria-label="Savings by audience" class="savings-tiers">
+                    
                     <table>
                         <thead>
                             <tr><th scope="col">Who</th><th scope="col">Discount</th><th scope="col">Notes</th></tr>
@@ -123,6 +123,17 @@
                 </section>
             @endif
 
+
+            {{-- HOW IT WORKS — the verification/context narrative from the brand record. --}}
+            @if (filled($offer->details))
+                <section aria-labelledby="how-it-works-heading" class="how-it-works">
+                    <h2 id="how-it-works-heading">HOW IT WORKS</h2>
+                    @foreach ($offer->details as $paragraph)
+                        <p>{{ $paragraph }}</p>
+                    @endforeach
+                </section>
+            @endif
+
             @if ($offer->faqs->isNotEmpty())
                 <section aria-labelledby="faq-heading" class="faqs">
                     <h2 id="faq-heading">FREQUENTLY ASKED QUESTIONS</h2>
@@ -158,6 +169,18 @@
                     </a>
                 </footer>
             @endif
+
+
+        @if (filled($relatedBrands))
+            <section class="more-discounts" aria-label="More military discounts">
+                <h2>MORE MILITARY DISCOUNTS</h2>
+                <ul>
+                    @foreach ($relatedBrands as $related)
+                        <li><a href="{{ $related['url'] }}">{{ $related['brand'] }}</a></li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
 
             @include('partials.trust.editorial-policy')
         </article>

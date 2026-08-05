@@ -31,6 +31,8 @@ use Illuminate\Support\Carbon;
  * @property string|null $slug
  * @property string|null $job_title
  * @property string|null $credentials
+ * @property string|null $military_service
+ * @property string|null $civilian_career
  * @property string|null $avatar_path
  * @property array<int, string>|null $knows_about
  * @property string|null $bio

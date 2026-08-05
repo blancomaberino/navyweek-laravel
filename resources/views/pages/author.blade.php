@@ -41,6 +41,20 @@
             </section>
         @endif
 
+        @if ($author->military_service)
+            <section class="author-section" aria-labelledby="service-heading">
+                <h2 id="service-heading">MILITARY SERVICE</h2>
+                <p>{{ $author->military_service }}</p>
+            </section>
+        @endif
+
+        @if ($author->civilian_career)
+            <section class="author-section" aria-labelledby="career-heading">
+                <h2 id="career-heading">CIVILIAN CAREER</h2>
+                <p>{{ $author->civilian_career }}</p>
+            </section>
+        @endif
+
         @if ($author->knows_about)
             <section class="author-section" aria-labelledby="expertise-heading">
                 <h2 id="expertise-heading">AREAS OF EXPERTISE</h2>
@@ -65,7 +79,7 @@
 
         @if ($reviewed->isNotEmpty())
             <section class="author-section" aria-labelledby="reviews-heading">
-                <h2 id="reviews-heading">Reviews for NavyWeek.org</h2>
+                <h2 id="reviews-heading">REVIEWS FOR NAVYWEEK.ORG</h2>
                 <p>{{ $author->name }} is a named expert reviewer on these NavyWeek.org guides:</p>
                 <ul class="author-links">
                     @foreach ($reviewed as $article)

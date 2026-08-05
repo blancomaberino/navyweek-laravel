@@ -22,7 +22,7 @@
         </nav>
 
         <header class="local-discount-header">
-            <h1>{{ $discount->h1 }}</h1>
+            <h1>{{ $discount->company }} Military &amp; Veteran Discount</h1>
             @if ($discount->hero_tagline !== '')
                 <p class="tagline">{{ $discount->hero_tagline }}</p>
             @endif
@@ -40,6 +40,7 @@
 
         @if ($discount->key_facts !== [])
             <section class="key-facts" aria-label="Key facts">
+                <h2>Key Facts</h2>
                 <dl>
                     @foreach ($discount->key_facts as $fact)
                         <div>
@@ -53,7 +54,7 @@
 
         @if ($discount->tiers !== [])
             <section class="savings-tiers" aria-label="Savings by audience">
-                <h2>WHO SAVES</h2>
+                <h2>What you get</h2>
                 <ul>
                     @foreach ($discount->tiers as $tier)
                         <li><strong>{{ $tier['audience'] }}:</strong> {{ $tier['amount'] }}@if (! empty($tier['note'])) — {{ $tier['note'] }}@endif</li>
@@ -64,7 +65,7 @@
 
         @if ($discount->redeem_in_store !== [])
             <section class="redeem" aria-label="How to redeem in store">
-                <h2>HOW TO REDEEM IN STORE</h2>
+                <h2>How to redeem in {{ $discount->city_name }}</h2>
                 <ol>
                     @foreach ($discount->redeem_in_store as $step)
                         <li><strong>{{ $step['title'] }}</strong> — {{ $step['detail'] }}</li>
@@ -73,12 +74,23 @@
             </section>
         @endif
 
+        @if (filled($discount->eligibility))
+            <section class="who-qualifies" aria-label="Who qualifies">
+                <h2>Who qualifies</h2>
+                <ul>
+                    @foreach ((array) $discount->eligibility as $who)
+                        <li>{{ $who }}</li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif
+
         @if ($discount->stores->isNotEmpty())
             <section class="stores" aria-label="Store locations">
-                <h2>LOCATIONS</h2>
+                <h2>The details</h2>
                 @foreach ($discount->stores->sortBy('sort_order') as $store)
                     <article class="store">
-                        <h3>{{ $store->name }}</h3>
+                        <h3>Installations near {{ $discount->company }}</h3>
                         <address>
                             {{ $store->street }}, {{ $store->city }}, {{ $store->state_abbr }} {{ $store->zip }}
                             @if ($store->phone)<br><a href="tel:{{ $store->phone }}">{{ $store->phone }}</a>@endif
@@ -100,7 +112,7 @@
 
         @if ($discount->exclusions !== [])
             <section class="exclusions" aria-label="Exclusions">
-                <h2>EXCLUSIONS</h2>
+                <h2>Good to know</h2>
                 <ul>
                     @foreach ($discount->exclusions as $exclusion)
                         <li>{{ $exclusion }}</li>
@@ -115,7 +127,7 @@
 
         @if ($discount->faqs->isNotEmpty())
             <section class="faqs" aria-label="Frequently asked questions">
-                <h2>FAQS</h2>
+                <h2>{{ $discount->city_name }} FAQ</h2>
                 @foreach ($discount->faqs as $faq)
                     <details>
                         <summary>{{ $faq->question }}</summary>
@@ -125,16 +137,5 @@
             </section>
         @endif
 
-        @if ($discount->sources->isNotEmpty())
-            <section class="sources" aria-label="Sources">
-                <h2>SOURCES</h2>
-                <ul>
-                    @foreach ($discount->sources as $source)
-                        <li><a href="{{ $source->url }}" target="_blank" rel="noopener nofollow">{{ $source->label }}</a>@if ($source->publisher) — {{ $source->publisher }}@endif</li>
-                    @endforeach
-                </ul>
-            </section>
-        @endif
-        @include('partials.trust.editorial-policy')
     </main>
 @endsection
