@@ -21,10 +21,13 @@
 
         @include('partials.trust.disclosure')
 
+        {{-- Kicker + intro are the legacy hub's own hero copy (NavyRatingsHub.tsx),
+             not the meta description — this family has exactly one page, so the
+             copy belongs to the template the way rank-list.blade.php holds its own. --}}
         <header class="rating-hero">
-            <p class="eyebrow">// U.S. Navy Reference</p>
+            <p class="eyebrow">{{ $page->eyebrow ?? '// Enlisted Job Specialties' }}</p>
             <h1>{{ $page->h1 ?? 'NAVY RATINGS' }}</h1>
-            <p class="intro">{{ $page->meta_description }}</p>
+            <p class="intro">A rating is an enlisted Sailor's occupational specialty — the job title worn on the rating badge, from Hospital Corpsman (HM) to Boatswain's Mate (BM). Every active rating is listed below, grouped by community, followed by the historic ratings the Navy has disestablished or merged away.</p>
         </header>
 
         @include('partials.trust.byline')
@@ -78,6 +81,7 @@
         @if ($historic->isNotEmpty())
             <section id="historic" class="rating-section historic" aria-label="Historic ratings">
                 <h2>HISTORIC RATINGS (DISESTABLISHED)</h2>
+                <p class="section-intro">Ratings the Navy has disestablished, merged, or renamed — listed by the year they were retired.</p>
                 <ul class="rating-rows">
                     @foreach ($historic as $rating)
                         <li id="{{ $rating->slug }}" class="rating-row">
@@ -93,9 +97,16 @@
             </section>
         @endif
 
-        <footer class="rating-footer">
-            <a href="{{ \App\Domain\Publishing\Support\PagePaths::root('ranks') }}">← Navy Ranks</a>
-        </footer>
+        {{-- "See Also" cross-link card, ported 1:1 from NavyRatingsHub.tsx. --}}
+        <div class="rating-see-also">
+            <div class="rating-see-also-eyebrow">See Also</div>
+            <div class="rating-see-also-title">Navy Ranks</div>
+            <div class="rating-see-also-body">Ratings are jobs; ranks are paygrades. See every commissioned officer, warrant officer, and enlisted paygrade on the Navy Ranks list.</div>
+            <a class="rating-see-also-cta" href="{{ \App\Domain\Publishing\Support\PagePaths::root('ranks') }}">
+                Browse Navy Ranks
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+        </div>
 
         @include('partials.trust.editorial-policy')
     </main>

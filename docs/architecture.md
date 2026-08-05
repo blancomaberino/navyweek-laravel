@@ -50,6 +50,7 @@ drives `Catalog\Support\VeteransDayFreeMealsPresenter` + `Publishing\Seo\Veteran
 (Breadcrumb + Article + author Person + ItemList + FAQPage; `dateModified` tracks the freshest
 verification) into the `pages.veterans-day-free-meals` view (SSR-first table, progressively
 enhanced with client-side filter/sort). Non-persisted FAQ pairs use `Publishing\Support\FaqItem`.
+Map rendering is server-side from two distinct coordinate assets: `Publishing\Support\UsMapGeometry` (Albers-USA landmass + state-border mesh, inset labels and tour-stop pin positions; drives `/map/` and the home map teaser) and `Pillars\Support\BaseMapSvg` (the separate hand-drawn bases projection — 960x560 CONUS schematic with Hawaii/Alaska inset, plus a 1000x500 world silhouette with per-country zoom; drives the base detail, country hub and overseas hub). Both are static rendering assets, not CMS content.
 
 **The author-profile page family** (`/authors/{slug}/`) renders one profile page per
 editorial byline `users` row that has a public `slug`. Like the home hub, it is data-driven
@@ -916,8 +917,10 @@ erDiagram
 > folds the legacy `NavyWeekEvent` + `CityData` + `CityExtras` into one row per
 > city — the three-file split was a file-organization artifact, all keyed by slug.
 > `sequence` preserves the legacy numeric `id` (the canonical 1..N stop order); the
-> rich city-detail block (venues, daily schedule, military context) is optional
-> JSON, so a stop can exist before its detail is compiled. **`fleet_weeks`** are the
+> rich city-detail block (`description` — the Mission Dossier prose the legacy
+> `getCityDescription()` hardcoded — plus venues, daily schedule, military context)
+> is optional JSON, so a stop can exist before its detail is compiled.
+> **`fleet_weeks`** are the
 > `/fleetweek/<slug>/` city guides driven by one flexible block template:
 > `has_official_fleet_week`/`has_air_show` and `status` gate which blocks render, so
 > a Tier-3 city with no standing event sets the flag false, nulls the festival/
@@ -1170,7 +1173,19 @@ officer designators ordered by four-digit code.
 (the structured `/authors/{slug}/` profile columns, keyed by the user's profile slug)
 and `import:content-page-meta` (the content pages' KeyFacts card, page-specific
 independence disclosure, hero eyebrow, `shows_reference_backlink` flag and FAQ rows,
-keyed by `url_path`). All are idempotent and fill only NULLs unless `--force`.
+keyed by `url_path`) and `import:discount-display` (the discount guides'/directory's
+per-brand presentation values, keyed by the brand's page slug). All are idempotent
+and fill only NULLs unless `--force`.
+
+**New discount-parity columns.** `connections.logo_display` holds the per-brand logo
+image cap (`{cardMaxHeight, cardMaxWidth}`); brand wordmarks have wildly different
+aspect ratios, so one shared cap renders each at a different optical size — the card
+chips use the cap directly and the guide's hero chip scales it by a fixed factor.
+`offers.related_slugs` holds the curated "More military discounts" pins; an unpinned
+guide falls back to catalogue order. Both are filled by `import:discount-display`,
+which also copies a brand's own `offers.source_priority_note` onto
+`pages.editorial_source_priority` so the trust footer quotes the brand's note rather
+than the generic house string.
 
 **New `pages` columns.** `eyebrow` (the "// VETERANS BENEFITS" kicker above the h1)
 and `disclosure` (the page-specific independence-disclosure body; null falls back to

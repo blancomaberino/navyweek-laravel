@@ -1,3 +1,193 @@
 /* Per-family parity CSS, ported from the legacy component inline styles.
    Kept in its own file so parallel work never collides in app.css.
-   Properties are alphabetized per the authored-CSS convention. */
+   Properties are alphabetized per the authored-CSS convention.
+
+   Source of truth: src/page-views/NavyRatingsHub.tsx (every declaration below
+   mirrors an inline style in that component) plus src/components/KeyFacts.tsx
+   and src/components/ReferenceTrust.tsx for the shared trust furniture.
+   Everything is scoped under `.rating-list` so it overrides the generic
+   `.rating-*` vocabulary in app.css without touching another family. */
+
+/* NavyRatingsHub's <main> carries `padding: var(--space-2xl)` inline at every
+   width, so the global small-screen `main` padding override must not apply. */
+.rating-list {
+    padding: var(--space-2xl);
+}
+
+/* Breadcrumb: the legacy trail is gray-on-gray after the gold "Home" link. */
+.rating-list .breadcrumb [aria-current='page'] {
+    color: var(--nw-gray-light);
+}
+
+.rating-list .breadcrumb span[aria-hidden='true'] {
+    color: var(--nw-gray);
+}
+
+/* Hero kicker — mono 11px / 3px tracking, not the 11.52px / 2px site default. */
+.rating-list .eyebrow {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+}
+
+/* The legacy hero is not a wrapper element: all of its trailing space comes
+   from the intro paragraph's own bottom margin. */
+.rating-list .rating-hero {
+    margin-bottom: 0;
+}
+
+.rating-list .rating-hero .intro {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-lg);
+    max-width: 760px;
+}
+
+/* TrustByline: app.css closes the reviewer row with `:last-of-type`, which never
+   matches (the dates/process rows are the last DIV siblings), so the reviewer
+   keeps a 12px gap where the legacy markup has 6px. */
+.rating-list .trust-byline-person:not(:has(~ .trust-byline-person)) {
+    margin-bottom: 6px;
+}
+
+/* KeyFacts / EditorialPolicy: the legacy blocks set no line-height on their mono
+   heading (so it inherits 1.5) and no margin under a <dt> — app.css adds 1.6 and
+   the global 2px <dt> margin, which lengthens the page by 6px. */
+.rating-list .key-facts[data-llm-key-facts] h2,
+.rating-list section.editorial-policy h2 {
+    line-height: 1.5;
+}
+
+.rating-list .key-facts dt {
+    margin-bottom: 0;
+}
+
+/* No section heading on this page carries the site's gold underline. */
+.rating-list section > h2 {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Community + historic groups: the section itself has no spacing; the row list
+   owns the gap to the next heading. */
+.rating-list .rating-section {
+    margin-bottom: 0;
+}
+
+.rating-list .rating-section > h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin: var(--space-xl) 0 var(--space-md);
+    text-transform: uppercase;
+}
+
+.rating-list .rating-section > .section-intro {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-md);
+    max-width: 760px;
+}
+
+.rating-list .rating-rows {
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    list-style: none;
+    margin: 0 0 var(--space-xl);
+    padding: 0;
+}
+
+/* Row: abbreviation · rating badge · name · paygrade (or retirement year). */
+.rating-list .rating-row {
+    align-items: center;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+    color: var(--nw-off-white);
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 52px 56px 1fr auto;
+    padding: 14px 4px;
+}
+
+.rating-list .rating-row .abbr {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+}
+
+.rating-list .rating-row .insignia {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    height: 40px;
+    image-rendering: pixelated;
+    object-fit: fill;
+    width: 40px;
+}
+
+.rating-list .rating-row .rating-name {
+    color: var(--nw-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.rating-list .rating-row .paygrade {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-align: right;
+    text-transform: none;
+}
+
+/* "See Also → Navy Ranks" card that closes the list, above the trust footer. */
+.rating-list .rating-see-also {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 2px;
+    padding: var(--space-lg);
+}
+
+.rating-list .rating-see-also-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.rating-list .rating-see-also-title {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.rating-list .rating-see-also-body {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+}
+
+.rating-list .rating-see-also-cta {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}

@@ -7,6 +7,7 @@ namespace App\Console\Commands;
 use App\Domain\Catalog\Models\DiscountCategory;
 use App\Domain\Catalog\Models\Offer;
 use App\Domain\Pillars\Models\AirShow;
+use App\Domain\Pillars\Models\AirShowHubMeta;
 use App\Domain\Pillars\Models\FleetWeek;
 use App\Domain\Pillars\Models\JetTeam;
 use App\Domain\Pillars\Models\JetTeamCity;
@@ -143,6 +144,7 @@ final class BackfillEditorialPolicyCommand extends Command
         return match (true) {
             $pageable instanceof FleetWeek => $this->fleetWeekCopy($pageable),
             $pageable instanceof AirShow => $this->airShowCopy($pageable),
+            $pageable instanceof AirShowHubMeta => $this->airShowHubCopy($pageable),
             $pageable instanceof JetTeamCity => $this->jetTeamCityCopy($pageable),
             $pageable instanceof JetTeam => $this->jetTeamHubCopy($pageable),
             $pageable instanceof DiscountCategory => $this->discountCategoryCopy($pageable),
@@ -191,8 +193,22 @@ final class BackfillEditorialPolicyCommand extends Command
     }
 
     /**
-     * Ported from AirShowDetail.tsx / AirShowHub.tsx — the hub row carries no
-     * per-show name, so it is keyed off the page having no city.
+     * Ported from AirShowHub.tsx — the directory hub names no single show, so its
+     * wording is generic over "each show".
+     *
+     * @return array{label: string, source: string, cadence: string}
+     */
+    private function airShowHubCopy(AirShowHubMeta $hub): array
+    {
+        return [
+            'label' => "U.S. military air shows {$hub->year} guide",
+            'source' => "We cite each show's official announcements and the participating military teams' schedules first. Dates, performers, and locations are quoted from those sources and dated above.",
+            'cadence' => 'Because the military and show organizers can change dates at any time, this guide is re-verified against the official sources on a recurring basis and whenever a reader reports a change.',
+        ];
+    }
+
+    /**
+     * Ported from AirShowDetail.tsx.
      *
      * @return array{label: string, source: string, cadence: string}
      */

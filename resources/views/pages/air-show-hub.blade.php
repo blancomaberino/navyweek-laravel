@@ -8,6 +8,8 @@
 @php
     /** @var \App\Domain\Pillars\Models\AirShowHubMeta $hub */
     /** @var \Illuminate\Support\Collection<int, \App\Domain\Pillars\Models\AirShow> $shows */
+    /** @var string $hubPath */
+    $hubPath ??= \App\Domain\Publishing\Support\PagePaths::root('air_shows');
 @endphp
 
 @section('content')
@@ -89,7 +91,7 @@
                                 <td class="ash-loc">{{ $show->city }}, {{ $show->state }}</td>
                                 <td class="ash-guide">
                                     @if ($show->published)
-                                        <a href="/air-show/{{ $show->slug }}/">{{ $show->short_name }} guide</a>
+                                        <a href="{{ $hubPath }}{{ $show->slug }}/">{{ $show->short_name }} guide</a>
                                     @else
                                         <span class="ash-soon">Guide coming soon</span>
                                     @endif

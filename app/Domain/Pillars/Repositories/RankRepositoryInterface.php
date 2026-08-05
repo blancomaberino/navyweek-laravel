@@ -43,7 +43,9 @@ interface RankRepositoryInterface
     public function activeRatings(): Collection;
 
     /**
-     * Historic enlisted ratings, most-recently-decommissioned first.
+     * Historic enlisted ratings, most-recently-decommissioned first. Ratings
+     * retired in the same year keep import order (`id`), which is the registry
+     * order the legacy hub's stable year sort preserved on /navy-ratings/.
      *
      * @return Collection<int, Rank>
      */

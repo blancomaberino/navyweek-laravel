@@ -7,16 +7,12 @@
      + the link list; the head/JSON-LD is byte-locked by SeoHead + LocalDiscountHubSchema. --}}
 @php
     /** @var list<array{name: string, url: string}> $crumbs */
-    /** @var string $heading */
-    /** @var list<array{url: string, name: string, meta: string|null}> $items */
-
-    // The three hub levels are distinguished by breadcrumb depth: Home + Local Discounts
-    // (root), + state, + city. The legacy view is one component per level.
-    $level = match (count($crumbs)) {
-        2 => 'root',
-        3 => 'state',
-        default => 'city',
-    };
+    /** @var string $eyebrow */
+    /** @var string $headingLead */
+    /** @var string $headingAccent */
+    /** @var string $intro */
+    /** @var string $note */
+    /** @var list<array{url: string, name: string, sub: string, meta: string, go: string}> $items */
 @endphp
 
 @section('content')
@@ -32,11 +28,9 @@
         </nav>
 
         <header class="lh-hero">
-            @if ($level === 'root')
-                <p class="lh-eyebrow">Local businesses · by state &amp; city</p>
-            @endif
-            <h1 class="lh-h1">{{ $heading }}</h1>
-            <p class="lh-intro">{{ $page->meta_description }}</p>
+            <p class="lh-eyebrow">{{ $eyebrow }}</p>
+            <h1 class="lh-h1">{{ $headingLead }}<em>{{ $headingAccent }}</em></h1>
+            <p class="lh-intro">{{ $intro }}</p>
         </header>
 
         @if ($items === [])
@@ -46,22 +40,14 @@
                 @foreach ($items as $item)
                     <a class="lh-card" href="{{ $item['url'] }}">
                         <div class="nm">{{ $item['name'] }}</div>
-                        @if (! empty($item['meta']))
-                            <div class="meta">{{ $item['meta'] }}</div>
-                        @endif
-                        <div class="go">{{ $level === 'city' ? 'See the discount →' : 'Browse '.$item['name'].' →' }}</div>
+                        <div class="sub">{{ $item['sub'] }}</div>
+                        <div class="meta">{{ $item['meta'] }}</div>
+                        <div class="go">{{ $item['go'] }}</div>
                     </a>
                 @endforeach
             </div>
         @endif
 
-        <p class="lh-note">
-            @if ($level === 'root')
-                New cities and businesses are added deliberately as each offer is verified. NavyWeek.org is an
-                independent publisher and is not affiliated with the businesses listed here.
-            @else
-                NavyWeek.org is an independent publisher and is not affiliated with the businesses listed here.
-            @endif
-        </p>
+        <p class="lh-note">{{ $note }}</p>
     </main>
 @endsection

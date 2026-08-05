@@ -48,6 +48,7 @@ use Illuminate\Support\Collection;
  * @property string|null $official_url
  * @property string|null $logo_url
  * @property string|null $logo_background
+ * @property array{cardMaxHeight: int, cardMaxWidth: int}|null $logo_display
  * @property int|null $default_affiliate_network_id
  * @property string|null $brief_path
  * @property string|null $source_csv
@@ -108,6 +109,7 @@ class Connection extends Model
         'official_url',
         'logo_url',
         'logo_background',
+        'logo_display',
         'default_affiliate_network_id',
         'brief_path',
         'source_csv',
@@ -127,6 +129,7 @@ class Connection extends Model
             'cpc' => 'decimal:2',
             'audiences' => AsEnumCollection::of(Audience::class),
             'research_cadence_days' => 'integer',
+            'logo_display' => 'array',
             'last_verified_at' => 'date',
             'next_review_due' => 'date',
         ];

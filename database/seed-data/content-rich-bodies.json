@@ -1,0 +1,6056 @@
+{
+ "/va-disability/": {
+  "blocks": [
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "VA Disability 2026 — Key Facts"
+   },
+   {
+    "type": "paragraph",
+    "text": "Source: VA.gov — Disability compensation · Last verified: May 25, 2026"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "VA disability compensation is monthly, tax-free pay from the U.S. Department of Veterans Affairs to veterans with a physical or mental condition connected to military service. This page explains how the program is structured in 2026: pay rates effective December 1, 2025, how the rating system works, how to file or appeal, and where to get free accredited help. Every figure below links to its official source on VA.gov, Benefits.va.gov, or the eCFR."
+     }
+    ],
+    "variant": "lead"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "NavyWeek.org is independent and not affiliated with the VA. This guide is informational and not legal, medical, or claims advice. Confirm any amount, deadline, or eligibility rule on "
+     },
+     {
+      "text": "VA.gov",
+      "url": "https://www.va.gov/disability/"
+     },
+     {
+      "text": " before you act on it."
+     }
+    ]
+   },
+   {
+    "type": "toc",
+    "label": "On this page",
+    "items": [
+     {
+      "label": "What VA disability is",
+      "url": "#what-it-is"
+     },
+     {
+      "label": "Who may qualify",
+      "url": "#who-may-qualify"
+     },
+     {
+      "label": "2026 pay rates",
+      "url": "#pay-rates"
+     },
+     {
+      "label": "How ratings work",
+      "url": "#how-ratings-work"
+     },
+     {
+      "label": "Combined ratings",
+      "url": "#combined-ratings"
+     },
+     {
+      "label": "Evidence",
+      "url": "#evidence"
+     },
+     {
+      "label": "How to file",
+      "url": "#how-to-file"
+     },
+     {
+      "label": "Intent to file & effective dates",
+      "url": "#intent-to-file"
+     },
+     {
+      "label": "Claim types",
+      "url": "#claim-types"
+     },
+     {
+      "label": "C&P exams",
+      "url": "#cp-exam"
+     },
+     {
+      "label": "Dependents, SMC, A&A, Housebound",
+      "url": "#dependents-smc"
+     },
+     {
+      "label": "TDIU",
+      "url": "#tdiu"
+     },
+     {
+      "label": "PACT Act",
+      "url": "#pact-act"
+     },
+     {
+      "label": "Common mistakes",
+      "url": "#common-mistakes"
+     },
+     {
+      "label": "Free & accredited help",
+      "url": "#free-help"
+     },
+     {
+      "label": "Official VA resources",
+      "url": "#official-resources"
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "WHAT VA DISABILITY COMPENSATION IS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "VA disability is a monthly, tax-free benefit paid by the U.S. Department of Veterans Affairs to veterans with a service-connected disability ("
+     },
+     {
+      "text": "VA.gov — Eligibility",
+      "url": "https://www.va.gov/disability/eligibility/"
+     },
+     {
+      "text": "). Federal income tax does not apply ("
+     },
+     {
+      "text": "IRS",
+      "url": "https://www.irs.gov/individuals/military/special-tax-considerations-for-veterans"
+     },
+     {
+      "text": "); most states also exempt it, but state treatment varies."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "It is distinct from a few other programs you may have heard of:"
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "VA pension",
+        "bold": true
+       },
+       {
+        "text": " is a separate, needs-based benefit for low-income wartime veterans ("
+       },
+       {
+        "text": "VA.gov — Pension",
+        "url": "https://www.va.gov/pension/eligibility/"
+       },
+       {
+        "text": ")."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "SSDI",
+        "bold": true
+       },
+       {
+        "text": " is paid by the Social Security Administration for a disability that prevents substantial work, regardless of cause ("
+       },
+       {
+        "text": "SSA.gov",
+        "url": "https://www.ssa.gov/benefits/disability/"
+       },
+       {
+        "text": "). Many veterans receive VA disability and SSDI at the same time."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Military retirement",
+        "bold": true
+       },
+       {
+        "text": " is a separate DoD benefit for service members who meet the retirement criteria. Concurrent receipt rules (CRDP / CRSC) govern how retirement and VA disability interact for eligible retirees ("
+       },
+       {
+        "text": "DFAS — CRDP",
+        "url": "https://www.dfas.mil/RetiredMilitary/disability/crdp/"
+       },
+       {
+        "text": ")."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "WHO MAY QUALIFY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "To qualify for service connection, a veteran generally needs a current diagnosis, an in-service event or exposure, and a medical nexus linking the two ("
+     },
+     {
+      "text": "VA.gov — Eligibility",
+      "url": "https://www.va.gov/disability/eligibility/"
+     },
+     {
+      "text": "). A condition can also be service-connected as a "
+     },
+     {
+      "text": "secondary",
+      "bold": true
+     },
+     {
+      "text": " if it was caused or aggravated by another service-connected condition ("
+     },
+     {
+      "text": "38 CFR §3.310",
+      "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-3/subpart-A/section-3.310"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Eligibility is fact-specific. Whether your situation meets the legal standard depends on the evidence in your file. If you are unsure, an accredited VSO can review the facts with you at no charge ("
+     },
+     {
+      "text": "VA accreditation search",
+      "url": "https://www.va.gov/ogc/apps/accreditation/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "2026 VA DISABILITY PAY RATES"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The 2026 monthly compensation rates took effect December 1, 2025, following a 2.5% cost-of-living adjustment. The table below shows rates for a single veteran with no dependents. Confirm the current figure for your situation on the official VA rate table: "
+     },
+     {
+      "text": "VA.gov — 2026 Veteran Compensation Rates",
+      "url": "https://www.va.gov/disability/compensation-rates/veteran-rates/"
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "table",
+    "variant": "plain",
+    "columns": [
+     {
+      "label": "Rating",
+      "align": "left"
+     },
+     {
+      "label": "Monthly pay",
+      "align": "right"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "spans": [
+        {
+         "text": "10%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$175.51"
+        }
+       ],
+       "align": "right"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "20%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$346.95"
+        }
+       ],
+       "align": "right"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "30%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$537.42"
+        }
+       ],
+       "align": "right"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "40%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$774.16"
+        }
+       ],
+       "align": "right"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "50%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$1,102.04"
+        }
+       ],
+       "align": "right"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "60%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$1,395.93"
+        }
+       ],
+       "align": "right"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "70%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$1,759.19"
+        }
+       ],
+       "align": "right"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "80%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$2,103.94"
+        }
+       ],
+       "align": "right"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "90%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$2,395.58"
+        }
+       ],
+       "align": "right"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "100%"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$3,946.25"
+        }
+       ],
+       "align": "right"
+      }
+     ]
+    ],
+    "caption": "2026 VA disability monthly pay — single veteran, no dependents (effective Dec 1, 2025)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Added dependent pay (spouse, children, dependent parents) begins at the 30% rating tier. Exact additions vary by tier and dependent type — see the VA rate table for the figures that apply to your household."
+     }
+    ]
+   },
+   {
+    "type": "callout",
+    "spans": [
+     {
+      "text": "Always confirm amounts on VA.gov.",
+      "bold": true
+     },
+     {
+      "text": " Rate tables change every December and the figures above may not reflect a mid-year correction. The numbers shown were last verified on May 25, 2026 against the "
+     },
+     {
+      "text": "official VA rate table",
+      "url": "https://www.va.gov/disability/compensation-rates/veteran-rates/"
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "HOW VA RATINGS WORK"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The VA rates each service-connected condition from 0% to 100% in 10% increments using the Schedule for Rating Disabilities ("
+     },
+     {
+      "text": "38 CFR Part 4",
+      "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-4"
+     },
+     {
+      "text": "). A 0% rating means the condition is service-connected but is not currently producing a compensable level of impairment."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Each diagnostic code has its own criteria. The VA assigns the rating based on the evidence in the claims file — typically service treatment records, private and VA medical records, lay statements, and the Compensation & Pension (C&P) exam."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "COMBINED RATINGS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "When a veteran has multiple conditions, the VA combines them using the table at "
+     },
+     {
+      "text": "38 CFR §4.25",
+      "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-4#4.25"
+     },
+     {
+      "text": " — not simple addition. Each rating reduces the \"remaining efficiency\" of a hypothetical healthy person, and the result is rounded to the nearest 10%."
+     }
+    ]
+   },
+   {
+    "type": "callout",
+    "spans": [
+     {
+      "text": "Quick example.",
+      "bold": true
+     },
+     {
+      "text": " A 50% rating combined with another 50% rating yields 75% under §4.25 (50% takes half of the remaining 50%), which rounds to 80%. Two 50% conditions do not combine to 100%."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "A "
+     },
+     {
+      "text": "bilateral factor",
+      "bold": true
+     },
+     {
+      "text": " adds 10% to the combined value of paired-extremity conditions (e.g., both knees, both hands) before final rounding ("
+     },
+     {
+      "text": "38 CFR §4.26",
+      "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-4#4.26"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "EVIDENCE THE VA CONSIDERS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The VA generally considers service treatment records, post-service medical records, VA medical records, Disability Benefits Questionnaires (DBQs), lay statements (sometimes called \"buddy statements\"), and the C&P exam report ("
+     },
+     {
+      "text": "VA.gov — Evidence needed",
+      "url": "https://www.va.gov/disability/how-to-file-claim/evidence-needed/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "You can submit private medical records and a private-provider DBQ in addition to whatever the VA gathers. The DBQ library is published at "
+     },
+     {
+      "text": "Benefits.va.gov — DBQs",
+      "url": "https://www.benefits.va.gov/COMPENSATION/dbq_disabilityexams.asp"
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "HOW TO FILE A CLAIM"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Initial disability claims are filed on "
+     },
+     {
+      "text": "VA Form 21-526EZ",
+      "url": "https://www.va.gov/find-forms/about-form-21-526ez/"
+     },
+     {
+      "text": ". You can file online, by mail, in person, or with the help of an accredited Veterans Service Organization ("
+     },
+     {
+      "text": "VA.gov — How to file",
+      "url": "https://www.va.gov/disability/how-to-file-claim/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Filing with an accredited VSO is free to the veteran. VSOs are accredited under VA Office of General Counsel rules and can prepare, present, and prosecute the claim on the veteran's behalf ("
+     },
+     {
+      "text": "VA accreditation search",
+      "url": "https://www.va.gov/ogc/apps/accreditation/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "INTENT TO FILE & EFFECTIVE DATES"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Submitting an "
+     },
+     {
+      "text": "Intent to File (VA Form 21-0966)",
+      "url": "https://www.va.gov/find-forms/about-form-21-0966/"
+     },
+     {
+      "text": " can preserve a potential effective date for up to one year while you gather evidence and complete the formal claim. If the claim is later granted, benefits may be paid back to the Intent to File date rather than the date the formal claim was submitted ("
+     },
+     {
+      "text": "VA.gov — When to file",
+      "url": "https://www.va.gov/disability/how-to-file-claim/when-to-file/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "CLAIM TYPES"
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Initial claim"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Used when you have never been rated for a condition, or you are claiming a new condition. Filed on VA Form 21-526EZ ("
+     },
+     {
+      "text": "VA.gov",
+      "url": "https://www.va.gov/disability/how-to-file-claim/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Supplemental claim"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Used after a decision when you have "
+     },
+     {
+      "text": "new and relevant evidence",
+      "bold": true
+     },
+     {
+      "text": " the VA has not previously considered ("
+     },
+     {
+      "text": "VA.gov — Supplemental Claim",
+      "url": "https://www.va.gov/decision-reviews/supplemental-claim/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Higher-Level Review"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "A senior reviewer takes a fresh look at the existing record. No new evidence is allowed ("
+     },
+     {
+      "text": "VA.gov — Higher-Level Review",
+      "url": "https://www.va.gov/decision-reviews/higher-level-review/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Board appeal"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Reviewed by a Veterans Law Judge at the Board of Veterans' Appeals. The Board offers three dockets (direct, evidence, hearing) ("
+     },
+     {
+      "text": "VA.gov — Board Appeal",
+      "url": "https://www.va.gov/decision-reviews/board-appeal/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "C&P EXAMS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "A Compensation & Pension exam may be scheduled to evaluate the claimed condition. The exam is conducted by VA clinicians or by contractors working with VA ("
+     },
+     {
+      "text": "VA.gov — VA claim exam",
+      "url": "https://www.va.gov/disability/va-claim-exam/"
+     },
+     {
+      "text": "). The examiner typically completes a DBQ and writes findings the rater will use."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "VA's published guidance is to attend the exam, bring records relevant to the condition, and describe symptoms accurately, including on flare-up days. Missing the exam without rescheduling can lead to a denial."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "DEPENDENTS, SMC, AID & ATTENDANCE, HOUSEBOUND"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Added dependent pay begins at the 30% rating tier. Amounts for a spouse, child, or dependent parent are published on the same VA rate page as the base rates ("
+     },
+     {
+      "text": "VA.gov — Veteran rates",
+      "url": "https://www.va.gov/disability/compensation-rates/veteran-rates/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Special Monthly Compensation (SMC)",
+      "bold": true
+     },
+     {
+      "text": " is additional compensation for specific, severe situations such as loss of use of a limb, blindness, or the need for aid and attendance. SMC categories and rates are published at "
+     },
+     {
+      "text": "VA.gov — SMC rates",
+      "url": "https://www.va.gov/disability/compensation-rates/special-monthly-compensation-rates/"
+     },
+     {
+      "text": " and governed by "
+     },
+     {
+      "text": "38 CFR §3.350",
+      "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-3/subpart-A/section-3.350"
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Aid and Attendance",
+      "bold": true
+     },
+     {
+      "text": " and "
+     },
+     {
+      "text": "Housebound",
+      "bold": true
+     },
+     {
+      "text": " benefits are additional payments for veterans who need help with daily activities or are substantially confined to home ("
+     },
+     {
+      "text": "VA.gov — Aid & Attendance / Housebound",
+      "url": "https://www.va.gov/pension/aid-attendance-housebound/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "TDIU (TOTAL DISABILITY INDIVIDUAL UNEMPLOYABILITY)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "TDIU allows a veteran to be paid at the 100% compensation rate without a 100% schedular rating when service-connected conditions prevent substantially gainful employment ("
+     },
+     {
+      "text": "VA.gov — TDIU",
+      "url": "https://www.va.gov/disability/eligibility/special-claims/unemployability/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The schedular thresholds under "
+     },
+     {
+      "text": "38 CFR §4.16",
+      "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-4/subpart-A/section-4.16"
+     },
+     {
+      "text": " are generally a single condition rated at 60% or higher, or a combined rating of 70% with at least one condition at 40%. The VA may also consider extraschedular TDIU outside these thresholds."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "PACT ACT (TOXIC EXPOSURE)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The PACT Act expanded VA health care and benefits for veterans exposed to toxic substances during service, including burn pits, Agent Orange, and radiation. It added presumptive conditions and broadened eligibility for affected eras ("
+     },
+     {
+      "text": "VA.gov — PACT Act",
+      "url": "https://www.va.gov/resources/the-pact-act-and-your-va-benefits/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "If you served in a covered location and time period and have a covered condition, the VA presumes service connection. You can still file even if your condition is not on the presumptive list — direct service connection remains available."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "COMMON MISTAKES TO AVOID"
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Filing only the condition you remember and not the related conditions in your record. The VA decides what you claim — not what you could have claimed ("
+       },
+       {
+        "text": "VA.gov",
+        "url": "https://www.va.gov/disability/how-to-file-claim/"
+       },
+       {
+        "text": ")."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Missing the C&P exam without rescheduling, which can lead to a denial ("
+       },
+       {
+        "text": "VA.gov — C&P exams",
+        "url": "https://www.va.gov/disability/va-claim-exam/"
+       },
+       {
+        "text": ")."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Letting an Intent to File expire before the formal claim is submitted, losing the protected effective date ("
+       },
+       {
+        "text": "VA.gov",
+        "url": "https://www.va.gov/disability/how-to-file-claim/when-to-file/"
+       },
+       {
+        "text": ")."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Paying anyone who is not VA-accredited, or paying for an initial claim — under "
+       },
+       {
+        "text": "38 CFR §14.636",
+        "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-14/subpart-A/section-14.636"
+       },
+       {
+        "text": " accredited representatives may not charge a fee for an initial claim."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "WHERE TO GET FREE & ACCREDITED HELP"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The VA maintains a public database of accredited Veterans Service Organizations, claims agents, and attorneys ("
+     },
+     {
+      "text": "VA Office of General Counsel — Accreditation search",
+      "url": "https://www.va.gov/ogc/apps/accreditation/"
+     },
+     {
+      "text": "). VSO representation is free to the veteran."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "For appeals after a denial, an accredited attorney or claims agent may charge a fee under "
+     },
+     {
+      "text": "38 CFR §14.636",
+      "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-14/subpart-A/section-14.636"
+     },
+     {
+      "text": " — commonly a contingency fee tied to past-due benefits. Confirm accreditation before signing any fee agreement."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "This page is not legal advice and does not endorse any specific representative. Whether to use a VSO, agent, or attorney depends on the facts of your claim."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "OFFICIAL VA RESOURCES"
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "VA.gov — Disability home",
+        "url": "https://www.va.gov/disability/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA.gov — How to file a claim",
+        "url": "https://www.va.gov/disability/how-to-file-claim/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA.gov — 2026 compensation rates",
+        "url": "https://www.va.gov/disability/compensation-rates/veteran-rates/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA.gov — SMC rates",
+        "url": "https://www.va.gov/disability/compensation-rates/special-monthly-compensation-rates/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA.gov — TDIU",
+        "url": "https://www.va.gov/disability/eligibility/special-claims/unemployability/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA.gov — PACT Act",
+        "url": "https://www.va.gov/resources/the-pact-act-and-your-va-benefits/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA.gov — Decision reviews & appeals",
+        "url": "https://www.va.gov/decision-reviews/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA Office of General Counsel — Accreditation search",
+        "url": "https://www.va.gov/ogc/apps/accreditation/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Benefits.va.gov — DBQ library",
+        "url": "https://www.benefits.va.gov/COMPENSATION/dbq_disabilityexams.asp"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "eCFR — Title 38 (VA regulations)",
+        "url": "https://www.ecfr.gov/current/title-38"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "FREQUENTLY ASKED QUESTIONS"
+   },
+   {
+    "type": "faq_item",
+    "question": "Is VA disability permanent?",
+    "spans": [
+     {
+      "text": "Not automatically. The VA can propose a reduction if it finds the condition has improved. Continuous ratings receive additional protection at 5, 10, and 20 years under 38 CFR §3.951 and §3.957. A \"Permanent and Total\" designation removes scheduled re-exams. Confirm your status on VA.gov."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "Is VA disability taxable?",
+    "spans": [
+     {
+      "text": "No. VA disability compensation is exempt from federal income tax per the IRS. Most states also exempt it, but state treatment varies — check your state tax authority."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "Can I work and collect VA disability?",
+    "spans": [
+     {
+      "text": "A veteran rated at 100% schedular may continue to work. Total Disability based on Individual Unemployability (TDIU) has earnings limits tied to substantially gainful employment. See VA.gov for the current rules."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "How long do VA claims take?",
+    "spans": [
+     {
+      "text": "VA publishes live timeliness data on VA.gov. Recent averages have been roughly 4–5 months for an initial decision; Board of Veterans' Appeals decisions can take 12–24 months or longer. Check the current average on VA.gov before relying on a specific number."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "Can my rating be reduced?",
+    "spans": [
+     {
+      "text": "Before the 20-year protection mark, yes — the VA can schedule re-examinations if it has reason to believe the condition has improved. Ratings held continuously for 20+ years and ratings designated Permanent and Total receive additional protection."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "What's the difference between VA disability and SSDI?",
+    "spans": [
+     {
+      "text": "VA disability is service-connected compensation paid by the VA with no income limit. SSDI is paid by the Social Security Administration for a disability that prevents substantial work, regardless of cause, and has SSA-defined earnings limits. The two programs are independent and many veterans receive both."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "Do I need a lawyer to file a claim?",
+    "spans": [
+     {
+      "text": "For an initial claim, no. An accredited Veterans Service Organization (VSO) can file the claim at no cost. For appeals after a denial, an accredited attorney or claims agent may charge a fee under VA rules (38 CFR §14.636). Verify accreditation in the VA Office of General Counsel database."
+     }
+    ]
+   }
+  ]
+ },
+ "/veterans-day/": {
+  "blocks": [
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "Veterans Day 2026 — Key Facts"
+   },
+   {
+    "type": "paragraph",
+    "text": "Source: VA.gov — History of Veterans Day · Last verified: June 2, 2026"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Veterans Day is the United States' annual tribute to everyone who has worn the uniform of the U.S. armed forces. In 2026 it falls on Wednesday, November 11 — the same date every year, chosen to mark the moment the guns fell silent at the end of World War I. This page explains where the holiday comes from, how it differs from Memorial Day and Armed Forces Day, how the U.S. Navy marks the day, and concrete ways to honor the veterans in your community."
+     }
+    ],
+    "variant": "lead"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "NavyWeek.org is independent and not affiliated with the U.S. Navy, NAVCO, or the U.S. Department of Veterans Affairs. Dates and program details are summarized from official sources linked throughout this page."
+     }
+    ]
+   },
+   {
+    "type": "toc",
+    "label": "On this page",
+    "items": [
+     {
+      "label": "What Veterans Day is",
+      "url": "#what-it-is"
+     },
+     {
+      "label": "History & origins",
+      "url": "#history"
+     },
+     {
+      "label": "Veterans Day vs. Memorial Day vs. Armed Forces Day",
+      "url": "#vs-other-days"
+     },
+     {
+      "label": "How the Navy observes it",
+      "url": "#navy-observance"
+     },
+     {
+      "label": "Veterans Day 2026 & Navy Week",
+      "url": "#navy-week-2026"
+     },
+     {
+      "label": "Ways to honor & participate",
+      "url": "#how-to-honor"
+     },
+     {
+      "label": "Official resources",
+      "url": "#official-resources"
+     },
+     {
+      "label": "Frequently asked questions",
+      "url": "#faq"
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "WHAT VETERANS DAY IS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Veterans Day is a U.S. federal holiday held on November 11 each year to honor everyone who has served in the United States armed forces — the Navy, Marine Corps, Army, Air Force, Space Force, and Coast Guard — whether in war or peacetime, and whether they are living or have passed away ("
+     },
+     {
+      "text": "VA.gov — Veterans Day",
+      "url": "https://www.va.gov/opa/vetsday/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Unlike many federal holidays that move to a Monday, Veterans Day stays anchored to November 11. The date itself is the point: it commemorates the armistice that ended the fighting of World War I at 11:00 a.m. on November 11, 1918."
+     }
+    ]
+   },
+   {
+    "type": "callout",
+    "spans": [
+     {
+      "text": "Spelling note.",
+      "bold": true
+     },
+     {
+      "text": " The federal government writes it as \"Veterans Day\" — no apostrophe. It is a day for honoring all veterans, not a day that belongs to them, so the possessive apostrophe is intentionally omitted."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "HISTORY & ORIGINS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The holiday began as "
+     },
+     {
+      "text": "Armistice Day",
+      "bold": true
+     },
+     {
+      "text": ". President Woodrow Wilson first proclaimed November 11, 1919, to commemorate the first anniversary of the end of World War I ("
+     },
+     {
+      "text": "VA.gov — History of Veterans Day",
+      "url": "https://www.va.gov/opa/vetsday/vetdayhistory.asp"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "In 1938, Congress made November 11 a legal federal holiday \"dedicated to the cause of world peace and to be hereafter celebrated and known as 'Armistice Day.'\" After World War II and the Korean War, veterans service organizations urged Congress to broaden the day to honor all American veterans. In "
+     },
+     {
+      "text": "1954",
+      "bold": true
+     },
+     {
+      "text": ", President Dwight D. Eisenhower signed legislation changing the name from Armistice Day to "
+     },
+     {
+      "text": "Veterans Day",
+      "bold": true
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "For a few years the date moved: the Uniform Monday Holiday Act of 1968 shifted Veterans Day to the fourth Monday in October beginning in 1971. The change proved unpopular — many states kept observing November 11 — and in 1975 President Gerald Ford signed a law returning Veterans Day to its original November 11 date, effective 1978, where it has remained ever since."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "VETERANS DAY VS. MEMORIAL DAY VS. ARMED FORCES DAY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "These three observances are often confused. Each honors a different group:"
+     }
+    ]
+   },
+   {
+    "type": "table",
+    "variant": "plain",
+    "columns": [
+     {
+      "label": "Observance",
+      "align": "left"
+     },
+     {
+      "label": "When",
+      "align": "left"
+     },
+     {
+      "label": "Honors",
+      "align": "left"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "spans": [
+        {
+         "text": "Veterans Day"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "November 11"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "All who served (living & deceased)"
+        }
+       ]
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Memorial Day"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "Last Monday in May"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "Those who died in service"
+        }
+       ]
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Armed Forces Day"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "Third Saturday in May"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "Those currently serving"
+        }
+       ]
+      }
+     ]
+    ]
+   },
+   {
+    "type": "callout",
+    "spans": [
+     {
+      "text": "Quick way to remember.",
+      "bold": true
+     },
+     {
+      "text": " Memorial Day remembers the fallen; Veterans Day thanks all who served; Armed Forces Day recognizes those serving right now."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "HOW THE U.S. NAVY OBSERVES VETERANS DAY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Across the fleet, the Navy marks Veterans Day with ceremonies at bases, aboard ships, and in communities. Typical observances include wreath-layings at memorials, color guard presentations, moments of silence, and Navy band performances. Current Sailors frequently join veterans at local parades and ceremonies ("
+     },
+     {
+      "text": "Navy.mil",
+      "url": "https://www.navy.mil/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The "
+     },
+     {
+      "text": "Navy Office of Community Outreach (NAVCO)",
+      "bold": true
+     },
+     {
+      "text": " coordinates much of the Navy's public engagement, including the Navy Week program that brings Sailors and Navy assets to cities without a major Navy presence ("
+     },
+     {
+      "text": "outreach.navy.mil",
+      "url": "https://outreach.navy.mil/"
+     },
+     {
+      "text": "). For the historical record of the sea service, the "
+     },
+     {
+      "text": "Naval History and Heritage Command",
+      "url": "https://www.history.navy.mil/"
+     },
+     {
+      "text": " preserves the stories of the Sailors Veterans Day honors."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "VETERANS DAY 2026 & NAVY WEEK"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "In 2026, Veterans Day falls squarely within a Navy Week. "
+     },
+     {
+      "text": "Flagstaff Navy Week runs November 9–16, 2026",
+      "bold": true
+     },
+     {
+      "text": " — the grand finale of the Navy's nationwide \"Road Trip to 250\" — so Veterans Day on November 11 lands in the middle of the week's events ("
+     },
+     {
+      "text": "NAVCO — Flagstaff 2026",
+      "url": "https://outreach.navy.mil/Navy-Weeks/Flagstaff-2026/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "That makes Flagstaff an especially fitting place to honor veterans in 2026: the Navy operates the Naval Observatory Flagstaff Station nearby, and the region is home to hundreds of thousands of Arizona veterans and the heritage of the WWII Navajo Code Talkers. See the "
+     },
+     {
+      "text": "Flagstaff Navy Week guide",
+      "url": "/city/flagstaff/"
+     },
+     {
+      "text": " for details, or browse the full "
+     },
+     {
+      "text": "2026 Navy Week schedule",
+      "url": "/schedule/"
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "WAYS TO HONOR & PARTICIPATE"
+   },
+   {
+    "type": "callout",
+    "spans": [
+     {
+      "text": "Veterans Day free meals.",
+      "bold": true
+     },
+     {
+      "text": " Hundreds of restaurants thank veterans and service members with a free meal on November 11. See our "
+     },
+     {
+      "text": "verified Veterans Day Free Meals 2026 list",
+      "url": "/veterans-day/free-meals/"
+     },
+     {
+      "text": " — every offer checked against the brand's own official source."
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Attend a ceremony or parade.",
+        "bold": true
+       },
+       {
+        "text": " Most communities hold a Veterans Day observance — many on or near November 11. Local VFW and American Legion posts are good places to find one."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Thank a veteran.",
+        "bold": true
+       },
+       {
+        "text": " A simple, sincere acknowledgment of a veteran's service is meaningful — at work, in your family, or in your neighborhood."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Fly the flag.",
+        "bold": true
+       },
+       {
+        "text": " Display the U.S. flag according to the Flag Code ("
+       },
+       {
+        "text": "VA flag display guide",
+        "url": "https://www.va.gov/opa/publications/celebrate/flagdisplay.pdf"
+       },
+       {
+        "text": ")."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Support veteran organizations.",
+        "bold": true
+       },
+       {
+        "text": " Reputable veterans service organizations provide claims help, transition support, and community for those who served."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Volunteer.",
+        "bold": true
+       },
+       {
+        "text": " VA medical centers and national cemeteries welcome volunteers, especially around Veterans Day."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Visit a memorial or cemetery.",
+        "bold": true
+       },
+       {
+        "text": " Many people lay flowers or a wreath at a local memorial or national cemetery to mark the day."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "OFFICIAL RESOURCES"
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "VA.gov — Veterans Day",
+        "url": "https://www.va.gov/opa/vetsday/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA.gov — History of Veterans Day",
+        "url": "https://www.va.gov/opa/vetsday/vetdayhistory.asp"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "OPM — Federal holidays",
+        "url": "https://www.opm.gov/policy-data-oversight/pay-leave/federal-holidays/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Navy.mil",
+        "url": "https://www.navy.mil/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Naval History and Heritage Command",
+        "url": "https://www.history.navy.mil/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "NAVCO — Navy outreach & Navy Weeks",
+        "url": "https://outreach.navy.mil/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "FREQUENTLY ASKED QUESTIONS"
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "When is Veterans Day 2026?",
+    "spans": [
+     {
+      "text": "Veterans Day 2026 is observed on Wednesday, November 11, 2026. Veterans Day is always commemorated on November 11 each year, regardless of the day of the week, because the date marks the anniversary of the 1918 Armistice that ended the fighting in World War I."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Why is Veterans Day on November 11?",
+    "spans": [
+     {
+      "text": "The fighting of World War I ended with an armistice that took effect at the 11th hour of the 11th day of the 11th month — 11:00 a.m. on November 11, 1918. The United States first marked the date as Armistice Day in 1919, Congress made it an annual observance in 1938, and in 1954 it was renamed Veterans Day to honor veterans of all American wars."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "What's the difference between Veterans Day and Memorial Day?",
+    "spans": [
+     {
+      "text": "Veterans Day (November 11) honors all who have served in the U.S. armed forces — living and deceased. Memorial Day (the last Monday in May) specifically honors service members who died while serving. A simple way to remember it: Memorial Day remembers those who gave their lives; Veterans Day thanks all who served."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "How is Veterans Day different from Armed Forces Day?",
+    "spans": [
+     {
+      "text": "Armed Forces Day (the third Saturday in May) honors people who are currently serving on active duty. Veterans Day honors those who have served and are no longer on active duty, while Memorial Day honors those who died in service. Together the three observances cover current members, former members, and the fallen."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Is Veterans Day a federal holiday?",
+    "spans": [
+     {
+      "text": "Yes. Veterans Day is one of the eleven U.S. federal holidays. Federal offices are generally closed, and many schools, banks, and businesses observe it as well. When November 11 falls on a weekend, federal employees typically receive the adjacent Friday or Monday as the observed day off — but the commemoration itself stays on November 11."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "How does the U.S. Navy observe Veterans Day?",
+    "spans": [
+     {
+      "text": "The Navy marks Veterans Day with wreath-laying ceremonies, ship and base observances, community events, and outreach through the Navy Office of Community Outreach (NAVCO). Navy bands perform, color guards present the colors, and current Sailors join veterans at memorials and parades nationwide to recognize those who served."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Is there a Navy Week happening around Veterans Day 2026?",
+    "spans": [
+     {
+      "text": "Yes. Flagstaff Navy Week runs November 9–16, 2026 — the grand finale of the 2026 \"Road Trip to 250\" — and includes Veterans Day on November 11. It is a natural opportunity to connect with Sailors, attend Navy band performances, and honor veterans in person."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "What are good ways to honor veterans on Veterans Day?",
+    "spans": [
+     {
+      "text": "You can attend a local Veterans Day ceremony or parade, thank a veteran in your life, fly the U.S. flag, support reputable veteran service organizations, volunteer at a VA medical center, or visit a national cemetery or memorial. Many businesses also offer recognition to veterans on the day."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Is Veterans Day spelled with an apostrophe?",
+    "spans": [
+     {
+      "text": "No. The U.S. Department of Veterans Affairs uses \"Veterans Day\" without an apostrophe. The holiday is not a day that \"belongs to\" veterans (possessive); it is a day for honoring all veterans (attributive), so no apostrophe is used."
+     }
+    ]
+   }
+  ]
+ },
+ "/veterans-home-care/": {
+  "blocks": [
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "Veterans Home Care 2026 — Key Facts"
+   },
+   {
+    "type": "paragraph",
+    "text": "Source: VA.gov — Aid and Attendance & Housebound · Last verified: June 2, 2026"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Most veterans want to stay in their own homes as they age. The trouble is that figuring out how the VA actually pays for that help can feel like its own full-time job. There are two completely different programs that both get called \"veterans home care,\" they have separate applications, and a social worker will rarely sit you down and explain the difference."
+     }
+    ],
+    "variant": "lead"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "This guide does that. By the end, you'll know which VA programs provide hands-on care, which one sends a monthly check you can use to pay for care yourself, who qualifies, and how to apply without paying anyone a fee to do it."
+     }
+    ],
+    "variant": "sublead"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "A bit of context on why this matters: there were about 8.1 million veterans aged 65 or older in 2021, and nearly half of all U.S. veterans are now 65 or older. The demand for in-home help is climbing fast, and the families who understand their options end up with far better care and far less out-of-pocket spending than the ones who don't."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "NavyWeek.org is independent and not affiliated with the VA. This guide is informational and not legal, medical, financial, or claims advice. Confirm any amount, deadline, or eligibility rule on "
+     },
+     {
+      "text": "VA.gov",
+      "url": "https://www.va.gov/"
+     },
+     {
+      "text": " or with an accredited representative before you act."
+     }
+    ]
+   },
+   {
+    "type": "toc",
+    "label": "On this page",
+    "items": [
+     {
+      "label": "Two programs, not one",
+      "url": "#two-programs"
+     },
+     {
+      "label": "VA home care programs (services)",
+      "url": "#service-programs"
+     },
+     {
+      "label": "Aid and Attendance (the cash side)",
+      "url": "#aid-attendance"
+     },
+     {
+      "label": "Who qualifies",
+      "url": "#who-qualifies"
+     },
+     {
+      "label": "How to apply",
+      "url": "#how-to-apply"
+     },
+     {
+      "label": "What it costs",
+      "url": "#what-it-costs"
+     },
+     {
+      "label": "Paying a family member",
+      "url": "#pay-family"
+     },
+     {
+      "label": "Choosing an agency",
+      "url": "#choose-agency"
+     },
+     {
+      "label": "Frequently asked questions",
+      "url": "#faq"
+     },
+     {
+      "label": "Where to get help",
+      "url": "#where-to-get-help"
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "THE ONE THING MOST FAMILIES GET WRONG"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Here's the distinction that trips everyone up. The VA runs two separate branches that both touch home care, and they don't talk to each other the way you'd expect."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The "
+     },
+     {
+      "text": "Veterans Health Administration (VHA)",
+      "bold": true
+     },
+     {
+      "text": " provides or arranges actual care. A nurse, an aide, or a medical team shows up at the house. You don't get cash; you get services."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The "
+     },
+     {
+      "text": "Veterans Benefits Administration (VBA)",
+      "bold": true
+     },
+     {
+      "text": " sends money. The main program here is "
+     },
+     {
+      "text": "Aid and Attendance",
+      "bold": true
+     },
+     {
+      "text": ", a tax-free monthly pension supplement you can spend on whatever care you choose, including hiring a private agency or, in many cases, a family member."
+     }
+    ]
+   },
+   {
+    "type": "callout",
+    "spans": [
+     {
+      "text": "Two branches, two applications, two sets of rules. Some families qualify for both. The rest of this guide is organized around that split, so keep it in mind as you read."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "One more practical note: the VA doesn't directly employ the aides who come to your home. It contracts that work out through its "
+     },
+     {
+      "text": "Community Care Network (CCN)",
+      "bold": true
+     },
+     {
+      "text": " — five regional networks managed by outside administrators (Optum handles Regions 1–3; TriWest handles Regions 4–5). That's why the agency at your door is a local company, not a VA employee."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "VA HOME CARE PROGRAMS (THE SERVICES SIDE)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "These are the VHA programs that put care in the home. You generally need to be enrolled in VA health care first (more on that below), and a VA social worker assesses what you need before any service starts. Here's what's on the menu."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Homemaker and Home Health Aide care"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "This is the program most people picture when they say \"home care.\" A trained aide comes to the house and helps with the daily things that have gotten hard — bathing, dressing, grooming, preparing meals, getting around safely. The aide isn't a nurse, but a registered nurse supervises the care."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "It's open to enrolled veterans of any age who meet the clinical criteria and live where the service is available. Depending on your service-connected status, a copay may apply."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Home-Based Primary Care (HBPC)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Don't confuse this with the aide program. HBPC sends a full VA medical team into the home — a physician or nurse practitioner, a nurse, a social worker, a dietitian, a therapist, a pharmacist, sometimes a psychologist. It's ongoing primary medical care for veterans with complex chronic conditions who have a genuinely hard time getting to a clinic."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "It's part of the standard VA medical benefits package, availability depends on your location, and a copay may apply based on the financial assessment from VA Form 10-10EC."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Veteran-Directed Care (VDC)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "VDC is the flexible option. Instead of the VA assigning you an agency, you get a monthly budget tied to your level of need and you hire your own workers — which can include friends, neighbors, and certain family members. An Area Agency on Aging counselor helps you set it up, and a financial management service handles the paychecks (you never touch the cash directly)."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "You don't need a service-connected disability rating for VDC, but it's only offered in certain locations, and budgets in practice rarely run above roughly $4,500 a month."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Skilled home health care"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "This is short-term, doctor-ordered medical care: wound care, catheter management, physical or occupational or speech therapy delivered at home by a community agency. It's especially useful for veterans who live outside a VA service area."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Respite care"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Respite exists for the caregiver, not just the veteran. It covers short-term care — in the home or in a facility — so a family caregiver can rest, travel, or handle an emergency. Eligible veterans can receive up to 30 days of respite care per year."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Hospice and palliative care"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Hospice is for veterans facing a terminal illness who are no longer pursuing a cure; palliative care can run alongside active treatment to manage symptoms. Both are available to enrolled veterans who meet the clinical need, in any setting, "
+     },
+     {
+      "text": "with no copays at all",
+      "bold": true
+     },
+     {
+      "text": ". The VA also provides bereavement support to families for 13 months afterward."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Adult day health care and home telehealth"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Rounding things out: adult day health care gives veterans a supervised, social daytime program (and gives caregivers a break), and home telehealth lets a care team monitor health conditions remotely. Both help families keep a veteran at home longer."
+     }
+    ]
+   },
+   {
+    "type": "callout",
+    "spans": [
+     {
+      "text": "A copay rule worth remembering:",
+      "bold": true
+     },
+     {
+      "text": " VA geriatric and extended-care services charge no copay for the first 21 days of care in any 12-month period. If a copay applies at all, it starts on day 22 and depends on your service-connected status and income. Hospice is always copay-free."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "AID AND ATTENDANCE: THE PROGRAM THAT PAYS YOU"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Aid and Attendance (A&A) is the cash side. It's a monthly supplement added on top of the basic Veterans Pension or Survivors Pension — which means you have to qualify for that underlying pension first; A&A can't be paid on its own."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The money is tax-free and yours to direct. Most families use it to pay a home care agency or a family caregiver."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "2026 Aid and Attendance rates"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "These rates are effective December 1, 2025 through November 30, 2026, and reflect a 2.8% cost-of-living increase. They come straight from "
+     },
+     {
+      "text": "VA.gov",
+      "url": "https://www.va.gov/pension/aid-attendance-housebound/"
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "table",
+    "variant": "plain",
+    "columns": [
+     {
+      "label": "Situation",
+      "align": "left"
+     },
+     {
+      "label": "Maximum annual benefit",
+      "align": "left"
+     },
+     {
+      "label": "Approx. monthly",
+      "align": "left"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "spans": [
+        {
+         "text": "Veteran, no dependents"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$29,093"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "~$2,424"
+        }
+       ]
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Veteran with one dependent"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$34,488"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "~$2,874"
+        }
+       ]
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Two veterans married to each other, both qualifying"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "$46,143"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "~$3,845"
+        }
+       ]
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Surviving spouse"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "~$18,696"
+        }
+       ]
+      },
+      {
+       "spans": [
+        {
+         "text": "~$1,558"
+        }
+       ]
+      }
+     ]
+    ]
+   },
+   {
+    "type": "callout",
+    "spans": [
+     {
+      "text": "Here's the catch that the table hides: these are "
+     },
+     {
+      "text": "maximums, not guaranteed checks",
+      "bold": true
+     },
+     {
+      "text": ". The actual payment equals the maximum annual pension rate minus your countable income, divided by 12. So if you have income, your check is smaller."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "The deduction almost nobody explains"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "This is the part that gets families who assume they earn too much to qualify. Your unreimbursed medical expenses — including what you pay for home care — that exceed 5% of the maximum pension rate get subtracted from your countable income. For a lot of applicants, the cost of care itself is what brings their \"countable\" income low enough to qualify. If a quick glance at your income made you think you're over the line, don't stop there."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "WHO QUALIFIES FOR VA HOME CARE"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Eligibility splits along the same two tracks. For the "
+     },
+     {
+      "text": "VHA service programs",
+      "bold": true
+     },
+     {
+      "text": ", you generally need to be enrolled in VA health care and have an assessed clinical need for the specific service. For "
+     },
+     {
+      "text": "Aid and Attendance",
+      "bold": true
+     },
+     {
+      "text": ", the bar is more detailed."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "To qualify for Aid and Attendance, you typically need to meet all four of these:"
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Service.",
+        "bold": true
+       },
+       {
+        "text": " At least 90 days of active duty with one or more days during a wartime period (or 24 months / your full call-up if you started service after September 7, 1980), and a discharge that wasn't dishonorable."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Status.",
+        "bold": true
+       },
+       {
+        "text": " You're 65 or older, "
+       },
+       {
+        "text": "or",
+        "italic": true
+       },
+       {
+        "text": " permanently and totally disabled, "
+       },
+       {
+        "text": "or",
+        "italic": true
+       },
+       {
+        "text": " in a nursing home for long-term care, "
+       },
+       {
+        "text": "or",
+        "italic": true
+       },
+       {
+        "text": " receiving SSDI or SSI."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Care need.",
+        "bold": true
+       },
+       {
+        "text": " You need help with daily activities, are bedridden, are in a nursing home because of incapacity, or have a qualifying severe vision impairment."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Finances.",
+        "bold": true
+       },
+       {
+        "text": " Your income and net worth fall below the limit — "
+       },
+       {
+        "text": "$163,699 for 2026",
+        "bold": true
+       },
+       {
+        "text": ". Your primary home and one vehicle don't count toward that. Be aware of the three-year asset look-back: gifting assets away to qualify can trigger a penalty period."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "HOW TO APPLY"
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "For VHA home care services"
+   },
+   {
+    "type": "list",
+    "ordered": true,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Enroll in VA health care",
+        "bold": true
+       },
+       {
+        "text": " if you haven't already, using VA Form 10-10EZ (online, by phone, or by mail)."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Talk to a VA social worker",
+        "bold": true
+       },
+       {
+        "text": " at your VA medical center. Tell them you want home care and describe what's going on at home."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Get assessed.",
+        "bold": true
+       },
+       {
+        "text": " The team evaluates your needs and decides which programs and how many hours fit."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Receive your referral",
+        "bold": true
+       },
+       {
+        "text": " to a Community Care Network agency. Tip: if you already have a preferred local agency, say so "
+       },
+       {
+        "text": "before",
+        "italic": true
+       },
+       {
+        "text": " a referral gets auto-assigned."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "For Aid and Attendance"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The core form is "
+     },
+     {
+      "text": "VA Form 21-2680",
+      "bold": true
+     },
+     {
+      "text": " (Examination for Housebound Status or Permanent Need for Regular Aid and Attendance), which your physician fills out. Send it to your state's Pension Management Center, or apply online at VA.gov."
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Nursing home residents also include "
+       },
+       {
+        "text": "VA Form 21-0779",
+        "bold": true
+       },
+       {
+        "text": "."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Surviving spouses apply with "
+       },
+       {
+        "text": "VA Form 21P-534EZ",
+        "bold": true
+       },
+       {
+        "text": "."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Expect the claim to take several months — three to six or more is common. The good news: approved benefits are paid retroactively to your application or intent-to-file date, so the wait doesn't cost you money. If the applicant is over 90 or in hospice, you can request expedited processing."
+     }
+    ]
+   },
+   {
+    "type": "callout",
+    "spans": [
+     {
+      "text": "You should never pay anyone to file a VA pension claim.",
+      "bold": true
+     },
+     {
+      "text": " Accredited representatives and Veterans Service Organizations help for free ("
+     },
+     {
+      "text": "VA accreditation search",
+      "url": "https://www.va.gov/ogc/apps/accreditation/"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "WHAT IT COSTS: VA-FUNDED CARE VS. PRIVATE PAY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "When the VA arranges care through its Community Care Network, your out-of-pocket cost is usually little or nothing (subject to the copay rules above). The tradeoff is that the VA's clinical assessment — not your family — decides the type and number of hours."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Private-pay home care is more flexible but adds up. The national median for a non-medical caregiver hit $35 per hour in the 2025 CareScout (Genworth) Cost of Care Survey — about $80,080 a year at 44 hours a week. Skilled in-home nursing runs closer to $90 an hour."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "That gap is exactly where Aid and Attendance earns its keep. The monthly benefit bridges the difference between what the VA provides directly and the additional private help many families want."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "CAN YOU PAY A FAMILY MEMBER TO PROVIDE CARE?"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Yes — and this is one of the most common questions families ask. There are three routes, and the rules differ in one important way."
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Through Aid and Attendance.",
+        "bold": true
+       },
+       {
+        "text": " The veteran or spouse receives the benefit and uses it to pay a caregiver. That caregiver can be an adult child, another relative, a friend, or a professional — "
+       },
+       {
+        "text": "but not the veteran's spouse",
+        "bold": true
+       },
+       {
+        "text": ", since spousal income is already counted. Set up a written care agreement and keep clean records (the \"nanny tax\" rules apply)."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Through PCAFC",
+        "bold": true
+       },
+       {
+        "text": " (the Program of Comprehensive Assistance for Family Caregivers). This one pays a monthly stipend directly to the caregiver — and here a spouse "
+       },
+       {
+        "text": "can",
+        "italic": true
+       },
+       {
+        "text": " be the paid caregiver. It also adds health coverage, mental-health support, and respite. The bar is higher: the veteran needs a VA disability rating of 70% or more and at least six months of needed personal care. Apply with VA Form 10-10CG. (A September 2025 rule extended the program's \"legacy\" transition period through September 30, 2028, so reassessment rules are still shifting.)"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Through Veteran-Directed Care.",
+        "bold": true
+       },
+       {
+        "text": " As covered above, you can hire and pay family members (other than a spouse) out of your VDC budget."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "HOW TO CHOOSE A VETERANS HOME CARE AGENCY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "A few things separate a smooth experience from a frustrating one:"
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Confirm CCN participation.",
+        "bold": true
+       },
+       {
+        "text": " If you're using VA-arranged care, the agency must be in the Community Care Network — properly licensed or certified and in good standing."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Speak up early.",
+        "bold": true
+       },
+       {
+        "text": " Name your preferred provider to your VA social worker before a referral is automatically assigned."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "For Aid and Attendance, you have freedom.",
+        "bold": true
+       },
+       {
+        "text": " You can use any qualified agency or hire privately, since you're paying with your own benefit."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Ask about VA experience.",
+        "bold": true
+       },
+       {
+        "text": " An agency that regularly bills the VA and handles Aid and Attendance paperwork will save you real headaches."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "FREQUENTLY ASKED QUESTIONS"
+   },
+   {
+    "type": "faq_item",
+    "question": "Does the VA pay for in-home care?",
+    "spans": [
+     {
+      "text": "Yes, in two ways: it arranges and largely covers services through its health system, and it provides the Aid and Attendance pension you can use to pay for care yourself."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "How many hours of home care does the VA provide?",
+    "spans": [
+     {
+      "text": "There's no fixed national number. Hours are set by a clinical assessment of your needs, so they vary from one veteran to the next."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "Who qualifies for VA home care?",
+    "spans": [
+     {
+      "text": "For service programs, enrolled veterans with an assessed clinical need. For Aid and Attendance, veterans who meet the service, status, care-need, and financial criteria described above."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "Can I be paid to care for my veteran spouse?",
+    "spans": [
+     {
+      "text": "Not through Aid and Attendance — but yes through PCAFC, which can pay a spouse a monthly stipend if the veteran has a 70%+ disability rating and meets the other requirements."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "What's the income and net worth limit for Aid and Attendance?",
+    "spans": [
+     {
+      "text": "The net worth limit is $163,699 for 2026. Your primary home and one vehicle are excluded."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "How much is Aid and Attendance per month in 2026?",
+    "spans": [
+     {
+      "text": "Up to roughly $2,424 for a single veteran, $2,874 for a veteran with one dependent, and $1,558 for a surviving spouse — minus any countable income."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "What's the difference between VA home care and Aid and Attendance?",
+    "spans": [
+     {
+      "text": "VA home care is a service the VA arranges. Aid and Attendance is cash you receive and spend on care yourself."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "Does the VA cover hospice at home?",
+    "spans": [
+     {
+      "text": "Yes, with no copays, in any setting, plus 13 months of bereavement support for the family."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "How long does an Aid and Attendance claim take?",
+    "spans": [
+     {
+      "text": "Usually three to six months or more, with benefits paid retroactively to your filing date."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "Will I have a copay for VA home care?",
+    "spans": [
+     {
+      "text": "No copay for the first 21 days of care in a 12-month period. After that, it depends on your service-connected status and income. Hospice is always free."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "question": "Can a veteran with dementia get home care through the VA?",
+    "spans": [
+     {
+      "text": "Yes. Dementia-related needs are exactly the kind of clinical need these programs are built to assess and cover."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "WHERE TO GET HELP"
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "VA benefits and pension questions:",
+        "bold": true
+       },
+       {
+        "text": " 800-827-1000"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA health care and enrollment:",
+        "bold": true
+       },
+       {
+        "text": " 877-222-8387"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "VA Caregiver Support Line:",
+        "bold": true
+       },
+       {
+        "text": " 855-260-3274"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "For the most current rates and program details, go straight to "
+     },
+     {
+      "text": "VA.gov",
+      "url": "https://www.va.gov/"
+     },
+     {
+      "text": " — third-party sites often carry outdated numbers. And remember: filing a VA claim should never cost you a dime."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Related guides"
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "VA disability benefits guide (2026 pay rates, ratings, how to file)",
+        "url": "/va-disability/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Navy Reference hub",
+        "url": "/navy-reference/"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/best-credit-cards-for-military/": {
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Advertiser & editorial disclosure: NavyWeek.org is an independent, veteran-authored publication. We are not affiliated with, endorsed by, or sponsored by any card issuer, the U.S. Navy, or the Department of Defense. NavyWeek.org may earn a commission if you apply for a card through links on this page — that never changes our rankings, and opinions, analyses, and recommendations here are the author's alone and have not been reviewed or endorsed by any issuer. Card fees, rates, and welcome offers change frequently and vary by applicant; you may not be eligible for a given offer. Always confirm current terms on the issuer's official page before applying."
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "For active-duty servicemembers, the best credit cards for military in 2026 are premium travel cards — the "
+     },
+     {
+      "text": "American Express Platinum ($895)",
+      "bold": true
+     },
+     {
+      "text": " and "
+     },
+     {
+      "text": "Chase Sapphire Reserve ($795)",
+      "bold": true
+     },
+     {
+      "text": " — because federal law wipes out their annual fees: Amex, Chase, Citi, and U.S. Bank waive fees under both the "
+     },
+     {
+      "text": "SCRA",
+      "bold": true
+     },
+     {
+      "text": " and the "
+     },
+     {
+      "text": "MLA",
+      "bold": true
+     },
+     {
+      "text": ", and the MLA extends the same waiver to military spouses on their own cards."
+     }
+    ],
+    "slot": "hero",
+    "variant": "capsule"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The details competitors gloss over decide whether you actually get the waiver: "
+     },
+     {
+      "text": "Capital One waives fees only under SCRA",
+      "bold": true
+     },
+     {
+      "text": " (the account must exist before active duty — never under MLA), and "
+     },
+     {
+      "text": "veterans get no waiver at all",
+      "bold": true
+     },
+     {
+      "text": ", because both laws protect active-duty members only. This guide covers which card to get for your exact status — active duty, spouse, Guard/Reserve, or veteran — with every claim traced to the statute or the issuer's own military-benefits page."
+     }
+    ],
+    "slot": "hero",
+    "variant": "sublead"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "July 16, 2026"
+     }
+    ],
+    "slot": "hero",
+    "variant": "verified"
+   },
+   {
+    "type": "jump_nav",
+    "label": "On this page:",
+    "items": [
+     {
+      "label": "Quick comparison",
+      "url": "#comparison"
+     },
+     {
+      "label": "SCRA & MLA fee waivers",
+      "url": "#scra-mla"
+     },
+     {
+      "label": "Best for active duty",
+      "url": "#active-duty"
+     },
+     {
+      "label": "Navy Federal, USAA & PenFed",
+      "url": "#credit-unions"
+     },
+     {
+      "label": "Best for veterans",
+      "url": "#veterans"
+     },
+     {
+      "label": "How to choose",
+      "url": "#how-to-choose"
+     },
+     {
+      "label": "FAQ",
+      "url": "#faq"
+     },
+     {
+      "label": "Sources",
+      "url": "#sources"
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "QUICK COMPARISON: BEST MILITARY CREDIT CARDS AT A GLANCE"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The short version:",
+      "bold": true
+     },
+     {
+      "text": " on active duty, get the premium cards — the fees are waived, so you keep benefits that civilians pay $895 a year for. Before active duty (Guard, Reserve, delayed entry), open Capital One cards early so SCRA can apply later. As a veteran, skip the fee waivers you can't get and pick the best no-annual-fee rewards card. Annual fees below are current as of July 16, 2026."
+     }
+    ]
+   },
+   {
+    "type": "table",
+    "variant": "panel",
+    "columns": [
+     {
+      "label": "#",
+      "align": "left"
+     },
+     {
+      "label": "Card",
+      "align": "left"
+     },
+     {
+      "label": "Best for",
+      "align": "left"
+     },
+     {
+      "label": "Annual fee",
+      "align": "left"
+     },
+     {
+      "label": "Waived for active duty?",
+      "align": "left"
+     },
+     {
+      "label": "Law(s)",
+      "align": "left"
+     },
+     {
+      "label": "Spouse's own card?",
+      "align": "left"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "spans": [
+        {
+         "text": "1"
+        }
+       ],
+       "label": "#"
+      },
+      {
+       "spans": [
+        {
+         "text": "Amex Platinum",
+         "bold": true,
+         "url": "#amex-platinum"
+        }
+       ],
+       "sub": "American Express",
+       "label": "Card"
+      },
+      {
+       "spans": [
+        {
+         "text": "Premium travel & lounge access"
+        }
+       ],
+       "label": "Best for"
+      },
+      {
+       "spans": [
+        {
+         "text": "$895"
+        }
+       ],
+       "label": "Annual fee"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes"
+        }
+       ],
+       "label": "Waived for active duty?"
+      },
+      {
+       "spans": [
+        {
+         "text": "SCRA + MLA"
+        }
+       ],
+       "label": "Law(s)"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes (MLA)"
+        }
+       ],
+       "label": "Spouse's own card?"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "2"
+        }
+       ],
+       "label": "#"
+      },
+      {
+       "spans": [
+        {
+         "text": "Amex Gold",
+         "bold": true,
+         "url": "#amex-gold"
+        }
+       ],
+       "sub": "American Express",
+       "label": "Card"
+      },
+      {
+       "spans": [
+        {
+         "text": "Dining & U.S. supermarkets"
+        }
+       ],
+       "label": "Best for"
+      },
+      {
+       "spans": [
+        {
+         "text": "$325"
+        }
+       ],
+       "label": "Annual fee"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes"
+        }
+       ],
+       "label": "Waived for active duty?"
+      },
+      {
+       "spans": [
+        {
+         "text": "SCRA + MLA"
+        }
+       ],
+       "label": "Law(s)"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes (MLA)"
+        }
+       ],
+       "label": "Spouse's own card?"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "3"
+        }
+       ],
+       "label": "#"
+      },
+      {
+       "spans": [
+        {
+         "text": "Chase Sapphire Reserve",
+         "bold": true,
+         "url": "#chase-sapphire-reserve"
+        }
+       ],
+       "sub": "Chase",
+       "label": "Card"
+      },
+      {
+       "spans": [
+        {
+         "text": "Lounge access + $300 travel credit"
+        }
+       ],
+       "label": "Best for"
+      },
+      {
+       "spans": [
+        {
+         "text": "$795"
+        }
+       ],
+       "label": "Annual fee"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes"
+        }
+       ],
+       "label": "Waived for active duty?"
+      },
+      {
+       "spans": [
+        {
+         "text": "MLA (cards opened after ~Sept. 20, 2017) + SCRA"
+        }
+       ],
+       "label": "Law(s)"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes (MLA)"
+        }
+       ],
+       "label": "Spouse's own card?"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "4"
+        }
+       ],
+       "label": "#"
+      },
+      {
+       "spans": [
+        {
+         "text": "Chase Sapphire Preferred",
+         "bold": true,
+         "url": "#chase-sapphire-preferred"
+        }
+       ],
+       "sub": "Chase",
+       "label": "Card"
+      },
+      {
+       "spans": [
+        {
+         "text": "First premium travel card"
+        }
+       ],
+       "label": "Best for"
+      },
+      {
+       "spans": [
+        {
+         "text": "$95"
+        }
+       ],
+       "label": "Annual fee"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes"
+        }
+       ],
+       "label": "Waived for active duty?"
+      },
+      {
+       "spans": [
+        {
+         "text": "MLA + SCRA"
+        }
+       ],
+       "label": "Law(s)"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes (MLA)"
+        }
+       ],
+       "label": "Spouse's own card?"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "5"
+        }
+       ],
+       "label": "#"
+      },
+      {
+       "spans": [
+        {
+         "text": "Capital One Venture X",
+         "bold": true,
+         "url": "#capital-one-venture-x"
+        }
+       ],
+       "sub": "Capital One",
+       "label": "Card"
+      },
+      {
+       "spans": [
+        {
+         "text": "Flat-rate travel rewards"
+        }
+       ],
+       "label": "Best for"
+      },
+      {
+       "spans": [
+        {
+         "text": "$395"
+        }
+       ],
+       "label": "Annual fee"
+      },
+      {
+       "spans": [
+        {
+         "text": "SCRA only — never MLA"
+        }
+       ],
+       "label": "Waived for active duty?"
+      },
+      {
+       "spans": [
+        {
+         "text": "SCRA (account must predate active duty)"
+        }
+       ],
+       "label": "Law(s)"
+      },
+      {
+       "spans": [
+        {
+         "text": "No (SCRA doesn’t cover a spouse’s own card)"
+        }
+       ],
+       "label": "Spouse's own card?"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "6"
+        }
+       ],
+       "label": "#"
+      },
+      {
+       "spans": [
+        {
+         "text": "Navy Federal Visa Signature Flagship Rewards",
+         "bold": true,
+         "url": "#navy-federal-flagship"
+        }
+       ],
+       "sub": "Navy Federal Credit Union",
+       "label": "Card"
+      },
+      {
+       "spans": [
+        {
+         "text": "Credit-union travel rewards"
+        }
+       ],
+       "label": "Best for"
+      },
+      {
+       "spans": [
+        {
+         "text": "$49"
+        }
+       ],
+       "label": "Annual fee"
+      },
+      {
+       "spans": [
+        {
+         "text": "SCRA only (pre-service accounts)"
+        }
+       ],
+       "label": "Waived for active duty?"
+      },
+      {
+       "spans": [
+        {
+         "text": "SCRA — no MLA fee waiver for cards opened on active duty"
+        }
+       ],
+       "label": "Law(s)"
+      },
+      {
+       "spans": [
+        {
+         "text": "Limited"
+        }
+       ],
+       "label": "Spouse's own card?"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "7"
+        }
+       ],
+       "label": "#"
+      },
+      {
+       "spans": [
+        {
+         "text": "USAA Eagle Navigator",
+         "bold": true,
+         "url": "#usaa-eagle-navigator"
+        }
+       ],
+       "sub": "USAA",
+       "label": "Card"
+      },
+      {
+       "spans": [
+        {
+         "text": "USAA-loyal travelers"
+        }
+       ],
+       "label": "Best for"
+      },
+      {
+       "spans": [
+        {
+         "text": "$95"
+        }
+       ],
+       "label": "Annual fee"
+      },
+      {
+       "spans": [
+        {
+         "text": "Verify with USAA"
+        }
+       ],
+       "label": "Waived for active duty?"
+      },
+      {
+       "spans": [
+        {
+         "text": "SCRA interest cap confirmed; an MLA fee waiver is not confirmed on USAA’s own pages"
+        }
+       ],
+       "label": "Law(s)"
+      },
+      {
+       "spans": [
+        {
+         "text": "Unverified"
+        }
+       ],
+       "label": "Spouse's own card?"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "8"
+        }
+       ],
+       "label": "#"
+      },
+      {
+       "spans": [
+        {
+         "text": "PenFed Pathfinder Rewards",
+         "bold": true,
+         "url": "#penfed-pathfinder"
+        }
+       ],
+       "sub": "PenFed Credit Union",
+       "label": "Card"
+      },
+      {
+       "spans": [
+        {
+         "text": "No-fee travel card for veterans"
+        }
+       ],
+       "label": "Best for"
+      },
+      {
+       "spans": [
+        {
+         "text": "$95"
+        }
+       ],
+       "label": "Annual fee"
+      },
+      {
+       "spans": [
+        {
+         "text": "Via Honors Advantage (includes veterans)"
+        }
+       ],
+       "label": "Waived for active duty?"
+      },
+      {
+       "spans": [
+        {
+         "text": "Credit-union program, not SCRA/MLA"
+        }
+       ],
+       "label": "Law(s)"
+      },
+      {
+       "spans": [
+        {
+         "text": "—"
+        }
+       ],
+       "label": "Spouse's own card?"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "9"
+        }
+       ],
+       "label": "#"
+      },
+      {
+       "spans": [
+        {
+         "text": "MILITARY STAR Card",
+         "bold": true,
+         "url": "#military-star"
+        }
+       ],
+       "sub": "Exchange Credit Program (AAFES)",
+       "label": "Card"
+      },
+      {
+       "spans": [
+        {
+         "text": "On-base exchange spending"
+        }
+       ],
+       "label": "Best for"
+      },
+      {
+       "spans": [
+        {
+         "text": "$0"
+        }
+       ],
+       "label": "Annual fee"
+      },
+      {
+       "spans": [
+        {
+         "text": "N/A — no annual fee to waive"
+        }
+       ],
+       "label": "Waived for active duty?"
+      },
+      {
+       "spans": [
+        {
+         "text": "—"
+        }
+       ],
+       "label": "Law(s)"
+      },
+      {
+       "spans": [
+        {
+         "text": "—"
+        }
+       ],
+       "label": "Spouse's own card?"
+      }
+     ]
+    ],
+    "label": "Best military credit cards comparison"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Fee waivers above statutory minimums are voluntary issuer policies and can change; each card's review below links the issuer's official military-benefits page. For American Express cards, see rates and fees on the issuer's site."
+     }
+    ],
+    "variant": "fine"
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "HOW SCRA AND MLA WAIVE CREDIT CARD ANNUAL FEES (THE PART MOST GUIDES GET WRONG)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Two different federal laws waive military credit card fees, and which one applies depends entirely on when you opened the account.",
+      "bold": true
+     },
+     {
+      "text": " The SCRA covers credit opened "
+     },
+     {
+      "text": "before",
+      "italic": true
+     },
+     {
+      "text": " active duty; the MLA covers credit opened "
+     },
+     {
+      "text": "during",
+      "italic": true
+     },
+     {
+      "text": " active duty. Neither law technically mandates an annual-fee waiver — but because both count fees toward their interest caps, major issuers zero out annual fees rather than track them, and several go further than the law requires."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "SCRA vs. MLA — what's the difference?"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The "
+     },
+     {
+      "text": "Servicemembers Civil Relief Act",
+      "bold": true
+     },
+     {
+      "text": " ("
+     },
+     {
+      "text": "50 U.S.C. § 3901 et seq.",
+      "url": "https://www.law.cornell.edu/uscode/text/50/chapter-50"
+     },
+     {
+      "text": ") applies to debt you incurred "
+     },
+     {
+      "text": "before",
+      "bold": true
+     },
+     {
+      "text": " entering active duty. It caps interest on that pre-service debt at "
+     },
+     {
+      "text": "6%",
+      "bold": true
+     },
+     {
+      "text": " — and issuers must count annual fees, late fees, and returned-payment fees as \"interest\" under the cap, with anything above 6% forgiven rather than deferred, per the "
+     },
+     {
+      "text": "CFPB",
+      "url": "https://www.consumerfinance.gov/consumer-tools/military-financial-lifecycle/the-servicemembers-civil-relief-act-scra/"
+     },
+     {
+      "text": ". SCRA relief "
+     },
+     {
+      "text": "must be requested",
+      "bold": true
+     },
+     {
+      "text": ", any time from the start of active duty until 180 days after you leave it. It is a stand-alone statute with no implementing regulation."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The "
+     },
+     {
+      "text": "Military Lending Act",
+      "bold": true
+     },
+     {
+      "text": " ("
+     },
+     {
+      "text": "10 U.S.C. § 987",
+      "url": "https://www.law.cornell.edu/uscode/text/10/987"
+     },
+     {
+      "text": ", implemented by "
+     },
+     {
+      "text": "32 C.F.R. Part 232",
+      "url": "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-M/part-232"
+     },
+     {
+      "text": ") applies to consumer credit you open "
+     },
+     {
+      "text": "during",
+      "bold": true
+     },
+     {
+      "text": " active duty — its credit-card \"covered borrower\" provision took effect "
+     },
+     {
+      "text": "October 3, 2017",
+      "bold": true
+     },
+     {
+      "text": ". It caps the Military APR (MAPR) at "
+     },
+     {
+      "text": "36%",
+      "bold": true
+     },
+     {
+      "text": ", and because annual fees count toward the MAPR, issuers voluntarily zero them out. MLA protection is "
+     },
+     {
+      "text": "applied automatically",
+      "bold": true
+     },
+     {
+      "text": " — no request needed — and it explicitly covers "
+     },
+     {
+      "text": "spouses and dependents enrolled in DEERS",
+      "bold": true
+     },
+     {
+      "text": ", per the "
+     },
+     {
+      "text": "CFPB",
+      "url": "https://www.consumerfinance.gov/ask-cfpb/im-in-the-military-are-there-limits-on-how-much-i-can-be-charged-for-a-loan-en-893/"
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Which issuers waive annual fees (and under which law)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Amex, Chase, Citi, and U.S. Bank waive annual fees on personal cards under both SCRA and MLA. Capital One waives only under SCRA — never MLA.",
+      "bold": true
+     },
+     {
+      "text": " That single asymmetry is the most expensive mistake in military credit cards: open a Venture X while on active duty and you will pay the $395 fee every year."
+     }
+    ]
+   },
+   {
+    "type": "table",
+    "variant": "panel",
+    "columns": [
+     {
+      "label": "Issuer",
+      "align": "left"
+     },
+     {
+      "label": "SCRA (opened before active duty)",
+      "align": "left"
+     },
+     {
+      "label": "MLA (opened during active duty)",
+      "align": "left"
+     },
+     {
+      "label": "Spouse's own card",
+      "align": "left"
+     },
+     {
+      "label": "Notes & source",
+      "align": "left"
+     }
+    ],
+    "rows": [
+     [
+      {
+       "spans": [
+        {
+         "text": "American Express",
+         "bold": true
+        }
+       ],
+       "label": "Issuer"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — by request"
+        }
+       ],
+       "label": "SCRA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — automatic on all personal cards"
+        }
+       ],
+       "label": "MLA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes, via MLA (own card)"
+        }
+       ],
+       "label": "Spouse's own card"
+      },
+      {
+       "spans": [
+        {
+         "text": "MLA is applied automatically at account opening; SCRA requires a request. Business cards are not covered the same way. "
+        },
+        {
+         "text": "Amex SCRA/MLA page ↗",
+         "url": "https://www.americanexpress.com/us/help-support/service-members-civil-relief/"
+        }
+       ],
+       "label": "Notes & source"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Chase",
+         "bold": true
+        }
+       ],
+       "label": "Issuer"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — pre-service accounts"
+        }
+       ],
+       "label": "SCRA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — personal cards opened after ~Sept. 20, 2017"
+        }
+       ],
+       "label": "MLA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes, via MLA (own card)"
+        }
+       ],
+       "label": "Spouse's own card"
+      },
+      {
+       "spans": [
+        {
+         "text": "Select \"Military\" as an income source when applying; Chase verifies MLA status against the DoD database automatically. Business cards excluded. Chase Military Services: 1-877-469-0110. "
+        },
+        {
+         "text": "Chase military page ↗",
+         "url": "https://www.chase.com/digital/military"
+        }
+       ],
+       "label": "Notes & source"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Citi",
+         "bold": true
+        }
+       ],
+       "label": "Issuer"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — by request"
+        }
+       ],
+       "label": "SCRA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — all personal cards"
+        }
+       ],
+       "label": "MLA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes, via MLA (own card)"
+        }
+       ],
+       "label": "Spouse's own card"
+      },
+      {
+       "spans": [
+        {
+         "text": "If MLA benefits aren’t auto-applied, email militaryorders@citi.com with an MLA certification or call the Military Response Unit at 877-804-1082. Citi accepts SCRA requests up to a year after release from active duty. "
+        },
+        {
+         "text": "Citi SCRA page ↗",
+         "url": "https://online.citi.com/US/ag/military-servicemembers-civil-relief-act"
+        }
+       ],
+       "label": "Notes & source"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "U.S. Bank",
+         "bold": true
+        }
+       ],
+       "label": "Issuer"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes"
+        }
+       ],
+       "label": "SCRA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — personal cards"
+        }
+       ],
+       "label": "MLA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes, via MLA (own card)"
+        }
+       ],
+       "label": "Spouse's own card"
+      },
+      {
+       "spans": [
+        {
+         "text": "Both laws honored on personal cards, spouses included. Confirm current terms with U.S. Bank before applying. "
+        },
+        {
+         "text": "U.S. Bank SCRA overview ↗",
+         "url": "https://www.usbank.com/financialiq/manage-your-household/personal-finance/things-to-know-about-the-servicemembers-civil-relief-act.html"
+        }
+       ],
+       "label": "Notes & source"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Capital One",
+         "bold": true
+        }
+       ],
+       "label": "Issuer"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — caps at 4% (better than the statutory 6%)"
+        }
+       ],
+       "label": "SCRA"
+      },
+      {
+       "spans": [
+        {
+         "text": "No — Capital One does not waive annual fees under MLA"
+        }
+       ],
+       "label": "MLA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Not on a spouse’s own separate card"
+        }
+       ],
+       "label": "Spouse's own card"
+      },
+      {
+       "spans": [
+        {
+         "text": "The critical exception: open the card BEFORE active duty, then request SCRA — or pay the fee. Guard/Reserve can open before a 30+ day activation. Military line: 1-855-227-1645. "
+        },
+        {
+         "text": "Capital One military page ↗",
+         "url": "https://www.capitalone.com/military/"
+        }
+       ],
+       "label": "Notes & source"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Discover",
+         "bold": true
+        }
+       ],
+       "label": "Issuer"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — via Capital One’s SCRA program"
+        }
+       ],
+       "label": "SCRA"
+      },
+      {
+       "spans": [
+        {
+         "text": "No"
+        }
+       ],
+       "label": "MLA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Not on a spouse’s own separate card"
+        }
+       ],
+       "label": "Spouse's own card"
+      },
+      {
+       "spans": [
+        {
+         "text": "Discover is now part of Capital One; one SCRA request covers accounts at both. "
+        },
+        {
+         "text": "Capital One military page ↗",
+         "url": "https://www.capitalone.com/military/"
+        }
+       ],
+       "label": "Notes & source"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Bank of America",
+         "bold": true
+        }
+       ],
+       "label": "Issuer"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes"
+        }
+       ],
+       "label": "SCRA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Community-reported only"
+        }
+       ],
+       "label": "MLA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Unverified"
+        }
+       ],
+       "label": "Spouse's own card"
+      },
+      {
+       "spans": [
+        {
+         "text": "Cardholders report fee waivers only on cards with annual fees over $100, and some waivers reportedly continue after service — but this is community data, not confirmed on an official Bank of America page. Verify with the issuer."
+        }
+       ],
+       "label": "Notes & source"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "Navy Federal",
+         "bold": true
+        }
+       ],
+       "label": "Issuer"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — caps at 4%; pre-service accounts"
+        }
+       ],
+       "label": "SCRA"
+      },
+      {
+       "spans": [
+        {
+         "text": "No fee waiver for cards opened on active duty"
+        }
+       ],
+       "label": "MLA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Limited"
+        }
+       ],
+       "label": "Spouse's own card"
+      },
+      {
+       "spans": [
+        {
+         "text": "The $49 Flagship fee is waived only under SCRA (account opened before active duty). Requests accepted up to 180 days after your active-duty end date. "
+        },
+        {
+         "text": "Navy Federal SCRA page ↗",
+         "url": "https://www.navyfederal.org/membership/offers-discounts/scra.html"
+        }
+       ],
+       "label": "Notes & source"
+      }
+     ],
+     [
+      {
+       "spans": [
+        {
+         "text": "USAA",
+         "bold": true
+        }
+       ],
+       "label": "Issuer"
+      },
+      {
+       "spans": [
+        {
+         "text": "Yes — caps at 4%"
+        }
+       ],
+       "label": "SCRA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Fee waiver unconfirmed by USAA’s own pages"
+        }
+       ],
+       "label": "MLA"
+      },
+      {
+       "spans": [
+        {
+         "text": "Unverified"
+        }
+       ],
+       "label": "Spouse's own card"
+      },
+      {
+       "spans": [
+        {
+         "text": "USAA confirms a 4% SCRA rate and no added fees on covered accounts during active duty. An MLA annual-fee waiver (e.g., on Eagle Navigator) circulates in community reports but is not stated on USAA’s site — verify before counting on it. "
+        },
+        {
+         "text": "USAA SCRA page ↗",
+         "url": "https://www.usaa.com/support/banking/scra-benefits/"
+        }
+       ],
+       "label": "Notes & source"
+      }
+     ]
+    ],
+    "label": "Issuer-by-issuer SCRA and MLA fee waiver matrix"
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Do military spouses get annual fees waived?"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Yes — under the MLA, a spouse enrolled in DEERS is a \"covered borrower\" and can open their own card with the fee waived.",
+      "bold": true
+     },
+     {
+      "text": " A spouse does "
+     },
+     {
+      "text": "not",
+      "italic": true
+     },
+     {
+      "text": " need to be an authorized user on the servicemember's account; in fact, separate accounts are better, because each spouse earns their own welcome offer. The waiver applies to cards the spouse opens while the sponsor is on active duty, at issuers that honor MLA fee waivers (Amex, Chase, Citi, U.S. Bank). Under "
+     },
+     {
+      "text": "SCRA",
+      "bold": true
+     },
+     {
+      "text": ", by contrast, a spouse cannot get a waiver on their own separate cards — SCRA protects the servicemember's pre-service obligations. This is the single most-argued point in military finance threads, and the distinction is simply which law covers the account."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Do veterans and retirees get SCRA or MLA benefits?"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "No.",
+      "bold": true
+     },
+     {
+      "text": " Both laws protect active-duty servicemembers only. SCRA requests can be filed up to roughly 180 days after separation for pre-service debt, and then the window closes; MLA coverage ends with active service. One practical nuance: fees on cards you opened while on active duty may not resume the moment you separate — issuers periodically re-check the DoD database — but plan your budget as if every fee returns. Veterans should skip the waiver-chasing entirely and pick cards that earn their keep without a fee (see the "
+     },
+     {
+      "text": "veterans section",
+      "url": "#veterans"
+     },
+     {
+      "text": ")."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Who counts as \"active duty\" for these laws?"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "All branches on active duty; "
+     },
+     {
+      "text": "National Guard and Reserve members on active orders of 30+ consecutive days",
+      "bold": true
+     },
+     {
+      "text": " (Title 10, or Title 32 for SCRA-covered Guard service); and commissioned officers of the U.S. Public Health Service and NOAA. Keep a copy of your orders — issuers may ask for them, and the "
+     },
+     {
+      "text": "Department of Justice",
+      "url": "https://www.justice.gov/servicemembers"
+     },
+     {
+      "text": " and "
+     },
+     {
+      "text": "Military OneSource",
+      "url": "https://www.militaryonesource.mil/financial-legal/legal/servicemembers-civil-relief-act/"
+     },
+     {
+      "text": " both publish plain-language eligibility guides."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "How to request your fee waiver (step by step)"
+   },
+   {
+    "type": "list",
+    "ordered": true,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Check your covered-borrower status first.",
+        "bold": true
+       },
+       {
+        "text": " Verify yourself (or your spouse) in the DoD's "
+       },
+       {
+        "text": "MLA database",
+        "url": "https://mla.dmdc.osd.mil/mla/"
+       },
+       {
+        "text": " and "
+       },
+       {
+        "text": "SCRA database",
+        "url": "https://scra.dmdc.osd.mil/scra/"
+       },
+       {
+        "text": " before you apply — it's what the issuers themselves query."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "MLA (card opened during active duty): usually automatic.",
+        "bold": true
+       },
+       {
+        "text": " Amex applies it at account opening; Chase checks the DoD database when you select \"Military\" as an income source. If a fee still bills, contact the issuer — Citi takes MLA certifications at militaryorders@citi.com or 877-804-1082."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "SCRA (card opened before active duty): you must ask.",
+        "bold": true
+       },
+       {
+        "text": " Submit your orders or an SCRA request to the issuer's military department — Capital One's military line is 1-855-227-1645 (one request also covers Discover accounts), Chase Military Services is 1-877-469-0110, and Navy Federal takes an eMessage with \"Attn: SCRA.\""
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Mind the window.",
+        "bold": true
+       },
+       {
+        "text": " SCRA relief can be requested from the start of active duty until 180 days after leaving it (Citi voluntarily accepts up to a year), and it applies retroactively to the start of your covered period."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Watch your statements.",
+        "bold": true
+       },
+       {
+        "text": " Issuers typically confirm within one to two billing cycles; the annual fee should be credited back, not just stop billing."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "BEST CREDIT CARDS FOR ACTIVE-DUTY MILITARY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "On active duty, premium travel cards are effectively free — so the ranking below is a ranking of benefits, not of fees.",
+      "bold": true
+     },
+     {
+      "text": " A servicemember holding both the Amex Platinum and the Chase Sapphire Reserve has $1,690 a year in annual fees waived; a dual-military or MLA-spouse couple each holding both would have $3,380 waived. Welcome offers change frequently and eligibility varies — check the current offer on the issuer's page, and for Amex cards see rates and fees there."
+     }
+    ]
+   },
+   {
+    "type": "card",
+    "anchor": "amex-platinum",
+    "eyebrow": "#1 · Best premium travel card — fee waived under both SCRA & MLA",
+    "title": "Amex Platinum",
+    "meta": [
+     {
+      "spans": [
+       {
+        "text": "Annual fee: "
+       },
+       {
+        "text": "$895",
+        "bold": true
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Waiver: "
+       },
+       {
+        "text": "SCRA + MLA",
+        "bold": true
+       }
+      ]
+     }
+    ],
+    "body": [
+     {
+      "spans": [
+       {
+        "text": "The Platinum's $895 annual fee (raised from $695 effective September 18, 2025 for new applicants; existing cardholders at their first renewal on or after January 2, 2026) is the exact reason it tops this list: American Express waives it in full for active-duty servicemembers under both laws, and for spouses on their own cards under MLA. You keep what civilians pay $895 for — the Global Lounge Collection's 1,400+ airport lounges, a long menu of airline, hotel, and lifestyle statement credits, and premium travel protections. MLA relief is applied automatically at account opening; note that Amex business cards are not covered the same way."
+       }
+      ]
+     }
+    ],
+    "note": "Raised from $695 effective Sept. 18, 2025 for new applicants; existing cardholders at first renewal on or after Jan. 2, 2026.",
+    "cta": {
+     "label": "See current offer, rates & fees at americanexpress.com ↗",
+     "url": "https://www.americanexpress.com/us/credit-cards/card/platinum/"
+    }
+   },
+   {
+    "type": "card",
+    "anchor": "amex-gold",
+    "eyebrow": "#2 · Best for dining and groceries",
+    "title": "Amex Gold",
+    "meta": [
+     {
+      "spans": [
+       {
+        "text": "Annual fee: "
+       },
+       {
+        "text": "$325",
+        "bold": true
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Waiver: "
+       },
+       {
+        "text": "SCRA + MLA",
+        "bold": true
+       }
+      ]
+     }
+    ],
+    "body": [
+     {
+      "spans": [
+       {
+        "text": "The Gold's $325 fee is likewise waived under both SCRA and MLA. It earns 4X Membership Rewards points at restaurants and U.S. supermarkets (up to annual caps) — the two categories that dominate most military families' budgets — plus monthly Uber Cash in the U.S. If the Platinum's travel-heavy credits don't fit how you actually spend, the Gold is the stronger everyday earner, and on active duty there's no fee-math to weigh: hold both."
+       }
+      ]
+     }
+    ],
+    "cta": {
+     "label": "See current offer, rates & fees at americanexpress.com ↗",
+     "url": "https://www.americanexpress.com/us/credit-cards/card/gold-card/"
+    }
+   },
+   {
+    "type": "card",
+    "anchor": "chase-sapphire-reserve",
+    "eyebrow": "#3 · Best for lounge access + $300 travel credit",
+    "title": "Chase Sapphire Reserve",
+    "meta": [
+     {
+      "spans": [
+       {
+        "text": "Annual fee: "
+       },
+       {
+        "text": "$795",
+        "bold": true
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Waiver: "
+       },
+       {
+        "text": "MLA (cards opened after ~Sept. 20, 2017) + SCRA",
+        "bold": true
+       }
+      ]
+     }
+    ],
+    "body": [
+     {
+      "spans": [
+       {
+        "text": "Chase waives the Reserve's $795 fee (up from $550) under MLA for personal cards opened after roughly September 20, 2017, and under SCRA for pre-service accounts — spouses included via MLA on their own cards. The headline benefits: a $300 annual travel credit that applies automatically, Priority Pass access to 1,300+ lounges, and strong point value on travel and dining. Select \"Military\" as an income source on the application so Chase's automatic DoD-database check picks you up. Chase business cards are excluded from the waiver."
+       }
+      ]
+     }
+    ],
+    "note": "Increased from $550.",
+    "cta": {
+     "label": "See current offer, rates & fees at chase.com ↗",
+     "url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/reserve"
+    }
+   },
+   {
+    "type": "card",
+    "anchor": "chase-sapphire-preferred",
+    "eyebrow": "#4 · Best mid-tier / first premium card",
+    "title": "Chase Sapphire Preferred",
+    "meta": [
+     {
+      "spans": [
+       {
+        "text": "Annual fee: "
+       },
+       {
+        "text": "$95",
+        "bold": true
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Waiver: "
+       },
+       {
+        "text": "MLA + SCRA",
+        "bold": true
+       }
+      ]
+     }
+    ],
+    "body": [
+     {
+      "spans": [
+       {
+        "text": "The Preferred's $95 fee is waived on the same MLA + SCRA terms as the Reserve. As a first travel card it's the gentler on-ramp: the same transferable Ultimate Rewards points with simpler benefits. On active duty the usual \"Preferred-vs-Reserve\" fee debate is moot — both are free — so the real question is whether you'll use the Reserve's lounge access; if yes, skip straight to it."
+       }
+      ]
+     }
+    ],
+    "cta": {
+     "label": "See current offer, rates & fees at chase.com ↗",
+     "url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred"
+    }
+   },
+   {
+    "type": "card",
+    "anchor": "capital-one-venture-x",
+    "eyebrow": "#5 · Best flat-rate travel — with the SCRA-only caveat",
+    "title": "Capital One Venture X",
+    "meta": [
+     {
+      "spans": [
+       {
+        "text": "Annual fee: "
+       },
+       {
+        "text": "$395",
+        "bold": true
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Waiver: "
+       },
+       {
+        "text": "SCRA (account must predate active duty)",
+        "bold": true
+       }
+      ]
+     }
+    ],
+    "body": [
+     {
+      "spans": [
+       {
+        "text": "The Venture X is the simplest premium travel card going — flat-rate miles on everything, a $300 annual credit through Capital One Travel, a 10,000-mile anniversary bonus, and lounge access — but it carries this guide's biggest trap: "
+       },
+       {
+        "text": "Capital One waives fees only under SCRA, never MLA.",
+        "bold": true
+       },
+       {
+        "text": " The account must exist "
+       },
+       {
+        "text": "before",
+        "italic": true
+       },
+       {
+        "text": " your active-duty period begins. That makes it the card to open "
+       },
+       {
+        "text": "before",
+        "italic": true
+       },
+       {
+        "text": " you ship — including Guard and Reserve members, who can open it before a 30+ day activation and then request SCRA (which also caps interest at 4%, better than the statutory 6%). Open it while already on active duty and you'll pay $395 a year."
+       }
+      ]
+     }
+    ],
+    "cta": {
+     "label": "See current offer, rates & fees at capitalone.com ↗",
+     "url": "https://www.capitalone.com/credit-cards/venture-x/"
+    }
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "BEST MILITARY-FOCUSED CREDIT CARDS (NAVY FEDERAL, USAA, PENFED)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The military credit unions compete on different ground: low or no fees for everyone, rather than premium fees waived for some.",
+      "bold": true
+     },
+     {
+      "text": " That makes them the natural home for the second card in your wallet — and, unlike the banks above, several of their perks survive your transition out of uniform."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Navy Federal cashRewards & Flagship Rewards"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Navy Federal's "
+     },
+     {
+      "text": "cashRewards",
+      "bold": true
+     },
+     {
+      "text": " earns up to 2% cash back with no annual fee — a clean everyday card for members. The "
+     },
+     {
+      "text": "Visa Signature Flagship Rewards",
+      "bold": true
+     },
+     {
+      "text": " ($49) is its travel card, and the fee treatment is the detail to know: Navy Federal waives it "
+     },
+     {
+      "text": "only under SCRA",
+      "bold": true
+     },
+     {
+      "text": " — an account opened before active duty — and does not apply an MLA fee waiver to cards opened while serving. Its SCRA program caps interest at 4%, and "
+     },
+     {
+      "text": "requests are accepted",
+      "url": "https://www.navyfederal.org/membership/offers-discounts/scra.html"
+     },
+     {
+      "text": " up to 180 days after your active-duty end date."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "USAA Cashback Rewards Plus & Eagle Navigator"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "USAA's "
+     },
+     {
+      "text": "Cashback Rewards Plus",
+      "bold": true
+     },
+     {
+      "text": " ($0 annual fee) earns 5% back on gas and on-base purchases up to annual caps — uniquely useful spending categories for military families. The "
+     },
+     {
+      "text": "Eagle Navigator",
+      "bold": true
+     },
+     {
+      "text": " ($95) is USAA's travel card, and here honesty beats hype: USAA's "
+     },
+     {
+      "text": "own SCRA page",
+      "url": "https://www.usaa.com/support/banking/scra-benefits/"
+     },
+     {
+      "text": " confirms a 4% interest cap and no added fees on covered accounts during active duty, but an MLA annual-fee waiver for the Eagle Navigator circulates only in community reports — it is "
+     },
+     {
+      "text": "not confirmed on USAA's own pages",
+      "bold": true
+     },
+     {
+      "text": ". Verify with USAA before you count on it."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "PenFed Pathfinder & Power Cash Rewards"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "PenFed's angle isn't SCRA or MLA at all — it's the "
+     },
+     {
+      "text": "Honors Advantage",
+      "bold": true
+     },
+     {
+      "text": " program, a credit-union benefit that "
+     },
+     {
+      "text": "includes honorably discharged veterans",
+      "bold": true
+     },
+     {
+      "text": ", not just active duty. With it, the "
+     },
+     {
+      "text": "Pathfinder Rewards",
+      "url": "https://www.penfed.org/credit-cards/pathfinder-rewards-visa"
+     },
+     {
+      "text": " card's $95 fee is waived and the "
+     },
+     {
+      "text": "Power Cash Rewards",
+      "url": "https://www.penfed.org/credit-cards/power-cash-rewards-visa"
+     },
+     {
+      "text": " card's cash back rises from 1.5% to a flat 2% with no annual fee. Because the benefit is membership-based rather than statutory, it doesn't expire when you leave service — which is why PenFed anchors our veterans picks below."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "MILITARY STAR Card (on-base spending)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The "
+     },
+     {
+      "text": "MILITARY STAR card",
+      "url": "https://www.myecp.com/htmlpages/cp_milstarcard"
+     },
+     {
+      "text": " (Exchange Credit Program) has no annual fee, earns 2% rewards on exchange purchases — AAFES, NEX, MCX, CGX stores, exchange food courts and Express locations — and gives a 10% discount on everything you buy the first day the account is open, plus a separate military clothing line of credit for uniform purchases. It works only within the exchange system, so it's a complement to the cards above, not a replacement — but for on-base spending it's the best tool for the job."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "BEST CREDIT CARDS FOR VETERANS (NO SCRA/MLA WAIVER)"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Veterans and retirees do not get SCRA or MLA fee waivers — both laws end with active service — so the best credit cards for veterans are the ones that earn their keep with no annual fee.",
+      "bold": true
+     },
+     {
+      "text": " Most \"military credit card\" roundups blur this line; your card strategy shouldn't."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Best no-annual-fee options for veterans"
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "PenFed Power Cash Rewards",
+        "bold": true
+       },
+       {
+        "text": " — flat 2% cash back with Honors Advantage, which explicitly includes honorably discharged veterans, and no annual fee. The strongest veteran-specific deal on this page."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Navy Federal cashRewards",
+        "bold": true
+       },
+       {
+        "text": " — up to 2% cash back, no annual fee, from a credit union whose membership (and famously service-friendly terms) stay with you for life once you join."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "USAA Cashback Rewards Plus",
+        "bold": true
+       },
+       {
+        "text": " — 5% on gas and on-base spending up to annual caps with no fee; veterans and eligible family members retain USAA membership."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 3,
+    "text": "Are premium cards still worth it for veterans?"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Sometimes — but now you have to do the math civilians do. An $895 Platinum or $795 Sapphire Reserve only makes sense if you genuinely use the credits and lounge access that offset the fee; a frequent business traveler often comes out ahead, an occasional flyer rarely does. Two transition tips from the fee-waiver era: when your waivers end, ask the issuer to "
+     },
+     {
+      "text": "downgrade",
+      "bold": true
+     },
+     {
+      "text": " premium cards to their no-fee versions instead of canceling, and don't close your oldest accounts — account age supports the credit score you'll want for a VA loan. If you're weighing bigger benefits questions, see our "
+     },
+     {
+      "text": "VA disability guide",
+      "url": "/va-disability/"
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "HOW TO CHOOSE A MILITARY CREDIT CARD"
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Match the card to your status, not to a listicle.",
+        "bold": true
+       },
+       {
+        "text": " Active duty → fee-waived premium cards (Amex, Chase, Citi, U.S. Bank). Pre-service, Guard, or Reserve → open Capital One and Navy Federal cards "
+       },
+       {
+        "text": "before",
+        "italic": true
+       },
+       {
+        "text": " orders so SCRA can apply. Veteran → no-fee rewards cards and PenFed's Honors Advantage."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Going OCONUS or PCSing abroad? Check foreign transaction fees.",
+        "bold": true
+       },
+       {
+        "text": " The premium travel cards in this guide charge none — one more reason they beat a basic no-fee card for an overseas tour. Confirm the FTF line on the issuer's page for any card you carry abroad."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Mind the issuers' application rules.",
+        "bold": true
+       },
+       {
+        "text": " Cardholders widely report that Chase declines applicants who have opened five or more cards in the past 24 months (the unwritten \"5/24\" rule) and that Amex generally grants one welcome offer per card per lifetime. Neither is published policy, but both are consistent enough to plan around: get Chase cards early in your card sequence."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Build in the right order.",
+        "bold": true
+       },
+       {
+        "text": " If you're new to credit, start with a no-fee card (MILITARY STAR, cashRewards, or a secured card), pay in full monthly, and add premium cards once you have a year of clean history — a waived fee doesn't help if the application is declined."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Deploying?",
+        "bold": true
+       },
+       {
+        "text": " Set autopay before you go, and remember SCRA's 6% cap (4% at Capital One, Navy Federal, and USAA) applies to pre-service debt while you're on active orders. Fee waivers don't excuse a missed payment."
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Stack cards with discounts.",
+        "bold": true
+       },
+       {
+        "text": " Rewards compound with the verified programs in our "
+       },
+       {
+        "text": "military discount directory",
+        "url": "/discount/"
+       },
+       {
+        "text": " — the discount cuts the price, the card earns on what's left."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "FREQUENTLY ASKED QUESTIONS"
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "What credit cards waive the annual fee for military?",
+    "spans": [
+     {
+      "text": "American Express, Chase, Citi, and U.S. Bank waive annual fees on personal cards for active-duty servicemembers under both SCRA and MLA — MLA also covers military spouses on their own cards. Capital One waives fees only under SCRA, which means the account must have been opened before active duty began. Navy Federal waives its $49 Flagship fee only under SCRA. Veterans and retirees are not covered by either law."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Does American Express waive annual fees for military?",
+    "spans": [
+     {
+      "text": "Yes. American Express waives annual fees on all personal cards for active-duty servicemembers under both SCRA and MLA. MLA relief is applied automatically when an eligible servicemember or spouse opens a card during active duty; SCRA relief on pre-service accounts must be requested. Military spouses qualify for the MLA waiver on their own cards, not just as authorized users."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Does Chase waive credit card fees for military spouses?",
+    "spans": [
+     {
+      "text": "Yes. Under the Military Lending Act, spouses of active-duty servicemembers are \"covered borrowers,\" so a spouse can open their own Chase personal card — including the Sapphire Reserve or Preferred — and have the annual fee waived. There is no requirement to be an authorized user; separate accounts also mean each spouse can earn their own welcome offer. Chase verifies MLA status automatically against the Department of Defense database."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "What is the difference between SCRA and MLA?",
+    "spans": [
+     {
+      "text": "SCRA (the Servicemembers Civil Relief Act) applies to credit you opened BEFORE active duty: it caps interest at 6% on pre-service debt, counts fees as interest, and must be requested. MLA (the Military Lending Act) applies to credit you open DURING active duty: it caps the Military APR at 36%, is applied automatically, and covers spouses and dependents enrolled in DEERS. Because annual fees count toward the 36% MAPR, major issuers simply waive them on MLA-covered accounts."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Do veterans get SCRA or MLA credit card benefits?",
+    "spans": [
+     {
+      "text": "No. Both laws protect servicemembers on active duty only. SCRA relief can be requested up to 180 days after leaving active duty for debt incurred before service, but once that window closes the protections end, and MLA coverage ends when active service ends. Veterans should optimize for rewards and no-annual-fee cards instead — or credit-union programs like PenFed’s Honors Advantage, which explicitly includes honorably discharged veterans."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Does Capital One waive the Venture X annual fee for active duty?",
+    "spans": [
+     {
+      "text": "Only under SCRA — never under MLA. That means the Venture X (or any Capital One card) must have been opened before your active-duty period began; open it during active duty and you will pay the $395 fee. Capital One’s SCRA program caps interest at 4%, better than the statutory 6%, and one request covers Discover accounts too, since Discover is now part of Capital One."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Do military credit card fee waivers apply to National Guard and Reserve?",
+    "spans": [
+     {
+      "text": "Yes, while on qualifying orders. Guard and Reserve members serving on active orders of 30 or more consecutive days (Title 10, or Title 32 for SCRA-covered National Guard service) are treated as active duty for these protections, as are commissioned officers of the Public Health Service and NOAA. One practical play for Capital One cards: open the card before a qualifying activation, then request SCRA once on orders."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "What is the maximum interest rate on a credit card for active-duty military?",
+    "spans": [
+     {
+      "text": "Two caps apply. Under SCRA, interest on debt you incurred before active duty is capped at 6% — and fees count as interest, with the excess forgiven, not deferred. Under MLA, credit opened during active duty is capped at a 36% Military APR (MAPR), which also counts most fees. Several issuers voluntarily beat the SCRA cap: Capital One, Navy Federal, and USAA all cap covered accounts at 4%."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "Is the Amex Platinum worth it for military?",
+    "spans": [
+     {
+      "text": "For active-duty servicemembers, it is one of the strongest cards available: the $895 annual fee is waived under both SCRA and MLA, so you keep the lounge access and the card’s long menu of statement credits at no annual cost. A spouse can hold their own fee-waived Platinum under MLA. For veterans, the math changes — no waiver applies, so it is only worth it if you actually use enough of the credits and travel benefits to beat the fee."
+     }
+    ]
+   },
+   {
+    "type": "faq_item",
+    "collapsed": true,
+    "question": "What happens to my credit cards when I leave active duty?",
+    "spans": [
+     {
+      "text": "MLA and SCRA fee waivers end when your covered status ends, so plan for annual fees to return. In practice fees may not resume immediately — issuers periodically re-check the DoD database — but budget as if they will. Before separation, decide card by card: keep the ones whose benefits beat the fee, downgrade the rest to no-fee versions rather than canceling, and avoid closing your oldest account, which shortens your credit history."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "SOURCES & METHODOLOGY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Every legal claim on this page traces to the statute, regulator, or the issuer's own military-benefits page — never to another blog. Fees and policies were last verified on July 16, 2026; we re-verify quarterly and after any major issuer fee change. Claims that rest only on community reports (Bank of America's \"over $100\" waiver pattern; USAA's Eagle Navigator MLA waiver) are labeled as such above and are never stated as fact."
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Servicemembers Civil Relief Act, 50 U.S.C. ch. 50",
+        "url": "https://www.law.cornell.edu/uscode/text/50/chapter-50"
+       },
+       {
+        "text": " — statutory text"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Military Lending Act, 10 U.S.C. § 987",
+        "url": "https://www.law.cornell.edu/uscode/text/10/987"
+       },
+       {
+        "text": " and "
+       },
+       {
+        "text": "32 C.F.R. Part 232",
+        "url": "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-M/part-232"
+       },
+       {
+        "text": " — statute and implementing regulation"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "CFPB — Servicemembers Civil Relief Act guide",
+        "url": "https://www.consumerfinance.gov/consumer-tools/military-financial-lifecycle/the-servicemembers-civil-relief-act-scra/"
+       },
+       {
+        "text": " and "
+       },
+       {
+        "text": "CFPB — military interest-rate limits",
+        "url": "https://www.consumerfinance.gov/ask-cfpb/im-in-the-military-are-there-limits-on-how-much-i-can-be-charged-for-a-loan-en-893/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "U.S. Department of Justice — Servicemembers and Veterans Initiative",
+        "url": "https://www.justice.gov/servicemembers"
+       },
+       {
+        "text": " · "
+       },
+       {
+        "text": "Military OneSource — SCRA",
+        "url": "https://www.militaryonesource.mil/financial-legal/legal/servicemembers-civil-relief-act/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "DoD covered-borrower databases: "
+       },
+       {
+        "text": "MLA",
+        "url": "https://mla.dmdc.osd.mil/mla/"
+       },
+       {
+        "text": " · "
+       },
+       {
+        "text": "SCRA",
+        "url": "https://scra.dmdc.osd.mil/scra/"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Issuer military-benefits pages: "
+       },
+       {
+        "text": "American Express",
+        "url": "https://www.americanexpress.com/us/help-support/service-members-civil-relief/"
+       },
+       {
+        "text": " · "
+       },
+       {
+        "text": "Chase",
+        "url": "https://www.chase.com/digital/military"
+       },
+       {
+        "text": " · "
+       },
+       {
+        "text": "Citi",
+        "url": "https://online.citi.com/US/ag/military-servicemembers-civil-relief-act"
+       },
+       {
+        "text": " · "
+       },
+       {
+        "text": "Capital One",
+        "url": "https://www.capitalone.com/military/"
+       },
+       {
+        "text": " · "
+       },
+       {
+        "text": "Navy Federal",
+        "url": "https://www.navyfederal.org/membership/offers-discounts/scra.html"
+       },
+       {
+        "text": " · "
+       },
+       {
+        "text": "USAA",
+        "url": "https://www.usaa.com/support/banking/scra-benefits/"
+       },
+       {
+        "text": " · "
+       },
+       {
+        "text": "PenFed",
+        "url": "https://www.penfed.org/credit-cards/pathfinder-rewards-visa"
+       },
+       {
+        "text": " · "
+       },
+       {
+        "text": "Exchange Credit Program (MILITARY STAR)",
+        "url": "https://www.myecp.com/htmlpages/cp_milstarcard"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "/privacy/": {
+  "eyebrow": "// Legal",
+  "h1": "PRIVACY POLICY",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Last updated: April 11, 2026"
+     }
+    ],
+    "slot": "hero",
+    "variant": "stamp"
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "INTRODUCTION"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Welcome to NavyWeek.org. This Privacy Policy explains how we collect, use, and protect information when you visit our website. NavyWeek.org is an independent, unofficial informational resource about the U.S. Navy Week program. We are not affiliated with the U.S. Navy or the Navy Office of Community Outreach (NAVCO)."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "INFORMATION WE COLLECT"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "NavyWeek.org is primarily an informational website. We do not require you to create an account or provide personal information to use the site. However, we may automatically collect certain non-personal information when you visit, including:"
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Browser type and version"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Operating system"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Referring website"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Pages visited and time spent on each page"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "IP address (anonymized where possible)"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Date and time of your visit"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "COOKIES"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "This website may use cookies and similar tracking technologies to enhance your browsing experience. Cookies are small text files placed on your device. You can control cookie settings through your browser preferences. Disabling cookies may affect certain features of the site."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "HOW WE USE INFORMATION"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Any information we collect is used solely for the following purposes:"
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "To improve and optimize the website"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "To understand visitor usage patterns"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "To ensure the site functions properly"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "THIRD-PARTY LINKS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "NavyWeek.org contains links to external websites, including official U.S. Navy and government websites. We are not responsible for the privacy practices or content of these third-party sites. We encourage you to review the privacy policies of any external sites you visit."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "DATA SECURITY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "We take reasonable measures to protect any information collected through this website. However, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "CHILDREN'S PRIVACY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "NavyWeek.org does not knowingly collect personal information from children under the age of 13. If you believe we have inadvertently collected such information, please contact us so we can promptly remove it."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "CHANGES TO THIS POLICY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. Your continued use of the site after changes are posted constitutes your acceptance of the updated policy."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "CONTACT US"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "If you have questions about this Privacy Policy, please visit our "
+     },
+     {
+      "text": "Contact page",
+      "url": "/contact/"
+     },
+     {
+      "text": "."
+     }
+    ]
+   }
+  ]
+ },
+ "/terms/": {
+  "eyebrow": "// Legal",
+  "h1": "TERMS AND CONDITIONS",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Last updated: April 11, 2026"
+     }
+    ],
+    "slot": "hero",
+    "variant": "stamp"
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "ACCEPTANCE OF TERMS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "By accessing and using NavyWeek.org, you accept and agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, please do not use this website."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "ABOUT THIS WEBSITE"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "NavyWeek.org is an independent, unofficial informational resource about the U.S. Navy Week program. This website is not affiliated with, endorsed by, or officially connected to the United States Navy, the Department of Defense, or the Navy Office of Community Outreach (NAVCO). All official Navy Week information can be found at "
+     },
+     {
+      "text": "outreach.navy.mil",
+      "url": "https://outreach.navy.mil"
+     },
+     {
+      "text": "."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "USE OF CONTENT"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The content on NavyWeek.org is provided for general informational purposes only. While we strive to keep information accurate and up to date, we make no warranties or representations about the completeness, accuracy, reliability, or availability of any information on this site."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "INTELLECTUAL PROPERTY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "The original content, design, and code of NavyWeek.org are the property of the site's creators. U.S. Navy imagery, logos, and official content referenced or displayed on this site remain the property of the United States Navy and the Department of Defense. Use of such materials is for informational purposes and does not imply endorsement."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "ACCEPTABLE USE"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "You agree not to:"
+     }
+    ]
+   },
+   {
+    "type": "list",
+    "ordered": false,
+    "items": [
+     {
+      "spans": [
+       {
+        "text": "Use the website for any unlawful purpose"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Attempt to gain unauthorized access to any part of the website"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Interfere with or disrupt the website's operation"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Reproduce, duplicate, or exploit any part of the website for commercial purposes without permission"
+       }
+      ]
+     },
+     {
+      "spans": [
+       {
+        "text": "Misrepresent your affiliation with NavyWeek.org or the U.S. Navy"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "DISCLAIMER OF WARRANTIES"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "NavyWeek.org is provided on an \"as is\" and \"as available\" basis. We disclaim all warranties, express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not guarantee that the website will be uninterrupted, secure, or error-free."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "LIMITATION OF LIABILITY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "To the fullest extent permitted by law, NavyWeek.org and its creators shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of or inability to use this website."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "EXTERNAL LINKS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "This website contains links to external sites, including official U.S. government websites. We are not responsible for the content or practices of any linked external sites. The inclusion of any link does not imply endorsement by NavyWeek.org."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "EVENT INFORMATION ACCURACY"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Navy Week event schedules, dates, locations, and details are sourced from publicly available information and may change without notice. Always verify event details with official sources before making travel or attendance plans. NavyWeek.org is not responsible for changes to event schedules or cancellations."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "CHANGES TO THESE TERMS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "We reserve the right to update or modify these Terms and Conditions at any time. Changes will be posted on this page with an updated revision date. Your continued use of the website after any changes constitutes acceptance of the new terms."
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "CONTACT"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "If you have questions about these Terms and Conditions, please visit our "
+     },
+     {
+      "text": "Contact page",
+      "url": "/contact/"
+     },
+     {
+      "text": "."
+     }
+    ]
+   }
+  ]
+ },
+ "/contact/": {
+  "eyebrow": "// Get in Touch",
+  "h1": "CONTACT US",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "NavyWeek.org is an independent, unofficial informational resource. We are not affiliated with the U.S. Navy or NAVCO. For official Navy Week inquiries, please contact the Navy Office of Community Outreach directly."
+     }
+    ],
+    "variant": "panel"
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "REACH OUT TO US"
+   },
+   {
+    "type": "link_card",
+    "icon": "mail",
+    "label": "Email",
+    "value": "hello@navyweek.org",
+    "url": "mailto:hello@navyweek.org"
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "OFFICIAL NAVY WEEK RESOURCES"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "For official information about Navy Week events, scheduling, and media inquiries, please contact the Navy Office of Community Outreach (NAVCO):"
+     }
+    ]
+   },
+   {
+    "type": "link_card",
+    "icon": "external",
+    "label": "Official NAVCO Website",
+    "value": "outreach.navy.mil",
+    "url": "https://outreach.navy.mil/Navy-Weeks/"
+   },
+   {
+    "type": "info_card",
+    "label": "NAVCO Mailing Address",
+    "spans": [
+     {
+      "text": "Navy Office of Community Outreach (NAVCO)\n5722 Integrity Drive, Bldg. 768\nMillington, TN 38054"
+     }
+    ]
+   },
+   {
+    "type": "heading",
+    "level": 2,
+    "text": "FEEDBACK AND CORRECTIONS"
+   },
+   {
+    "type": "paragraph",
+    "spans": [
+     {
+      "text": "Found an error in our schedule or event information? Have a suggestion for improving the site? We appreciate your feedback. Please email us at "
+     },
+     {
+      "text": "hello@navyweek.org",
+      "url": "mailto:hello@navyweek.org"
+     },
+     {
+      "text": " and we will do our best to respond promptly."
+     }
+    ]
+   }
+  ]
+ },
+ "/our-process/": {
+  "blocks": [
+   {
+    "type": "paragraph",
+    "variant": "lead",
+    "slot": "hero",
+    "spans": [
+     {
+      "text": "NavyWeek publishes one thing about military and veteran discounts: what we can prove. Every figure on this site traces back to a primary source we read ourselves — and dated."
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "variant": "op-lead",
+    "spans": [
+     {
+      "text": "This page explains exactly how we do that, step by step, so you can judge our work — and so the people who rely on it know what stands behind it."
+     }
+    ]
+   },
+   {
+    "type": "callout",
+    "variant": "alert",
+    "spans": [
+     {
+      "text": "We treat this as a high-stakes subject. A wrong percentage sends a veteran to a counter expecting a discount that was never real. Accuracy isn't a constraint on what we do here — it is the work."
+     }
+    ]
+   },
+   {
+    "type": "band",
+    "tone": "light",
+    "layout": "steps",
+    "eyebrow": "// THE SHORT VERSION",
+    "heading": "For any brand, the process runs the same order — every time",
+    "cards": [
+     {
+      "n": "1",
+      "title": "Choose",
+      "desc": "Pick the brand and audience to cover, ranked by real search demand."
+     },
+     {
+      "n": "2",
+      "title": "Research",
+      "desc": "Read the offer against primary sources, in a fixed order of authority."
+     },
+     {
+      "n": "3",
+      "title": "Compare",
+      "desc": "Weigh every legitimate way to save — not just the official discount."
+     },
+     {
+      "n": "4",
+      "title": "Verify",
+      "desc": "Run each page through a publish gate it must pass to ship."
+     },
+     {
+      "n": "5",
+      "title": "Publish",
+      "desc": "Ship only what survives the gate, with sources and dates shown."
+     },
+     {
+      "n": "6",
+      "title": "Re-check",
+      "desc": "Re-verify every page on a schedule and after anything changes."
+     }
+    ]
+   },
+   {
+    "type": "step",
+    "tag": "STEP 1 · SELECTION",
+    "heading": "How we choose what to cover",
+    "spans": [
+     {
+      "text": "We don't cover brands at random, and we don't cover them because an affiliate program pays well — we have no such arrangements. We maintain a research queue ranked by search demand: the brands and questions service members and veterans look up most. We deliberately also cover brands that turn out to have no military discount. That's a real, useful answer — more honest than the coupon pages that invent an offer to fill the gap."
+     }
+    ]
+   },
+   {
+    "type": "step",
+    "tag": "STEP 2 · RESEARCH",
+    "heading": "How we research an offer",
+    "spans": [
+     {
+      "text": "The governing rule is simple and absolute: we never state a discount amount, eligible group, code, stacking claim, or term we haven’t confirmed against a primary source. When a source doesn’t confirm something, we say what is confirmed and flag the rest as unverified. An honest \"the brand publishes no exact percentage\" beats a confident, fabricated number. For every fact, we record the source URL, who owns it, the date it was updated, the date we accessed it, the exact fact, and our confidence in it."
+     }
+    ]
+   },
+   {
+    "type": "step",
+    "tag": "STEP 3 · COMPARISON",
+    "heading": "Finding the genuinely best way to save",
+    "spans": [
+     {
+      "text": "A page that only answers \"does this brand have a military discount?\" leaves money on the table — the official discount is frequently not the best deal. For each brand we compare every legitimate path against one realistic example cart: the official discount, third-party programs, cashback routes, sale-stacking, credit-card and loyalty plays, and outlet channels. The make-or-break question is stacking — what can legally be combined — verified against both the brand’s terms and the provider’s."
+     }
+    ]
+   },
+   {
+    "type": "ladder",
+    "tag": "SOURCE HIERARCHY",
+    "heading": "We work sources in a fixed order of authority",
+    "rows": [
+     {
+      "n": "1",
+      "title": "The brand's own pages",
+      "desc": "Discount, help, terms, checkout, or offer page. The top source for the percentage, codes, and fine print.",
+      "tone": 1
+     },
+     {
+      "n": "2",
+      "title": "The verification provider's brand page",
+      "desc": "ID.me, SheerID, GovX, WeSalute, VerifyPass — often states the exact percentage and eligible groups.",
+      "tone": 2
+     },
+     {
+      "n": "3",
+      "title": "Store locator, support, return policy",
+      "desc": "For in-store rules, regional limits, and exclusions.",
+      "tone": 3
+     },
+     {
+      "n": "4",
+      "title": "Reputable military & editorial resources",
+      "desc": "Context only. These go stale quickly, so we verify against the brand before publishing.",
+      "tone": 4
+     },
+     {
+      "n": "5",
+      "title": "Coupon & aggregator sites",
+      "desc": "Never treated as fact. We read them only to see what false claims are circulating so we can correct them. They are the problem we exist to fix.",
+      "tone": 5
+     }
+    ],
+    "note": "The most authoritative source always wins. Anything below high confidence gets hedged in the copy — or left out entirely."
+   },
+   {
+    "type": "band",
+    "tone": "navy",
+    "layout": "gate",
+    "eyebrow": "// STEP 4 · THE PUBLISH GATE",
+    "heading": "A brand cannot be published unless we have all of this",
+    "lead": "Research becomes a page only after it clears a gate. A documented \"no discount exists\" finding passes too — it meets the same standard of proof.",
+    "cards": [
+     {
+      "title": "A working brand link",
+      "desc": "A verified link to the brand's own discount page — https://, not an affiliate link, not a dead link, not a generic homepage."
+     },
+     {
+      "title": "The verification mechanic",
+      "desc": "Which provider gates the offer, and how a customer proves eligibility."
+     },
+     {
+      "title": "The discount value",
+      "desc": "The actual value — or an explicit, sourced statement that the brand publishes none."
+     },
+     {
+      "title": "Material exclusions",
+      "desc": "Caps, excluded categories, one-code-per-order windows, regional limits, no-stacking rules."
+     }
+    ]
+   },
+   {
+    "type": "refusals",
+    "tag": "OUR REFUSALS",
+    "heading": "What we will not do",
+    "lead": "To make the standard concrete — here is what we refuse to do, even when it would be easier or more profitable.",
+    "items": [
+     "Publish a percentage, code, or eligibility rule we couldn't verify at the source.",
+     "Treat a coupon or aggregator site as proof of anything.",
+     "Claim an audience — reserve, Guard, retiree, spouse, dependent — the brand doesn't actually name.",
+     "Present an expired or limited promo as a standing, evergreen offer.",
+     "Imply a partnership or endorsement that doesn't exist, or let affiliate incentives decide what we say.",
+     "Emit fabricated merchant ratings, reviews, or offer markup — we are a publisher, not the seller."
+    ]
+   },
+   {
+    "type": "freshness",
+    "label": "STANDING FRESHNESS BAR",
+    "spans": [
+     {
+      "text": "Every discount page must have been verified within the last "
+     },
+     {
+      "text": "45 days",
+      "bold": true
+     },
+     {
+      "text": ". Cross that line and it goes back into the queue — the \"facts verified\" date only advances when a person has re-confirmed the offer."
+     }
+    ],
+    "stat": "45",
+    "statLabel": "DAYS MAX"
+   },
+   {
+    "type": "rule_note",
+    "heading": "Independence & Disclosure",
+    "spans": [
+     {
+      "text": "NavyWeek is an independent editorial publisher. We are not affiliated with, sponsored by, or endorsed by the brands we cover. Company names and logos are trademarks of their owners, used only to identify the brand a page is about. Because brands change their offers at any time, we always route you to the brand's official page to confirm current terms."
+     }
+    ]
+   },
+   {
+    "type": "cta_panel",
+    "heading": "See something that doesn't match?",
+    "spans": [
+     {
+      "text": "If a discount on this site doesn't match what a brand currently offers, tell us. We re-verify it against the source and update or correct the page."
+     }
+    ],
+    "actions": [
+     {
+      "label": "Report a Correction",
+      "url": "/contact/"
+     },
+     {
+      "label": "Read Our Terms",
+      "url": "/terms/"
+     }
+    ]
+   },
+   {
+    "type": "paragraph",
+    "variant": "op-reviewer",
+    "spans": [
+     {
+      "text": "This page is reviewed by Erik Rivera, former U.S. Navy Explosive Ordnance Disposal officer. Last reviewed June 24, 2026."
+     }
+    ]
+   }
+  ]
+ }
+}

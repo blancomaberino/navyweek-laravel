@@ -104,7 +104,13 @@
   "sourcePriorityNote": "We cite ID.me Shop first — \"We’re not aware that JEGS offers Military discounts\" — alongside a full-text search of JEGS’ own help center, which contains no military-discount policy (its only military-specific article covers APO/FPO shipping). The price-match and promo-code rules are quoted from JEGS’ official help-center articles, and the Rakuten cashback rate is stamped to the \"Last verified\" date above because portal rates move often."
  },
  "dominos-military-discount": {
-  "headlineDiscount": "No national discount — save via coupons"
+  "headlineDiscount": "No national discount — save via coupons",
+  "heroTagline": "Domino's runs no national military or veteran discount — but public coupons and Domino's Rewards beat any franchise courtesy, and veterans get a $20K franchise-fee perk. Here's the honest breakdown.",
+  "discountSummary": "Domino's does not run a national military or veteran discount and uses no verification service (ID.me, GovX, SheerID). A few independently franchised stores may offer a small courtesy (shoppers report ~10%) at their discretion, but it is never guaranteed. The real way to save is the public coupon lineup plus Domino's Rewards.",
+  "ctaLabel": "See Domino's public deals",
+  "ctaSubnote": "Opens www.dominos.com · No military verification and no national military code — any in-store courtesy is a local franchise decision and is not guaranteed",
+  "stickyCtaLabel": "See Domino's Deals",
+  "sourcePriorityNote": "We cite Domino's official U.S. deals page, its investor-relations press release on the Veterans Franchise Program, and Military.com first, and report plainly that no national customer military or veteran discount and no verification provider were found. The public coupons, Domino's Rewards, the $20,000 Veterans Franchise Program, and the absence of a stated military rate are quoted from those sources and confirmed on the “Last verified” date above. We deliberately omit any specific in-store courtesy percentage as an asserted policy because Domino's publishes none — reported figures are discretionary and location-specific. UK Blue Light Card / Defence Discount Service offers come from a separate British company and do not apply in the United States."
  },
  "teva-military-discount": {
   "discountSummary": "Teva does not offer a military, veteran, or first-responder discount. ID.me itself says it is not aware of one, Teva is not on the GovX marketplace, and there is no ID.me/SheerID military rate. The honest ways for a service member to save are all non-military: Teva’s Sale/outlet, the public email/SMS welcome code (~10%), ID.me Shop cashback (open to everyone), and retailer substitutes like REI, whose Co-op members earn a ~10% annual dividend.",
@@ -154,7 +160,12 @@
   "sourcePriorityNote": "We cite Trijicon’s own Military / Law Enforcement / Government Programs page first, which routes shoppers to ExpertVoice and Guidefitter for special MIL/LE pricing on select optics and publishes no percentage. The pro-program eligibility, the GovX storefront, and the public $100 RMR rebate window are quoted from those primary sources and confirmed on the \"Last verified\" date above. We deliberately omit the \"10%–25% military discount at trijicon.com\" figure circulating on coupon sites because Trijicon publishes no such brand-run rate and has no military discount at its own checkout."
  },
  "dillards-military-discount": {
-  "headlineDiscount": "No everyday discount"
+  "headlineDiscount": "No everyday discount",
+  "heroTagline": "Dillard's has no everyday military discount. The only real offer is Hero Appreciation Days — 20% off in-store, ~2 days a year, for active military, police & firefighters (not broadly veterans).",
+  "discountSummary": "Dillard's has no everyday military or veteran discount — ID.me confirms it isn’t aware of one, and nothing is published on dillards.com. The only real military-adjacent offer is Hero Appreciation Days, a limited event (historically early December) giving 20% off in-store to active military, police, and firefighters and their immediate families.",
+  "ctaLabel": "See Dillard's Hero Appreciation Days details",
+  "ctaSubnote": "Opens shop.id.me/discounts/dillard-s/military · Dillard's has no everyday military discount — the only offer is a ~2-day-a-year in-store event for active military, police & firefighters",
+  "sourcePriorityNote": "We cite ID.me’s Dillard's discount page first, which states it is not aware that Dillard's offers a military discount, and report plainly that no everyday Dillard's military or veteran discount exists. The Hero Appreciation Days details (20% in-store, historically early December, active military/police/firefighters + immediate families) are drawn from Dillard's own event post and press coverage and confirmed on the \"Last verified\" date above. We deliberately omit the unverified \"25% Dillard's military discount\" claim circulating on aggregator sites because no such everyday offer exists, and we do not promise a specific future Hero Appreciation Days date because it shifts year to year."
  },
  "lg-military-discount": {
   "discountSummary": "LG gives verified active military and veterans a guaranteed minimum of an additional 10% off LG-branded products (15% off LG STUDIO and LG SIGNATURE appliances) versus LG.com sale prices, shopped on the LG Partner Store after ID.me verification.",
@@ -424,7 +435,12 @@
   "sourcePriorityNote": "We cite Airbnb’s own Help Center first, and report plainly that Airbnb offers no platform-wide military/veteran discount — it \"does not currently offer any loyalty discounts,\" uses no verification partner, and ID.me is \"not aware\" of any Airbnb military offer. Airbnb is a marketplace where independent hosts set pricing; the only military rate comes from a host who voluntarily offers one via the official \"special offer\" tool (host sets any proof rules), and length-of-stay weekly/monthly discounts are open to everyone. Any \"Airbnb military discount code\" on coupon sites is unverified — Airbnb issues none. Airbnb.org emergency/temporary-stay programs are humanitarian housing, not a consumer discount."
  },
  "kohls-military-discount": {
-  "headlineDiscount": "15% off (Mondays, in-store)"
+  "headlineDiscount": "15% off (Mondays, in-store)",
+  "heroTagline": "15% off in store every Monday for military, veterans, retirees, and immediate family — verified by showing ID at the register (plus 30% around Veterans Day).",
+  "discountSummary": "Kohl's \"Military Mondays\" gives active-duty military, veterans, retirees, and their immediate family 15% off qualifying purchases in store, every Monday of the year — verified by showing proper ID at the register. It is in-store only (not valid on Kohls.com), and Kohl's typically raises it to 30% for a short Veterans Day window.",
+  "ctaLabel": "See Kohl's Military Mondays details",
+  "ctaSubnote": "Opens kohls.com · 15% off in store every Monday — show a military ID, veteran-status state ID, or DD 214 at the register. In-store only (not valid online); no ID.me/SheerID/GovX",
+  "sourcePriorityNote": "We cite Kohl's FAQ and its corporate Veterans Day post (which reproduces the Military Mondays terms verbatim) first. The 15% Monday in-store discount, in-person ID requirement, and 30% Veterans Day window (most recently Nov 10–11, 2025) are quoted from those pages; the Veterans Day rate/dates are a recurring seasonal promo confirmed for 2025, so re-verify each year. Confirm current terms on kohls.com on the \"Last verified\" date above."
  },
  "shark-military-discount": {
   "discountSummary": "Shark (SharkNinja) does not offer a U.S. military or veteran discount — ID.me itself says it is \"not aware that SharkNinja offers Military discounts,\" and the only genuine Shark military discount (9% via GoCertify) is UK-only.",
@@ -920,7 +936,13 @@
   "heroTagline": "No permanent national military discount — but a recurring Veterans Day 10%, ID.me online cash back, and public rebates do the work. Here’s the cheapest real way to buy Goodyear tires."
  },
  "mens-wearhouse-military-discount": {
-  "headlineDiscount": "Seasonal only"
+  "headlineDiscount": "Seasonal only",
+  "heroTagline": "No everyday military discount — but during Military Appreciation Week active service members, veterans, and family get 25% off in store, and Veterans Day has brought a separate ~20% event.",
+  "discountSummary": "Men's Wearhouse has no verified everyday military discount. During its Military Appreciation Week it has offered 25% off in store (excludes rentals), and around Veterans Day it has separately run a ~20% in-store event — both with a verified military ID, no ID.me, and no online path.",
+  "ctaLabel": "See Men's Wearhouse military event details",
+  "ctaSubnote": "Opens the official Military Appreciation Week release · Verified in store with a qualifying ID — no ID.me, no standing discount",
+  "stickyCtaLabel": "See Men's Wearhouse Military Event",
+  "sourcePriorityNote": "We cite the official Tailored Brands / Men's Wearhouse press release and the ID.me Shop page first, and report plainly that no everyday military discount was found — only seasonal Military Appreciation Week (25% in-store, verified instance June 29 - July 6, 2024) and a separately reported Veterans Day event (~20% in-store). We deliberately omit the unverified \"up to 40%/60% off\" claims circulating on aggregator sites because neither Men's Wearhouse nor ID.me publishes a standing military rate."
  },
  "total-wine-and-more-military-discount": {
   "discountSummary": "Total Wine & More offers no percentage-off military discount. The official Military Benefit is 2x Bonus Points in the free &MORE Rewards program — verified once via ID.me — on Winery Direct wines, Spirits Direct spirits, and beer singles, in &MORE Rewards markets only. In real money that’s roughly an extra 1% back in future store rewards on eligible items.",
@@ -1001,7 +1023,13 @@
   "sourcePriorityNote": "We cite Smith’s own site (support and current-promotion terms), the Smith Pro Program terms, and the GovX marketplace first, and report plainly that no first-party Smith military or veteran discount or ID.me checkout was found. The GovX route, the Pro Program terms and its active-military/first-responder-only eligibility, the public-sale math, and the portal/exchange details are quoted from those sources and confirmed on the \"Last verified\" date above. We deliberately omit the \"20% via ID.me,\" \"up to 60% military,\" and \"10–25% military\" figures circulating on coupon sites because Smith publishes no such first-party rate."
  },
  "arcteryx-military-discount": {
-  "headlineDiscount": "No military discount"
+  "headlineDiscount": "No military discount",
+  "heroTagline": "Arc'teryx has no military discount — its PRO/LEAF program excludes military and law enforcement. The real savings are open to everyone: the Outlet and ReBIRD Resale (~30–40% off) and a 20% Trade-In credit.",
+  "discountSummary": "Arc'teryx has no military or veteran discount — no percentage, no code, and no ID.me/SheerID/GovX military checkout. Its PRO Program FAQ says military and law enforcement are not eligible for a PRO Purchase membership, and LEAF is purchase-restricted product access, not a discount. The real savings are open to everyone: the Outlet, ReBIRD Resale, and a 20% Trade-In credit.",
+  "ctaLabel": "Shop the Arc'teryx Outlet",
+  "ctaSubnote": "Opens outlet.arcteryx.com · Arc'teryx has no military discount — the Outlet and ReBIRD Resale (~30–40% off) are the real savings, open to everyone",
+  "stickyCtaLabel": "Arc'teryx: How to Save",
+  "sourcePriorityNote": "We cite Arc'teryx's own PRO Program FAQ first — it states that \"Law enforcement and military personnel are not eligible for a PRO Purchase membership due to system limitations\" — and report plainly that no Arc'teryx military discount was found (no code, and no ID.me/SheerID/GovX military checkout on arcteryx.com). Operation Military Kids independently confirms the company does not offer a military discount. The Outlet, ReBIRD Resale, and 20% Trade-In figures are quoted from Arc'teryx's own sites and confirmed on the \"Last verified\" date above. We deliberately omit the fabricated \"Arc'teryx military discount codes\" circulating on aggregator sites and do not present the LEAF product line as a price break."
  },
  "starlink-military-discount": {
   "discountSummary": "Starlink (SpaceX) offers no military or veteran discount — no active-duty, veteran, retiree, reserve, spouse, dependent, or first-responder pricing on its dishes or plans. Prices are the same for all consumers in a given area, and Starlink uses no ID.me/SheerID/GovX/WeSalute to verify military status. \"Starlink military discount\" claims online are third-party (an installer’s labor discount, or GovX accessory pricing) — not from Starlink. Starshield is a separate defense procurement channel, not a consumer discount.",
@@ -1120,7 +1148,12 @@
  },
  "cheddars-military-discount": {
   "headlineDiscount": "Free app on Veterans Day",
-  "ctaSubnote": "Opens www.cheddars.com · No year-round military discount · Veterans Day free appetizer/dessert is dine-in with proof of service; participation varies by location"
+  "ctaSubnote": "Opens www.cheddars.com · No year-round military discount · Veterans Day free appetizer/dessert is dine-in with proof of service; participation varies by location",
+  "heroTagline": "No year-round military discount — but veterans and active-duty get a free appetizer or dessert on Veterans Day. Here are all the real 2026 ways to save.",
+  "discountSummary": "Cheddar's has no year-round military discount, but veterans and active-duty service members who dine in on Veterans Day (Nov 11) with proof of service get a free appetizer or dessert.",
+  "ctaLabel": "Visit Cheddar's official site",
+  "stickyCtaLabel": "See Cheddar's Savings",
+  "sourcePriorityNote": "We cite Cheddar's official FAQ, homepage, and Veterans Day Facebook post first, and report plainly that no year-round first-party military or veteran discount was found. The Veterans Day free appetizer/dessert offer, the eClub freebie, lunch pricing, and the Rakuten/ID.me gift-card cash-back rates are quoted from those sources and confirmed on the “Last verified” date above. We deliberately omit the unverified “10-15% military discount” and “20% promo code” figures circulating on coupon sites because Cheddar’s publishes no such rate."
  },
  "wilson-military-discount": {
   "discountSummary": "Wilson offers a 15% military discount on eligible merchandise for active, reserve, and retired military and their families, verified through SheerID and applied automatically at wilson.com — no code needed.",
@@ -1203,7 +1236,11 @@
  "bloomingdales-military-discount": {
   "headlineDiscount": "No military discount",
   "ctaLabel": "Shop the Friends & Family Sale",
-  "ctaSubnote": "Opens www.bloomingdales.com · No military discount and no verification — Friends & Family is a public sale open to everyone"
+  "ctaSubnote": "Opens www.bloomingdales.com · No military discount and no verification — Friends & Family is a public sale open to everyone",
+  "heroTagline": "Bloomingdale’s runs no military or veteran discount — and the “15% off with military ID” claim is fake. Here’s the honest maximum-savings plan: Friends & Family ~25% off and the 10-day price adjustment.",
+  "discountSummary": "Bloomingdale's does not offer a military or veteran discount — there is no percentage off for service members, no in-store ID deal, and no ID.me, SheerID, or GovX military program. The real way to save is the twice-yearly Friends & Family sale (historically ~25% off), captured retroactively through the 10-day price adjustment where needed, with Loyallist points and the Bloomingdale's card layered on top.",
+  "stickyCtaLabel": "How to Save at Bloomingdale's",
+  "sourcePriorityNote": "We cite ID.me’s Bloomingdale’s military and first-responder pages, the Bloomingdale’s Loyallist terms, the Friends & Family sale page, and the price-adjustment help article first, and report plainly that no first-party Bloomingdale’s military or veteran discount was found. ID.me confirms it is not aware of any Bloomingdale’s military offer. We deliberately omit the unverified “15% off with military ID” figure circulating on coupon aggregators because Bloomingdale’s publishes no such rate. Facts were confirmed on the “Last verified” date above."
  },
  "great-clips-military-discount": {
   "discountSummary": "Great Clips gives veterans and active service members a free haircut on Veterans Day (Nov 11) through its Thank a Veteran program; there is no company-wide everyday military rate — everyday discounts are set by each franchise.",
@@ -1384,7 +1421,8 @@
  },
  "rothys-military-discount": {
   "headlineDiscount": "20% off",
-  "heroTagline": "20% off one pair for military, veterans, families, first responders, and more — verified through SheerID."
+  "heroTagline": "20% off one pair for military, veterans, families, first responders, and more — verified through SheerID.",
+  "discountSummary": "Rothy's offers a 20% military discount on one pair of shoes, verified through SheerID and valid online at rothys.com and in Rothy's retail stores."
  },
  "hexclad-military-discount": {
   "discountSummary": "HexClad’s \"HexClad Heroes\" program gives verified US Military Service Members, Veterans, National Guard, Reserve, and their immediate family — plus Police, Firefighters, and EMTs — 10% off. Verify through ID.me and it issues a unique 10% code that auto-applies at checkout on hexclad.com. Key rule: one discount per order — not combinable with other promos, and not valid during sitewide sales or Black Friday / Cyber Monday.",
@@ -1477,7 +1515,8 @@
  },
  "knotts-berry-farm-military-discount": {
   "headlineDiscount": "Tickets from $25",
-  "heroTagline": "Discounted tickets via ID.me (from ~$57), $25 Military Tribute Days, and free Memorial Day weekend admission for military, veterans, and first responders."
+  "heroTagline": "Discounted tickets via ID.me (from ~$57), $25 Military Tribute Days, and free Memorial Day weekend admission for military, veterans, and first responders.",
+  "discountSummary": "Knott's Berry Farm offers discounted single-day admission (from about $57 vs. a $110 gate) to military, veterans, and first responders via ID.me, plus $25 Military Tribute Days and free Memorial Day weekend admission."
  },
  "valvoline-military-discount": {
   "discountSummary": "Valvoline Instant Oil Change gives military customers 15% off their service invoice when they show a valid military ID at a participating location. It is an in-store, point-of-sale discount — no online code and no third-party verification app for the 15%.",
@@ -1600,7 +1639,8 @@
  },
  "boscovs-military-discount": {
   "headlineDiscount": "Up to 15% off",
-  "heroTagline": "Up to 15% off, tiered by department, that stacks on sale prices — in-store and online, valid a full year."
+  "heroTagline": "Up to 15% off, tiered by department, that stacks on sale prices — in-store and online, valid a full year.",
+  "discountSummary": "Boscov's offers eligible military shoppers up to 15% off (tiered by department) that stacks on sale prices, valid in-store and online for a full year."
  },
  "enterprise-military-discount": {
   "discountSummary": "Enterprise offers Government Leisure Travel — 5% off base rates (base only, not taxes or fees) — to active-duty members, veterans, retired federal employees, and current U.S. federal employees, with no military-association membership required, plus separate contracted Official Government Travel rates for travel on official orders.",
@@ -1758,7 +1798,9 @@
   "discountSummary": "CVS has no free register discount. The only CVS military discount is 20% off full-price items at CVS.com (plus free shipping), unlocked through a paid WeSalute+ membership — online only, full-price items only, and excluding prescriptions, gift cards, BOGO, and sale items.",
   "headlineDiscount": "20% off (paid WeSalute+)",
   "ctaSubnote": "Opens cvs.com · The 20% is CVS.com online only and requires a paid WeSalute+ membership — there is no free in-store register discount",
-  "heroTagline": "CVS has no free register discount — the only CVS military deal is 20% off full-price CVS.com orders via a paid WeSalute+ membership, and the free ExtraCare program usually beats it."
+  "heroTagline": "CVS has no free register discount — the only CVS military deal is 20% off full-price CVS.com orders via a paid WeSalute+ membership, and the free ExtraCare program usually beats it.",
+  "ctaLabel": "See CVS’s WeSalute+ offer",
+  "sourcePriorityNote": "We cite CVS’s own we-salute pages first (the 20%-off-full-price terms, free shipping, and exclusion list) and WeSalute’s CVS offer page for the eligibility and paid-membership requirement, and we report plainly that the discount is CVS.com online-only and gated behind a paid WeSalute+ subscription — not a free register discount. The membership-cost figures come from WeSalute’s plans page and a third-party review and are labeled as such. The free ExtraCare path is documented from CVS’s ExtraCare overview. All confirmed on the “Last verified” date above; CVS and WeSalute can change terms at any time."
  },
  "pirates-voyage-military-discount": {
   "discountSummary": "Pirates Voyage offers a special military rate confirmed on its own FAQ, but it cannot be booked online — you must call the box office of your location and present a valid military ID. The brand does not publish the discount amount, and there is no ID.me, SheerID, or GovX verification.",
@@ -1965,7 +2007,8 @@
   "ctaLabel": "See GovX Norton/LifeLock pricing",
   "ctaSubnote": "Opens GovX / Norton · No standalone everyday military rate — verify the GovX Norton 360 with LifeLock price, compare it to Norton’s public first-year promo, and calendar the renewal",
   "heroTagline": "No standalone everyday military rate — the military channel is GovX for Norton 360 with LifeLock. Here’s how to compare it to the public promo and beat the renewal.",
-  "stickyCtaLabel": "See GovX Pricing"
+  "stickyCtaLabel": "See GovX Pricing",
+  "sourcePriorityNote": "We cite Military.com's LifeLock pages, the GovX Norton 360 with LifeLock listing, and us.norton.com. There is no standalone, everyday LifeLock military rate on the consumer site — Military.com notes LifeLock \"does not currently offer an active military discount.\" The legitimate military channel is GovX (gated government/military pricing, verified via GovX ID). The exact GovX discount was not verifiable this pass (JS-rendered page); aggregators cite \"up to 45% off,\" but we treat that as unconfirmed and do not assert a percentage. \"Extra 15–30% off military LifeLock\" codes are coupon-site inventions. Norton's public first-year promo (~37–52% off, anyone) applies to year 1 only and renews at full price on every channel."
  },
  "j-crew-military-discount": {
   "discountSummary": "J.Crew offers a 15% military discount — covering active duty, veterans, retirees, reserve/Guard, and qualified dependents, plus medical professionals and first responders — verified through SheerID and valid online and in store.",
@@ -1991,7 +2034,8 @@
   "headlineDiscount": "Up to 10% off hotels",
   "ctaSubnote": "Opens expedia.com · Verify military/veteran status through ID.me, then enter the coupon code at Expedia checkout on a stand-alone prepaid hotel (advertised 10%, terms page says 8% — confirm the live value in the ID.me flow)",
   "heroTagline": "Expedia advertises up to 10% off select hotels for the verified military & veteran community via ID.me — but its terms page says 8%. Here’s the real deal, who qualifies, and how to redeem.",
-  "sourcePriorityNote": "We cite Expedia’s own ID.me, Travel for Veterans, and coupon terms pages, plus ID.me Shop, first. Expedia’s marketing pages advertise \"10% off select hotels\" while the only terms page found states 8% and shows a 2025 redemption window that has expired — a current 2026 replacement terms page was not located, so we do not assert a fixed percentage and route readers to confirm inside the ID.me flow. Spouse/dependent/Gold Star eligibility is not itemized by Expedia (governed by ID.me’s Military category); re-verification rules are ID.me’s, not stated by Expedia. Confirm current terms on the \"Last verified\" date above."
+  "sourcePriorityNote": "We cite Expedia’s own ID.me, Travel for Veterans, and coupon terms pages, plus ID.me Shop, first. Expedia’s marketing pages advertise \"10% off select hotels\" while the only terms page found states 8% and shows a 2025 redemption window that has expired — a current 2026 replacement terms page was not located, so we do not assert a fixed percentage and route readers to confirm inside the ID.me flow. Spouse/dependent/Gold Star eligibility is not itemized by Expedia (governed by ID.me’s Military category); re-verification rules are ID.me’s, not stated by Expedia. Confirm current terms on the \"Last verified\" date above.",
+  "ctaLabel": "Verify with ID.me on Expedia"
  },
  "dixxon-military-discount": {
   "discountSummary": "Dixxon Flannel Co. offers a military and first-responder discount verified through VerifyPass — a one-time code applied at checkout on dixxon.com. Independent military directories consistently report the rate at about 10% off; the exact figure is shown after you verify.",
@@ -2031,7 +2075,8 @@
   "headlineDiscount": "5% + up to 25%",
   "ctaLabel": "See Dollar military rates",
   "ctaSubnote": "Opens dollar.com / ID.me Shop · 5% VetRewards (CDP code), an ID.me “up to 25%” military rate, or a U.S. Government agreement rate on official orders — compare against Pay Now",
-  "heroTagline": "Three lanes: 5% VetRewards (CDP code), an ID.me “up to 25%” military rate, and government rates on official orders. Here’s how to compare them and rent for the least."
+  "heroTagline": "Three lanes: 5% VetRewards (CDP code), an ID.me “up to 25%” military rate, and government rates on official orders. Here’s how to compare them and rent for the least.",
+  "sourcePriorityNote": "We cite Dollar's own VetRewards/Veterans Advantage page, the ID.me Shop Dollar store page, and Military.com. Dollar publishes only the 5% VetRewards figure (tied to a paid Veterans Advantage membership, on the pay-later base rate, taxes and fees excluded) and U.S. Government agreement rates for official travel. The \"up to 25%\" is an ID.me Shop marketplace headline — an \"up to\" maximum verified via ID.me/SheerID, not a Dollar-published flat rate. Coupon-site figures like \"10/25/35%\" that don't trace to dollar.com, Veterans Advantage, or ID.me are not asserted. Only one rate code applies per reservation, so the military, Costco, USAA, and AAA rates are mutually exclusive — and the military lane is not automatically the cheapest."
  },
  "burton-military-discount": {
   "discountSummary": "Burton offers a 20% military discount on select items at burton.com, verified for free through SheerID.",
@@ -2210,11 +2255,18 @@
   "heroTagline": "No standing ChatGPT military discount — but transitioning servicemembers and recently-separated veterans can claim one free year of ChatGPT Plus ($240 value), verified through SheerID."
  },
  "daves-hot-chicken-military-discount": {
-  "headlineDiscount": "No military discount"
+  "headlineDiscount": "No military discount",
+  "heroTagline": "Dave's Hot Chicken has no official military discount — the free Frequent Fryer app is your best (and only reliable) way to save. Here's the honest answer and what to avoid.",
+  "discountSummary": "Dave's Hot Chicken publishes no national military or veteran discount and has no ID.me, GovX, SheerID, WeSalute, or VerifyPass partnership. The reliable way for service members (and everyone else) to save is the free Frequent Fryer rewards app — order direct so points count.",
+  "ctaLabel": "Get the free Frequent Fryer app",
+  "ctaSubnote": "Opens daveshotchicken.com · No military discount or verification — the free rewards app is the reliable way to save",
+  "stickyCtaLabel": "Save at Dave's Hot Chicken",
+  "sourcePriorityNote": "We cite Dave's Hot Chicken's official site (FAQ + Frequent Fryer rewards) and Military.com's Veterans Day list first, and report plainly that no national first-party military or veteran discount and no verification partnership were found. The rewards earn rate, tiers, and delivery-app exclusion are quoted from those sources and confirmed on the “Last verified” date above. We deliberately omit the 10–15%, 50%, and 60% “military discount” figures circulating on coupon aggregators because Dave's publishes no such rate and no such code."
  },
  "levis-military-discount": {
   "headlineDiscount": "10% off",
-  "heroTagline": "10% off at Levi.com for active and retired U.S. military — verified through SheerID, and stackable with any Levi’s promotion up to 40% off."
+  "heroTagline": "10% off at Levi.com for active and retired U.S. military — verified through SheerID, and stackable with any Levi’s promotion up to 40% off.",
+  "discountSummary": "Levi's gives verified active and retired U.S. military 10% off at Levi.com through SheerID — and the code stacks with any Levi's promotion up to 40% off."
  },
  "pizza-hut-military-discount": {
   "discountSummary": "Pizza Hut has no national military discount — nothing on pizzahut.com, no ID.me/GovX/SheerID path, and Military.com lists it as not offering one. Because nearly every US Pizza Hut is a franchise, a handful of stores grant a register discount at the manager’s discretion (commonly reported ~10%, never guaranteed). The verified everyday savings stack needs no military ID: Deals-menu pricing, paid with a discounted gift card, inside Hut Rewards.",
@@ -2344,7 +2396,9 @@
  },
  "bj-military-discount": {
   "headlineDiscount": "$25 membership + $10 reward",
-  "ctaSubnote": "Opens BJs.com/Military · Verification via ID.me · New members only"
+  "ctaSubnote": "Opens BJs.com/Military · Verification via ID.me · New members only",
+  "heroTagline": "New members join BJ's Club for $25 (reg. $60) with a $10 reward — about $15 net — verified through ID.me. A membership-fee discount, not a merchandise %.",
+  "discountSummary": "BJ's Wholesale Club lets new military and veteran members join a 1-year BJ's Club for $25 (reg. $60) plus a $10 reward, or Club+ for $50 (reg. $120) plus a $20 reward, verified through ID.me — a discount on the cost of joining, not a percentage off merchandise."
  },
  "vivid-seats-military-discount": {
   "discountSummary": "Vivid Seats offers a military discount of 10% off, capped at $30 per order, verified through ID.me. It applies to the ticket price only — not service fees, delivery, or taxes — and can’t be combined with other promo codes or cash-back. The same terms extend to nurses, first responders, teachers, students, and other ID.me communities. Because the cap hits at a $300 ticket subtotal, a public promo code often beats it on larger orders.",
@@ -2353,7 +2407,8 @@
  },
  "omaha-zoo-military-discount": {
   "headlineDiscount": "~10% off tickets",
-  "heroTagline": "About 10% off military tickets year-round, plus free gate admission on Veterans Day (Nov 11) for military, veterans, and immediate families."
+  "heroTagline": "About 10% off military tickets year-round, plus free gate admission on Veterans Day (Nov 11) for military, veterans, and immediate families.",
+  "discountSummary": "Omaha's Henry Doorly Zoo & Aquarium publishes a discounted military admission price year-round — about 10% off standard adult and child gate rates — and gives free gate admission on Veterans Day (Nov 11) to active/retired military, veterans, and their immediate families."
  },
  "specialized-military-discount": {
   "discountSummary": "Specialized’s Hero Pro Program gives 15–30% off bikes and 30% off equipment, verified for free through ID.me.",
@@ -2466,7 +2521,8 @@
  },
  "goruck-military-discount": {
   "headlineDiscount": "15% off",
-  "heroTagline": "15% off full-priced gear for military, veterans, and first responders — verified through GovX ID."
+  "heroTagline": "15% off full-priced gear for military, veterans, and first responders — verified through GovX ID.",
+  "discountSummary": "GORUCK's Earned Service Discount gives 15% off full-priced gear (plus an events discount), verified through GovX ID."
  },
  "tecovas-military-discount": {
   "discountSummary": "Tecovas offers 10% off to Active Duty Military, Military Retirees, and Veterans, verified through ID.me — online at tecovas.com and at Tecovas retail stores. It cannot be combined with any other promotions or offers.",
@@ -2488,7 +2544,13 @@
   "heroTagline": "A flat $500 toward a new VW lease or finance — for active duty, veterans, retirees, first responders, and household family. Stacks on your deal."
  },
  "golds-gym-military-discount": {
-  "headlineDiscount": "No national discount — ask your local club"
+  "headlineDiscount": "No national discount — ask your local club",
+  "heroTagline": "Gold's Gym has no national military discount — it's franchise-by-franchise. Here's how to actually save: negotiate a local rate, or use the free on-base MWR gym.",
+  "discountSummary": "Gold's Gym has no national or corporate military discount in 2026. The brand's site publishes no military page and Military.com shows no current offer. Because almost every U.S. club is an independently owned franchise, any military or first-responder rate is discretionary and set location-by-location — there is no national code to enter online.",
+  "ctaLabel": "Find a Gold's Gym & ask in person",
+  "ctaSubnote": "Opens www.goldsgym.com · No national military code — call your local franchise to ask for a military/first-responder rate and an initiation-fee waiver",
+  "stickyCtaLabel": "How to Save at Gold's Gym",
+  "sourcePriorityNote": "We cite Gold's Gym's official site, the Military.com listing, and the ID.me store page first, and report plainly that no national or corporate Gold's Gym military discount was found. The franchise-discretion structure, the free on-base MWR alternative, and the absence of a published national rate are quoted from those sources and confirmed on the “Last verified” date above. We deliberately omit the unverified “20% off + $348 enrollment waived via ID.me” figure circulating on coupon sites because no primary source confirms it."
  },
  "hawaiian-airlines-military-discount": {
   "discountSummary": "Hawaiian Airlines does not publish a percentage off airfare for military travelers. Its own military benefit is a checked-bag fee waiver — active-duty members and qualified dependents traveling on official orders get their first 5 bags free (up to 70 lb each), and on personal travel active-duty members get 2 free bags (up to 50 lb each) — claimed in person at airport check-in with a military ID and proof of orders. The only fare percentage is a 5% economy discount via a paid WeSalute (VetRewards) membership.",
@@ -2557,7 +2619,10 @@
  "ripleys-aquarium-military-discount": {
   "headlineDiscount": "30% off",
   "ctaSubnote": "Opens ripleys.com · The 30% is redeemed in person at the box office with a valid military or first-responder ID — no online code and no ID.me",
-  "heroTagline": "30% off single-attraction admission for active and retired military and first responders — plus up to four guests — redeemed in person at the box office with a valid ID."
+  "heroTagline": "30% off single-attraction admission for active and retired military and first responders — plus up to four guests — redeemed in person at the box office with a valid ID.",
+  "discountSummary": "Ripley’s US aquariums (Myrtle Beach and Gatlinburg’s Aquarium of the Smokies) give active and retired military and first responders 30% off single-attraction admission — plus up to four additional guests — redeemed in person at the box office with a valid ID.",
+  "ctaLabel": "See Ripley’s military discount",
+  "sourcePriorityNote": "We cite Ripley’s own “Military and First Responders Discount” page first and report the terms plainly: a flat 30% off single-attraction admission for the eligible ID-holder plus up to four additional guests, in person at the box office, “not valid with any other promotions or discounts.” Because Ripley’s live pages render as a JavaScript shell to automated fetches, the 30%/four-guest wording is confirmed against search-indexed copy of those same official pages and aggregator cross-reference as of the “Last verified” date above; confirm the current rate at the window. The Toronto CFOne program and the historical July 3–4 free-admission promo are labeled as separate/past offers and are not asserted as the evergreen US rate."
  },
  "rogue-fitness-military-discount": {
   "discountSummary": "Rogue Fitness does not offer a standing everyday military or veteran discount — its own help center and a public statement confirm it, and it says it keeps prices as low as possible for everyone. What it offers the military community: occasional military/veteran-exclusive sales (historically around Veterans Day) unlocked only for logged-in, verified veterans or active U.S. military — no percentage published — plus an APO/FPO/DPO shipping store (rogueapo.com). No verification provider is publicly named. Aggregator \"10–25% via GovX/SheerID\" claims are unverified and contradicted by Rogue.",
@@ -2727,7 +2792,8 @@
   "ctaLabel": "Join World Market Rewards",
   "ctaSubnote": "Opens worldmarket.com · No everyday military discount — a seasonal Veterans Day event runs ~25% off in store (alcohol excluded); free Rewards saves year-round",
   "heroTagline": "World Market has no everyday military discount — but a seasonal Veterans Day event runs ~25% off in store (alcohol excluded). Here’s the timing, terms, and how to save year-round.",
-  "stickyCtaLabel": "Join World Market Rewards"
+  "stickyCtaLabel": "Join World Market Rewards",
+  "sourcePriorityNote": "We cite Military.com's World Market pages, the World Market Rewards landing page, and a Milled email archive, and report plainly that there is no year-round military discount — no ID.me/SheerID checkout gate and no standing counter discount. The military benefit is a seasonal Veterans Day in-store event (historically ~25% off an entire purchase, alcohol excluded, in-store only, ~Nov 10–13), with a separate ~20% veteran offer in some years. Percentages and dates change year to year, so we do not present the Veterans Day figure as a standing everyday rate. First responders, healthcare workers, and K-12 teachers are referenced in separate, non-military promos. Year-round savings come from the free World Market Rewards program and public sales."
  },
  "papa-johns-military-discount": {
   "discountSummary": "Papa John’s has no official, nationwide military discount and no standing national military code — any military savings are local franchise or on-base/MWR deals that vary by store. The most reliable savings for everyone are the public 40–50% off app and site codes plus the free Papa Rewards program (75 points = $10 toward food).",
@@ -2953,7 +3019,8 @@
   "ctaLabel": "Find your Cold Stone store",
   "ctaSubnote": "Opens coldstonecreamery.com · No corporate military discount — a franchise courtesy (commonly ~10%) is location-dependent, so ask your store and bring a military ID",
   "heroTagline": "Cold Stone has no chain-wide military discount — it is franchise by franchise. Here is where about 10% is offered, the Veterans Day angle, and the rewards program that saves reliably.",
-  "stickyCtaLabel": "Find a Cold Stone"
+  "stickyCtaLabel": "Find a Cold Stone",
+  "sourcePriorityNote": "We cite The Military Wallet, WeSalute's Cold Stone listing, and Veteran.com, and report plainly that Cold Stone has no corporate, chain-wide military discount — every location is independently franchised and each owner sets its own discounts. Where a courtesy exists it is commonly around 10%; some stores run a Veterans Day free scoop or discount; none of it is guaranteed. The WeSalute-listed \"up to 10%\" offer is outside its Partner Coalition and can't be guaranteed. \"30% off\" or \"50% off\" figures on aggregators reflect what a single franchise was seen offering, not a chain-wide rate, so we do not assert them."
  },
  "bpn-military-discount": {
   "discountSummary": "BPN (Bare Performance Nutrition) gives verified US and Canadian active-duty members, veterans, and dependents 15% off sitewide through ID.me, with a parallel 15% for law enforcement, firefighters, and EMT/EMS. By BPN’s own policy it never stacks: one discount per order, no use on subscription carts, and it’s disabled during major sales — including the 30% Summer Sale live as of July 13, 2026, which beats it outright.",
@@ -3130,7 +3197,9 @@
   "discountSummary": "PlayStation (Sony Interactive Entertainment) has no official military or veteran discount on the PS5, PS5 Pro, controllers, or PlayStation Plus. Eligible service members save the most by buying PS5 consoles tax-free at the military Exchange, and by funding digital purchases with discounted PlayStation Store gift cards during PS Store sales.",
   "headlineDiscount": "No military discount",
   "ctaSubnote": "Opens direct.playstation.com · PlayStation has no military discount — eligible members save at the tax-free military Exchange and with discounted PSN gift cards, not a PlayStation code",
-  "heroTagline": "PlayStation has no military discount on the PS5 or PS Plus — eligible service members save the most by buying tax-free at the military Exchange and with discounted PlayStation Store gift cards."
+  "heroTagline": "PlayStation has no military discount on the PS5 or PS Plus — eligible service members save the most by buying tax-free at the military Exchange and with discounted PlayStation Store gift cards.",
+  "ctaLabel": "See PlayStation’s deals page",
+  "sourcePriorityNote": "We cite PlayStation Direct’s own deals page first, which lists only financing, trade-in, refurbished, and a co-branded Visa card — no military pricing — and report plainly that PlayStation has no first-party military discount. The tax-free Exchange path and its eligibility are sourced from AAFES/Navy Exchange pages; the Sony Electronics up-to-15% ID.me offer is labeled as a SEPARATE Sony division that does not cover PlayStation; and the GOVX “PlayStation Store” storefront is flagged as member-gated and unverified (GOVX’s standard discount excludes gift-card purchases). Exchange sticker prices move, so the reliable benefit asserted is tax-free + free shipping, not a specific number. Confirmed on the “Last verified” date above."
  },
  "office-depot-military-discount": {
   "discountSummary": "Office Depot and OfficeMax give veterans, active-duty and retired military, reservists, and their dependents 20% off qualifying regular-price purchases in stores nationwide — shown with ID at the register. Online, a separate Teacher/Military offer via ID.me pays 25% back in Bonus Rewards (store credit), not 25% off at checkout.",
@@ -3182,7 +3251,12 @@
  },
  "raising-canes-military-discount": {
   "headlineDiscount": "Unofficial ~10% in-store",
-  "ctaSubnote": "Opens www.military.com · No online code or verification — the ~10% Hero Discount is in-store only, ID required, and \"may vary by location\""
+  "ctaSubnote": "Opens www.military.com · No online code or verification — the ~10% Hero Discount is in-store only, ID required, and \"may vary by location\"",
+  "heroTagline": "Raising Cane's has no official military discount — but many locations honor an unofficial ~10% Hero Discount with a valid ID. Here's how it works, what to avoid, and the reliable way to save.",
+  "discountSummary": "Raising Cane's has no official, company-wide military-discount policy — no terms page, no promo code, and no ID.me, GovX, or SheerID partnership. What most locations honor is an unofficial, discretionary in-store \"Hero Discount\" of about 10% off for veterans, active-duty military, and first responders (and their families) who mention it at the register with a valid ID. It \"may vary by location,\" so it is not guaranteed everywhere.",
+  "ctaLabel": "Check the Hero Discount at Military.com",
+  "stickyCtaLabel": "Raising Cane's Hero Discount",
+  "sourcePriorityNote": "We cite ID.me's live brand pages and Military.com / MilitaryBridge first, and report plainly that Raising Cane's publishes no official military-discount policy — no terms page, promo code, or verification partnership. ID.me confirms it is not partnered with Cane's for military or first-responder discounts. The ~10% Hero Discount, its \"may vary by location\" limit, and the Caniac Club rewards are quoted from those sources and confirmed on the \"Last verified\" date above. We deliberately omit the fabricated \"student 25%\" and \"first responder 50%\" online codes circulating on coupon sites because no such national offers exist."
  },
  "wingstop-military-discount": {
   "discountSummary": "Wingstop has no official military or veteran discount — nothing on its FAQ or offers pages, no verification partner, and ID.me confirms it isn’t aware of any Wingstop military program. Anything at the counter is a location-discretionary franchise courtesy. The verified savings path for everyone: join Club Wingstop (5 free boneless wings on signup) and order direct on wingstop.com or the app.",
@@ -3564,7 +3638,8 @@
   "ctaLabel": "See the real ways to save",
   "ctaSubnote": "Opens ID.me / partner sites · No direct Marc Jacobs military discount — save via WeSalute My Bag (~15%), GovX, or the Veterans Canteen Service, not marcjacobs.com",
   "heroTagline": "Marc Jacobs runs no direct military discount — but WeSalute My Bag (~15%), GovX, and the Veterans Canteen Service do. Here’s the honest answer and when a sale beats them.",
-  "stickyCtaLabel": "See Real Ways to Save"
+  "stickyCtaLabel": "See Real Ways to Save",
+  "sourcePriorityNote": "We cite the ID.me Marc Jacobs page, WeSalute's My Bag offer, GovX, and the Veterans Canteen Service (ShopVCS). Marc Jacobs runs no direct military or veteran discount, and ID.me confirms it is \"not aware\" of one. The only verified military-linked savings are partner marketplaces: WeSalute+ ~15% off full-price Marc Jacobs via My Bag (excludes sale items, gift vouchers, and certain brands), GovX member pricing (varies by item, not a flat %), and ShopVCS for veterans/VA employees/families (often tax-advantaged, limited selection). Aggregator \"military promo codes\" for Marc Jacobs (HALFOFF, 30% off, 70% off, a 20% veteran code) are fabricated and not asserted."
  },
  "little-caesars-military-discount": {
   "discountSummary": "Little Caesars does not run a year-round national military or veteran discount. The one verified brand-official military benefit is the annual free HOT-N-READY Lunch Combo on Veterans Day (Nov 11) for veterans and active-duty military. Any everyday \"military %\" is a local franchisee’s choice, and there is no SheerID or ID.me online military offer.",
@@ -3686,7 +3761,8 @@
  },
  "dave-and-busters-military-discount": {
   "headlineDiscount": "15% off food",
-  "heroTagline": "15% off food & non-alcoholic drinks with a valid Military or First Responder ID — plus up to 4 guests, in person, no app or code."
+  "heroTagline": "15% off food & non-alcoholic drinks with a valid Military or First Responder ID — plus up to 4 guests, in person, no app or code.",
+  "discountSummary": "Dave & Buster's gives 15% off food and non-alcoholic beverages when you show a valid Military or First Responder ID to your server, for you plus up to 4 guests, at participating locations."
  },
  "benchmade-military-discount": {
   "discountSummary": "Benchmade gives verified military members — current and former — plus military spouses and dependents, first responders, government employees, and teachers 15% off at benchmade.com (the brand page phrases it \"up to 15%\"), verified through GovX ID at checkout. One single-use code per day; Gold Class and Limited Edition knives excluded.",
@@ -3773,7 +3849,11 @@
  },
  "sams-club-military-discount": {
   "headlineDiscount": "Discounted new membership",
-  "heroTagline": "No merchandise discount — instead, verified military members can join a new Club membership for $15 + $5 Sam’s Cash (or Plus for $50 + $5) via ID.me. New members only."
+  "heroTagline": "No merchandise discount — instead, verified military members can join a new Club membership for $15 + $5 Sam’s Cash (or Plus for $50 + $5) via ID.me. New members only.",
+  "discountSummary": "Sam's Club gives military shoppers no discount on merchandise. Instead, verified military members can join a new one-year Club membership for $15 (plus $5 in Sam's Cash), or Plus for $50 (plus $5 in Sam's Cash) — verified through ID.me, for new members only.",
+  "ctaLabel": "Verify & join at Sam's Club",
+  "ctaSubnote": "Opens samsclub.com/content/military-membership · New-member offer verified via ID.me — not a discount on merchandise",
+  "sourcePriorityNote": "We cite the Sam's Club military membership page and the Sam's Club–linked ID.me hosted join pages first, and the Sam's Club help center for eligible groups. We report plainly that Sam's Club offers no merchandise discount for military shoppers — only a discounted new membership — and we use only the current hosted-page figures ($15 Club / $50 Plus, each plus $5 in Sam's Cash). We deliberately omit the stale \"60% off / $20 / $60 / $5 in-club gift card\" figures that older copy and aggregators still circulate."
  },
  "crunch-fitness-military-discount": {
   "discountSummary": "Crunch Fitness offers a military, veteran, and first-responder membership deal via ID.me: a 7-day free trial plus the \"Peak Results Military Plan\" — $0 enrollment and $3 off the standard recurring monthly dues. There is no published flat percentage; the benefit is this enrollment-and-dues structure. Verify with ID.me online at checkout or in club. Available at participating (largely franchised) locations only, so pricing and participation vary by club.",
@@ -3919,7 +3999,10 @@
  "cabelas-military-discount": {
   "headlineDiscount": "5% guns/ammo · 10% other",
   "ctaSubnote": "Opens cabelas.com · Verify via a cabelas.com account on the Legendary Salute page (provider not named on the official page; widely reported as SheerID), or show a qualifying ID in store",
-  "heroTagline": "Legendary Salute — 5% off firearms & ammunition and 10% off other eligible gear for verified military and first responders, online or in stores."
+  "heroTagline": "Legendary Salute — 5% off firearms & ammunition and 10% off other eligible gear for verified military and first responders, online or in stores.",
+  "discountSummary": "Cabela's Legendary Salute gives verified military and first-responder customers 5% off firearms and ammunition and 10% off all other eligible merchandise (exclusions apply). Redeem online, by phone, or in stores; the identical program is shared with Bass Pro Shops.",
+  "ctaLabel": "See Cabela's Legendary Salute",
+  "sourcePriorityNote": "We cite Cabela's own help center and Legendary Salute page first (the program is shared identically with Bass Pro Shops). The 5% firearms/ammo, 10% other-merchandise, and eligible groups are from Cabela's official pages; the specific exclusions, stacking rules, and spouse/dependent eligibility are NOT published, so we don't assert them. Cabela's does not name the verification provider (secondary sources say SheerID); confirm current terms on the Legendary Salute page on the \"Last verified\" date above."
  },
  "epcot-military-discount": {
   "discountSummary": "There is no Epcot-only military ticket. Epcot admission is included in Walt Disney World’s Disney Military Salute — a multi-day Park Hopper priced at 4-Day $409, 5-Day $429, or 6-Day $449 for 2026, good at all four Orlando parks. Buying it tax-free at a base ticket office or Shades of Green saves roughly $390 (about 48%) on a 5-Day cart versus the standard gate.",
@@ -3942,7 +4025,8 @@
   "ctaLabel": "See Rockler promotions",
   "ctaSubnote": "Opens rockler.com · No military discount exists — save with email promo codes, the Outlet/clearance section, and free shipping on $99+ orders",
   "heroTagline": "Rockler has no military discount, and “15% off military” claims are false. Here’s how service members actually save: email promo codes, the Outlet, and $99+ free shipping.",
-  "stickyCtaLabel": "See Rockler Deals"
+  "stickyCtaLabel": "See Rockler Deals",
+  "sourcePriorityNote": "We cite Rockler's own Ordering FAQ, Current Promotions, Support, and Promo Codes pages, none of which reference a military discount, and we confirm no Rockler military offer exists on any verification portal (ID.me, GovX, SheerID, or WeSalute). The \"up to 15% off military\" figure from coupon aggregators cites no primary source and is fabricated marketing — we do not repeat it as fact. The genuine savings levers are email/account promo codes (not combinable, not applied to past orders), sales, the Outlet/clearance section, and free shipping on $99+. Community reports of an in-store courtesy are manager discretion, not company policy."
  },
  "zagg-military-discount": {
   "discountSummary": "ZAGG offers no U.S. military or veteran discount — ID.me itself says it’s not aware of one. The real deal is ZAGG’s public buy-2 bundle (20–30% off) or 20% email-signup code, open to everyone.",
@@ -4252,7 +4336,13 @@
   "heroTagline": "Fixed military & first-responder prices via ID.me — daily tickets from ~$20 and a ~$80 Military Gold Pass. Online only; prices vary by park."
  },
  "bobs-furniture-military-discount": {
-  "headlineDiscount": "No published rate"
+  "headlineDiscount": "No published rate",
+  "heroTagline": "Bob's has no published military discount — so here's the honest answer, the discretionary store courtesy worth asking about, and the sale-plus-cashback path that actually saves you money.",
+  "discountSummary": "Bob's Discount Furniture publishes no corporate military or veteran discount. Its military involvement is charitable (Operation Homefront, USO, K9s For Warriors), and one Bob's post invites veterans and first responders to ask their local store about a discretionary courtesy. Your reliable savings are Bob's sales, clearance, price-match, and free delivery over $1,000 — plus a cashback portal and card rewards online.",
+  "ctaLabel": "See Bob's savings & coupons",
+  "ctaSubnote": "Opens mybobs.com · Bob's has no published military discount — a store-level courtesy is discretionary, so ask your local manager and bring a military ID",
+  "stickyCtaLabel": "See Bob's Savings",
+  "sourcePriorityNote": "We cite Bob's own coupon/savings and blog pages and a Bob's-branded Facebook post first, and report plainly that no corporate military discount is published. Bob's military activity is charitable — Operation Homefront, the USO, and K9s For Warriors — not a shopper discount. The Facebook post inviting veterans, police, and first responders to \"reach out to your local store\" points to a discretionary, manager's-discretion courtesy, not a guaranteed rate. The \"10% off for military\" figure on coupon aggregators is not confirmed by any official Bob's source, so we do not assert it."
  },
  "gnc-military-discount": {
   "discountSummary": "GNC offers a standing 10% \"Community of Heroes\" discount online, applied in your cart and verified free through ID.me, to military members, veterans, spouses and family, plus nurses, first responders, medical providers, teachers, and students.",
@@ -4439,7 +4529,9 @@
   "sourcePriorityNote": "We cite ID.me’s own MeUndies page first — \"We’re not aware that MeUndies offers Military discounts\" (verified July 14, 2026) — alongside the ID.me confirmation of no student offer and the GovX underwear category that shows no MeUndies storefront. We deliberately repeat none of the percentages circulating on coupon sites (a \"50% in-store military discount,\" a \"70% off MEUNDIESFAMILY military code\") as if they were real: MeUndies runs no military discount at any percentage. The savings paths above are public offers quoted from MeUndies’ own pages and date-stamped portal terms."
  },
  "sportsmans-warehouse-military-discount": {
-  "headlineDiscount": "5% off"
+  "headlineDiscount": "5% off",
+  "heroTagline": "5% off most full-price gear for military, veterans, retirees, reserve, National Guard, and registered spouses — verified free through ID.me.",
+  "discountSummary": "Sportsman's Warehouse offers a standing 5% discount on most full-price items, online and in-store, for verified military members, veterans, retirees, reserve and National Guard, and registered spouses — verified free through ID.me."
  },
  "american-airlines-military-discount": {
   "discountSummary": "American Airlines doesn’t give military members a percentage off its own airfare. Instead, active-duty service members get policy perks worth real money: free checked bags (up to 5 bags/100 lbs on orders, or up to 3 bags/50 lbs on personal travel), Group 1 priority boarding, and complimentary Admirals Club access in uniform — all on American-marketed and -operated flights.",
@@ -4770,7 +4862,8 @@
   "headlineDiscount": "10% off",
   "ctaLabel": "Find your Fleet Feet store",
   "ctaSubnote": "Opens fleetfeet.com · 10% off full-price items in-store with a valid Military/EMS/Peace Officer ID — participation is set by each franchise, so confirm with your local store",
-  "heroTagline": "10% off full-priced items for military and law enforcement, in-store with a valid ID — set franchise by franchise. Here’s who qualifies and when clearance saves more."
+  "heroTagline": "10% off full-priced items for military and law enforcement, in-store with a valid ID — set franchise by franchise. Here’s who qualifies and when clearance saves more.",
+  "sourcePriorityNote": "We cite Fleet Feet's own store pages first, where the 10% military and law-enforcement discount on full-priced items (in-store, with a valid ID, not combinable) is confirmed. Fleet Feet is a franchise system with no reachable chain-wide military-discount terms page, so participation, accepted IDs, and veteran/spouse/dependent eligibility are set per store. Aggregator \"up to 25%\" figures conflate unrelated promo codes and are not asserted. An online 10% path via SheerID is reported by directories but is not confirmed on Fleet Feet's corporate site, so we flag it as store/promo-dependent rather than a guaranteed national offer."
  },
  "carvana-military-discount": {
   "discountSummary": "Carvana does not offer a military or veteran purchase discount — its no-haggle price is the same for every buyer. The real savings for service members come from military-friendly financing, SCRA protections, and cross-shopping, not a Carvana code.",
@@ -4915,7 +5008,8 @@
  },
  "oreilly-military-discount": {
   "headlineDiscount": "10% off in-store",
-  "heroTagline": "10% off most regularly priced parts in store, with a valid military or veteran ID — no online code."
+  "heroTagline": "10% off most regularly priced parts in store, with a valid military or veteran ID — no online code.",
+  "discountSummary": "O'Reilly Auto Parts gives eligible military members and veterans 10% off most regularly priced items in store, with a valid military or veteran ID shown at the register."
  },
  "rhone-military-discount": {
   "discountSummary": "Rhone offers a 15% discount on full-price gear to verified military members, veterans, and military families — and the same 15% to first responders, medical providers, nurses, hospital employees, teachers, and students — verified free through ID.me, online and in participating stores.",
@@ -5210,7 +5304,8 @@
   "ctaLabel": "See 7 Brew Rewards",
   "ctaSubnote": "Opens 7brew.com · No everyday military discount — a Veterans Day deal (terms change yearly) is claimed in person with a military/veteran ID; join Rewards to save the rest of the year",
   "heroTagline": "7 Brew has no everyday military discount — but veterans get an in-store Veterans Day deal (terms change yearly) with a military ID. Here’s the honest answer and how to save year-round.",
-  "stickyCtaLabel": "See 7 Brew Rewards"
+  "stickyCtaLabel": "See 7 Brew Rewards",
+  "sourcePriorityNote": "We cite 7 Brew's official site and official social posts first, and report plainly that there is no standing military or veteran discount. The only verified military pricing is the annual Veterans Day promo, and its value has changed year to year (25% in 2024, 50% in 2025), so we do not publish a fixed standing percentage. There is no promo code, no online offer, and no third-party verifier (no ID.me, GovX, SheerID, or WeSalute). Whether the Veterans Day offer covers more than one drink, stacks with Rewards, or extends to spouses and dependents is not stated by 7 Brew — so we do not assert it. Terms can also vary by franchise location."
  },
  "tumi-military-discount": {
   "discountSummary": "TUMI has no first-party military or veteran discount — there is no military verification (ID.me, SheerID, or otherwise) anywhere in tumi.com checkout, and ID.me itself says it isn’t aware of any TUMI military offer. The \"20% military promo code\" and \"40% military discount\" listings on coupon sites are fabricated. What military shoppers actually have: a TUMI storefront on GovX with member pricing (amount not published), tax-free TUMI luggage at the military exchange (AAFES), and TUMI’s public Semi-Annual Sale — up to 40% off select styles every January and July, the deepest verified TUMI discount anywhere.",
@@ -5408,7 +5503,12 @@
  },
  "mcdonalds-military-discount": {
   "headlineDiscount": "No national discount",
-  "ctaSubnote": "Opens www.mcdonalds.com · No national military discount — availability is set store by store, and any check is done at the register at the cashier’s discretion"
+  "ctaSubnote": "Opens www.mcdonalds.com · No national military discount — availability is set store by store, and any check is done at the register at the cashier’s discretion",
+  "heroTagline": "McDonald's runs no national military or veteran discount — it's set store by store. Here's the honest answer, the Veterans Day free meal, and the app deals that actually save you more.",
+  "discountSummary": "McDonald's does not run a national military or veteran discount. Corporate says only that certain locations may offer one at the franchisee's discretion, so any percentage varies store to store and is never guaranteed. The real savings for service members are the McDonald's app (McValue, Free Fries Friday, and MyMcDonald's Rewards) and, on Veterans Day, free meals at participating locations.",
+  "ctaLabel": "See McDonald's app deals",
+  "stickyCtaLabel": "See McDonald's Savings",
+  "sourcePriorityNote": "We cite McDonald's official FAQ, Deals/McValue page, and app page first, and report plainly that no national McDonald's military or veteran discount, code, or verification provider was found. The franchise-discretion policy, the McValue and Rewards savings paths, and the regional Veterans Day free-meal example are quoted from those sources and confirmed on the “Last verified” date above. We deliberately omit the “10% military discount” percentage and “military promo code” circulating on coupon sites because McDonald's publishes no such national rate or code."
  },
  "sorel-military-discount": {
   "discountSummary": "SOREL does not offer a first-party military or veteran discount in the US — there is no military checkout on sorel.com, no ID.me military tier, and no GovX SOREL store, and ID.me itself says it is not aware of any SOREL military offer. The \"15% + extra 10%\" offer people cite is a UK-only program, and SOREL’s parent Columbia runs a 10% ID.me discount for Columbia products only. The real way to save on SOREL boots is sale-stacking (deep end-of-winter clearance + a public signup code + a cashback portal) or buying the same boot at a retailer that does offer a military discount, like REI Co-op.",
@@ -5421,7 +5521,12 @@
  },
  "wendys-military-discount": {
   "headlineDiscount": "$3 off $20+ (WeSalute)",
-  "ctaSubnote": "Opens www.wendys.com · Verification via WeSalute (formerly Veterans Advantage) · No standing % discount — the everyday benefit is a $3-off-$20+ app coupon"
+  "ctaSubnote": "Opens www.wendys.com · Verification via WeSalute (formerly Veterans Advantage) · No standing % discount — the everyday benefit is a $3-off-$20+ app coupon",
+  "heroTagline": "No flat register discount — but a real WeSalute $3-off-$20+ app coupon, WendyMail holiday deals, and a free Veterans Day breakfast combo. Here's how to save.",
+  "discountSummary": "Wendy's has no everyday automatic percentage military discount. Through its WeSalute partnership, verified service members and veterans get a recurring $3 off a $20+ My Wendy's app order, WendyMail holiday coupons, and a free Veterans Day breakfast combo.",
+  "ctaLabel": "Check Wendy's WeSalute offers",
+  "stickyCtaLabel": "See Wendy's WeSalute Deal",
+  "sourcePriorityNote": "We cite Wendy's official WeSalute program page and the WeSalute Wendy's brand and offer pages first, with editorial corroboration for the Veterans Day meal. We report plainly that Wendy's publishes no standing percentage military discount, and we deliberately omit the \"10%-25%\" figure circulating on coupon sites because no Wendy's or WeSalute page states it. The $3-off terms, eligibility, WendyMail program, and Veterans Day combo are quoted from those sources and confirmed on the \"Last verified\" date above."
  },
  "gunmag-warehouse-military-discount": {
   "discountSummary": "GunMag Warehouse publishes no standing, verified military or first-responder discount and advertises no GovX/ID.me/SheerID gate. The real savings are its sale/clearance sections (up to ~70% off select items), a 10% newsletter welcome code (order over $100), free shipping, and bulk/wholesale quotes.",
@@ -5464,7 +5569,13 @@
   "stickyCtaLabel": "Santa’s Village Military Offers"
  },
  "culvers-military-discount": {
-  "headlineDiscount": "No national discount"
+  "headlineDiscount": "No national discount",
+  "heroTagline": "Culver's has no national military discount — every restaurant sets its own. Here's where the ~10% applies, the free Veterans Day sundae, and the guaranteed way to save.",
+  "discountSummary": "Culver's has no national, corporate-set military or veteran discount — every restaurant is franchise-owned, so any service discount is set by the local owner. Some locations give around 10% off with a valid service ID, but many give nothing, so call ahead. The guaranteed nationwide value is the free Delicious Rewards loyalty program plus a free Veterans Day sundae at many locations.",
+  "ctaLabel": "Confirm with your local Culver's",
+  "ctaSubnote": "Opens culvers.com · No online military discount and no verification portal · Any discount is set per franchise — call your location to confirm before you count on it",
+  "stickyCtaLabel": "Check Culver's Discount",
+  "sourcePriorityNote": "We cite Culver's own site and its Delicious Rewards press release first, and report plainly that no national, corporate-set military or veteran discount exists — Culver's tells guests to reach out to their local restaurant. The per-location ~10% example, the Veterans Day sundae, and the free loyalty program are quoted from those sources and confirmed on the “Last verified” date above. We deliberately debunk the “daily heroes 10% everyday” and “15% or more” figures circulating on aggregator sites because no official Culver's source documents any such national program."
  },
  "holland-america-military-discount": {
   "discountSummary": "Holland America Line gives U.S. and Canadian active-duty, retired, and veteran military guests a US$100 onboard credit per stateroom on new bookings — spending money aboard the ship, not a fare discount — verified free through SheerID.",
@@ -5534,7 +5645,12 @@
   "heroTagline": "15% off for U.S. and Canadian military, verified free through ID.me — a single-use code redeemable online on On.com or the On app."
  },
  "macys-military-discount": {
-  "headlineDiscount": "No military discount"
+  "headlineDiscount": "No military discount",
+  "heroTagline": "Macy's has no official military or veteran discount — ID.me and Military.com both confirm it. Here's what's real, why coupon-site claims are wrong, and how to save.",
+  "discountSummary": "Macy's does not offer an official military or veteran discount — it uses no ID.me, SheerID, or GovX for one, ID.me is \"not aware\" of any offer, and Military.com says Macy's may not offer one. Coupon-site \"10% off\" or \"20% off promo code\" claims are unsupported. Everyone saves the same way: public sales, Star Rewards, and price match.",
+  "ctaLabel": "See Macy's ways to save",
+  "ctaSubnote": "Opens macys.com · Macy's has no military discount — its public sales (incl. the all-shopper Veterans Day Sale), Star Rewards, and price match are open to everyone",
+  "sourcePriorityNote": "We cite ID.me's Macy's page, Military.com, and macys.com first, and report plainly that Macy's offers no official military or veteran discount — ID.me is \"not aware\" of one and Macy's publishes no military-discount page (its /shop/featured/military URL is a product category, not a discount). The Star Rewards program, public sales, and price match are Macy's own, open to all. A WeSalute cash-back offer exists but is a third-party WeSalute member benefit, not a Macy's discount. Aggregator \"10%/20% off\" claims are unverified."
  },
  "chipotle-military-discount": {
   "discountSummary": "Chipotle has no everyday (year-round) military or veteran discount and no ID.me/GovX/SheerID/WeSalute partnership. In some years it runs a limited-time Veterans Day buy-one-get-one-free entrée offer (in-restaurant, military ID shown at the register) — most recently on November 11, 2025, from 4–8 p.m. local time.",
@@ -5578,7 +5694,9 @@
   "heroTagline": "Up to 10% off Sony electronics for military and veterans — verified free through ID.me, and it stacks on sale prices. PlayStation is not included."
  },
  "farmers-dog-military-discount": {
-  "headlineDiscount": "70% off first box"
+  "headlineDiscount": "70% off first box",
+  "heroTagline": "70% off your first box for verified military — via ID.me or WeSalute, plus a welcome kit and up to $5 cash back. Here's how to claim it, and the first-box-only fine print.",
+  "discountSummary": "The Farmer's Dog gives verified military customers 70% off their first box (some channels add a free welcome kit), redeemed after verifying through ID.me or WeSalute, and also available via GovX. ID.me Shop adds up to $5 cash back. That’s well above the standard public new-customer offer (about 20% off, sometimes up to ~50% on promo). The catch: it’s a fresh-food subscription, so the discount applies to the first box only — recurring boxes bill at the regular plan price."
  },
  "silencerco-military-discount": {
   "discountSummary": "SilencerCo’s SPEQ program (“Service Proven Equipment”) is a genuine first-party military/law-enforcement discount, but the price is confidential and flat-rate — set by SilencerCo, standardized across dealers, and revealed only after your credentials are verified through a SPEQ dealer or the SPEQ portal. It is not a published percentage and not an ID.me/SheerID/GovX self-serve checkout.",
@@ -5630,7 +5748,8 @@
  },
  "altard-state-military-discount": {
   "headlineDiscount": "15% off",
-  "heroTagline": "15% off full-price purchases for service members, veterans, and military families — in-store with a military ID or online via ID.me."
+  "heroTagline": "15% off full-price purchases for service members, veterans, and military families — in-store with a military ID or online via ID.me.",
+  "discountSummary": "Altar'd State offers a standing 15% military discount on full-price purchases, redeemable in-store with a military ID or online via ID.me verification."
  },
  "shoe-carnival-military-discount": {
   "discountSummary": "Shoe Carnival offers a 10% military discount online for verified service members, veterans, and military families through SheerID, applied inside a free Shoe Perks account.",
@@ -5939,7 +6058,8 @@
   "ctaLabel": "Find your Sky Zone park",
   "ctaSubnote": "Opens skyzone.com · No national military discount — a local ~10% or \"Military Night\" is set park-by-park, so call ahead and bring a military ID",
   "heroTagline": "Sky Zone has no national military discount — it’s park-by-park. Here’s where about 10% or a Military Night shows up, and the cheaper ways families actually save.",
-  "stickyCtaLabel": "Find a Sky Zone"
+  "stickyCtaLabel": "Find a Sky Zone",
+  "sourcePriorityNote": "We cite Sky Zone's own site and community Q&A first, and report plainly that there is no chain-wide, nationally published military discount. Sky Zone is franchised, so any military offer — a roughly 10% in-park discount, or a recurring \"Military Night\" — is set park-by-park, and many locations offer nothing. Location pages surfaced in search returned 404s at access time, underscoring how transient these local offers are. There is no corporate military-discount page, no guaranteed national percentage, and no national ID.me/SheerID/GovX program, so we do not represent a national Sky Zone military discount as verified fact — call your specific park."
  },
  "national-car-rental-military-discount": {
   "discountSummary": "National Car Rental offers an official Government & Military leisure rate to current federal employees, active-duty service members, retired employees, and veterans — but publishes no percentage; it is a variable discounted rate booked through nationalcar.com, and it does not stack with USAA, WeSalute+, or public promo rates.",
@@ -6112,7 +6232,8 @@
   "ctaLabel": "See Mission BBQ Vets program",
   "ctaSubnote": "Opens mission-bbq.com · No everyday % discount — a free sandwich on Veterans Day and your branch’s May day, redeemed in store with a military ID",
   "heroTagline": "No everyday percentage discount — but a free sandwich on Veterans Day and your branch’s May day, redeemed in store with a military ID. Here’s exactly how it works.",
-  "stickyCtaLabel": "See Mission BBQ Vets"
+  "stickyCtaLabel": "See Mission BBQ Vets",
+  "sourcePriorityNote": "We cite Military.com's Mission BBQ pages and the Mission BBQ Vets page. There is no everyday percentage military discount — the real, verifiable benefits are the free-sandwich events on Veterans Day (Nov 11, plus cake at many stores) and the branch-specific free-sandwich days during May's Military Appreciation Week, redeemed in store with a military ID or staff discretion. There is no third-party verifier (no ID.me/GovX/SheerID/WeSalute). We do not state a percentage because there isn't one, and exact May branch dates and whether cake is chain-wide vary year to year and store to store."
  },
  "williams-sonoma-military-discount": {
   "discountSummary": "Williams Sonoma does not run a first-party military or veteran discount and there is no military code at checkout — it discontinued its old 15% in-store military discount in 2021. The real ways for service members to save are the free Key Rewards program, the deep Outlet / Open Box clearance, and public sales.",
@@ -6186,7 +6307,8 @@
   "ctaLabel": "See FedEx Advantage",
   "ctaSubnote": "Opens fedex.com · No direct military discount — enroll in the free FedEx Advantage program through USAA (if eligible) or another partner org; the rate applies to your FedEx account",
   "heroTagline": "FedEx has no direct military discount — the real savings come from the free FedEx Advantage program, unlocked at enhanced rates through USAA. Here’s how to enroll.",
-  "stickyCtaLabel": "See FedEx Advantage"
+  "stickyCtaLabel": "See FedEx Advantage",
+  "sourcePriorityNote": "We cite Military.com's FedEx page, FedEx Small Business pages, and USAA member-perk pages. FedEx documents no military or veteran discount on shipping or at FedEx Office — no ID.me, SheerID, GovX, or in-store military-ID program. The only durable savings mechanism is the free FedEx Advantage program, whose exact percentage depends on the partner organization you enroll through and your shipment profile; FedEx publishes no single \"X% military\" number, so the reported USAA-tier figures (up to ~40% Express, ~15% Ground personal) are labeled reported-not-guaranteed. Aggregator \"military promo codes\" like USL200, 35% off, or a flat 5% veteran rate are unverified and not asserted."
  },
  "holiday-inn-express-military-discount": {
   "discountSummary": "Holiday Inn Express (an IHG brand) participates in IHG’s Military Appreciation Rate — a minimum of 5% off the Best Flexible Rate, varying by hotel and date — for US and Canadian active, veteran, and retired military plus their families, for leisure travel, with a military or veteran ID shown at check-in. A separate Government Rate covers official travel.",
@@ -6290,7 +6412,8 @@
   "ctaLabel": "Find a Maurices store",
   "ctaSubnote": "Opens maurices.com · No verified online military discount — many stores give ~10% off with a military ID, so ask your local store; online, stack a code on clearance",
   "heroTagline": "No published online military discount — but many Maurices stores give ~10% off with a military ID. Here’s how to claim it in store, and how to save more online.",
-  "stickyCtaLabel": "Find a Maurices"
+  "stickyCtaLabel": "Find a Maurices",
+  "sourcePriorityNote": "We cite ID.me's Maurices page, mall store directories, and a Maurices store post. ID.me states plainly it is \"not aware that Maurices offers Military discounts,\" so there is no published, company-wide program and no verified online mechanic (no ID.me/SheerID/GovX/WeSalute). What is genuinely attested is a 10% everyday in-store discount at participating locations, redeemed with a valid military ID at checkout — discretionary and store-by-store. The aggregator \"up to 25%\" figure is unsupported and disregarded, and spouse/dependent eligibility is not documented, so we do not assert it."
  },
  "shark-ninja-military-discount": {
   "discountSummary": "SharkNinja does not run a military or veteran discount on its US sites (sharkclean.com, ninjakitchen.com), and ID.me confirms it is \"not aware that SharkNinja offers Military discounts.\" US service members save instead through public sales, certified-refurbished units, Amazon pricing with cashback, and — with a paid WeSalute+ membership — occasional product-specific offers through BenefitHub. The \"9% off\" you may have seen is a UK-only GoCertify program.",

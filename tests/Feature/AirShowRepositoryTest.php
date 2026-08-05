@@ -35,6 +35,18 @@ it('returns only published shows, ordered by start date with unconfirmed last', 
         ->toBe(['Miramar', 'Oceana', 'TBD']);
 });
 
+it('returns every show in the directory, published or not, in the same order', function () {
+    AirShow::factory()->create(['short_name' => 'Oceana', 'slug' => 'oceana', 'start_date' => '2026-09-26']);
+    AirShow::factory()->create(['short_name' => 'Miramar', 'slug' => 'miramar', 'start_date' => '2026-05-01']);
+    AirShow::factory()->unconfirmed()->create(['short_name' => 'TBD', 'slug' => 'tbd']);
+    AirShow::factory()->unpublished()->create(['short_name' => 'Draft', 'slug' => 'draft', 'start_date' => '2026-07-01']);
+
+    // The hub table lists every show (legacy `airShows`); only the guide LINK is
+    // gated on publication, so Draft keeps its date-ordered slot.
+    expect($this->repository->directory()->pluck('short_name')->all())
+        ->toBe(['Miramar', 'Draft', 'Oceana', 'TBD']);
+});
+
 it('returns the single hub meta record', function () {
     expect($this->repository->hub())->toBeNull();
 

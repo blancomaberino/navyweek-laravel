@@ -97,6 +97,34 @@ it('renders a jet-team city guide with the full graph incl. a plain Event', func
         ->assertDontSee('"@type":"Offer"', false);
 });
 
+it('renders the adjacent-stop line and gates unpublished cross-links as plain text', function () {
+    $team = jetTeamRenderSetup();
+    foreach ([['seattle', 'Seattle'], ['anchorage', 'Anchorage'], ['mcminnville', 'McMinnville']] as $i => [$slug, $city]) {
+        JetTeamScheduleRow::factory()->for($team, 'team')->create([
+            'sort_order' => $i, 'slug' => $slug, 'city' => $city, 'state' => 'WA',
+            'show' => "{$city} Air Show", 'dates_label' => 'Jul 25–26',
+        ]);
+    }
+    // Only the middle stop has a published guide, so both neighbours render plain.
+    JetTeamCity::factory()->for($team, 'team')->create([
+        'slug' => 'anchorage', 'city' => 'Anchorage', 'year' => 2026,
+        'related_paragraph' => [
+            ['before' => 'Next up: ', 'label' => 'McMinnville, Oregon', 'href' => '/blue-angels/mcminnville/', 'after' => '.'],
+        ],
+    ]);
+    app(GenerateJetTeamPagesAction::class)();
+
+    $res = fetchJetTeam('/blue-angels/anchorage/')->assertOk();
+
+    $res->assertSee('Other 2026 stops:')
+        ->assertSee('← Seattle')
+        ->assertSee('McMinnville →')
+        // Neither neighbour ships a guide, so none of them is an <a>.
+        ->assertSee('<span class="jt-related-plain">McMinnville, Oregon</span>', false)
+        ->assertDontSee('href="/blue-angels/mcminnville/"', false)
+        ->assertDontSee('href="/blue-angels/seattle/"', false);
+});
+
 it('falls through to the shell for a city unpublished after generation', function () {
     $team = jetTeamRenderSetup();
     $city = JetTeamCity::factory()->for($team, 'team')->create(['slug' => 'anchorage', 'city' => 'Anchorage']);

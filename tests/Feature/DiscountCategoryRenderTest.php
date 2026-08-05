@@ -126,7 +126,7 @@ it('renders the empty state when no brand in the category has a live page', func
 
     renderPath('/discount/outdoor/')
         ->assertOk()
-        ->assertSee('No brands in this category yet')
+        ->assertSee('No brands are catalogued in this category yet')
         ->assertSee('"numberOfItems":0', false)
         ->assertDontSee('GhostBrand');
 });

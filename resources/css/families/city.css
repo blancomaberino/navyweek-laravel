@@ -1,3 +1,900 @@
 /* Per-family parity CSS, ported from the legacy component inline styles.
    Kept in its own file so parallel work never collides in app.css.
+
+   Source of truth: src/page-views/CityDetail.tsx plus src/components/CityMap.tsx,
+   StatusBadge.tsx and SourceLabel.tsx (the legacy styling is inline in those
+   components — every value below is copied from them, not eyeballed).
    Properties are alphabetized per the authored-CSS convention. */
+
+/* ==========================================================================
+   Shell — the legacy <main> is full-bleed (`style={{flex:1}}`); each section
+   caps its own width at 1100px.
+   ========================================================================== */
+.nwc-page {
+    max-width: none;
+    padding: 0;
+}
+
+/* The shared section wrapper: `padding: 0 var(--space-2xl) var(--space-2xl)`. */
+.nwc-sec {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: 0 var(--space-2xl) var(--space-2xl);
+    width: 100%;
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.nwc-hero {
+    background: var(--navy);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    overflow: hidden;
+    padding: var(--space-3xl) var(--space-2xl);
+    position: relative;
+}
+.nwc-hero-img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    opacity: 0.25;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+.nwc-hero-tint {
+    background: radial-gradient(circle at center, rgba(30, 58, 95, 0.2) 0%, transparent 100%);
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+.nwc-hero-body {
+    margin: 0 auto;
+    max-width: 1100px;
+    position: relative;
+    z-index: 1;
+}
+.nwc-back-wrap {
+    margin-bottom: var(--space-lg);
+}
+.nwc-back {
+    align-items: center;
+    color: var(--gold-light);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: var(--space-xs);
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.nwc-hero h1 {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 56px);
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin: 0 0 var(--space-md) 0;
+    text-transform: uppercase;
+}
+.nwc-stats {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+.nwc-stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+.nwc-stat-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.nwc-stat-value {
+    color: var(--nw-off-white);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.nwc-stat-rule {
+    background: rgba(140, 140, 122, 0.3);
+    height: 24px;
+    width: 1px;
+}
+.nwc-hero-meta {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+.nwc-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+.nwc-badge,
+.nwc-badge-first {
+    border-radius: 2px;
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    text-transform: uppercase;
+}
+.nwc-badge.is-upcoming {
+    background: rgba(201, 168, 76, 0.15);
+    color: #e8c96a;
+}
+.nwc-badge.is-active {
+    background: rgba(26, 92, 58, 0.4);
+    color: #6dc28a;
+}
+.nwc-badge.is-completed {
+    background: rgba(140, 140, 122, 0.1);
+    color: #8c8c7a;
+}
+.nwc-badge-first {
+    background: rgba(30, 58, 95, 0.6);
+    color: #7aa8d8;
+}
+.nwc-navco {
+    align-items: center;
+    color: var(--gold-light);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1px;
+    text-decoration: underline;
+}
+.nwc-verified {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+}
+
+/* ==========================================================================
+   Key facts wrapper — the block itself is the shared partial.
+   ========================================================================== */
+.nwc-kf {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: var(--space-xl) var(--space-2xl) 0;
+    width: 100%;
+}
+
+/* The global `main section > h2` gold rule belongs to other families; the legacy
+   KeyFacts heading carries no underline, no padding and the inherited 1.5 body
+   line-height. */
+.nwc-page .key-facts[data-llm-key-facts] > h2 {
+    border-bottom: 0;
+    line-height: 1.5;
+    padding-bottom: 0;
+}
+
+/* ==========================================================================
+   Shared type + card primitives (CityDetail.tsx `sectionHeadingStyle` /
+   `cardStyle`).
+   ========================================================================== */
+.nwc-h2 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin: 0 0 var(--space-md) 0;
+    padding-bottom: 0;
+}
+.nwc-h2--icon {
+    align-items: center;
+    display: flex;
+    gap: var(--space-sm);
+}
+.nwc-h3 {
+    align-items: center;
+    color: var(--gold);
+    display: flex;
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 400;
+    gap: var(--space-sm);
+    letter-spacing: 1.5px;
+    margin: 0 0 var(--space-md) 0;
+    text-transform: uppercase;
+}
+.nwc-h3--flush {
+    margin-bottom: 0;
+}
+.nwc-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    padding: var(--space-xl);
+}
+.nwc-card--top {
+    border-top: 3px solid var(--gold);
+}
+.nwc-card--left {
+    border-left: 3px solid var(--gold);
+}
+.nwc-card-head {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    justify-content: space-between;
+}
+.nwc-card-head--gap {
+    margin-bottom: var(--space-sm);
+}
+.nwc-card-p {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0;
+}
+.nwc-card-p--stacked {
+    margin-bottom: var(--space-md);
+}
+.nwc-lede {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0 0 var(--space-md) 0;
+    max-width: 720px;
+}
+
+/* Source-level chips (SourceLabel.tsx). */
+.nwc-src {
+    align-items: center;
+    border-radius: 2px;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    padding: 2px 6px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.nwc-src.is-navco {
+    background: rgba(70, 180, 120, 0.12);
+    border: 1px solid rgba(70, 180, 120, 0.45);
+    color: #7be0a6;
+}
+.nwc-src.is-anchor {
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid rgba(201, 168, 76, 0.45);
+    color: var(--gold-light);
+}
+.nwc-src.is-local {
+    background: rgba(140, 140, 122, 0.1);
+    border: 1px solid rgba(140, 140, 122, 0.45);
+    color: var(--nw-gray-light);
+}
+
+/* Gold bullet lists (What to Expect / Navy assets). */
+.nwc-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.nwc-bullets--grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.nwc-bullets > li {
+    align-items: flex-start;
+    color: var(--nw-off-white);
+    display: flex;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    gap: var(--space-sm);
+    line-height: 1.6;
+}
+.nwc-dot {
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 5px;
+    margin-top: 7px;
+    width: 5px;
+}
+
+/* ==========================================================================
+   Mission dossier
+   ========================================================================== */
+.nwc-dossier {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: var(--space-2xl) var(--space-2xl);
+}
+.nwc-dossier-grid {
+    display: grid;
+    gap: var(--space-2xl);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.nwc-dossier-p {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0 0 var(--space-md) 0;
+}
+.nwc-cta-row {
+    display: flex;
+    gap: var(--space-sm);
+}
+.nwc-cta {
+    align-items: center;
+    background: var(--gold);
+    border: none;
+    border-radius: 2px;
+    color: var(--navy);
+    cursor: pointer;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    gap: var(--space-sm);
+    justify-content: center;
+    letter-spacing: 1.5px;
+    padding: 12px 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.nwc-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+.nwc-anchor-p {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: var(--space-sm) 0 var(--space-md) 0;
+}
+.nwc-anchor-link {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1px;
+    text-decoration: underline;
+}
+.nwc-firsttime {
+    background: rgba(201, 168, 76, 0.08);
+    border-left: 2px solid var(--gold);
+    border-radius: 2px;
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.6;
+    margin: var(--space-md) 0 0 0;
+    padding: var(--space-sm) var(--space-md);
+}
+
+/* ==========================================================================
+   Daily schedule
+   ========================================================================== */
+.nwc-legend-wrap {
+    margin-bottom: var(--space-lg);
+}
+.nwc-legend {
+    align-items: flex-start;
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding: var(--space-md);
+}
+.nwc-legend-key {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.nwc-legend-item {
+    align-items: center;
+    display: inline-flex;
+    gap: 6px;
+    max-width: 320px;
+}
+.nwc-legend-desc {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 1.4;
+}
+.nwc-days {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+.nwc-day {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    padding: var(--space-lg);
+}
+.nwc-day-head {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+.nwc-day-title {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    margin: 0;
+    text-transform: uppercase;
+}
+.nwc-tba {
+    border: 1px solid rgba(140, 140, 122, 0.4);
+    border-radius: 2px;
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+}
+.nwc-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.nwc-items > li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.nwc-item-head {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+.nwc-item-time {
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    min-width: 80px;
+}
+.nwc-item-title {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+}
+.nwc-item-venue {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.nwc-item-desc {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+.nwc-item-src {
+    align-items: center;
+    color: var(--gold-light);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: 4px;
+    text-decoration: underline;
+}
+
+/* The lucide glyphs that lead a run of text (venue address, parking, item venue).
+   They keep the preflight `svg{display:block}` the legacy render also has, so the
+   glyph takes its own line exactly as it does live. */
+.nwc-inline-icon {
+    margin-right: 4px;
+    vertical-align: -2px;
+}
+
+/* ==========================================================================
+   Venues + schematic map (CityMap.tsx)
+   ========================================================================== */
+.nwc-map-wrap {
+    margin-bottom: var(--space-lg);
+}
+.nwc-map {
+    background: var(--navy);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.nwc-map > svg {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+.nwc-map-grid {
+    opacity: 0.18;
+}
+.nwc-map-note {
+    border-top: 1px solid rgba(201, 168, 76, 0.1);
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    line-height: 1.6;
+    padding: var(--space-md);
+}
+.nwc-venues {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.nwc-venue {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-lg);
+}
+.nwc-venue-head {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+.nwc-venue-num {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+}
+.nwc-venue-name {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0;
+    text-transform: uppercase;
+}
+.nwc-venue-addr {
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.5;
+    text-decoration: none;
+}
+.nwc-venue-notes {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0;
+}
+.nwc-venue-parking {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0;
+}
+.nwc-parking {
+    margin-top: var(--space-lg);
+}
+
+/* ==========================================================================
+   Cost + official sources
+   ========================================================================== */
+.nwc-cost-grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.nwc-sources {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.nwc-sources a {
+    align-items: center;
+    color: var(--gold-light);
+    display: inline-flex;
+    font-family: var(--font-body);
+    font-size: 14px;
+    gap: 6px;
+    line-height: 1.5;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   FAQ (DiscountDetail.tsx FAQAccordion)
+   ========================================================================== */
+.nwc-faq-list {
+    display: flex;
+    flex-direction: column;
+}
+.nwc-faq-list .nw-faq {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+.nwc-faq-list .nw-faq > summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: space-between;
+    list-style: none;
+    padding: var(--space-md) 0;
+}
+.nwc-faq-list .nw-faq > summary::-webkit-details-marker {
+    display: none;
+}
+.nwc-faq-list .nw-faq > summary > h3 {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+}
+.nwc-faq-list .nw-faq[open] > summary > h3 {
+    color: var(--gold);
+}
+.nwc-faq-list .nw-faq-chev {
+    color: var(--nw-gray);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+.nwc-faq-list .nw-faq[open] .nw-faq-chev {
+    color: var(--gold);
+    transform: rotate(180deg);
+}
+.nwc-faq-list .nw-faq-a {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    padding-bottom: var(--space-md);
+}
+
+/* ==========================================================================
+   More Navy Week cities
+   ========================================================================== */
+.nwc-more {
+    background: var(--navy-mid);
+    border-top: 1px solid rgba(201, 168, 76, 0.1);
+    padding: var(--space-2xl) var(--space-2xl);
+}
+.nwc-more-inner {
+    margin: 0 auto;
+    max-width: 1100px;
+}
+.nwc-more-h2 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin: 0 0 var(--space-lg) 0;
+    padding-bottom: 0;
+}
+.nwc-more-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.nwc-more-card {
+    background: var(--navy);
+    border: 1px solid rgba(201, 168, 76, 0.1);
+    border-radius: 2px;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    padding: var(--space-lg);
+    text-decoration: none;
+    transition: border-color 0.2s;
+}
+.nwc-more-dates {
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+.nwc-more-city {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 1.5px;
+}
+.nwc-more-meta {
+    color: var(--nw-gray);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 300;
+}
+
+/* ==========================================================================
+   U.S. Navy reference cross-links
+   ========================================================================== */
+.nwc-ref {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: 0 var(--space-2xl) var(--space-2xl);
+    width: 100%;
+}
+.nwc-ref-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+.nwc-ref-h2 {
+    border-bottom: 0;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin: 0 0 var(--space-xs);
+    padding-bottom: 0;
+}
+.nwc-ref-lede {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-md);
+    max-width: 720px;
+}
+.nwc-ref-list {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.nwc-ref-list a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    display: block;
+    padding: var(--space-md);
+    text-decoration: none;
+}
+.nwc-ref-card-eyebrow {
+    color: var(--gold);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+.nwc-ref-card-title {
+    align-items: center;
+    color: var(--nw-white);
+    display: inline-flex;
+    font-family: var(--font-display);
+    font-size: 18px;
+    gap: 6px;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   Previous / next stop
+   ========================================================================== */
+.nwc-adj {
+    border-top: 1px solid rgba(140, 140, 122, 0.15);
+}
+.nwc-adj-inner {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1100px;
+}
+.nwc-adj-link {
+    align-items: center;
+    background: var(--navy);
+    border-right: 1px solid rgba(140, 140, 122, 0.15);
+    display: flex;
+    flex: 1 1 50%;
+    gap: var(--space-lg);
+    padding: var(--space-xl) var(--space-2xl);
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.nwc-adj-link:hover {
+    background: var(--navy-mid);
+}
+.nwc-adj-link--next {
+    border-right: 0;
+    justify-content: flex-end;
+    text-align: right;
+}
+.nwc-adj-icon {
+    color: var(--gold);
+}
+.nwc-adj-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+.nwc-adj-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.nwc-adj-city {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.nwc-adj-dates {
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}

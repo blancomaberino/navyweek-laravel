@@ -113,11 +113,10 @@
                 @endif
                 <ul class="author-links">
                     @foreach ($curated as $work)
+                        {{-- No whitespace between the link and its note: the legacy JSX
+                             strips the newline, so the gap is the note's 8px margin alone. --}}
                         <li>
-                            <a href="{{ $work['url'] }}">{{ $work['label'] }}</a>
-                            @if (($work['note'] ?? null) !== null)
-                                <span class="author-work-note">&mdash; {{ $work['note'] }}</span>
-                            @endif
+                            <a href="{{ $work['url'] }}">{{ $work['label'] }}</a>@if (($work['note'] ?? null) !== null)<span class="author-work-note">&mdash; {{ $work['note'] }}</span>@endif
                         </li>
                     @endforeach
                 </ul>

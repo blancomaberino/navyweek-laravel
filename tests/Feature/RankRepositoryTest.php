@@ -35,3 +35,15 @@ it('returns a category ordered by paygrade then name, scoped to the category', f
 
     expect($result->pluck('name')->all())->toBe(['Ensign', 'Fleet Admiral', 'Lieutenant']);
 });
+
+it('orders historic ratings by decommission year, keeping import order within a year', function () {
+    // The legacy /navy-ratings/ hub stable-sorted the registry by year descending, so
+    // ratings retired in the same year keep registry (= import = id) order, NOT
+    // alphabetical order. Storekeeper is imported before Aviation Storekeeper.
+    Rank::factory()->ratingHistorical()->create(['slug' => 'storekeeper', 'name' => 'Storekeeper', 'decommissioned_year' => 2009]);
+    Rank::factory()->ratingHistorical()->create(['slug' => 'aviation-storekeeper', 'name' => 'Aviation Storekeeper', 'decommissioned_year' => 2009]);
+    Rank::factory()->ratingHistorical()->create(['slug' => 'instrumentman', 'name' => 'Instrumentman', 'decommissioned_year' => 2007]);
+
+    expect($this->repository->historicRatings()->pluck('slug')->all())
+        ->toBe(['storekeeper', 'aviation-storekeeper', 'instrumentman']);
+});

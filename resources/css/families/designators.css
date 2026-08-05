@@ -1,3 +1,646 @@
 /* Per-family parity CSS, ported from the legacy component inline styles.
    Kept in its own file so parallel work never collides in app.css.
-   Properties are alphabetized per the authored-CSS convention. */
+   Properties are alphabetized per the authored-CSS convention.
+
+   Sources (every value below is copied from one of these, never inferred):
+   - src/page-views/NavyDesignatorsHub.tsx        → /navy-designators/
+   - src/page-views/NavyDesignatorsCommunity.tsx  → /navy-designators/{community}/
+   - src/page-views/NavyRankDetail.tsx            → /navy-designators/{slug}/
+     (NavyDesignatorsSlugRouter.tsx delegates a designator slug to it)
+   - src/page-views/DiscountDetail.tsx            → FAQ_ACCORDION_CSS
+
+   Every selector is prefixed with `main.dsg…` because the family sheets are
+   @imported at the TOP of app.css, so an equal-specificity rule there would win
+   on source order. */
+
+/* ==========================================================================
+   Shared across the three designator page types
+   ========================================================================== */
+
+/* All three pages set `padding: var(--space-2xl)` inline on <main> at every
+   width — the legacy has no responsive narrowing. app.css's
+   `@media (max-width: 720px)` narrows the shared `main` to 24px/16px/48px, which
+   made the mobile column 64px wider than the remote's and reflowed every grid. */
+main.dsg {
+    padding: var(--space-2xl);
+}
+
+/* The legacy eyebrow is an inline-styled <div>, not app.css's discount-guide
+   `.eyebrow` (0.72rem/600/2px): 11px mono, weight 400, 3px tracking. */
+main.dsg .dsg-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+/* app.css's global h1 is the discount-guide hero (clamp(48px,6vw,72px)/4px). */
+main.dsg .dsg-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 64px);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin: 0 0 var(--space-sm);
+}
+
+/* The hub / community lede paragraph. */
+main.dsg .dsg-lede {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-xl);
+    max-width: 760px;
+}
+
+/* No designator heading is underlined in the legacy source — the section h2s are
+   bare inline-styled headings, and the EditorialPolicy h2 sets only type +
+   colour. app.css's global `main section > h2` gold rule is a guide treatment. */
+main.dsg section > h2 {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Legacy breadcrumb: the trailing crumb is `--nw-gray-light` and the separators
+   inherit the nav's `--nw-gray`; app.css paints both gold. */
+main.dsg .breadcrumb [aria-current='page'] {
+    color: var(--nw-gray-light);
+}
+main.dsg .breadcrumb span[aria-hidden='true'] {
+    color: var(--nw-gray);
+}
+
+/* Only the DETAIL breadcrumb sets `flexWrap: 'wrap'` (NavyRankDetail.tsx); the
+   hub and community navs are the default nowrap, so at 375px their long crumbs
+   wrap their own text inside one flex row instead of breaking onto a second row
+   (which app.css's shared `.breadcrumb` wrap made them do, adding 6px). */
+main.dsg-hub .breadcrumb,
+main.dsg-community-hub .breadcrumb {
+    flex-wrap: nowrap;
+}
+
+/* EditorialPolicy's heading sets only type + colour (src/components/
+   ReferenceTrust.tsx), so it inherits the body's 1.5 line-height; app.css's
+   shared rule raises it to 1.6, which made the box 1.1px taller than remote. */
+main.dsg .editorial-policy h2 {
+    line-height: 1.5;
+}
+
+/* TrustByline's reviewer block has a 6px bottom margin (ReferenceTrust.tsx); the
+   shared `:last-of-type` rule never matches because `.trust-byline-process` is
+   the byline's last <div>. */
+main.dsg .trust-byline-person:has(+ .trust-byline-dates) {
+    margin-bottom: 6px;
+}
+
+/* ==========================================================================
+   /navy-designators/ — hub (NavyDesignatorsHub.tsx)
+   ========================================================================== */
+main.dsg-hub .dsg-communities {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-bottom: var(--space-2xl);
+}
+main.dsg-hub .dsg-community {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    display: block;
+    padding: var(--space-lg);
+    text-decoration: none;
+}
+main.dsg-hub .dsg-community-count {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+main.dsg-hub .dsg-community-name {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+main.dsg-hub .dsg-community-tagline {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+}
+main.dsg-hub .dsg-community-cta {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    margin-top: var(--space-md);
+    text-transform: uppercase;
+}
+
+main.dsg-hub .dsg-group {
+    margin-bottom: var(--space-2xl);
+}
+main.dsg-hub .dsg-group-h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-md);
+}
+main.dsg-hub .dsg-rows {
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+main.dsg-hub .dsg-row {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+}
+main.dsg-hub .dsg-row a {
+    align-items: center;
+    color: var(--nw-off-white);
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 60px 1fr auto;
+    padding: 14px 4px;
+    text-decoration: none;
+}
+main.dsg-hub .dsg-row-code {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+}
+main.dsg-hub .dsg-row-name {
+    color: var(--nw-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+}
+main.dsg-hub .dsg-row-abbr {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    margin-left: 8px;
+}
+
+/* ==========================================================================
+   /navy-designators/{community}/ — community hub (NavyDesignatorsCommunity.tsx)
+   ========================================================================== */
+main.dsg-community-hub .dsg-cards {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    list-style: none;
+    margin: 0 0 var(--space-2xl);
+    padding: 0;
+}
+main.dsg-community-hub .dsg-cards a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    display: block;
+    height: 100%;
+    padding: var(--space-lg);
+    text-decoration: none;
+}
+main.dsg-community-hub .dsg-card-head {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+main.dsg-community-hub .dsg-card-code {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+main.dsg-community-hub .dsg-card-name {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+main.dsg-community-hub .dsg-card-tagline {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+}
+main.dsg-community-hub .dsg-community-foot {
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    padding-top: var(--space-lg);
+}
+main.dsg-community-hub .dsg-community-foot a {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   /navy-designators/{slug}/ — detail (NavyRankDetail.tsx, `isDesignator` branch)
+   ========================================================================== */
+main.dsg-detail .dsg-hero {
+    align-items: start;
+    display: grid;
+    gap: var(--space-xl);
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin-bottom: var(--space-2xl);
+}
+main.dsg-detail .dsg-hero-tagline {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 700px;
+}
+main.dsg-detail .dsg-insignia {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+main.dsg-detail .dsg-insignia img {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 4px;
+    height: 120px;
+    image-rendering: pixelated;
+    padding: 8px;
+    width: 120px;
+}
+main.dsg-detail .dsg-insignia-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+main.dsg-detail .dsg-facts {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    margin-bottom: var(--space-2xl);
+}
+main.dsg-detail .dsg-fact {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    padding: var(--space-md);
+}
+main.dsg-detail .dsg-fact-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+main.dsg-detail .dsg-fact-value {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+main.dsg-detail .dsg-section {
+    margin-bottom: var(--space-2xl);
+}
+main.dsg-detail .dsg-section h2 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-md);
+}
+main.dsg-detail .dsg-prose {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0 0 var(--space-md);
+}
+
+main.dsg-detail .dsg-responsibilities {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+main.dsg-detail .dsg-responsibilities li {
+    background: rgba(21, 35, 64, 0.5);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 2px 2px 0;
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 12px 16px;
+}
+
+main.dsg-detail .dsg-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+main.dsg-detail .dsg-chips li {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 2px;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 8px 14px;
+}
+
+main.dsg-detail .dsg-pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+main.dsg-detail .dsg-pipeline li {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 2px 2px 0;
+    padding: var(--space-md);
+}
+main.dsg-detail .dsg-pipeline-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+main.dsg-detail .dsg-pipeline-name {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+main.dsg-detail .dsg-pipeline-duration {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+main.dsg-detail .dsg-pipeline-location {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+main.dsg-detail .dsg-pipeline-desc {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+main.dsg-detail .dsg-career {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+main.dsg-detail .dsg-career li {
+    align-items: start;
+    background: rgba(21, 35, 64, 0.5);
+    border-radius: 2px;
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 110px 1fr;
+    padding: 12px 14px;
+}
+main.dsg-detail .dsg-career-paygrade {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    padding-top: 2px;
+}
+main.dsg-detail .dsg-career-title {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 16px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+main.dsg-detail .dsg-career-desc {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+main.dsg-detail .dsg-related {
+    display: grid;
+    gap: var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+main.dsg-detail .dsg-related--designators {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+main.dsg-detail .dsg-related--bases {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+main.dsg-detail .dsg-related a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    display: block;
+    padding: var(--space-md);
+    text-decoration: none;
+}
+main.dsg-detail .dsg-related-meta {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+main.dsg-detail .dsg-related-name {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+main.dsg-detail .dsg-related-name--base {
+    font-size: 16px;
+}
+
+main.dsg-detail .dsg-panels {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    margin-bottom: var(--space-2xl);
+}
+main.dsg-detail .dsg-panel {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    padding: var(--space-lg);
+}
+main.dsg-detail .dsg-panel-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+main.dsg-detail .dsg-panel-body {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+}
+main.dsg-detail .dsg-panel-list {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    list-style: disc;
+    margin: 0;
+    padding-left: 18px;
+}
+main.dsg-detail .dsg-panel-list li {
+    margin-bottom: 4px;
+}
+
+/* FAQ accordion — FAQ_ACCORDION_CSS from src/page-views/DiscountDetail.tsx. */
+main.dsg-detail .dsg-faqs {
+    display: flex;
+    flex-direction: column;
+}
+main.dsg-detail .nw-faq {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+}
+main.dsg-detail .nw-faq > summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: space-between;
+    list-style: none;
+    padding: var(--space-md) 0;
+}
+main.dsg-detail .nw-faq > summary::-webkit-details-marker {
+    display: none;
+}
+main.dsg-detail .nw-faq > summary > h3 {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+}
+main.dsg-detail .nw-faq[open] > summary > h3 {
+    color: var(--gold);
+}
+main.dsg-detail .nw-faq-chev {
+    color: var(--nw-gray);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+main.dsg-detail .nw-faq[open] .nw-faq-chev {
+    color: var(--gold);
+    transform: rotate(180deg);
+}
+main.dsg-detail .nw-faq-a {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    padding-bottom: var(--space-md);
+}
+
+main.dsg-detail .dsg-sources h2 {
+    font-size: 24px;
+    margin: 0 0 var(--space-sm);
+}
+main.dsg-detail .dsg-sources ul {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+main.dsg-detail .dsg-sources a {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-body);
+    font-size: 13px;
+    gap: 6px;
+    text-decoration: none;
+}
+main.dsg-detail .dsg-sources-updated {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-top: var(--space-sm);
+}
+
+main.dsg-detail .dsg-detail-foot {
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    padding-top: var(--space-lg);
+}
+main.dsg-detail .dsg-detail-foot a {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}

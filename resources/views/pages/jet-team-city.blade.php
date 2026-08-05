@@ -7,6 +7,14 @@
 @php
     /** @var \App\Domain\Pillars\Models\JetTeamCity $city */
     /** @var \App\Domain\Pillars\Models\JetTeam $team */
+    /** @var \App\Domain\Pillars\Models\JetTeamScheduleRow|null $prevStop */
+    /** @var \App\Domain\Pillars\Models\JetTeamScheduleRow|null $nextStop */
+    /** @var array{team: \App\Domain\Pillars\Models\JetTeam, row: \App\Domain\Pillars\Models\JetTeamScheduleRow}|null $sibling */
+    /** @var array<int, string> $publishedHrefs */
+    $prevStop ??= null;
+    $nextStop ??= null;
+    $sibling ??= null;
+    $publishedHrefs ??= [];
     $intro = is_array($city->intro) ? $city->intro : [];
     $sections = is_array($city->sections) ? $city->sections : [];
     $admission = $city->admission instanceof \BackedEnum ? $city->admission->value : (string) $city->admission;
@@ -20,6 +28,21 @@
         $html = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $html) ?? $html;
 
         return preg_replace('/\*(.+?)\*/s', '<em>$1</em>', $html) ?? $html;
+    };
+
+    // Port of the legacy `RelatedSegment` (JetTeamDetail.tsx): a cross-link is a
+    // real <a> only when its target actually ships, otherwise it renders as plain
+    // off-white text. Segments concatenate with NO separator — they are authored
+    // as one sentence split around its links.
+    $teamRoot = rtrim($team->base_path, '/').'/';
+    $isPublished = static fn (?string $href): bool => $href !== null
+        && in_array('/'.trim($href, '/').'/', $publishedHrefs, true);
+    $segment = static function (?string $before, string $label, ?string $href, ?string $after) use ($isPublished): string {
+        $target = $href !== null && $isPublished($href)
+            ? '<a href="'.e(\App\Domain\Navigation\Support\LinkUrl::sanitize($href)).'">'.e($label).'</a>'
+            : '<span class="jt-related-plain">'.e($label).'</span>';
+
+        return e((string) $before).$target.e((string) $after);
     };
 @endphp
 
@@ -135,15 +158,31 @@
 
         <section class="jt-section jt-narrow jt-section-last" aria-labelledby="related">
             <h2 class="jt-h2" id="related">NEARBY &amp; RELATED</h2>
-            {{-- `related_paragraph` is either a plain string/list of strings or a
-                 list of {before,label,href,after} link fragments. --}}
-            @foreach ((array) $city->related_paragraph as $relatedPara)
-                @if (is_array($relatedPara))
-                    <p class="jt-p">{{ $relatedPara['before'] ?? '' }}@if (! empty($relatedPara['href']))<a href="{{ $relatedPara['href'] }}">{{ $relatedPara['label'] ?? $relatedPara['href'] }}</a>@else{{ $relatedPara['label'] ?? '' }}@endif{{ $relatedPara['after'] ?? '' }}</p>
-                @else
-                    <p class="jt-p">{{ $relatedPara }}</p>
-                @endif
-            @endforeach
+            {{-- `related_paragraph` is a list of {before,label,href,after} link
+                 fragments (or plain strings) that form ONE paragraph — the legacy
+                 maps them inside a single <p>, so they must not be split. --}}
+            @php
+                $relatedHtml = collect((array) $city->related_paragraph)
+                    ->map(fn ($seg): string => is_array($seg)
+                        ? $segment($seg['before'] ?? '', (string) ($seg['label'] ?? $seg['href'] ?? ''), $seg['href'] ?? null, $seg['after'] ?? '')
+                        : e((string) $seg))
+                    ->implode('');
+            @endphp
+            @if ($relatedHtml !== '')
+                <p class="jt-p">{!! $relatedHtml !!}</p>
+            @endif
+
+            @if ($sibling !== null)
+                @php
+                    $siblingHref = rtrim($sibling['team']->base_path, '/').'/'.$sibling['row']->slug.'/';
+                @endphp
+                <p class="jt-p">The {{ $sibling['team']->name }} are at the same show this year —
+                    @if ($isPublished($siblingHref))<a href="{{ $siblingHref }}">see the {{ $sibling['team']->name }} {{ $sibling['row']->city }} guide</a>@else<span>both teams headline {{ $sibling['row']->city }} on {{ $sibling['row']->dates_label }}</span>@endif.</p>
+            @endif
+
+            @if ($prevStop !== null || $nextStop !== null)
+                <p class="jt-other-stops"><span class="jt-other-stops-label">Other {{ $city->year }} stops:</span>@if ($prevStop !== null)<span>{!! $segment(null, '← '.($prevStop->guide_label ?? $prevStop->city), $teamRoot.$prevStop->slug.'/', null) !!}</span>@endif@if ($prevStop !== null && $nextStop !== null)<span class="jt-other-stops-sep"> · </span>@endif@if ($nextStop !== null)<span>{!! $segment(null, ($nextStop->guide_label ?? $nextStop->city).' →', $teamRoot.$nextStop->slug.'/', null) !!}</span>@endif</p>
+            @endif
 
             <a class="jt-back-link" href="{{ $team->base_path }}/">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>

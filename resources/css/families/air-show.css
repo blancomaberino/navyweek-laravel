@@ -83,12 +83,23 @@
 }
 
 /* The legacy pages carry no `strong` rule at all, so bold runs keep the UA
-   `bolder` weight and inherit their colour. app.css instead re-styles `strong`
-   site-wide (600 / --nw-white), which re-flows every bolded sentence here. */
+   `bolder` weight and inherit their colour. `bolder` is RELATIVE to the parent
+   (700 inside 400 body copy, but only 400 inside the font-weight:300 paragraphs
+   and bullet lists these pages use), so pinning it to a fixed 700 re-flowed every
+   bolded sentence. app.css pins it to 600/--nw-white site-wide. */
 .as-page strong,
 .ash-page strong {
     color: inherit;
-    font-weight: 700;
+    font-weight: bolder;
+}
+
+/* ReferenceTrustFooter's heading carries no line-height in the legacy inline
+   style, so it inherits Tailwind preflight's `html { line-height: 1.5 }` —
+   16.5px at 11px mono. app.css pins it to 1.6 (17.6px), which pushes every
+   following line 1px down. */
+.as-page .editorial-policy h2,
+.ash-page .editorial-policy h2 {
+    line-height: 1.5;
 }
 
 /* ==========================================================================
@@ -203,6 +214,12 @@
 
 .as-source-pub {
     color: var(--nw-gray);
+}
+
+/* An unpublished cross-link target renders as plain copy, not a dead <a>
+   (legacy `RelatedSegment` in AirShowDetail.tsx). */
+.as-related-plain {
+    color: var(--nw-off-white);
 }
 
 .as-back {

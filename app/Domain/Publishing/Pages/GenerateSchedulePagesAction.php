@@ -82,12 +82,17 @@ final class GenerateSchedulePagesAction
             'h1' => "{$year} ROUTE MAP",
             'meta_description' => "The Navy Week {$year} route map — every tour stop plotted, with dates and the anchor event in each host city.",
             'og_image_path' => '/og/map.png',
+            // Ported verbatim from the legacy MapPage.tsx <KeyFacts> props — the six
+            // facts the live /map/ renders, in that order.
             'key_facts' => [
                 'title' => "{$year} Route Map — Key Facts",
                 'facts' => [
-                    ['label' => 'Tour stops', 'value' => (string) $count],
-                    ['label' => 'Programme year', 'value' => "{$year} — the \"Road Trip to 250\" tour"],
-                    ['label' => 'Operator', 'value' => 'Navy Office of Community Outreach (NAVCO)'],
+                    ['label' => 'Cities visited', 'value' => "{$count} U.S. host cities"],
+                    ['label' => 'States represented', 'value' => (string) $all->pluck('state')->unique()->count()],
+                    ['label' => 'First-time locations', 'value' => (string) $firstTime],
+                    ['label' => 'Tour window', 'value' => $all->first()?->start_date->format('Y-m-d').' – '.$all->last()?->end_date->format('Y-m-d')],
+                    ['label' => 'Westernmost stop', 'value' => 'Honolulu / Hilo, Hawaii'],
+                    ['label' => 'Easternmost stop', 'value' => 'Sussex County, Delaware'],
                 ],
                 'source' => ['label' => 'outreach.navy.mil/Navy-Weeks', 'url' => 'https://outreach.navy.mil/Navy-Weeks/'],
                 'lastVerified' => Carbon::parse(self::LAST_CHECKED)->format('F j, Y'),

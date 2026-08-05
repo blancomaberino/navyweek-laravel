@@ -81,6 +81,15 @@
     margin-bottom: 6px;
 }
 
+/* ReferenceTrustFooter's heading carries no line-height in the legacy inline
+   style, so it inherits Tailwind preflight's `html { line-height: 1.5 }` —
+   16.5px at 11px mono. app.css pins it to 1.6 (17.6px), which pushes every
+   following line 1px down. */
+.jet-team-hub .editorial-policy h2,
+.jet-team-city .editorial-policy h2 {
+    line-height: 1.5;
+}
+
 /* ---- Typography ---------------------------------------------------------- */
 .jt-eyebrow {
     color: var(--gold);
@@ -138,6 +147,33 @@
 .jt-p-820 { max-width: 820px; }
 .jt-p a { color: var(--gold); text-decoration: underline; }
 .jt-cross-team { margin-top: var(--space-lg); }
+
+/* An unpublished cross-link target renders as plain copy, not a dead <a>
+   (legacy `RelatedSegment`). It pins its own colour because the "other stops"
+   line it also appears in is gray-light. */
+.jt-related-plain {
+    color: var(--nw-off-white);
+}
+
+/* City guide "Other {year} stops: ← prev · next →" line. */
+.jt-other-stops {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    line-height: 1.8;
+    margin: 0 0 var(--space-lg);
+}
+.jt-other-stops-label {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-right: 8px;
+    text-transform: uppercase;
+}
+.jt-other-stops-sep {
+    color: var(--nw-gray);
+}
 
 .jt-bullets {
     color: var(--nw-off-white);

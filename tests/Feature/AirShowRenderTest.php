@@ -96,7 +96,7 @@ it('suppresses the Event node for a date-unconfirmed show', function () {
 it('renders the air-show hub with an ItemList of published shows', function () {
     airShowRenderSetup();
     AirShow::factory()->create(['slug' => 'miramar', 'name' => 'MCAS Miramar', 'year' => 2026]);
-    AirShow::factory()->unpublished()->create(['slug' => 'draft']);
+    AirShow::factory()->unpublished()->create(['slug' => 'draft', 'name' => 'Draft Air Show']);
     AirShowHubMeta::factory()->create(['seo_headline' => '2026 U.S. Military Air Shows']);
     app(GenerateAirShowPagesAction::class)();
 
@@ -108,4 +108,27 @@ it('renders the air-show hub with an ItemList of published shows', function () {
         ->assertSee('"name":"MCAS Miramar 2026"', false)
         ->assertSee('"numberOfItems":1', false)   // only the published show
         ->assertDontSee('/air-show/draft/', false);
+
+    // The directory table lists EVERY show (legacy `airShows`); publication gates
+    // only the guide link in the last column.
+    $res->assertSee('Draft Air Show')
+        ->assertSee('Guide coming soon');
+});
+
+it('renders an unpublished cross-link in the related paragraph as plain text', function () {
+    airShowRenderSetup();
+    AirShowHubMeta::factory()->create();
+    AirShow::factory()->create([
+        'slug' => 'oceana',
+        'related_paragraph' => [
+            ['before' => 'Also see ', 'label' => 'Miramar', 'href' => '/air-show/miramar/', 'after' => ' and '],
+            ['label' => 'Camarillo', 'href' => '/air-show/camarillo/', 'after' => '.'],
+        ],
+    ]);
+    AirShow::factory()->create(['slug' => 'miramar']);
+    app(GenerateAirShowPagesAction::class)();
+
+    fetchAirShow('/air-show/oceana/')->assertOk()
+        ->assertSee('<a class="as-link" href="/air-show/miramar/">Miramar</a>', false)
+        ->assertSee('<span class="as-related-plain">Camarillo</span>', false);
 });

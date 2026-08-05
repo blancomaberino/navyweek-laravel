@@ -61,7 +61,7 @@ final class EloquentRankRepository implements RankRepositoryInterface
         return Rank::query()
             ->where('category', RankCategory::RatingHistorical->value)
             ->orderByDesc('decommissioned_year')
-            ->orderBy('name')
+            ->orderBy('id')
             ->get();
     }
 

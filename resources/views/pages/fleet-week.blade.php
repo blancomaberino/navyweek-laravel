@@ -425,10 +425,11 @@
             @if (filled($relatedWeeks))
                 <h2>MORE FLEET WEEKS</h2>
                 <div class="fw-related">
-                    @foreach ($relatedWeeks as $relatedSlug)
-                        <a href="{{ PagePaths::child('fleet_weeks', (string) $relatedSlug) }}">
+                    @foreach ($relatedWeeks as $related)
+                        <a href="{{ PagePaths::child('fleet_weeks', (string) $related->slug) }}">
+                            <span class="fw-related-when">{{ $related->month_label }} {{ $related->year }}</span>
                             <span class="fw-related-city">
-                                {{ \Illuminate\Support\Str::headline((string) $relatedSlug) }}
+                                {{ $related->city }}
                                 {!! $icon('arrow-right', 14) !!}
                             </span>
                         </a>

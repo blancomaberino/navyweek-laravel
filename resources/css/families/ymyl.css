@@ -72,6 +72,16 @@
     text-transform: uppercase;
 }
 
+/* The legacy sections space their children with a flex `gap`, so the last block
+   in the body carries no trailing space of its own. */
+.content-page article > :last-child {
+    margin-bottom: 0;
+}
+
+.content-page--our-process article > :last-child {
+    margin-bottom: 80px;
+}
+
 /* Section body copy — legacy section content div: 15px/1.75, gray-light, with a
    16px flex gap between blocks. */
 .content-page p {
@@ -86,6 +96,29 @@
     font-size: 17px;
     line-height: 1.75;
     margin-bottom: var(--space-xl);
+}
+
+/* The 16px off-white paragraph the home-care guide runs under its lead. */
+.content-page .content-sublead {
+    color: var(--nw-off-white);
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: var(--space-lg);
+}
+
+/* Fine print under a table — legacy 13px gray paragraph. */
+.content-page .content-fine {
+    color: var(--nw-gray);
+    font-size: 13px;
+}
+
+/* The answer-first capsule the credit-cards guide opens with. */
+.content-page .content-capsule {
+    color: var(--nw-white);
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+    max-width: 800px;
 }
 
 /* The shared trust cards carry their own type scale — keep the body-copy rule
@@ -158,7 +191,14 @@
     gap: var(--space-sm);
 }
 
-.content-faq details {
+/* The same card, emitted one block at a time (the 8px flex gap between the
+   legacy stack's children becomes a bottom margin). */
+.content-faq-card {
+    margin-bottom: var(--space-sm);
+}
+
+.content-faq details,
+.content-faq-card {
     background: var(--navy-mid);
     border: 1px solid rgba(201, 168, 76, 0.15);
     border-radius: 4px;
@@ -167,7 +207,8 @@
 
 /* `listStyle: 'revert'` in the legacy — the native disclosure triangle, not the
    site-wide "+ / –" marker app.css swaps in. */
-.content-faq summary {
+.content-faq summary,
+.content-faq-card > summary {
     color: var(--nw-white);
     cursor: pointer;
     font-family: var(--font-display);
@@ -179,19 +220,439 @@
     padding: 0;
 }
 
-.content-faq summary::-webkit-details-marker {
+.content-faq summary::-webkit-details-marker,
+.content-faq-card > summary::-webkit-details-marker {
     display: revert;
 }
 
-.content-faq summary::before {
+.content-faq summary::before,
+.content-faq-card > summary::before {
     content: none;
 }
 
-.content-page .content-faq details p {
+.content-page .content-faq details p,
+.content-page .content-faq-card > p {
     color: var(--nw-gray-light);
     font-size: 15px;
     line-height: 1.7;
     margin: var(--space-sm) 0 0;
+}
+
+/* Pull-quote callout — legacy `Callout()` in VaDisability/VeteransDay/
+   VeteransHomeCare: a navy panel behind a 3px gold rule, sitting in the section's
+   16px flex gap. */
+.content-callout {
+    background: var(--navy);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.content-callout a {
+    color: var(--gold);
+    text-decoration: underline;
+}
+
+/* -- data tables ----------------------------------------------------------
+   Two treatments. The guides use a bare table in an `overflowX: auto` div; the
+   credit-cards guide wraps it in a bordered panel (`.bcc-tablewrap`) that CSS
+   restacks into cards under 820px. */
+.content-tablewrap {
+    margin: calc(var(--space-lg) + var(--space-md)) 0 var(--space-md);
+    overflow-x: auto;
+}
+
+.content-tablepanel {
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    border-radius: 6px;
+    margin: 0 0 var(--space-md);
+    overflow-x: auto;
+}
+
+/* `margin: 0` overrides the site-wide `table` rule in app.css; the legacy tables
+   carry no margin of their own — the wrapper positions them. `line-height: 1.75`
+   is inherited from the section's body-copy stack in the legacy. */
+.content-table {
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.75;
+    margin: 0;
+    width: 100%;
+}
+
+/* Legacy `<p style={{ marginTop: 'var(--space-lg)' }}>` under the rate table — 24px
+   of its own on top of the section stack's 16px gap. */
+.content-page .content-tablewrap + p {
+    margin-top: calc(var(--space-lg) + var(--space-md));
+}
+
+.content-table caption {
+    caption-side: top;
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 0 0 var(--space-sm);
+    text-align: left;
+}
+
+.content-tablewrap thead tr {
+    background: var(--navy-mid);
+}
+
+.content-tablewrap th {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 10px 14px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.content-tablewrap td {
+    color: var(--nw-off-white);
+    padding: 10px 14px;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+}
+
+.content-table .is-right {
+    text-align: right;
+}
+
+.content-table .is-accent {
+    color: var(--gold-light);
+}
+
+/* Legacy `.bcc-table`: body face, denser head, hover row. */
+.content-tablepanel .content-table {
+    font-family: var(--font-body);
+}
+
+.content-tablepanel th {
+    background: var(--navy-mid);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 12px 14px;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.content-tablepanel td {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    color: var(--nw-off-white);
+    line-height: 1.5;
+    padding: 14px;
+    vertical-align: top;
+}
+
+.content-tablepanel tbody tr {
+    border-bottom: 0;
+}
+
+.content-tablepanel tbody tr:hover {
+    background: rgba(21, 35, 64, 0.5);
+}
+
+/* Legacy `.bcc-cardlink` / `.bcc-source`. */
+.content-tablepanel td[data-label='Card'] a {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.content-tablepanel .content-cell-sub {
+    color: var(--nw-gray);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-top: 3px;
+    text-transform: uppercase;
+}
+
+.content-tablepanel td[data-label='Notes & source'] a {
+    color: var(--gold);
+    font-size: 13px;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+
+/* Legacy `@media (max-width: 820px)`: the full table stays in the HTML and CSS
+   restacks it into one card per row. */
+@media (max-width: 820px) {
+    .content-tablepanel {
+        border: none;
+        overflow-x: visible;
+    }
+
+    .content-tablepanel .content-table,
+    .content-tablepanel tbody,
+    .content-tablepanel tr,
+    .content-tablepanel td {
+        display: block;
+        width: 100%;
+    }
+
+    .content-tablepanel thead {
+        clip: rect(0 0 0 0);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+    }
+
+    .content-tablepanel tr {
+        background: var(--navy-mid);
+        border: 1px solid rgba(201, 168, 76, 0.18);
+        border-radius: 6px;
+        margin-bottom: var(--space-md);
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .content-tablepanel tr:hover {
+        background: var(--navy-mid);
+    }
+
+    .content-tablepanel td {
+        border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+        display: grid;
+        gap: var(--space-md);
+        grid-template-columns: 40% 60%;
+        padding: 9px 0;
+    }
+
+    .content-tablepanel td:last-child {
+        border-bottom: none;
+    }
+
+    .content-tablepanel td::before {
+        color: var(--gold);
+        content: attr(data-label);
+        font-family: var(--font-mono);
+        font-size: 9.5px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+}
+
+/* -- credit-card review cards (legacy `CardBlock`) ------------------------ */
+/* The card sits inside the legacy section's `fontSize: 15 / lineHeight: 1.75`
+   stack, and every line inside it (kicker, title, meta, note, CTA) is measured
+   against that inherited leading. */
+.content-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    border-radius: 6px;
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0 0 var(--space-md);
+    padding: var(--space-lg) var(--space-xl);
+    scroll-margin-top: 80px;
+}
+
+.content-card-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.content-page .content-card h3 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 1px;
+    line-height: inherit;
+    margin: 0 0 var(--space-sm);
+    padding-bottom: 0;
+    text-transform: none;
+}
+
+.content-card-meta {
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    gap: var(--space-md);
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-sm);
+}
+
+.content-card-meta strong {
+    color: var(--nw-white);
+}
+
+.content-card-note {
+    color: var(--nw-gray);
+    font-size: 12.5px;
+    font-style: italic;
+    margin-bottom: var(--space-sm);
+}
+
+.content-page .content-card-body p {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.content-card-cta {
+    margin-top: var(--space-md);
+}
+
+.content-card-cta a {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+/* -- /contact/ cards ------------------------------------------------------ */
+.content-linkcard {
+    align-items: center;
+    background: rgba(10, 22, 40, 0.6);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 2px;
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-xl);
+    text-decoration: none;
+    transition: border-color 0.2s;
+}
+
+.content-linkcard-icon {
+    align-items: center;
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: 2px;
+    color: var(--gold);
+    display: flex;
+    flex-shrink: 0;
+    height: 44px;
+    justify-content: center;
+    width: 44px;
+}
+
+.content-linkcard-label {
+    color: var(--nw-gray);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.content-linkcard-value {
+    color: var(--gold);
+    display: block;
+    font-size: 16px;
+}
+
+.content-infocard {
+    background: rgba(10, 22, 40, 0.6);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 2px;
+    margin-top: var(--space-lg);
+    padding: var(--space-lg) var(--space-xl);
+}
+
+.content-infocard-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.content-page .content-infocard p {
+    margin: 0;
+}
+
+/* The lead panel on /contact/ — legacy gold-ruled intro section. */
+.content-page .content-panel {
+    background: rgba(201, 168, 76, 0.04);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 2px 2px 0;
+    color: var(--nw-off-white);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0 0 var(--space-2xl);
+    padding: var(--space-xl) var(--space-2xl);
+}
+
+/* The mono "Last updated" / "Fees verified" stamps under an h1. */
+.content-page .content-stamp {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    margin: var(--space-sm) 0 var(--space-2xl);
+}
+
+.content-page .content-verified {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin: var(--space-md) 0 var(--space-xl);
+}
+
+/* Inline "On this page:" strip — legacy `.bcc-toc`. */
+.content-jump {
+    align-items: baseline;
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 13px;
+    gap: 8px 14px;
+    padding: var(--space-md) var(--space-lg);
+}
+
+.content-jump-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.content-jump a {
+    color: var(--nw-off-white);
+    text-decoration: underline;
+    text-decoration-color: rgba(201, 168, 76, 0.5);
+}
+
+/* Section body links — legacy `SourceLink`. */
+.content-page p a,
+.content-page .content-list a,
+.content-page .content-faq-item a {
+    color: var(--gold);
+    text-decoration: underline;
 }
 
 /* "On this page" jump list — legacy <nav aria-label="On this page">. */
@@ -221,18 +682,78 @@
     padding: 0;
 }
 
-.content-toc li span {
+.content-toc li span,
+.content-toc li a {
     border-bottom: 1px solid rgba(201, 168, 76, 0.2);
     color: var(--nw-off-white);
     font-size: 14px;
     line-height: 1.6;
+    text-decoration: none;
 }
 
-/* -- policy pages (/privacy/, /terms/, /contact/) -------------------------- */
+/* -- policy pages (/privacy/, /terms/, /contact/) --------------------------
+   Legacy <main maxWidth 800>, a 22px section head, and a 48px flex gap between
+   sections. The h1 is a literal uppercase string in the legacy component; here it
+   comes from `pages.h1`, so the case is applied in CSS. */
 .content-page--contact,
 .content-page--privacy,
 .content-page--terms {
     max-width: 800px;
+}
+
+/* These three set no line-height in the legacy, so the h1 takes the document's
+   1.5 — taller than the guides' 1.15. */
+.content-page--contact h1,
+.content-page--privacy h1,
+.content-page--terms h1 {
+    font-size: clamp(36px, 6vw, 48px);
+    line-height: 1.5;
+}
+
+.content-page--contact .content-stamp,
+.content-page--privacy .content-stamp,
+.content-page--terms .content-stamp {
+    line-height: 1.5;
+}
+
+.content-page--privacy h1,
+.content-page--terms h1 {
+    margin-bottom: 0;
+}
+
+.content-page--contact h2,
+.content-page--privacy h2,
+.content-page--terms h2 {
+    font-size: 22px;
+}
+
+.content-page--contact h2 {
+    margin-bottom: var(--space-lg);
+}
+
+/* Legacy: the paragraph above the NAVCO link carries a 24px bottom margin. */
+.content-page--contact .content-linkcard {
+    margin-top: var(--space-lg);
+}
+
+/* Legacy policy `ul`: 24px indent, 8px between bullets, no top flex gap. */
+.content-page--privacy .content-list,
+.content-page--terms .content-list {
+    margin-top: var(--space-md);
+}
+
+/* -- /va-disability/, /veterans-day/ --------------------------------------
+   These two space their sections with `gap: var(--space-3xl)` (the home-care
+   guide uses `--space-2xl`, which is the shared default above). */
+.content-page--va-disability h2,
+.content-page--veterans-day h2 {
+    margin-top: var(--space-3xl);
+}
+
+/* The paragraph above the jump list carries a 48px bottom margin in the legacy. */
+.content-page--va-disability .content-toc,
+.content-page--veterans-day .content-toc {
+    margin-top: var(--space-2xl);
 }
 
 /* -- /veterans-home-care/ ------------------------------------------------- */
@@ -243,6 +764,7 @@
 
 .content-page--veterans-home-care .content-toc {
     margin-bottom: var(--space-2xl);
+    margin-top: var(--space-2xl);
     padding: var(--space-md) var(--space-lg);
 }
 
@@ -254,8 +776,23 @@
     gap: 6px var(--space-lg);
 }
 
-.content-page--veterans-home-care .content-toc li span {
+.content-page--veterans-home-care .content-toc li span,
+.content-page--veterans-home-care .content-toc li a {
     border-bottom: 0;
+}
+
+/* This guide's rate table is body-face, has no head fill and no top offset. */
+.content-page--veterans-home-care .content-tablewrap {
+    margin-top: 0;
+}
+
+.content-page--veterans-home-care .content-table {
+    font-family: var(--font-body);
+    min-width: 480px;
+}
+
+.content-page--veterans-home-care .content-tablewrap thead tr {
+    background: none;
 }
 
 /* -- /best-credit-cards-for-military/ ------------------------------------- */
@@ -283,11 +820,29 @@
     text-transform: none;
 }
 
-.content-page--best-credit-cards-for-military .content-lead {
-    color: var(--nw-white);
-    font-size: 18px;
+/* Hero stack: h1 → answer-first capsule (18px white) → supporting paragraph
+   (16px gray) → the mono "fees verified" stamp, then the byline. */
+.content-page--best-credit-cards-for-military .content-sublead {
+    color: var(--nw-gray-light);
     line-height: 1.7;
+    margin-bottom: var(--space-md);
     max-width: 800px;
+}
+
+.content-page--best-credit-cards-for-military h1 {
+    margin-bottom: var(--space-lg);
+}
+
+/* Legacy `ulStyle` on this page is `margin: 0` — the list takes only the
+   section stack's 16px gap, not the 32px the guides' lists carry. */
+.content-page--best-credit-cards-for-military .content-list {
+    margin-top: var(--space-md);
+}
+
+/* The section stack opens 48px below the jump strip, not the 64px it keeps
+   between sections. */
+.content-page--best-credit-cards-for-military .content-jump + h2 {
+    margin-top: var(--space-2xl);
 }
 
 /* -- /our-process/ --------------------------------------------------------
@@ -362,14 +917,19 @@
     border: 0;
     border-radius: 0;
     border-top: 1px solid #1e2d45;
+    margin: 40px 0 0;
+    padding: 28px 0 0;
+    text-align: center;
+}
+
+/* The partial nests every row in one column wrapper, so the three-up strip is
+   built there: role/person pairs flow down each column, dates in the third. */
+.content-page--our-process .trust-byline-col {
     display: grid;
     gap: 0 36px;
     grid-auto-flow: column;
     grid-template-rows: auto auto;
     justify-content: center;
-    margin: 40px 0 0;
-    padding: 28px 0 0;
-    text-align: center;
 }
 
 .content-page--our-process .trust-byline-person {
@@ -392,10 +952,18 @@
     font-size: 13px;
 }
 
+/* Legacy `.op-narrow { max-width: 760px; margin: 0 auto }` with 48px of inner
+   padding — a 664px column on desktop, and the padding is what keeps the copy off
+   the edge on a phone. */
+/* Legacy `.op-narrow { max-width: 760px; margin: 0 auto }` with 48px of inner
+   padding — a 664px column on desktop. The gutter is expressed as `width` rather
+   than padding so it can't be added on top of a block's own padding (the CTA and
+   freshness panels bring their own), and so it still holds on a phone. */
 .content-page--our-process article > :not(.content-hero) {
     margin-left: auto;
     margin-right: auto;
     max-width: 664px;
+    width: calc(100% - 2 * var(--space-2xl));
 }
 
 .content-page--our-process .content-hero + * {
@@ -447,8 +1015,487 @@
 /* The hero byline strip is a wrapping flex row in the legacy — it stacks once
    the three columns no longer fit. */
 @media (max-width: 700px) {
-    .content-page--our-process .trust-byline {
+    .content-page--our-process .trust-byline-col {
         grid-auto-flow: row;
         grid-template-rows: none;
+    }
+}
+
+/* -- /our-process/ bespoke layout ----------------------------------------
+   Ported from the inline styles in src/page-views/OurProcess.tsx: full-bleed
+   bands alternating navy / #F7F8FA over a 664px white column, the six-step card
+   grid, the source-authority ladder, the publish gate, the refusals list, the
+   freshness bar and the corrections CTA. The design's literal neutrals are kept
+   as hex, brand colours use the shared tokens. */
+.content-page--our-process .op-lead {
+    color: #26303f;
+    font-size: 19px;
+    line-height: 1.62;
+    margin-bottom: 0;
+}
+
+/* `borderLeft: '4px solid var(--nw-red)'` with 36px of air above and below. */
+.content-page--our-process .content-callout--alert {
+    background: none;
+    border-left: 4px solid var(--nw-red);
+    border-radius: 0;
+    color: var(--navy);
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 36px 0;
+    padding: 4px 0 4px 26px;
+}
+
+/* Full-bleed bands break out of the 664px column (the selector has to outrank
+   `article > :not(.content-hero)` above). */
+.content-page--our-process article > .op-band {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
+    width: 100%;
+}
+
+.content-page--our-process .op-band--light {
+    background: #f7f8fa;
+    border-bottom: 1px solid #edeef0;
+    border-top: 1px solid #edeef0;
+    margin-top: 56px;
+    padding: 64px var(--space-2xl);
+}
+
+.content-page--our-process .op-band--navy {
+    background: var(--navy);
+    color: #f7f8fa;
+    margin-top: 0;
+    padding: 72px var(--space-2xl);
+}
+
+.content-page--our-process .op-band-inner {
+    margin: 0 auto;
+    max-width: 1180px;
+}
+
+.content-page--our-process .op-band--navy .op-band-inner {
+    max-width: 760px;
+}
+
+.content-page--our-process .op-eyebrow {
+    color: #5c6678;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    margin-bottom: 10px;
+}
+
+.content-page--our-process .op-band--navy .op-eyebrow {
+    color: var(--gold);
+}
+
+.content-page--our-process .op-band h2 {
+    line-height: 1.5;
+    margin: 0;
+}
+
+.content-page--our-process .op-band--navy h2 {
+    line-height: 1.05;
+}
+
+.content-page--our-process .op-band--navy h2 {
+    color: #f7f8fa;
+}
+
+.content-page--our-process .op-band-lead {
+    color: #aeb6c2;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 18px 0 0;
+}
+
+.content-page--our-process .op-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 38px;
+}
+
+.content-page--our-process .op-grid--gate {
+    gap: 14px;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 34px;
+}
+
+.content-page--our-process .op-card {
+    background: #fff;
+    border-radius: 3px;
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 1px 3px rgba(10, 22, 40, 0.07);
+    padding: 26px 24px 28px;
+}
+
+.content-page--our-process .op-grid--gate .op-card {
+    background: #16243b;
+    border-left: 3px solid var(--nw-green);
+    border-radius: 3px;
+    border-top: 0;
+    box-shadow: none;
+    padding: 22px;
+}
+
+.content-page--our-process .op-card-n {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.content-page--our-process .op-card-title {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 600;
+    margin-top: 12px;
+    text-transform: uppercase;
+}
+
+.content-page--our-process .op-grid--gate .op-card-title {
+    color: #fff;
+    font-size: 17px;
+    margin-top: 0;
+}
+
+.content-page--our-process .op-card p {
+    color: #5c6678;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 8px 0 0;
+}
+
+.content-page--our-process .op-grid--gate .op-card p {
+    color: #aeb6c2;
+    margin-top: 7px;
+}
+
+/* Detailed steps + the source ladder sit back in the 664px column. */
+.content-page--our-process .op-step {
+    margin-bottom: 64px;
+}
+
+.content-page--our-process .op-band + .op-step {
+    margin-top: 72px;
+}
+
+.content-page--our-process .op-tag {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.content-page--our-process .op-tag--red {
+    color: var(--nw-red);
+}
+
+.content-page--our-process .op-step h2 {
+    margin: 10px 0 0;
+}
+
+.content-page--our-process .op-ladder h2,
+.content-page--our-process .op-refusals h2 {
+    line-height: 1.5;
+}
+
+.content-page--our-process .op-ladder h2 {
+    font-size: 28px;
+}
+
+.content-page--our-process .op-step > p {
+    color: #26303f;
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 18px 0 0;
+}
+
+.content-page--our-process .op-ladder-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 24px;
+}
+
+.content-page--our-process .op-ladder-row {
+    border-radius: 2px;
+    display: flex;
+    gap: 18px;
+    padding: 18px 22px;
+}
+
+.content-page--our-process .op-ladder-row--1 {
+    background: var(--navy);
+}
+
+.content-page--our-process .op-ladder-row--2 {
+    background: #16243b;
+}
+
+.content-page--our-process .op-ladder-row--3 {
+    background: #edeef0;
+}
+
+.content-page--our-process .op-ladder-row--4 {
+    background: #f2f3f5;
+}
+
+.content-page--our-process .op-ladder-row--5 {
+    background: #fbeaec;
+}
+
+.content-page--our-process .op-ladder-n {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 24px;
+}
+
+.content-page--our-process .op-ladder-row--3 .op-ladder-n {
+    color: var(--navy);
+}
+
+.content-page--our-process .op-ladder-row--4 .op-ladder-n {
+    color: #5c6678;
+}
+
+.content-page--our-process .op-ladder-row--5 .op-ladder-n {
+    color: var(--nw-red);
+}
+
+.content-page--our-process .op-ladder-title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.content-page--our-process .op-ladder-row--3 .op-ladder-title,
+.content-page--our-process .op-ladder-row--4 .op-ladder-title {
+    color: var(--navy);
+}
+
+.content-page--our-process .op-ladder-row--5 .op-ladder-title {
+    color: #8a1722;
+}
+
+.content-page--our-process .op-ladder-row p {
+    color: #aeb6c2;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 4px 0 0;
+}
+
+.content-page--our-process .op-ladder-row--3 p,
+.content-page--our-process .op-ladder-row--4 p {
+    color: #5c6678;
+}
+
+.content-page--our-process .op-ladder-row--5 p {
+    color: #9a4651;
+}
+
+.content-page--our-process .op-step > .op-ladder-note {
+    color: #5c6678;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.55;
+    margin: 18px 0 0;
+}
+
+.content-page--our-process .op-refusals {
+    margin-bottom: 0;
+    margin-top: 72px;
+}
+
+.content-page--our-process .op-refusals-lead {
+    color: #26303f;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 16px 0 0;
+}
+
+.content-page--our-process .op-refusals-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-top: 28px;
+}
+
+.content-page--our-process .op-refusals-row {
+    border-bottom: 1px solid #edeef0;
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+}
+
+.content-page--our-process .op-refusals-mark {
+    align-items: center;
+    background: #fbeaec;
+    border-radius: 50%;
+    color: var(--nw-red);
+    display: flex;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 700;
+    height: 22px;
+    justify-content: center;
+    margin-top: 1px;
+    width: 22px;
+}
+
+.content-page--our-process .op-refusals-row p {
+    color: var(--navy);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.content-page--our-process .op-freshness {
+    align-items: center;
+    background: #f7f8fa;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 64px;
+    padding: 38px 40px;
+}
+
+.content-page--our-process .op-freshness-copy {
+    flex: 1;
+    min-width: 200px;
+}
+
+.content-page--our-process .op-freshness-label {
+    color: #5c6678;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+}
+
+.content-page--our-process .op-freshness-copy p {
+    color: var(--navy);
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 10px 0 0;
+}
+
+.content-page--our-process .op-freshness-stat {
+    text-align: center;
+}
+
+.content-page--our-process .op-freshness-n {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 0.9;
+}
+
+.content-page--our-process .op-freshness-unit {
+    color: #5c6678;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+}
+
+.content-page--our-process .op-rulenote {
+    border-left: 4px solid var(--gold);
+    margin-top: 56px;
+    padding-left: 26px;
+}
+
+.content-page--our-process .op-rulenote h3,
+.content-page--our-process .op-cta h3 {
+    margin: 0;
+}
+
+.content-page--our-process .op-rulenote p {
+    color: #26303f;
+    font-size: 16px;
+    line-height: 1.62;
+    margin: 14px 0 0;
+}
+
+.content-page--our-process .op-cta {
+    background: var(--navy);
+    border-radius: 4px;
+    color: #f7f8fa;
+    margin-top: 48px;
+    padding: 40px;
+}
+
+.content-page--our-process .op-cta h3 {
+    color: #f7f8fa;
+    font-size: 26px;
+}
+
+.content-page--our-process .op-cta p {
+    color: #aeb6c2;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 12px 0 0;
+    max-width: 520px;
+}
+
+.content-page--our-process .op-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.content-page--our-process .op-btn {
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.content-page--our-process .op-btn--gold {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 14px 28px;
+}
+
+.content-page--our-process .op-btn--ghost {
+    background: transparent;
+    border: 1.5px solid #38445a;
+    color: #fff;
+    padding: 12.5px 26px;
+}
+
+/* Legacy `padding: '40px 48px 80px'` on the closing band. */
+.content-page--our-process .op-reviewer {
+    color: #8a93a2;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 40px 0 80px;
+    text-align: center;
+}
+
+@media (max-width: 860px) {
+    .content-page--our-process .op-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .content-page--our-process .op-grid,
+    .content-page--our-process .op-grid--gate {
+        grid-template-columns: 1fr;
     }
 }

@@ -6,6 +6,8 @@
      byte-locked by SeoHead + AirShowPageSchema. --}}
 @php
     /** @var \App\Domain\Pillars\Models\AirShow $show */
+    /** @var string $hubPath */
+    $hubPath ??= \App\Domain\Publishing\Support\PagePaths::root('air_shows');
 
     // Port of AirShowDetail's `renderInline`: **bold**, *italic* and [label](href).
     // Everything outside a match is escaped, and hrefs go through the same scheme
@@ -39,6 +41,18 @@
         return $out.e(substr($text, $offset));
     };
 
+    // Port of the legacy `RelatedSegment` (AirShowDetail.tsx): a cross-link is a
+    // real <a> only when its target actually ships; an unpublished sibling renders
+    // as plain off-white text rather than a dead link.
+    $publishedHrefs ??= [];
+    $relatedSegment = static function (?string $before, string $label, ?string $href, ?string $after) use ($publishedHrefs): string {
+        $target = $href !== null && in_array('/'.trim($href, '/').'/', $publishedHrefs, true)
+            ? '<a class="as-link" href="'.e(\App\Domain\Navigation\Support\LinkUrl::sanitize($href)).'">'.e($label).'</a>'
+            : '<span class="as-related-plain">'.e($label).'</span>';
+
+        return e((string) $before).$target.e((string) $after);
+    };
+
     $isFree = $show->admission->value === 'FREE';
     $organizer = is_array($show->organizer) ? ($show->organizer['name'] ?? null) : null;
     $emailCta = is_array($show->email_cta) ? $show->email_cta : null;
@@ -50,7 +64,7 @@
             <nav class="breadcrumb" aria-label="Breadcrumb">
                 <a href="/">Home</a>
                 <span aria-hidden="true">/</span>
-                <a href="/air-show/">Air Shows</a>
+                <a href="{{ $hubPath }}">Air Shows</a>
                 <span aria-hidden="true">/</span>
                 <span aria-current="page">{{ $show->short_name }}</span>
             </nav>
@@ -184,20 +198,21 @@
             <h2 id="related">NEARBY &amp; RELATED</h2>
 
             {{-- `related_paragraph` is a single string, a list of strings, or a list of
-                 {before,label,href,after} link fragments — all three render as one <p>. --}}
-            @if (filled($show->related_paragraph))
-                <p class="as-p">
-                    @foreach ((array) $show->related_paragraph as $segment)
-                        @if (is_array($segment))
-                            {{ $segment['before'] ?? '' }}@if (! empty($segment['href']))<a class="as-link" href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($segment['href']) }}">{{ $segment['label'] ?? $segment['href'] }}</a>@elseif (! empty($segment['label'])){{ $segment['label'] }}@endif{{ $segment['after'] ?? '' }}
-                        @else
-                            {{ $segment }}
-                        @endif
-                    @endforeach
-                </p>
+                 {before,label,href,after} link fragments — all three render as one <p>,
+                 with the fragments concatenated and NO separator between them (the
+                 legacy maps them straight into one paragraph). --}}
+            @php
+                $relatedHtml = collect((array) $show->related_paragraph)
+                    ->map(fn ($segment): string => is_array($segment)
+                        ? $relatedSegment($segment['before'] ?? '', (string) ($segment['label'] ?? $segment['href'] ?? ''), $segment['href'] ?? null, $segment['after'] ?? '')
+                        : e((string) $segment))
+                    ->implode('');
+            @endphp
+            @if ($relatedHtml !== '')
+                <p class="as-p">{!! $relatedHtml !!}</p>
             @endif
 
-            <a class="as-back" href="/air-show/">
+            <a class="as-back" href="{{ $hubPath }}">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 All military air shows
             </a>

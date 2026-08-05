@@ -19,6 +19,15 @@ interface AirShowRepositoryInterface
     public function findBySlug(string $slug): ?AirShow;
 
     /**
+     * Every show in the registry, published or not — the legacy `airShows` export
+     * that fills the hub directory table (publication gates only the guide LINK
+     * in the last column, never the row). Same ordering as `published()`.
+     *
+     * @return Collection<int, AirShow>
+     */
+    public function directory(): Collection;
+
+    /**
      * Published guides only (the render gate for the hub listing + ItemList),
      * ordered by start date with date-unconfirmed shows last — the legacy list
      * order that fixes the hub ItemList positions.

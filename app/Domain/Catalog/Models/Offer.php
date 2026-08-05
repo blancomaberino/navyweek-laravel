@@ -52,6 +52,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $cta_subnote
  * @property string|null $source_priority_note
  * @property string|null $sticky_cta_label
+ * @property array<int, string>|null $related_slugs
  * @property bool $is_primary
  * @property int $sort_order
  * @property bool $is_published
@@ -101,6 +102,7 @@ class Offer extends Model
         'cta_subnote',
         'source_priority_note',
         'sticky_cta_label',
+        'related_slugs',
         'is_primary',
         'sort_order',
         'is_published',
@@ -122,6 +124,7 @@ class Offer extends Model
             'savings_table_secondary' => 'array',
             'chooser' => 'array',
             'share_cta' => 'array',
+            'related_slugs' => 'array',
             'is_primary' => 'boolean',
             'sort_order' => 'integer',
             'is_published' => 'boolean',

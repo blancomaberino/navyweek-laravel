@@ -1,11 +1,22 @@
 @extends('layouts.base')
 
-{{-- Single naval-base page (/navy-bases/{slug}/). Ported from NavyBaseDetail:
-     header → overview → key facts → history → major units → location → host-nation
-     (overseas) → notable events → FAQs → sources. The head/JSON-LD is byte-locked
-     by SeoHead + BasePageSchema; this body is a clean semantic rebuild. --}}
+{{-- Single naval-base page (/navy-bases/{slug}/). Ported markup-for-markup from
+     the legacy src/page-views/NavyBaseDetail.tsx: back-link → breadcrumb → hero →
+     (overseas advisory) → quick facts → overview → key facts → history → major
+     units → location & geography (map + address panel) → host-nation (overseas) →
+     notable events → nearby bases → FAQs → sources → footer nav. The head/JSON-LD
+     is byte-locked by SeoHead + BasePageSchema. Styles live in
+     resources/css/families/bases.css. --}}
 @php
+    use App\Domain\Pillars\Support\BaseMapSvg;
+    use App\Domain\Publishing\Support\PagePaths;
+
     /** @var \App\Domain\Pillars\Models\Base $base */
+    $basesRoot = PagePaths::root('bases');
+    $overseasPath = PagePaths::child('bases', 'overseas');
+    $overseas = $base->isOverseas();
+    $regionPath = PagePaths::child('bases', (string) ($overseas ? $base->country_slug : $base->state));
+
     // Split a prose field into paragraphs on blank lines (used by three sections).
     // Filter on emptiness only — a paragraph that is literally "0" must survive.
     $paragraphs = fn (?string $text): array => array_values(array_filter(
@@ -15,207 +26,338 @@
     $overview = $paragraphs($base->overview);
     $history = $paragraphs($base->history);
     $hostNationContext = $paragraphs($base->host_nation_context);
-    $regionLabel = $base->isOverseas()
-        ? trim("{$base->city}, {$base->country}", ', ')
-        : trim("{$base->city}, {$base->state_name}", ', ');
+
+    // Lucide icons, copied path-for-path from the legacy render (lucide-react).
+    $icon = static function (string $name, int $size, string $stroke = 'currentColor', string $style = ''): string {
+        $paths = [
+            'globe' => '<circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path>',
+            'map-pin' => '<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle>',
+            'external-link' => '<path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>',
+            'chevron-down' => '<path d="m6 9 6 6 6-6"></path>',
+            'chevron-left' => '<path d="m15 18-6-6 6-6"></path>',
+            'arrow-right' => '<path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>',
+        ];
+
+        return '<svg xmlns="http://www.w3.org/2000/svg" width="'.$size.'" height="'.$size.'" viewBox="0 0 24 24"'
+            .' fill="none" stroke="'.$stroke.'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'
+            .' class="lucide lucide-'.$name.'" aria-hidden="true"'.($style === '' ? '' : ' style="'.$style.'"')
+            .'>'.$paths[$name].'</svg>';
+    };
+
+    // Quick Facts vary by location type (NavyBaseDetail.tsx L116-138). Values are
+    // taken verbatim, including the em-dash placeholder for a missing column.
+    $coordinates = number_format((float) $base->lat, 3).'°, '.number_format((float) $base->lng, 3).'°';
+    $quickFacts = $overseas
+        ? [
+            ['Established', (string) $base->established],
+            ['Type', $base->type->label()],
+            ['Location', $base->city.', '.$base->country],
+            ['Country', $base->country ?: '—'],
+            ['Region', $base->region?->value ?: '—'],
+            ['Timezone', $base->timezone ?: '—'],
+            ['Coordinates', $coordinates],
+            ['Major Commands', (string) count($base->major_units)],
+            ['Area', $base->area_acres ?: '—'],
+            ['Personnel', $base->personnel_count ?: '—'],
+        ]
+        : [
+            ['Established', (string) $base->established],
+            ['Type', $base->type->label()],
+            ['Location', $base->city.', '.$base->state_abbr],
+            ['State', $base->state_name ?: '—'],
+            ['Coordinates', $coordinates],
+            ['Major Commands', (string) count($base->major_units)],
+            ['Area', $base->area_acres ?: '—'],
+            ['Personnel', $base->personnel_count ?: '—'],
+        ];
+
+    // Decimal degrees rendered as hemisphere pairs (NavyBaseDetail.tsx L74-82).
+    $formatLat = static fn (float $v): string => number_format(abs($v), 4).'° '.($v >= 0 ? 'N' : 'S');
+    $formatLng = static fn (float $v): string => number_format(abs($v), 4).'° '.($v >= 0 ? 'E' : 'W');
 @endphp
 
 @section('content')
     <main class="base-detail">
+        {{-- The legacy detail page always renders the reference back-link, so it is
+             emitted here rather than through the CMS-flagged shared partial. --}}
+        <div class="reference-backlink">
+            <a href="{{ PagePaths::root('navy_reference') }}">&larr; Navy Reference</a>
+        </div>
+
         <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="/">Home</a>
             <span aria-hidden="true">/</span>
-            <a href="/navy-bases/">Navy Bases</a>
+            <a href="{{ $basesRoot }}">Navy Bases</a>
             <span aria-hidden="true">/</span>
-            @if ($base->isOverseas())
-                <a href="/navy-bases/overseas/">Overseas</a>
+            @if ($overseas)
+                <a href="{{ $overseasPath }}">Overseas</a>
                 <span aria-hidden="true">/</span>
-                <a href="/navy-bases/{{ $base->country_slug }}/">{{ $base->country }}</a>
+                <a href="{{ $regionPath }}">{{ $base->country }}</a>
             @else
-                <a href="/navy-bases/{{ $base->state }}/">{{ $base->state_name }}</a>
+                <a href="{{ $regionPath }}">{{ $base->state_name }}</a>
             @endif
             <span aria-hidden="true">/</span>
             <span aria-current="page">{{ $base->name }}</span>
         </nav>
 
         <header class="base-hero">
-            <p class="eyebrow">// {{ $base->type->label() }} · {{ $regionLabel }}</p>
+            <div class="base-eyebrow">// {{ $base->type->label() }} ·
+                {{ $overseas ? $base->country_iso2.' · '.$base->region?->value : $base->state_abbr }}</div>
             {{-- The legacy detail page renders the installation name uppercased in the
                  markup (not via CSS), so the h1 matches the live site byte-for-byte. --}}
             <h1>{{ mb_strtoupper((string) ($page->h1 ?? $base->h1)) }}</h1>
             @if (! empty($base->aka))
-                <p class="aka">Also known as: {{ implode(', ', $base->aka) }}</p>
+                <div class="base-aka">also known as {{ implode(' · ', $base->aka) }}</div>
             @endif
-            @if ($base->hero_tagline)
-                <p class="hero-tagline">{{ $base->hero_tagline }}</p>
-            @endif
+            <p class="base-tagline">{{ $base->hero_tagline }}</p>
         </header>
 
-        @if ($base->isOverseas())
-            <p class="advisory" role="note">
-                This is an overseas U.S. Navy installation. Access, currency, language, and
-                travel requirements differ from CONUS bases — see host-nation details below.
-            </p>
+        @if ($overseas)
+            <div class="base-advisory" role="note" aria-label="Overseas base advisory">
+                {!! $icon('globe', 18, 'var(--gold)', 'margin-top:2px;flex-shrink:0') !!}
+                <div>
+                    <strong>Overseas installation.</strong>
+                    This is a forward-deployed U.S. Navy base in {{ $base->country }}, operating under the
+                    host-nation Status of Forces framework summarized below. Travel, base access, command
+                    sponsorship, and entry requirements are subject to current orders and host-nation policy —
+                    always verify with your command and the installation's official public-affairs office before
+                    traveling or visiting.
+                </div>
+            </div>
         @endif
 
-        <section class="quick-facts" aria-label="Quick facts">
-            <dl>
-                <div><dt>Established</dt><dd>{{ $base->established }}</dd></div>
-                <div><dt>Type</dt><dd>{{ $base->type->label() }}</dd></div>
-                <div><dt>Location</dt><dd>{{ $regionLabel }}</dd></div>
-                @if ($base->region)
-                    <div><dt>Command</dt><dd>{{ $base->region->label() }}</dd></div>
-                @endif
-                @if ($base->timezone)
-                    <div><dt>Time zone</dt><dd>{{ $base->timezone }}</dd></div>
-                @endif
-                @if ($base->personnel_count)
-                    <div><dt>Personnel</dt><dd>{{ $base->personnel_count }}</dd></div>
-                @endif
-                @if ($base->area_acres)
-                    <div><dt>Area</dt><dd>{{ $base->area_acres }} acres</dd></div>
-                @endif
-            </dl>
+        <section class="base-quick-facts" aria-label="Quick facts">
+            @foreach ($quickFacts as [$label, $value])
+                <div class="base-quick-fact">
+                    <div class="base-quick-fact-label">{{ $label }}</div>
+                    <div class="base-quick-fact-value">{{ $value }}</div>
+                </div>
+            @endforeach
         </section>
 
-        @if ($overview !== [])
-            <section class="base-overview" aria-label="Overview">
-                <h2>OVERVIEW</h2>
-                @foreach ($overview as $paragraph)
-                    <p>{{ $paragraph }}</p>
+        <section class="base-prose" aria-label="Overview">
+            <h2>OVERVIEW</h2>
+            @foreach ($overview as $paragraph)
+                <p>{{ $paragraph }}</p>
+            @endforeach
+        </section>
+
+        <section class="base-key-facts" aria-label="Key facts list">
+            <h2>KEY FACTS</h2>
+            <ul>
+                @foreach ($base->key_facts as $fact)
+                    <li>
+                        <span class="base-key-fact-label">{{ $fact['label'] ?? '' }}</span>
+                        <span class="base-key-fact-value">{{ $fact['value'] ?? '' }}</span>
+                    </li>
                 @endforeach
-            </section>
-        @endif
+            </ul>
+        </section>
 
-        @if (! empty($base->key_facts))
-            <section class="base-key-facts" aria-label="Key facts">
-                <h2>KEY FACTS</h2>
-                <dl>
-                    @foreach ($base->key_facts as $fact)
-                        <div><dt>{{ $fact['label'] ?? '' }}</dt><dd>{{ $fact['value'] ?? '' }}</dd></div>
-                    @endforeach
-                </dl>
-            </section>
-        @endif
+        <section class="base-prose" aria-label="History">
+            <h2>HISTORY</h2>
+            @foreach ($history as $paragraph)
+                <p>{{ $paragraph }}</p>
+            @endforeach
+        </section>
 
-        @if ($history !== [])
-            <section class="base-history" aria-label="History">
-                <h2>HISTORY</h2>
-                @foreach ($history as $paragraph)
-                    <p>{{ $paragraph }}</p>
+        <section class="base-units" aria-label="Major commands and tenant units">
+            <h2>MAJOR COMMANDS &amp; TENANT UNITS</h2>
+            <ul>
+                @foreach ($base->major_units as $unit)
+                    <li>{{ $unit }}</li>
                 @endforeach
-            </section>
-        @endif
-
-        @if (! empty($base->major_units))
-            <section class="base-units" aria-label="Major commands and tenant units">
-                <h2>MAJOR COMMANDS &amp; TENANT UNITS</h2>
-                <ul>
-                    @foreach ($base->major_units as $unit)
-                        <li>{{ $unit }}</li>
-                    @endforeach
-                </ul>
-            </section>
-        @endif
+            </ul>
+        </section>
 
         <section class="base-location" aria-label="Location and geography">
             <h2>LOCATION &amp; GEOGRAPHY</h2>
-            <p class="coordinates">{{ $base->lat }}, {{ $base->lng }}</p>
-            <p>
-                <a href="https://www.google.com/maps/search/?api=1&amp;query={{ $base->lat }},{{ $base->lng }}"
-                   rel="noopener noreferrer" target="_blank">View on Google Maps</a>
-            </p>
-            @if ($base->location_context)
-                <p>{{ $base->location_context }}</p>
-            @endif
+            <div class="base-map">
+                <div class="base-map-caption">
+                    {{ $base->name }} — Highlighted on {{ $overseas ? 'world map' : 'U.S. map' }}
+                </div>
+                @if ($overseas)
+                    {!! BaseMapSvg::worldMap(
+                        BaseMapSvg::pins([$base]),
+                        BaseMapSvg::viewportForBase($base),
+                        $base->slug,
+                        "Map showing the location of {$base->name} in {$base->country}",
+                    ) !!}
+                @else
+                    {!! BaseMapSvg::usMap(BaseMapSvg::pins([$base]), $base->slug) !!}
+                @endif
+            </div>
+            <div class="base-place">
+                <div>
+                    <div class="base-place-head">
+                        {!! $icon('map-pin', 16, 'var(--gold)') !!}
+                        <div class="base-place-label">Address</div>
+                    </div>
+                    <div class="base-place-address">
+                        {{ $overseas ? $base->city.', '.$base->country : $base->city.', '.$base->state_name.' ('.$base->state_abbr.')' }}
+                    </div>
+                    <div class="base-place-coords">
+                        {{ $formatLat((float) $base->lat) }}, {{ $formatLng((float) $base->lng) }}
+                    </div>
+                    <a class="base-place-link"
+                       href="https://www.google.com/maps/search/?api=1&amp;query={{ $base->lat }},{{ $base->lng }}"
+                       rel="noopener noreferrer" target="_blank">View on Google Maps {!! $icon('external-link', 11) !!}</a>
+                </div>
+                <div>
+                    <div class="base-place-label">Region</div>
+                    <div class="base-place-region">
+                        @if ($overseas)
+                            {{ $base->region?->label() }}<br>
+                            <span>{{ $base->location_context ?: $base->city.', '.$base->country }}</span>
+                        @else
+                            {{ $base->city }} metropolitan area, {{ $base->state_name }}
+                        @endif
+                    </div>
+                    <div class="base-place-more">
+                        <a href="{{ $regionPath }}">More bases in
+                            {{ $overseas ? $base->country : $base->state_name }} &rarr;</a>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        @if ($base->isOverseas() && $hostNationContext !== [])
+        @if ($overseas && $hostNationContext !== [])
             <section class="base-host-nation" aria-label="Host nation context">
                 <h2>HOST NATION CONTEXT</h2>
-                <dl>
-                    @if ($base->host_nation)
-                        <div><dt>Host nation</dt><dd>{{ $base->host_nation }}</dd></div>
-                    @endif
-                    @if ($base->local_currency)
-                        <div><dt>Currency</dt><dd>{{ $base->local_currency }}</dd></div>
-                    @endif
-                    @if (! empty($base->local_language))
-                        <div><dt>Language</dt><dd>{{ implode(', ', $base->local_language) }}</dd></div>
-                    @endif
+                <div class="base-host-panel">
+                    <dl>
+                        @if ($base->host_nation)
+                            <div><dt>Host Nation</dt><dd>{{ $base->host_nation }}</dd></div>
+                        @endif
+                        @if ($base->region)
+                            <div><dt>Combatant Command</dt><dd>{{ $base->region->label() }}</dd></div>
+                        @endif
+                        @if ($base->timezone)
+                            <div><dt>Timezone</dt><dd>{{ $base->timezone }}</dd></div>
+                        @endif
+                        @if ($base->local_currency)
+                            <div><dt>Currency</dt><dd>{{ $base->local_currency }}</dd></div>
+                        @endif
+                        @if (! empty($base->local_language))
+                            <div><dt>Languages</dt>
+                                <dd>{{ implode(' · ', array_map('mb_strtoupper', $base->local_language)) }}</dd></div>
+                        @endif
+                        @if (! is_null($base->command_sponsorship_required))
+                            <div><dt>Command Sponsorship</dt>
+                                <dd>{{ $base->command_sponsorship_required ? 'Required for dependents' : 'Not required' }}</dd></div>
+                        @endif
+                        @if (! is_null($base->passport_required))
+                            <div><dt>Passport</dt>
+                                <dd>{{ $base->passport_required ? 'Required for entry' : 'Not required' }}</dd></div>
+                        @endif
+                    </dl>
                     @if ($base->sofa_status)
-                        <div><dt>SOFA status</dt><dd>{{ $base->sofa_status }}</dd></div>
+                        <div class="base-sofa">
+                            <div class="base-sofa-label">Status of Forces Agreement</div>
+                            <p>{{ $base->sofa_status }}</p>
+                        </div>
                     @endif
-                </dl>
+                </div>
                 @foreach ($hostNationContext as $paragraph)
-                    <p>{{ $paragraph }}</p>
+                    <p class="base-host-para">{{ $paragraph }}</p>
                 @endforeach
+                <div class="base-host-warning">
+                    ⚠ Always verify SOFA status, command sponsorship, and entry requirements with your command and
+                    the installation's official public-affairs office before traveling.
+                </div>
             </section>
         @endif
 
         @if (! empty($base->notable_events))
             <section class="base-events" aria-label="Notable events">
                 <h2>NOTABLE EVENTS</h2>
-                <ul>
+                <ol>
                     @foreach ($base->notable_events as $event)
                         <li>
-                            @isset($event['year'])<strong>{{ $event['year'] }}</strong> — @endisset
-                            @isset($event['title'])<strong>{{ $event['title'] }}</strong>@endisset
-                            @isset($event['description']) {{ $event['description'] }}@endisset
+                            @isset($event['year'])
+                                <div class="base-event-year">{{ $event['year'] }}</div>
+                            @endisset
+                            <div>
+                                <div class="base-event-title">{{ $event['title'] ?? '' }}</div>
+                                <div class="base-event-desc">{{ $event['description'] ?? '' }}</div>
+                            </div>
                         </li>
                     @endforeach
-                </ul>
+                </ol>
             </section>
         @endif
 
-        {{-- Nearby bases — the legacy detail page links each sibling installation. --}}
-        @if (filled($base->nearby_bases))
-            <section class="base-nearby" aria-label="Nearby bases">
-                <h2>NEARBY BASES</h2>
-                <ul>
-                    @foreach ($base->nearby_bases as $nearby)
-                        @php($nearbySlug = is_array($nearby) ? ($nearby['slug'] ?? null) : $nearby)
-                        @php($nearbyName = is_array($nearby) ? ($nearby['name'] ?? $nearbySlug) : $nearby)
-                        <li>
-                            @if ($nearbySlug)
-                                <a href="{{ \App\Domain\Publishing\Support\PagePaths::child('bases', (string) $nearbySlug) }}">{{ $nearbyName }}</a>
-                            @else
-                                {{ $nearbyName }}
-                            @endif
-                        </li>
+        <section class="base-nearby" aria-label="Nearby bases">
+            <h2>NEARBY BASES</h2>
+            @if ($nearby->isEmpty() && $otherInRegion->isEmpty())
+                <p class="base-nearby-empty">
+                    No other bases are catalogued near {{ $base->name }} yet. As more installations are added to the
+                    directory, related bases in {{ $overseas ? $base->country : $base->state_name }} and adjoining
+                    regions will appear here.
+                    <a href="{{ $overseas ? $overseasPath : $basesRoot }}">Browse the
+                        {{ $overseas ? 'overseas' : 'full' }} directory &rarr;</a>
+                </p>
+            @else
+                <div class="base-nearby-grid">
+                    @foreach ($nearby as $item)
+                        <a href="{{ PagePaths::child('bases', $item->slug) }}">
+                            <div class="base-nearby-label">NEARBY ·
+                                {{ $item->isOverseas() ? $item->country_iso2 : $item->state_abbr }}</div>
+                            <div class="base-nearby-name">{{ $item->name }}</div>
+                        </a>
                     @endforeach
-                </ul>
-            </section>
-        @endif
+                    @foreach ($otherInRegion as $item)
+                        <a href="{{ PagePaths::child('bases', $item->slug) }}">
+                            <div class="base-nearby-label">ALSO IN
+                                {{ mb_strtoupper((string) ($overseas ? $base->country : $base->state_name)) }}</div>
+                            <div class="base-nearby-name">{{ $item->name }}</div>
+                        </a>
+                    @endforeach
+                </div>
+            @endif
+        </section>
 
         @if ($base->faqs->isNotEmpty())
             <section class="base-faqs" aria-label="Frequently asked questions">
                 <h2>FREQUENTLY ASKED QUESTIONS</h2>
-                @foreach ($base->faqs as $faq)
-                    <details>
-                        <summary><h3>{{ $faq->question }}</h3></summary>
-                        <div>{{ $faq->answer }}</div>
-                    </details>
-                @endforeach
+                <div class="nw-faq-list">
+                    @foreach ($base->faqs as $faq)
+                        <details class="nw-faq" @if ($loop->first) open @endif>
+                            <summary>
+                                <h3>{{ $faq->question }}</h3>
+                                {!! $icon('chevron-down', 18, 'currentColor') !!}
+                            </summary>
+                            <div class="nw-faq-a">{{ $faq->answer }}</div>
+                        </details>
+                    @endforeach
+                </div>
             </section>
         @endif
 
         @if ($base->sources->isNotEmpty())
-            <footer class="base-sources">
+            <section class="base-sources" aria-label="Sources">
                 <h2>SOURCES</h2>
                 <ul>
                     @foreach ($base->sources as $source)
                         <li>
                             @if ($source->url)
-                                <a href="{{ $source->url }}" rel="noopener noreferrer" target="_blank">{{ $source->label }}</a>
+                                <a href="{{ $source->url }}" rel="noopener noreferrer" target="_blank">{{ $source->label }}
+                                    {!! $icon('external-link', 11) !!}</a>
                             @else
                                 {{ $source->label }}
                             @endif
                         </li>
                     @endforeach
                 </ul>
-                <p class="last-updated">Last updated {{ $base->last_updated?->toDateString() }}</p>
-            </footer>
+                <div class="base-last-updated">Last updated {{ $base->last_updated?->toDateString() }}</div>
+            </section>
         @endif
+
+        <div class="base-footer-nav">
+            <a href="{{ $regionPath }}">{!! $icon('chevron-left', 14) !!} All Bases in
+                {{ $overseas ? $base->country : $base->state_name }}</a>
+            <a href="{{ $overseas ? $overseasPath : $basesRoot }}">{{ $overseas ? 'Overseas Directory' : 'Full Directory' }}
+                {!! $icon('arrow-right', 14) !!}</a>
+        </div>
     </main>
 @endsection

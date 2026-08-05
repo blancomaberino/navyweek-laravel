@@ -110,7 +110,8 @@ it('renders the discount guide body from the primary offer', function () {
         ->assertSee('Up to 20% off for the military community')
         ->assertSee('not affiliated', false) // independence disclosure
         ->assertSee('Shop YETI with ID.me')
-        ->assertSee('Savings by audience')
+        // The tier table sits inside "WHO QUALIFIES", captioned per the legacy guide.
+        ->assertSee('YETI discount by community')
         ->assertSee('WHO QUALIFIES', false)
         // key_facts is a list of {label, value} pairs — rendered as a <dl>, not flat <li> strings
         ->assertSee('Key Facts', false)

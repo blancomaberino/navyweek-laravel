@@ -25,11 +25,14 @@ use App\Domain\Publishing\Support\PagePaths;
  */
 final class GenerateDesignatorPagesAction
 {
-    private const LAST_REVIEWED = '2026-07-23';
+    /** `LAST_REVIEWED_LABEL` ("May 25, 2026") in src/page-views/NavyDesignatorsHub.tsx. */
+    private const LAST_REVIEWED = '2026-05-25';
 
-    private const SOURCE_PRIORITY = 'We cite MyNavyHR / MILPERSMAN designator listings, NAVPERS manuals, and navy.mil community pages first; the U.S. Code (Title 10) where statutes apply. Non-government sources are not used as primary evidence on this page.';
+    /** Verbatim from the hub's `<ReferenceTrustFooter sourcePriority>` (NavyDesignatorsHub.tsx). */
+    private const SOURCE_PRIORITY = 'We cite MyNavyHR / MILPERSMAN 1212-010 (Officer Designator Codes), OPNAV/BUPERS instructions, and navy.mil community pages first. Non-government sources are not used as primary evidence on this page.';
 
-    private const REVIEW_CADENCE = 'Designator codes, communities, and commissioning routes are re-verified quarterly and at every page update.';
+    /** Verbatim from the hub's `<ReferenceTrustFooter reviewCadence>` (NavyDesignatorsHub.tsx). */
+    private const REVIEW_CADENCE = 'Designator codes, community membership, and accession pipelines are re-verified quarterly and any time NPC or BUPERS publishes a community-consolidation NAVADMIN.';
 
     public function __construct(
         private readonly RankRepositoryInterface $ranks,
@@ -51,7 +54,7 @@ final class GenerateDesignatorPagesAction
             'h1' => 'NAVY OFFICER DESIGNATORS',
             'meta_description' => "Every U.S. Navy officer designator on one page — all {$designators->count()} four-digit codes across the Unrestricted Line, Restricted Line, and Staff Corps, with what each community does.",
             'og_image_path' => '/og/designators/hub.png',
-            'trust_page_label' => 'Navy officer designators hub',
+            'trust_page_label' => 'Navy Officer Designators reference hub',
         ]);
         $count++;
 

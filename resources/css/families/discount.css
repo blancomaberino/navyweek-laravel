@@ -1,3 +1,1144 @@
 /* Per-family parity CSS, ported from the legacy component inline styles.
    Kept in its own file so parallel work never collides in app.css.
-   Properties are alphabetized per the authored-CSS convention. */
+   Properties are alphabetized per the authored-CSS convention.
+
+   Sources (the legacy styling is INLINE in these components):
+     src/page-views/DiscountDetail.tsx    → the brand guide (.discount-guide)
+     src/page-views/DiscountHub.tsx       → the directory  (.discount-index)
+     src/page-views/DiscountCategory.tsx  → category hubs  (.discount-category)
+     src/components/DiscountShareCta.tsx  → the advisory share block
+     src/components/DiscountStickyCta.tsx → the mobile sticky CTA
+*/
+
+/* ==========================================================================
+   Shared shell — the legacy <main> is a bare flex child; every band is its own
+   centered <section> that owns the max-width and the gutter.
+   ========================================================================== */
+
+main.discount-guide,
+main.discount-index,
+main.discount-category {
+    max-width: none;
+    padding: 0;
+}
+
+.dg-section {
+    margin: 0 auto;
+    max-width: 900px;
+    padding: var(--space-xl) var(--space-2xl);
+    width: 100%;
+}
+
+.dg-hero {
+    padding: var(--space-2xl) var(--space-2xl) var(--space-lg);
+}
+
+.dg-section-last {
+    padding-bottom: var(--space-2xl);
+}
+
+/* The hub + category bands are 1100px wide, not 900px. */
+.dh-section {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: var(--space-xl) var(--space-2xl);
+    width: 100%;
+}
+
+.dh-hero {
+    padding: var(--space-2xl) var(--space-2xl) var(--space-lg);
+}
+
+.dh-band {
+    padding: 0 var(--space-2xl) var(--space-lg);
+}
+
+.dh-grid-band {
+    padding: 0 var(--space-2xl) var(--space-xl);
+}
+
+.dh-section-last {
+    padding: var(--space-xl) var(--space-2xl) var(--space-3xl);
+}
+
+/* The shared trust blocks pick up two site-wide defaults the legacy discount
+   pages never had: a 2px `dt` gap under every key fact (KeyFacts.tsx uses a flat
+   4px flex gap) and a 1.6 heading line-height (the legacy headings inherit the
+   body's 1.5). Reset both here rather than in app.css, which other families own. */
+.discount-category .editorial-policy h2,
+.discount-guide .editorial-policy h2,
+.discount-guide .key-facts h2,
+.discount-index .editorial-policy h2,
+.discount-index .key-facts h2 {
+    line-height: 1.5;
+}
+
+.discount-guide .key-facts dt,
+.discount-index .key-facts dt {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Brand guide — DiscountDetail.tsx
+   ========================================================================== */
+
+.discount-guide h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5.5vw, 64px);
+    letter-spacing: 3px;
+    line-height: 1.05;
+    margin: 0 0 var(--space-sm);
+}
+
+/* `h2Style` in DiscountDetail.tsx — flat 28px display type, no rule under it
+   (the site-wide `main section > h2` underline is not part of this family). */
+.discount-guide h2 {
+    border-bottom: 0;
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin: 0 0 var(--space-md);
+    padding-bottom: 0;
+}
+
+.dg-crumb {
+    align-items: center;
+    color: var(--nw-gray);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+}
+.dg-crumb a { color: var(--gold); text-decoration: none; }
+.dg-crumb [aria-current='page'] { color: var(--nw-gray-light); }
+
+.dg-brandrow {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.dg-logo-chip {
+    align-items: center;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 6px;
+    display: inline-flex;
+    justify-content: center;
+    min-height: 64px;
+    min-width: 140px;
+    padding: 14px 24px;
+}
+.dg-logo-chip img { display: block; height: auto; width: auto; }
+
+.dg-category {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.dg-tagline {
+    color: var(--gold-light);
+    font-family: var(--font-body);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 0 var(--space-lg);
+    max-width: 720px;
+}
+
+/* `paraStyle` — the body paragraph used by the intro, the hack body, and the
+   lead line under every h2. */
+.dg-lead {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    max-width: 720px;
+}
+
+/* Credit-cards interlink callout */
+.dg-cc-callout {
+    align-items: flex-start;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    display: flex;
+    gap: 14px;
+    margin: 4px 0 var(--space-lg);
+    max-width: 720px;
+    padding: 14px 18px;
+}
+.dg-cc-icon { color: var(--gold); flex-shrink: 0; margin-top: 3px; }
+.dg-cc-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+}
+.dg-cc-body {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+.dg-cc-body a {
+    color: var(--gold);
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.dg-promo {
+    align-items: center;
+    background: rgba(201, 168, 76, 0.12);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    color: var(--gold-light);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: 8px;
+    letter-spacing: 0.5px;
+    margin: 0 0 var(--space-lg);
+    padding: 10px 16px;
+}
+
+/* Hero CTA. Also publishes the view timeline the mobile sticky bar animates on. */
+.nw-hero-cta {
+    align-items: center;
+    background: var(--gold);
+    border-radius: 3px;
+    color: var(--navy);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    gap: 10px;
+    letter-spacing: 1.5px;
+    padding: 14px 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.nw-hero-cta:hover { background: var(--gold-light); color: var(--navy); text-decoration: none; }
+
+.dg-cta-note {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    margin: var(--space-sm) 0 0;
+}
+
+/* Insider savings hack */
+.dg-hack {
+    background: var(--navy-mid);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    padding: var(--space-lg);
+}
+.dg-hack-eyebrow {
+    align-items: center;
+    color: var(--gold);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 8px;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+.discount-guide .dg-hack-headline {
+    color: var(--nw-white);
+    font-family: var(--font-body);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.3;
+    margin: 0 0 var(--space-sm);
+}
+.dg-hack-caveat {
+    color: var(--nw-gray);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Numbered step lists (savings hack + how to redeem) */
+.dg-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+}
+.dg-hack .dg-steps { margin: 0 0 var(--space-md); }
+.dg-steps > li { align-items: flex-start; display: flex; gap: var(--space-md); }
+.dg-step-num {
+    align-items: center;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    color: var(--gold);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    height: 28px;
+    justify-content: center;
+    width: 28px;
+}
+.dg-step-text {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+.dg-step-title {
+    color: var(--nw-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+.dg-step-detail {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* The small gold mono sub-heading used above step lists, tables and the chooser */
+.discount-guide .dg-block-h3 {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin: 0 0 var(--space-md);
+    text-transform: uppercase;
+}
+.discount-guide .dg-block-h3-spaced { margin: var(--space-lg) 0 var(--space-md); }
+/* SavingsPathTable's own title sits closer to its table than the other h3s. */
+.discount-guide .dg-block-h3-tight { margin: 0 0 var(--space-sm); }
+
+/* CSS-only savings chooser */
+.nw-chooser {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    margin-bottom: var(--space-lg);
+    padding: var(--space-lg);
+}
+.nw-chooser .nw-cr {
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    width: 0;
+}
+.nw-chooser .nw-btn {
+    background: transparent;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 3px;
+    color: var(--nw-off-white);
+    cursor: pointer;
+    display: block;
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    padding: 10px 16px;
+    text-align: center;
+    text-transform: uppercase;
+    user-select: none;
+}
+.nw-chooser-body:has(#nw-q1-yes:checked) .nw-lbl-q1-yes,
+.nw-chooser-body:has(#nw-q1-no:checked) .nw-lbl-q1-no,
+.nw-chooser-body:has(#nw-q2-yes:checked) .nw-lbl-q2-yes,
+.nw-chooser-body:has(#nw-q2-no:checked) .nw-lbl-q2-no {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+    font-weight: 600;
+}
+.nw-chooser .nw-out { display: none; }
+.nw-chooser .nw-default { display: block; }
+.nw-chooser-q { margin-bottom: var(--space-md); }
+.nw-chooser-qlabel {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 0 0 8px;
+}
+.nw-chooser-btns { display: flex; gap: 10px; }
+.nw-chooser-out {
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    padding-top: var(--space-md);
+}
+.nw-out-eyebrow {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+.nw-out-winner {
+    color: var(--gold-light);
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+}
+.nw-out-reason {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Tables — the tier table and the "best savings path" decision table */
+.dg-table-wrap {
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+.dg-savings-table-second { margin-top: var(--space-lg); }
+.discount-guide table {
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin: 0;
+    width: 100%;
+}
+.discount-guide .dg-path-table { min-width: 720px; }
+.discount-guide caption {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    padding: var(--space-md) var(--space-md) 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+.discount-guide thead tr { border-bottom: 1px solid rgba(201, 168, 76, 0.25); }
+.discount-guide thead th {
+    border-bottom: 0;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 12px var(--space-md);
+    text-align: left;
+    text-transform: uppercase;
+    vertical-align: bottom;
+}
+.discount-guide tbody tr { border-bottom: 1px solid rgba(201, 168, 76, 0.1); }
+.discount-guide tbody tr:last-child { border-bottom: 0; }
+.discount-guide tbody tr:hover { background: transparent; }
+.discount-guide tbody td,
+.discount-guide tbody th {
+    border-bottom: 0;
+    color: var(--nw-off-white);
+    font-weight: 300;
+    padding: 12px var(--space-md);
+    text-align: left;
+    vertical-align: top;
+}
+.discount-guide .dg-tier-table tbody th { font-weight: 400; }
+.discount-guide .dg-path-name { color: var(--nw-white); font-weight: 500; }
+.discount-guide .dg-price { color: var(--gold-light); font-weight: 600; }
+.dg-nowrap { white-space: nowrap; }
+.dg-star { color: var(--gold); }
+.dg-tier-note {
+    color: var(--nw-gray);
+    display: block;
+    font-size: 12px;
+    margin-top: 4px;
+}
+.dg-rates-note {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    margin: var(--space-sm) 0 0;
+}
+
+/* Who qualifies — the checkmark eligibility list */
+.dg-eligibility {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0 0 var(--space-lg);
+    padding: 0;
+}
+.dg-eligibility > li {
+    align-items: flex-start;
+    color: var(--nw-off-white);
+    display: flex;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    gap: 10px;
+    line-height: 1.6;
+}
+.dg-eligibility svg { flex-shrink: 0; margin-top: 2px; }
+
+/* How to redeem — one column, or online/in-store side by side */
+.dg-redeem-grid {
+    display: grid;
+    gap: var(--space-xl);
+    grid-template-columns: 1fr;
+}
+.dg-redeem-grid-split { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+/* Exclusions + sources — plain bulleted lists */
+.dg-fineprint,
+.dg-sources {
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    font-size: 14px;
+    gap: var(--space-sm);
+    margin: 0;
+    padding-left: var(--space-lg);
+}
+.dg-fineprint { line-height: 1.7; }
+.dg-sources { line-height: 1.6; }
+.dg-sources a { color: var(--gold); text-decoration: underline; }
+.dg-source-publisher { color: var(--nw-gray); }
+
+/* FAQ accordion — native <details>, zero JavaScript */
+.dg-faq-list { display: flex; flex-direction: column; }
+.discount-guide .nw-faq {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    padding: 0;
+}
+.discount-guide .nw-faq > summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: space-between;
+    list-style: none;
+    padding: var(--space-md) 0;
+}
+.discount-guide .nw-faq > summary::-webkit-details-marker { display: none; }
+.discount-guide .nw-faq > summary > h3 {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: normal;
+    line-height: 1.4;
+    margin: 0;
+}
+.discount-guide .nw-faq[open] > summary > h3 { color: var(--gold); }
+.nw-faq-chev { color: var(--nw-gray); flex-shrink: 0; transition: transform 0.2s; }
+.nw-faq[open] .nw-faq-chev { color: var(--gold); transform: rotate(180deg); }
+.discount-guide .nw-faq > .nw-faq-a {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 0 0 var(--space-md);
+}
+
+/* More military discounts — the 4-card related grid + back link */
+.dg-related {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin-bottom: var(--space-xl);
+}
+.dg-related > a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    display: block;
+    padding: var(--space-md);
+    text-decoration: none;
+}
+.dg-related > a:hover { text-decoration: none; }
+.dg-related-headline {
+    color: var(--gold);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+.dg-related-brand {
+    align-items: center;
+    color: var(--nw-white);
+    display: inline-flex;
+    font-family: var(--font-display);
+    font-size: 20px;
+    gap: 6px;
+    letter-spacing: 1px;
+}
+
+.dg-back-link {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: 8px;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.dg-back-link:hover { text-decoration: none; }
+.dg-flip { transform: rotate(180deg); }
+
+/* ==========================================================================
+   Ask-the-brand share CTA — DiscountShareCta.tsx (advisory pages only)
+   ========================================================================== */
+
+.dg-share {
+    background: var(--navy-mid);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    padding: var(--space-lg);
+}
+.dg-share-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+.discount-guide .dg-share-headline {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin: 0 0 var(--space-sm);
+}
+.dg-share-preview {
+    background: rgba(201, 168, 76, 0.08);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 3px 3px 0;
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-lg);
+    padding: 12px 16px;
+}
+.nw-share-btn-row {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.nw-share-btn-row > * { flex: 1 1 180px; }
+.dg-share-btn {
+    align-items: center;
+    border-radius: 3px;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    gap: 10px;
+    justify-content: center;
+    letter-spacing: 1px;
+    min-height: 44px;
+    padding: 10px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.dg-share-btn-solid { background: var(--gold); color: var(--navy); }
+.dg-share-btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    color: var(--nw-off-white);
+}
+.nw-share-ig {
+    background: transparent;
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    border-radius: 3px;
+    padding: 0;
+}
+.nw-share-ig > summary {
+    align-items: center;
+    color: var(--nw-off-white);
+    cursor: pointer;
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    gap: 10px;
+    justify-content: center;
+    letter-spacing: 1px;
+    list-style: none;
+    min-height: 44px;
+    padding: 10px 18px;
+    text-transform: uppercase;
+    user-select: none;
+}
+.nw-share-ig > summary::-webkit-details-marker { display: none; }
+.nw-share-ig[open] > summary {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    color: var(--gold);
+}
+.nw-share-ig-body { padding: 14px 16px; }
+.dg-share-ig-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin: 0 0 8px;
+    text-transform: uppercase;
+}
+.nw-share-caption {
+    background: var(--navy);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 3px;
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 12px;
+    padding: 12px 14px;
+    user-select: all;
+    white-space: pre-wrap;
+}
+.nw-share-open-ig {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    gap: 8px;
+    letter-spacing: 1px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.dg-share-foot {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    margin: var(--space-md) 0 0;
+}
+
+/* ==========================================================================
+   Mobile sticky CTA — DiscountStickyCta.tsx. Zero JavaScript: the reveal is a
+   CSS scroll-driven animation across the hero CTA's exit range. Browsers with
+   no scroll-driven animation support skip the @supports block and FAIL OPEN.
+   ========================================================================== */
+
+.nw-sticky-cta { display: none; }
+
+@media (max-width: 767px) {
+    /* The spacer reserves the bar's height at the very end of the page, so the
+       footer's links can scroll up past the fixed bar and are never covered. The
+       legacy markup appends a spacer div after the footer; ::after on <body> puts
+       the same box in the same place without touching the shared chrome. */
+    body:has(.nw-discount-page)::after {
+        content: '';
+        display: block;
+        flex: 0 0 auto;
+        height: calc(72px + env(safe-area-inset-bottom));
+    }
+    .nw-discount-page { timeline-scope: --nw-hero-cta; }
+    .nw-hero-cta { view-timeline: --nw-hero-cta block; }
+    .nw-sticky-cta {
+        background: rgba(10, 22, 40, 0.97);
+        border-top: 1px solid rgba(201, 168, 76, 0.35);
+        bottom: 0;
+        box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.4);
+        display: block;
+        left: 0;
+        padding: 10px var(--space-md) calc(10px + env(safe-area-inset-bottom));
+        position: fixed;
+        right: 0;
+        z-index: 90;
+    }
+    .nw-sticky-cta a {
+        align-items: center;
+        background: var(--gold);
+        border-radius: 3px;
+        color: var(--navy);
+        display: flex;
+        font-family: var(--font-mono);
+        font-size: 13px;
+        font-weight: 600;
+        gap: 10px;
+        justify-content: center;
+        letter-spacing: 1.5px;
+        min-height: 48px;
+        padding: 12px 16px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    @supports ((timeline-scope: --nw-hero-cta) and (animation-timeline: --nw-hero-cta)) {
+        .nw-sticky-cta {
+            animation: nw-sticky-reveal linear both;
+            animation-range: exit 0% exit 100%;
+            animation-timeline: --nw-hero-cta;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .nw-sticky-cta { animation-name: nw-sticky-reveal-fade; }
+        }
+    }
+}
+
+@keyframes nw-sticky-reveal {
+    from { transform: translateY(110%); visibility: hidden; }
+    to { transform: translateY(0); visibility: visible; }
+}
+
+@keyframes nw-sticky-reveal-fade {
+    from { opacity: 0; visibility: hidden; }
+    to { opacity: 1; visibility: visible; }
+}
+
+/* ==========================================================================
+   Directory + category hubs — DiscountHub.tsx / DiscountCategory.tsx
+   ========================================================================== */
+
+.discount-index h1,
+.discount-category h1 {
+    font-family: var(--font-display);
+    margin: 0 0 var(--space-md);
+}
+.discount-index h1 { font-size: clamp(44px, 6vw, 72px); letter-spacing: 4px; line-height: 1; }
+.discount-category h1 {
+    font-size: clamp(40px, 5.5vw, 64px);
+    letter-spacing: 3px;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.discount-index h2,
+.discount-category h2 {
+    border-bottom: 0;
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin: 0 0 var(--space-sm);
+    padding-bottom: 0;
+}
+
+.dh-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin: 0 0 var(--space-sm);
+    text-transform: uppercase;
+}
+
+.dh-intro {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-lg);
+    max-width: 760px;
+}
+
+/* The category hubs run the lead paragraph a notch looser than the directory
+   (DiscountCategory.tsx uses 1.7, DiscountHub.tsx 1.6). */
+.discount-category .dh-intro { line-height: 1.7; margin-bottom: var(--space-md); }
+
+/* Only the directory's FAQ heading uses the wider gap (DiscountHub.tsx). */
+.discount-index .dh-section-last > h2 { margin-bottom: var(--space-md); }
+
+.dh-intro-secondary {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    max-width: 760px;
+}
+
+.dh-cc-note {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: var(--space-lg) 0 0;
+    max-width: 760px;
+}
+.dh-cc-note a { color: var(--gold); text-decoration: underline; }
+
+/* Category filter pills */
+.dh-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.dh-pill {
+    align-items: center;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 999px;
+    color: var(--nw-off-white);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    gap: 6px;
+    letter-spacing: 1px;
+    padding: 6px 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.dh-pill:hover { color: var(--nw-off-white); text-decoration: none; }
+.dh-pill[aria-current='true'] {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+}
+.dh-pill span { font-weight: 400; opacity: 0.7; }
+
+/* Grid header: "ALL DISCOUNTS" + the brand count */
+.dh-grid-head {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+.dh-grid-head h2 { margin: 0; }
+.dh-count {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+/* Directory cards */
+.dh-cards {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.dh-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    color: var(--nw-off-white);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    text-decoration: none;
+}
+.dh-card:hover { color: var(--nw-off-white); text-decoration: none; }
+.dh-card-top {
+    align-items: center;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: space-between;
+}
+.dh-logo {
+    align-items: center;
+    border-radius: 4px;
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: center;
+    min-height: 48px;
+    min-width: 96px;
+    padding: 10px 16px;
+}
+.dh-logo img { display: block; height: auto; width: auto; }
+.dh-headline {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1px;
+    line-height: 1.15;
+    text-align: right;
+}
+.dh-brand {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+.dh-cat {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.dh-view {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    margin-top: auto;
+    text-transform: uppercase;
+}
+
+/* Category-hub cards: logo left, brand + "view discount" right */
+.dc-cards {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.dc-card {
+    align-items: center;
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    color: var(--nw-off-white);
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    text-decoration: none;
+}
+.dc-card:hover { color: var(--nw-off-white); text-decoration: none; }
+.dc-logo {
+    align-items: center;
+    border-radius: 4px;
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: center;
+    min-height: 48px;
+    min-width: 88px;
+    padding: 10px 14px;
+}
+.dc-logo img { display: block; height: auto; width: auto; }
+.dc-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+.dc-brand {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 1.15;
+}
+.dc-view {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.dc-all-link {
+    align-items: center;
+    background: transparent;
+    border: 1px solid var(--gold);
+    border-radius: 2px;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    padding: 12px 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.dc-all-link:hover { text-decoration: none; }
+
+.dh-empty {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+/* The hub FAQ accordion is the guide's, reused verbatim. */
+.discount-index .nw-faq {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    padding: 0;
+}
+.discount-index .nw-faq > summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: space-between;
+    list-style: none;
+    padding: var(--space-md) 0;
+}
+.discount-index .nw-faq > summary::-webkit-details-marker { display: none; }
+.discount-index .nw-faq > summary > h3 {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: normal;
+    line-height: 1.4;
+    margin: 0;
+}
+.discount-index .nw-faq[open] > summary > h3 { color: var(--gold); }
+.discount-index .nw-faq > .nw-faq-a {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 0 0 var(--space-md);
+}

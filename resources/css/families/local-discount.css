@@ -488,11 +488,13 @@
     margin: 0;
 }
 
+/* The legacy `min-height: 60vh` sits on the page WRAPPER div (header + main + footer),
+   where it can never bind; the port folds `.lh-page` onto `<main>` itself, where it
+   would pad a short hub out to 60vh and desync every section below. Deliberately dropped. */
 .lh-page {
     background: var(--navy);
     color: var(--nw-off-white);
     font-family: var(--font-body);
-    min-height: 60vh;
 }
 .lh-wrap {
     margin: 0 auto;
