@@ -943,9 +943,20 @@ final class PageController
 
         $seo = SeoHead::forPage($page, FleetWeekPageSchema::buildDetail($page, $week));
 
+        // "More fleet weeks" uses the record's curated related_slugs when it has
+        // them, and otherwise falls back to the other cities — the live guide shows
+        // the section either way.
+        $related = filled($week->related_slugs)
+            ? collect($week->related_slugs)->map(static fn ($slug): string => (string) $slug)
+            : $this->fleetWeeks->all()
+                ->reject(static fn (FleetWeek $other): bool => $other->slug === $week->slug)
+                ->take(4)
+                ->map(static fn (FleetWeek $other): string => $other->slug);
+
         return response()->view('pages.fleet-week', [
             'page' => $page,
             'week' => $week,
+            'relatedWeeks' => $related->values(),
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);
