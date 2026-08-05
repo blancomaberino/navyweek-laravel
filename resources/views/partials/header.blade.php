@@ -68,7 +68,9 @@
                     @foreach ($eventLinks as $link)
                         <a href="{{ $link['href'] }}" class="nw-dropdown-event @if ($isActive($link['slug'])) is-active @endif">{{ $link['label'] }}</a>
                         @foreach ($link['children'] ?? [] as $child)
-                            <a href="{{ $child['href'] }}" class="nw-dropdown-subevent @if ($isActive($child['slug'])) is-active @endif">{{ $child['label'] }}</a>
+                            {{-- No active state on the sub-items: the legacy renders
+                                 these with a bare class (Header.tsx). --}}
+                            <a href="{{ $child['href'] }}" class="nw-dropdown-subevent">{{ $child['label'] }}</a>
                         @endforeach
                     @endforeach
                 </div>

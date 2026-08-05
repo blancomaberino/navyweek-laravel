@@ -197,7 +197,9 @@ final class ChromeCatalog
     {
         $links = $this->airShows->published()
             ->map(static fn (AirShow $show): array => [
-                'label' => $show->short_name ?: $show->name,
+                // The legacy uses the show's FULL name here (Header.tsx: `label: s.name`),
+                // not the short one — "NAS Oceana Air Show", not "Oceana".
+                'label' => $show->name,
                 'href' => PagePaths::child('air_shows', $show->slug),
                 'slug' => $show->slug,
             ])
