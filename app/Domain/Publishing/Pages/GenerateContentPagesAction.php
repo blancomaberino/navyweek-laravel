@@ -127,6 +127,18 @@ final class GenerateContentPagesAction
                     ['type' => 'paragraph', 'text' => 'To make the standard concrete — we refuse to infer a discount from a coupon site, to state a percentage no primary source confirms, to present an affiliate link as the brand\'s official page, or to leave a verified-stale figure on the site because it still attracts traffic.'],
                 ],
             ],
+            // The military credit-cards guide. Its long-form body is imported into
+            // body_blocks by `import:content-bodies` (ported from the live page),
+            // so the seed only establishes the page + its SEO shell.
+            [
+                'url_path' => '/best-credit-cards-for-military/',
+                'slug' => 'best-credit-cards-for-military',
+                'title' => 'Best Credit Cards for Military Members (2026) — SCRA & MLA Fee Waivers | NavyWeek.org',
+                'meta' => 'The best credit cards for active-duty military and veterans in 2026 — how SCRA and MLA waive annual fees, which issuers waive them for life, and how to choose.',
+                'blocks' => [
+                    ['type' => 'paragraph', 'text' => 'Active-duty service members can have credit card annual fees waived under the SCRA and the Military Lending Act. This guide covers which cards are worth holding, which issuers waive fees for the life of the account, and how to choose between them.'],
+                ],
+            ],
         ];
     }
 }

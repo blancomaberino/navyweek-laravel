@@ -81,7 +81,7 @@ it('page generators spell no route literal outside the allowlist', function () {
     // One-off content pages own their full fixed path (a reviewed opt-out — these
     // are single pages, not families, so there is no PagePaths knob to route them
     // through). /our-process/ is the editorial-process page every byline links to.
-    $allow = ['/og/', '/privacy/', '/terms/', '/contact/', '/va-disability/', '/veterans-day/', '/veterans-home-care/', '/our-process/', '/schedule/', '/map/'];
+    $allow = ['/og/', '/privacy/', '/terms/', '/contact/', '/va-disability/', '/veterans-day/', '/veterans-home-care/', '/our-process/', '/schedule/', '/map/', '/best-credit-cards-for-military/'];
 
     $violations = [];
     foreach (routeShapedLiterals(app_path('Domain/*/Pages/*Action.php')) as $loc => $value) {

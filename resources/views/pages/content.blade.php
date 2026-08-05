@@ -25,12 +25,18 @@
         </nav>
 
         <article>
-            <h1>{{ $heading }}</h1>
+            <h1>{{ $page->h1 ?? $heading }}</h1>
 
             @foreach ($blocks as $block)
                 @switch($block['type'] ?? 'paragraph')
                     @case('heading')
-                        <h2>{{ $block['text'] ?? '' }}</h2>
+                        {{-- `level` (2 or 3) mirrors the source page's heading depth;
+                             older blocks without it stay h2. --}}
+                        @php($level = (int) ($block['level'] ?? 2) === 3 ? 'h3' : 'h2')
+                        <{{ $level }}>{{ $block['text'] ?? '' }}</{{ $level }}>
+                        @break
+                    @case('list_item')
+                        <ul class="content-list"><li>{{ $block['text'] ?? '' }}</li></ul>
                         @break
                     @case('list')
                         <ul>
@@ -47,5 +53,7 @@
                 @endswitch
             @endforeach
         </article>
+
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection

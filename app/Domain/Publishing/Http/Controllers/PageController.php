@@ -199,6 +199,14 @@ final class PageController
                 ['name' => 'Home', 'url' => '/'],
                 ['name' => 'Contact', 'url' => '/contact/'],
             ]),
+            'our-process' => $this->renderContentPage($page, [
+                ['name' => 'Home', 'url' => '/'],
+                ['name' => 'Our Process', 'url' => '/our-process/'],
+            ]),
+            'best-credit-cards-for-military' => $this->renderContentPage($page, [
+                ['name' => 'Home', 'url' => '/'],
+                ['name' => 'Best Credit Cards for Military', 'url' => '/best-credit-cards-for-military/'],
+            ]),
             'va-disability' => $this->renderYmylGuide(
                 $page,
                 'VA Disability Benefits Guide (2026 Pay Rates, Ratings, How to File)',
