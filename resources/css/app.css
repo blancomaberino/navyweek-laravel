@@ -713,9 +713,23 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
 .deals-card-headline { color: var(--gold); font-family: var(--font-display); font-size: 24px; letter-spacing: 1px; line-height: 1.15; }
 .deals-card-company { color: var(--nw-white); display: block; font-family: var(--font-display); font-size: 22px; letter-spacing: 1px; margin-bottom: 4px; }
 .deals-card-category { color: var(--nw-gray); display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; line-height: 1.5; text-transform: uppercase; }
-.deals-card-cta { color: var(--gold); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; margin-top: auto; text-transform: uppercase; }
+/* inline-flex with the arrow as its own flex item, exactly as the legacy renders
+   it: the 13px icon plus the 6px gap are reserved out of the line box, so a long
+   brand name wraps a line earlier than it would with a trailing text glyph. */
+.deals-card-cta {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    margin-top: auto;
+    text-transform: uppercase;
+}
 .deals-foot { margin-top: var(--space-2xl); text-align: center; }
 .deals-all {
+    align-items: center;
     background: var(--gold);
     border-radius: 2px;
     color: var(--navy);
@@ -723,13 +737,24 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
+    gap: 8px;
     letter-spacing: 1.5px;
     padding: 12px 32px;
     text-transform: uppercase;
 }
 .deals-all:hover { text-decoration: none; }
 @media (max-width: 1024px) { .deals-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 768px) { .deals-grid { grid-template-columns: repeat(2, 1fr); } }
+/* The legacy shrinks the section's own spacing scale below 768px, not just the
+   column count — without this the section is ~50px taller on mobile. */
+@media (max-width: 768px) {
+    .deals-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .deals-section {
+        --space-2xl: 24px;
+        --space-3xl: 40px;
+        --space-xl: 20px;
+    }
+}
 @media (max-width: 480px) { .deals-grid { grid-template-columns: 1fr; } }
 
 /* Footer */
@@ -738,6 +763,7 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     border-top: 1px solid rgba(201, 168, 76, 0.15);
     flex-shrink: 0;
     font-family: var(--font-mono);
+    padding: var(--space-2xl);
 }
 .nw-footer-inner {
     display: flex;
@@ -745,7 +771,6 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     gap: var(--space-lg);
     margin: 0 auto;
     max-width: var(--nw-maxw);
-    padding: var(--space-2xl);
 }
 .nw-footer-brand { align-items: center; display: flex; gap: var(--space-sm); }
 .nw-footer-brand-name { color: var(--nw-gray); font-family: var(--font-display); font-size: 16px; letter-spacing: 2px; }
@@ -754,19 +779,24 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     gap: var(--space-xl);
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
+/* The legacy group is a flex column with an 8px gap and the heading's own 8px
+   bottom margin; the gap supplies that spacing here, so the heading carries none
+   and the links carry no padding of their own. */
+.nw-footer-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
 .nw-footer-group-heading {
     color: var(--gold);
     font-size: 10px;
     letter-spacing: 2px;
-    margin-bottom: var(--space-sm);
     text-transform: uppercase;
 }
 .nw-footer-group a {
     color: var(--nw-gray);
-    display: block;
     font-size: 10px;
     letter-spacing: 1.5px;
-    padding: 5px 0;
     text-transform: uppercase;
 }
 .nw-footer-group a:hover { color: var(--gold); text-decoration: none; }

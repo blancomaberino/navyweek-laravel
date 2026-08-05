@@ -3,6 +3,11 @@
      App\Domain\Navigation\View\NavigationComposer, newest published first. --}}
 @php
     $deals ??= app(\App\Domain\Navigation\Support\ChromeCatalog::class)->deals();
+
+    // lucide ArrowRight — the legacy renders the icon, not a "→" glyph. It matters
+    // for layout as well as looks: as a flex item it reserves its own width, so a
+    // long brand name wraps a line earlier than a trailing character would.
+    $arrow = static fn (int $size): string => '<svg xmlns="http://www.w3.org/2000/svg" width="'.$size.'" height="'.$size.'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
 @endphp
 @if (! empty($deals))
     <section class="deals-section" id="deals" aria-label="Military and veteran deals">
@@ -30,13 +35,13 @@
                                 <span class="deals-card-category">{{ $deal['category'] }}</span>
                             @endif
                         </span>
-                        <span class="deals-card-cta">{{ $deal['brand'] }} military discount &rarr;</span>
+                        <span class="deals-card-cta">{{ $deal['brand'] }} military discount {!! $arrow(13) !!}</span>
                     </a>
                 @endforeach
             </div>
 
             <div class="deals-foot">
-                <a href="/discount/" class="deals-all">View All Deals &rarr;</a>
+                <a href="{{ \App\Domain\Publishing\Support\PagePaths::root('discounts') }}" class="deals-all">View All Deals {!! $arrow(14) !!}</a>
             </div>
         </div>
     </section>
