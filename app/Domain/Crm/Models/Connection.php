@@ -47,6 +47,7 @@ use Illuminate\Support\Collection;
  * @property string|null $brand_home_url
  * @property string|null $official_url
  * @property string|null $logo_url
+ * @property string|null $logo_background
  * @property int|null $default_affiliate_network_id
  * @property string|null $brief_path
  * @property string|null $source_csv
@@ -106,6 +107,7 @@ class Connection extends Model
         'brand_home_url',
         'official_url',
         'logo_url',
+        'logo_background',
         'default_affiliate_network_id',
         'brief_path',
         'source_csv',

@@ -33,6 +33,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $headline_discount
  * @property string|null $discount_summary
  * @property array<int, string>|null $details
+ * @property array<int, string>|null $intro
  * @property VerificationProvider|null $verification
  * @property string|null $verification_url
  * @property string|null $official_url
@@ -80,6 +81,7 @@ class Offer extends Model
         'headline_discount',
         'discount_summary',
         'details',
+        'intro',
         'verification',
         'verification_url',
         'official_url',
@@ -108,6 +110,7 @@ class Offer extends Model
             'offer_type' => OfferType::class,
             'verification' => VerificationProvider::class,
             'details' => 'array',
+            'intro' => 'array',
             'eligibility' => 'array',
             'exclusions' => 'array',
             'key_facts' => 'array',

@@ -1658,3 +1658,73 @@ section.editorial-policy h2 {
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+
+/* ==========================================================================
+   Discount guide hero extras — ported from src/page-views/DiscountDetail.tsx
+   ========================================================================== */
+.guide-logo-chip {
+    align-items: center;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 6px;
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: var(--space-md);
+    min-height: 64px;
+    min-width: 140px;
+    padding: 14px 24px;
+}
+.guide-logo-chip img { display: block; height: auto; max-height: 44px; max-width: 180px; width: auto; }
+.discount-cc-callout {
+    align-items: flex-start;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    display: flex;
+    gap: 14px;
+    margin: 4px 0 var(--space-lg);
+    max-width: 720px;
+    padding: 14px 18px;
+}
+.discount-cc-icon { color: var(--gold); flex-shrink: 0; font-size: 18px; margin-top: 3px; }
+.discount-cc-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+}
+.discount-cc-body {
+    color: var(--nw-off-white);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+.discount-cc-body a { color: var(--gold); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+
+.guide-intro p {
+    color: var(--nw-off-white);
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    max-width: 720px;
+}
+
+/* The discount guide h1 is smaller than the reference-page default. */
+.discount-guide h1 {
+    font-size: clamp(40px, 5.5vw, 64px);
+    letter-spacing: 3px;
+    line-height: 1.05;
+    margin: 0 0 var(--space-sm);
+}
+.discount-guide .discount-summary {
+    color: var(--gold-light);
+    font-family: var(--font-body);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 0 var(--space-lg);
+    max-width: 720px;
+}

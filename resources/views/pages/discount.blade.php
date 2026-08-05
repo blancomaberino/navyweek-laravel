@@ -5,6 +5,14 @@
      the independence disclosure is emitted first, per the site's YMYL/E-E-A-T policy. --}}
 @section('content')
     <main class="discount-guide">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="/">Home</a>
+            <span aria-hidden="true">/</span>
+            <a href="{{ \App\Domain\Publishing\Support\PagePaths::root('discounts') }}">Military Discounts</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{{ $offer->connection?->brand ?? $page->title }}</span>
+        </nav>
+
         <p class="independence-disclosure" role="note">
             NavyWeek.org is an independent editorial publisher and is
             <strong>not affiliated</strong> with {{ $offer->connection?->brand ?? $page->title }} or the U.S. Navy.
@@ -13,6 +21,11 @@
 
         <article>
             <header class="guide-hero">
+                @if ($offer->connection?->logo_url)
+                    <div class="guide-logo-chip" style="background: {{ $offer->connection->logo_background ?? '#ffffff' }}">
+                        <img src="{{ $offer->connection->logo_url }}" alt="{{ $offer->connection->brand }} logo" loading="eager">
+                    </div>
+                @endif
                 {{-- The legacy records carry a separate on-page `h1` distinct from the
                      <title> (`metaTitle`), so prefer it and fall back to the title. --}}
                 <h1>{{ $page->h1 ?? $page->title }}</h1>
@@ -44,6 +57,25 @@
 
             {{-- Author/reviewer byline. Discount guides use the publish-date variant
                  ("Publish date · Last reviewed"), matching the legacy TrustByline. --}}
+
+            @if (filled($offer->intro))
+                <div class="guide-intro">
+                    @foreach ($offer->intro as $paragraph)
+                        <p>{{ $paragraph }}</p>
+                    @endforeach
+                </div>
+            @endif
+
+            {{-- Template-wide interlink to the credit-cards guide: a bordered callout
+                 (not a button) so it never competes with the hero CTA. --}}
+            <aside class="discount-cc-callout" aria-label="Related guide: best credit cards for military">
+                <span class="discount-cc-icon" aria-hidden="true">&#9635;</span>
+                <div>
+                    <p class="discount-cc-eyebrow">Maximize every purchase</p>
+                    <p class="discount-cc-body">A military discount is only half the savings — the right card earns on what's left. See our guide to the <a href="/best-credit-cards-for-military/">best credit cards for military</a> members, including cards with annual fees waived under SCRA and MLA.</p>
+                </div>
+            </aside>
+
             @include('partials.trust.byline', ['publishDate' => true, 'processLinkNewTab' => true])
 
             {{-- KeyFacts block. Discount pages key off the OFFER's key_facts (the
