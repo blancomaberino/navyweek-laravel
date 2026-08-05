@@ -149,3 +149,63 @@ being a list rather than a string 500'd the city guides.
 `/our-process/` reports two phantom diffs: the remote h1 is split across spans so
 the extractor drops a space, and the DEALS section sits inside `<main>` there but
 after it here. Both are artifacts of the text extractor, not visible differences.
+
+
+---
+
+# CORRECTION (2026-08-05) — the heading metric was wrong
+
+The "34/34 headings match" result above **did not mean the site looked the same**.
+Heading outlines are blind to layout, spacing, typography, icons and behaviour.
+`/schedule/` scored 2/2 while **94.3% of its pixels differed** — the entire body
+(intro copy, six key facts, official-schedule links, filter bar, event cards) was
+missing or invented. Treat that section as a record of structural coverage only.
+
+Parity is now measured with `tools/vdiff` (Playwright + pixelmatch): same path on
+local and remote, both viewports, ranked worst-first. **>1% differing pixels is a
+failing gate.**
+
+## Desktop pixel diff — progress
+
+| Page | First measured | Now |
+|---|---|---|
+| `/schedule/` | 94.3% | **1.5%** |
+| `/city/billings/` | 20.8% | **2.1%** |
+| `/` | 18.1% | **1.2%** |
+| `/city/rio-grande-valley/` | 11.0% | **2.8%** |
+| `/navy-ranks/` | 4.1% | **1.8%** |
+| worst page on the site | 94.3% | **12.3%** |
+
+No page is above 15% any more; the median sits near 4%.
+
+## Root causes found by measuring rather than eyeballing
+
+Systemic (every page):
+- **`main` padding** — the legacy uses 48px horizontally, ours used 24px.
+- **No base element styles in the legacy.** `global.css` defines NO h1–h4 / p /
+  ul / li rules; Tailwind preflight plus per-component INLINE styles do it all.
+  Our invented globals fought every ported component. Aligned body line-height
+  (1.5), h1 (clamp(48px,6vw,72px)/lh 1/ls 4px), removed the `li` margin.
+- **Shared components were being overridden.** `.key-facts h2` sits inside pages
+  that style their own h2 at equal specificity, so the page rule won by source
+  order and rendered it at 24px display instead of 11px mono.
+- **`.intro`** was 1.15rem/70ch vs the legacy 17px/760px, so long intros wrapped
+  early on every reference page.
+- **Breadcrumb** typography and margin were all slightly off, shifting everything
+  below it.
+
+Per family: the home and city heroes (full-bleed image + overlays) were missing
+entirely; `/schedule/` had no filter bar or event cards; discount guides had no
+logo chip, no lead intro, no breadcrumb and no credit-cards callout.
+
+## Still open
+
+- `/discounts/{state}/{city}/{biz}/` (12.3%) — the legacy ships a self-contained
+  `LOCAL_DISCOUNT_CSS` block with a two-column layout and a sticky NAP sidebar;
+  ours is a generic single column.
+- The YMYL/content pages (6–8%) and event families (5–7%) need their per-view
+  inline styles ported the same way.
+- **Discount data divergence** persists beyond h1/intro/details: `discount_summary`,
+  CTA label/subnote, tier table columns and source labels still come from the
+  research briefs rather than `src/data/discounts/*.ts`, so YETI (5.9%) differs
+  from Nike (1.2%) on the same template.
