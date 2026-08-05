@@ -84,6 +84,46 @@ final class ChromeCatalog
     }
 
     /**
+     * The nav slug the current request should light up, or null for a page whose
+     * family has no top-level nav item.
+     *
+     * The legacy header takes an explicit `activePage` slug from each page view
+     * (`<Header activePage="schedule" />`) and compares it to the nav item's slug —
+     * NOT to the current path. That distinction is the whole point: a city guide at
+     * `/city/honolulu-hilo/` lights SCHEDULE, and a brand guide at
+     * `/discount/yeti-military-veteran/` lights DEALS. Matching on path equality, as
+     * this used to, left every detail page in the site with no active tab.
+     *
+     * The mapping is derived from `config('publishing.paths.*')` rather than route
+     * literals, so a family-wide prefix change moves it too. Jet-team paths are
+     * data-driven (`JetTeam.base_path`), so those come from the Events links.
+     */
+    public function activePage(string $path): ?string
+    {
+        $path = '/'.trim($path, '/').'/';
+        $under = static fn (string $family): bool => str_starts_with($path, PagePaths::root($family));
+
+        // A jet team lights its own hub (the legacy passes the team id).
+        foreach ($this->eventLinks() as $link) {
+            if (str_starts_with($path, $link['href'])) {
+                return $link['slug'];
+            }
+        }
+
+        return match (true) {
+            // Brand guides, category hubs, the local-discount tree and the
+            // credit-cards guide all light DEALS.
+            $under('discounts'), $under('local_discounts'), $path === '/best-credit-cards-for-military/' => 'discount',
+            // City guides light SCHEDULE, as CityDetail.tsx does.
+            $under('navy_week_cities'), $path === '/schedule/' => 'schedule',
+            // Everything else — including /contact/, which passes no activePage at
+            // all — resolves to a slug with no matching nav item, so the legacy
+            // highlights nothing. Verified against the live header on 10 paths.
+            default => null,
+        };
+    }
+
+    /**
      * A stored colour, but only if it really is one.
      *
      * This value is editor-supplied and ends up inside a `style` attribute, where

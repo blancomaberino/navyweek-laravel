@@ -8,9 +8,14 @@
     $eventLinks ??= app(\App\Domain\Navigation\Support\ChromeCatalog::class)->eventLinks();
     $lastUpdated ??= config('site.last_updated');
 
-    $currentPath = trim(request()->getPathInfo(), '/');
-    $isActive = static fn (string $href): bool => trim($href, '/') === $currentPath;
-    $eventActive = collect($eventLinks)->contains(static fn ($l) => $isActive($l['href']));
+    // The legacy header compares a nav item's SLUG to an `activePage` the page view
+    // passes in — not the current path — so `/city/honolulu-hilo/` lights SCHEDULE
+    // and `/discount/yeti-military-veteran/` lights DEALS. Resolved for us by
+    // ChromeCatalog::activePage() and shared by NavigationComposer.
+    $activePage ??= app(\App\Domain\Navigation\Support\ChromeCatalog::class)
+        ->activePage(request()->getPathInfo());
+    $isActive = static fn (string $slug): bool => $activePage !== null && $slug === $activePage;
+    $eventActive = collect($eventLinks)->contains(static fn ($l) => $isActive($l['slug']));
 
     $updatedAt = \Illuminate\Support\Carbon::parse($lastUpdated)->timezone('America/New_York');
     $updatedLabel = $updatedAt->format('F j, Y').' at '.$updatedAt->format('g:i A').' ET';
@@ -36,7 +41,7 @@
         <nav aria-label="Main navigation" class="nw-desktop-nav">
             {{-- Deals — mega-menu of every discount-brand guide --}}
             <div class="nw-dropdown nw-mega">
-                <a href="/discount/" class="nw-navlink @if ($isActive('/discount/')) is-active @endif" data-testid="link-discount">Deals</a>
+                <a href="/discount/" class="nw-navlink @if ($isActive('discount')) is-active @endif" data-testid="link-discount">Deals</a>
                 <span class="nw-dropdown-trigger" aria-hidden="true">{!! $chevronSvg !!}</span>
                 <div class="nw-mega-panel" role="menu">
                     <div class="nw-mega-inner">
@@ -54,16 +59,16 @@
                 </div>
             </div>
 
-            <a href="/schedule/" class="nw-navlink @if ($isActive('/schedule/')) is-active @endif" data-testid="link-schedule">Schedule</a>
+            <a href="/schedule/" class="nw-navlink @if ($isActive('schedule')) is-active @endif" data-testid="link-schedule">Schedule</a>
 
             {{-- Events — dropdown of the four hubs --}}
             <div class="nw-dropdown">
                 <span class="nw-dropdown-trigger @if ($eventActive) is-active @endif" tabindex="0" role="button" aria-haspopup="true">Events{!! $chevronSvg !!}</span>
                 <div class="nw-dropdown-menu" role="menu">
                     @foreach ($eventLinks as $link)
-                        <a href="{{ $link['href'] }}" class="nw-dropdown-event @if ($isActive($link['href'])) is-active @endif">{{ $link['label'] }}</a>
+                        <a href="{{ $link['href'] }}" class="nw-dropdown-event @if ($isActive($link['slug'])) is-active @endif">{{ $link['label'] }}</a>
                         @foreach ($link['children'] ?? [] as $child)
-                            <a href="{{ $child['href'] }}" class="nw-dropdown-subevent @if ($isActive($child['href'])) is-active @endif">{{ $child['label'] }}</a>
+                            <a href="{{ $child['href'] }}" class="nw-dropdown-subevent @if ($isActive($child['slug'])) is-active @endif">{{ $child['label'] }}</a>
                         @endforeach
                     @endforeach
                 </div>
@@ -71,7 +76,7 @@
 
             <a href="/#partners" class="nw-navlink" data-testid="link-partners">Partners</a>
             <a href="/#faq" class="nw-navlink" data-testid="link-faq">FAQ</a>
-            <a href="/contact/" class="nw-navlink @if ($isActive('/contact/')) is-active @endif" data-testid="link-contact">Contact</a>
+            <a href="/contact/" class="nw-navlink @if ($isActive('contact')) is-active @endif" data-testid="link-contact">Contact</a>
         </nav>
 
         <a href="https://outreach.navy.mil/Navy-Weeks/" target="_blank" rel="noopener noreferrer" class="nw-cta" data-testid="link-official-site">Official NAVCO Site</a>
@@ -83,7 +88,7 @@
     </div>
 
     <nav aria-label="Mobile navigation" class="nw-mobile-panel">
-        <a href="/schedule/" class="nw-mob-link @if ($isActive('/schedule/')) is-active @endif">Schedule</a>
+        <a href="/schedule/" class="nw-mob-link @if ($isActive('schedule')) is-active @endif">Schedule</a>
 
         <details class="nw-mob-acc">
             <summary class="nw-mob-acc-summary @if ($eventActive) is-active @endif">
@@ -92,7 +97,7 @@
             </summary>
             <div class="nw-mob-acc-body">
                 @foreach ($eventLinks as $link)
-                    <a href="{{ $link['href'] }}" class="nw-mob-sublink @if ($isActive($link['href'])) is-active @endif">{{ $link['label'] }}</a>
+                    <a href="{{ $link['href'] }}" class="nw-mob-sublink @if ($isActive($link['slug'])) is-active @endif">{{ $link['label'] }}</a>
                     @foreach ($link['children'] ?? [] as $child)
                         <a href="{{ $child['href'] }}" class="nw-mob-subsublink">{{ $child['label'] }}</a>
                     @endforeach
@@ -101,7 +106,7 @@
         </details>
 
         <details class="nw-mob-acc">
-            <summary class="nw-mob-acc-summary @if ($isActive('/discount/')) is-active @endif">
+            <summary class="nw-mob-acc-summary @if ($isActive('discount')) is-active @endif">
                 <span>Deals</span>
                 <span class="nw-mob-acc-chevron" aria-hidden="true"></span>
             </summary>
@@ -115,7 +120,7 @@
 
         <a href="/#partners" class="nw-mob-link">Partners</a>
         <a href="/#faq" class="nw-mob-link">FAQ</a>
-        <a href="/contact/" class="nw-mob-link @if ($isActive('/contact/')) is-active @endif">Contact</a>
+        <a href="/contact/" class="nw-mob-link @if ($isActive('contact')) is-active @endif">Contact</a>
         <a href="https://outreach.navy.mil/Navy-Weeks/" target="_blank" rel="noopener noreferrer" class="nw-mob-cta">Official NAVCO Site</a>
     </nav>
 </header>

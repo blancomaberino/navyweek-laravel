@@ -39,6 +39,10 @@ final class NavigationComposer
                 'deals' => $this->chrome->deals(),
                 'eventLinks' => $this->chrome->eventLinks(),
                 'lastUpdated' => config('site.last_updated'),
+                // The nav slug to highlight. The legacy passes this explicitly from
+                // each page view, so a detail page lights its FAMILY's tab rather
+                // than only an exact path match.
+                'activePage' => $this->chrome->activePage(request()->getPathInfo()),
             ]),
         };
     }
