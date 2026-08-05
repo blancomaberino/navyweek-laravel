@@ -52,6 +52,13 @@ use Illuminate\Support\Carbon;
  * @property string|null $disclosure
  * @property string|null $editorial_source_priority
  * @property string|null $editorial_review_cadence
+ * @property string|null $editorial_independence
+ * @property string|null $editorial_reviewer_note
+ * @property string|null $editorial_corrections
+ * @property string|null $editorial_not_advice
+ * @property string|null $corrections_note
+ * @property bool $shows_process_link
+ * @property bool $shows_reviewer
  * @property string|null $trust_page_label
  * @property bool $shows_reference_backlink
  * @property int|null $author_id
@@ -101,6 +108,13 @@ class Page extends Model
         'disclosure',
         'editorial_source_priority',
         'editorial_review_cadence',
+        'editorial_independence',
+        'editorial_reviewer_note',
+        'editorial_corrections',
+        'editorial_not_advice',
+        'corrections_note',
+        'shows_process_link',
+        'shows_reviewer',
         'trust_page_label',
         'shows_reference_backlink',
         'author_id',
@@ -124,6 +138,8 @@ class Page extends Model
             'sources_checked' => 'date',
             'key_facts' => 'array',
             'shows_reference_backlink' => 'boolean',
+            'shows_process_link' => 'boolean',
+            'shows_reviewer' => 'boolean',
             'is_published' => 'boolean',
         ];
     }

@@ -30,8 +30,12 @@ final class ImportContentBodiesCommand extends Command
     private const CHROME_PREFIXES = [
         'navyweek.org is an independent publication',
         'navyweek.org is an independent editorial publisher',
-        'written by',
-        'reviewed by',
+        // NOT 'written by' / 'reviewed by': those match no byline row in any
+        // artifact (the byline is rendered from CMS columns, never imported as a
+        // block), but they DO match real body prose — "Reviewed by a Veterans Law
+        // Judge at the Board of Veterans' Appeals…" was being silently dropped
+        // from /va-disability/'s claim-types section. A prefix that only ever
+        // fires on a false positive is a bug, not a filter.
         'last reviewed:',
         'sources checked:',
         'how we research & review',

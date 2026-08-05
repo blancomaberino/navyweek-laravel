@@ -32,7 +32,11 @@
             </div>
         @endif
 
-        @if ($reviewer)
+        {{-- Some pages are author-only: VeteransDay.tsx renders no reviewer row.
+             The flag (not a null reviewer_id) carries that intent, because
+             EditorialTeamSeeder back-fills the default byline onto any page whose
+             reviewer is null. --}}
+        @if ($reviewer && $page->shows_reviewer)
             <div class="trust-byline-role">Reviewed by</div>
             <div class="trust-byline-person is-reviewer">
                 @if ($reviewer->avatar_path)
@@ -57,10 +61,14 @@
             </div>
         @endif
 
-        <div class="trust-byline-process">
-            How we research &amp; review:
-            <a href="/our-process/" @if ($processNewTab) target="_blank" rel="noopener noreferrer" @endif>Our editorial process</a>
-        </div>
+        {{-- The reference pages close the byline with this row; the YMYL guides end
+             at the dates line (VaDisability.tsx and the other three stop there). --}}
+        @if ($page->shows_process_link)
+            <div class="trust-byline-process">
+                How we research &amp; review:
+                <a href="/our-process/" @if ($processNewTab) target="_blank" rel="noopener noreferrer" @endif>Our editorial process</a>
+            </div>
+        @endif
         </div>
     </div>
 @endif

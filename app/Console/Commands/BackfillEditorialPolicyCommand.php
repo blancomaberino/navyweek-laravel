@@ -99,18 +99,32 @@ final class BackfillEditorialPolicyCommand extends Command
     {
         $force = (bool) $this->option('force');
         $filled = 0;
+        $ymyl = $this->ymylPolicy();
 
         foreach ($pages->allPublishedIndexable() as $page) {
             $copy = $this->copyFor($page);
-            if ($copy === null) {
+            $perPage = $ymyl[$page->slug] ?? [];
+            if ($copy === null && $perPage === []) {
                 continue;
             }
 
-            $updates = array_filter([
+            $updates = $copy === null ? [] : array_filter([
                 'trust_page_label' => $this->valueFor($page, 'trust_page_label', $force, $copy['label']),
                 'editorial_source_priority' => $this->valueFor($page, 'editorial_source_priority', $force, $copy['source']),
                 'editorial_review_cadence' => $this->valueFor($page, 'editorial_review_cadence', $force, $copy['cadence']),
             ], static fn (?string $value): bool => $value !== null);
+
+            // The two VA guides ship their OWN EditorialPolicyBox — all six
+            // bullets differ, and the Reviewer one carries the "not a
+            // VA-accredited representative" disclaimer, which is load-bearing on
+            // a benefits page. Every other family uses the shared component, so
+            // the partial's fallback wording is already correct for them.
+            foreach ($perPage as $column => $text) {
+                $value = $this->valueFor($page, $column, $force, $text);
+                if ($value !== null) {
+                    $updates[$column] = $value;
+                }
+            }
 
             if ($updates !== []) {
                 $page->forceFill($updates)->save();
@@ -121,6 +135,45 @@ final class BackfillEditorialPolicyCommand extends Command
         $this->info("Editorial policy copy written to {$filled} pages.");
 
         return self::SUCCESS;
+    }
+
+    /**
+     * The per-page policy bullets for the guides that write their own, keyed
+     * page slug => [pages column => text]. Extracted verbatim from each view's
+     * `EditorialPolicyBox()` / `CorrectionsBox()` into a committed seed artifact.
+     *
+     * @return array<string, array<string, string>>
+     */
+    private function ymylPolicy(): array
+    {
+        $path = database_path('seed-data/ymyl-editorial-policy.json');
+        if (! is_file($path)) {
+            return [];
+        }
+
+        /** @var array{editorialPolicy?: array<string, array<string, string>>} $data */
+        $data = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
+
+        $columns = [
+            'source_priority' => 'editorial_source_priority',
+            'review_cadence' => 'editorial_review_cadence',
+            'independence' => 'editorial_independence',
+            'reviewer' => 'editorial_reviewer_note',
+            'corrections' => 'editorial_corrections',
+            'not_advice' => 'editorial_not_advice',
+            'corrections_note' => 'corrections_note',
+        ];
+
+        $out = [];
+        foreach ($data['editorialPolicy'] ?? [] as $slug => $bullets) {
+            foreach ($bullets as $key => $text) {
+                if (isset($columns[$key]) && $text !== '') {
+                    $out[$slug][$columns[$key]] = $text;
+                }
+            }
+        }
+
+        return $out;
     }
 
     /**

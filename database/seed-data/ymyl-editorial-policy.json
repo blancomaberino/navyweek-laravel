@@ -1,0 +1,22 @@
+{
+ "editorialPolicy": {
+  "va-disability": {
+   "source_priority": "We cite VA.gov and Benefits.va.gov first, then the eCFR (38 CFR), then other official federal sources (SSA, IRS, DFAS, GAO). Non-government sources are not used as primary evidence on this page.",
+   "independence": "NavyWeek.org is not affiliated with the VA, the U.S. Navy, or NAVCO. We do not accept payment to recommend specific attorneys, claims agents, VSOs, or filing services.",
+   "review_cadence": "Pay rates, COLA, and dollar figures are re-verified each December and at every page update. Filing-process and program-rule sections (TDIU, SMC, PACT Act, claim types) are re-verified quarterly.",
+   "reviewer": "The page is reviewed for general accuracy and plain-language clarity by a former U.S. Navy officer named in the byline — not a VA-accredited representative. For accredited claims help, use the VA's accreditation search linked throughout this guide. The \"Last reviewed\" date at the top of the page reflects the most recent review pass.",
+   "corrections": "Factual errors are corrected as soon as we can verify the issue against an official source. See the \"Report an outdated fact\" link below.",
+   "not_advice": "This page is informational only and is not a substitute for legal, medical, financial, or claims advice. Eligibility, deadlines, and amounts depend on facts only the VA and your accredited representative can confirm.",
+   "corrections_note": "Please include a link to the VA.gov or eCFR page you believe is more current."
+  },
+  "veterans-home-care": {
+   "source_priority": "We cite VA.gov and Benefits.va.gov first, then the eCFR (38 CFR), then other official federal sources. For private-pay cost figures we cite the named industry survey. Non-government sources are not used as primary evidence for benefit rules.",
+   "independence": "NavyWeek.org is not affiliated with the VA, the U.S. Navy, or NAVCO. We do not accept payment to recommend specific agencies, attorneys, claims agents, VSOs, or filing services.",
+   "review_cadence": "Pension rates, COLA, and dollar figures are re-verified each December and at every page update. Program-rule sections (Aid and Attendance, PCAFC, VDC, copays) are re-verified quarterly.",
+   "reviewer": "The page is reviewed for general accuracy and plain-language clarity by a former U.S. Navy officer named in the byline — not a VA-accredited representative. For accredited claims help, use the VA's accreditation search linked throughout this guide. The \"Last reviewed\" date at the top of the page reflects the most recent review pass.",
+   "corrections": "Factual errors are corrected as soon as we can verify the issue against an official source. See the \"Report an outdated fact\" link below.",
+   "not_advice": "This page is informational only and is not a substitute for legal, medical, financial, or claims advice. Eligibility, deadlines, and amounts depend on facts only the VA and your accredited representative can confirm.",
+   "corrections_note": "Please include a link to the VA.gov or eCFR page you believe is more current."
+  }
+ }
+}
