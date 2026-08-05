@@ -16,6 +16,8 @@
     $updatedLabel = $updatedAt->format('F j, Y').' at '.$updatedAt->format('g:i A').' ET';
 
     $anchorSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>';
+    // lucide ChevronDown, 12px — the legacy nav uses the icon, not a text glyph.
+    $chevronSvg = '<svg class="nw-dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
 @endphp
 
 <div class="nw-banner" role="status" aria-label="Site last updated {{ $updatedLabel }}">
@@ -35,9 +37,7 @@
             {{-- Deals — mega-menu of every discount-brand guide --}}
             <div class="nw-dropdown nw-mega">
                 <a href="/discount/" class="nw-navlink @if ($isActive('/discount/')) is-active @endif" data-testid="link-discount">Deals</a>
-                <span class="nw-dropdown-trigger" aria-hidden="true">
-                    <span class="nw-dropdown-chevron">&#9662;</span>
-                </span>
+                <span class="nw-dropdown-trigger" aria-hidden="true">{!! $chevronSvg !!}</span>
                 <div class="nw-mega-panel" role="menu">
                     <div class="nw-mega-inner">
                         <div class="nw-mega-grid">
@@ -58,10 +58,13 @@
 
             {{-- Events — dropdown of the four hubs --}}
             <div class="nw-dropdown">
-                <span class="nw-dropdown-trigger @if ($eventActive) is-active @endif" tabindex="0" role="button" aria-haspopup="true">Events<span class="nw-dropdown-chevron">&#9662;</span></span>
+                <span class="nw-dropdown-trigger @if ($eventActive) is-active @endif" tabindex="0" role="button" aria-haspopup="true">Events{!! $chevronSvg !!}</span>
                 <div class="nw-dropdown-menu" role="menu">
                     @foreach ($eventLinks as $link)
                         <a href="{{ $link['href'] }}" class="nw-dropdown-event @if ($isActive($link['href'])) is-active @endif">{{ $link['label'] }}</a>
+                        @foreach ($link['children'] ?? [] as $child)
+                            <a href="{{ $child['href'] }}" class="nw-dropdown-subevent @if ($isActive($child['href'])) is-active @endif">{{ $child['label'] }}</a>
+                        @endforeach
                     @endforeach
                 </div>
             </div>
@@ -90,6 +93,9 @@
             <div class="nw-mob-acc-body">
                 @foreach ($eventLinks as $link)
                     <a href="{{ $link['href'] }}" class="nw-mob-sublink @if ($isActive($link['href'])) is-active @endif">{{ $link['label'] }}</a>
+                    @foreach ($link['children'] ?? [] as $child)
+                        <a href="{{ $child['href'] }}" class="nw-mob-subsublink">{{ $child['label'] }}</a>
+                    @endforeach
                 @endforeach
             </div>
         </details>

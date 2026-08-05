@@ -41,5 +41,9 @@
     @include('partials.header')
     @yield('content')
     @include('partials.footer')
+
+    {{-- Page-level progressive-enhancement scripts (e.g. the schedule filters).
+         Pushed at the end of body so they never block first paint. --}}
+    @stack('scripts')
   </body>
 </html>

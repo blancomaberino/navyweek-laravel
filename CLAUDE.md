@@ -104,6 +104,40 @@ For ANY task that renders or changes a user-facing page, before you call it done
 so an entire un-ported design system — no CSS even linked in the base layout — shipped
 invisibly. Never verify a rendered page without viewing it.)
 
+## Parity means PIXELS, not headings (non-negotiable)
+
+This is a 1:1 rebuild of a live site. "Parity" is only ever proven by a **visual
+diff of the rendered page against the remote**, at BOTH desktop (1280) and mobile
+(375) widths. Nothing else counts.
+
+**Never claim parity from a structural proxy.** Heading counts, DOM greps,
+JSON-LD checks and HTTP 200s are all blind to layout, spacing, typography, icons
+and behaviour. A page can match heading-for-heading and still be completely wrong:
+`/schedule/` once scored "2/2 headings match" while 94% of its pixels differed —
+the whole body (filters, cards, key facts, intro copy) was missing or invented.
+
+The harness lives at `_scratch`/`vdiff/diff.mjs` (Playwright + pixelmatch):
+screenshots the same path on local and remote, pixel-diffs, and ranks worst-first.
+Run it for every page you touch, and re-run it after each fix:
+
+```
+node diff.mjs urls.txt [desktop|mobile]
+```
+
+Treat **>1% differing pixels as a failing gate**, exactly like a red test, and read
+the emitted `*.diff.png` to see WHERE it differs.
+
+**Port from the source, don't infer from the rendering.** The original site's code
+is in the repo root (`src/components/*`, `src/page-views/*`, `src/styles/global.css`).
+When a page differs, open its component and port the actual markup and styles —
+much of the legacy styling is INLINE in the components, so re-deriving it from a
+screenshot guarantees drift. Approximating "close enough" CSS is how the header nav
+shipped with a text glyph instead of the lucide chevron and with the Events
+dropdown missing its indented air-show sub-items entirely.
+
+**Behaviour is part of parity too** — dropdowns, filters, accordions and the mobile
+menu must work the same way, not just look the same at rest.
+
 ## CSS authoring — alphabetical property order (enforced)
 
 Within every declaration block of our **authored** CSS, list properties in

@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace App\Domain\Navigation\Support;
 
 use App\Domain\Catalog\Models\Offer;
+use App\Domain\Pillars\Models\AirShow;
+use App\Domain\Pillars\Repositories\AirShowRepositoryInterface;
 use App\Domain\Publishing\Repositories\PageRepositoryInterface;
+use App\Domain\Publishing\Support\PagePaths;
 
 /**
  * Request-scoped source for the site chrome's data-driven bits: the "Deals"
@@ -22,7 +25,10 @@ final class ChromeCatalog
     /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null}>|null */
     private ?array $deals = null;
 
-    public function __construct(private readonly PageRepositoryInterface $pages) {}
+    public function __construct(
+        private readonly PageRepositoryInterface $pages,
+        private readonly AirShowRepositoryInterface $airShows,
+    ) {}
 
     /**
      * Every published discount-brand deal, newest published first (mirrors the
@@ -72,16 +78,35 @@ final class ChromeCatalog
 
     /**
      * The Events dropdown — the four hub links, ported verbatim from Header.tsx.
+     * Published air-show guides are indented UNDER "Air Shows Hub" (`children`),
+     * exactly as the legacy `airShowSubLinks` render, so new shows appear as they
+     * publish.
      *
-     * @return list<array{label: string, href: string, slug: string}>
+     * @return list<array{label: string, href: string, slug: string, children: list<array{label: string, href: string, slug: string}>}>
      */
     public function eventLinks(): array
     {
         return [
-            ['label' => 'Air Shows Hub', 'href' => '/air-show/', 'slug' => 'air-show'],
-            ['label' => 'Thunderbirds Hub', 'href' => '/thunderbirds/', 'slug' => 'thunderbirds'],
-            ['label' => 'Blue Angels Hub', 'href' => '/blue-angels/', 'slug' => 'blue-angels'],
-            ['label' => 'Fleet Week Hub', 'href' => '/fleetweek/', 'slug' => 'fleetweek'],
+            ['label' => 'Air Shows Hub', 'href' => '/air-show/', 'slug' => 'air-show', 'children' => $this->airShowSubLinks()],
+            ['label' => 'Thunderbirds Hub', 'href' => '/thunderbirds/', 'slug' => 'thunderbirds', 'children' => []],
+            ['label' => 'Blue Angels Hub', 'href' => '/blue-angels/', 'slug' => 'blue-angels', 'children' => []],
+            ['label' => 'Fleet Week Hub', 'href' => '/fleetweek/', 'slug' => 'fleetweek', 'children' => []],
         ];
+    }
+
+    /**
+     * @return list<array{label: string, href: string, slug: string}>
+     */
+    private function airShowSubLinks(): array
+    {
+        $links = $this->airShows->published()
+            ->map(static fn (AirShow $show): array => [
+                'label' => $show->short_name ?: $show->name,
+                'href' => PagePaths::child('air_shows', $show->slug),
+                'slug' => $show->slug,
+            ])
+            ->all();
+
+        return array_values($links);
     }
 }
