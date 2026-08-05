@@ -1,0 +1,202 @@
+{
+  "t-alford": {
+    "service_title": "Captain (O-6), U.S. Navy Reserve",
+    "current_title": "Co-Founder & Head of Growth, Honest Paws",
+    "location_city": "League City",
+    "location_state": "Texas",
+    "location_country": "United States",
+    "military_timeline": [
+      {
+        "title": "Captain (O-6), U.S. Navy Reserve",
+        "org": "U.S. Navy Reserve",
+        "period": "Jul 2009 – Present",
+        "detail": "Continued service as a reserve officer following active-duty submarine and DTRA assignments."
+      },
+      {
+        "title": "Nuclear Weapon Surety Program Manager",
+        "org": "Defense Threat Reduction Agency (DTRA)",
+        "period": "Feb 2007 – Mar 2009",
+        "detail": "Oversaw multi-million-dollar, technically intensive R&D projects; served as nuclear equipment and material exportation advisor to the Office of the Secretary of Defense; sat on the board for Force Protection Equipment Demonstration V (600 vendors, 11,000 visitors, 30 countries)."
+      },
+      {
+        "title": "Assistant Engineer, USS Key West (SSN-722)",
+        "org": "United States Navy",
+        "period": "May 2006 – Feb 2007",
+        "detail": "Submarine officer aboard a Los Angeles-class fast-attack submarine."
+      },
+      {
+        "title": "Midshipman",
+        "org": "United States Naval Academy",
+        "period": "1998 – 2002 (graduate)",
+        "detail": "Bachelor's degree, U.S. Naval Academy, Annapolis, MD."
+      }
+    ],
+    "civilian_timeline": [
+      {
+        "title": "Co-Founder & Head of Growth",
+        "org": "Honest Paws",
+        "period": "May 2018 – Present",
+        "detail": null
+      },
+      {
+        "title": "Co-Founder",
+        "org": "Cloud Clinic LLC",
+        "period": "Present",
+        "detail": null
+      },
+      {
+        "title": "Co-Founder & President",
+        "org": "Triton Well Services LLC",
+        "period": "Mar 2014 – Jul 2015",
+        "detail": null
+      },
+      {
+        "title": "Landman — Permian Basin",
+        "org": "XTO Energy (an ExxonMobil subsidiary)",
+        "period": "Jan 2012 – Mar 2014",
+        "detail": "Fort Worth, TX."
+      },
+      {
+        "title": "Senior Land Representative",
+        "org": "ExxonMobil",
+        "period": "Oct 2011 – Jan 2012",
+        "detail": null
+      },
+      {
+        "title": "Senior Logistics Analyst — LNG, Pipelines, Storage",
+        "org": "ExxonMobil Gas & Power Marketing",
+        "period": "Sep 2010 – Oct 2011",
+        "detail": null
+      },
+      {
+        "title": "Senior Business Analyst — Asia Pacific, Africa and Power",
+        "org": "ExxonMobil Gas & Power Marketing",
+        "period": "Jul 2009 – Sep 2010",
+        "detail": null
+      },
+      {
+        "title": "Senior Business Analyst — NGL",
+        "org": "ExxonMobil Gas & Power Marketing",
+        "period": "Mar 2009 – Jul 2009",
+        "detail": null
+      }
+    ],
+    "profile_expertise": [
+      "U.S. Navy service & culture",
+      "Navy Reserve & officer career paths",
+      "Submarine community",
+      "VA disability benefits",
+      "Veteran transition",
+      "U.S. Naval Academy",
+      "Nuclear weapon surety",
+      "Veteran-founded business"
+    ],
+    "expertise_lead": "Topics T Madden Alford covers and reviews for NavyWeek.org:",
+    "works_lead": null,
+    "featured_works": [
+      {
+        "url": "/va-disability/",
+        "label": "VA Disability: Ratings, Pay, and How to File in 2026",
+        "note": "author"
+      },
+      {
+        "url": "/best-credit-cards-for-military/",
+        "label": "Best Credit Cards for Military Members (2026)",
+        "note": "author"
+      }
+    ],
+    "profile_reviewed_at": "2026-05-01"
+  },
+  "erik-rivera": {
+    "service_title": "Former U.S. Navy Explosive Ordnance Disposal Officer",
+    "current_title": "Chief Executive Officer, OnePet",
+    "location_city": "San Juan",
+    "location_state": "Puerto Rico",
+    "location_country": "United States",
+    "military_timeline": [
+      {
+        "title": "Explosive Ordnance Disposal (EOD) Officer",
+        "org": "United States Navy",
+        "period": "Commissioned 2004",
+        "detail": "Served as a U.S. Navy Explosive Ordnance Disposal / Naval Special Operations officer following commissioning from the U.S. Naval Academy."
+      },
+      {
+        "title": "Midshipman",
+        "org": "United States Naval Academy",
+        "period": "2000 – 2004 (graduate)",
+        "detail": "Bachelor of Science in Weapons & Systems Engineering, U.S. Naval Academy, Annapolis, MD."
+      }
+    ],
+    "civilian_timeline": [
+      {
+        "title": "Chief Executive Officer",
+        "org": "OnePet",
+        "period": "Jun 2018 – Present",
+        "detail": null
+      },
+      {
+        "title": "Founder",
+        "org": "Honest Paws",
+        "period": "Feb 2018 – Present",
+        "detail": null
+      },
+      {
+        "title": "Founder",
+        "org": "CertaPet",
+        "period": "Jun 2015 – Present",
+        "detail": null
+      },
+      {
+        "title": "Investor",
+        "org": "Sellbrite",
+        "period": "2017 – 2019",
+        "detail": null
+      },
+      {
+        "title": "Investor",
+        "org": "AdEspresso",
+        "period": "2013 – 2017",
+        "detail": null
+      }
+    ],
+    "profile_expertise": [
+      "U.S. Navy service & culture",
+      "Naval Explosive Ordnance Disposal (EOD)",
+      "Naval Special Operations",
+      "Officer career paths",
+      "U.S. Naval Academy",
+      "Weapons & systems engineering",
+      "Veteran entrepreneurship"
+    ],
+    "expertise_lead": "Topics Erik Rivera reviews for NavyWeek.org:",
+    "works_lead": "Erik Rivera is the named expert reviewer on NavyWeek.org's U.S. Navy reference and veteran-benefit guides, including:",
+    "featured_works": [
+      {
+        "url": "/navy-reference/",
+        "label": "Navy Reference",
+        "note": null
+      },
+      {
+        "url": "/navy-bases/",
+        "label": "Navy Bases",
+        "note": null
+      },
+      {
+        "url": "/navy-ranks/",
+        "label": "Navy Ranks",
+        "note": null
+      },
+      {
+        "url": "/navy-designators/",
+        "label": "Navy Designators",
+        "note": null
+      },
+      {
+        "url": "/va-disability/",
+        "label": "VA Disability Guide",
+        "note": null
+      }
+    ],
+    "profile_reviewed_at": "2026-06-01"
+  }
+}

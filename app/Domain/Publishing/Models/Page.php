@@ -36,6 +36,7 @@ use Illuminate\Support\Carbon;
  * @property bool $url_path_is_custom
  * @property string|null $title
  * @property string|null $h1
+ * @property string|null $eyebrow
  * @property string|null $meta_description
  * @property string|null $canonical_path
  * @property string $og_type
@@ -48,6 +49,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $last_reviewed
  * @property Carbon|null $sources_checked
  * @property array<string, mixed>|null $key_facts
+ * @property string|null $disclosure
  * @property string|null $editorial_source_priority
  * @property string|null $editorial_review_cadence
  * @property string|null $trust_page_label
@@ -83,6 +85,7 @@ class Page extends Model
         'url_path_is_custom',
         'title',
         'h1',
+        'eyebrow',
         'meta_description',
         'canonical_path',
         'og_type',
@@ -95,6 +98,7 @@ class Page extends Model
         'last_reviewed',
         'sources_checked',
         'key_facts',
+        'disclosure',
         'editorial_source_priority',
         'editorial_review_cadence',
         'trust_page_label',

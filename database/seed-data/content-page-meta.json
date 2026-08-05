@@ -1,0 +1,307 @@
+{
+  "/va-disability/": {
+    "keyFacts": {
+      "title": "VA Disability 2026 — Key Facts",
+      "facts": [
+        {
+          "label": "Paid by",
+          "value": "U.S. Department of Veterans Affairs (VA.gov)"
+        },
+        {
+          "label": "Monthly pay at 10%",
+          "value": "$175.51 (single veteran, no dependents) — VA rate table"
+        },
+        {
+          "label": "Monthly pay at 100%",
+          "value": "$3,946.25 (single veteran, no dependents) — VA rate table"
+        },
+        {
+          "label": "2026 COLA",
+          "value": "2.5% effective December 1, 2025 (SSA COLA)"
+        },
+        {
+          "label": "Federal tax",
+          "value": "Exempt — IRS guidance"
+        },
+        {
+          "label": "Rating increments",
+          "value": "0–100% in 10% steps; combined under 38 CFR §4.25"
+        },
+        {
+          "label": "Average initial-claim decision time",
+          "value": "Roughly 4–5 months — verify current average on VA.gov"
+        },
+        {
+          "label": "TDIU threshold",
+          "value": "60% single, or 70% combined with one 40% (VA TDIU)"
+        }
+      ],
+      "source": {
+        "label": "VA.gov — Disability compensation",
+        "url": "https://www.va.gov/disability/compensation-rates/veteran-rates/"
+      },
+      "lastVerified": "May 25, 2026"
+    },
+    "disclosure": "NavyWeek.org is an independent publication. We are not affiliated with, endorsed by, or sponsored by the U.S. Department of Veterans Affairs, the U.S. Navy, NAVCO, or any federal agency. This page is informational only and is not legal, medical, financial, or claims advice. For decisions about your benefits, rely on official sources at VA.gov or consult an accredited representative (VA accreditation search).",
+    "eyebrow": "// Veterans Benefits",
+    "faqs": [
+      {
+        "question": "Is VA disability permanent?",
+        "answer": "Not automatically. The VA can propose a reduction if it finds the condition has improved. Continuous ratings receive additional protection at 5, 10, and 20 years under 38 CFR §3.951 and §3.957. A \"Permanent and Total\" designation removes scheduled re-exams. Confirm your status on VA.gov."
+      },
+      {
+        "question": "Is VA disability taxable?",
+        "answer": "No. VA disability compensation is exempt from federal income tax per the IRS. Most states also exempt it, but state treatment varies — check your state tax authority."
+      },
+      {
+        "question": "Can I work and collect VA disability?",
+        "answer": "A veteran rated at 100% schedular may continue to work. Total Disability based on Individual Unemployability (TDIU) has earnings limits tied to substantially gainful employment. See VA.gov for the current rules."
+      },
+      {
+        "question": "How long do VA claims take?",
+        "answer": "VA publishes live timeliness data on VA.gov. Recent averages have been roughly 4–5 months for an initial decision; Board of Veterans' Appeals decisions can take 12–24 months or longer. Check the current average on VA.gov before relying on a specific number."
+      },
+      {
+        "question": "Can my rating be reduced?",
+        "answer": "Before the 20-year protection mark, yes — the VA can schedule re-examinations if it has reason to believe the condition has improved. Ratings held continuously for 20+ years and ratings designated Permanent and Total receive additional protection."
+      },
+      {
+        "question": "What's the difference between VA disability and SSDI?",
+        "answer": "VA disability is service-connected compensation paid by the VA with no income limit. SSDI is paid by the Social Security Administration for a disability that prevents substantial work, regardless of cause, and has SSA-defined earnings limits. The two programs are independent and many veterans receive both."
+      },
+      {
+        "question": "Do I need a lawyer to file a claim?",
+        "answer": "For an initial claim, no. An accredited Veterans Service Organization (VSO) can file the claim at no cost. For appeals after a denial, an accredited attorney or claims agent may charge a fee under VA rules (38 CFR §14.636). Verify accreditation in the VA Office of General Counsel database."
+      }
+    ],
+    "showsReferenceBacklink": true
+  },
+  "/veterans-home-care/": {
+    "keyFacts": {
+      "title": "Veterans Home Care 2026 — Key Facts",
+      "facts": [
+        {
+          "label": "Two separate programs",
+          "value": "VHA arranges services; VBA pays the Aid and Attendance cash pension — VA.gov"
+        },
+        {
+          "label": "Aid & Attendance — single veteran",
+          "value": "Up to ~$2,424/mo ($29,093/yr) minus countable income (VA.gov)"
+        },
+        {
+          "label": "A&A — surviving spouse",
+          "value": "Up to ~$1,558/mo (~$18,696/yr) minus countable income"
+        },
+        {
+          "label": "2026 net worth limit",
+          "value": "$163,699 (primary home and one vehicle excluded) — VA.gov"
+        },
+        {
+          "label": "Rate period",
+          "value": "Effective Dec 1, 2025 – Nov 30, 2026 (2.8% COLA)"
+        },
+        {
+          "label": "Copay for geriatric/extended care",
+          "value": "None for first 21 days per 12-month period; hospice always free"
+        },
+        {
+          "label": "Cost of filing a claim",
+          "value": "$0 — accredited representatives and VSOs help for free"
+        },
+        {
+          "label": "Core A&A form",
+          "value": "VA Form 21-2680 (physician-completed) — VA.gov"
+        }
+      ],
+      "source": {
+        "label": "VA.gov — Aid and Attendance & Housebound",
+        "url": "https://www.va.gov/pension/aid-attendance-housebound/"
+      },
+      "lastVerified": "June 2, 2026"
+    },
+    "disclosure": "NavyWeek.org is an independent publication. We are not affiliated with, endorsed by, or sponsored by the U.S. Department of Veterans Affairs, the U.S. Navy, NAVCO, or any federal agency. This page is informational only and is not legal, medical, financial, or claims advice. For decisions about your benefits, rely on official sources at VA.gov or consult an accredited representative (VA accreditation search).",
+    "eyebrow": "// Veterans Benefits",
+    "faqs": [
+      {
+        "question": "Does the VA pay for in-home care?",
+        "answer": "Yes, in two ways: it arranges and largely covers services through its health system, and it provides the Aid and Attendance pension you can use to pay for care yourself."
+      },
+      {
+        "question": "How many hours of home care does the VA provide?",
+        "answer": "There's no fixed national number. Hours are set by a clinical assessment of your needs, so they vary from one veteran to the next."
+      },
+      {
+        "question": "Who qualifies for VA home care?",
+        "answer": "For service programs, enrolled veterans with an assessed clinical need. For Aid and Attendance, veterans who meet the service, status, care-need, and financial criteria described above."
+      },
+      {
+        "question": "Can I be paid to care for my veteran spouse?",
+        "answer": "Not through Aid and Attendance — but yes through PCAFC, which can pay a spouse a monthly stipend if the veteran has a 70%+ disability rating and meets the other requirements."
+      },
+      {
+        "question": "What's the income and net worth limit for Aid and Attendance?",
+        "answer": "The net worth limit is $163,699 for 2026. Your primary home and one vehicle are excluded."
+      },
+      {
+        "question": "How much is Aid and Attendance per month in 2026?",
+        "answer": "Up to roughly $2,424 for a single veteran, $2,874 for a veteran with one dependent, and $1,558 for a surviving spouse — minus any countable income."
+      },
+      {
+        "question": "What's the difference between VA home care and Aid and Attendance?",
+        "answer": "VA home care is a service the VA arranges. Aid and Attendance is cash you receive and spend on care yourself."
+      },
+      {
+        "question": "Does the VA cover hospice at home?",
+        "answer": "Yes, with no copays, in any setting, plus 13 months of bereavement support for the family."
+      },
+      {
+        "question": "How long does an Aid and Attendance claim take?",
+        "answer": "Usually three to six months or more, with benefits paid retroactively to your filing date."
+      },
+      {
+        "question": "Will I have a copay for VA home care?",
+        "answer": "No copay for the first 21 days of care in a 12-month period. After that, it depends on your service-connected status and income. Hospice is always free."
+      },
+      {
+        "question": "Can a veteran with dementia get home care through the VA?",
+        "answer": "Yes. Dementia-related needs are exactly the kind of clinical need these programs are built to assess and cover."
+      }
+    ],
+    "showsReferenceBacklink": true
+  },
+  "/veterans-day/": {
+    "keyFacts": {
+      "title": "Veterans Day 2026 — Key Facts",
+      "facts": [
+        {
+          "label": "2026 date",
+          "value": "Wednesday, November 11, 2026"
+        },
+        {
+          "label": "Observed every",
+          "value": "November 11 (fixed date, any weekday)"
+        },
+        {
+          "label": "Who it honors",
+          "value": "All who have served in the U.S. armed forces — living and deceased"
+        },
+        {
+          "label": "Origin",
+          "value": "Armistice Day, marking the WWI armistice of November 11, 1918 (VA history)"
+        },
+        {
+          "label": "Renamed",
+          "value": "\"Armistice Day\" → \"Veterans Day\" in 1954"
+        },
+        {
+          "label": "Holiday status",
+          "value": "U.S. federal holiday (OPM)"
+        },
+        {
+          "label": "Not the same as",
+          "value": "Memorial Day (honors the fallen) or Armed Forces Day (honors active duty)"
+        },
+        {
+          "label": "Navy Week tie-in",
+          "value": "Falls during Flagstaff Navy Week (Nov 9–16, 2026)"
+        }
+      ],
+      "source": {
+        "label": "VA.gov — History of Veterans Day",
+        "url": "https://www.va.gov/opa/vetsday/vetdayhistory.asp"
+      },
+      "lastVerified": "June 2, 2026"
+    },
+    "eyebrow": "// Military Observances",
+    "faqs": [
+      {
+        "question": "When is Veterans Day 2026?",
+        "answer": "Veterans Day 2026 is observed on Wednesday, November 11, 2026. Veterans Day is always commemorated on November 11 each year, regardless of the day of the week, because the date marks the anniversary of the 1918 Armistice that ended the fighting in World War I."
+      },
+      {
+        "question": "Why is Veterans Day on November 11?",
+        "answer": "The fighting of World War I ended with an armistice that took effect at the 11th hour of the 11th day of the 11th month — 11:00 a.m. on November 11, 1918. The United States first marked the date as Armistice Day in 1919, Congress made it an annual observance in 1938, and in 1954 it was renamed Veterans Day to honor veterans of all American wars."
+      },
+      {
+        "question": "What's the difference between Veterans Day and Memorial Day?",
+        "answer": "Veterans Day (November 11) honors all who have served in the U.S. armed forces — living and deceased. Memorial Day (the last Monday in May) specifically honors service members who died while serving. A simple way to remember it: Memorial Day remembers those who gave their lives; Veterans Day thanks all who served."
+      },
+      {
+        "question": "How is Veterans Day different from Armed Forces Day?",
+        "answer": "Armed Forces Day (the third Saturday in May) honors people who are currently serving on active duty. Veterans Day honors those who have served and are no longer on active duty, while Memorial Day honors those who died in service. Together the three observances cover current members, former members, and the fallen."
+      },
+      {
+        "question": "Is Veterans Day a federal holiday?",
+        "answer": "Yes. Veterans Day is one of the eleven U.S. federal holidays. Federal offices are generally closed, and many schools, banks, and businesses observe it as well. When November 11 falls on a weekend, federal employees typically receive the adjacent Friday or Monday as the observed day off — but the commemoration itself stays on November 11."
+      },
+      {
+        "question": "How does the U.S. Navy observe Veterans Day?",
+        "answer": "The Navy marks Veterans Day with wreath-laying ceremonies, ship and base observances, community events, and outreach through the Navy Office of Community Outreach (NAVCO). Navy bands perform, color guards present the colors, and current Sailors join veterans at memorials and parades nationwide to recognize those who served."
+      },
+      {
+        "question": "Is there a Navy Week happening around Veterans Day 2026?",
+        "answer": "Yes. Flagstaff Navy Week runs November 9–16, 2026 — the grand finale of the 2026 \"Road Trip to 250\" — and includes Veterans Day on November 11. It is a natural opportunity to connect with Sailors, attend Navy band performances, and honor veterans in person."
+      },
+      {
+        "question": "What are good ways to honor veterans on Veterans Day?",
+        "answer": "You can attend a local Veterans Day ceremony or parade, thank a veteran in your life, fly the U.S. flag, support reputable veteran service organizations, volunteer at a VA medical center, or visit a national cemetery or memorial. Many businesses also offer recognition to veterans on the day."
+      },
+      {
+        "question": "Is Veterans Day spelled with an apostrophe?",
+        "answer": "No. The U.S. Department of Veterans Affairs uses \"Veterans Day\" without an apostrophe. The holiday is not a day that \"belongs to\" veterans (possessive); it is a day for honoring all veterans (attributive), so no apostrophe is used."
+      }
+    ],
+    "showsReferenceBacklink": true
+  },
+  "/best-credit-cards-for-military/": {
+    "disclosure": "Advertiser & editorial disclosure: NavyWeek.org is an independent, veteran-authored publication. We are not affiliated with, endorsed by, or sponsored by any card issuer, the U.S. Navy, or the Department of Defense. NavyWeek.org may earn a commission if you apply for a card through links on this page — that never changes our rankings, and opinions, analyses, and recommendations here are the author's alone and have not been reviewed or endorsed by any issuer. Card fees, rates, and welcome offers change frequently and vary by applicant; you may not be eligible for a given offer. Always confirm current terms on the issuer's official page before applying.",
+    "eyebrow": "// Military Money · Credit Cards",
+    "faqs": [
+      {
+        "question": "What credit cards waive the annual fee for military?",
+        "answer": "American Express, Chase, Citi, and U.S. Bank waive annual fees on personal cards for active-duty servicemembers under both SCRA and MLA — MLA also covers military spouses on their own cards. Capital One waives fees only under SCRA, which means the account must have been opened before active duty began. Navy Federal waives its $49 Flagship fee only under SCRA. Veterans and retirees are not covered by either law."
+      },
+      {
+        "question": "Does American Express waive annual fees for military?",
+        "answer": "Yes. American Express waives annual fees on all personal cards for active-duty servicemembers under both SCRA and MLA. MLA relief is applied automatically when an eligible servicemember or spouse opens a card during active duty; SCRA relief on pre-service accounts must be requested. Military spouses qualify for the MLA waiver on their own cards, not just as authorized users."
+      },
+      {
+        "question": "Does Chase waive credit card fees for military spouses?",
+        "answer": "Yes. Under the Military Lending Act, spouses of active-duty servicemembers are \"covered borrowers,\" so a spouse can open their own Chase personal card — including the Sapphire Reserve or Preferred — and have the annual fee waived. There is no requirement to be an authorized user; separate accounts also mean each spouse can earn their own welcome offer. Chase verifies MLA status automatically against the Department of Defense database."
+      },
+      {
+        "question": "What is the difference between SCRA and MLA?",
+        "answer": "SCRA (the Servicemembers Civil Relief Act) applies to credit you opened BEFORE active duty: it caps interest at 6% on pre-service debt, counts fees as interest, and must be requested. MLA (the Military Lending Act) applies to credit you open DURING active duty: it caps the Military APR at 36%, is applied automatically, and covers spouses and dependents enrolled in DEERS. Because annual fees count toward the 36% MAPR, major issuers simply waive them on MLA-covered accounts."
+      },
+      {
+        "question": "Do veterans get SCRA or MLA credit card benefits?",
+        "answer": "No. Both laws protect servicemembers on active duty only. SCRA relief can be requested up to 180 days after leaving active duty for debt incurred before service, but once that window closes the protections end, and MLA coverage ends when active service ends. Veterans should optimize for rewards and no-annual-fee cards instead — or credit-union programs like PenFed’s Honors Advantage, which explicitly includes honorably discharged veterans."
+      },
+      {
+        "question": "Does Capital One waive the Venture X annual fee for active duty?",
+        "answer": "Only under SCRA — never under MLA. That means the Venture X (or any Capital One card) must have been opened before your active-duty period began; open it during active duty and you will pay the $395 fee. Capital One’s SCRA program caps interest at 4%, better than the statutory 6%, and one request covers Discover accounts too, since Discover is now part of Capital One."
+      },
+      {
+        "question": "Do military credit card fee waivers apply to National Guard and Reserve?",
+        "answer": "Yes, while on qualifying orders. Guard and Reserve members serving on active orders of 30 or more consecutive days (Title 10, or Title 32 for SCRA-covered National Guard service) are treated as active duty for these protections, as are commissioned officers of the Public Health Service and NOAA. One practical play for Capital One cards: open the card before a qualifying activation, then request SCRA once on orders."
+      },
+      {
+        "question": "What is the maximum interest rate on a credit card for active-duty military?",
+        "answer": "Two caps apply. Under SCRA, interest on debt you incurred before active duty is capped at 6% — and fees count as interest, with the excess forgiven, not deferred. Under MLA, credit opened during active duty is capped at a 36% Military APR (MAPR), which also counts most fees. Several issuers voluntarily beat the SCRA cap: Capital One, Navy Federal, and USAA all cap covered accounts at 4%."
+      },
+      {
+        "question": "Is the Amex Platinum worth it for military?",
+        "answer": "For active-duty servicemembers, it is one of the strongest cards available: the $895 annual fee is waived under both SCRA and MLA, so you keep the lounge access and the card’s long menu of statement credits at no annual cost. A spouse can hold their own fee-waived Platinum under MLA. For veterans, the math changes — no waiver applies, so it is only worth it if you actually use enough of the credits and travel benefits to beat the fee."
+      },
+      {
+        "question": "What happens to my credit cards when I leave active duty?",
+        "answer": "MLA and SCRA fee waivers end when your covered status ends, so plan for annual fees to return. In practice fees may not resume immediately — issuers periodically re-check the DoD database — but budget as if they will. Before separation, decide card by card: keep the ones whose benefits beat the fee, downgrade the rest to no-fee versions rather than canceling, and avoid closing your oldest account, which shortens your credit history."
+      }
+    ],
+    "showsReferenceBacklink": false
+  },
+  "/our-process/": {
+    "eyebrow": "// OUR PROCESS · EDITORIAL STANDARDS",
+    "showsReferenceBacklink": false
+  }
+}

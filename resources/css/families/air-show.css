@@ -1,2 +1,538 @@
 /* Per-family parity CSS, ported from the legacy component inline styles.
-   Kept in its own file so parallel work never collides in app.css. */
+   Kept in its own file so parallel work never collides in app.css.
+
+   Sources: src/page-views/AirShowDetail.tsx (guide) and
+   src/page-views/AirShowHub.tsx (directory hub). Both lay the page out as a
+   stack of centered <section>s that own their own padding, so <main> itself
+   carries none. */
+
+/* ==========================================================================
+   Shared: section shell
+   ========================================================================== */
+.as-page,
+.ash-page {
+    padding: 0;
+}
+
+.as-page {
+    max-width: 900px;
+}
+
+.ash-page {
+    max-width: 1100px;
+}
+
+.as-section,
+.ash-section {
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.as-section {
+    padding: var(--space-xl) var(--space-2xl);
+}
+
+.as-hero,
+.ash-hero {
+    padding: var(--space-2xl) var(--space-2xl) var(--space-lg);
+}
+
+.as-related {
+    padding-bottom: var(--space-2xl);
+}
+
+.ash-shows,
+.ash-about,
+.ash-faq {
+    padding: 0 var(--space-2xl) var(--space-xl);
+}
+
+.ash-about,
+.ash-faq {
+    max-width: 900px;
+}
+
+/* The legacy breadcrumb dims the current page instead of accenting it, and the
+   "/" separators simply inherit the nav colour. */
+.as-page .breadcrumb [aria-current='page'],
+.ash-page .breadcrumb [aria-current='page'] {
+    color: var(--nw-gray-light);
+}
+
+.as-page .breadcrumb span[aria-hidden='true'],
+.ash-page .breadcrumb span[aria-hidden='true'] {
+    color: var(--nw-gray);
+}
+
+.as-section h2,
+.ash-section h2 {
+    border-bottom: none;
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin: 0 0 var(--space-md);
+    padding-bottom: 0;
+}
+
+.as-link,
+.as-page .as-p a,
+.as-page .as-dateline a {
+    color: var(--gold);
+    text-decoration: underline;
+}
+
+/* The legacy pages carry no `strong` rule at all, so bold runs keep the UA
+   `bolder` weight and inherit their colour. app.css instead re-styles `strong`
+   site-wide (600 / --nw-white), which re-flows every bolded sentence here. */
+.as-page strong,
+.ash-page strong {
+    color: inherit;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   Guide hero — /air-show/{slug}/
+   ========================================================================== */
+.as-pills {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.as-pill {
+    align-items: center;
+    border-radius: 999px;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    gap: 8px;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    text-transform: uppercase;
+}
+
+.as-pill-free {
+    background: rgba(90, 180, 110, 0.12);
+    border: 1px solid rgba(90, 180, 110, 0.5);
+    color: #86d39a;
+}
+
+.as-pill-ticketed {
+    background: rgba(201, 168, 76, 0.12);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+}
+
+.as-pill-status {
+    background: rgba(200, 90, 90, 0.12);
+    border: 1px solid rgba(200, 90, 90, 0.5);
+    color: #e6a4a4;
+}
+
+.as-place {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.as-page h1 {
+    font-size: clamp(40px, 5.5vw, 64px);
+    letter-spacing: 3px;
+    line-height: 1.05;
+    margin: 0 0 var(--space-sm);
+}
+
+.as-dateline {
+    color: var(--gold-light);
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0 0 var(--space-lg);
+    max-width: 760px;
+}
+
+/* ==========================================================================
+   Guide body sections
+   ========================================================================== */
+.as-p {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    max-width: 720px;
+}
+
+.as-body ul {
+    color: var(--nw-off-white);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    gap: var(--space-md);
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    padding-left: var(--space-lg);
+}
+
+.as-sources ul {
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    font-size: 14px;
+    gap: var(--space-sm);
+    line-height: 1.6;
+    margin: 0;
+    padding-left: var(--space-lg);
+}
+
+.as-sources a {
+    color: var(--gold);
+    text-decoration: underline;
+}
+
+.as-source-pub {
+    color: var(--nw-gray);
+}
+
+.as-back {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.as-back:hover {
+    text-decoration: none;
+}
+
+.as-back svg {
+    transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   Email-capture stub (a `cta` body block)
+   ========================================================================== */
+.as-email-cta {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    margin: var(--space-md) 0 var(--space-lg);
+    padding: var(--space-lg) var(--space-xl);
+}
+
+.as-email-heading {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-bottom: var(--space-sm);
+}
+
+.as-email-row {
+    align-items: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.as-email-row input {
+    background: var(--navy);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-radius: 2px;
+    color: var(--nw-white);
+    flex: 1 1 240px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    min-width: 0;
+    padding: 12px 14px;
+}
+
+.as-email-row button {
+    background: var(--gold);
+    border: none;
+    border-radius: 2px;
+    color: var(--navy);
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 12px 20px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Hub hero + directory table — /air-show/
+   ========================================================================== */
+.ash-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.ash-page h1 {
+    font-size: clamp(44px, 6vw, 72px);
+    letter-spacing: 4px;
+    line-height: 1;
+    margin: 0 0 var(--space-sm);
+}
+
+.ash-subtitle {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 32px);
+    letter-spacing: 3px;
+    margin: 0 0 var(--space-md);
+}
+
+.ash-p {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    max-width: 820px;
+}
+
+.ash-p-narrow {
+    max-width: 760px;
+}
+
+.ash-h2-icon {
+    color: var(--gold);
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.ash-table-wrap {
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.ash-table-wrap table {
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin: 0;
+    width: 100%;
+}
+
+.ash-table-wrap caption {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: var(--space-md) var(--space-md) 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.ash-table-wrap thead tr {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+}
+
+.ash-table-wrap thead th {
+    border-bottom: none;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 12px var(--space-md);
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.ash-table-wrap tbody tr {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+}
+
+.ash-table-wrap tbody tr:last-child {
+    border-bottom: none;
+}
+
+.ash-table-wrap tbody tr:hover {
+    background: none;
+}
+
+.ash-table-wrap tbody th,
+.ash-table-wrap tbody td {
+    border-bottom: none;
+    padding: 12px var(--space-md);
+    text-align: left;
+    vertical-align: top;
+}
+
+.ash-table-wrap tbody th[scope='row'] {
+    color: var(--gold-light);
+    font-family: var(--font-body);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.ash-show {
+    color: var(--nw-off-white);
+}
+
+.ash-show-name {
+    align-items: center;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ash-headliner {
+    color: var(--nw-gray);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2px;
+    margin-top: 2px;
+}
+
+.ash-loc {
+    color: var(--nw-gray-light);
+    white-space: nowrap;
+}
+
+.ash-guide a {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    text-decoration: underline;
+}
+
+.ash-soon {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.3px;
+}
+
+.ash-micro {
+    align-items: center;
+    border-radius: 999px;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.ash-micro-free {
+    background: rgba(90, 180, 110, 0.12);
+    border: 1px solid rgba(90, 180, 110, 0.45);
+    color: #86d39a;
+}
+
+.ash-micro-ticketed {
+    background: rgba(201, 168, 76, 0.12);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+}
+
+.ash-micro-status {
+    background: rgba(200, 90, 90, 0.12);
+    border: 1px solid rgba(200, 90, 90, 0.5);
+    color: #e6a4a4;
+}
+
+/* ==========================================================================
+   FAQ accordion (scoped to this family so a parallel port can't clash)
+   ========================================================================== */
+.as-page .nw-faq-list,
+.ash-page .nw-faq-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.as-page .nw-faq,
+.ash-page .nw-faq {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    padding: 0;
+}
+
+.as-page .nw-faq > summary,
+.ash-page .nw-faq > summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: space-between;
+    list-style: none;
+    padding: var(--space-md) 0;
+}
+
+.as-page .nw-faq > summary::before,
+.ash-page .nw-faq > summary::before {
+    content: none;
+}
+
+.as-page .nw-faq > summary::-webkit-details-marker,
+.ash-page .nw-faq > summary::-webkit-details-marker {
+    display: none;
+}
+
+.as-page .nw-faq > summary > h3,
+.ash-page .nw-faq > summary > h3 {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.as-page .nw-faq[open] > summary > h3,
+.ash-page .nw-faq[open] > summary > h3 {
+    color: var(--gold);
+}
+
+.as-page .nw-faq-chev,
+.ash-page .nw-faq-chev {
+    color: var(--nw-gray);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.as-page .nw-faq[open] .nw-faq-chev,
+.ash-page .nw-faq[open] .nw-faq-chev {
+    color: var(--gold);
+    transform: rotate(180deg);
+}
+
+.as-page .nw-faq-a,
+.ash-page .nw-faq-a {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 0 0 var(--space-md);
+}

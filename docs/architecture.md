@@ -509,6 +509,18 @@ erDiagram
         text credentials "Person.description / bio, nullable"
         string avatar_path "Person.image, nullable"
         json knows_about "Person.knowsAbout, nullable"
+        json profile_expertise "author-page expertise chips, nullable"
+        string service_title "author-page hero service line, nullable"
+        string current_title "author-page hero civilian line, nullable"
+        string location_city "author-page hero location, nullable"
+        string location_state "author-page hero location, nullable"
+        string location_country "Person.address country, nullable"
+        json military_timeline "author-page service entries, nullable"
+        json civilian_timeline "author-page career entries, nullable"
+        text expertise_lead "author-page expertise lead-in, nullable"
+        text works_lead "author-page works lead-in, nullable"
+        json featured_works "curated author-page credit links, nullable"
+        date profile_reviewed_at "author-page freshness stamp, nullable"
         text bio "Person.description — long-form author-page bio, nullable"
         string linkedin_url "Person.sameAs — LinkedIn profile, nullable"
     }
@@ -1142,15 +1154,27 @@ prefix resolved through `PagePaths`, and a `renderBody` match arm.
 `editorial_review_cadence`, `trust_page_label`, `shows_reference_backlink` — read
 by the shared partials under `resources/views/partials/trust/`. `offers.details`
 holds the "How it works" paragraphs. `users.military_service` /
-`users.civilian_career` back the author-profile sections.
+`users.civilian_career` back the author-profile sections; the structured
+`users.military_timeline` / `users.civilian_timeline` entry lists supersede that prose
+on the `/authors/{slug}/` page, alongside `service_title`, `current_title`, `location_*`,
+`profile_expertise` (kept apart from the compact byline `knows_about`), `expertise_lead`,
+`works_lead`, `featured_works` (the curated credit list that replaces the auto-derived
+byline list) and `profile_reviewed_at`.
 
 **New repository method.** `RankRepositoryInterface::designators()` returns the
 officer designators ordered by four-digit code.
 
 **New importers** (Stage-B, reading committed seed artifacts):
 `import:content-bodies` (long-form page bodies → `pages.body_blocks`) and
-`import:discount-details` (`offers.details`). Both are idempotent and fill only
-NULLs unless `--force`.
+`import:discount-details` (`offers.details`) and `import:author-profiles`
+(the structured `/authors/{slug}/` profile columns, keyed by the user's profile slug)
+and `import:content-page-meta` (the content pages' KeyFacts card, page-specific
+independence disclosure, hero eyebrow, `shows_reference_backlink` flag and FAQ rows,
+keyed by `url_path`). All are idempotent and fill only NULLs unless `--force`.
+
+**New `pages` columns.** `eyebrow` (the "// VETERANS BENEFITS" kicker above the h1)
+and `disclosure` (the page-specific independence-disclosure body; null falls back to
+the shared partial's standard reference wording).
 
 ### Editable URLs (auto-301, zero deploys)
 

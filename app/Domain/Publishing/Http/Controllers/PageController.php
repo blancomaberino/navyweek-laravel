@@ -231,7 +231,7 @@ final class PageController
      */
     private function renderYmylGuide(Page $page, string $heading, string $articleHeadline, string $description): Response
     {
-        $page->load(['author', 'reviewer']);
+        $page->load(['author', 'reviewer', 'faqs']);
         $crumbs = [
             ['name' => 'Home', 'url' => '/'],
             ['name' => 'Navy Reference', 'url' => '/navy-reference/'],
@@ -251,6 +251,7 @@ final class PageController
             'crumbs' => $crumbs,
             'heading' => $heading,
             'blocks' => $page->body_blocks ?? [],
+            'faqs' => $page->faqs,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);
@@ -272,6 +273,7 @@ final class PageController
             'crumbs' => $crumbs,
             'heading' => (string) $page->title,
             'blocks' => $page->body_blocks ?? [],
+            'faqs' => $page->faqs,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);
@@ -304,6 +306,7 @@ final class PageController
             'crumbs' => $crumbs,
             'heading' => 'Veterans Day 2026: History, Meaning & How the Navy Observes It',
             'blocks' => $page->body_blocks ?? [],
+            'faqs' => $page->faqs,
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

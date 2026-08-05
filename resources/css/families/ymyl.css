@@ -1,2 +1,454 @@
 /* Per-family parity CSS, ported from the legacy component inline styles.
    Kept in its own file so parallel work never collides in app.css. */
+
+/* ==========================================================================
+   Long-form editorial / YMYL guides — pages/content.blade.php.
+   Values ported from the inline styles in the legacy page views:
+     src/page-views/VaDisability.tsx
+     src/page-views/VeteransDay.tsx
+     src/page-views/VeteransHomeCare.tsx
+     src/page-views/BestCreditCardsForMilitary.tsx
+     src/page-views/OurProcess.tsx
+   ========================================================================== */
+
+/* Legacy <main style={{ maxWidth: 860, margin: '0 auto',
+   padding: 'var(--space-3xl) var(--space-2xl)' }}>. */
+.content-page {
+    margin: 0 auto;
+    max-width: 860px;
+    padding: var(--space-3xl) var(--space-2xl);
+}
+
+/* The hero wrapper is inert on every page whose legacy hero is a plain stack;
+   only /our-process/ turns it into a full-bleed band (below). */
+.content-hero {
+    display: contents;
+}
+
+/* The "// VETERANS BENEFITS" kicker above the h1 — legacy hero eyebrow div. */
+.content-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+/* h1: display face, tight leading, the hero block's 48px bottom margin folded in. */
+.content-page h1 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 52px);
+    letter-spacing: 2px;
+    line-height: 1.15;
+    margin: 0 0 var(--space-2xl);
+}
+
+/* Section headings — legacy <Section> title: gold display caps over a hairline
+   rule, with the 48px flex gap between sections folded into margin-top. */
+.content-page h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    margin: var(--space-2xl) 0 var(--space-md);
+    padding-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+/* Sub-headings — legacy <SubHeading>: mono micro-caps, no rule. */
+.content-page h3 {
+    border-bottom: 0;
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    line-height: 1.75;
+    margin: var(--space-xl) 0 var(--space-md);
+    padding-bottom: 0;
+    text-transform: uppercase;
+}
+
+/* Section body copy — legacy section content div: 15px/1.75, gray-light, with a
+   16px flex gap between blocks. */
+.content-page p {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0 0 var(--space-md);
+}
+
+.content-page .content-lead {
+    color: var(--nw-off-white);
+    font-size: 17px;
+    line-height: 1.75;
+    margin-bottom: var(--space-xl);
+}
+
+/* The shared trust cards carry their own type scale — keep the body-copy rule
+   above from reaching into them. The card title takes this page's 1.5 heading
+   leading, not the 1.6 the pillar pages use. */
+.content-page .key-facts[data-llm-key-facts] h2 {
+    border-bottom: 0;
+    line-height: 1.5;
+    padding-bottom: 0;
+}
+
+.content-page .key-facts-source {
+    color: var(--nw-gray-light);
+    font-size: 11px;
+    line-height: 1.5;
+    margin: var(--space-md) 0 0;
+}
+
+.content-page .trust-disclosure p {
+    color: var(--nw-off-white);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Legacy `ul` style object: 24px indent, 16px above, 8px between bullets. */
+.content-page .content-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: var(--space-xl) 0 var(--space-md);
+    padding-left: var(--space-lg);
+}
+
+.content-page .content-list li {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+/* FAQ, expanded treatment — legacy VaDisability/VeteransHomeCare: a display-face
+   question over its answer, with a 24px gap between entries. */
+.content-page .content-faq-item {
+    margin-bottom: var(--space-lg);
+}
+
+.content-page .content-faq-item h3 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    margin: 0 0 var(--space-xs);
+    padding-bottom: 0;
+    text-transform: none;
+}
+
+.content-page .content-faq-item p {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* FAQ, collapsed treatment — legacy VeteransDay/BestCreditCards: a stack of
+   <details> cards, closed at rest. */
+.content-faq {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.content-faq details {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    padding: var(--space-md) var(--space-lg);
+}
+
+/* `listStyle: 'revert'` in the legacy — the native disclosure triangle, not the
+   site-wide "+ / –" marker app.css swaps in. */
+.content-faq summary {
+    color: var(--nw-white);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.75;
+    list-style: revert;
+    padding: 0;
+}
+
+.content-faq summary::-webkit-details-marker {
+    display: revert;
+}
+
+.content-faq summary::before {
+    content: none;
+}
+
+.content-page .content-faq details p {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: var(--space-sm) 0 0;
+}
+
+/* "On this page" jump list — legacy <nav aria-label="On this page">. */
+.content-toc {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-lg);
+}
+
+.content-toc-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+}
+
+.content-toc ul {
+    display: grid;
+    gap: var(--space-sm) var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content-toc li span {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    color: var(--nw-off-white);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* -- policy pages (/privacy/, /terms/, /contact/) -------------------------- */
+.content-page--contact,
+.content-page--privacy,
+.content-page--terms {
+    max-width: 800px;
+}
+
+/* -- /veterans-home-care/ ------------------------------------------------- */
+.content-page--veterans-home-care h1 {
+    font-size: clamp(34px, 5.5vw, 50px);
+    letter-spacing: 1.5px;
+}
+
+.content-page--veterans-home-care .content-toc {
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.content-page--veterans-home-care .content-toc-label {
+    margin-bottom: var(--space-sm);
+}
+
+.content-page--veterans-home-care .content-toc ul {
+    gap: 6px var(--space-lg);
+}
+
+.content-page--veterans-home-care .content-toc li span {
+    border-bottom: 0;
+}
+
+/* -- /best-credit-cards-for-military/ ------------------------------------- */
+.content-page--best-credit-cards-for-military {
+    max-width: 1080px;
+}
+
+.content-page--best-credit-cards-for-military h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: 1.1;
+    margin-bottom: var(--space-xl);
+}
+
+.content-page--best-credit-cards-for-military h2 {
+    font-size: 26px;
+    margin-top: var(--space-3xl);
+}
+
+/* Legacy `.bcc-h3`: display face, sentence case, no micro-caps treatment. */
+.content-page--best-credit-cards-for-military h3 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: none;
+}
+
+.content-page--best-credit-cards-for-military .content-lead {
+    color: var(--nw-white);
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 800px;
+}
+
+/* -- /our-process/ --------------------------------------------------------
+   A light editorial layout, not the navy guide layout: a full-bleed navy
+   breadcrumb bar, a centred navy hero band, then a white body in a 664px
+   column (legacy `.op-narrow` = a 760px box with 48px inner padding). */
+.content-page--our-process {
+    max-width: none;
+    padding: 0;
+}
+
+.content-page--our-process .breadcrumb {
+    background: var(--navy);
+    border-bottom: 1px solid #16243b;
+    color: #aeb6c2;
+    font-size: 12px;
+    gap: 9px;
+    letter-spacing: 0.04em;
+    margin: 0;
+    padding: 13px max(var(--space-2xl), calc((100% - 1180px) / 2 + var(--space-2xl)));
+    text-transform: none;
+}
+
+.content-page--our-process .breadcrumb a,
+.content-page--our-process .breadcrumb [aria-current='page'] {
+    color: #f7f8fa;
+}
+
+.content-page--our-process article {
+    background: #fff;
+    color: var(--navy);
+}
+
+.content-page--our-process .content-hero {
+    background: var(--navy);
+    color: #f7f8fa;
+    display: block;
+    padding: 72px var(--space-2xl) 80px;
+    text-align: center;
+}
+
+/* The hero kicker is larger and looser here than on the navy guide pages. */
+.content-page--our-process .content-eyebrow {
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    margin-bottom: 24px;
+}
+
+.content-page--our-process h1 {
+    font-size: 68px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin: 0 auto;
+    max-width: 880px;
+    text-transform: uppercase;
+}
+
+.content-page--our-process .content-hero .content-lead {
+    color: #c3cad4;
+    font-size: 20px;
+    line-height: 1.55;
+    margin: 26px auto 0;
+    max-width: 680px;
+}
+
+/* The hero byline strip: three centred columns (label above person), not the
+   navy card the guide pages use. The partial emits role/person pairs followed by
+   the dates block, so column auto-flow over two rows lands them in place. */
+.content-page--our-process .trust-byline {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    border-top: 1px solid #1e2d45;
+    display: grid;
+    gap: 0 36px;
+    grid-auto-flow: column;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    margin: 40px 0 0;
+    padding: 28px 0 0;
+    text-align: center;
+}
+
+.content-page--our-process .trust-byline-person {
+    display: block;
+    margin-bottom: 0;
+}
+
+.content-page--our-process .trust-byline-person img {
+    display: none;
+}
+
+.content-page--our-process .trust-byline-name {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.content-page--our-process .trust-byline-cred {
+    color: #8a93a2;
+    font-size: 13px;
+}
+
+.content-page--our-process article > :not(.content-hero) {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 664px;
+}
+
+.content-page--our-process .content-hero + * {
+    margin-top: var(--space-3xl);
+}
+
+.content-page--our-process p {
+    color: #26303f;
+    font-size: 17px;
+    line-height: 1.62;
+    margin-bottom: 18px;
+}
+
+.content-page--our-process article > .content-lead {
+    color: #26303f;
+    font-size: 19px;
+    line-height: 1.62;
+    margin-bottom: 18px;
+}
+
+.content-page--our-process h2 {
+    border-bottom: 0;
+    color: var(--navy);
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.05;
+    margin: var(--space-3xl) auto 18px;
+    padding-bottom: 0;
+}
+
+.content-page--our-process h3 {
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+/* Legacy `@media (max-width: 860px) { .op-h1 { font-size: 44px } }`. */
+@media (max-width: 860px) {
+    .content-page--our-process h1 {
+        font-size: 44px;
+    }
+}
+
+/* The hero byline strip is a wrapping flex row in the legacy — it stacks once
+   the three columns no longer fit. */
+@media (max-width: 700px) {
+    .content-page--our-process .trust-byline {
+        grid-auto-flow: row;
+        grid-template-rows: none;
+    }
+}

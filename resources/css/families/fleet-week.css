@@ -1,2 +1,771 @@
 /* Per-family parity CSS, ported from the legacy component inline styles.
-   Kept in its own file so parallel work never collides in app.css. */
+   Kept in its own file so parallel work never collides in app.css.
+
+   Source of truth: src/page-views/FleetWeekDetail.tsx + FleetWeekHub.tsx +
+   src/components/FleetWeekViewingMap.tsx (the legacy styling is inline in those
+   components — every value below is copied from them, not eyeballed).
+   Properties are alphabetized per the authored-CSS convention. */
+
+/* ==========================================================================
+   Shared shell — the legacy <main> is full-bleed and each <section> caps its
+   own width (900px on the detail guide, 1100px on the hub).
+   ========================================================================== */
+.fw-page,
+.fw-hub-page {
+    max-width: none;
+    padding: 0;
+}
+
+.fw-sec {
+    margin: 0 auto;
+    max-width: 900px;
+    padding: var(--space-xl) var(--space-2xl);
+    width: 100%;
+}
+.fw-sec--hero {
+    padding-bottom: var(--space-lg);
+    padding-top: var(--space-2xl);
+}
+.fw-sec--last {
+    padding-bottom: var(--space-2xl);
+}
+
+/* Section headings: 28px Bebas, no gold rule (the global `main section > h2`
+   underline belongs to other families). */
+.fw-sec > h2,
+.fw-hub-sec > h2,
+.fw-hub-head > h2 {
+    border-bottom: 0;
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: inherit;
+    margin: 0 0 var(--space-md);
+    padding-bottom: 0;
+}
+/* The season-bucket heading sits in a flex row that owns the spacing below it. */
+.fw-hub-head > h2 {
+    margin: 0;
+}
+.fw-h2-icon {
+    margin-right: 10px;
+    stroke: var(--gold);
+    vertical-align: middle;
+}
+
+/* The legacy pages carry no `strong` rule, so bold text is the UA default weight
+   and inherits its colour (app.css's site-wide 600/near-white is another family). */
+.fw-page strong,
+.fw-hub-page strong {
+    color: inherit;
+    font-weight: 700;
+}
+
+/* KeyFacts / editorial-policy headings: the legacy blocks have no gold rule under
+   the heading and no extra leading, and their <dt> carries no bottom margin —
+   app.css's site-wide `main section > h2` + `dt` defaults add 16px per block. */
+.fw-page .key-facts[data-llm-key-facts] h2,
+.fw-page section.editorial-policy h2,
+.fw-hub-page .key-facts[data-llm-key-facts] h2,
+.fw-hub-page section.editorial-policy h2 {
+    border-bottom: 0;
+    line-height: inherit;
+    padding-bottom: 0;
+}
+.fw-page .key-facts dt,
+.fw-hub-page .key-facts dt {
+    margin-bottom: 0;
+}
+
+/* TrustByline spacing: the legacy reviewer row is tighter than the author row
+   and the dates line sits 4px under it (app.css uses one value for both). */
+.fw-page .trust-byline-person ~ .trust-byline-person,
+.fw-hub-page .trust-byline-person ~ .trust-byline-person {
+    margin-bottom: 6px;
+}
+.fw-page .trust-byline-dates,
+.fw-hub-page .trust-byline-dates {
+    margin-top: 4px;
+}
+
+/* The legacy trail is Home / Fleet Week / {City} — leaf and separators muted. */
+.fw-page .breadcrumb [aria-current='page'],
+.fw-hub-page .breadcrumb [aria-current='page'] {
+    color: var(--nw-gray-light);
+}
+.fw-page .breadcrumb span[aria-hidden='true'],
+.fw-hub-page .breadcrumb span[aria-hidden='true'] {
+    color: var(--nw-gray);
+}
+
+/* ==========================================================================
+   Detail hero — status pill, H1, dek, status note, intro copy, CTA
+   ========================================================================== */
+.fw-statusrow {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+.fw-pill {
+    align-items: center;
+    border-radius: 999px;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    gap: 8px;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    text-transform: uppercase;
+}
+.fw-place {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* statusColors() in FleetWeekDetail.tsx — the same treatment drives the pill
+   and the status-note callout (the note keeps off-white body text). */
+.fw-pill.is-cancelled,
+.fw-note.is-cancelled {
+    background: rgba(220, 90, 70, 0.12);
+    border: 1px solid rgba(220, 90, 70, 0.5);
+    color: #ff8b7a;
+}
+.fw-pill.is-rescheduled,
+.fw-pill.is-off-season,
+.fw-note.is-rescheduled,
+.fw-note.is-off-season {
+    background: rgba(201, 168, 76, 0.12);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+}
+.fw-pill.is-none,
+.fw-note.is-none {
+    background: rgba(140, 140, 122, 0.12);
+    border: 1px solid rgba(140, 140, 122, 0.4);
+    color: var(--nw-gray-light);
+}
+.fw-pill.is-confirmed,
+.fw-pill.is-scheduled,
+.fw-note.is-confirmed,
+.fw-note.is-scheduled {
+    background: rgba(90, 180, 110, 0.12);
+    border: 1px solid rgba(90, 180, 110, 0.5);
+    color: #86d39a;
+}
+
+.fw-page h1 {
+    font-size: clamp(40px, 5.5vw, 64px);
+    letter-spacing: 3px;
+    line-height: 1.05;
+    margin: 0 0 var(--space-sm);
+}
+.fw-dek {
+    color: var(--gold-light);
+    font-family: var(--font-body);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 0 var(--space-lg);
+    max-width: 720px;
+}
+
+.fw-note {
+    align-items: flex-start;
+    border-radius: 4px;
+    display: flex;
+    font-family: var(--font-body);
+    font-size: 14px;
+    gap: 10px;
+    line-height: 1.6;
+    margin: 0 0 var(--space-lg);
+    max-width: 720px;
+    padding: var(--space-md) var(--space-lg);
+}
+.fw-note > svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+.fw-note > span {
+    color: var(--nw-off-white);
+}
+
+.fw-p {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    max-width: 720px;
+}
+.fw-p--flush {
+    margin: 0;
+}
+
+.fw-cta {
+    align-items: center;
+    background: var(--gold);
+    border-radius: 3px;
+    color: var(--navy);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    gap: 10px;
+    letter-spacing: 1.5px;
+    padding: 14px 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.fw-cta:hover {
+    color: var(--navy);
+    text-decoration: none;
+}
+.fw-cta-note {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    margin: var(--space-sm) 0 0;
+}
+
+/* ==========================================================================
+   Schedule table
+   ========================================================================== */
+.fw-table-wrap {
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    overflow-x: auto;
+}
+.fw-table {
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin: 0;
+    width: 100%;
+}
+.fw-table caption {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: var(--space-md) var(--space-md) 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+.fw-table thead tr {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+}
+.fw-table thead th {
+    border-bottom: 0;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 12px var(--space-md);
+    text-align: left;
+    text-transform: uppercase;
+}
+.fw-table thead th:first-child {
+    white-space: nowrap;
+}
+.fw-table tbody tr {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+}
+.fw-table tbody tr:last-child {
+    border-bottom: 0;
+}
+.fw-table tbody tr:hover {
+    background: none;
+}
+.fw-table tbody th {
+    border-bottom: 0;
+    color: var(--gold-light);
+    font-weight: 600;
+    padding: 12px var(--space-md);
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap;
+}
+.fw-table tbody td {
+    border-bottom: 0;
+    color: var(--nw-gray-light);
+    padding: 12px var(--space-md);
+    vertical-align: top;
+}
+.fw-table tbody td:first-of-type {
+    color: var(--nw-off-white);
+}
+.fw-table-day {
+    color: var(--nw-gray);
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    margin-top: 2px;
+}
+.fw-sched-note {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.3px;
+    line-height: 1.6;
+    margin: var(--space-md) 0 0;
+}
+
+/* ==========================================================================
+   Air show — performer checklist + the four timing notes
+   ========================================================================== */
+.fw-h3 {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    line-height: inherit;
+    margin: var(--space-lg) 0 var(--space-md);
+    text-transform: uppercase;
+}
+.fw-performers {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0 0 var(--space-lg);
+    padding: 0;
+}
+.fw-performers li {
+    align-items: flex-start;
+    color: var(--nw-off-white);
+    display: flex;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    gap: 10px;
+    line-height: 1.6;
+}
+.fw-performers svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    stroke: var(--gold);
+}
+.fw-muted {
+    color: var(--nw-gray);
+}
+.fw-air-notes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+.fw-air-window {
+    align-items: flex-start;
+    display: flex;
+    gap: 10px;
+}
+.fw-air-window svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    stroke: var(--gold);
+}
+
+/* ==========================================================================
+   Bullet lists — ship-tour rules, getting there, sources
+   ========================================================================== */
+.fw-rules {
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    font-size: 14px;
+    gap: var(--space-sm);
+    line-height: 1.7;
+    margin: 0;
+    padding-left: var(--space-lg);
+}
+.fw-getting {
+    color: var(--nw-off-white);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    gap: var(--space-md);
+    line-height: 1.7;
+    margin: 0;
+    padding-left: var(--space-lg);
+}
+.fw-sources {
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-body);
+    font-size: 14px;
+    gap: var(--space-sm);
+    line-height: 1.6;
+    margin: 0;
+    padding-left: var(--space-lg);
+}
+.fw-sources a {
+    color: var(--gold);
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Viewing spots — schematic SVG map + numbered cards
+   ========================================================================== */
+.fw-map {
+    background: var(--navy);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    margin: 0 0 var(--space-lg);
+    overflow: hidden;
+}
+.fw-map svg {
+    display: block;
+    height: auto;
+    width: 100%;
+}
+.fw-map-grid {
+    opacity: 0.18;
+}
+.fw-map-note {
+    border-top: 1px solid rgba(201, 168, 76, 0.1);
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    line-height: 1.6;
+    padding: var(--space-md);
+}
+.fw-spots {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.fw-spot {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    padding: var(--space-lg);
+}
+.fw-spot-head {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+.fw-spot-num {
+    align-items: center;
+    background: var(--gold);
+    border-radius: 50%;
+    color: var(--navy);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    height: 24px;
+    justify-content: center;
+    width: 24px;
+}
+.fw-spot-name {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 19px;
+    letter-spacing: 1px;
+}
+.fw-spot-why {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+.fw-spot-transit {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    margin-top: var(--space-sm);
+}
+
+/* ==========================================================================
+   Past years
+   ========================================================================== */
+.fw-past {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+.fw-past-row {
+    align-items: flex-start;
+    display: flex;
+    gap: var(--space-md);
+}
+.fw-past-year {
+    color: var(--gold);
+    flex-shrink: 0;
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 1px;
+    min-width: 60px;
+}
+
+/* ==========================================================================
+   FAQ accordion — FAQ_ACCORDION_CSS from src/page-views/DiscountDetail.tsx
+   ========================================================================== */
+.fw-faqs {
+    display: flex;
+    flex-direction: column;
+}
+.nw-faq {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    padding: 0;
+}
+.nw-faq > summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: space-between;
+    list-style: none;
+    padding: var(--space-md) 0;
+}
+.nw-faq > summary::-webkit-details-marker {
+    display: none;
+}
+.nw-faq > summary::before,
+.nw-faq[open] > summary::before {
+    content: none;
+}
+.nw-faq > summary > h3 {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: normal;
+    line-height: 1.4;
+    margin: 0;
+}
+.nw-faq[open] > summary > h3 {
+    color: var(--gold);
+}
+.nw-faq-chev {
+    color: var(--nw-gray);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+.nw-faq[open] .nw-faq-chev {
+    color: var(--gold);
+    transform: rotate(180deg);
+}
+.nw-faq-a {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    padding-bottom: var(--space-md);
+}
+
+/* ==========================================================================
+   Related guides + back link
+   ========================================================================== */
+.fw-related {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    margin-bottom: var(--space-xl);
+}
+.fw-related a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    display: block;
+    padding: var(--space-md);
+    text-decoration: none;
+}
+.fw-related a:hover {
+    text-decoration: none;
+}
+.fw-related-when {
+    color: var(--gold);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+.fw-related-city {
+    align-items: center;
+    color: var(--nw-white);
+    display: inline-flex;
+    font-family: var(--font-display);
+    font-size: 20px;
+    gap: 6px;
+    letter-spacing: 1px;
+}
+.fw-back {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: 8px;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.fw-back:hover {
+    text-decoration: none;
+}
+.fw-back svg {
+    transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   Hub (/fleetweek/) — 1100px sections, season buckets, city cards
+   ========================================================================== */
+.fw-hub-sec {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: 0 var(--space-2xl) var(--space-xl);
+    width: 100%;
+}
+.fw-hub-sec--hero {
+    padding-bottom: var(--space-lg);
+    padding-top: var(--space-2xl);
+}
+.fw-hub-sec--faq {
+    padding-bottom: var(--space-3xl);
+    padding-top: var(--space-xl);
+}
+.fw-hub-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+.fw-hub-page h1 {
+    font-size: clamp(44px, 6vw, 72px);
+    letter-spacing: 4px;
+    line-height: 1;
+    margin: 0 0 var(--space-md);
+}
+.fw-hub-intro {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-lg);
+    max-width: 760px;
+}
+.fw-hub-head {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+.fw-hub-head--tight {
+    margin-bottom: var(--space-sm);
+}
+.fw-hub-count {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+.fw-hub-lede {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-md);
+    max-width: 760px;
+}
+.fw-hub-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+.fw-hub-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    color: var(--nw-off-white);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    text-decoration: none;
+}
+.fw-hub-card:hover {
+    color: var(--nw-off-white);
+    text-decoration: none;
+}
+.fw-hub-card-top {
+    align-items: center;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: space-between;
+}
+.fw-hub-card-when {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.fw-hub-card-state {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.fw-hub-card-city {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+.fw-hub-card-brand {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.fw-hub-card-summary {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+.fw-hub-card-cta {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    margin-top: auto;
+    text-transform: uppercase;
+}

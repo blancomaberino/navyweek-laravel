@@ -1,2 +1,619 @@
 /* Per-family parity CSS, ported from the legacy component inline styles.
-   Kept in its own file so parallel work never collides in app.css. */
+   Kept in its own file so parallel work never collides in app.css.
+
+   Source of truth: src/page-views/LocalDiscountDetail.tsx (`LOCAL_DISCOUNT_CSS`,
+   the `ld-*` vocabulary) and src/page-views/LocalDiscountHubs.tsx (`LOCAL_HUB_CSS`,
+   the `lh-*` vocabulary). Ported declaration-for-declaration; the only edits are
+   `--app-font-mono` → `--font-mono` (the platform's token name) and the reset
+   block below. */
+
+/* The legacy page ships Tailwind preflight ONLY — it has no element-level design
+   system on top. The platform's app.css does (headings, p, lists, details/summary),
+   so those defaults have to be taken back off inside the family. `:where()` keeps
+   the reset at plain `.ld-page` specificity, so every `.ld-*` rule below still wins
+   on source order. */
+.ld-page :where(h1, h2, h3, h4) {
+    letter-spacing: normal;
+    line-height: inherit;
+    margin: 0;
+}
+.ld-page :where(ol, ul) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.ld-page :where(p) {
+    margin: 0;
+}
+.ld-page :where(details) {
+    padding: 0;
+}
+.ld-page :where(details) > :where(p) {
+    padding: 0;
+}
+.ld-page :where(summary)::before {
+    content: none;
+}
+/* app.css underlines every link on hover; the legacy family does not (only `.ld-src a`
+   opts in, further down). */
+.ld-page a:hover,
+.lh-page a:hover {
+    text-decoration: none;
+}
+
+/* The shared KeyFacts partial is the same component the legacy page renders, but
+   app.css gives it a heading line-height and a `dt` bottom margin the legacy
+   inline styles do not — both shift every section below by a pixel or two. */
+.ld-page .key-facts[data-llm-key-facts] h2 {
+    line-height: inherit;
+}
+.ld-page .key-facts dt {
+    margin-bottom: 0;
+}
+
+.ld-page {
+    background: var(--navy);
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+}
+.ld-wrap {
+    margin: 0 auto;
+    max-width: 1120px;
+    padding: 0 24px;
+}
+.ld-crumb {
+    align-items: center;
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    gap: 6px;
+    letter-spacing: .04em;
+    padding: 18px 0 4px;
+}
+.ld-crumb a {
+    color: var(--nw-gray-light);
+    text-decoration: none;
+}
+.ld-crumb a:hover {
+    color: var(--gold-light);
+}
+.ld-crumb .sep {
+    color: var(--nw-gray);
+}
+.ld-crumb .here {
+    color: var(--gold);
+}
+.ld-hero {
+    border-bottom: 1px solid var(--navy-light);
+    padding: 26px 0 30px;
+}
+.ld-pin {
+    align-items: center;
+    background: rgba(201, 168, 76, .12);
+    border: 1px solid rgba(201, 168, 76, .32);
+    border-radius: 999px;
+    color: var(--gold-pale);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: 8px;
+    letter-spacing: .1em;
+    padding: 6px 12px;
+    text-transform: uppercase;
+}
+.ld-h1 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: clamp(34px, 5.4vw, 54px);
+    font-weight: 400;
+    letter-spacing: .012em;
+    line-height: 1;
+    margin: 16px 0 12px;
+    text-transform: uppercase;
+}
+.ld-h1 em {
+    color: var(--gold);
+    font-style: normal;
+}
+.ld-tag {
+    color: var(--nw-gray-light);
+    font-size: 18px;
+    line-height: 1.55;
+    margin: 0;
+    max-width: 64ch;
+}
+.ld-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+.ld-badge {
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 7px;
+    color: var(--nw-off-white);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    padding: 7px 12px;
+}
+.ld-badge.ok {
+    background: rgba(26, 92, 58, .22);
+    border-color: rgba(26, 92, 58, .7);
+    color: #7fd9a2;
+}
+.ld-grid {
+    display: grid;
+    gap: 40px;
+    grid-template-columns: 1fr 340px;
+    padding: 34px 0 10px;
+}
+@media (max-width: 880px) {
+    .ld-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.ld-block {
+    margin-bottom: 34px;
+}
+.ld-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: .14em;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+}
+.ld-h2 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 27px;
+    font-weight: 400;
+    letter-spacing: .02em;
+    line-height: 1;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+}
+.ld-prose p {
+    line-height: 1.62;
+    margin: 0 0 15px;
+}
+/* `font-weight` + `max-width` are not in the legacy rule — they take back app.css's
+   global `.lead` utility (17px / weight 300 / 760px), which the legacy page has no
+   equivalent of. */
+.ld-prose p.lead {
+    color: var(--nw-white);
+    font-size: 18px;
+    font-weight: 400;
+    max-width: none;
+}
+.ld-steps {
+    counter-reset: s;
+    display: grid;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.ld-steps li {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-radius: 10px;
+    counter-increment: s;
+    padding: 14px 16px 14px 56px;
+    position: relative;
+}
+.ld-steps li::before {
+    background: var(--navy);
+    border: 1px solid var(--navy-light);
+    border-radius: 7px;
+    color: var(--gold);
+    content: counter(s);
+    display: grid;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    height: 28px;
+    left: 14px;
+    place-items: center;
+    position: absolute;
+    top: 13px;
+    width: 28px;
+}
+.ld-steps b {
+    color: var(--nw-white);
+    display: block;
+    margin-bottom: 2px;
+}
+.ld-steps span {
+    color: var(--nw-gray-light);
+    font-size: 14.5px;
+}
+.ld-tiers {
+    display: grid;
+    gap: 10px;
+}
+.ld-tier {
+    align-items: baseline;
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-radius: 10px;
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+    padding: 14px 16px;
+}
+.ld-tier .amt {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 26px;
+    line-height: 1;
+    white-space: nowrap;
+}
+.ld-tier .aud {
+    color: var(--nw-white);
+    font-size: 15px;
+    font-weight: 600;
+}
+.ld-tier .note {
+    color: var(--nw-gray-light);
+    font-size: 13px;
+    margin-top: 3px;
+}
+.ld-list {
+    display: grid;
+    gap: 9px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.ld-list li {
+    color: var(--nw-off-white);
+    display: flex;
+    font-size: 14.5px;
+    gap: 10px;
+    line-height: 1.5;
+}
+.ld-list li::before {
+    color: var(--gold);
+    content: "▹";
+    flex: none;
+}
+.ld-loc {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-left: 3px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 20px;
+}
+.ld-loc h3 {
+    color: var(--nw-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    margin: 0 0 10px;
+}
+.ld-bases {
+    display: grid;
+    gap: 9px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.ld-bases li {
+    align-items: flex-start;
+    color: var(--nw-gray-light);
+    display: flex;
+    font-size: 14.5px;
+    gap: 12px;
+}
+.ld-bases .mi {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding-top: 2px;
+    white-space: nowrap;
+}
+.ld-bases b {
+    color: var(--nw-white);
+}
+.ld-faq {
+    border-bottom: 1px solid var(--navy-light);
+}
+.ld-faq summary {
+    align-items: center;
+    color: var(--nw-white);
+    cursor: pointer;
+    display: flex;
+    font-size: 15.5px;
+    font-weight: 600;
+    gap: 16px;
+    justify-content: space-between;
+    list-style: none;
+    padding: 15px 0;
+}
+.ld-faq summary::-webkit-details-marker {
+    display: none;
+}
+.ld-faq summary::after {
+    color: var(--gold);
+    content: "+";
+    font-family: var(--font-mono);
+    font-size: 20px;
+}
+.ld-faq[open] summary::after {
+    content: "–";
+}
+.ld-faq p {
+    color: var(--nw-gray-light);
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 0 0 16px;
+}
+.ld-src {
+    display: grid;
+    gap: 8px;
+}
+.ld-src a {
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    text-decoration: none;
+}
+.ld-src a:hover {
+    text-decoration: underline;
+}
+.ld-src .pub {
+    color: var(--nw-gray);
+}
+.ld-side {
+    position: relative;
+}
+.ld-nap {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-radius: 12px;
+    overflow: hidden;
+    position: sticky;
+    top: 16px;
+}
+.ld-nap-head {
+    background: var(--navy);
+    border-bottom: 1px solid var(--navy-light);
+    padding: 16px 18px;
+}
+.ld-nap-head .co {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: .03em;
+    text-transform: uppercase;
+}
+.ld-nap-head .loc {
+    color: var(--gold-pale);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .06em;
+    margin-top: 2px;
+}
+.ld-map {
+    background: var(--navy);
+    border: 0;
+    border-bottom: 1px solid var(--navy-light);
+    display: block;
+    height: 150px;
+    width: 100%;
+}
+.ld-nap-body {
+    display: grid;
+    gap: 14px;
+    padding: 16px 18px;
+}
+.ld-nap-row {
+    color: var(--nw-off-white);
+    display: grid;
+    font-size: 14px;
+    gap: 10px;
+    grid-template-columns: 20px 1fr;
+}
+.ld-nap-row .lab {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+.ld-nap-row a {
+    color: var(--gold-light);
+    text-decoration: none;
+}
+.ld-nap-hours {
+    color: var(--nw-gray-light);
+    display: grid;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    gap: 2px;
+}
+.ld-cta {
+    background: var(--gold);
+    color: #1b1405;
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    padding: 13px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.ld-cta:hover {
+    background: var(--gold-light);
+}
+.ld-verif {
+    background: var(--navy);
+    border-top: 1px solid var(--navy-light);
+    color: var(--nw-gray-light);
+    font-size: 13px;
+    padding: 13px 18px;
+}
+.ld-verif b {
+    color: var(--nw-white);
+}
+.ld-disclaim {
+    border-top: 1px solid var(--navy-light);
+    color: var(--nw-gray);
+    font-size: 12.5px;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px 0 34px;
+}
+
+/* ---- Rollup hubs (/discounts/, /discounts/{state}/, /discounts/{state}/{city}/) ---- */
+
+.lh-page :where(h1, h2, h3, h4) {
+    letter-spacing: normal;
+    line-height: inherit;
+    margin: 0;
+}
+.lh-page :where(p) {
+    margin: 0;
+}
+
+.lh-page {
+    background: var(--navy);
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    min-height: 60vh;
+}
+.lh-wrap {
+    margin: 0 auto;
+    max-width: 1080px;
+    padding: 0 24px;
+}
+.lh-crumb {
+    align-items: center;
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    gap: 6px;
+    letter-spacing: .04em;
+    padding: 18px 0 4px;
+}
+.lh-crumb a {
+    color: var(--nw-gray-light);
+    text-decoration: none;
+}
+.lh-crumb a:hover {
+    color: var(--gold-light);
+}
+.lh-crumb .sep {
+    color: var(--nw-gray);
+}
+.lh-crumb .here {
+    color: var(--gold);
+}
+.lh-hero {
+    border-bottom: 1px solid var(--navy-light);
+    margin-bottom: 30px;
+    padding: 24px 0 26px;
+}
+.lh-eyebrow {
+    align-items: center;
+    color: var(--gold);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: 10px;
+    letter-spacing: .14em;
+    margin: 0 0 12px;
+    text-transform: uppercase;
+}
+.lh-eyebrow::before {
+    background: var(--gold);
+    content: "";
+    height: 2px;
+    width: 24px;
+}
+.lh-h1 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    letter-spacing: .012em;
+    line-height: 1;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+}
+.lh-h1 em {
+    color: var(--gold);
+    font-style: normal;
+}
+.lh-intro {
+    color: var(--nw-gray-light);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 66ch;
+}
+.lh-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    padding-bottom: 40px;
+}
+.lh-card {
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-light);
+    border-radius: 12px;
+    display: block;
+    padding: 18px 20px;
+    text-decoration: none;
+    transition: border-color .15s, transform .15s;
+}
+.lh-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+}
+.lh-card .nm {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: .02em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+.lh-card .sub {
+    color: var(--gold-pale);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    margin-top: 6px;
+}
+.lh-card .meta {
+    color: var(--nw-gray-light);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+.lh-card .go {
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .04em;
+    margin-top: 12px;
+}
+.lh-note {
+    border-top: 1px solid var(--navy-light);
+    color: var(--nw-gray);
+    font-size: 12.5px;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px 0 34px;
+}

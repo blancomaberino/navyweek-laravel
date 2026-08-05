@@ -73,7 +73,6 @@ h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: 0.5px;
-    line-height: 1.05;
     margin: 0 0 var(--space-md);
 }
 
@@ -84,7 +83,7 @@ h3 { font-size: 1.5rem; }
 p { margin: 0 0 var(--space-md); }
 a { color: var(--gold); text-decoration: none; }
 a:hover { color: var(--gold-light); text-decoration: underline; }
-strong { color: var(--nw-white); font-weight: 600; }
+strong { font-weight: bolder; }
 em { color: var(--nw-off-white); }
 hr { border: 0; border-top: 1px solid rgba(201, 168, 76, 0.2); margin: var(--space-2xl) 0; }
 
@@ -212,66 +211,6 @@ ul, ol { margin: 0 0 var(--space-md); padding-left: 1.4em; }
 }
 .byline-name { color: var(--nw-off-white); font-weight: 600; margin: 2px 0; }
 .byline-verified { color: var(--nw-gray); font-family: var(--font-mono); font-size: 0.72rem; margin: 0; }
-
-/* Author profile (/authors/{slug}/) */
-.author-page { max-width: 860px; }
-.author-hero {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xl);
-    margin-bottom: var(--space-2xl);
-}
-.author-avatar {
-    background: var(--navy-mid);
-    border: 3px solid var(--gold);
-    border-radius: 50%;
-    flex-shrink: 0;
-    height: 160px;
-    object-fit: cover;
-    width: 160px;
-}
-.author-hero-body { flex: 1 1 320px; min-width: 0; }
-.author-hero-body h1 { margin-bottom: var(--space-sm); }
-.author-role { color: var(--gold-light); font-size: 1.05rem; margin: 0 0 var(--space-xs); }
-.author-credentials {
-    color: var(--nw-gray-light);
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    letter-spacing: 0.5px;
-    margin: 0;
-}
-.author-bio { margin-bottom: var(--space-2xl); }
-.author-section { margin-bottom: var(--space-2xl); }
-.author-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    list-style: none;
-    margin: var(--space-md) 0 0;
-    padding: 0;
-}
-.author-chips li {
-    background: var(--navy-mid);
-    border: 1px solid rgba(201, 168, 76, 0.25);
-    border-radius: 2px;
-    color: var(--gold-light);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-    margin: 0;
-    padding: 6px 12px;
-}
-.author-links { list-style: none; margin: var(--space-md) 0 0; padding: 0; }
-.author-links li { margin-bottom: var(--space-sm); }
-.author-links a { text-decoration: underline; }
-.author-disclosure {
-    border-top: 1px solid rgba(201, 168, 76, 0.15);
-    color: var(--nw-gray);
-    font-size: 0.85rem;
-    margin-top: var(--space-2xl);
-    padding-top: var(--space-lg);
-}
 
 /* Section headings with a gold underline */
 main section > h2 {
@@ -436,8 +375,6 @@ summary {
     padding: var(--space-sm) 0;
 }
 summary::-webkit-details-marker { display: none; }
-summary::before { color: var(--gold); content: '+ '; font-family: var(--font-mono); }
-details[open] summary::before { content: '– '; }
 details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--space-sm); }
 
 /* Sources */
@@ -768,7 +705,7 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
 .deals-card-logo img { display: block; height: auto; max-height: 32px; max-width: 120px; width: auto; }
 .deals-card-headline { color: var(--gold); font-family: var(--font-display); font-size: 24px; letter-spacing: 1px; line-height: 1.15; }
 .deals-card-company { color: var(--nw-white); display: block; font-family: var(--font-display); font-size: 22px; letter-spacing: 1px; margin-bottom: 4px; }
-.deals-card-category { color: var(--nw-gray); font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; }
+.deals-card-category { color: var(--nw-gray); display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; line-height: 1.5; text-transform: uppercase; }
 .deals-card-cta { color: var(--gold); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; margin-top: auto; text-transform: uppercase; }
 .deals-foot { margin-top: var(--space-2xl); text-align: center; }
 .deals-all {

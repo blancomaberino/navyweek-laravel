@@ -123,3 +123,88 @@ it('resolves the byline Person @id to the custom profile path, not the family de
         // …not the synthesized family-default path.
         ->assertDontSee('/authors/t-alford/#person', false);
 });
+
+it('renders the structured career timelines, hero location and curated works over the byline list', function () {
+    $author = User::factory()->create([
+        'name' => 'T Madden Alford',
+        'slug' => 't-alford',
+        'job_title' => 'Editor, NavyWeek.org',
+        'service_title' => 'Captain (O-6), U.S. Navy Reserve',
+        'current_title' => 'Co-Founder & Head of Growth, Honest Paws',
+        'location_city' => 'League City',
+        'location_state' => 'Texas',
+        'military_timeline' => [[
+            'title' => 'Assistant Engineer, USS Key West (SSN-722)',
+            'org' => 'United States Navy',
+            'period' => 'May 2006 – Feb 2007',
+            'detail' => 'Submarine officer aboard a Los Angeles-class fast-attack submarine.',
+        ]],
+        'civilian_timeline' => [[
+            'title' => 'Co-Founder & President',
+            'org' => 'Triton Well Services LLC',
+            'period' => 'Mar 2014 – Jul 2015',
+            'detail' => null,
+        ]],
+        'knows_about' => ['military discounts'],
+        'profile_expertise' => ['Nuclear weapon surety'],
+        'expertise_lead' => 'Topics T Madden Alford covers and reviews for NavyWeek.org:',
+        'featured_works' => [[
+            'url' => '/va-disability/',
+            'label' => 'VA Disability: Ratings, Pay, and How to File in 2026',
+            'note' => 'author',
+        ]],
+        'profile_reviewed_at' => '2026-05-01',
+    ]);
+
+    // A byline-derived page: the curated list must WIN over it, the way the legacy page
+    // listed two hand-picked credits rather than every auto-bylined guide.
+    Page::factory()->create([
+        'author_id' => $author->id,
+        'title' => 'Some Auto-Bylined Guide',
+        'url_path' => '/discount/nike-military-veteran/',
+    ]);
+
+    app(GenerateAuthorPagesAction::class)();
+
+    authorFetch('/authors/t-alford/')
+        ->assertOk()
+        // Hero: the service line and the civilian line are distinct from job_title.
+        ->assertSee('Captain (O-6), U.S. Navy Reserve')
+        ->assertSee('Co-Founder &amp; Head of Growth, Honest Paws', false)
+        ->assertSee('League City, Texas')
+        // Timelines, not the prose columns.
+        ->assertSee('Assistant Engineer, USS Key West (SSN-722)')
+        ->assertSee('May 2006 – Feb 2007')
+        ->assertSee('Los Angeles-class fast-attack submarine')
+        ->assertSee('Triton Well Services LLC')
+        // The profile's own expertise list, not the compact discount byline list.
+        ->assertSee('Topics T Madden Alford covers and reviews for NavyWeek.org:')
+        ->assertSee('<li>Nuclear weapon surety</li>', false)
+        // `knows_about` stays the byline list the discount guides cite — it is NOT a chip.
+        ->assertDontSee('<li>military discounts</li>', false)
+        // Curated credits replace the auto-derived byline list entirely.
+        ->assertSee('VA Disability: Ratings, Pay, and How to File in 2026')
+        // (It survives only in the head's ItemList JSON-LD, which AuthorPageSchema owns.)
+        ->assertDontSee('>Some Auto-Bylined Guide</a>', false)
+        ->assertSee('Profile last reviewed: May 2026');
+});
+
+it('falls back to the prose columns and the byline list when no structured profile is set', function () {
+    $author = User::factory()->create([
+        'slug' => 'erik-rivera',
+        'job_title' => 'Expert Reviewer, NavyWeek.org',
+        'military_service' => 'U.S. Naval Academy class of 2004.',
+        'knows_about' => ['Naval Special Operations'],
+    ]);
+    Page::factory()->create(['reviewer_id' => $author->id, 'title' => 'Navy Ranks Reference']);
+
+    app(GenerateAuthorPagesAction::class)();
+
+    authorFetch('/authors/erik-rivera/')
+        ->assertOk()
+        ->assertSee('U.S. Naval Academy class of 2004.')
+        ->assertSee('Naval Special Operations')
+        ->assertSee('REVIEWS FOR NAVYWEEK.ORG')
+        ->assertSee('Navy Ranks Reference')
+        ->assertDontSee('Profile last reviewed');
+});

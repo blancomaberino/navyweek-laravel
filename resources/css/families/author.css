@@ -1,2 +1,210 @@
 /* Per-family parity CSS, ported from the legacy component inline styles.
    Kept in its own file so parallel work never collides in app.css. */
+
+/* Author / reviewer profile (/authors/{slug}/).
+   Ported 1:1 from the inline styles in src/page-views/AuthorTAlford.tsx and
+   AuthorErikRivera.tsx (main padding 3xl/2xl, max-width 860). Credential
+   colouring follows the shared byline in src/components/ReferenceTrust.tsx. */
+.author-page {
+    max-width: 860px;
+    padding: var(--space-3xl) var(--space-2xl);
+}
+
+/* Legacy breadcrumb is inline mono text, not the site-wide uppercase flex row. */
+.author-page .breadcrumb {
+    color: var(--nw-gray);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-xl);
+    text-transform: none;
+}
+.author-page .breadcrumb a { color: var(--nw-gray); text-decoration: none; }
+.author-page .breadcrumb a:hover { color: var(--nw-gray); text-decoration: none; }
+.author-page .breadcrumb span[aria-hidden='true'] { color: var(--gold); margin: 0 var(--space-sm); }
+.author-page .breadcrumb [aria-current='page'] { color: var(--nw-off-white); }
+
+.author-hero {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+}
+.author-avatar {
+    background: var(--navy-mid);
+    border: 3px solid var(--gold);
+    border-radius: 50%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    height: 180px;
+    object-fit: cover;
+    width: 180px;
+}
+.author-hero-body { flex: 1 1 320px; min-width: 0; }
+.author-hero-body .eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-sm);
+    text-transform: uppercase;
+}
+.author-hero-body h1 {
+    color: var(--nw-white);
+    font-size: clamp(32px, 5vw, 44px);
+    letter-spacing: 2px;
+    line-height: 1.15;
+    margin: 0;
+}
+.author-role {
+    color: var(--gold-light);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: var(--space-md) 0 0;
+}
+.author-credentials {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 15px;
+    letter-spacing: normal;
+    line-height: 1.5;
+    margin: var(--space-xs) 0 0;
+}
+
+/* Legacy hero foot: the mono "City, State" line under the two identity lines. */
+.author-location {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    margin: var(--space-md) 0 0;
+}
+
+.author-bio { margin-bottom: var(--space-3xl); }
+.author-bio p {
+    color: var(--nw-off-white);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.75;
+    margin: 0;
+    max-width: none;
+}
+
+/* Legacy stacks the sections in a flex column with a space-3xl gap. */
+.author-section { margin-bottom: var(--space-3xl); }
+.author-page > .author-section:last-of-type { margin-bottom: 0; }
+.author-section h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-md);
+    padding-bottom: var(--space-sm);
+}
+.author-section > p {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0 0 var(--space-md);
+}
+.author-section > p:last-child { margin-bottom: 0; }
+
+/* Career timeline: an <ol> of gold-left-rule entries (legacy <Timeline/>). The rule
+   colour and the 1.75 body leading are inherited from the legacy Section wrapper. */
+.author-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.author-timeline > li {
+    border-left: 2px solid rgba(201, 168, 76, 0.3);
+    margin: 0;
+    padding-left: var(--space-lg);
+}
+.author-timeline-title {
+    color: var(--nw-white);
+    display: block;
+    font-family: var(--font-display);
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    line-height: 1.75;
+}
+.author-timeline-org {
+    color: var(--gold-light);
+    display: block;
+    font-size: 14px;
+    line-height: 1.75;
+    margin-top: 2px;
+}
+.author-timeline-period {
+    color: var(--nw-gray);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    line-height: 1.75;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+.author-timeline-detail {
+    color: var(--nw-gray-light);
+    font-size: 14px;
+    line-height: 1.65;
+    margin: var(--space-sm) 0 0;
+}
+
+/* The 15px/1.75 pair is the legacy Section body inherited by the chips and links. */
+.author-chips {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 15px;
+    gap: var(--space-sm);
+    line-height: 1.75;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.author-chips li {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 2px;
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 6px 12px;
+}
+
+.author-links {
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    gap: var(--space-sm);
+    line-height: 1.75;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.author-links li { margin: 0; }
+.author-links a { color: var(--gold); font-size: 15px; text-decoration: underline; }
+.author-work-note { color: var(--nw-gray); font-size: 13px; margin-left: 8px; }
+
+/* Legacy profile foot: "Profile last reviewed: {Month Year}". */
+.author-reviewed {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: 0;
+    margin-top: var(--space-3xl);
+}
