@@ -29,17 +29,14 @@
                 {{-- The legacy records carry a separate on-page `h1` distinct from the
                      <title> (`metaTitle`), so prefer it and fall back to the title. --}}
                 <h1>{{ $page->h1 ?? $page->title }}</h1>
-                @if ($offer->headline_discount)
-                    <p class="headline-discount">{{ $offer->headline_discount }}</p>
-                @endif
-                @if ($offer->discount_summary)
-                    <p class="discount-summary">{{ $offer->discount_summary }}</p>
+                @if ($offer->hero_tagline || $offer->discount_summary)
+                    <p class="discount-summary">{{ $offer->hero_tagline ?: $offer->discount_summary }}</p>
                 @endif
 
                 @if ($offer->official_url)
                     <p class="cta">
                         <a class="cta-primary" href="{{ $offer->official_url }}" rel="sponsored noopener noreferrer" target="_blank">
-                            {{ $offer->cta_label ?? 'Get this discount' }}
+                            {{ $offer->cta_label ?: 'Verify & redeem at '.($offer->connection?->brand ?? 'the brand') }}
                         </a>
                         @if ($offer->cta_subnote)
                             <span class="cta-subnote">{{ $offer->cta_subnote }}</span>
@@ -197,7 +194,7 @@
             @if ($offer->official_url)
                 <footer class="sticky-cta">
                     <a class="cta-primary" href="{{ $offer->official_url }}" rel="sponsored noopener noreferrer" target="_blank">
-                        {{ $offer->sticky_cta_label ?? $offer->cta_label ?? 'Get this discount' }}
+                        {{ $offer->sticky_cta_label ?: ($offer->cta_label ?: 'Verify & redeem at '.($offer->connection?->brand ?? 'the brand')) }}
                     </a>
                 </footer>
             @endif

@@ -34,6 +34,7 @@ use Illuminate\Support\Carbon;
  * @property string|null $discount_summary
  * @property array<int, string>|null $details
  * @property array<int, string>|null $intro
+ * @property string|null $hero_tagline
  * @property VerificationProvider|null $verification
  * @property string|null $verification_url
  * @property string|null $official_url
@@ -82,6 +83,7 @@ class Offer extends Model
         'discount_summary',
         'details',
         'intro',
+        'hero_tagline',
         'verification',
         'verification_url',
         'official_url',
