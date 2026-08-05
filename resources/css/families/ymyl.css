@@ -631,12 +631,18 @@
     margin: var(--space-sm) 0 var(--space-2xl);
 }
 
+/* The legacy line is a <div>, so it takes the document's 1.5 rather than the
+   1.75 this page's paragraphs use — 3px, which shifted everything below it. */
 .content-page .content-verified {
     color: var(--nw-gray);
     font-family: var(--font-mono);
     font-size: 12px;
     letter-spacing: 1px;
+    line-height: 1.5;
     margin: var(--space-md) 0 var(--space-xl);
+}
+.content-page .content-verified span {
+    color: var(--nw-off-white);
 }
 
 /* Inline "On this page:" strip — legacy `.bcc-toc`. */
@@ -2080,4 +2086,62 @@
     .veterans-day-free-meals .vdm-table td[data-label='Brand']::before {
         display: none;
     }
+}
+
+/* /our-process/ byline strip — OurProcess.tsx:120-142. A centred three-up row
+   under a hairline rule: upper-case mono role labels, 16px/600 names, 13px short
+   credentials, and a green "facts verified" pill with a dot. No portraits, no
+   dates line. */
+.op-byline {
+    border-top: 1px solid #1e2d45;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+    justify-content: center;
+    margin-top: 40px;
+    padding-top: 28px;
+}
+.op-byline-role {
+    color: #7e8896;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+}
+.op-byline-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+.op-byline-cred {
+    color: #8a93a2;
+    font-size: 13px;
+    margin-top: 2px;
+}
+.op-byline-pill {
+    align-items: center;
+    background: var(--nw-green);
+    border-radius: 2px;
+    color: #fff;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    gap: 8px;
+    letter-spacing: 0.06em;
+    margin-top: 8px;
+    padding: 7px 13px;
+}
+.op-byline-pill span {
+    background: #7fe6a8;
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+}
+
+/* The card-name cell is a link the legacy styles at weight 600 (.bcc-cardlink),
+   not a <strong>. Our extractor recorded that 600 as `bold`, and `strong`
+   inherits Tailwind's relative `bolder`, which resolves to 700 — ~1.7px wider per
+   name. That widened the table's auto-layout column by 1.5px, which was just
+   enough for "AMERICAN EXPRESS" to stop wrapping and cost the table 27px. */
+.content-page--best-credit-cards-for-military .content-table a strong {
+    font-weight: 600;
 }

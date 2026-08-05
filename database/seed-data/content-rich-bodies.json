@@ -3010,7 +3010,14 @@
     "type": "paragraph",
     "spans": [
      {
-      "text": "July 16, 2026"
+      "text": "Fees & issuer policies verified: "
+     },
+     {
+      "text": "July 16, 2026",
+      "emphasis": true
+     },
+     {
+      "text": " · Next review: October 2026"
      }
     ],
     "slot": "hero",

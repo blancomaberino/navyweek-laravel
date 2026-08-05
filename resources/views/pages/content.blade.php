@@ -43,6 +43,12 @@
             if ($span['italic'] ?? false) {
                 $piece = '<em>'.$piece.'</em>';
             }
+            // A bare <span> the block's own CSS colours — the legacy highlights a
+            // value inside a line (a verified date, a figure) with colour alone,
+            // which is neither <strong> nor <em>.
+            if ($span['emphasis'] ?? false) {
+                $piece = '<span>'.$piece.'</span>';
+            }
             if (filled($span['url'] ?? null)) {
                 $url = LinkUrl::sanitize((string) $span['url']);
                 $offsite = str_starts_with($url, 'http');
@@ -258,7 +264,31 @@
                      leads with the publish date (BestCreditCardsForMilitary.tsx:529);
                      the other guides carry their own "last reviewed / sources checked"
                      line. --}}
-                @if ($showsByline)
+                @if ($page->slug === 'our-process')
+                    {{-- /our-process/ has its own byline entirely (OurProcess.tsx:120-142):
+                         a centred three-up strip with upper-case role labels, short
+                         credentials and a green "facts verified" pill — no portraits and
+                         no dates line. Credentials come from the page's own columns. --}}
+                    <div class="op-byline">
+                        @foreach ([['WRITTEN BY', $page->author, $page->author_credentials], ['REVIEWED BY', $page->reviewer, $page->reviewer_credentials]] as [$role, $person, $credentials])
+                            @if ($person)
+                                <div>
+                                    <div class="op-byline-role">{{ $role }}</div>
+                                    <a class="op-byline-link" href="/authors/{{ $person->slug }}/">
+                                        <div class="op-byline-name">{{ $person->name }}</div>
+                                    </a>
+                                    <div class="op-byline-cred">{{ $credentials ?? $person->credentials }}</div>
+                                </div>
+                            @endif
+                        @endforeach
+                        @if ($page->last_reviewed)
+                            <div>
+                                <div class="op-byline-role">FACTS VERIFIED</div>
+                                <div class="op-byline-pill"><span></span>{{ strtoupper($page->last_reviewed->format('M j, Y')) }}</div>
+                            </div>
+                        @endif
+                    </div>
+                @elseif ($showsByline)
                     @include('partials.trust.byline', ['publishDate' => $page->slug === 'best-credit-cards-for-military'])
                 @endif
             </div>
