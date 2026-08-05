@@ -57,12 +57,14 @@ final class ChromeCatalog
                 'category' => $connection->category,
                 'logo' => $connection->logo_url,
                 'published' => $page->date_published?->toDateString() ?? '',
+                'order' => $offer->sort_order ?? PHP_INT_MAX,
             ];
         }
 
-        // Newest published first (mirrors the legacy DealsSection sort); ISO dates
-        // compare correctly as strings and usort keeps it a list.
-        usort($rows, static fn (array $a, array $b): int => $b['published'] <=> $a['published']);
+        // Newest published first (mirrors the legacy DealsSection sort). The legacy
+        // sort is STABLE, so equal dates keep the curated registry order — without
+        // that tie-break the list diverges from the live page at the first tie.
+        usort($rows, static fn (array $a, array $b): int => [$b['published'], $a['order']] <=> [$a['published'], $b['order']]);
 
         return $this->deals = array_map(
             static fn (array $d): array => [

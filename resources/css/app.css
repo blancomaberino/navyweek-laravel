@@ -842,6 +842,7 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     text-transform: uppercase;
 }
 .trust-byline-person { align-items: center; display: flex; gap: 10px; margin-bottom: 12px; }
+.trust-byline-person:last-of-type { margin-bottom: 6px; }
 .trust-byline-person img {
     border: 2px solid var(--gold);
     border-radius: 50%;
@@ -853,7 +854,14 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
 .trust-byline-name { color: var(--gold); font-weight: 600; text-decoration: underline; }
 .trust-byline-name.is-reviewer { color: var(--gold-light); }
 .trust-byline-cred { color: var(--nw-gray-light); }
-.trust-byline-dates, .trust-byline-process {
+.trust-byline-dates {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+.trust-byline-process {
     color: var(--nw-gray);
     font-family: var(--font-mono);
     font-size: 11px;
