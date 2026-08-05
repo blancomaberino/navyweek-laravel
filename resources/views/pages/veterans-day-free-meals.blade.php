@@ -18,7 +18,7 @@
 
         <header class="fm-hero">
             <p class="eyebrow">// Veterans Day 2026 · Free Meals</p>
-            <h1>Veterans Day Free Meals 2026</h1>
+            <h1>{{ $page->h1 ?? 'VETERANS DAY FREE MEALS 2026' }}</h1>
             <p class="intro">
                 Where veterans and service members can get a free meal on Wednesday, November 11, 2026.
                 Every offer below is checked against the restaurant's <strong>own official source</strong>
@@ -55,8 +55,9 @@
             </p>
         </section>
 
-        <section class="fm-offers" aria-labelledby="offers-heading">
-            <h2 id="offers-heading" class="sr-only">Verified Veterans Day 2026 free-meal offers</h2>
+        {{-- Named with aria-label rather than an sr-only <h2>, matching the live
+             page's heading outline exactly while keeping the accessible name. --}}
+        <section class="fm-offers" aria-label="Verified Veterans Day 2026 free-meal offers">
 
             <div class="vdm-controls" role="search">
                 <label>Search <input type="search" data-vdm="q" data-testid="vdm-search" placeholder="Brand or offer"></label>
@@ -152,7 +153,7 @@
 
         <div class="fm-supporting">
             <section id="who-qualifies">
-                <h2>Who counts as a “veteran” for these offers</h2>
+                <h2>WHO COUNTS AS A “VETERAN” FOR THESE OFFERS</h2>
                 <p>
                     There is no single rule — each restaurant sets its own eligibility, and the table above
                     shows exactly who each brand says qualifies. In practice, most Veterans Day free-meal
@@ -168,7 +169,7 @@
             </section>
 
             <section id="how-to-redeem">
-                <h2>How to redeem a free Veterans Day meal</h2>
+                <h2>HOW TO REDEEM A FREE VETERANS DAY MEAL</h2>
                 <ul>
                     <li><strong>Bring proof of service.</strong> Commonly accepted: a military ID (CAC),
                         Veterans Health Identification Card (VHIC), VA ID card, DD‑214, a state-issued Veteran ID
@@ -189,7 +190,7 @@
             </section>
 
             <section id="verify">
-                <h2>How we verify every offer</h2>
+                <h2>HOW WE VERIFY EVERY OFFER</h2>
                 <p>
                     The highest-volume Veterans Day search is for free meals — and most of the lists you'll find
                     are stale media roundups that are wrong by November 11. NavyWeek does it differently: every
@@ -207,7 +208,7 @@
             </section>
 
             <section id="more">
-                <h2>More Veterans Day savings</h2>
+                <h2>MORE VETERANS DAY SAVINGS</h2>
                 <p>
                     Looking for year-round military savings beyond Veterans Day? Browse our
                     <a href="/discount/">military &amp; veteran discounts</a>, or read the
@@ -216,7 +217,7 @@
             </section>
 
             <section id="faq" class="fm-faqs">
-                <h2>Frequently asked questions</h2>
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
                 @foreach ($faqs as $faq)
                     <details>
                         <summary>{{ $faq->question }}</summary>

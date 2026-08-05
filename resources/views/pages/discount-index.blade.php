@@ -31,12 +31,27 @@
 
         <header class="directory-hero">
             <p class="eyebrow">// Military &amp; Veteran Savings</p>
-            <h1>Military &amp; Veteran Discounts Directory</h1>
+            <h1>{{ $page->h1 ?? 'MILITARY DISCOUNTS' }}</h1>
             <p class="intro">{{ $page->meta_description }}</p>
         </header>
 
+        @include('partials.trust.key-facts')
+
+        <section class="brand-grid-section" aria-label="Browse by category">
+            <h2>BROWSE BY CATEGORY</h2>
+            <ul class="brand-grid">
+                @foreach ($categories as $category)
+                    <li class="brand-card">
+                        <a href="{{ \App\Domain\Publishing\Support\PagePaths::child('discounts', $category->slug) }}">
+                            <span class="brand-name">{{ $category->name }}</span>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </section>
+
         <section class="brand-grid-section" aria-label="All military discounts">
-            <h2>All Brands <span class="count">({{ $brands->count() }})</span></h2>
+            <h2>ALL DISCOUNTS</h2>
             @if ($brands->isEmpty())
                 <p class="empty-state">Discount guides are coming soon.</p>
             @else
@@ -58,14 +73,15 @@
 
         @if ($page->faqs->isNotEmpty())
             <section class="directory-faqs" aria-label="Frequently asked questions">
-                <h2>Frequently Asked Questions</h2>
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
                 <dl>
                     @foreach ($page->faqs as $faq)
-                        <dt>{{ $faq->question }}</dt>
+                        <dt><h3>{{ $faq->question }}</h3></dt>
                         <dd>{{ $faq->answer }}</dd>
                     @endforeach
                 </dl>
             </section>
         @endif
+        @include('partials.trust.editorial-policy')
     </main>
 @endsection

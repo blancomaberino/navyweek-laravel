@@ -25,7 +25,7 @@
             @endif
             <div class="author-hero-body">
                 <p class="eyebrow">// Author Profile</p>
-                <h1>{{ $author->name }}</h1>
+                <h1>{{ mb_strtoupper($author->name) }}</h1>
                 @if ($author->job_title)
                     <p class="author-role">{{ $author->job_title }}</p>
                 @endif
@@ -43,7 +43,7 @@
 
         @if ($author->knows_about)
             <section class="author-section" aria-labelledby="expertise-heading">
-                <h2 id="expertise-heading">Areas of expertise</h2>
+                <h2 id="expertise-heading">AREAS OF EXPERTISE</h2>
                 <ul class="author-chips">
                     @foreach ($author->knows_about as $topic)
                         <li>{{ $topic }}</li>
@@ -54,7 +54,7 @@
 
         @if ($authored->isNotEmpty())
             <section class="author-section" aria-labelledby="writes-heading">
-                <h2 id="writes-heading">Writes for NavyWeek.org</h2>
+                <h2 id="writes-heading">WRITES FOR NAVYWEEK.ORG</h2>
                 <ul class="author-links">
                     @foreach ($authored as $article)
                         <li><a href="{{ $article->url_path }}">{{ $article->title }}</a></li>
@@ -77,7 +77,7 @@
 
         @if ($author->linkedin_url && \Illuminate\Support\Str::startsWith($author->linkedin_url, ['https://', 'http://']))
             <section class="author-section" aria-labelledby="connect-heading">
-                <h2 id="connect-heading">Connect</h2>
+                <h2 id="connect-heading">CONNECT</h2>
                 <ul class="author-links">
                     <li>
                         <a href="{{ $author->linkedin_url }}" target="_blank" rel="noopener noreferrer me">

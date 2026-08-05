@@ -392,6 +392,8 @@ final class PageController
         return response()->view('pages.discount-index', [
             'page' => $page,
             'brandPages' => $brandPages,
+            // The category hubs the live directory links from "Browse by category".
+            'categories' => $this->categories->all(),
             'seoHead' => $seo->render(),
             'noindex' => $seo->isNoindex(),
         ]);

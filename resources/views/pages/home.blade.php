@@ -27,7 +27,7 @@
         {{-- Hero --}}
         <section class="home-hero" aria-label="Navy Week 2026 hero">
             <p class="eyebrow">// Road Trip to 250</p>
-            <h1>Navy Week 2026</h1>
+            <h1>NAVY WEEK 2026</h1>
             <p class="lede">Bringing the Navy to your community. Experience the pride, professionalism, and equipment of the United States Navy in 12 cities across America.</p>
             <p class="intro">From Blue Angels flight demonstrations and Leap Frogs parachute jumps to Navy Band concerts and hands-on STEM exhibits, Navy Week 2026 offers free, family-friendly events in cities from coast to coast. Now in its 22nd year, the program connects Americans with the sailors, technology, and missions that keep the nation safe.</p>
             <div class="home-cta">
@@ -77,7 +77,7 @@
 
         {{-- 2026 schedule --}}
         <section id="schedule" class="home-schedule" aria-label="2026 Navy Week schedule preview">
-            <h2>2026 Schedule</h2>
+            <h2>2026 SCHEDULE</h2>
             <p class="section-sub">12 cities. January through November.</p>
             @if ($events->isEmpty())
                 <p class="empty-state">The 2026 schedule is coming soon.</p>
@@ -103,7 +103,7 @@
         {{-- Our mission --}}
         <section class="home-mission" aria-label="Our mission">
             <p class="eyebrow">// Navy Office of Community Outreach</p>
-            <h2>Our Mission</h2>
+            <h2>OUR MISSION</h2>
             <blockquote>
                 <p>The Navy Week program is the United States Navy's flagship community outreach effort, bringing Sailors, ships, aircraft, and interactive experiences to cities across America without a significant Navy presence — showing Americans why a strong maritime force is vital to national security and the American way of life.</p>
                 <footer>Managed by the Navy Office of Community Outreach (NAVCO), Millington, TN — Director: Cmdr. Julie Holland</footer>
@@ -118,7 +118,7 @@
                 <dt>20+</dt>
                 <dd>Years of Service</dd>
             </dl>
-            <h3>What is Navy Week?</h3>
+            <h3>WHAT IS NAVY WEEK?</h3>
             <p>Since 2005, the Navy Week program has served as the Navy's principal outreach effort in areas of the country without a significant Navy presence. Each week deploys 50 to 100 Sailors to a single city for about a week of community engagement — from Blue Angels flight demonstrations to Navy Band concerts, Leap Frogs parachute jumps, and hands-on STEM exhibits.</p>
             <p>All official Navy Week events are free and open to the public, making it one of the most accessible military outreach programs in the nation. Each stop generates 75 to 100 community events, reaching schools, civic organizations, veterans groups, and the general public.</p>
             <p>In 2026, the Navy Week tour celebrates America's 250th birthday with the "Road Trip to 250" theme, visiting 12 cities — including eight first-time Navy Week locations. From the Rio Grande Valley in January to Flagstaff in November, each stop brings the Navy's story of service, sacrifice, and readiness directly to the American people.</p>
@@ -130,7 +130,7 @@
         {{-- Our partners --}}
         <section id="partners" class="home-partners" aria-label="Our partners">
             <p class="eyebrow">// Trusted Partners</p>
-            <h2>Our Partners</h2>
+            <h2>OUR PARTNERS</h2>
             <div class="partner-card">
                 <p class="partner-name">CertaPet</p>
                 <p class="partner-role">
@@ -147,7 +147,7 @@
 
         {{-- Map teaser --}}
         <section id="map" class="home-map" aria-label="Route map preview">
-            <h2>Route Map</h2>
+            <h2>ROUTE MAP</h2>
             <p class="section-sub">Explore the nationwide schedule.</p>
             <a class="btn btn-primary" href="/map/">View Interactive Map</a>
         </section>
@@ -155,10 +155,10 @@
         {{-- FAQ --}}
         @if ($page->faqs->isNotEmpty())
             <section id="faq" class="home-faqs" aria-label="Frequently asked questions">
-                <h2>Frequently Asked Questions</h2>
+                <h2>FREQUENTLY ASKED QUESTIONS</h2>
                 <dl>
                     @foreach ($page->faqs as $faq)
-                        <dt>{{ $faq->question }}</dt>
+                        <dt><h3>{{ $faq->question }}</h3></dt>
                         <dd>{{ $faq->answer }}</dd>
                     @endforeach
                 </dl>
