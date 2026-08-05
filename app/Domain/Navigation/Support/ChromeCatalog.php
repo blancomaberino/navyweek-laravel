@@ -22,7 +22,15 @@ use App\Domain\Publishing\Support\PagePaths;
  */
 final class ChromeCatalog
 {
-    /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null}>|null */
+    /**
+     * The legacy LOGO_DISPLAY_DEFAULT (src/data/discounts/logo.ts) — the caps a
+     * brand gets when it carries no tuned `logoDisplay` of its own.
+     */
+    private const LOGO_MAX_HEIGHT = 28;
+
+    private const LOGO_MAX_WIDTH = 130;
+
+    /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int}>|null */
     private ?array $deals = null;
 
     public function __construct(
@@ -34,7 +42,7 @@ final class ChromeCatalog
      * Every published discount-brand deal, newest published first (mirrors the
      * legacy DealsSection sort), for the mega-menu and the Deals section.
      *
-     * @return list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null}>
+     * @return list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int}>
      */
     public function deals(): array
     {
@@ -60,6 +68,12 @@ final class ChromeCatalog
                 // need a white plate, but ~120 ship a light-on-dark logo and set
                 // navy/black — hardcoding white made those chips glare.
                 'logoBackground' => self::hexColour($connection->logo_background),
+                // Per-brand image caps (the legacy `logoDisplay`). The brand marks
+                // have wildly different aspect ratios — a long wordmark and a square
+                // badge can't share one cap without one of them looking wrong — so
+                // 95 records carry a tuned pair and the rest take the default.
+                'logoMaxHeight' => self::logoCap($connection->logo_display, 'cardMaxHeight', self::LOGO_MAX_HEIGHT),
+                'logoMaxWidth' => self::logoCap($connection->logo_display, 'cardMaxWidth', self::LOGO_MAX_WIDTH),
                 'published' => $page->date_published?->toDateString() ?? '',
                 'order' => $offer->sort_order ?? PHP_INT_MAX,
             ];
@@ -78,6 +92,8 @@ final class ChromeCatalog
                 'category' => $d['category'],
                 'logo' => $d['logo'],
                 'logoBackground' => $d['logoBackground'],
+                'logoMaxHeight' => $d['logoMaxHeight'],
+                'logoMaxWidth' => $d['logoMaxWidth'],
             ],
             $rows,
         );
@@ -121,6 +137,23 @@ final class ChromeCatalog
             // highlights nothing. Verified against the live header on 10 paths.
             default => null,
         };
+    }
+
+    /**
+     * One side of a brand's stored logo cap, in px.
+     *
+     * Like the chip colour this is editor-supplied and ends up in a `style`
+     * attribute, so it is coerced to a positive int — a stored string can never be
+     * anything but a number of pixels. A missing or nonsensical value takes the
+     * legacy default rather than rendering an uncapped image.
+     *
+     * @param  array<string, mixed>|null  $display
+     */
+    private static function logoCap(?array $display, string $key, int $default): int
+    {
+        $value = $display[$key] ?? null;
+
+        return is_numeric($value) && (int) $value > 0 ? (int) $value : $default;
     }
 
     /**

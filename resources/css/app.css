@@ -711,7 +711,10 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     min-width: 96px;
     padding: 10px 16px;
 }
-.deals-card-logo img { display: block; height: auto; max-height: 32px; max-width: 120px; width: auto; }
+/* The caps are the legacy LOGO_DISPLAY_DEFAULT; 95 brands override them per record
+   via an inline style, because a long wordmark and a square badge cannot share one
+   cap without one of them rendering at the wrong optical size. */
+.deals-card-logo img { display: block; height: auto; max-height: 28px; max-width: 130px; width: auto; }
 .deals-card-headline { color: var(--gold); font-family: var(--font-display); font-size: 24px; letter-spacing: 1px; line-height: 1.15; }
 .deals-card-company { color: var(--nw-white); display: block; font-family: var(--font-display); font-size: 22px; letter-spacing: 1px; margin-bottom: 4px; }
 .deals-card-category { color: var(--nw-gray); display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; line-height: 1.5; text-transform: uppercase; }

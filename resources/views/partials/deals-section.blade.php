@@ -23,7 +23,8 @@
                     <a href="{{ $deal['url'] }}" class="deals-card">
                         @if (! empty($deal['logo']))
                             <span class="deals-card-logo" @if (! empty($deal['logoBackground'])) style="background: {{ $deal['logoBackground'] }}" @endif>
-                                <img src="{{ $deal['logo'] }}" alt="{{ $deal['brand'] }} logo" loading="lazy">
+                                <img src="{{ $deal['logo'] }}" alt="{{ $deal['brand'] }} logo" loading="lazy"
+                                     style="max-height: {{ $deal['logoMaxHeight'] }}px; max-width: {{ $deal['logoMaxWidth'] }}px">
                             </span>
                         @endif
                         @if (! empty($deal['headline']))
