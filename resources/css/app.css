@@ -24,9 +24,9 @@
    ========================================================================== */
 
 :root {
-    --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
     --font-display: 'Bebas Neue', sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-mono: 'IBM Plex Mono', monospace;
     --gold: #c9a84c;
     --gold-light: #e8c96a;
     --gold-pale: #f5e8c2;
@@ -337,12 +337,14 @@ dl {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     margin: var(--space-md) 0 var(--space-lg);
 }
+/* No margin-bottom: the legacy global.css defines no dt rule at all, and the
+   components that render a <dl> space their rows with a flex gap instead. A 2px
+   base margin here stacked on top of that gap on every fact row. */
 dt {
     color: var(--nw-gray-light);
     font-family: var(--font-mono);
     font-size: 0.66rem;
     letter-spacing: 1.5px;
-    margin-bottom: 2px;
     text-transform: uppercase;
 }
 dd { color: var(--nw-off-white); margin: 0 0 var(--space-sm); }
@@ -861,14 +863,26 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     text-transform: uppercase;
 }
 
+/* The legacy box is a wrapping flex row whose single child is a 300px-basis
+   column carrying the 13px/1.6 type scale. Flattening the column away left the
+   rows inheriting the body's 16px/1.5, which is where the byline's extra height
+   came from. */
 .trust-byline {
+    align-items: flex-start;
     background: var(--navy-mid);
     border: 1px solid rgba(201, 168, 76, 0.15);
     border-radius: 4px;
-    font-size: 13px;
-    line-height: 1.6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
     margin-bottom: var(--space-xl);
     padding: var(--space-md) var(--space-lg);
+}
+.trust-byline-col {
+    flex: 1 1 300px;
+    font-size: 13px;
+    line-height: 1.6;
+    min-width: 0;
 }
 .trust-byline-role {
     color: var(--nw-gray);
@@ -879,7 +893,7 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     text-transform: uppercase;
 }
 .trust-byline-person { align-items: center; display: flex; gap: 10px; margin-bottom: 12px; }
-.trust-byline-person:last-of-type { margin-bottom: 6px; }
+.trust-byline-person.is-reviewer { margin-bottom: 6px; }
 .trust-byline-person img {
     border: 2px solid var(--gold);
     border-radius: 50%;
@@ -916,14 +930,19 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     margin: var(--space-lg) 0;
     padding: var(--space-lg) var(--space-xl);
 }
+/* The underline is cancelled explicitly: when .key-facts is itself a direct
+   <section> of <main>, the `main section > h2` rule above would otherwise give
+   this heading a border it never has in KeyFacts.tsx. */
 .key-facts[data-llm-key-facts] h2 {
+    border-bottom: 0;
     color: var(--gold);
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 2px;
-    line-height: 1.6;
+    line-height: 1.5;
     margin: 0 0 var(--space-md);
+    padding-bottom: 0;
     text-transform: uppercase;
 }
 .key-facts dl {

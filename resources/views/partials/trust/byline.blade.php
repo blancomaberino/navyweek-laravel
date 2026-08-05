@@ -16,6 +16,7 @@
 @endphp
 @if ($author || $reviewer)
     <div class="trust-byline">
+        <div class="trust-byline-col">
         @if ($author)
             <div class="trust-byline-role">Written by</div>
             <div class="trust-byline-person">
@@ -33,7 +34,7 @@
 
         @if ($reviewer)
             <div class="trust-byline-role">Reviewed by</div>
-            <div class="trust-byline-person">
+            <div class="trust-byline-person is-reviewer">
                 @if ($reviewer->avatar_path)
                     <img src="{{ $reviewer->avatar_path }}" alt="Portrait of {{ $reviewer->name }}" width="56" height="56" loading="lazy">
                 @endif
@@ -59,6 +60,7 @@
         <div class="trust-byline-process">
             How we research &amp; review:
             <a href="/our-process/" @if ($processNewTab) target="_blank" rel="noopener noreferrer" @endif>Our editorial process</a>
+        </div>
         </div>
     </div>
 @endif

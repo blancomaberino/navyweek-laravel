@@ -167,7 +167,11 @@
     margin: 0 0 12px;
     text-transform: uppercase;
 }
+/* border-bottom/padding-bottom are zeroed on purpose: app.css gives every
+   `main section > h2` a gold underline, but the legacy .ld-h2 (LocalDiscountDetail.tsx)
+   has none — and the live page confirms it (0 of 7 headings underlined). */
 .ld-h2 {
+    border-bottom: 0;
     color: var(--nw-white);
     font-family: var(--font-display);
     font-size: 27px;
@@ -175,6 +179,7 @@
     letter-spacing: .02em;
     line-height: 1;
     margin: 0 0 16px;
+    padding-bottom: 0;
     text-transform: uppercase;
 }
 .ld-prose p {

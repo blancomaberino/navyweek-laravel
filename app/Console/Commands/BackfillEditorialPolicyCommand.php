@@ -253,15 +253,23 @@ final class BackfillEditorialPolicyCommand extends Command
      * Ported from DiscountDetail.tsx — the brand's own verification method is
      * named in the sentence, so it reads differently on every guide.
      *
-     * @return array{label: string, source: string, cadence: string}
+     * Null when the offer names no verification provider — the sentence quotes it,
+     * and inventing one would assert a fact the record doesn't carry.
+     *
+     * @return array{label: string, source: string, cadence: string}|null
      */
-    private function discountBrandCopy(Offer $offer): array
+    private function discountBrandCopy(Offer $offer): ?array
     {
-        $brand = $offer->connection->brand;
         // The enum's backing values are the legacy registry's `verification`
         // strings verbatim ("ID.me", "GovX", "In-store ID", …), so the sentence
         // reads exactly as it does on the live guide.
-        $verification = $offer->verification?->value ?? 'ID.me';
+        $provider = $offer->verification;
+        if ($provider === null) {
+            return null;
+        }
+
+        $brand = $offer->connection->brand;
+        $verification = $provider->value;
 
         return [
             'label' => "{$brand} military discount page",
