@@ -28,7 +28,8 @@ class LinkUrlField
         return static function (): Closure {
             return static function (string $attribute, mixed $value, Closure $fail): void {
                 if (is_string($value) && $value !== '' && ! LinkUrl::isAllowed($value)) {
-                    $fail('Enter a site path (starting with /) or a URL using http, https, mailto, or tel.');
+                    $fail('Enter a site path (starting with /) or a URL using '
+                        .implode(', ', LinkUrl::ALLOWED_SCHEMES).'.');
                 }
             };
         };
@@ -37,6 +38,7 @@ class LinkUrlField
     /** The matching helper text, so every link field explains the same rule. */
     public static function helperText(): string
     {
-        return 'Root-relative path (e.g. /schedule/) or an absolute http(s)/mailto/tel URL.';
+        return 'Root-relative path (e.g. /schedule/) or an absolute '
+            .implode('/', LinkUrl::ALLOWED_SCHEMES).' URL.';
     }
 }

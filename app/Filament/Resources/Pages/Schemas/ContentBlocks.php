@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Pages\Schemas;
 
+use App\Domain\Navigation\Support\LinkUrl;
 use App\Domain\Publishing\Content\BodyBlocks;
 use App\Filament\Support\LinkUrlField;
 use Filament\Forms\Components\Builder;
@@ -16,6 +17,7 @@ use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Utilities\Get;
 
 /**
  * The CMS body editor: one Builder block per block type
@@ -73,7 +75,15 @@ class ContentBlocks
             Block::make('paragraph')
                 ->icon('heroicon-o-bars-3-bottom-left')
                 ->schema([
-                    self::prose('content')->label('Text'),
+                    self::prose('content')
+                        ->label('Text')
+                        // A block carrying a mark the editor cannot represent is shown
+                        // read-only rather than silently flattened on save.
+                        ->disabled(static fn (Get $get): bool => filled($get('preserved')))
+                        ->helperText(static fn (Get $get): ?string => filled($get('preserved'))
+                            ? 'Read-only: this paragraph uses inline styling the editor cannot represent, so it is preserved exactly as stored.'
+                            : null),
+                    Hidden::make('preserved'),
                     Select::make('variant')
                         ->options(self::PARAGRAPH_VARIANTS)
                         ->placeholder('Body copy')
@@ -169,7 +179,11 @@ class ContentBlocks
                                     TextInput::make('label')->helperText('Mobile row label.'),
                                     TextInput::make('sub')->label('Sub-text'),
                                     self::align(),
-                                    Toggle::make('accent'),
+                                    Toggle::make('accent')
+                                        // Absent is NOT false: Filament's Toggle cast is
+                                        // non-nullable, so without this every stored cell
+                                        // would gain `"accent": false` on an untouched save.
+                                        ->dehydrateStateUsing(static fn (mixed $state): ?bool => $state ? true : null),
                                 ])
                                 ->columns(2),
                         ])
@@ -220,8 +234,11 @@ class ContentBlocks
                     TextInput::make('eyebrow'),
                     TextInput::make('heading'),
                     Textarea::make('lead')->rows(2)->columnSpanFull(),
-                    Select::make('tone')->options(['light' => 'Light', 'dark' => 'Dark'])->default('light'),
-                    Select::make('layout')->options(['steps' => 'Steps', 'cards' => 'Cards'])->default('steps'),
+                    // The values are the CSS modifier names (ymyl.css: .op-band--light,
+                    // .op-band--navy, .op-grid--gate) — NOT invented labels. An option
+                    // list that omits a stored value makes the page unsaveable.
+                    Select::make('tone')->options(['light' => 'Light', 'navy' => 'Navy'])->default('light'),
+                    Select::make('layout')->options(['steps' => 'Steps', 'gate' => 'Publish gate'])->default('steps'),
                     Repeater::make('cards')
                         ->addActionLabel('Add card')
                         ->schema([
@@ -251,7 +268,9 @@ class ContentBlocks
                         ->schema([
                             TextInput::make('n')->label('Number'),
                             TextInput::make('title'),
-                            TextInput::make('tone')->helperText('1–4, picks the rung colour.'),
+                            Select::make('tone')
+                                ->options([1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5'])
+                                ->helperText('Rung colour (ymyl.css defines .op-ladder-row--1…5).'),
                             Textarea::make('desc')->label('Description')->rows(2)->columnSpanFull(),
                         ])
                         ->columns(3)
@@ -301,7 +320,10 @@ class ContentBlocks
                 ->schema([
                     TextInput::make('question')->columnSpanFull(),
                     self::prose('content')->label('Answer'),
-                    Toggle::make('collapsed')->label('Render collapsed'),
+                    Toggle::make('collapsed')
+                        ->label('Render collapsed')
+                        // Absent is NOT false — see the `accent` toggle.
+                        ->dehydrateStateUsing(static fn (mixed $state): ?bool => $state ? true : null),
                 ]),
         ];
     }
@@ -320,6 +342,9 @@ class ContentBlocks
         // re-evaluated per builder item and cost far more than it saves.
         return RichEditor::make($name)
             ->toolbarButtons(self::TOOLBAR)
+            // The same allowlist the render side enforces, so an inline link is
+            // rejected in the editor rather than silently becoming `#` on the page.
+            ->linkProtocols(LinkUrl::ALLOWED_SCHEMES)
             ->columnSpanFull();
     }
 
@@ -351,8 +376,10 @@ class ContentBlocks
 
     private static function align(): Select
     {
+        // `left` is STORED explicitly on every table column, so it must be a real
+        // option — a placeholder would fail validation on the page's own data.
         return Select::make('align')
-            ->options(['right' => 'Right'])
-            ->placeholder('Left');
+            ->options(['left' => 'Left', 'right' => 'Right'])
+            ->placeholder('Inherit');
     }
 }

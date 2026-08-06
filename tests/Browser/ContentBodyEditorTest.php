@@ -28,18 +28,20 @@ final class ContentBodyEditorTest extends DuskTestCase
 {
     public function test_editor_shows_stored_prose_and_an_edit_reaches_the_public_page(): void
     {
-        $admin = User::factory()->admin()->create([
-            'email' => 'dusk-body-editor@navyweek.test',
-        ]);
-
         // The public body only renders for a slug `PageController::renderStatic()`
         // dispatches, so this drives the REAL /privacy/ row rather than an invented
         // path that would fall through to the minimal shell. No RefreshDatabase here
         // (the browser hits a separate process), so the original body is snapshotted
         // and restored in `finally`.
+        // Created inside the try: a fixed, unique email created BEFORE it would leak
+        // on any throw and then poison every later run at the unique constraint.
+        $admin = null;
         $page = Page::query()->firstOrNew(['url_path' => '/privacy/']);
         $createdHere = ! $page->exists;
-        $originalBlocks = $page->body_blocks;
+
+        // Snapshot EVERY column the test overwrites, not just the body — otherwise a
+        // real /privacy/ row keeps this test's title and publish state forever.
+        $original = $page->only(['slug', 'page_type', 'title', 'is_published', 'body_blocks']);
 
         $page->fill([
             'slug' => 'privacy',
@@ -56,6 +58,10 @@ final class ContentBodyEditorTest extends DuskTestCase
         ])->save();
 
         try {
+            $admin = User::factory()->admin()->create([
+                'email' => 'dusk-body-editor@navyweek.test',
+            ]);
+
             $this->browse(function (Browser $browser) use ($admin, $page): void {
                 $browser->visit('/admin/login')
                     ->waitFor('input[type="email"]')
@@ -152,10 +158,10 @@ final class ContentBodyEditorTest extends DuskTestCase
             if ($createdHere) {
                 $page->forceDelete();
             } else {
-                $page->forceFill(['body_blocks' => $originalBlocks])->save();
+                $page->forceFill($original)->save();
             }
 
-            $admin->forceDelete();
+            $admin?->forceDelete();
         }
     }
 }

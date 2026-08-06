@@ -6,6 +6,7 @@ use App\Domain\Publishing\Content\InlineSpans;
 use App\Filament\Resources\Pages\Schemas\ContentBlocks;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 
 /**
  * Fail-closed coverage between the renderer's block vocabulary, the stored corpus and
@@ -63,6 +64,28 @@ function builderFieldNames(string $type): array
     return $cache[$type] = array_unique($names);
 }
 
+/** A Select's options for one block field, by name, wherever it is nested. */
+function blockFieldOptions(string $type, string $field): array
+{
+    $found = [];
+
+    $collect = function (array $components) use (&$collect, &$found, $field): void {
+        foreach ($components as $component) {
+            if ($component instanceof Select && $component->getName() === $field) {
+                $found = (new ReflectionProperty(Select::class, 'options'))->getValue($component) ?? [];
+            }
+
+            if (method_exists($component, 'getDefaultChildComponents')) {
+                $collect($component->getDefaultChildComponents());
+            }
+        }
+    };
+
+    $collect(builderBlocks()[$type]->getDefaultChildComponents());
+
+    return is_array($found) ? $found : [];
+}
+
 /** Every RichEditor in the Builder tree, wherever it is nested. */
 function builderRichEditors(): array
 {
@@ -105,8 +128,8 @@ it('models every block type the renderer can display', function (): void {
 
     expect($rendered)->not->toBeEmpty();
 
-    // `list_item` runs are folded into lists by the view, and `paragraph` is the
-    // @default arm — both are modelled, they just are not spelled as @case arms.
+    // `paragraph` is the @default arm rather than a @case, so it is never captured
+    // here; every other type the view can render must have a block.
     $missing = array_diff($rendered, builderBlockNames());
 
     expect($missing)->toBe(
@@ -243,8 +266,10 @@ it('translates the body on every page that mounts the editor', function (): void
         $mounts[] = basename((string) $file);
     }
 
-    // PageForm mounts it; the Create/Edit pages behind that form carry the trait.
-    expect($mounts)->not->toBeEmpty();
+    // Pinned, not merely non-empty: a NEW mount point must be added here deliberately
+    // AND have its pages carry the trait, or this test goes red. A guard that cannot
+    // fail is worse than none.
+    expect($mounts)->toBe(['PageForm.php']);
 
     foreach (['CreatePage', 'EditPage'] as $page) {
         $source = (string) file_get_contents(app_path("Filament/Resources/Pages/Pages/{$page}.php"));
@@ -253,6 +278,11 @@ it('translates the body on every page that mounts the editor', function (): void
             $untranslated[] = $page;
         }
     }
+
+    // The hydrate half is an EditRecord-only hook (CreateRecord does not declare it),
+    // so it lives on EditPage rather than the shared trait — assert it is actually there.
+    expect((string) file_get_contents(app_path('Filament/Resources/Pages/Pages/EditPage.php')))
+        ->toContain('mutateFormDataBeforeFill');
 
     expect($untranslated)->toBe(
         [],
@@ -284,12 +314,94 @@ it('offers every paragraph variant the renderer styles', function (): void {
     );
 });
 
+it('offers every value the corpus stores for a closed-set field', function (): void {
+    // The form REJECTS a value outside a Select's options, so an incomplete option list
+    // does not merely hide a choice — it makes the page unsaveable. Four lists were
+    // invented rather than read from the data (band.tone/layout, table align), and the
+    // single-fixture save test could not see it.
+    $closed = [
+        'band.tone' => 'tone',
+        'band.layout' => 'layout',
+        'paragraph.variant' => 'variant',
+        'paragraph.slot' => 'slot',
+        'callout.variant' => 'variant',
+        'table.variant' => 'variant',
+        'link_card.icon' => 'icon',
+        'heading.level' => 'level',
+    ];
+
+    $stored = [];
+
+    $walk = function (mixed $node, string $type) use (&$walk, &$stored, $closed): void {
+        if (! is_array($node)) {
+            return;
+        }
+
+        foreach ($node as $key => $value) {
+            if (is_array($value)) {
+                $walk($value, $type);
+
+                continue;
+            }
+
+            if (isset($closed["{$type}.{$key}"])) {
+                $stored["{$type}.{$key}"][] = $value;
+            }
+        }
+    };
+
+    foreach (bodyBlockCorpus() as $blocks) {
+        foreach ($blocks as $block) {
+            $walk($block, $block['type'] ?? 'paragraph');
+        }
+    }
+
+    expect($stored)->not->toBeEmpty();
+
+    $unofferable = [];
+
+    foreach ($stored as $path => $values) {
+        [$type, $field] = explode('.', $path);
+        $options = blockFieldOptions($type, $field);
+
+        foreach (array_unique($values) as $value) {
+            if (! array_key_exists($value, $options)) {
+                $unofferable[] = "{$path}={$value}";
+            }
+        }
+    }
+
+    expect(array_values(array_unique($unofferable)))->toBe(
+        [],
+        'Stored values no CMS option offers (the page cannot be saved): '.implode(', ', array_unique($unofferable)),
+    );
+});
+
+it('never lets the editor silently destroy a stored mark', function (): void {
+    // TipTap drops any mark it does not know (a bare <span> emphasis), so a mark that
+    // is NOT in EDITABLE_MARKS must be handled by locking the block, never by routing
+    // it through the editor. If a mark is added to TAGS without a decision here, this
+    // fails.
+    $unhandled = array_diff(array_keys(InlineSpans::TAGS), [...InlineSpans::EDITABLE_MARKS, 'emphasis']);
+
+    expect($unhandled)->toBe(
+        [],
+        'Marks with no editor round-trip and no lock decision: '.implode(', ', $unhandled),
+    );
+
+    // And the lock actually triggers on the shape the corpus stores.
+    expect(InlineSpans::hasUneditableMark([['text' => 'x', 'emphasis' => true]]))->toBeTrue()
+        ->and(InlineSpans::hasUneditableMark([['text' => 'x', 'bold' => true]]))->toBeFalse();
+});
+
 it('restricts every prose toolbar to marks the stored format can carry', function (): void {
     // A strikethrough or heading button would let an editor produce formatting `spans`
     // cannot carry, so it would silently vanish on save. The allowed set is DERIVED
     // from the round-trippable marks (InlineSpans::TAGS) plus link and the history
     // buttons — not hand-copied, so adding a mark to the model updates this too.
-    $allowed = [...array_keys(InlineSpans::TAGS), 'link', 'undo', 'redo'];
+    // Derived from the marks the editor can actually carry — `emphasis` is in TAGS but
+    // TipTap cannot round-trip it, so it must never appear on a toolbar.
+    $allowed = [...InlineSpans::EDITABLE_MARKS, 'link', 'undo', 'redo'];
 
     $editors = builderRichEditors();
 

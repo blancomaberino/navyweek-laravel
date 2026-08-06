@@ -48,6 +48,20 @@ class InlineSpans
     ];
 
     /**
+     * Marks a Filament RichEditor can carry. TipTap parses the stored HTML into its own
+     * document model on the way IN and re-serialises on the way OUT, dropping every mark
+     * it does not recognise — `<span>`, `<small>`, `<u>` and `<mark>` all vanish
+     * (measured against the installed tiptap-php). So `emphasis`, which the renderer
+     * emits as a bare `<span>`, CANNOT survive a round trip through the editor.
+     *
+     * A block carrying one is locked rather than silently flattened — see
+     * {@see hasUneditableMark()} and BodyBlocks::hydrate().
+     *
+     * @var list<string>
+     */
+    public const EDITABLE_MARKS = ['bold', 'italic'];
+
+    /**
      * The inverse lookup, including the legacy `<b>`/`<i>` a paste from a word processor
      * brings in. Kept as data so reading a mark back is not a scan.
      *
@@ -62,24 +76,60 @@ class InlineSpans
     ];
 
     /**
+     * Whether any run carries a mark the rich editor would destroy. Such a block is
+     * preserved verbatim instead of being routed through the editor.
+     *
+     * @param  list<array<string, mixed>>|mixed  $spans
+     */
+    public static function hasUneditableMark(mixed $spans): bool
+    {
+        if (! is_array($spans)) {
+            return false;
+        }
+
+        foreach ($spans as $span) {
+            if (! is_array($span)) {
+                continue;
+            }
+
+            foreach (array_keys(self::TAGS) as $mark) {
+                if (($span[$mark] ?? false) && ! in_array($mark, self::EDITABLE_MARKS, true)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Runs → PAGE HTML. Differs from {@see toHtml()} in exactly the ways the public
      * page must: every editor-supplied href goes through `LinkUrl::sanitize()` (repo
      * policy — editor values are untrusted output), off-site links carry the legacy
      * `target`/`rel` pair, and there is no wrapping `<p>` because the view supplies its
      * own `<p>`/`<li>`/`<td>`.
      *
-     * @param  list<array<string, mixed>>  $spans
+     * @param  array<array-key, mixed>  $spans  untrusted stored JSON, not a typed list
      */
     public static function render(array $spans): string
     {
         $html = '';
 
         foreach ($spans as $span) {
+            // A stored run that is not a map (bad import, hand-edited JSON) must not
+            // take the public page down — this is a `{!! !!}` sink reached on every
+            // content page.
+            if (! is_array($span)) {
+                continue;
+            }
+
             $piece = self::marked($span, nl2br(e(self::textOf($span)), false));
             $url = $span['url'] ?? null;
 
-            if (is_string($url) && $url !== '') {
-                $safe = LinkUrl::sanitize($url);
+            // `filled()`, not `!== ''`: a whitespace-only url is blank, and the view
+            // this replaced rendered no anchor for it.
+            if (is_scalar($url) && filled($url)) {
+                $safe = LinkUrl::sanitize((string) $url);
                 $offsite = str_starts_with($safe, 'http');
 
                 $piece = '<a href="'.e($safe).'"'
@@ -173,7 +223,10 @@ class InlineSpans
     {
         $text = $span['text'] ?? '';
 
-        return is_string($text) ? $text : '';
+        // Coerced, not narrowed: the closures this replaced did `(string)`, so a block
+        // storing a numeric `text` still renders its digits. Non-scalars have no
+        // sensible string form and would only produce a warning.
+        return is_scalar($text) ? (string) $text : '';
     }
 
     /**
@@ -193,21 +246,31 @@ class InlineSpans
 
         $document = new DOMDocument;
         $previous = libxml_use_internal_errors(true);
-        // The fragment is not a document: give it an explicit UTF-8 meta so DOMDocument
-        // does not fall back to Latin-1 and mangle the em dashes these pages are full of.
-        $document->loadHTML(
-            '<?xml encoding="UTF-8"><div>'.$html.'</div>',
-            LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD,
-        );
-        libxml_clear_errors();
-        libxml_use_internal_errors($previous);
 
-        $spans = [];
+        try {
+            // The fragment is not a document: give it an explicit UTF-8 meta so DOMDocument
+            // does not fall back to Latin-1 and mangle the em dashes these pages are full of.
+            $loaded = $document->loadHTML(
+                '<?xml encoding="UTF-8"><div>'.$html.'</div>',
+                LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD,
+            );
+        } finally {
+            // Restored under `finally` so internal-error mode cannot leak into the rest
+            // of the request if the parse throws.
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
+        }
+
         $root = $document->documentElement;
 
-        if ($root instanceof DOMNode) {
-            self::walk($root, [], $spans);
+        if ($loaded === false || ! $root instanceof DOMNode) {
+            // NEVER turn an unparseable body into an empty one — that would delete the
+            // block's prose on save. Keep the words, lose only the markup.
+            return self::merge([['text' => html_entity_decode(strip_tags($html), ENT_QUOTES | ENT_HTML5)]]);
         }
+
+        $spans = [];
+        self::walk($root, [], $spans);
 
         return self::merge($spans);
     }
@@ -267,11 +330,20 @@ class InlineSpans
                 }
             }
 
-            // A paragraph/list boundary inside the fragment separates runs; the editor
-            // emits one <p> per block, and a stray second one must not glue words together.
-            $isBlock = in_array($tag, ['p', 'div', 'li', 'h1', 'h2', 'h3', 'h4'], true);
+            // A block boundary inside the fragment separates runs — without it, a
+            // pasted table's cells glue into one word ("RatingMonthly"). Word
+            // boundaries are content, so the list has to cover everything a paste can
+            // bring in, not just what the editor itself emits.
+            $isBlock = in_array($tag, [
+                'p', 'div', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+                'tr', 'td', 'th', 'blockquote', 'pre', 'dt', 'dd', 'figcaption',
+            ], true);
 
-            if ($isBlock && $spans !== []) {
+            $last = $spans === [] ? null : $spans[array_key_last($spans)];
+
+            // Nested blocks (TipTap wraps a list item's text in a <p>) would otherwise
+            // each add their own break and render <br><br>.
+            if ($isBlock && $last !== null && $last['text'] !== "\n") {
                 $spans[] = [...$flags, 'text' => "\n"];
             }
 
@@ -294,6 +366,11 @@ class InlineSpans
         foreach ($spans as $span) {
             $text = $span['text'];
             unset($span['text']);
+
+            // Compare the flag SET, not discovery order: `<strong><a>` and `<a><strong>`
+            // yield the same run, and the canonical re-ordering below emits them
+            // identically — so without this, a second save would re-split them.
+            ksort($span);
 
             $last = array_key_last($merged);
 

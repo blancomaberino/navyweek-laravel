@@ -22,7 +22,7 @@
     // Read through InlineSpans, NOT `['text']`: a lead the CMS has formatted is
     // stored as `spans`, and indexing `text` directly would silently drop it back
     // to the meta description the moment an editor bolds a word.
-    $lead = InlineSpans::plainText($page->body_blocks[0] ?? []) ?: $page->meta_description;
+    $lead = InlineSpans::plainText((array) ($page->body_blocks[0] ?? [])) ?: $page->meta_description;
 @endphp
 
 @section('content')

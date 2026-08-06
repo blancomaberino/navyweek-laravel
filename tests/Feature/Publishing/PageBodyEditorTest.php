@@ -108,9 +108,10 @@ it('saves an edited paragraph back as spans and leaves its neighbours untouched'
     ]);
 });
 
-it('leaves an untouched body byte-identical after a save', function (): void {
-    $blocks = bodyBlockCorpus()['privacy'];
-
+// EVERY fixture, not just one: `privacy` holds only paragraph/heading/list, so a
+// single-fixture version cannot see what Filament does to a table's cells, a card's
+// CTA map or an FAQ block — which is exactly where an untouched save rewrote content.
+it('leaves an untouched body byte-identical after a save', function (array $blocks): void {
     $page = contentPage($blocks);
 
     Livewire::test(EditPage::class, ['record' => $page->getRouteKey()])
@@ -118,7 +119,7 @@ it('leaves an untouched body byte-identical after a save', function (): void {
         ->assertHasNoFormErrors();
 
     expect($page->refresh()->body_blocks)->toBe($blocks);
-});
+})->with('body block corpus');
 
 it('renders an edit made in the CMS on the public page', function (): void {
     $page = contentPage([

@@ -13,11 +13,6 @@ use App\Domain\Publishing\Content\BodyBlocks;
  * reads 19 types and nested `spans`, so opening a page in the CMS showed empty boxes.
  * This test is what makes that impossible to reintroduce.
  */
-dataset('body block corpus', array_map(
-    static fn (array $blocks): array => [$blocks],
-    bodyBlockCorpus(),
-));
-
 it('round-trips every block of every live content page unchanged', function (array $blocks): void {
     $result = BodyBlocks::dehydrate(BodyBlocks::hydrate($blocks));
 
@@ -38,28 +33,45 @@ it('hydrates every block into a builder item carrying its type', function (array
     }
 })->with('body block corpus');
 
-it('gives every rich block prose the editor can actually see', function (array $blocks): void {
-    $state = BodyBlocks::hydrate($blocks);
+// Corpus-wide rather than per-fixture: `navy-bases` holds a single `text` block, so a
+// per-fixture vacuity guard would either fail on it or assert nothing anywhere.
+it('gives every rich block prose the editor can actually see', function (): void {
+    $checked = 0;
 
-    expect($state)->not->toBeEmpty();
+    foreach (bodyBlockCorpus() as $blocks) {
+        $state = BodyBlocks::hydrate($blocks);
 
-    foreach ($state as $index => $item) {
-        $source = $blocks[$index];
+        expect($state)->toHaveCount(count($blocks));
 
-        // The exact defect that shipped: a stored `spans` paragraph rendered an empty
-        // editor box. Every block that HAS prose must arrive with that prose in it.
-        if (! isset($source['spans']) || $source['spans'] === []) {
-            continue;
+        foreach ($state as $index => $item) {
+            $source = $blocks[$index];
+
+            // The exact defect that shipped: a stored `spans` paragraph rendered an
+            // empty editor box. Every block that HAS prose must arrive with it.
+            if (! isset($source['spans']) || $source['spans'] === []) {
+                continue;
+            }
+
+            $plain = implode('', array_column($source['spans'], 'text'));
+
+            // `<br>` back to "\n" first: toHtml() replaced the run's newlines, so
+            // stripping tags alone would compare "a\nb" against "ab" and pass only by
+            // luck of where the newline falls in the 40-character window.
+            $visible = html_entity_decode(
+                strip_tags(str_replace('<br>', "\n", (string) $item['data']['content'])),
+                ENT_QUOTES | ENT_HTML5,
+            );
+
+            expect($item['data']['content'])->toBeString()
+                ->and($visible)->toContain(mb_substr($plain, 0, 40));
+
+            $checked++;
         }
-
-        $plain = implode('', array_column($source['spans'], 'text'));
-
-        $visible = html_entity_decode(strip_tags((string) $item['data']['content']), ENT_QUOTES | ENT_HTML5);
-
-        expect($item['data']['content'])->toBeString()
-            ->and($visible)->toContain(mb_substr($plain, 0, 40));
     }
-})->with('body block corpus');
+
+    // Guard the guard: an all-`continue` walk would assert nothing at all.
+    expect($checked)->toBeGreaterThan(150);
+});
 
 it('returns an empty list for an empty or absent builder state', function (): void {
     expect(BodyBlocks::dehydrate([]))->toBe([])

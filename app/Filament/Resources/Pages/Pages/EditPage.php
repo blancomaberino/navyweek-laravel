@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Pages\Pages;
 
 use App\Domain\Publishing\Actions\ChangeUrlPathAction;
+use App\Domain\Publishing\Content\BodyBlocks;
 use App\Domain\Publishing\Models\Page;
 use App\Filament\Resources\Pages\PageResource;
 use App\Filament\Resources\Pages\Pages\Concerns\TranslatesBodyBlocks;
@@ -16,6 +17,26 @@ class EditPage extends EditRecord
     use TranslatesBodyBlocks;
 
     protected static string $resource = PageResource::class;
+
+    /**
+     * Stored blocks → Builder state. An `EditRecord`-only hook, so it lives here rather
+     * than in the shared trait; chained so EditRecord's own implementation — which
+     * upstream uses to strip sensitive attributes before they reach the browser —
+     * stays reachable.
+     *
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $data = parent::mutateFormDataBeforeFill($data);
+
+        /** @var list<array<string, mixed>>|null $blocks */
+        $blocks = $data['body_blocks'] ?? null;
+        $data['body_blocks'] = BodyBlocks::hydrate($blocks);
+
+        return $data;
+    }
 
     protected function getHeaderActions(): array
     {

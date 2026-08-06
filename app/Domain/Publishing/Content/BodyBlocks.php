@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Publishing\Content;
 
+use InvalidArgumentException;
+
 /**
  * Translates `pages.body_blocks` between the shape the renderer reads and the shape a
  * Filament Builder edits, in both directions.
@@ -40,11 +42,28 @@ class BodyBlocks
             $type = self::stringOr($block['type'] ?? null, 'paragraph');
             unset($block['type']);
 
+            // A block whose prose carries a mark the rich editor would destroy (a bare
+            // `<span>` emphasis) is NOT routed through the editor: its runs ride along
+            // verbatim and are restored on save. Losing a mark silently on a page an
+            // editor merely opened is the one outcome this class exists to prevent.
+            if (InlineSpans::hasUneditableMark($block['spans'] ?? null)) {
+                $state[] = [
+                    'type' => $type,
+                    // The WHOLE block rides along, so save returns it byte-identical —
+                    // key order included — instead of rebuilding it from form fields.
+                    'data' => [...self::encodeMap($block), 'preserved' => json_encode($block)],
+                ];
+
+                continue;
+            }
+
             $data = self::encodeMap($block);
 
             // A `text`-shaped paragraph is edited in the same rich field as a
-            // `spans`-shaped one; remember which it was so save can put it back.
-            if ($type === 'paragraph' && array_key_exists('text', $data)) {
+            // `spans`-shaped one; remember which it was so save can put it back. A block
+            // carrying BOTH keeps its `spans` — that is the one the renderer reads
+            // (content.blade.php prefers them), so hydrate must not let key order decide.
+            if ($type === 'paragraph' && array_key_exists('text', $data) && ! array_key_exists('content', $data)) {
                 $data = self::replaceKey($data, 'text', 'content', InlineSpans::toHtml([
                     ['text' => self::stringOr($data['text'], '')],
                 ]));
@@ -73,17 +92,34 @@ class BodyBlocks
             $data = $item['data'] ?? [];
 
             $isPlainText = ($data['shape'] ?? null) === 'text';
-            unset($data['shape']);
+            $preserved = $data['preserved'] ?? null;
+            unset($data['shape'], $data['preserved']);
+
+            // A locked block is written back exactly as it was read — the editor never
+            // had a representation of it to save.
+            if (is_string($preserved)) {
+                $restored = json_decode($preserved, true);
+
+                if (is_array($restored)) {
+                    $blocks[] = ['type' => $type, ...$restored];
+
+                    continue;
+                }
+            }
 
             $block = self::decodeMap($data);
             $spans = $block['spans'] ?? null;
 
             // Plain text can only carry a single unformatted run. The moment an editor
-            // bolds a word or adds a link, the block graduates to `spans`.
-            if ($type === 'paragraph' && $isPlainText && is_array($spans)
-                && count($spans) === 1 && is_array($spans[0]) && array_keys($spans[0]) === ['text']
-            ) {
-                $block = self::replaceKey($block, 'spans', 'text', $spans[0]['text']);
+            // bolds a word or adds a link, the block graduates to `spans`. Clearing the
+            // field is NOT that moment — an emptied paragraph stays `text`-shaped, or
+            // the shape marker would be lost for good on the most ordinary edit.
+            if ($type === 'paragraph' && $isPlainText && is_array($spans) && (
+                $spans === []
+                || (count($spans) === 1 && is_array($spans[0]) && array_keys($spans[0]) === ['text'])
+            )) {
+                $first = $spans[0] ?? [];
+                $block = self::replaceKey($block, 'spans', 'text', is_array($first) ? ($first['text'] ?? '') : '');
             }
 
             $blocks[] = ['type' => $type, ...$block];
@@ -150,7 +186,16 @@ class BodyBlocks
 
         foreach ($map as $key => $item) {
             if ($key === 'content') {
-                $out['spans'] = InlineSpans::fromHtml(is_string($item) ? $item : null);
+                // Fail LOUD, not open: silently treating a non-string as "no prose"
+                // would empty every block on the page if the editor's state shape ever
+                // changed (Filament's RichEditor can be configured to hold TipTap JSON).
+                if ($item !== null && ! is_string($item)) {
+                    throw new InvalidArgumentException(
+                        'Rich prose must dehydrate to an HTML string, got '.get_debug_type($item).'.',
+                    );
+                }
+
+                $out['spans'] = InlineSpans::fromHtml($item);
 
                 continue;
             }
@@ -166,7 +211,15 @@ class BodyBlocks
                 continue;
             }
 
-            $out[$key] = self::decodeValue($item);
+            $decoded = self::decodeValue($item);
+
+            // A nested map whose every field came back empty (a card with no CTA) is
+            // absent, not `"cta": []` — same reasoning as the null prune above.
+            if (is_array($decoded) && $decoded === [] && is_array($item) && ! array_is_list($item)) {
+                continue;
+            }
+
+            $out[$key] = $decoded;
         }
 
         return $out;

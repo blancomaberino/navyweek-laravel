@@ -10,26 +10,18 @@ use App\Domain\Publishing\Content\BodyBlocks;
  * Converts `body_blocks` between the stored renderer shape and the Builder state on
  * every form fill and every save.
  *
- * The translation is deliberately hung off the page's fill/save hooks rather than the
+ * The translation is deliberately hung off the page's save hooks rather than the
  * Builder's own state casts: by the time these run, Filament has already re-indexed
  * every nested repeater to a plain list, so the mapper sees exactly the shape it is
  * tested against.
+ *
+ * Only the SAVE half is shared. The hydrate half lives on {@see EditPage} because
+ * `mutateFormDataBeforeFill` is an `EditRecord` hook — `CreateRecord` does not declare
+ * it, so a `parent::` call from here would be undefined on the create path (and there
+ * is nothing to hydrate when creating).
  */
 trait TranslatesBodyBlocks
 {
-    /**
-     * @param  array<string, mixed>  $data
-     * @return array<string, mixed>
-     */
-    protected function mutateFormDataBeforeFill(array $data): array
-    {
-        /** @var list<array<string, mixed>>|null $blocks */
-        $blocks = $data['body_blocks'] ?? null;
-        $data['body_blocks'] = BodyBlocks::hydrate($blocks);
-
-        return $data;
-    }
-
     /**
      * @param  array<string, mixed>  $data
      * @return array<string, mixed>

@@ -63,6 +63,11 @@ expect()->extend('toBeOne', function () {
 |
 */
 
+dataset('body block corpus', static fn (): array => array_map(
+    static fn (array $blocks): array => [$blocks],
+    bodyBlockCorpus(),
+));
+
 /**
  * The CMS body of every content page, captured verbatim from the live database into
  * tests/Fixtures/body-blocks/. Shared by the block round-trip, coverage and inline-span
