@@ -4,7 +4,9 @@
      the Deals mega-menu ($deals) and the Events dropdown ($eventLinks) are
      data-driven, shared by App\Domain\Navigation\View\NavigationComposer. --}}
 @php
-    $deals ??= app(\App\Domain\Navigation\Support\ChromeCatalog::class)->deals();
+    // The header renders the curated REGISTRY order (Header.tsx maps `discounts`
+    // as-is); only the Deals section above the footer sorts by publish date.
+    $deals ??= app(\App\Domain\Navigation\Support\ChromeCatalog::class)->menuDeals();
     $eventLinks ??= app(\App\Domain\Navigation\Support\ChromeCatalog::class)->eventLinks();
     $lastUpdated ??= config('site.last_updated');
 

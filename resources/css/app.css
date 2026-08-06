@@ -533,6 +533,27 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
 }
 .nw-dropdown-event:hover, .nw-dropdown-event:focus-visible, .nw-dropdown-event.is-active { color: var(--gold); }
 
+/* Indented air-show children under "Air Shows Hub" — ported from Header.tsx:62.
+   Without these the sub-items rendered as bare links: gold instead of gray, mixed
+   case instead of uppercase, no indent rule, and long names wrapped to two lines
+   because `white-space: nowrap` was missing. */
+.nw-dropdown-subevent {
+    border-left: 2px solid rgba(201, 168, 76, 0.25);
+    color: var(--nw-gray-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-left: var(--space-md);
+    padding: 8px 12px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.nw-dropdown-subevent:hover,
+.nw-dropdown-subevent:focus-visible {
+    background: rgba(201, 168, 76, 0.08);
+    color: var(--gold);
+}
+
 /* Mega menu (Deals) — full-width panel anchored under the 64px bar */
 .nw-mega { position: static; }
 .nw-mega-panel {
@@ -630,8 +651,31 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     padding: 12px 0 12px var(--space-lg);
     text-transform: uppercase;
 }
+
+/* Mobile equivalent of the indented air-show children — Header.tsx:101. */
+.nw-mob-subsublink {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    border-left: 2px solid rgba(201, 168, 76, 0.15);
+    color: var(--nw-gray-light);
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-left: var(--space-sm);
+    padding: 10px 0 10px calc(var(--space-lg) * 2);
+    text-transform: uppercase;
+}
+.nw-mob-subsublink:hover,
+.nw-mob-subsublink:focus-visible {
+    color: var(--gold);
+}
 .nw-mob-sublink.is-active { color: var(--gold); }
-.nw-mob-acc { border-bottom: 1px solid rgba(201, 168, 76, 0.08); }
+/* padding:0 takes back the global `details` rule above — the legacy accordion has
+   no padding of its own, and 8px top/bottom offset every item below it. */
+.nw-mob-acc {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    padding: 0;
+}
 .nw-mob-acc-summary {
     align-items: center;
     color: var(--nw-off-white);

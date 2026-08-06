@@ -30,8 +30,14 @@ final class ChromeCatalog
 
     private const LOGO_MAX_WIDTH = 130;
 
+    /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int, published: string, order: int}>|null */
+    private ?array $rows = null;
+
     /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int}>|null */
     private ?array $deals = null;
+
+    /** @var list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int}>|null */
+    private ?array $menuDeals = null;
 
     public function __construct(
         private readonly PageRepositoryInterface $pages,
@@ -39,8 +45,11 @@ final class ChromeCatalog
     ) {}
 
     /**
-     * Every published discount-brand deal, newest published first (mirrors the
-     * legacy DealsSection sort), for the mega-menu and the Deals section.
+     * Every published discount-brand deal, newest published first — the legacy
+     * DealsSection sort, for the Deals section above the footer.
+     *
+     * NOT the same order as the header menu: DealsSection.tsx sorts a copy by
+     * datePublished, while Header.tsx maps the `discounts` registry as-is.
      *
      * @return list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int}>
      */
@@ -48,6 +57,47 @@ final class ChromeCatalog
     {
         if ($this->deals !== null) {
             return $this->deals;
+        }
+
+        $rows = $this->dealRows();
+
+        // Newest published first. The legacy sort is STABLE, so equal dates keep the
+        // curated registry order — without that tie-break the list diverges from the
+        // live page at the first tie.
+        usort($rows, static fn (array $a, array $b): int => [$b['published'], $a['order']] <=> [$a['published'], $b['order']]);
+
+        return $this->deals = array_map(self::present(...), $rows);
+    }
+
+    /**
+     * The same deals in curated registry order — what the header's Deals mega-menu
+     * and its mobile accordion render (Header.tsx maps `discounts` directly, with no
+     * sort of its own).
+     *
+     * @return list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int}>
+     */
+    public function menuDeals(): array
+    {
+        if ($this->menuDeals !== null) {
+            return $this->menuDeals;
+        }
+
+        $rows = $this->dealRows();
+        usort($rows, static fn (array $a, array $b): int => $a['order'] <=> $b['order']);
+
+        return $this->menuDeals = array_map(self::present(...), $rows);
+    }
+
+    /**
+     * Every published discount-brand deal with the fields both orderings need,
+     * loaded once per request.
+     *
+     * @return list<array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int, published: string, order: int}>
+     */
+    private function dealRows(): array
+    {
+        if ($this->rows !== null) {
+            return $this->rows;
         }
 
         $rows = [];
@@ -79,24 +129,27 @@ final class ChromeCatalog
             ];
         }
 
-        // Newest published first (mirrors the legacy DealsSection sort). The legacy
-        // sort is STABLE, so equal dates keep the curated registry order — without
-        // that tie-break the list diverges from the live page at the first tie.
-        usort($rows, static fn (array $a, array $b): int => [$b['published'], $a['order']] <=> [$a['published'], $b['order']]);
+        return $this->rows = $rows;
+    }
 
-        return $this->deals = array_map(
-            static fn (array $d): array => [
-                'brand' => $d['brand'],
-                'url' => $d['url'],
-                'headline' => $d['headline'],
-                'category' => $d['category'],
-                'logo' => $d['logo'],
-                'logoBackground' => $d['logoBackground'],
-                'logoMaxHeight' => $d['logoMaxHeight'],
-                'logoMaxWidth' => $d['logoMaxWidth'],
-            ],
-            $rows,
-        );
+    /**
+     * A loaded row reduced to the fields the views render.
+     *
+     * @param  array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int, published: string, order: int}  $row
+     * @return array{brand: string, url: string, headline: string|null, category: string|null, logo: string|null, logoBackground: string|null, logoMaxHeight: int, logoMaxWidth: int}
+     */
+    private static function present(array $row): array
+    {
+        return [
+            'brand' => $row['brand'],
+            'url' => $row['url'],
+            'headline' => $row['headline'],
+            'category' => $row['category'],
+            'logo' => $row['logo'],
+            'logoBackground' => $row['logoBackground'],
+            'logoMaxHeight' => $row['logoMaxHeight'],
+            'logoMaxWidth' => $row['logoMaxWidth'],
+        ];
     }
 
     /**

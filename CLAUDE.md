@@ -138,6 +138,23 @@ dropdown missing its indented air-show sub-items entirely.
 **Behaviour is part of parity too** — dropdowns, filters, accordions and the mobile
 menu must work the same way, not just look the same at rest.
 
+**A full-page diff CANNOT see an interaction state.** `diff.mjs` screenshots the
+page at rest, so a menu, accordion or modal that is closed contributes nothing to
+its number — a component can be 100% wrong and the page still score 0.0%. Anything
+that opens needs its own diff in the opened state:
+
+```
+node tools/vdiff/menu-desktop.mjs      # Events dropdown, forced open
+node tools/vdiff/menu-mobile.mjs       # mobile panel + Events accordion, forced open
+```
+
+Checking the DOM instead does NOT substitute. The Events sub-items once had the
+right labels, the right count and the right hrefs while rendering gold mixed-case
+unindented text against remote's grey uppercase indented rows, because
+`.nw-dropdown-subevent` had no CSS at all — a DOM check passes that, a pixel diff
+of the open menu catches it immediately. When you add a component with an open
+state, add its diff script here in the same change.
+
 ## CSS authoring — alphabetical property order (enforced)
 
 Within every declaration block of our **authored** CSS, list properties in

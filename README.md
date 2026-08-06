@@ -21,6 +21,18 @@ site remains at the repo root until cutover (Phase 7).
 
 ## Common commands
 
+> **Run the dev server with `composer run dev`, not `php artisan serve`.**
+> Laravel's dev router hands a request straight to the built-in PHP server whenever
+> `file_exists()` is true for the path — and that is also true for a DIRECTORY, so
+> any URL matching a folder under `public/` never reaches Laravel. Here that made
+> `/authors/` return the built-in server's own 404, while the application (and
+> production, which serves through `public/index.php`) correctly 301s it to `/` —
+> `public/authors/` exists only to hold the two byline portraits. `tools/serve.php`
+> is the framework's router with `is_file()` in place of `file_exists()`, and
+> `composer run dev` uses it. Behaviour is guarded by
+> `tests/Feature/FamilyRootRedirectTest.php`.
+
+
 Run everything under PHP 8.4:
 
 ```sh

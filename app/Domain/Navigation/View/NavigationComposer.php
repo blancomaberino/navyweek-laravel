@@ -36,7 +36,8 @@ final class NavigationComposer
                 'lastUpdated' => config('site.last_updated'),
             ]),
             default => $view->with([
-                'deals' => $this->chrome->deals(),
+                // Header: curated registry order, not the section's date sort.
+                'deals' => $this->chrome->menuDeals(),
                 'eventLinks' => $this->chrome->eventLinks(),
                 'lastUpdated' => config('site.last_updated'),
                 // The nav slug to highlight. The legacy passes this explicitly from
