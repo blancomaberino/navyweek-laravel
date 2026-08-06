@@ -32,6 +32,15 @@ site remains at the repo root until cutover (Phase 7).
 > `composer run dev` uses it. Behaviour is guarded by
 > `tests/Feature/FamilyRootRedirectTest.php`.
 
+> **If a page suddenly "stops working" locally, suspect a cached redirect before
+> anything else.** The catch-all 301s any path with no published page — including
+> during the seconds `pages:generate-*` is re-running — and browsers cache a 301
+> permanently. One reload in that window pins the URL to `/` in your browser, with
+> the server never consulted again. It presents as a dead page while curl, the
+> pixel diff and the test suite all report 200. Confirm in a private window, then
+> clear it with DevTools → right-click reload → **Empty Cache and Hard Reload**
+> (a plain Cmd-Shift-R does not clear cached redirects). The 301 is intentional —
+> a site SEO invariant and a verbatim port of the legacy edge.
 
 Run everything under PHP 8.4:
 
@@ -42,7 +51,7 @@ $php84 vendor/bin/pest          # test suite (Pest v4) — the SEO parity gates 
 $php84 -d memory_limit=512M vendor/bin/phpstan analyse   # Larastan (level max)
 $php84 vendor/bin/pint          # format (Laravel Pint)
 $php84 vendor/bin/pint --test   # format check (CI)
-$php84 artisan serve            # dev server
+composer run dev               # dev server (uses tools/serve.php — see the note above)
 ```
 
 Or via composer scripts: `composer pest`, `composer stan`, `composer lint`,
