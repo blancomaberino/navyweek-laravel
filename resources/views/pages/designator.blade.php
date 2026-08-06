@@ -220,7 +220,7 @@
             <ul>
                 @foreach ($designator->sources as $source)
                     <li>
-                        <a href="{{ $source->url }}" rel="noopener noreferrer" target="_blank">{{ $source->label }} {!! $icon('external-link', 11) !!}</a>
+                        <a href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($source->url) }}" rel="noopener noreferrer" target="_blank">{{ $source->label }} {!! $icon('external-link', 11) !!}</a>
                     </li>
                 @endforeach
             </ul>

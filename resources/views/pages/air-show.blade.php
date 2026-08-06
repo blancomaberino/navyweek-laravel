@@ -177,6 +177,7 @@
             </section>
         @endif
 
+        @if ($show->faqs->isNotEmpty())
         <section class="as-section as-faq" aria-labelledby="faq">
             <h2 id="faq">FREQUENTLY ASKED QUESTIONS</h2>
             {{-- CSS-only accordion (native <details>), first item open — port of
@@ -193,6 +194,7 @@
                 @endforeach
             </div>
         </section>
+        @endif
 
         <section class="as-section as-related" aria-labelledby="related">
             <h2 id="related">NEARBY &amp; RELATED</h2>

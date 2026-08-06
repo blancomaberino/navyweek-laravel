@@ -1,0 +1,17 @@
+{
+  "name": "navyweek-vdiff",
+  "private": true,
+  "type": "module",
+  "description": "Visual parity harness: pixel-diffs a path on the local app against www.navyweek.org.",
+  "scripts": {
+    "diff": "node diff.mjs urls.txt desktop",
+    "diff:mobile": "node diff.mjs urls.txt mobile",
+    "menu:desktop": "node menu-desktop.mjs",
+    "menu:mobile": "node menu-mobile.mjs"
+  },
+  "dependencies": {
+    "pixelmatch": "^6.0.0",
+    "playwright": "^1.49.0",
+    "pngjs": "^7.0.0"
+  }
+}

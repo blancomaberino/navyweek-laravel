@@ -116,7 +116,7 @@
                         {{-- No whitespace between the link and its note: the legacy JSX
                              strips the newline, so the gap is the note's 8px margin alone. --}}
                         <li>
-                            <a href="{{ $work['url'] }}">{{ $work['label'] }}</a>@if (($work['note'] ?? null) !== null)<span class="author-work-note">&mdash; {{ $work['note'] }}</span>@endif
+                            <a href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($work['url']) }}">{{ $work['label'] }}</a>@if (($work['note'] ?? null) !== null)<span class="author-work-note">&mdash; {{ $work['note'] }}</span>@endif
                         </li>
                     @endforeach
                 </ul>
@@ -151,7 +151,7 @@
                 <h2 id="connect-heading">CONNECT</h2>
                 <ul class="author-links">
                     <li>
-                        <a href="{{ $author->linkedin_url }}" target="_blank" rel="noopener noreferrer me">
+                        <a href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($author->linkedin_url) }}" target="_blank" rel="noopener noreferrer me">
                             LinkedIn &mdash; {{ $linkedinLabel }}
                         </a>
                     </li>

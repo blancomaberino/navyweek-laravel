@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Publishing\Seo;
 
+use App\Domain\Navigation\Support\LinkUrl;
 use App\Domain\Publishing\Models\Page;
 use App\Models\User;
 use Illuminate\Support\Collection;
@@ -58,7 +59,10 @@ final class AuthorPageSchema
         if ($author->knows_about !== null && $author->knows_about !== []) {
             $person['knowsAbout'] = $author->knows_about;
         }
-        if ($author->linkedin_url !== null && $author->linkedin_url !== '') {
+        // Editor-supplied, so it goes through the same scheme allowlist as every
+        // rendered href — but OMITTED rather than replaced with the "#" placeholder:
+        // publishing a bogus `sameAs` is worse structured data than publishing none.
+        if ($author->linkedin_url !== null && LinkUrl::isAllowed($author->linkedin_url)) {
             $person['sameAs'] = [$author->linkedin_url];
         }
         // The publisher the profile writes for, mirroring the legacy `worksFor` entry.

@@ -25,7 +25,11 @@ fs.mkdirSync(OUT, { recursive: true });
 
 /** Screenshot one URL, with the chat widget + anything animated hidden. */
 async function shoot(page, url, file, height) {
-  await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 }).catch(() => {});
+  // Fail CLOSED: a swallowed navigation error compares a blank page and can read
+  // as a near-zero diff — a false pass on the one metric this whole port trusts.
+  const response = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+  if (response === null) throw new Error(`no response for ${url}`);
+  if (!response.ok()) throw new Error(`HTTP ${response.status()} for ${url}`);
   // Neutralize third-party chrome that isn't part of the port, and freeze motion.
   await page.addStyleTag({
     content: `*,*::before,*::after{transition:none!important;animation:none!important}
@@ -97,5 +101,8 @@ for (const r of rows) {
   const flag = r.pct > 15 ? '🔴' : r.pct > 5 ? '🟠' : r.pct > 1 ? '🟡' : '🟢';
   console.log(`${flag} ${(r.pct ?? 0).toFixed(1).padStart(5)}%  ${r.vp.padEnd(7)} ${r.path}${r.err ? '  ERR ' + r.err : ''}`);
 }
-const bad = rows.filter((r) => r.pct > 1).length;
+const bad = rows.filter((r) => !(r.pct <= 1)).length; // NaN (errored) counts as failing
 console.log(`\n${rows.length - bad}/${rows.length} within 1% · diff images in ${OUT}`);
+// >1% differing pixels is a failing gate (see CLAUDE.md), so exit non-zero and let
+// CI or a caller act on it rather than printing a red flag and returning success.
+if (bad > 0) process.exit(1);

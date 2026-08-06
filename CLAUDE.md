@@ -116,13 +116,18 @@ and behaviour. A page can match heading-for-heading and still be completely wron
 `/schedule/` once scored "2/2 headings match" while 94% of its pixels differed —
 the whole body (filters, cards, key facts, intro copy) was missing or invented.
 
-The harness lives at `_scratch`/`vdiff/diff.mjs` (Playwright + pixelmatch):
-screenshots the same path on local and remote, pixel-diffs, and ranks worst-first.
-Run it for every page you touch, and re-run it after each fix:
+The harness is committed at `platform/tools/vdiff/` (Playwright + pixelmatch):
+it screenshots the same path on local and remote, pixel-diffs, and ranks
+worst-first. Run it from that directory for every page you touch, and re-run it
+after each fix:
 
-```
+```sh
+cd platform/tools/vdiff && npm install     # first run only
 node diff.mjs urls.txt [desktop|mobile]
 ```
+
+It **fails closed**: a navigation error or non-2xx response throws rather than
+comparing a blank page, and the script exits non-zero when any path exceeds 1%.
 
 Treat **>1% differing pixels as a failing gate**, exactly like a red test, and read
 the emitted `*.diff.png` to see WHERE it differs.

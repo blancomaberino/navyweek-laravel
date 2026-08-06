@@ -161,7 +161,7 @@
                         <p class="ld-eyebrow">Sources</p>
                         <div class="ld-src">
                             @foreach ($discount->sources as $source)
-                                <a href="{{ $source->url }}" target="_blank" rel="noopener noreferrer nofollow">{{ $source->label }}@if ($source->publisher)<span class="pub"> · {{ $source->publisher }}</span>@endif</a>
+                                <a href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($source->url) }}" target="_blank" rel="noopener noreferrer nofollow">{{ $source->label }}@if ($source->publisher)<span class="pub"> · {{ $source->publisher }}</span>@endif</a>
                             @endforeach
                         </div>
                     </section>

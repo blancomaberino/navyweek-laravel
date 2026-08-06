@@ -341,7 +341,7 @@
                     @foreach ($base->sources as $source)
                         <li>
                             @if ($source->url)
-                                <a href="{{ $source->url }}" rel="noopener noreferrer" target="_blank">{{ $source->label }}
+                                <a href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($source->url) }}" rel="noopener noreferrer" target="_blank">{{ $source->label }}
                                     {!! $icon('external-link', 11) !!}</a>
                             @else
                                 {{ $source->label }}

@@ -126,7 +126,7 @@
                     @foreach ($city->sources as $source)
                         <li>
                             @if ($source->url)
-                                <a href="{{ $source->url }}" rel="noopener noreferrer nofollow" target="_blank">{{ $source->label }}</a>
+                                <a href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($source->url) }}" rel="noopener noreferrer nofollow" target="_blank">{{ $source->label }}</a>
                             @else
                                 {{ $source->label }}
                             @endif

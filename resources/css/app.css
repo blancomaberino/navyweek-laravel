@@ -1443,6 +1443,14 @@ section.editorial-policy h2 {
     transition: all 0.2s;
 }
 .schedule-filter-group select { min-width: 140px; outline: none; }
+/* The legacy sets `outline: none` with no replacement (Schedule.tsx:193), which
+   leaves keyboard users with no visible focus (WCAG 2.4.7). Restored here as a
+   deliberate, documented deviation: :focus-visible paints only during keyboard
+   interaction, so it costs nothing against the at-rest parity diff. */
+.schedule-filter-group select:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
 .schedule-status-buttons button.is-on { background: var(--gold); border-color: var(--gold); color: var(--navy); }
 .schedule-view-buttons { display: flex; gap: var(--space-xs); }
 .schedule-view-buttons button {

@@ -142,7 +142,7 @@
                                 <td data-label="Proof required">{{ $meal->proof_required }}</td>
                                 <td data-label="When">{{ $meal->whenLabel() }}</td>
                                 <td data-label="Source">
-                                    <a class="vdm-source" href="{{ $meal->source_url }}" target="_blank" rel="nofollow noopener noreferrer"
+                                    <a class="vdm-source" href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($meal->source_url) }}" target="_blank" rel="nofollow noopener noreferrer"
                                        data-testid="vdm-source-{{ $meal->slug }}">{{ $meal->source_label }} ↗</a>
                                 </td>
                             </tr>

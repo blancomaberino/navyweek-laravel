@@ -898,6 +898,9 @@ final class PageController
         $all = $this->bases->all()->sortBy('name')->values();
         $overseas = $all->filter(static fn (Base $b): bool => filled($b->country_slug));
 
+        // Both templates read $page->faqs; load it here so the view does not lazy-load.
+        $page->load('faqs');
+
         return response()->view('pages.base-hub', [
             'page' => $page,
             'states' => $this->statesWithBases($all),
@@ -927,6 +930,9 @@ final class PageController
             $byRegion[$country['region']]['countries'][] = $country;
         }
         ksort($byRegion);
+
+        // Both templates read $page->faqs; load it here so the view does not lazy-load.
+        $page->load('faqs');
 
         return response()->view('pages.base-overseas-hub', [
             'page' => $page,

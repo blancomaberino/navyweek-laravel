@@ -140,7 +140,7 @@
             @endif
 
             @if ($crossTeam !== [])
-                <p class="jt-p jt-p-760 jt-cross-team">{{ $crossTeam['before'] ?? '' }}@if (! empty($crossTeam['href']))<a href="{{ $crossTeam['href'] }}">{{ $crossTeam['label'] ?? '' }}</a>@else{{ $crossTeam['label'] ?? '' }}@endif{{ $crossTeam['after'] ?? '' }}</p>
+                <p class="jt-p jt-p-760 jt-cross-team">{{ $crossTeam['before'] ?? '' }}@if (! empty($crossTeam['href']))<a href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($crossTeam['href']) }}">{{ $crossTeam['label'] ?? '' }}</a>@else{{ $crossTeam['label'] ?? '' }}@endif{{ $crossTeam['after'] ?? '' }}</p>
             @endif
 
             @include('partials.trust.editorial-policy')
