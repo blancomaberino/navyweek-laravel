@@ -31,40 +31,35 @@ it('returns all hubs in id (registry insertion) order', function () {
         ->toBe(['first-military-veteran', 'second-military-veteran', 'third-military-veteran']);
 });
 
-it('orders matched connections: pinned first, then the rest A–Z, excluding hidden', function () {
-    $category = DiscountCategory::factory()->create([
-        'match_category' => 'Car Rental',
-        'pinned' => ['hertz', 'avis'],
-        'excluded' => ['secret-brand'],
-    ]);
+it('returns the category\'s connections brand A-Z, case-insensitively', function () {
+    $category = DiscountCategory::factory()->create(['match_category' => 'Car Rental']);
 
-    Connection::factory()->create(['slug' => 'avis', 'brand' => 'Avis', 'category' => 'Car Rental']);
-    Connection::factory()->create(['slug' => 'hertz', 'brand' => 'Hertz', 'category' => 'Car Rental']);
     Connection::factory()->create(['slug' => 'zipcar', 'brand' => 'Zipcar', 'category' => 'Car Rental']);
     Connection::factory()->create(['slug' => 'alamo', 'brand' => 'Alamo', 'category' => 'Car Rental']);
-    Connection::factory()->create(['slug' => 'secret-brand', 'brand' => 'Secret', 'category' => 'Car Rental']);
+    Connection::factory()->create(['slug' => 'ebay-cars', 'brand' => 'eBay Motors', 'category' => 'Car Rental']);
     // A different category must not leak in.
     Connection::factory()->create(['slug' => 'marriott', 'brand' => 'Marriott', 'category' => 'Hotels & Travel']);
 
     $result = $this->repository->orderedConnections($category);
 
-    // hertz, avis (pinned order) then alamo, zipcar (A–Z); secret-brand excluded.
-    expect($result->pluck('slug')->all())->toBe(['hertz', 'avis', 'alamo', 'zipcar']);
+    // Case-insensitive: "eBay Motors" sorts between Alamo and Zipcar, not after
+    // both (a byte-order sort would push every lowercase-styled brand to the end).
+    expect($result->pluck('slug')->all())->toBe(['alamo', 'ebay-cars', 'zipcar']);
 });
 
-it('honours an explicit order, sending unnamed brands to the end A–Z', function () {
+it('leaves the curated lists alone — they are page slugs, applied downstream', function () {
+    // Real data pins PAGE slugs (…-military-discount). This method only sees
+    // connection slugs, so it must not try to match them: doing so silently did
+    // nothing, which is how the curated order went missing on the live hubs.
     $category = DiscountCategory::factory()->create([
-        'match_category' => 'Flights',
-        'order' => ['delta', 'united'],
+        'match_category' => 'Hotels & Travel',
+        'pinned' => ['marriott-military-discount'],
+        'excluded' => ['airbnb-military-discount'],
     ]);
 
-    Connection::factory()->create(['slug' => 'united', 'brand' => 'United', 'category' => 'Flights']);
-    Connection::factory()->create(['slug' => 'delta', 'brand' => 'Delta', 'category' => 'Flights']);
-    Connection::factory()->create(['slug' => 'jetblue', 'brand' => 'JetBlue', 'category' => 'Flights']);
-    Connection::factory()->create(['slug' => 'alaska', 'brand' => 'Alaska', 'category' => 'Flights']);
+    Connection::factory()->create(['slug' => 'airbnb', 'brand' => 'Airbnb', 'category' => 'Hotels & Travel']);
+    Connection::factory()->create(['slug' => 'marriott', 'brand' => 'Marriott', 'category' => 'Hotels & Travel']);
 
-    $result = $this->repository->orderedConnections($category);
-
-    // delta, united (explicit) then alaska, jetblue (unnamed → end, A–Z).
-    expect($result->pluck('slug')->all())->toBe(['delta', 'united', 'alaska', 'jetblue']);
+    expect($this->repository->orderedConnections($category)->pluck('slug')->all())
+        ->toBe(['airbnb', 'marriott']);
 });

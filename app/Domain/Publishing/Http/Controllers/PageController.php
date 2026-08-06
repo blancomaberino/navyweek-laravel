@@ -11,6 +11,7 @@ use App\Domain\Catalog\Models\Offer;
 use App\Domain\Catalog\Repositories\DiscountCategoryRepositoryInterface;
 use App\Domain\Catalog\Repositories\LocalDiscountRepositoryInterface;
 use App\Domain\Catalog\Repositories\VeteransDayMealRepositoryInterface;
+use App\Domain\Catalog\Support\DiscountCategoryOrdering;
 use App\Domain\Catalog\Support\VeteransDayFreeMealsPresenter;
 use App\Domain\Crm\Models\Connection;
 use App\Domain\Pillars\Enums\BaseType;
@@ -508,24 +509,19 @@ final class PageController
             }
         }
 
-        // `pinned`/`order`/`excluded` list PAGE slugs (…-military-discount), not the
-        // connection slugs the repository's curated sort keys off — so apply them
-        // here, where the page is in hand. The repository already returns brand A–Z,
-        // and PHP's sort is stable, so a sort on priority alone yields "named brands
-        // first in their given order, everyone else A–Z" exactly as the legacy does.
-        $excluded = array_flip($category->excluded ?? []);
-        $priority = array_flip($category->order ?: ($category->pinned ?? []));
-        $live = array_filter(
-            $live,
-            static fn (Page $p): bool => ! isset($excluded[(string) $p->slug])
-        );
-        uasort(
-            $live,
-            static fn (Page $a, Page $b): int => ($priority[(string) $a->slug] ?? PHP_INT_MAX)
-                <=> ($priority[(string) $b->slug] ?? PHP_INT_MAX)
-        );
+        // The curated lists hold PAGE slugs, so they can only be applied here, where
+        // the page is in hand — the repository returns the brand A–Z baseline.
+        $bySlug = [];
+        foreach ($live as $connectionId => $brandPage) {
+            $bySlug[(string) $brandPage->slug] = $connectionId;
+        }
 
-        return $live;
+        $ordered = [];
+        foreach (DiscountCategoryOrdering::apply($category, $bySlug) as $connectionId) {
+            $ordered[$connectionId] = $live[$connectionId];
+        }
+
+        return $ordered;
     }
 
     /**

@@ -51,6 +51,7 @@ drives `Catalog\Support\VeteransDayFreeMealsPresenter` + `Publishing\Seo\Veteran
 verification) into the `pages.veterans-day-free-meals` view (SSR-first table, progressively
 enhanced with client-side filter/sort). Non-persisted FAQ pairs use `Publishing\Support\FaqItem`.
 Map rendering is server-side from two distinct coordinate assets: `Publishing\Support\UsMapGeometry` (Albers-USA landmass + state-border mesh, inset labels and tour-stop pin positions; drives `/map/` and the home map teaser) and `Pillars\Support\BaseMapSvg` (the separate hand-drawn bases projection — 960x560 CONUS schematic with Hawaii/Alaska inset, plus a 1000x500 world silhouette with per-country zoom; drives the base detail, country hub and overseas hub). Both are static rendering assets, not CMS content.
+Discount category hubs order their cards through `Catalog\Support\DiscountCategoryOrdering`: `EloquentDiscountCategoryRepository::orderedConnections` returns the brand A-Z baseline, and the curated `pinned`/`order`/`excluded` lists — which hold PAGE slugs, not connection slugs — are applied by that support class where the page is in hand.
 
 **The author-profile page family** (`/authors/{slug}/`) renders one profile page per
 editorial byline `users` row that has a public `slug`. Like the home hub, it is data-driven
