@@ -1,0 +1,1193 @@
+[
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "VA Disability 2026 — Key Facts"
+    },
+    {
+        "type": "paragraph",
+        "text": "Source: VA.gov — Disability compensation · Last verified: May 25, 2026"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "VA disability compensation is monthly, tax-free pay from the U.S. Department of Veterans Affairs to veterans with a physical or mental condition connected to military service. This page explains how the program is structured in 2026: pay rates effective December 1, 2025, how the rating system works, how to file or appeal, and where to get free accredited help. Every figure below links to its official source on VA.gov, Benefits.va.gov, or the eCFR."
+            }
+        ],
+        "variant": "lead"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "NavyWeek.org is independent and not affiliated with the VA. This guide is informational and not legal, medical, or claims advice. Confirm any amount, deadline, or eligibility rule on "
+            },
+            {
+                "text": "VA.gov",
+                "url": "https://www.va.gov/disability/"
+            },
+            {
+                "text": " before you act on it."
+            }
+        ]
+    },
+    {
+        "type": "toc",
+        "label": "On this page",
+        "items": [
+            {
+                "label": "What VA disability is",
+                "url": "#what-it-is"
+            },
+            {
+                "label": "Who may qualify",
+                "url": "#who-may-qualify"
+            },
+            {
+                "label": "2026 pay rates",
+                "url": "#pay-rates"
+            },
+            {
+                "label": "How ratings work",
+                "url": "#how-ratings-work"
+            },
+            {
+                "label": "Combined ratings",
+                "url": "#combined-ratings"
+            },
+            {
+                "label": "Evidence",
+                "url": "#evidence"
+            },
+            {
+                "label": "How to file",
+                "url": "#how-to-file"
+            },
+            {
+                "label": "Intent to file & effective dates",
+                "url": "#intent-to-file"
+            },
+            {
+                "label": "Claim types",
+                "url": "#claim-types"
+            },
+            {
+                "label": "C&P exams",
+                "url": "#cp-exam"
+            },
+            {
+                "label": "Dependents, SMC, A&A, Housebound",
+                "url": "#dependents-smc"
+            },
+            {
+                "label": "TDIU",
+                "url": "#tdiu"
+            },
+            {
+                "label": "PACT Act",
+                "url": "#pact-act"
+            },
+            {
+                "label": "Common mistakes",
+                "url": "#common-mistakes"
+            },
+            {
+                "label": "Free & accredited help",
+                "url": "#free-help"
+            },
+            {
+                "label": "Official VA resources",
+                "url": "#official-resources"
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "WHAT VA DISABILITY COMPENSATION IS"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "VA disability is a monthly, tax-free benefit paid by the U.S. Department of Veterans Affairs to veterans with a service-connected disability ("
+            },
+            {
+                "text": "VA.gov — Eligibility",
+                "url": "https://www.va.gov/disability/eligibility/"
+            },
+            {
+                "text": "). Federal income tax does not apply ("
+            },
+            {
+                "text": "IRS",
+                "url": "https://www.irs.gov/individuals/military/special-tax-considerations-for-veterans"
+            },
+            {
+                "text": "); most states also exempt it, but state treatment varies."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "It is distinct from a few other programs you may have heard of:"
+            }
+        ]
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "VA pension",
+                        "bold": true
+                    },
+                    {
+                        "text": " is a separate, needs-based benefit for low-income wartime veterans ("
+                    },
+                    {
+                        "text": "VA.gov — Pension",
+                        "url": "https://www.va.gov/pension/eligibility/"
+                    },
+                    {
+                        "text": ")."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "SSDI",
+                        "bold": true
+                    },
+                    {
+                        "text": " is paid by the Social Security Administration for a disability that prevents substantial work, regardless of cause ("
+                    },
+                    {
+                        "text": "SSA.gov",
+                        "url": "https://www.ssa.gov/benefits/disability/"
+                    },
+                    {
+                        "text": "). Many veterans receive VA disability and SSDI at the same time."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Military retirement",
+                        "bold": true
+                    },
+                    {
+                        "text": " is a separate DoD benefit for service members who meet the retirement criteria. Concurrent receipt rules (CRDP / CRSC) govern how retirement and VA disability interact for eligible retirees ("
+                    },
+                    {
+                        "text": "DFAS — CRDP",
+                        "url": "https://www.dfas.mil/RetiredMilitary/disability/crdp/"
+                    },
+                    {
+                        "text": ")."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "WHO MAY QUALIFY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "To qualify for service connection, a veteran generally needs a current diagnosis, an in-service event or exposure, and a medical nexus linking the two ("
+            },
+            {
+                "text": "VA.gov — Eligibility",
+                "url": "https://www.va.gov/disability/eligibility/"
+            },
+            {
+                "text": "). A condition can also be service-connected as a "
+            },
+            {
+                "text": "secondary",
+                "bold": true
+            },
+            {
+                "text": " if it was caused or aggravated by another service-connected condition ("
+            },
+            {
+                "text": "38 CFR §3.310",
+                "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-3/subpart-A/section-3.310"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Eligibility is fact-specific. Whether your situation meets the legal standard depends on the evidence in your file. If you are unsure, an accredited VSO can review the facts with you at no charge ("
+            },
+            {
+                "text": "VA accreditation search",
+                "url": "https://www.va.gov/ogc/apps/accreditation/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "2026 VA DISABILITY PAY RATES"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The 2026 monthly compensation rates took effect December 1, 2025, following a 2.5% cost-of-living adjustment. The table below shows rates for a single veteran with no dependents. Confirm the current figure for your situation on the official VA rate table: "
+            },
+            {
+                "text": "VA.gov — 2026 Veteran Compensation Rates",
+                "url": "https://www.va.gov/disability/compensation-rates/veteran-rates/"
+            },
+            {
+                "text": "."
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "variant": "plain",
+        "columns": [
+            {
+                "label": "Rating",
+                "align": "left"
+            },
+            {
+                "label": "Monthly pay",
+                "align": "right"
+            }
+        ],
+        "rows": [
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "10%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$175.51"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "20%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$346.95"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "30%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$537.42"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "40%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$774.16"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "50%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$1,102.04"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "60%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$1,395.93"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "70%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$1,759.19"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "80%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$2,103.94"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "90%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$2,395.58"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "100%"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$3,946.25"
+                        }
+                    ],
+                    "align": "right"
+                }
+            ]
+        ],
+        "caption": "2026 VA disability monthly pay — single veteran, no dependents (effective Dec 1, 2025)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Added dependent pay (spouse, children, dependent parents) begins at the 30% rating tier. Exact additions vary by tier and dependent type — see the VA rate table for the figures that apply to your household."
+            }
+        ]
+    },
+    {
+        "type": "callout",
+        "spans": [
+            {
+                "text": "Always confirm amounts on VA.gov.",
+                "bold": true
+            },
+            {
+                "text": " Rate tables change every December and the figures above may not reflect a mid-year correction. The numbers shown were last verified on May 25, 2026 against the "
+            },
+            {
+                "text": "official VA rate table",
+                "url": "https://www.va.gov/disability/compensation-rates/veteran-rates/"
+            },
+            {
+                "text": "."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "HOW VA RATINGS WORK"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The VA rates each service-connected condition from 0% to 100% in 10% increments using the Schedule for Rating Disabilities ("
+            },
+            {
+                "text": "38 CFR Part 4",
+                "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-4"
+            },
+            {
+                "text": "). A 0% rating means the condition is service-connected but is not currently producing a compensable level of impairment."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Each diagnostic code has its own criteria. The VA assigns the rating based on the evidence in the claims file — typically service treatment records, private and VA medical records, lay statements, and the Compensation & Pension (C&P) exam."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "COMBINED RATINGS"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "When a veteran has multiple conditions, the VA combines them using the table at "
+            },
+            {
+                "text": "38 CFR §4.25",
+                "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-4#4.25"
+            },
+            {
+                "text": " — not simple addition. Each rating reduces the \"remaining efficiency\" of a hypothetical healthy person, and the result is rounded to the nearest 10%."
+            }
+        ]
+    },
+    {
+        "type": "callout",
+        "spans": [
+            {
+                "text": "Quick example.",
+                "bold": true
+            },
+            {
+                "text": " A 50% rating combined with another 50% rating yields 75% under §4.25 (50% takes half of the remaining 50%), which rounds to 80%. Two 50% conditions do not combine to 100%."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "A "
+            },
+            {
+                "text": "bilateral factor",
+                "bold": true
+            },
+            {
+                "text": " adds 10% to the combined value of paired-extremity conditions (e.g., both knees, both hands) before final rounding ("
+            },
+            {
+                "text": "38 CFR §4.26",
+                "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-4#4.26"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "EVIDENCE THE VA CONSIDERS"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The VA generally considers service treatment records, post-service medical records, VA medical records, Disability Benefits Questionnaires (DBQs), lay statements (sometimes called \"buddy statements\"), and the C&P exam report ("
+            },
+            {
+                "text": "VA.gov — Evidence needed",
+                "url": "https://www.va.gov/disability/how-to-file-claim/evidence-needed/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "You can submit private medical records and a private-provider DBQ in addition to whatever the VA gathers. The DBQ library is published at "
+            },
+            {
+                "text": "Benefits.va.gov — DBQs",
+                "url": "https://www.benefits.va.gov/COMPENSATION/dbq_disabilityexams.asp"
+            },
+            {
+                "text": "."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "HOW TO FILE A CLAIM"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Initial disability claims are filed on "
+            },
+            {
+                "text": "VA Form 21-526EZ",
+                "url": "https://www.va.gov/find-forms/about-form-21-526ez/"
+            },
+            {
+                "text": ". You can file online, by mail, in person, or with the help of an accredited Veterans Service Organization ("
+            },
+            {
+                "text": "VA.gov — How to file",
+                "url": "https://www.va.gov/disability/how-to-file-claim/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Filing with an accredited VSO is free to the veteran. VSOs are accredited under VA Office of General Counsel rules and can prepare, present, and prosecute the claim on the veteran's behalf ("
+            },
+            {
+                "text": "VA accreditation search",
+                "url": "https://www.va.gov/ogc/apps/accreditation/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "INTENT TO FILE & EFFECTIVE DATES"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Submitting an "
+            },
+            {
+                "text": "Intent to File (VA Form 21-0966)",
+                "url": "https://www.va.gov/find-forms/about-form-21-0966/"
+            },
+            {
+                "text": " can preserve a potential effective date for up to one year while you gather evidence and complete the formal claim. If the claim is later granted, benefits may be paid back to the Intent to File date rather than the date the formal claim was submitted ("
+            },
+            {
+                "text": "VA.gov — When to file",
+                "url": "https://www.va.gov/disability/how-to-file-claim/when-to-file/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "CLAIM TYPES"
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Initial claim"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Used when you have never been rated for a condition, or you are claiming a new condition. Filed on VA Form 21-526EZ ("
+            },
+            {
+                "text": "VA.gov",
+                "url": "https://www.va.gov/disability/how-to-file-claim/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Supplemental claim"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Used after a decision when you have "
+            },
+            {
+                "text": "new and relevant evidence",
+                "bold": true
+            },
+            {
+                "text": " the VA has not previously considered ("
+            },
+            {
+                "text": "VA.gov — Supplemental Claim",
+                "url": "https://www.va.gov/decision-reviews/supplemental-claim/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Higher-Level Review"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "A senior reviewer takes a fresh look at the existing record. No new evidence is allowed ("
+            },
+            {
+                "text": "VA.gov — Higher-Level Review",
+                "url": "https://www.va.gov/decision-reviews/higher-level-review/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Board appeal"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Reviewed by a Veterans Law Judge at the Board of Veterans' Appeals. The Board offers three dockets (direct, evidence, hearing) ("
+            },
+            {
+                "text": "VA.gov — Board Appeal",
+                "url": "https://www.va.gov/decision-reviews/board-appeal/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "C&P EXAMS"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "A Compensation & Pension exam may be scheduled to evaluate the claimed condition. The exam is conducted by VA clinicians or by contractors working with VA ("
+            },
+            {
+                "text": "VA.gov — VA claim exam",
+                "url": "https://www.va.gov/disability/va-claim-exam/"
+            },
+            {
+                "text": "). The examiner typically completes a DBQ and writes findings the rater will use."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "VA's published guidance is to attend the exam, bring records relevant to the condition, and describe symptoms accurately, including on flare-up days. Missing the exam without rescheduling can lead to a denial."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "DEPENDENTS, SMC, AID & ATTENDANCE, HOUSEBOUND"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Added dependent pay begins at the 30% rating tier. Amounts for a spouse, child, or dependent parent are published on the same VA rate page as the base rates ("
+            },
+            {
+                "text": "VA.gov — Veteran rates",
+                "url": "https://www.va.gov/disability/compensation-rates/veteran-rates/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Special Monthly Compensation (SMC)",
+                "bold": true
+            },
+            {
+                "text": " is additional compensation for specific, severe situations such as loss of use of a limb, blindness, or the need for aid and attendance. SMC categories and rates are published at "
+            },
+            {
+                "text": "VA.gov — SMC rates",
+                "url": "https://www.va.gov/disability/compensation-rates/special-monthly-compensation-rates/"
+            },
+            {
+                "text": " and governed by "
+            },
+            {
+                "text": "38 CFR §3.350",
+                "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-3/subpart-A/section-3.350"
+            },
+            {
+                "text": "."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Aid and Attendance",
+                "bold": true
+            },
+            {
+                "text": " and "
+            },
+            {
+                "text": "Housebound",
+                "bold": true
+            },
+            {
+                "text": " benefits are additional payments for veterans who need help with daily activities or are substantially confined to home ("
+            },
+            {
+                "text": "VA.gov — Aid & Attendance / Housebound",
+                "url": "https://www.va.gov/pension/aid-attendance-housebound/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "TDIU (TOTAL DISABILITY INDIVIDUAL UNEMPLOYABILITY)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "TDIU allows a veteran to be paid at the 100% compensation rate without a 100% schedular rating when service-connected conditions prevent substantially gainful employment ("
+            },
+            {
+                "text": "VA.gov — TDIU",
+                "url": "https://www.va.gov/disability/eligibility/special-claims/unemployability/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The schedular thresholds under "
+            },
+            {
+                "text": "38 CFR §4.16",
+                "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-4/subpart-A/section-4.16"
+            },
+            {
+                "text": " are generally a single condition rated at 60% or higher, or a combined rating of 70% with at least one condition at 40%. The VA may also consider extraschedular TDIU outside these thresholds."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "PACT ACT (TOXIC EXPOSURE)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The PACT Act expanded VA health care and benefits for veterans exposed to toxic substances during service, including burn pits, Agent Orange, and radiation. It added presumptive conditions and broadened eligibility for affected eras ("
+            },
+            {
+                "text": "VA.gov — PACT Act",
+                "url": "https://www.va.gov/resources/the-pact-act-and-your-va-benefits/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "If you served in a covered location and time period and have a covered condition, the VA presumes service connection. You can still file even if your condition is not on the presumptive list — direct service connection remains available."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "COMMON MISTAKES TO AVOID"
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Filing only the condition you remember and not the related conditions in your record. The VA decides what you claim — not what you could have claimed ("
+                    },
+                    {
+                        "text": "VA.gov",
+                        "url": "https://www.va.gov/disability/how-to-file-claim/"
+                    },
+                    {
+                        "text": ")."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Missing the C&P exam without rescheduling, which can lead to a denial ("
+                    },
+                    {
+                        "text": "VA.gov — C&P exams",
+                        "url": "https://www.va.gov/disability/va-claim-exam/"
+                    },
+                    {
+                        "text": ")."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Letting an Intent to File expire before the formal claim is submitted, losing the protected effective date ("
+                    },
+                    {
+                        "text": "VA.gov",
+                        "url": "https://www.va.gov/disability/how-to-file-claim/when-to-file/"
+                    },
+                    {
+                        "text": ")."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Paying anyone who is not VA-accredited, or paying for an initial claim — under "
+                    },
+                    {
+                        "text": "38 CFR §14.636",
+                        "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-14/subpart-A/section-14.636"
+                    },
+                    {
+                        "text": " accredited representatives may not charge a fee for an initial claim."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "WHERE TO GET FREE & ACCREDITED HELP"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The VA maintains a public database of accredited Veterans Service Organizations, claims agents, and attorneys ("
+            },
+            {
+                "text": "VA Office of General Counsel — Accreditation search",
+                "url": "https://www.va.gov/ogc/apps/accreditation/"
+            },
+            {
+                "text": "). VSO representation is free to the veteran."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "For appeals after a denial, an accredited attorney or claims agent may charge a fee under "
+            },
+            {
+                "text": "38 CFR §14.636",
+                "url": "https://www.ecfr.gov/current/title-38/chapter-I/part-14/subpart-A/section-14.636"
+            },
+            {
+                "text": " — commonly a contingency fee tied to past-due benefits. Confirm accreditation before signing any fee agreement."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "This page is not legal advice and does not endorse any specific representative. Whether to use a VSO, agent, or attorney depends on the facts of your claim."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "OFFICIAL VA RESOURCES"
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "VA.gov — Disability home",
+                        "url": "https://www.va.gov/disability/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "VA.gov — How to file a claim",
+                        "url": "https://www.va.gov/disability/how-to-file-claim/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "VA.gov — 2026 compensation rates",
+                        "url": "https://www.va.gov/disability/compensation-rates/veteran-rates/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "VA.gov — SMC rates",
+                        "url": "https://www.va.gov/disability/compensation-rates/special-monthly-compensation-rates/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "VA.gov — TDIU",
+                        "url": "https://www.va.gov/disability/eligibility/special-claims/unemployability/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "VA.gov — PACT Act",
+                        "url": "https://www.va.gov/resources/the-pact-act-and-your-va-benefits/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "VA.gov — Decision reviews & appeals",
+                        "url": "https://www.va.gov/decision-reviews/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "VA Office of General Counsel — Accreditation search",
+                        "url": "https://www.va.gov/ogc/apps/accreditation/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Benefits.va.gov — DBQ library",
+                        "url": "https://www.benefits.va.gov/COMPENSATION/dbq_disabilityexams.asp"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "eCFR — Title 38 (VA regulations)",
+                        "url": "https://www.ecfr.gov/current/title-38"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+        "type": "faq_item",
+        "question": "Is VA disability permanent?",
+        "spans": [
+            {
+                "text": "Not automatically. The VA can propose a reduction if it finds the condition has improved. Continuous ratings receive additional protection at 5, 10, and 20 years under 38 CFR §3.951 and §3.957. A \"Permanent and Total\" designation removes scheduled re-exams. Confirm your status on VA.gov."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "Is VA disability taxable?",
+        "spans": [
+            {
+                "text": "No. VA disability compensation is exempt from federal income tax per the IRS. Most states also exempt it, but state treatment varies — check your state tax authority."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "Can I work and collect VA disability?",
+        "spans": [
+            {
+                "text": "A veteran rated at 100% schedular may continue to work. Total Disability based on Individual Unemployability (TDIU) has earnings limits tied to substantially gainful employment. See VA.gov for the current rules."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "How long do VA claims take?",
+        "spans": [
+            {
+                "text": "VA publishes live timeliness data on VA.gov. Recent averages have been roughly 4–5 months for an initial decision; Board of Veterans' Appeals decisions can take 12–24 months or longer. Check the current average on VA.gov before relying on a specific number."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "Can my rating be reduced?",
+        "spans": [
+            {
+                "text": "Before the 20-year protection mark, yes — the VA can schedule re-examinations if it has reason to believe the condition has improved. Ratings held continuously for 20+ years and ratings designated Permanent and Total receive additional protection."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "What's the difference between VA disability and SSDI?",
+        "spans": [
+            {
+                "text": "VA disability is service-connected compensation paid by the VA with no income limit. SSDI is paid by the Social Security Administration for a disability that prevents substantial work, regardless of cause, and has SSA-defined earnings limits. The two programs are independent and many veterans receive both."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "Do I need a lawyer to file a claim?",
+        "spans": [
+            {
+                "text": "For an initial claim, no. An accredited Veterans Service Organization (VSO) can file the claim at no cost. For appeals after a denial, an accredited attorney or claims agent may charge a fee under VA rules (38 CFR §14.636). Verify accreditation in the VA Office of General Counsel database."
+            }
+        ]
+    }
+]

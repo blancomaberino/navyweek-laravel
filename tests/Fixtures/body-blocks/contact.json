@@ -1,0 +1,72 @@
+[
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "NavyWeek.org is an independent, unofficial informational resource. We are not affiliated with the U.S. Navy or NAVCO. For official Navy Week inquiries, please contact the Navy Office of Community Outreach directly."
+            }
+        ],
+        "variant": "panel"
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "REACH OUT TO US"
+    },
+    {
+        "type": "link_card",
+        "icon": "mail",
+        "label": "Email",
+        "value": "hello@navyweek.org",
+        "url": "mailto:hello@navyweek.org"
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "OFFICIAL NAVY WEEK RESOURCES"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "For official information about Navy Week events, scheduling, and media inquiries, please contact the Navy Office of Community Outreach (NAVCO):"
+            }
+        ]
+    },
+    {
+        "type": "link_card",
+        "icon": "external",
+        "label": "Official NAVCO Website",
+        "value": "outreach.navy.mil",
+        "url": "https://outreach.navy.mil/Navy-Weeks/"
+    },
+    {
+        "type": "info_card",
+        "label": "NAVCO Mailing Address",
+        "spans": [
+            {
+                "text": "Navy Office of Community Outreach (NAVCO)\n5722 Integrity Drive, Bldg. 768\nMillington, TN 38054"
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "FEEDBACK AND CORRECTIONS"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Found an error in our schedule or event information? Have a suggestion for improving the site? We appreciate your feedback. Please email us at "
+            },
+            {
+                "text": "hello@navyweek.org",
+                "url": "mailto:hello@navyweek.org"
+            },
+            {
+                "text": " and we will do our best to respond promptly."
+            }
+        ]
+    }
+]

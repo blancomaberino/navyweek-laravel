@@ -1,0 +1,232 @@
+[
+    {
+        "type": "paragraph",
+        "variant": "lead",
+        "slot": "hero",
+        "spans": [
+            {
+                "text": "NavyWeek publishes one thing about military and veteran discounts: what we can prove. Every figure on this site traces back to a primary source we read ourselves — and dated."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "variant": "op-lead",
+        "spans": [
+            {
+                "text": "This page explains exactly how we do that, step by step, so you can judge our work — and so the people who rely on it know what stands behind it."
+            }
+        ]
+    },
+    {
+        "type": "callout",
+        "variant": "alert",
+        "spans": [
+            {
+                "text": "We treat this as a high-stakes subject. A wrong percentage sends a veteran to a counter expecting a discount that was never real. Accuracy isn't a constraint on what we do here — it is the work."
+            }
+        ]
+    },
+    {
+        "type": "band",
+        "tone": "light",
+        "layout": "steps",
+        "eyebrow": "// THE SHORT VERSION",
+        "heading": "For any brand, the process runs the same order — every time",
+        "cards": [
+            {
+                "n": "1",
+                "title": "Choose",
+                "desc": "Pick the brand and audience to cover, ranked by real search demand."
+            },
+            {
+                "n": "2",
+                "title": "Research",
+                "desc": "Read the offer against primary sources, in a fixed order of authority."
+            },
+            {
+                "n": "3",
+                "title": "Compare",
+                "desc": "Weigh every legitimate way to save — not just the official discount."
+            },
+            {
+                "n": "4",
+                "title": "Verify",
+                "desc": "Run each page through a publish gate it must pass to ship."
+            },
+            {
+                "n": "5",
+                "title": "Publish",
+                "desc": "Ship only what survives the gate, with sources and dates shown."
+            },
+            {
+                "n": "6",
+                "title": "Re-check",
+                "desc": "Re-verify every page on a schedule and after anything changes."
+            }
+        ]
+    },
+    {
+        "type": "step",
+        "tag": "STEP 1 · SELECTION",
+        "heading": "How we choose what to cover",
+        "spans": [
+            {
+                "text": "We don't cover brands at random, and we don't cover them because an affiliate program pays well — we have no such arrangements. We maintain a research queue ranked by search demand: the brands and questions service members and veterans look up most. We deliberately also cover brands that turn out to have no military discount. That's a real, useful answer — more honest than the coupon pages that invent an offer to fill the gap."
+            }
+        ]
+    },
+    {
+        "type": "step",
+        "tag": "STEP 2 · RESEARCH",
+        "heading": "How we research an offer",
+        "spans": [
+            {
+                "text": "The governing rule is simple and absolute: we never state a discount amount, eligible group, code, stacking claim, or term we haven’t confirmed against a primary source. When a source doesn’t confirm something, we say what is confirmed and flag the rest as unverified. An honest \"the brand publishes no exact percentage\" beats a confident, fabricated number. For every fact, we record the source URL, who owns it, the date it was updated, the date we accessed it, the exact fact, and our confidence in it."
+            }
+        ]
+    },
+    {
+        "type": "step",
+        "tag": "STEP 3 · COMPARISON",
+        "heading": "Finding the genuinely best way to save",
+        "spans": [
+            {
+                "text": "A page that only answers \"does this brand have a military discount?\" leaves money on the table — the official discount is frequently not the best deal. For each brand we compare every legitimate path against one realistic example cart: the official discount, third-party programs, cashback routes, sale-stacking, credit-card and loyalty plays, and outlet channels. The make-or-break question is stacking — what can legally be combined — verified against both the brand’s terms and the provider’s."
+            }
+        ]
+    },
+    {
+        "type": "ladder",
+        "tag": "SOURCE HIERARCHY",
+        "heading": "We work sources in a fixed order of authority",
+        "rows": [
+            {
+                "n": "1",
+                "title": "The brand's own pages",
+                "desc": "Discount, help, terms, checkout, or offer page. The top source for the percentage, codes, and fine print.",
+                "tone": 1
+            },
+            {
+                "n": "2",
+                "title": "The verification provider's brand page",
+                "desc": "ID.me, SheerID, GovX, WeSalute, VerifyPass — often states the exact percentage and eligible groups.",
+                "tone": 2
+            },
+            {
+                "n": "3",
+                "title": "Store locator, support, return policy",
+                "desc": "For in-store rules, regional limits, and exclusions.",
+                "tone": 3
+            },
+            {
+                "n": "4",
+                "title": "Reputable military & editorial resources",
+                "desc": "Context only. These go stale quickly, so we verify against the brand before publishing.",
+                "tone": 4
+            },
+            {
+                "n": "5",
+                "title": "Coupon & aggregator sites",
+                "desc": "Never treated as fact. We read them only to see what false claims are circulating so we can correct them. They are the problem we exist to fix.",
+                "tone": 5
+            }
+        ],
+        "note": "The most authoritative source always wins. Anything below high confidence gets hedged in the copy — or left out entirely."
+    },
+    {
+        "type": "band",
+        "tone": "navy",
+        "layout": "gate",
+        "eyebrow": "// STEP 4 · THE PUBLISH GATE",
+        "heading": "A brand cannot be published unless we have all of this",
+        "lead": "Research becomes a page only after it clears a gate. A documented \"no discount exists\" finding passes too — it meets the same standard of proof.",
+        "cards": [
+            {
+                "title": "A working brand link",
+                "desc": "A verified link to the brand's own discount page — https://, not an affiliate link, not a dead link, not a generic homepage."
+            },
+            {
+                "title": "The verification mechanic",
+                "desc": "Which provider gates the offer, and how a customer proves eligibility."
+            },
+            {
+                "title": "The discount value",
+                "desc": "The actual value — or an explicit, sourced statement that the brand publishes none."
+            },
+            {
+                "title": "Material exclusions",
+                "desc": "Caps, excluded categories, one-code-per-order windows, regional limits, no-stacking rules."
+            }
+        ]
+    },
+    {
+        "type": "refusals",
+        "tag": "OUR REFUSALS",
+        "heading": "What we will not do",
+        "lead": "To make the standard concrete — here is what we refuse to do, even when it would be easier or more profitable.",
+        "items": [
+            "Publish a percentage, code, or eligibility rule we couldn't verify at the source.",
+            "Treat a coupon or aggregator site as proof of anything.",
+            "Claim an audience — reserve, Guard, retiree, spouse, dependent — the brand doesn't actually name.",
+            "Present an expired or limited promo as a standing, evergreen offer.",
+            "Imply a partnership or endorsement that doesn't exist, or let affiliate incentives decide what we say.",
+            "Emit fabricated merchant ratings, reviews, or offer markup — we are a publisher, not the seller."
+        ]
+    },
+    {
+        "type": "freshness",
+        "label": "STANDING FRESHNESS BAR",
+        "spans": [
+            {
+                "text": "Every discount page must have been verified within the last "
+            },
+            {
+                "text": "45 days",
+                "bold": true
+            },
+            {
+                "text": ". Cross that line and it goes back into the queue — the \"facts verified\" date only advances when a person has re-confirmed the offer."
+            }
+        ],
+        "stat": "45",
+        "statLabel": "DAYS MAX"
+    },
+    {
+        "type": "rule_note",
+        "heading": "Independence & Disclosure",
+        "spans": [
+            {
+                "text": "NavyWeek is an independent editorial publisher. We are not affiliated with, sponsored by, or endorsed by the brands we cover. Company names and logos are trademarks of their owners, used only to identify the brand a page is about. Because brands change their offers at any time, we always route you to the brand's official page to confirm current terms."
+            }
+        ]
+    },
+    {
+        "type": "cta_panel",
+        "heading": "See something that doesn't match?",
+        "spans": [
+            {
+                "text": "If a discount on this site doesn't match what a brand currently offers, tell us. We re-verify it against the source and update or correct the page."
+            }
+        ],
+        "actions": [
+            {
+                "label": "Report a Correction",
+                "url": "/contact/"
+            },
+            {
+                "label": "Read Our Terms",
+                "url": "/terms/"
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "variant": "op-reviewer",
+        "spans": [
+            {
+                "text": "This page is reviewed by Erik Rivera, former U.S. Navy Explosive Ordnance Disposal officer. Last reviewed June 24, 2026."
+            }
+        ]
+    }
+]

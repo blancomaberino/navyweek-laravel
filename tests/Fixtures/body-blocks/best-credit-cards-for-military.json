@@ -1,0 +1,2381 @@
+[
+    {
+        "type": "paragraph",
+        "text": "Advertiser & editorial disclosure: NavyWeek.org is an independent, veteran-authored publication. We are not affiliated with, endorsed by, or sponsored by any card issuer, the U.S. Navy, or the Department of Defense. NavyWeek.org may earn a commission if you apply for a card through links on this page — that never changes our rankings, and opinions, analyses, and recommendations here are the author's alone and have not been reviewed or endorsed by any issuer. Card fees, rates, and welcome offers change frequently and vary by applicant; you may not be eligible for a given offer. Always confirm current terms on the issuer's official page before applying."
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "For active-duty servicemembers, the best credit cards for military in 2026 are premium travel cards — the "
+            },
+            {
+                "text": "American Express Platinum ($895)",
+                "bold": true
+            },
+            {
+                "text": " and "
+            },
+            {
+                "text": "Chase Sapphire Reserve ($795)",
+                "bold": true
+            },
+            {
+                "text": " — because federal law wipes out their annual fees: Amex, Chase, Citi, and U.S. Bank waive fees under both the "
+            },
+            {
+                "text": "SCRA",
+                "bold": true
+            },
+            {
+                "text": " and the "
+            },
+            {
+                "text": "MLA",
+                "bold": true
+            },
+            {
+                "text": ", and the MLA extends the same waiver to military spouses on their own cards."
+            }
+        ],
+        "slot": "hero",
+        "variant": "capsule"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The details competitors gloss over decide whether you actually get the waiver: "
+            },
+            {
+                "text": "Capital One waives fees only under SCRA",
+                "bold": true
+            },
+            {
+                "text": " (the account must exist before active duty — never under MLA), and "
+            },
+            {
+                "text": "veterans get no waiver at all",
+                "bold": true
+            },
+            {
+                "text": ", because both laws protect active-duty members only. This guide covers which card to get for your exact status — active duty, spouse, Guard/Reserve, or veteran — with every claim traced to the statute or the issuer's own military-benefits page."
+            }
+        ],
+        "slot": "hero",
+        "variant": "sublead"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Fees & issuer policies verified: "
+            },
+            {
+                "text": "July 16, 2026",
+                "emphasis": true
+            },
+            {
+                "text": " · Next review: October 2026"
+            }
+        ],
+        "slot": "hero",
+        "variant": "verified"
+    },
+    {
+        "type": "jump_nav",
+        "label": "On this page:",
+        "items": [
+            {
+                "label": "Quick comparison",
+                "url": "#comparison"
+            },
+            {
+                "label": "SCRA & MLA fee waivers",
+                "url": "#scra-mla"
+            },
+            {
+                "label": "Best for active duty",
+                "url": "#active-duty"
+            },
+            {
+                "label": "Navy Federal, USAA & PenFed",
+                "url": "#credit-unions"
+            },
+            {
+                "label": "Best for veterans",
+                "url": "#veterans"
+            },
+            {
+                "label": "How to choose",
+                "url": "#how-to-choose"
+            },
+            {
+                "label": "FAQ",
+                "url": "#faq"
+            },
+            {
+                "label": "Sources",
+                "url": "#sources"
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "QUICK COMPARISON: BEST MILITARY CREDIT CARDS AT A GLANCE"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The short version:",
+                "bold": true
+            },
+            {
+                "text": " on active duty, get the premium cards — the fees are waived, so you keep benefits that civilians pay $895 a year for. Before active duty (Guard, Reserve, delayed entry), open Capital One cards early so SCRA can apply later. As a veteran, skip the fee waivers you can't get and pick the best no-annual-fee rewards card. Annual fees below are current as of July 16, 2026."
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "variant": "panel",
+        "columns": [
+            {
+                "label": "#",
+                "align": "left"
+            },
+            {
+                "label": "Card",
+                "align": "left"
+            },
+            {
+                "label": "Best for",
+                "align": "left"
+            },
+            {
+                "label": "Annual fee",
+                "align": "left"
+            },
+            {
+                "label": "Waived for active duty?",
+                "align": "left"
+            },
+            {
+                "label": "Law(s)",
+                "align": "left"
+            },
+            {
+                "label": "Spouse's own card?",
+                "align": "left"
+            }
+        ],
+        "rows": [
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "1"
+                        }
+                    ],
+                    "label": "#"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Amex Platinum",
+                            "bold": true,
+                            "url": "#amex-platinum"
+                        }
+                    ],
+                    "sub": "American Express",
+                    "label": "Card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Premium travel & lounge access"
+                        }
+                    ],
+                    "label": "Best for"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$895"
+                        }
+                    ],
+                    "label": "Annual fee"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes"
+                        }
+                    ],
+                    "label": "Waived for active duty?"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "SCRA + MLA"
+                        }
+                    ],
+                    "label": "Law(s)"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes (MLA)"
+                        }
+                    ],
+                    "label": "Spouse's own card?"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "2"
+                        }
+                    ],
+                    "label": "#"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Amex Gold",
+                            "bold": true,
+                            "url": "#amex-gold"
+                        }
+                    ],
+                    "sub": "American Express",
+                    "label": "Card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Dining & U.S. supermarkets"
+                        }
+                    ],
+                    "label": "Best for"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$325"
+                        }
+                    ],
+                    "label": "Annual fee"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes"
+                        }
+                    ],
+                    "label": "Waived for active duty?"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "SCRA + MLA"
+                        }
+                    ],
+                    "label": "Law(s)"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes (MLA)"
+                        }
+                    ],
+                    "label": "Spouse's own card?"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "3"
+                        }
+                    ],
+                    "label": "#"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Chase Sapphire Reserve",
+                            "bold": true,
+                            "url": "#chase-sapphire-reserve"
+                        }
+                    ],
+                    "sub": "Chase",
+                    "label": "Card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Lounge access + $300 travel credit"
+                        }
+                    ],
+                    "label": "Best for"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$795"
+                        }
+                    ],
+                    "label": "Annual fee"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes"
+                        }
+                    ],
+                    "label": "Waived for active duty?"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "MLA (cards opened after ~Sept. 20, 2017) + SCRA"
+                        }
+                    ],
+                    "label": "Law(s)"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes (MLA)"
+                        }
+                    ],
+                    "label": "Spouse's own card?"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "4"
+                        }
+                    ],
+                    "label": "#"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Chase Sapphire Preferred",
+                            "bold": true,
+                            "url": "#chase-sapphire-preferred"
+                        }
+                    ],
+                    "sub": "Chase",
+                    "label": "Card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "First premium travel card"
+                        }
+                    ],
+                    "label": "Best for"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$95"
+                        }
+                    ],
+                    "label": "Annual fee"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes"
+                        }
+                    ],
+                    "label": "Waived for active duty?"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "MLA + SCRA"
+                        }
+                    ],
+                    "label": "Law(s)"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes (MLA)"
+                        }
+                    ],
+                    "label": "Spouse's own card?"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "5"
+                        }
+                    ],
+                    "label": "#"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Capital One Venture X",
+                            "bold": true,
+                            "url": "#capital-one-venture-x"
+                        }
+                    ],
+                    "sub": "Capital One",
+                    "label": "Card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Flat-rate travel rewards"
+                        }
+                    ],
+                    "label": "Best for"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$395"
+                        }
+                    ],
+                    "label": "Annual fee"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "SCRA only — never MLA"
+                        }
+                    ],
+                    "label": "Waived for active duty?"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "SCRA (account must predate active duty)"
+                        }
+                    ],
+                    "label": "Law(s)"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "No (SCRA doesn’t cover a spouse’s own card)"
+                        }
+                    ],
+                    "label": "Spouse's own card?"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "6"
+                        }
+                    ],
+                    "label": "#"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Navy Federal Visa Signature Flagship Rewards",
+                            "bold": true,
+                            "url": "#navy-federal-flagship"
+                        }
+                    ],
+                    "sub": "Navy Federal Credit Union",
+                    "label": "Card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Credit-union travel rewards"
+                        }
+                    ],
+                    "label": "Best for"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$49"
+                        }
+                    ],
+                    "label": "Annual fee"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "SCRA only (pre-service accounts)"
+                        }
+                    ],
+                    "label": "Waived for active duty?"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "SCRA — no MLA fee waiver for cards opened on active duty"
+                        }
+                    ],
+                    "label": "Law(s)"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Limited"
+                        }
+                    ],
+                    "label": "Spouse's own card?"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "7"
+                        }
+                    ],
+                    "label": "#"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "USAA Eagle Navigator",
+                            "bold": true,
+                            "url": "#usaa-eagle-navigator"
+                        }
+                    ],
+                    "sub": "USAA",
+                    "label": "Card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "USAA-loyal travelers"
+                        }
+                    ],
+                    "label": "Best for"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$95"
+                        }
+                    ],
+                    "label": "Annual fee"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Verify with USAA"
+                        }
+                    ],
+                    "label": "Waived for active duty?"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "SCRA interest cap confirmed; an MLA fee waiver is not confirmed on USAA’s own pages"
+                        }
+                    ],
+                    "label": "Law(s)"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Unverified"
+                        }
+                    ],
+                    "label": "Spouse's own card?"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "8"
+                        }
+                    ],
+                    "label": "#"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "PenFed Pathfinder Rewards",
+                            "bold": true,
+                            "url": "#penfed-pathfinder"
+                        }
+                    ],
+                    "sub": "PenFed Credit Union",
+                    "label": "Card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "No-fee travel card for veterans"
+                        }
+                    ],
+                    "label": "Best for"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$95"
+                        }
+                    ],
+                    "label": "Annual fee"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Via Honors Advantage (includes veterans)"
+                        }
+                    ],
+                    "label": "Waived for active duty?"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Credit-union program, not SCRA/MLA"
+                        }
+                    ],
+                    "label": "Law(s)"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "—"
+                        }
+                    ],
+                    "label": "Spouse's own card?"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "9"
+                        }
+                    ],
+                    "label": "#"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "MILITARY STAR Card",
+                            "bold": true,
+                            "url": "#military-star"
+                        }
+                    ],
+                    "sub": "Exchange Credit Program (AAFES)",
+                    "label": "Card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "On-base exchange spending"
+                        }
+                    ],
+                    "label": "Best for"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$0"
+                        }
+                    ],
+                    "label": "Annual fee"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "N/A — no annual fee to waive"
+                        }
+                    ],
+                    "label": "Waived for active duty?"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "—"
+                        }
+                    ],
+                    "label": "Law(s)"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "—"
+                        }
+                    ],
+                    "label": "Spouse's own card?"
+                }
+            ]
+        ],
+        "label": "Best military credit cards comparison"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Fee waivers above statutory minimums are voluntary issuer policies and can change; each card's review below links the issuer's official military-benefits page. For American Express cards, see rates and fees on the issuer's site."
+            }
+        ],
+        "variant": "fine"
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "HOW SCRA AND MLA WAIVE CREDIT CARD ANNUAL FEES (THE PART MOST GUIDES GET WRONG)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Two different federal laws waive military credit card fees, and which one applies depends entirely on when you opened the account.",
+                "bold": true
+            },
+            {
+                "text": " The SCRA covers credit opened "
+            },
+            {
+                "text": "before",
+                "italic": true
+            },
+            {
+                "text": " active duty; the MLA covers credit opened "
+            },
+            {
+                "text": "during",
+                "italic": true
+            },
+            {
+                "text": " active duty. Neither law technically mandates an annual-fee waiver — but because both count fees toward their interest caps, major issuers zero out annual fees rather than track them, and several go further than the law requires."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "SCRA vs. MLA — what's the difference?"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The "
+            },
+            {
+                "text": "Servicemembers Civil Relief Act",
+                "bold": true
+            },
+            {
+                "text": " ("
+            },
+            {
+                "text": "50 U.S.C. § 3901 et seq.",
+                "url": "https://www.law.cornell.edu/uscode/text/50/chapter-50"
+            },
+            {
+                "text": ") applies to debt you incurred "
+            },
+            {
+                "text": "before",
+                "bold": true
+            },
+            {
+                "text": " entering active duty. It caps interest on that pre-service debt at "
+            },
+            {
+                "text": "6%",
+                "bold": true
+            },
+            {
+                "text": " — and issuers must count annual fees, late fees, and returned-payment fees as \"interest\" under the cap, with anything above 6% forgiven rather than deferred, per the "
+            },
+            {
+                "text": "CFPB",
+                "url": "https://www.consumerfinance.gov/consumer-tools/military-financial-lifecycle/the-servicemembers-civil-relief-act-scra/"
+            },
+            {
+                "text": ". SCRA relief "
+            },
+            {
+                "text": "must be requested",
+                "bold": true
+            },
+            {
+                "text": ", any time from the start of active duty until 180 days after you leave it. It is a stand-alone statute with no implementing regulation."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The "
+            },
+            {
+                "text": "Military Lending Act",
+                "bold": true
+            },
+            {
+                "text": " ("
+            },
+            {
+                "text": "10 U.S.C. § 987",
+                "url": "https://www.law.cornell.edu/uscode/text/10/987"
+            },
+            {
+                "text": ", implemented by "
+            },
+            {
+                "text": "32 C.F.R. Part 232",
+                "url": "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-M/part-232"
+            },
+            {
+                "text": ") applies to consumer credit you open "
+            },
+            {
+                "text": "during",
+                "bold": true
+            },
+            {
+                "text": " active duty — its credit-card \"covered borrower\" provision took effect "
+            },
+            {
+                "text": "October 3, 2017",
+                "bold": true
+            },
+            {
+                "text": ". It caps the Military APR (MAPR) at "
+            },
+            {
+                "text": "36%",
+                "bold": true
+            },
+            {
+                "text": ", and because annual fees count toward the MAPR, issuers voluntarily zero them out. MLA protection is "
+            },
+            {
+                "text": "applied automatically",
+                "bold": true
+            },
+            {
+                "text": " — no request needed — and it explicitly covers "
+            },
+            {
+                "text": "spouses and dependents enrolled in DEERS",
+                "bold": true
+            },
+            {
+                "text": ", per the "
+            },
+            {
+                "text": "CFPB",
+                "url": "https://www.consumerfinance.gov/ask-cfpb/im-in-the-military-are-there-limits-on-how-much-i-can-be-charged-for-a-loan-en-893/"
+            },
+            {
+                "text": "."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Which issuers waive annual fees (and under which law)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Amex, Chase, Citi, and U.S. Bank waive annual fees on personal cards under both SCRA and MLA. Capital One waives only under SCRA — never MLA.",
+                "bold": true
+            },
+            {
+                "text": " That single asymmetry is the most expensive mistake in military credit cards: open a Venture X while on active duty and you will pay the $395 fee every year."
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "variant": "panel",
+        "columns": [
+            {
+                "label": "Issuer",
+                "align": "left"
+            },
+            {
+                "label": "SCRA (opened before active duty)",
+                "align": "left"
+            },
+            {
+                "label": "MLA (opened during active duty)",
+                "align": "left"
+            },
+            {
+                "label": "Spouse's own card",
+                "align": "left"
+            },
+            {
+                "label": "Notes & source",
+                "align": "left"
+            }
+        ],
+        "rows": [
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "American Express",
+                            "bold": true
+                        }
+                    ],
+                    "label": "Issuer"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — by request"
+                        }
+                    ],
+                    "label": "SCRA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — automatic on all personal cards"
+                        }
+                    ],
+                    "label": "MLA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes, via MLA (own card)"
+                        }
+                    ],
+                    "label": "Spouse's own card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "MLA is applied automatically at account opening; SCRA requires a request. Business cards are not covered the same way. "
+                        },
+                        {
+                            "text": "Amex SCRA/MLA page ↗",
+                            "url": "https://www.americanexpress.com/us/help-support/service-members-civil-relief/"
+                        }
+                    ],
+                    "label": "Notes & source"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Chase",
+                            "bold": true
+                        }
+                    ],
+                    "label": "Issuer"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — pre-service accounts"
+                        }
+                    ],
+                    "label": "SCRA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — personal cards opened after ~Sept. 20, 2017"
+                        }
+                    ],
+                    "label": "MLA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes, via MLA (own card)"
+                        }
+                    ],
+                    "label": "Spouse's own card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Select \"Military\" as an income source when applying; Chase verifies MLA status against the DoD database automatically. Business cards excluded. Chase Military Services: 1-877-469-0110. "
+                        },
+                        {
+                            "text": "Chase military page ↗",
+                            "url": "https://www.chase.com/digital/military"
+                        }
+                    ],
+                    "label": "Notes & source"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Citi",
+                            "bold": true
+                        }
+                    ],
+                    "label": "Issuer"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — by request"
+                        }
+                    ],
+                    "label": "SCRA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — all personal cards"
+                        }
+                    ],
+                    "label": "MLA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes, via MLA (own card)"
+                        }
+                    ],
+                    "label": "Spouse's own card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "If MLA benefits aren’t auto-applied, email militaryorders@citi.com with an MLA certification or call the Military Response Unit at 877-804-1082. Citi accepts SCRA requests up to a year after release from active duty. "
+                        },
+                        {
+                            "text": "Citi SCRA page ↗",
+                            "url": "https://online.citi.com/US/ag/military-servicemembers-civil-relief-act"
+                        }
+                    ],
+                    "label": "Notes & source"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "U.S. Bank",
+                            "bold": true
+                        }
+                    ],
+                    "label": "Issuer"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes"
+                        }
+                    ],
+                    "label": "SCRA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — personal cards"
+                        }
+                    ],
+                    "label": "MLA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes, via MLA (own card)"
+                        }
+                    ],
+                    "label": "Spouse's own card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Both laws honored on personal cards, spouses included. Confirm current terms with U.S. Bank before applying. "
+                        },
+                        {
+                            "text": "U.S. Bank SCRA overview ↗",
+                            "url": "https://www.usbank.com/financialiq/manage-your-household/personal-finance/things-to-know-about-the-servicemembers-civil-relief-act.html"
+                        }
+                    ],
+                    "label": "Notes & source"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Capital One",
+                            "bold": true
+                        }
+                    ],
+                    "label": "Issuer"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — caps at 4% (better than the statutory 6%)"
+                        }
+                    ],
+                    "label": "SCRA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "No — Capital One does not waive annual fees under MLA"
+                        }
+                    ],
+                    "label": "MLA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Not on a spouse’s own separate card"
+                        }
+                    ],
+                    "label": "Spouse's own card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "The critical exception: open the card BEFORE active duty, then request SCRA — or pay the fee. Guard/Reserve can open before a 30+ day activation. Military line: 1-855-227-1645. "
+                        },
+                        {
+                            "text": "Capital One military page ↗",
+                            "url": "https://www.capitalone.com/military/"
+                        }
+                    ],
+                    "label": "Notes & source"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Discover",
+                            "bold": true
+                        }
+                    ],
+                    "label": "Issuer"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — via Capital One’s SCRA program"
+                        }
+                    ],
+                    "label": "SCRA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "No"
+                        }
+                    ],
+                    "label": "MLA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Not on a spouse’s own separate card"
+                        }
+                    ],
+                    "label": "Spouse's own card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Discover is now part of Capital One; one SCRA request covers accounts at both. "
+                        },
+                        {
+                            "text": "Capital One military page ↗",
+                            "url": "https://www.capitalone.com/military/"
+                        }
+                    ],
+                    "label": "Notes & source"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Bank of America",
+                            "bold": true
+                        }
+                    ],
+                    "label": "Issuer"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes"
+                        }
+                    ],
+                    "label": "SCRA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Community-reported only"
+                        }
+                    ],
+                    "label": "MLA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Unverified"
+                        }
+                    ],
+                    "label": "Spouse's own card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Cardholders report fee waivers only on cards with annual fees over $100, and some waivers reportedly continue after service — but this is community data, not confirmed on an official Bank of America page. Verify with the issuer."
+                        }
+                    ],
+                    "label": "Notes & source"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Navy Federal",
+                            "bold": true
+                        }
+                    ],
+                    "label": "Issuer"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — caps at 4%; pre-service accounts"
+                        }
+                    ],
+                    "label": "SCRA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "No fee waiver for cards opened on active duty"
+                        }
+                    ],
+                    "label": "MLA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Limited"
+                        }
+                    ],
+                    "label": "Spouse's own card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "The $49 Flagship fee is waived only under SCRA (account opened before active duty). Requests accepted up to 180 days after your active-duty end date. "
+                        },
+                        {
+                            "text": "Navy Federal SCRA page ↗",
+                            "url": "https://www.navyfederal.org/membership/offers-discounts/scra.html"
+                        }
+                    ],
+                    "label": "Notes & source"
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "USAA",
+                            "bold": true
+                        }
+                    ],
+                    "label": "Issuer"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Yes — caps at 4%"
+                        }
+                    ],
+                    "label": "SCRA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Fee waiver unconfirmed by USAA’s own pages"
+                        }
+                    ],
+                    "label": "MLA"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "Unverified"
+                        }
+                    ],
+                    "label": "Spouse's own card"
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "USAA confirms a 4% SCRA rate and no added fees on covered accounts during active duty. An MLA annual-fee waiver (e.g., on Eagle Navigator) circulates in community reports but is not stated on USAA’s site — verify before counting on it. "
+                        },
+                        {
+                            "text": "USAA SCRA page ↗",
+                            "url": "https://www.usaa.com/support/banking/scra-benefits/"
+                        }
+                    ],
+                    "label": "Notes & source"
+                }
+            ]
+        ],
+        "label": "Issuer-by-issuer SCRA and MLA fee waiver matrix"
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Do military spouses get annual fees waived?"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Yes — under the MLA, a spouse enrolled in DEERS is a \"covered borrower\" and can open their own card with the fee waived.",
+                "bold": true
+            },
+            {
+                "text": " A spouse does "
+            },
+            {
+                "text": "not",
+                "italic": true
+            },
+            {
+                "text": " need to be an authorized user on the servicemember's account; in fact, separate accounts are better, because each spouse earns their own welcome offer. The waiver applies to cards the spouse opens while the sponsor is on active duty, at issuers that honor MLA fee waivers (Amex, Chase, Citi, U.S. Bank). Under "
+            },
+            {
+                "text": "SCRA",
+                "bold": true
+            },
+            {
+                "text": ", by contrast, a spouse cannot get a waiver on their own separate cards — SCRA protects the servicemember's pre-service obligations. This is the single most-argued point in military finance threads, and the distinction is simply which law covers the account."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Do veterans and retirees get SCRA or MLA benefits?"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "No.",
+                "bold": true
+            },
+            {
+                "text": " Both laws protect active-duty servicemembers only. SCRA requests can be filed up to roughly 180 days after separation for pre-service debt, and then the window closes; MLA coverage ends with active service. One practical nuance: fees on cards you opened while on active duty may not resume the moment you separate — issuers periodically re-check the DoD database — but plan your budget as if every fee returns. Veterans should skip the waiver-chasing entirely and pick cards that earn their keep without a fee (see the "
+            },
+            {
+                "text": "veterans section",
+                "url": "#veterans"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Who counts as \"active duty\" for these laws?"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "All branches on active duty; "
+            },
+            {
+                "text": "National Guard and Reserve members on active orders of 30+ consecutive days",
+                "bold": true
+            },
+            {
+                "text": " (Title 10, or Title 32 for SCRA-covered Guard service); and commissioned officers of the U.S. Public Health Service and NOAA. Keep a copy of your orders — issuers may ask for them, and the "
+            },
+            {
+                "text": "Department of Justice",
+                "url": "https://www.justice.gov/servicemembers"
+            },
+            {
+                "text": " and "
+            },
+            {
+                "text": "Military OneSource",
+                "url": "https://www.militaryonesource.mil/financial-legal/legal/servicemembers-civil-relief-act/"
+            },
+            {
+                "text": " both publish plain-language eligibility guides."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "How to request your fee waiver (step by step)"
+    },
+    {
+        "type": "list",
+        "ordered": true,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Check your covered-borrower status first.",
+                        "bold": true
+                    },
+                    {
+                        "text": " Verify yourself (or your spouse) in the DoD's "
+                    },
+                    {
+                        "text": "MLA database",
+                        "url": "https://mla.dmdc.osd.mil/mla/"
+                    },
+                    {
+                        "text": " and "
+                    },
+                    {
+                        "text": "SCRA database",
+                        "url": "https://scra.dmdc.osd.mil/scra/"
+                    },
+                    {
+                        "text": " before you apply — it's what the issuers themselves query."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "MLA (card opened during active duty): usually automatic.",
+                        "bold": true
+                    },
+                    {
+                        "text": " Amex applies it at account opening; Chase checks the DoD database when you select \"Military\" as an income source. If a fee still bills, contact the issuer — Citi takes MLA certifications at militaryorders@citi.com or 877-804-1082."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "SCRA (card opened before active duty): you must ask.",
+                        "bold": true
+                    },
+                    {
+                        "text": " Submit your orders or an SCRA request to the issuer's military department — Capital One's military line is 1-855-227-1645 (one request also covers Discover accounts), Chase Military Services is 1-877-469-0110, and Navy Federal takes an eMessage with \"Attn: SCRA.\""
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Mind the window.",
+                        "bold": true
+                    },
+                    {
+                        "text": " SCRA relief can be requested from the start of active duty until 180 days after leaving it (Citi voluntarily accepts up to a year), and it applies retroactively to the start of your covered period."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Watch your statements.",
+                        "bold": true
+                    },
+                    {
+                        "text": " Issuers typically confirm within one to two billing cycles; the annual fee should be credited back, not just stop billing."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "BEST CREDIT CARDS FOR ACTIVE-DUTY MILITARY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "On active duty, premium travel cards are effectively free — so the ranking below is a ranking of benefits, not of fees.",
+                "bold": true
+            },
+            {
+                "text": " A servicemember holding both the Amex Platinum and the Chase Sapphire Reserve has $1,690 a year in annual fees waived; a dual-military or MLA-spouse couple each holding both would have $3,380 waived. Welcome offers change frequently and eligibility varies — check the current offer on the issuer's page, and for Amex cards see rates and fees there."
+            }
+        ]
+    },
+    {
+        "type": "card",
+        "anchor": "amex-platinum",
+        "eyebrow": "#1 · Best premium travel card — fee waived under both SCRA & MLA",
+        "title": "Amex Platinum",
+        "meta": [
+            {
+                "spans": [
+                    {
+                        "text": "Annual fee: "
+                    },
+                    {
+                        "text": "$895",
+                        "bold": true
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Waiver: "
+                    },
+                    {
+                        "text": "SCRA + MLA",
+                        "bold": true
+                    }
+                ]
+            }
+        ],
+        "body": [
+            {
+                "spans": [
+                    {
+                        "text": "The Platinum's $895 annual fee (raised from $695 effective September 18, 2025 for new applicants; existing cardholders at their first renewal on or after January 2, 2026) is the exact reason it tops this list: American Express waives it in full for active-duty servicemembers under both laws, and for spouses on their own cards under MLA. You keep what civilians pay $895 for — the Global Lounge Collection's 1,400+ airport lounges, a long menu of airline, hotel, and lifestyle statement credits, and premium travel protections. MLA relief is applied automatically at account opening; note that Amex business cards are not covered the same way."
+                    }
+                ]
+            }
+        ],
+        "note": "Raised from $695 effective Sept. 18, 2025 for new applicants; existing cardholders at first renewal on or after Jan. 2, 2026.",
+        "cta": {
+            "label": "See current offer, rates & fees at americanexpress.com ↗",
+            "url": "https://www.americanexpress.com/us/credit-cards/card/platinum/"
+        }
+    },
+    {
+        "type": "card",
+        "anchor": "amex-gold",
+        "eyebrow": "#2 · Best for dining and groceries",
+        "title": "Amex Gold",
+        "meta": [
+            {
+                "spans": [
+                    {
+                        "text": "Annual fee: "
+                    },
+                    {
+                        "text": "$325",
+                        "bold": true
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Waiver: "
+                    },
+                    {
+                        "text": "SCRA + MLA",
+                        "bold": true
+                    }
+                ]
+            }
+        ],
+        "body": [
+            {
+                "spans": [
+                    {
+                        "text": "The Gold's $325 fee is likewise waived under both SCRA and MLA. It earns 4X Membership Rewards points at restaurants and U.S. supermarkets (up to annual caps) — the two categories that dominate most military families' budgets — plus monthly Uber Cash in the U.S. If the Platinum's travel-heavy credits don't fit how you actually spend, the Gold is the stronger everyday earner, and on active duty there's no fee-math to weigh: hold both."
+                    }
+                ]
+            }
+        ],
+        "cta": {
+            "label": "See current offer, rates & fees at americanexpress.com ↗",
+            "url": "https://www.americanexpress.com/us/credit-cards/card/gold-card/"
+        }
+    },
+    {
+        "type": "card",
+        "anchor": "chase-sapphire-reserve",
+        "eyebrow": "#3 · Best for lounge access + $300 travel credit",
+        "title": "Chase Sapphire Reserve",
+        "meta": [
+            {
+                "spans": [
+                    {
+                        "text": "Annual fee: "
+                    },
+                    {
+                        "text": "$795",
+                        "bold": true
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Waiver: "
+                    },
+                    {
+                        "text": "MLA (cards opened after ~Sept. 20, 2017) + SCRA",
+                        "bold": true
+                    }
+                ]
+            }
+        ],
+        "body": [
+            {
+                "spans": [
+                    {
+                        "text": "Chase waives the Reserve's $795 fee (up from $550) under MLA for personal cards opened after roughly September 20, 2017, and under SCRA for pre-service accounts — spouses included via MLA on their own cards. The headline benefits: a $300 annual travel credit that applies automatically, Priority Pass access to 1,300+ lounges, and strong point value on travel and dining. Select \"Military\" as an income source on the application so Chase's automatic DoD-database check picks you up. Chase business cards are excluded from the waiver."
+                    }
+                ]
+            }
+        ],
+        "note": "Increased from $550.",
+        "cta": {
+            "label": "See current offer, rates & fees at chase.com ↗",
+            "url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/reserve"
+        }
+    },
+    {
+        "type": "card",
+        "anchor": "chase-sapphire-preferred",
+        "eyebrow": "#4 · Best mid-tier / first premium card",
+        "title": "Chase Sapphire Preferred",
+        "meta": [
+            {
+                "spans": [
+                    {
+                        "text": "Annual fee: "
+                    },
+                    {
+                        "text": "$95",
+                        "bold": true
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Waiver: "
+                    },
+                    {
+                        "text": "MLA + SCRA",
+                        "bold": true
+                    }
+                ]
+            }
+        ],
+        "body": [
+            {
+                "spans": [
+                    {
+                        "text": "The Preferred's $95 fee is waived on the same MLA + SCRA terms as the Reserve. As a first travel card it's the gentler on-ramp: the same transferable Ultimate Rewards points with simpler benefits. On active duty the usual \"Preferred-vs-Reserve\" fee debate is moot — both are free — so the real question is whether you'll use the Reserve's lounge access; if yes, skip straight to it."
+                    }
+                ]
+            }
+        ],
+        "cta": {
+            "label": "See current offer, rates & fees at chase.com ↗",
+            "url": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred"
+        }
+    },
+    {
+        "type": "card",
+        "anchor": "capital-one-venture-x",
+        "eyebrow": "#5 · Best flat-rate travel — with the SCRA-only caveat",
+        "title": "Capital One Venture X",
+        "meta": [
+            {
+                "spans": [
+                    {
+                        "text": "Annual fee: "
+                    },
+                    {
+                        "text": "$395",
+                        "bold": true
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Waiver: "
+                    },
+                    {
+                        "text": "SCRA (account must predate active duty)",
+                        "bold": true
+                    }
+                ]
+            }
+        ],
+        "body": [
+            {
+                "spans": [
+                    {
+                        "text": "The Venture X is the simplest premium travel card going — flat-rate miles on everything, a $300 annual credit through Capital One Travel, a 10,000-mile anniversary bonus, and lounge access — but it carries this guide's biggest trap: "
+                    },
+                    {
+                        "text": "Capital One waives fees only under SCRA, never MLA.",
+                        "bold": true
+                    },
+                    {
+                        "text": " The account must exist "
+                    },
+                    {
+                        "text": "before",
+                        "italic": true
+                    },
+                    {
+                        "text": " your active-duty period begins. That makes it the card to open "
+                    },
+                    {
+                        "text": "before",
+                        "italic": true
+                    },
+                    {
+                        "text": " you ship — including Guard and Reserve members, who can open it before a 30+ day activation and then request SCRA (which also caps interest at 4%, better than the statutory 6%). Open it while already on active duty and you'll pay $395 a year."
+                    }
+                ]
+            }
+        ],
+        "cta": {
+            "label": "See current offer, rates & fees at capitalone.com ↗",
+            "url": "https://www.capitalone.com/credit-cards/venture-x/"
+        }
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "BEST MILITARY-FOCUSED CREDIT CARDS (NAVY FEDERAL, USAA, PENFED)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The military credit unions compete on different ground: low or no fees for everyone, rather than premium fees waived for some.",
+                "bold": true
+            },
+            {
+                "text": " That makes them the natural home for the second card in your wallet — and, unlike the banks above, several of their perks survive your transition out of uniform."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Navy Federal cashRewards & Flagship Rewards"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Navy Federal's "
+            },
+            {
+                "text": "cashRewards",
+                "bold": true
+            },
+            {
+                "text": " earns up to 2% cash back with no annual fee — a clean everyday card for members. The "
+            },
+            {
+                "text": "Visa Signature Flagship Rewards",
+                "bold": true
+            },
+            {
+                "text": " ($49) is its travel card, and the fee treatment is the detail to know: Navy Federal waives it "
+            },
+            {
+                "text": "only under SCRA",
+                "bold": true
+            },
+            {
+                "text": " — an account opened before active duty — and does not apply an MLA fee waiver to cards opened while serving. Its SCRA program caps interest at 4%, and "
+            },
+            {
+                "text": "requests are accepted",
+                "url": "https://www.navyfederal.org/membership/offers-discounts/scra.html"
+            },
+            {
+                "text": " up to 180 days after your active-duty end date."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "USAA Cashback Rewards Plus & Eagle Navigator"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "USAA's "
+            },
+            {
+                "text": "Cashback Rewards Plus",
+                "bold": true
+            },
+            {
+                "text": " ($0 annual fee) earns 5% back on gas and on-base purchases up to annual caps — uniquely useful spending categories for military families. The "
+            },
+            {
+                "text": "Eagle Navigator",
+                "bold": true
+            },
+            {
+                "text": " ($95) is USAA's travel card, and here honesty beats hype: USAA's "
+            },
+            {
+                "text": "own SCRA page",
+                "url": "https://www.usaa.com/support/banking/scra-benefits/"
+            },
+            {
+                "text": " confirms a 4% interest cap and no added fees on covered accounts during active duty, but an MLA annual-fee waiver for the Eagle Navigator circulates only in community reports — it is "
+            },
+            {
+                "text": "not confirmed on USAA's own pages",
+                "bold": true
+            },
+            {
+                "text": ". Verify with USAA before you count on it."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "PenFed Pathfinder & Power Cash Rewards"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "PenFed's angle isn't SCRA or MLA at all — it's the "
+            },
+            {
+                "text": "Honors Advantage",
+                "bold": true
+            },
+            {
+                "text": " program, a credit-union benefit that "
+            },
+            {
+                "text": "includes honorably discharged veterans",
+                "bold": true
+            },
+            {
+                "text": ", not just active duty. With it, the "
+            },
+            {
+                "text": "Pathfinder Rewards",
+                "url": "https://www.penfed.org/credit-cards/pathfinder-rewards-visa"
+            },
+            {
+                "text": " card's $95 fee is waived and the "
+            },
+            {
+                "text": "Power Cash Rewards",
+                "url": "https://www.penfed.org/credit-cards/power-cash-rewards-visa"
+            },
+            {
+                "text": " card's cash back rises from 1.5% to a flat 2% with no annual fee. Because the benefit is membership-based rather than statutory, it doesn't expire when you leave service — which is why PenFed anchors our veterans picks below."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "MILITARY STAR Card (on-base spending)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The "
+            },
+            {
+                "text": "MILITARY STAR card",
+                "url": "https://www.myecp.com/htmlpages/cp_milstarcard"
+            },
+            {
+                "text": " (Exchange Credit Program) has no annual fee, earns 2% rewards on exchange purchases — AAFES, NEX, MCX, CGX stores, exchange food courts and Express locations — and gives a 10% discount on everything you buy the first day the account is open, plus a separate military clothing line of credit for uniform purchases. It works only within the exchange system, so it's a complement to the cards above, not a replacement — but for on-base spending it's the best tool for the job."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "BEST CREDIT CARDS FOR VETERANS (NO SCRA/MLA WAIVER)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Veterans and retirees do not get SCRA or MLA fee waivers — both laws end with active service — so the best credit cards for veterans are the ones that earn their keep with no annual fee.",
+                "bold": true
+            },
+            {
+                "text": " Most \"military credit card\" roundups blur this line; your card strategy shouldn't."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Best no-annual-fee options for veterans"
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "PenFed Power Cash Rewards",
+                        "bold": true
+                    },
+                    {
+                        "text": " — flat 2% cash back with Honors Advantage, which explicitly includes honorably discharged veterans, and no annual fee. The strongest veteran-specific deal on this page."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Navy Federal cashRewards",
+                        "bold": true
+                    },
+                    {
+                        "text": " — up to 2% cash back, no annual fee, from a credit union whose membership (and famously service-friendly terms) stay with you for life once you join."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "USAA Cashback Rewards Plus",
+                        "bold": true
+                    },
+                    {
+                        "text": " — 5% on gas and on-base spending up to annual caps with no fee; veterans and eligible family members retain USAA membership."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Are premium cards still worth it for veterans?"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Sometimes — but now you have to do the math civilians do. An $895 Platinum or $795 Sapphire Reserve only makes sense if you genuinely use the credits and lounge access that offset the fee; a frequent business traveler often comes out ahead, an occasional flyer rarely does. Two transition tips from the fee-waiver era: when your waivers end, ask the issuer to "
+            },
+            {
+                "text": "downgrade",
+                "bold": true
+            },
+            {
+                "text": " premium cards to their no-fee versions instead of canceling, and don't close your oldest accounts — account age supports the credit score you'll want for a VA loan. If you're weighing bigger benefits questions, see our "
+            },
+            {
+                "text": "VA disability guide",
+                "url": "/va-disability/"
+            },
+            {
+                "text": "."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "HOW TO CHOOSE A MILITARY CREDIT CARD"
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Match the card to your status, not to a listicle.",
+                        "bold": true
+                    },
+                    {
+                        "text": " Active duty → fee-waived premium cards (Amex, Chase, Citi, U.S. Bank). Pre-service, Guard, or Reserve → open Capital One and Navy Federal cards "
+                    },
+                    {
+                        "text": "before",
+                        "italic": true
+                    },
+                    {
+                        "text": " orders so SCRA can apply. Veteran → no-fee rewards cards and PenFed's Honors Advantage."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Going OCONUS or PCSing abroad? Check foreign transaction fees.",
+                        "bold": true
+                    },
+                    {
+                        "text": " The premium travel cards in this guide charge none — one more reason they beat a basic no-fee card for an overseas tour. Confirm the FTF line on the issuer's page for any card you carry abroad."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Mind the issuers' application rules.",
+                        "bold": true
+                    },
+                    {
+                        "text": " Cardholders widely report that Chase declines applicants who have opened five or more cards in the past 24 months (the unwritten \"5/24\" rule) and that Amex generally grants one welcome offer per card per lifetime. Neither is published policy, but both are consistent enough to plan around: get Chase cards early in your card sequence."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Build in the right order.",
+                        "bold": true
+                    },
+                    {
+                        "text": " If you're new to credit, start with a no-fee card (MILITARY STAR, cashRewards, or a secured card), pay in full monthly, and add premium cards once you have a year of clean history — a waived fee doesn't help if the application is declined."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Deploying?",
+                        "bold": true
+                    },
+                    {
+                        "text": " Set autopay before you go, and remember SCRA's 6% cap (4% at Capital One, Navy Federal, and USAA) applies to pre-service debt while you're on active orders. Fee waivers don't excuse a missed payment."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Stack cards with discounts.",
+                        "bold": true
+                    },
+                    {
+                        "text": " Rewards compound with the verified programs in our "
+                    },
+                    {
+                        "text": "military discount directory",
+                        "url": "/discount/"
+                    },
+                    {
+                        "text": " — the discount cuts the price, the card earns on what's left."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "What credit cards waive the annual fee for military?",
+        "spans": [
+            {
+                "text": "American Express, Chase, Citi, and U.S. Bank waive annual fees on personal cards for active-duty servicemembers under both SCRA and MLA — MLA also covers military spouses on their own cards. Capital One waives fees only under SCRA, which means the account must have been opened before active duty began. Navy Federal waives its $49 Flagship fee only under SCRA. Veterans and retirees are not covered by either law."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "Does American Express waive annual fees for military?",
+        "spans": [
+            {
+                "text": "Yes. American Express waives annual fees on all personal cards for active-duty servicemembers under both SCRA and MLA. MLA relief is applied automatically when an eligible servicemember or spouse opens a card during active duty; SCRA relief on pre-service accounts must be requested. Military spouses qualify for the MLA waiver on their own cards, not just as authorized users."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "Does Chase waive credit card fees for military spouses?",
+        "spans": [
+            {
+                "text": "Yes. Under the Military Lending Act, spouses of active-duty servicemembers are \"covered borrowers,\" so a spouse can open their own Chase personal card — including the Sapphire Reserve or Preferred — and have the annual fee waived. There is no requirement to be an authorized user; separate accounts also mean each spouse can earn their own welcome offer. Chase verifies MLA status automatically against the Department of Defense database."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "What is the difference between SCRA and MLA?",
+        "spans": [
+            {
+                "text": "SCRA (the Servicemembers Civil Relief Act) applies to credit you opened BEFORE active duty: it caps interest at 6% on pre-service debt, counts fees as interest, and must be requested. MLA (the Military Lending Act) applies to credit you open DURING active duty: it caps the Military APR at 36%, is applied automatically, and covers spouses and dependents enrolled in DEERS. Because annual fees count toward the 36% MAPR, major issuers simply waive them on MLA-covered accounts."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "Do veterans get SCRA or MLA credit card benefits?",
+        "spans": [
+            {
+                "text": "No. Both laws protect servicemembers on active duty only. SCRA relief can be requested up to 180 days after leaving active duty for debt incurred before service, but once that window closes the protections end, and MLA coverage ends when active service ends. Veterans should optimize for rewards and no-annual-fee cards instead — or credit-union programs like PenFed’s Honors Advantage, which explicitly includes honorably discharged veterans."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "Does Capital One waive the Venture X annual fee for active duty?",
+        "spans": [
+            {
+                "text": "Only under SCRA — never under MLA. That means the Venture X (or any Capital One card) must have been opened before your active-duty period began; open it during active duty and you will pay the $395 fee. Capital One’s SCRA program caps interest at 4%, better than the statutory 6%, and one request covers Discover accounts too, since Discover is now part of Capital One."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "Do military credit card fee waivers apply to National Guard and Reserve?",
+        "spans": [
+            {
+                "text": "Yes, while on qualifying orders. Guard and Reserve members serving on active orders of 30 or more consecutive days (Title 10, or Title 32 for SCRA-covered National Guard service) are treated as active duty for these protections, as are commissioned officers of the Public Health Service and NOAA. One practical play for Capital One cards: open the card before a qualifying activation, then request SCRA once on orders."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "What is the maximum interest rate on a credit card for active-duty military?",
+        "spans": [
+            {
+                "text": "Two caps apply. Under SCRA, interest on debt you incurred before active duty is capped at 6% — and fees count as interest, with the excess forgiven, not deferred. Under MLA, credit opened during active duty is capped at a 36% Military APR (MAPR), which also counts most fees. Several issuers voluntarily beat the SCRA cap: Capital One, Navy Federal, and USAA all cap covered accounts at 4%."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "Is the Amex Platinum worth it for military?",
+        "spans": [
+            {
+                "text": "For active-duty servicemembers, it is one of the strongest cards available: the $895 annual fee is waived under both SCRA and MLA, so you keep the lounge access and the card’s long menu of statement credits at no annual cost. A spouse can hold their own fee-waived Platinum under MLA. For veterans, the math changes — no waiver applies, so it is only worth it if you actually use enough of the credits and travel benefits to beat the fee."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "collapsed": true,
+        "question": "What happens to my credit cards when I leave active duty?",
+        "spans": [
+            {
+                "text": "MLA and SCRA fee waivers end when your covered status ends, so plan for annual fees to return. In practice fees may not resume immediately — issuers periodically re-check the DoD database — but budget as if they will. Before separation, decide card by card: keep the ones whose benefits beat the fee, downgrade the rest to no-fee versions rather than canceling, and avoid closing your oldest account, which shortens your credit history."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "SOURCES & METHODOLOGY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Every legal claim on this page traces to the statute, regulator, or the issuer's own military-benefits page — never to another blog. Fees and policies were last verified on July 16, 2026; we re-verify quarterly and after any major issuer fee change. Claims that rest only on community reports (Bank of America's \"over $100\" waiver pattern; USAA's Eagle Navigator MLA waiver) are labeled as such above and are never stated as fact."
+            }
+        ]
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Servicemembers Civil Relief Act, 50 U.S.C. ch. 50",
+                        "url": "https://www.law.cornell.edu/uscode/text/50/chapter-50"
+                    },
+                    {
+                        "text": " — statutory text"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Military Lending Act, 10 U.S.C. § 987",
+                        "url": "https://www.law.cornell.edu/uscode/text/10/987"
+                    },
+                    {
+                        "text": " and "
+                    },
+                    {
+                        "text": "32 C.F.R. Part 232",
+                        "url": "https://www.ecfr.gov/current/title-32/subtitle-A/chapter-I/subchapter-M/part-232"
+                    },
+                    {
+                        "text": " — statute and implementing regulation"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "CFPB — Servicemembers Civil Relief Act guide",
+                        "url": "https://www.consumerfinance.gov/consumer-tools/military-financial-lifecycle/the-servicemembers-civil-relief-act-scra/"
+                    },
+                    {
+                        "text": " and "
+                    },
+                    {
+                        "text": "CFPB — military interest-rate limits",
+                        "url": "https://www.consumerfinance.gov/ask-cfpb/im-in-the-military-are-there-limits-on-how-much-i-can-be-charged-for-a-loan-en-893/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "U.S. Department of Justice — Servicemembers and Veterans Initiative",
+                        "url": "https://www.justice.gov/servicemembers"
+                    },
+                    {
+                        "text": " · "
+                    },
+                    {
+                        "text": "Military OneSource — SCRA",
+                        "url": "https://www.militaryonesource.mil/financial-legal/legal/servicemembers-civil-relief-act/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "DoD covered-borrower databases: "
+                    },
+                    {
+                        "text": "MLA",
+                        "url": "https://mla.dmdc.osd.mil/mla/"
+                    },
+                    {
+                        "text": " · "
+                    },
+                    {
+                        "text": "SCRA",
+                        "url": "https://scra.dmdc.osd.mil/scra/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Issuer military-benefits pages: "
+                    },
+                    {
+                        "text": "American Express",
+                        "url": "https://www.americanexpress.com/us/help-support/service-members-civil-relief/"
+                    },
+                    {
+                        "text": " · "
+                    },
+                    {
+                        "text": "Chase",
+                        "url": "https://www.chase.com/digital/military"
+                    },
+                    {
+                        "text": " · "
+                    },
+                    {
+                        "text": "Citi",
+                        "url": "https://online.citi.com/US/ag/military-servicemembers-civil-relief-act"
+                    },
+                    {
+                        "text": " · "
+                    },
+                    {
+                        "text": "Capital One",
+                        "url": "https://www.capitalone.com/military/"
+                    },
+                    {
+                        "text": " · "
+                    },
+                    {
+                        "text": "Navy Federal",
+                        "url": "https://www.navyfederal.org/membership/offers-discounts/scra.html"
+                    },
+                    {
+                        "text": " · "
+                    },
+                    {
+                        "text": "USAA",
+                        "url": "https://www.usaa.com/support/banking/scra-benefits/"
+                    },
+                    {
+                        "text": " · "
+                    },
+                    {
+                        "text": "PenFed",
+                        "url": "https://www.penfed.org/credit-cards/pathfinder-rewards-visa"
+                    },
+                    {
+                        "text": " · "
+                    },
+                    {
+                        "text": "Exchange Credit Program (MILITARY STAR)",
+                        "url": "https://www.myecp.com/htmlpages/cp_milstarcard"
+                    }
+                ]
+            }
+        ]
+    }
+]

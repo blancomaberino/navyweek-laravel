@@ -23,57 +23,19 @@
      paired back up with its answer from the page's `faqs` relation. --}}
 @php
     use App\Domain\Navigation\Support\LinkUrl;
+    use App\Domain\Publishing\Content\InlineSpans;
 
     /** @var list<array{name: string, url: string}> $crumbs */
     /** @var list<array<string, mixed>> $blocks */
     /** @var string $heading */
     /** @var iterable<int, \App\Domain\Shared\Models\Faq> $faqs */
 
-    // Inline runs → HTML. Every editor-supplied href goes through LinkUrl::sanitize
-    // (repo policy); off-site links carry the legacy `target`/`rel` pair.
-    $inline = static function (array $spans): string {
-        $html = '';
+    // Inline runs → HTML, and a block's plain words. Both live in InlineSpans so the
+    // page and the CMS editor share ONE vocabulary — a mark added to one is readable
+    // by the other by construction. Every editor-supplied href is sanitized in there.
+    $inline = InlineSpans::render(...);
 
-        foreach ($spans as $span) {
-            $piece = nl2br(e((string) ($span['text'] ?? '')), false);
-
-            if ($span['bold'] ?? false) {
-                $piece = '<strong>'.$piece.'</strong>';
-            }
-            if ($span['italic'] ?? false) {
-                $piece = '<em>'.$piece.'</em>';
-            }
-            // A bare <span> the block's own CSS colours — the legacy highlights a
-            // value inside a line (a verified date, a figure) with colour alone,
-            // which is neither <strong> nor <em>.
-            if ($span['emphasis'] ?? false) {
-                $piece = '<span>'.$piece.'</span>';
-            }
-            if (filled($span['url'] ?? null)) {
-                $url = LinkUrl::sanitize((string) $span['url']);
-                $offsite = str_starts_with($url, 'http');
-                $piece = '<a href="'.e($url).'"'
-                    .($offsite ? ' target="_blank" rel="noopener noreferrer"' : '')
-                    .'>'.$piece.'</a>';
-            }
-
-            $html .= $piece;
-        }
-
-        return $html;
-    };
-
-    // A block's plain text, whether it stores `text` or `spans`.
-    $plain = static function (array $block): string {
-        if (isset($block['text'])) {
-            return (string) $block['text'];
-        }
-
-        return implode('', array_map(
-            static fn (array $span): string => (string) ($span['text'] ?? ''),
-            $block['spans'] ?? [],
-        ));
-    };
+    $plain = InlineSpans::plainText(...);
 
     // Fold runs of `list_item` back into single lists (the legacy renders one <ul>
     // per bullet group, not one per bullet).

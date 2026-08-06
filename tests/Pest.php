@@ -63,7 +63,30 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+/**
+ * The CMS body of every content page, captured verbatim from the live database into
+ * tests/Fixtures/body-blocks/. Shared by the block round-trip, coverage and inline-span
+ * suites so the corpus has one loader and one non-empty guard: an empty glob would make
+ * all three pass vacuously.
+ *
+ * @return array<string, list<array<string, mixed>>>
+ */
+function bodyBlockCorpus(): array
 {
-    // ..
+    $files = glob(__DIR__.'/Fixtures/body-blocks/*.json');
+
+    expect($files)->not->toBeEmpty('The body-block fixture corpus is missing.');
+
+    $corpus = [];
+
+    foreach ($files as $file) {
+        $corpus[basename($file, '.json')] = json_decode(
+            (string) file_get_contents($file),
+            true,
+            512,
+            JSON_THROW_ON_ERROR,
+        );
+    }
+
+    return $corpus;
 }

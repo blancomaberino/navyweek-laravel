@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Pages\Pages;
 use App\Domain\Publishing\Actions\ChangeUrlPathAction;
 use App\Domain\Publishing\Models\Page;
 use App\Filament\Resources\Pages\PageResource;
+use App\Filament\Resources\Pages\Pages\Concerns\TranslatesBodyBlocks;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 
 class EditPage extends EditRecord
 {
+    use TranslatesBodyBlocks;
+
     protected static string $resource = PageResource::class;
 
     protected function getHeaderActions(): array

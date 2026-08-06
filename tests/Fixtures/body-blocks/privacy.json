@@ -1,0 +1,211 @@
+[
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Last updated: April 11, 2026"
+            }
+        ],
+        "slot": "hero",
+        "variant": "stamp"
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "INTRODUCTION"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Welcome to NavyWeek.org. This Privacy Policy explains how we collect, use, and protect information when you visit our website. NavyWeek.org is an independent, unofficial informational resource about the U.S. Navy Week program. We are not affiliated with the U.S. Navy or the Navy Office of Community Outreach (NAVCO)."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "INFORMATION WE COLLECT"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "NavyWeek.org is primarily an informational website. We do not require you to create an account or provide personal information to use the site. However, we may automatically collect certain non-personal information when you visit, including:"
+            }
+        ]
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Browser type and version"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Operating system"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Referring website"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Pages visited and time spent on each page"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "IP address (anonymized where possible)"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Date and time of your visit"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "COOKIES"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "This website may use cookies and similar tracking technologies to enhance your browsing experience. Cookies are small text files placed on your device. You can control cookie settings through your browser preferences. Disabling cookies may affect certain features of the site."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "HOW WE USE INFORMATION"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Any information we collect is used solely for the following purposes:"
+            }
+        ]
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "To improve and optimize the website"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "To understand visitor usage patterns"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "To ensure the site functions properly"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "THIRD-PARTY LINKS"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "NavyWeek.org contains links to external websites, including official U.S. Navy and government websites. We are not responsible for the privacy practices or content of these third-party sites. We encourage you to review the privacy policies of any external sites you visit."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "DATA SECURITY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "We take reasonable measures to protect any information collected through this website. However, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "CHILDREN'S PRIVACY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "NavyWeek.org does not knowingly collect personal information from children under the age of 13. If you believe we have inadvertently collected such information, please contact us so we can promptly remove it."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "CHANGES TO THIS POLICY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. Your continued use of the site after changes are posted constitutes your acceptance of the updated policy."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "CONTACT US"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "If you have questions about this Privacy Policy, please visit our "
+            },
+            {
+                "text": "Contact page",
+                "url": "/contact/"
+            },
+            {
+                "text": "."
+            }
+        ]
+    }
+]
