@@ -138,6 +138,14 @@ final class CanonicalUrlMiddleware
         }
 
         // Note: the legacy catch-all drops the query string on the final "/".
+        //
+        // Deliberately 301, matching the legacy edge — retired URLs must redirect
+        // permanently (a site SEO invariant), and CanonicalUrlMiddlewareTest pins
+        // it. Be aware while developing: this branch also fires for the seconds
+        // while `pages:generate-*` is re-running, and browsers cache a 301 forever,
+        // so one reload in that window can pin a URL to "/" in your browser with
+        // the server never consulted again. It looks like a broken page while curl
+        // and the tests all say 200 — clear the cached redirect, don't chase it.
         return $this->redirect($origin.'/');
     }
 

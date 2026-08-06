@@ -1,0 +1,85 @@
+/* Per-family parity CSS, ported from the legacy component inline styles.
+   Kept in its own file so parallel work never collides in app.css.
+   Properties are alphabetized per the authored-CSS convention.
+
+   Everything below narrows a shared app.css rule that does not apply to
+   /navy-ranks/ in the legacy source. Selectors are prefixed with
+   `main.rank-list` because the family sheets are @imported at the TOP of
+   app.css, so an equal-specificity override there would lose on source order. */
+
+/* Legacy NavyRanksHub sets `padding: var(--space-2xl)` inline on <main>
+   (NavyRanksHub.tsx L105), which an inline style keeps at every width. app.css's
+   `@media (max-width: 720px)` narrows the shared `main` to 24px/16px/48px, so
+   the mobile column came out 64px wider than the remote's. */
+main.rank-list {
+    padding: var(--space-2xl);
+}
+
+/* Legacy NavyRanksHub styles its eyebrow inline: 11px IBM Plex Mono, weight 400,
+   3px tracking, body line-height (src/page-views/NavyRanksHub.tsx L113-115).
+   app.css's shared `.eyebrow` is the discount-guide variant (0.72rem/600/2px). */
+main.rank-list .eyebrow {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    line-height: 1.5;
+}
+
+/* There is no hero wrapper in the legacy markup — the intro <p> carries the
+   whole gap down to the byline (`margin: 0 0 var(--space-lg)`,
+   NavyRanksHub.tsx L119). The shared `.rank-hero` margin double-counts it. */
+main.rank-list .rank-hero {
+    margin-bottom: 0;
+}
+
+/* None of this page's headings is underlined in the legacy source: the three
+   section h2s are bare inline-styled headings (NavyRanksHub.tsx L135/138/141)
+   and the KeyFacts / EditorialPolicy h2s set only type + colour
+   (src/components/KeyFacts.tsx, src/components/ReferenceTrust.tsx). app.css's
+   global `main section > h2` gold rule is a discount-guide treatment. */
+main.rank-list section > h2 {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* Neither KeyFacts nor EditorialPolicy sets `lineHeight` on its heading, so the
+   legacy h2 inherits the body 1.5 rather than app.css's 1.6. */
+main.rank-list .key-facts h2,
+main.rank-list .editorial-policy h2 {
+    line-height: 1.5;
+}
+
+/* Legacy KeyFacts <dt> carries no margin (KeyFacts.tsx) — the 4px gap on the
+   wrapping flex column is the only separation. app.css's global `dt` bottom
+   margin adds an extra 2px to every fact row. */
+main.rank-list .key-facts dt {
+    margin-bottom: 0;
+}
+
+/* The legacy rank row is a single four-column grid at every width — there is no
+   responsive variant in NavyRanksHub.tsx (L64-70), so the name column simply
+   wraps and the NATO code stays visible on phones. app.css's
+   `@media (max-width: 720px)` block drops the NATO column and narrows the grid,
+   which shortened every mobile row by ~25px. */
+main.rank-list .rank-row {
+    grid-template-columns: 52px 56px 1fr auto;
+}
+main.rank-list .rank-row .nato {
+    display: block;
+    font-size: 10px;
+}
+
+/* The legacy row cells are sized in absolute px, not rem (NavyRanksHub.tsx
+   L65/67/68): paygrade 11, abbreviation 11, NATO code 10. app.css rounds them to
+   0.7rem/0.62rem, i.e. 11.2px/9.92px, which drifts the mono glyph runs. */
+main.rank-list .rank-row .abbr,
+main.rank-list .rank-row .paygrade {
+    font-size: 11px;
+}
+
+/* TrustByline's reviewer block has a 6px bottom margin, not 12px
+   (ReferenceTrust.tsx L206). The shared `.trust-byline-person:last-of-type`
+   never matches, because `.trust-byline-process` is the byline's last <div>. */
+main.rank-list .trust-byline-person:has(+ .trust-byline-dates) {
+    margin-bottom: 6px;
+}

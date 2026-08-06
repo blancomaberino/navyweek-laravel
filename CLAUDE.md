@@ -104,6 +104,127 @@ For ANY task that renders or changes a user-facing page, before you call it done
 so an entire un-ported design system — no CSS even linked in the base layout — shipped
 invisibly. Never verify a rendered page without viewing it.)
 
+## Parity means PIXELS, not headings (non-negotiable)
+
+This is a 1:1 rebuild of a live site. "Parity" is only ever proven by a **visual
+diff of the rendered page against the remote**, at BOTH desktop (1280) and mobile
+(375) widths. Nothing else counts.
+
+**Never claim parity from a structural proxy.** Heading counts, DOM greps,
+JSON-LD checks and HTTP 200s are all blind to layout, spacing, typography, icons
+and behaviour. A page can match heading-for-heading and still be completely wrong:
+`/schedule/` once scored "2/2 headings match" while 94% of its pixels differed —
+the whole body (filters, cards, key facts, intro copy) was missing or invented.
+
+The harness is committed at `platform/tools/vdiff/` (Playwright + pixelmatch):
+it screenshots the same path on local and remote, pixel-diffs, and ranks
+worst-first. Run it from that directory for every page you touch, and re-run it
+after each fix:
+
+```sh
+cd platform/tools/vdiff && npm install     # first run only
+node diff.mjs urls.txt [desktop|mobile]
+```
+
+It **fails closed**: a navigation error or non-2xx response throws rather than
+comparing a blank page, and the script exits non-zero when any path exceeds 1%.
+
+Treat **>1% differing pixels as a failing gate**, exactly like a red test, and read
+the emitted `*.diff.png` to see WHERE it differs.
+
+**Port from the source, don't infer from the rendering.** The original site's code
+is in the repo root (`src/components/*`, `src/page-views/*`, `src/styles/global.css`).
+When a page differs, open its component and port the actual markup and styles —
+much of the legacy styling is INLINE in the components, so re-deriving it from a
+screenshot guarantees drift. Approximating "close enough" CSS is how the header nav
+shipped with a text glyph instead of the lucide chevron and with the Events
+dropdown missing its indented air-show sub-items entirely.
+
+**Behaviour is part of parity too** — dropdowns, filters, accordions and the mobile
+menu must work the same way, not just look the same at rest.
+
+**A full-page diff CANNOT see an interaction state.** `diff.mjs` screenshots the
+page at rest, so a menu, accordion or modal that is closed contributes nothing to
+its number — a component can be 100% wrong and the page still score 0.0%. Anything
+that opens needs its own diff in the opened state:
+
+```
+node tools/vdiff/menu-desktop.mjs      # Events dropdown, forced open
+node tools/vdiff/menu-mobile.mjs       # mobile panel + Events accordion, forced open
+```
+
+Checking the DOM instead does NOT substitute. The Events sub-items once had the
+right labels, the right count and the right hrefs while rendering gold mixed-case
+unindented text against remote's grey uppercase indented rows, because
+`.nw-dropdown-subevent` had no CSS at all — a DOM check passes that, a pixel diff
+of the open menu catches it immediately. When you add a component with an open
+state, add its diff script here in the same change.
+
+## Editor-supplied values are untrusted output (non-negotiable)
+
+Anything an editor can set — a `pages`/`users` column, a JSON column, a CMS
+relation — is attacker-controlled by the time it reaches a template. Three sinks,
+three different correct answers:
+
+- **`href`** → `Navigation\Support\LinkUrl::sanitize()`. The scheme allowlist
+  (http/https/mailto/tel) is the only thing stopping a stored `javascript:` from
+  becoming an executable link.
+- **`style` attribute** → constrain to a literal SHAPE, not just escaping. Blade's
+  `{{ }}` stops an attribute break-out but NOT CSS injection
+  (`#fff; background-image: url(…)`). Coerce to a hex colour, a positive int, an
+  enum — see `ChromeCatalog::hexColour()` / `logoCap()`.
+- **Structured data (JSON-LD)** → **OMIT** an invalid value; never substitute the
+  `#` placeholder. A bogus `sameAs` is worse published data than none.
+
+**Fix the PATTERN, not the reported line.** A review that names one bad `href` is
+telling you the convention is not being followed anywhere. Grep every sink across
+all views before you touch the one you were handed — the last sweep turned four
+reported sites into eight real ones, plus a JSON-LD leak nobody had flagged.
+
+## Verification tooling must fail closed (non-negotiable)
+
+A harness that swallows its own errors reports success for work it never checked,
+and it will be believed — the numbers it prints are what "done" means here.
+
+`tools/vdiff/diff.mjs` once wrapped navigation in `catch(() => {})`: an
+unreachable page compared a blank screenshot and scored near zero. That is a
+false pass on the single metric this port is judged by. It now throws on a
+null/non-2xx response, counts an errored path as failing, and exits non-zero past
+the 1% gate.
+
+**Whenever you add or change a check, prove it BOTH ways** — that it passes when
+it should, and that it actually fails when it should. Run it against something
+known-broken before you trust a green result.
+
+## Test harnesses that produce false passes
+
+Two traps in this repo have each cost a debugging session. Both make a test look
+like it is asserting something it is not:
+
+- **Laravel's test client trims trailing slashes.** `$this->get('/authors/')`
+  runs through `prepareUrlForRequest()` and actually requests `/authors`, so it
+  only ever exercises the slash-normalising 301 — never the page or the catch-all.
+  When the trailing slash IS the thing under test, build the request by hand:
+  `app()->handle(Request::create('http://localhost'.$path, 'GET'))`. See
+  `FamilyRootRedirectTest` / `EditorSuppliedUrlSchemeTest`.
+- **A fixture can encode the bug's own assumption.** `DiscountCategoryRepositoryTest`
+  passed for months because its fixtures pinned CONNECTION slugs, while real data
+  pins PAGE slugs — so the curated ordering never applied in production and the
+  suite confirmed the broken behaviour. When a test is green but production is
+  visibly wrong, suspect the fixture before the code.
+
+## Rendering hygiene (cheap, and each one has bitten us)
+
+- **Guard a collection section consistently.** Every view wraps its FAQ block in
+  `@if (…->isNotEmpty())`; the one that did not printed a bare heading on records
+  with no rows. If siblings guard it, guard it.
+- **Eager-load what the template reads.** A renderer that hands a model to a view
+  which walks `$page->faqs` must `load('faqs')`, or every render lazy-loads.
+- **Never strip a focus indicator without replacing it.** `outline: none` with no
+  `:focus-visible` rule is a WCAG 2.4.7 failure. Porting one from the legacy is
+  not a reason to keep it — a focus ring paints only during keyboard interaction,
+  so it costs nothing against the at-rest parity diff.
+
 ## CSS authoring — alphabetical property order (enforced)
 
 Within every declaration block of our **authored** CSS, list properties in

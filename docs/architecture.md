@@ -50,6 +50,8 @@ drives `Catalog\Support\VeteransDayFreeMealsPresenter` + `Publishing\Seo\Veteran
 (Breadcrumb + Article + author Person + ItemList + FAQPage; `dateModified` tracks the freshest
 verification) into the `pages.veterans-day-free-meals` view (SSR-first table, progressively
 enhanced with client-side filter/sort). Non-persisted FAQ pairs use `Publishing\Support\FaqItem`.
+Map rendering is server-side from two distinct coordinate assets: `Publishing\Support\UsMapGeometry` (Albers-USA landmass + state-border mesh, inset labels and tour-stop pin positions; drives `/map/` and the home map teaser) and `Pillars\Support\BaseMapSvg` (the separate hand-drawn bases projection — 960x560 CONUS schematic with Hawaii/Alaska inset, plus a 1000x500 world silhouette with per-country zoom; drives the base detail, country hub and overseas hub). Both are static rendering assets, not CMS content.
+Discount category hubs order their cards through `Catalog\Support\DiscountCategoryOrdering`: `EloquentDiscountCategoryRepository::orderedConnections` returns the brand A-Z baseline, and the curated `pinned`/`order`/`excluded` lists — which hold PAGE slugs, not connection slugs — are applied by that support class where the page is in hand.
 
 **The author-profile page family** (`/authors/{slug}/`) renders one profile page per
 editorial byline `users` row that has a public `slug`. Like the home hub, it is data-driven
@@ -509,6 +511,18 @@ erDiagram
         text credentials "Person.description / bio, nullable"
         string avatar_path "Person.image, nullable"
         json knows_about "Person.knowsAbout, nullable"
+        json profile_expertise "author-page expertise chips, nullable"
+        string service_title "author-page hero service line, nullable"
+        string current_title "author-page hero civilian line, nullable"
+        string location_city "author-page hero location, nullable"
+        string location_state "author-page hero location, nullable"
+        string location_country "Person.address country, nullable"
+        json military_timeline "author-page service entries, nullable"
+        json civilian_timeline "author-page career entries, nullable"
+        text expertise_lead "author-page expertise lead-in, nullable"
+        text works_lead "author-page works lead-in, nullable"
+        json featured_works "curated author-page credit links, nullable"
+        date profile_reviewed_at "author-page freshness stamp, nullable"
         text bio "Person.description — long-form author-page bio, nullable"
         string linkedin_url "Person.sameAs — LinkedIn profile, nullable"
     }
@@ -904,8 +918,10 @@ erDiagram
 > folds the legacy `NavyWeekEvent` + `CityData` + `CityExtras` into one row per
 > city — the three-file split was a file-organization artifact, all keyed by slug.
 > `sequence` preserves the legacy numeric `id` (the canonical 1..N stop order); the
-> rich city-detail block (venues, daily schedule, military context) is optional
-> JSON, so a stop can exist before its detail is compiled. **`fleet_weeks`** are the
+> rich city-detail block (`description` — the Mission Dossier prose the legacy
+> `getCityDescription()` hardcoded — plus venues, daily schedule, military context)
+> is optional JSON, so a stop can exist before its detail is compiled.
+> **`fleet_weeks`** are the
 > `/fleetweek/<slug>/` city guides driven by one flexible block template:
 > `has_official_fleet_week`/`has_air_show` and `status` gate which blocks render, so
 > a Tier-3 city with no standing event sets the flag false, nulls the festival/
@@ -1115,6 +1131,66 @@ The **`author`** type (`PageType::Author`) is dispatched straight from `renderBo
 
 Every other page type falls back to the minimal shell until its own page-family
 view lands, as does response caching.
+
+### Site-parity page families (2026-08-05)
+
+The parity pass added the families the live site serves that the platform had
+never built, plus the CMS columns the shared "trust" chrome reads. All of them
+follow the existing contract: a stable `generation_key`, a `config('publishing.paths')`
+prefix resolved through `PagePaths`, and a `renderBody` match arm.
+
+| PageType | Route | Pageable | Renderer |
+|---|---|---|---|
+| `BaseHub` | `/navy-bases/` | — | `renderBaseHub` |
+| `BaseOverseasHub` | `/navy-bases/overseas/` | — | `renderBaseOverseasHub` |
+| `BaseStateHub` | `/navy-bases/{state}/` | — (region = page slug) | `renderBaseRegionHub` |
+| `BaseCountryHub` | `/navy-bases/{country}/` | — (region = page slug) | `renderBaseRegionHub` |
+| `DesignatorHub` | `/navy-designators/` | — | `renderDesignatorHub` |
+| `DesignatorCommunityHub` | `/navy-designators/{community}/` | — (community = page slug) | `renderDesignatorCommunityHub` |
+| `Designator` | `/navy-designators/{slug}/` | `Rank` (`officer-designator`) | `renderDesignator` |
+| `NavyReferenceHub` | `/navy-reference/` | — | `renderNavyReferenceHub` |
+| `Schedule` | `/schedule/` | — | `renderSchedulePage` |
+| `RouteMap` | `/map/` | — | `renderSchedulePage` |
+| `DiscountCategoryHub` | `/discount/{category}/` | `DiscountCategory` | `renderDiscountCategory` (generator was the missing piece) |
+
+**New columns.** `pages`: `h1` (distinct from the `<title>`), `last_reviewed`,
+`sources_checked`, `key_facts`, `editorial_source_priority`,
+`editorial_review_cadence`, `trust_page_label`, `shows_reference_backlink` — read
+by the shared partials under `resources/views/partials/trust/`. `offers.details`
+holds the "How it works" paragraphs. `users.military_service` /
+`users.civilian_career` back the author-profile sections; the structured
+`users.military_timeline` / `users.civilian_timeline` entry lists supersede that prose
+on the `/authors/{slug}/` page, alongside `service_title`, `current_title`, `location_*`,
+`profile_expertise` (kept apart from the compact byline `knows_about`), `expertise_lead`,
+`works_lead`, `featured_works` (the curated credit list that replaces the auto-derived
+byline list) and `profile_reviewed_at`.
+
+**New repository method.** `RankRepositoryInterface::designators()` returns the
+officer designators ordered by four-digit code.
+
+**New importers** (Stage-B, reading committed seed artifacts):
+`import:content-bodies` (long-form page bodies → `pages.body_blocks`) and
+`import:discount-details` (`offers.details`) and `import:author-profiles`
+(the structured `/authors/{slug}/` profile columns, keyed by the user's profile slug)
+and `import:content-page-meta` (the content pages' KeyFacts card, page-specific
+independence disclosure, hero eyebrow, `shows_reference_backlink` flag and FAQ rows,
+keyed by `url_path`) and `import:discount-display` (the discount guides'/directory's
+per-brand presentation values, keyed by the brand's page slug). All are idempotent
+and fill only NULLs unless `--force`.
+
+**New discount-parity columns.** `connections.logo_display` holds the per-brand logo
+image cap (`{cardMaxHeight, cardMaxWidth}`); brand wordmarks have wildly different
+aspect ratios, so one shared cap renders each at a different optical size — the card
+chips use the cap directly and the guide's hero chip scales it by a fixed factor.
+`offers.related_slugs` holds the curated "More military discounts" pins; an unpinned
+guide falls back to catalogue order. Both are filled by `import:discount-display`,
+which also copies a brand's own `offers.source_priority_note` onto
+`pages.editorial_source_priority` so the trust footer quotes the brand's note rather
+than the generic house string.
+
+**New `pages` columns.** `eyebrow` (the "// VETERANS BENEFITS" kicker above the h1)
+and `disclosure` (the page-specific independence-disclosure body; null falls back to
+the shared partial's standard reference wording).
 
 ### Editable URLs (auto-301, zero deploys)
 

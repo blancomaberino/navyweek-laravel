@@ -78,7 +78,10 @@ it('page generators spell no route literal outside the allowlist', function () {
     // and must build its url_path via PagePaths.
     // (The home root `/` is also a reviewed one-off but needs no entry: it isn't
     // route-shaped, so the regex above never collects it — GenerateHomePageAction.)
-    $allow = ['/og/', '/privacy/', '/terms/', '/contact/', '/va-disability/', '/veterans-day/', '/veterans-home-care/'];
+    // One-off content pages own their full fixed path (a reviewed opt-out — these
+    // are single pages, not families, so there is no PagePaths knob to route them
+    // through). /our-process/ is the editorial-process page every byline links to.
+    $allow = ['/og/', '/privacy/', '/terms/', '/contact/', '/va-disability/', '/veterans-day/', '/veterans-home-care/', '/our-process/', '/schedule/', '/map/', '/best-credit-cards-for-military/'];
 
     $violations = [];
     foreach (routeShapedLiterals(app_path('Domain/*/Pages/*Action.php')) as $loc => $value) {

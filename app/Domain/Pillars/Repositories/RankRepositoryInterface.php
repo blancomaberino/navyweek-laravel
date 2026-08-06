@@ -43,9 +43,20 @@ interface RankRepositoryInterface
     public function activeRatings(): Collection;
 
     /**
-     * Historic enlisted ratings, most-recently-decommissioned first.
+     * Historic enlisted ratings, most-recently-decommissioned first. Ratings
+     * retired in the same year keep import order (`id`), which is the registry
+     * order the legacy hub's stable year sort preserved on /navy-ratings/.
      *
      * @return Collection<int, Rank>
      */
     public function historicRatings(): Collection;
+
+    /**
+     * Every officer designator (category `officer-designator`), ordered by its
+     * four-digit code — the source for the designators hub, its community hubs,
+     * and each detail page.
+     *
+     * @return Collection<int, Rank>
+     */
+    public function designators(): Collection;
 }

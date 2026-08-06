@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 use App\Domain\Catalog\Models\LocalDiscount;
 use App\Domain\Catalog\Pages\GenerateLocalDiscountPagesAction;
+use App\Domain\Pillars\Enums\DesignatorCommunity;
+use App\Domain\Pillars\Enums\RankCategory;
 use App\Domain\Pillars\Models\AirShow;
 use App\Domain\Pillars\Models\Base;
 use App\Domain\Pillars\Models\FleetWeek;
 use App\Domain\Pillars\Models\NavyWeekEvent;
+use App\Domain\Pillars\Models\Rank;
 use App\Domain\Pillars\Pages\GenerateAirShowPagesAction;
 use App\Domain\Pillars\Pages\GenerateBasePagesAction;
+use App\Domain\Pillars\Pages\GenerateDesignatorPagesAction;
 use App\Domain\Pillars\Pages\GenerateFleetWeekPagesAction;
 use App\Domain\Pillars\Pages\GenerateNavyWeekPagesAction;
 use App\Domain\Pillars\Pages\GenerateRankPagesAction;
@@ -17,6 +21,7 @@ use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Models\Redirect;
 use App\Domain\Publishing\Pages\GenerateAuthorPagesAction;
 use App\Domain\Publishing\Pages\GenerateDiscountIndexPageAction;
+use App\Domain\Publishing\Pages\GenerateNavyReferenceHubPageAction;
 use App\Models\User;
 
 /**
@@ -51,6 +56,30 @@ function knobFamilyCases(): array
             'oldPath' => '/navy-ranks/',
             'newRoot' => '/ranks-x/',
             'newPath' => '/ranks-x/',
+        ],
+        'navy_reference' => [
+            'configKey' => 'navy_reference',
+            'seed' => fn () => null, // the library landing page aggregates at render
+            'action' => GenerateNavyReferenceHubPageAction::class,
+            'generationKey' => 'navy-reference-hub',
+            'oldPath' => '/navy-reference/',
+            'newRoot' => '/reference-x/',
+            'newPath' => '/reference-x/',
+        ],
+        'designators' => [
+            'configKey' => 'designators',
+            'seed' => fn () => Rank::factory()->create([
+                'slug' => 'knob-designator',
+                'name' => 'Knob Designator',
+                'category' => RankCategory::OfficerDesignator,
+                'designator_code' => '9999',
+                'designator_community' => DesignatorCommunity::UnrestrictedLine,
+            ]),
+            'action' => GenerateDesignatorPagesAction::class,
+            'generationKey' => 'designator:knob-designator',
+            'oldPath' => '/navy-designators/knob-designator/',
+            'newRoot' => '/designators-x/',
+            'newPath' => '/designators-x/knob-designator/',
         ],
         'ratings' => [
             'configKey' => 'ratings',
@@ -141,7 +170,7 @@ dataset('knob families', knobFamilyCases());
  */
 function knobPendingFamilies(): array
 {
-    return ['navy_reference', 'designators'];
+    return [];
 }
 
 it('has a knob-test case for every configured page family', function () {

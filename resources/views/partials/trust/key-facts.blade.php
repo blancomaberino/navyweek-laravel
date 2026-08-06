@@ -15,9 +15,17 @@
         <h2>{{ $kfTitle }}</h2>
         <dl>
             @foreach ($facts as $fact)
+                @php
+                    // Fact values are usually scalars but some imported records carry a
+                    // list (e.g. several performers) — flatten rather than 500.
+                    $factValue = $fact['value'] ?? '';
+                    $factValue = is_array($factValue)
+                        ? implode(', ', array_map(static fn ($v): string => is_scalar($v) ? (string) $v : '', $factValue))
+                        : (string) $factValue;
+                @endphp
                 <div>
                     <dt>{{ $fact['label'] ?? '' }}</dt>
-                    <dd>{{ $fact['value'] ?? '' }}</dd>
+                    <dd>{{ $factValue }}</dd>
                 </div>
             @endforeach
         </dl>

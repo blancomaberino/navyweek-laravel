@@ -75,6 +75,7 @@ final class GenerateRankPagesAction
             'slug' => 'navy-ratings',
             'title' => "U.S. Navy Ratings — All {$active} Active Enlisted Ratings Listed | NavyWeek.org",
             'h1' => 'NAVY RATINGS',
+            'eyebrow' => '// Enlisted Job Specialties',
             'meta_description' => "Every U.S. Navy enlisted rating on one page — all {$active} active ratings grouped by community, plus {$historic} historic (disestablished) ratings, with rating badges and abbreviations.",
             'og_image_path' => '/og/default.png',
             'date_published' => $now,
@@ -85,16 +86,17 @@ final class GenerateRankPagesAction
             'key_facts' => [
                 'title' => 'U.S. Navy Ratings — Key Facts',
                 'facts' => [
-                    ['label' => 'Active enlisted ratings', 'value' => (string) $active],
-                    ['label' => 'Historic (disestablished) ratings', 'value' => (string) $historic],
-                    ['label' => 'What a rating is', 'value' => "A Navy enlisted job specialty — the sailor's occupational field, worn as a rating badge"],
-                    ['label' => 'Rating vs. rank', 'value' => 'A rating is the job; the paygrade (E-1 to E-9) is the rank'],
+                    ['label' => 'Active ratings', 'value' => (string) $active],
+                    ['label' => 'Historic (disestablished) ratings listed', 'value' => (string) $historic],
+                    ['label' => 'What a rating is', 'value' => 'An enlisted occupational specialty (job), distinct from rank/paygrade (E-1 to E-9)'],
+                    ['label' => 'Largest rating community', 'value' => 'Naval Aviation — maintenance, ordnance, and aircrew ratings'],
+                    ['label' => 'Oldest ratings still active', 'value' => "Boatswain's Mate (BM) and Gunner's Mate (GM), dating to 1794"],
                 ],
-                'source' => ['label' => 'U.S. Navy — Ranks & Insignia (navy.mil)', 'url' => 'https://www.navy.mil/About/Ranks-and-Insignia/'],
+                'source' => ['label' => 'MyNavyHR — Enlisted Community Managers', 'url' => 'https://www.mynavyhr.navy.mil/Career-Management/Community-Management/Enlisted/'],
             ],
             'trust_page_label' => 'Navy Ratings reference hub',
-            'editorial_source_priority' => 'We cite navy.mil rating badge plates, MyNavyHR / MILPERSMAN, and NAVPERS rating documentation first; the U.S. Code (Title 10) and eCFR where statutes apply. Non-government sources are not used as primary evidence on this page.',
-            'editorial_review_cadence' => 'Rating badges, abbreviations, and community groupings are re-verified quarterly and at every page update.',
+            'editorial_source_priority' => 'We cite navy.mil, MyNavyHR enlisted community pages, and Navy COOL rating cards first. Non-government sources are not used as primary evidence on this page.',
+            'editorial_review_cadence' => 'The active-rating roster and community groupings are re-verified quarterly and at every page update; historic ratings are checked against Navy disestablishment notices.',
             'is_published' => true,
         ]);
 

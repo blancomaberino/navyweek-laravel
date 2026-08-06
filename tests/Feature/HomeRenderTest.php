@@ -56,26 +56,28 @@ it('emits the full home JSON-LD graph', function () {
         ->assertSee('"@type":"FAQPage"', false);
 });
 
-it('shows "Happening Now" for an active stop and "Next Stop" otherwise', function () {
+// The kicker is authored in caps in the legacy Home.tsx ('HAPPENING NOW' / 'NEXT
+// STOP'), so the literal in the markup is upper-case, not text-transformed.
+it('shows "HAPPENING NOW" for an active stop and "NEXT STOP" otherwise', function () {
     NavyWeekEvent::factory()->create([
         'sequence' => 1, 'slug' => 'billings', 'city' => 'Billings', 'status' => NavyWeekStatus::Active,
     ]);
     app(GenerateHomePageAction::class)();
 
     fetchHome()->assertOk()
-        ->assertSee('Happening Now')
+        ->assertSee('HAPPENING NOW')
         ->assertSee('Live This Week');
 });
 
-it('shows "Next Stop" when no stop is active', function () {
+it('shows "NEXT STOP" when no stop is active', function () {
     NavyWeekEvent::factory()->create([
         'sequence' => 1, 'slug' => 'flagstaff', 'city' => 'Flagstaff', 'status' => NavyWeekStatus::Upcoming,
     ]);
     app(GenerateHomePageAction::class)();
 
     fetchHome()->assertOk()
-        ->assertSee('Next Stop')
-        ->assertDontSee('Happening Now');
+        ->assertSee('NEXT STOP')
+        ->assertDontSee('HAPPENING NOW');
 });
 
 it('omits the FAQPage node (and section) when the page has no FAQs', function () {
@@ -91,13 +93,15 @@ it('omits the FAQPage node (and section) when the page has no FAQs', function ()
         ->assertSee('"@type":"ItemList"', false);
 });
 
-it('renders the empty-state schedule when no events exist', function () {
+it('renders an empty schedule grid when no events exist', function () {
     app(GenerateHomePageAction::class)();
 
+    // The legacy Home.tsx has no empty-state copy: the section heading stays and the
+    // card grid is simply empty. No current/next stop section, and zero ItemList items.
     fetchHome()->assertOk()
-        ->assertSee('The 2026 schedule is coming soon.')
-        // No current/next stop section, and the ItemList reports zero items.
-        ->assertDontSee('Next Stop')
+        ->assertSee('2026 SCHEDULE')
+        ->assertDontSee('event-card')
+        ->assertDontSee('NEXT STOP')
         ->assertSee('"numberOfItems":0', false);
 });
 

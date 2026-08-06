@@ -36,6 +36,7 @@ use Illuminate\Support\Carbon;
  * @property bool $url_path_is_custom
  * @property string|null $title
  * @property string|null $h1
+ * @property string|null $eyebrow
  * @property string|null $meta_description
  * @property string|null $canonical_path
  * @property string $og_type
@@ -48,12 +49,22 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $last_reviewed
  * @property Carbon|null $sources_checked
  * @property array<string, mixed>|null $key_facts
+ * @property string|null $disclosure
  * @property string|null $editorial_source_priority
  * @property string|null $editorial_review_cadence
+ * @property string|null $editorial_independence
+ * @property string|null $editorial_reviewer_note
+ * @property string|null $editorial_corrections
+ * @property string|null $editorial_not_advice
+ * @property string|null $corrections_note
+ * @property bool $shows_process_link
+ * @property bool $shows_reviewer
  * @property string|null $trust_page_label
  * @property bool $shows_reference_backlink
  * @property int|null $author_id
  * @property int|null $reviewer_id
+ * @property string|null $author_credentials
+ * @property string|null $reviewer_credentials
  * @property string|null $pageable_type
  * @property int|null $pageable_id
  * @property bool $is_published
@@ -83,6 +94,7 @@ class Page extends Model
         'url_path_is_custom',
         'title',
         'h1',
+        'eyebrow',
         'meta_description',
         'canonical_path',
         'og_type',
@@ -95,12 +107,22 @@ class Page extends Model
         'last_reviewed',
         'sources_checked',
         'key_facts',
+        'disclosure',
         'editorial_source_priority',
         'editorial_review_cadence',
+        'editorial_independence',
+        'editorial_reviewer_note',
+        'editorial_corrections',
+        'editorial_not_advice',
+        'corrections_note',
+        'shows_process_link',
+        'shows_reviewer',
         'trust_page_label',
         'shows_reference_backlink',
         'author_id',
         'reviewer_id',
+        'author_credentials',
+        'reviewer_credentials',
         'pageable_type',
         'pageable_id',
         'is_published',
@@ -120,6 +142,8 @@ class Page extends Model
             'sources_checked' => 'date',
             'key_facts' => 'array',
             'shows_reference_backlink' => 'boolean',
+            'shows_process_link' => 'boolean',
+            'shows_reviewer' => 'boolean',
             'is_published' => 'boolean',
         ];
     }

@@ -58,8 +58,11 @@ function authoredCssSources(): array
 {
     $sources = [];
 
-    foreach (glob(resource_path('css/*.css')) ?: [] as $file) {
-        $sources['resources/css/'.basename($file)] = (string) file_get_contents($file);
+    // Recursive on purpose: the per-family sheets live in css/families/ and are the
+    // bulk of the authored CSS. A non-recursive glob left ~10,000 lines outside the
+    // guard — green while never inspecting the code it exists to protect.
+    foreach (glob(resource_path('css/{,*/}*.css'), GLOB_BRACE) ?: [] as $file) {
+        $sources[str_replace(base_path().'/', '', $file)] = (string) file_get_contents($file);
     }
 
     $views = new RecursiveIteratorIterator(

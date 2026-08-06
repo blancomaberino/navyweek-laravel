@@ -13,10 +13,36 @@
     $sourcesChecked = $fmt($page->sources_checked) ?? $lastReviewed;
     $publishDate = ($publishDate ?? false) ? $fmt($page->date_published) : null;
     $processNewTab = $processLinkNewTab ?? false;
+
+    // Credentials are per PAGE where the page says so: the same reviewer reads
+    // one way on the VA guides ("… not a VA-accredited representative" — a
+    // disclaimer, not a bio) and another on the credit-cards guide. Falls back to
+    // the user's own credentials.
+    $authorCredentials = $page->author_credentials ?? $author?->credentials;
+    $reviewerCredentials = $page->reviewer_credentials ?? $reviewer?->credentials;
+@endphp
+@php
+    // Author-only pages use a different shape: the portrait is a SIBLING of the
+    // text column rather than nested in a person row, and the label/name spacing
+    // is tighter (VeteransDay.tsx:438-490). The two-person byline nests one
+    // portrait per row instead.
+    $solo = $author && ! ($reviewer && $page->shows_reviewer);
 @endphp
 @if ($author || $reviewer)
-    <div class="trust-byline">
-        @if ($author)
+    <div @class(['trust-byline', 'is-solo' => $solo])>
+        @if ($solo && $author->avatar_path)
+            <img src="{{ $author->avatar_path }}" alt="Portrait of {{ $author->name }}" width="56" height="56" loading="eager">
+        @endif
+        <div class="trust-byline-col">
+        @if ($solo)
+            <div class="trust-byline-role">Written by</div>
+            <div class="trust-byline-solo-name">
+                <a class="trust-byline-name" href="/authors/{{ $author->slug }}/">{{ $author->name }}</a>
+                @if ($authorCredentials)
+                    <span class="trust-byline-cred"> — {{ $authorCredentials }}</span>
+                @endif
+            </div>
+        @elseif ($author)
             <div class="trust-byline-role">Written by</div>
             <div class="trust-byline-person">
                 @if ($author->avatar_path)
@@ -24,23 +50,27 @@
                 @endif
                 <div>
                     <a class="trust-byline-name" href="/authors/{{ $author->slug }}/">{{ $author->name }}</a>
-                    @if ($author->credentials)
-                        <span class="trust-byline-cred"> — {{ $author->credentials }}</span>
+                    @if ($authorCredentials)
+                        <span class="trust-byline-cred"> — {{ $authorCredentials }}</span>
                     @endif
                 </div>
             </div>
         @endif
 
-        @if ($reviewer)
+        {{-- Some pages are author-only: VeteransDay.tsx renders no reviewer row.
+             The flag (not a null reviewer_id) carries that intent, because
+             EditorialTeamSeeder back-fills the default byline onto any page whose
+             reviewer is null. --}}
+        @if ($reviewer && $page->shows_reviewer)
             <div class="trust-byline-role">Reviewed by</div>
-            <div class="trust-byline-person">
+            <div class="trust-byline-person is-reviewer">
                 @if ($reviewer->avatar_path)
                     <img src="{{ $reviewer->avatar_path }}" alt="Portrait of {{ $reviewer->name }}" width="56" height="56" loading="lazy">
                 @endif
                 <div>
                     <a class="trust-byline-name is-reviewer" href="/authors/{{ $reviewer->slug }}/">{{ $reviewer->name }}</a>
-                    @if ($reviewer->credentials)
-                        <span class="trust-byline-cred"> — {{ $reviewer->credentials }}</span>
+                    @if ($reviewerCredentials)
+                        <span class="trust-byline-cred"> — {{ $reviewerCredentials }}</span>
                     @endif
                 </div>
             </div>
@@ -56,9 +86,14 @@
             </div>
         @endif
 
-        <div class="trust-byline-process">
-            How we research &amp; review:
-            <a href="/our-process/" @if ($processNewTab) target="_blank" rel="noopener noreferrer" @endif>Our editorial process</a>
+        {{-- The reference pages close the byline with this row; the YMYL guides end
+             at the dates line (VaDisability.tsx and the other three stop there). --}}
+        @if ($page->shows_process_link)
+            <div class="trust-byline-process">
+                How we research &amp; review:
+                <a href="/our-process/" @if ($processNewTab) target="_blank" rel="noopener noreferrer" @endif>Our editorial process</a>
+            </div>
+        @endif
         </div>
     </div>
 @endif

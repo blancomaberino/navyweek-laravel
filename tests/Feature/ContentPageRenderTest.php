@@ -17,11 +17,11 @@ function contentFetch(string $path): TestResponse
     );
 }
 
-it('seeds the privacy/terms/contact content pages with an editable body', function () {
+it('seeds the privacy/terms/contact/our-process content pages with an editable body', function () {
     $count = app(GenerateContentPagesAction::class)();
 
-    expect($count)->toBe(3);
-    foreach (['/privacy/', '/terms/', '/contact/'] as $path) {
+    expect($count)->toBe(5);
+    foreach (['/privacy/', '/terms/', '/contact/', '/our-process/', '/best-credit-cards-for-military/'] as $path) {
         $page = Page::query()->where('url_path', $path)->firstOrFail();
         expect($page->page_type)->toBe(PageType::Static)
             ->and($page->is_published)->toBeTrue()

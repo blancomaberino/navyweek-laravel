@@ -1,0 +1,1234 @@
+/* Per-family parity CSS, ported from the legacy component inline styles.
+   Kept in its own file so parallel work never collides in app.css.
+   Properties are alphabetized per the authored-CSS convention.
+
+   Family sheets are @imported at the TOP of app.css, so an equal-specificity
+   override there would lose on source order — every selector below is therefore
+   prefixed with `main.base-detail` / `main.base-hub` to outrank the shared rule.
+
+   Source of truth for every value: src/page-views/NavyBaseDetail.tsx,
+   NavyBasesHub.tsx, NavyBaseState.tsx, NavyBasesCountry.tsx,
+   NavyBasesOverseas.tsx (the legacy styling is inline in those components). */
+
+/* Every bases view sets its own padding inline in the legacy source
+   (`padding: var(--space-2xl)` on <main>, or on each <section> for the hubs) and
+   never narrows it on small screens. app.css's shared `@media (max-width: 720px)`
+   main-padding rule is therefore wrong here: at 375px it widens the column by
+   48px, which re-wraps the hero and every card grid. */
+@media (max-width: 720px) {
+    main.base-detail,
+    main.base-hub {
+        padding: var(--space-2xl);
+    }
+}
+
+/* ==========================================================================
+   Base detail — /navy-bases/{slug}/  (NavyBaseDetail.tsx)
+   ========================================================================== */
+
+/* NavyBaseDetail.tsx L199-214 — the hero block. */
+main.base-detail .base-hero {
+    margin-bottom: var(--space-2xl);
+}
+
+main.base-detail .base-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+main.base-detail .base-hero h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin: 0 0 var(--space-sm);
+}
+
+main.base-detail .base-aka {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-md);
+}
+
+main.base-detail .base-tagline {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 760px;
+}
+
+/* NavyBaseDetail.tsx L216-231 — the overseas advisory note. */
+main.base-detail .base-advisory {
+    align-items: flex-start;
+    background: rgba(201, 168, 76, 0.06);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    display: flex;
+    gap: 12px;
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-md);
+}
+
+main.base-detail .base-advisory > div {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+main.base-detail .base-advisory strong {
+    color: var(--gold);
+    font-weight: bolder;
+}
+
+/* NavyBaseDetail.tsx L233-249 — the quick-facts card grid. */
+main.base-detail .base-quick-facts {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    margin-bottom: var(--space-2xl);
+}
+
+main.base-detail .base-quick-fact {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    padding: var(--space-md);
+}
+
+main.base-detail .base-quick-fact-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+main.base-detail .base-quick-fact-value {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Every content section carries the same bottom gap and a bare display h2 —
+   app.css's shared `main section > h2` gold underline is a discount-guide
+   treatment that no bases section uses. */
+main.base-detail > section {
+    margin-bottom: var(--space-2xl);
+}
+
+main.base-detail > section > h2 {
+    border-bottom: 0;
+    font-size: 32px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-md);
+    padding-bottom: 0;
+}
+
+/* NavyBaseDetail.tsx L251-258 / L276-283 — overview + history prose. */
+main.base-detail .base-prose p {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0 0 var(--space-md);
+}
+
+/* NavyBaseDetail.tsx L260-274 — the gold-ruled key-facts list. */
+main.base-detail .base-key-facts ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+main.base-detail .base-key-facts li {
+    background: rgba(21, 35, 64, 0.5);
+    border-left: 2px solid var(--gold);
+    border-radius: 0 2px 2px 0;
+    display: flex;
+    gap: var(--space-md);
+    padding: 12px 16px;
+}
+
+main.base-detail .base-key-fact-label {
+    color: var(--gold);
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    min-width: 220px;
+    text-transform: uppercase;
+}
+
+main.base-detail .base-key-fact-value {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* NavyBaseDetail.tsx L285-294 — major commands / tenant units. */
+main.base-detail .base-units ul {
+    display: grid;
+    gap: var(--space-sm);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+main.base-detail .base-units li {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 10px 14px;
+}
+
+/* NavyBaseDetail.tsx L296-397 — location & geography (map panel + address grid). */
+main.base-detail .base-map {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    margin-bottom: var(--space-md);
+    min-height: 280px;
+    padding: var(--space-md);
+}
+
+main.base-detail .base-map-caption {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+main.base-detail .base-place {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    padding: var(--space-lg);
+}
+
+main.base-detail .base-place-head {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+    margin-bottom: var(--space-sm);
+}
+
+main.base-detail .base-place-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+main.base-detail .base-place > div > .base-place-label {
+    margin-bottom: var(--space-sm);
+}
+
+main.base-detail .base-place-address {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+main.base-detail .base-place-coords {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 6px;
+}
+
+main.base-detail .base-place-link {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    margin-top: var(--space-sm);
+    text-transform: uppercase;
+}
+
+main.base-detail .base-place-region {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+main.base-detail .base-place-region span {
+    color: var(--nw-gray-light);
+}
+
+main.base-detail .base-place-more {
+    margin-top: var(--space-sm);
+}
+
+main.base-detail .base-place-more a {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* NavyBaseDetail.tsx L399-470 — host-nation panel (overseas only). */
+main.base-detail .base-host-panel {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    margin-bottom: var(--space-md);
+    padding: var(--space-lg);
+}
+
+main.base-detail .base-host-panel dl {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    margin: 0 0 var(--space-md);
+}
+
+main.base-detail .base-host-panel dt {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+main.base-detail .base-host-panel dd {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    margin: 0;
+}
+
+main.base-detail .base-sofa {
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    padding-top: var(--space-md);
+}
+
+main.base-detail .base-sofa-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+main.base-detail .base-sofa p {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+main.base-detail .base-host-para {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0 0 var(--space-md);
+}
+
+main.base-detail .base-host-warning {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-top: var(--space-sm);
+}
+
+/* NavyBaseDetail.tsx L472-495 — the notable-events timeline. */
+main.base-detail .base-events ol {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+main.base-detail .base-events li {
+    align-items: flex-start;
+    display: flex;
+    gap: var(--space-md);
+}
+
+main.base-detail .base-event-year {
+    color: var(--gold);
+    flex-shrink: 0;
+    font-family: var(--font-display);
+    font-size: 36px;
+    line-height: 1;
+    min-width: 80px;
+}
+
+main.base-detail .base-event-title {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+main.base-detail .base-event-desc {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* NavyBaseDetail.tsx L497-522 — nearby / also-in-region cards. */
+main.base-detail .base-nearby-grid {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+main.base-detail .base-nearby-grid a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    display: block;
+    padding: var(--space-md);
+}
+
+main.base-detail .base-nearby-grid a:hover {
+    text-decoration: none;
+}
+
+main.base-detail .base-nearby-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+}
+
+main.base-detail .base-nearby-name {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 1.2px;
+}
+
+main.base-detail .base-nearby-empty {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* NavyBaseDetail.tsx L529-543 — the sources list. */
+main.base-detail .base-sources > h2 {
+    font-size: 24px;
+    margin: 0 0 var(--space-sm);
+}
+
+main.base-detail .base-sources ul {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+main.base-detail .base-sources a {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-body);
+    font-size: 13px;
+    gap: 6px;
+}
+
+main.base-detail .base-last-updated {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-top: var(--space-sm);
+}
+
+/* NavyBaseDetail.tsx L545-558 — the footer prev/next rail. */
+main.base-detail .base-footer-nav {
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    padding-top: var(--space-lg);
+}
+
+main.base-detail .base-footer-nav a {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   FAQ accordion — the legacy FAQAccordion (DiscountDetail.tsx) ships its rules
+   in an inline <style> on every page that uses it; they are hoisted here.
+   ========================================================================== */
+
+main.base-detail .nw-faq-list,
+main.base-hub .nw-faq-list {
+    display: flex;
+    flex-direction: column;
+}
+
+main.base-detail .nw-faq,
+main.base-hub .nw-faq {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    padding: 0;
+}
+
+main.base-detail .nw-faq > summary,
+main.base-hub .nw-faq > summary {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: var(--space-md);
+    justify-content: space-between;
+    list-style: none;
+    padding: var(--space-md) 0;
+}
+
+main.base-detail .nw-faq > summary > h3,
+main.base-hub .nw-faq > summary > h3 {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0;
+}
+
+main.base-detail .nw-faq[open] > summary > h3,
+main.base-hub .nw-faq[open] > summary > h3 {
+    color: var(--gold);
+}
+
+main.base-detail .nw-faq .lucide-chevron-down,
+main.base-hub .nw-faq .lucide-chevron-down {
+    color: var(--nw-gray);
+    flex-shrink: 0;
+}
+
+main.base-detail .nw-faq[open] .lucide-chevron-down,
+main.base-hub .nw-faq[open] .lucide-chevron-down {
+    color: var(--gold);
+    transform: rotate(180deg);
+}
+
+main.base-detail .nw-faq-a,
+main.base-hub .nw-faq-a {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    padding: 0 0 var(--space-md);
+}
+
+/* ==========================================================================
+   State + country hubs — /navy-bases/{state|country}/
+   (NavyBaseState.tsx, NavyBasesCountry.tsx)
+   ========================================================================== */
+
+/* Both hubs are a flat <main> with the same inline padding as the detail page;
+   app.css's shared `.base-hub-*` block spacing does not apply to them. */
+main.base-region-hub .base-hub-back {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 4px;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-lg);
+    text-transform: uppercase;
+}
+
+main.base-region-hub .base-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+main.base-region-hub > h1 {
+    font-size: clamp(48px, 6vw, 72px);
+    letter-spacing: 4px;
+    line-height: 1;
+    margin: 0 0 var(--space-sm);
+}
+
+main.base-region-hub .base-hub-intro {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-xl);
+    max-width: 700px;
+}
+
+main.base-region-hub .base-hub-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+/* NavyBaseState.tsx L140-147 — the type headings are mono rules, not display type. */
+main.base-region-hub .base-hub-groups section > h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-sm);
+    padding-bottom: var(--space-xs);
+    text-transform: uppercase;
+}
+
+main.base-region-hub .base-hub-groups section {
+    margin-bottom: 0;
+}
+
+/* NavyBaseState.tsx L148-180 — the installation cards. */
+main.base-region-hub .base-type-grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+}
+
+main.base-region-hub .base-type-grid > a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    display: block;
+    padding: var(--space-lg);
+}
+
+main.base-region-hub .base-type-grid > a:hover {
+    text-decoration: none;
+}
+
+main.base-region-hub .base-type-card-kind {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+}
+
+main.base-region-hub .base-type-card-name {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    line-height: 1.1;
+    margin-bottom: 6px;
+}
+
+main.base-region-hub .base-type-card-meta {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 13px;
+    margin-bottom: var(--space-md);
+}
+
+main.base-region-hub .base-type-card-tagline {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+}
+
+main.base-region-hub .base-type-card-cta {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* NavyBasesCountry.tsx L210-223 — the zoomed country map panel. */
+main.base-region-hub .base-country-map {
+    margin-bottom: var(--space-2xl);
+}
+
+main.base-region-hub .base-country-map > div {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.1);
+    border-radius: 4px;
+    min-height: 320px;
+    padding: var(--space-lg);
+}
+
+/* NavyBasesCountry.tsx L279-300 — the host-nation summary panel. */
+main.base-region-hub .base-country-host {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    margin-bottom: 0;
+    margin-top: var(--space-2xl);
+    padding: var(--space-lg);
+}
+
+main.base-region-hub .base-country-host > h2 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-size: 24px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-md);
+    padding-bottom: 0;
+}
+
+main.base-region-hub .base-country-host dl {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    margin: 0;
+}
+
+main.base-region-hub .base-country-host dt {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+main.base-region-hub .base-country-host dd {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    margin: 0;
+}
+
+main.base-region-hub .base-country-host > p {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    margin: var(--space-md) 0 0;
+}
+
+/* NavyBasesCountry.tsx L302-305 — the FAQ block sits on its own 2xl rhythm. */
+main.base-region-hub .base-hub-faqs {
+    margin-bottom: var(--space-2xl);
+    margin-top: var(--space-2xl);
+}
+
+main.base-region-hub .base-hub-faqs > h2 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-md);
+    padding-bottom: 0;
+}
+
+/* ==========================================================================
+   Directory root + overseas hub — /navy-bases/ and /navy-bases/overseas/
+   (NavyBasesHub.tsx, NavyBasesOverseas.tsx)
+   ========================================================================== */
+
+/* Both hubs give <main> `flex: 1` with no padding and put the padding on each
+   <section> instead (NavyBasesHub.tsx L137-138), so the vertical rhythm between
+   bands is 24/32/48 rather than a single 48px main gutter. */
+main.base-hub-root {
+    padding: 0;
+}
+
+main.base-hub-root .base-hub-intro-section {
+    padding: var(--space-2xl) var(--space-2xl) var(--space-lg);
+}
+
+main.base-hub-root .base-hub-section {
+    padding: var(--space-xl) var(--space-2xl);
+}
+
+/* app.css gives `.base-hub-all` / `.base-hub-faqs` a 48px bottom margin for the
+   pre-parity hub markup; the legacy bands butt straight up against each other. */
+main.base-hub-root .base-hub-all,
+main.base-hub-root .base-hub-faqs {
+    margin-bottom: 0;
+}
+
+main.base-hub-root .base-hub-faqs {
+    padding-bottom: var(--space-3xl);
+}
+
+main.base-hub-root .base-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+main.base-hub-root h1 {
+    font-size: clamp(48px, 6vw, 72px);
+    letter-spacing: 4px;
+    line-height: 1;
+    margin: 0 0 var(--space-md);
+}
+
+main.base-hub-root .base-hub-lead {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-lg);
+    max-width: 760px;
+}
+
+main.base-hub-root > section > h2 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-md);
+    padding-bottom: 0;
+}
+
+/* NavyBasesHub.tsx L171-187 — the headline stat row. */
+main.base-hub-root .base-stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xl);
+    margin-top: var(--space-lg);
+}
+
+main.base-hub-root .base-stat-row > div {
+    min-width: 140px;
+}
+
+main.base-hub-root .base-stat-value {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 56px;
+    line-height: 1;
+}
+
+main.base-hub-root .base-stat-label {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+
+/* NavyBasesHub.tsx L194-223 — the state / country pick-lists. */
+main.base-hub-root .base-region-grid {
+    display: grid;
+    gap: var(--space-sm);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+main.base-hub-root .base-region-grid > a {
+    align-items: center;
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    display: flex;
+    font-family: var(--font-body);
+    font-size: 15px;
+    justify-content: space-between;
+    padding: 12px 16px;
+    transition: all 0.2s;
+}
+
+main.base-hub-root .base-region-grid > a:hover {
+    text-decoration: none;
+}
+
+main.base-hub-root .base-region-abbr {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-right: 8px;
+}
+
+main.base-hub-root .base-region-terr {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 1px;
+    margin-left: 6px;
+}
+
+main.base-hub-root .base-region-count {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+/* NavyBasesHub.tsx L230-264 — the overseas promo card. */
+main.base-hub-root .base-overseas-promo {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 4px;
+    color: var(--nw-off-white);
+    display: block;
+    margin-bottom: var(--space-md);
+    padding: var(--space-lg);
+}
+
+main.base-hub-root .base-overseas-promo:hover {
+    text-decoration: none;
+}
+
+main.base-hub-root .base-overseas-promo-head {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+}
+
+main.base-hub-root .base-overseas-promo-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+main.base-hub-root .base-overseas-promo-title {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 32px;
+    letter-spacing: 2px;
+    line-height: 1.1;
+}
+
+main.base-hub-root .base-overseas-promo-desc {
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 8px;
+    max-width: 640px;
+}
+
+main.base-hub-root .base-overseas-promo-cta {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+main.base-hub-root .base-country-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: var(--space-md);
+}
+
+main.base-hub-root .base-country-chips > span {
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 2px;
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+}
+
+/* NavyBasesHub.tsx L267-348 — the filterable A–Z list. */
+main.base-hub-root .base-list-head {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+}
+
+/* The A–Z heading sits inside the count row, so it is not matched by the
+   `section > h2` rule above and would otherwise take app.css's `.base-hub h2`. */
+main.base-hub-root .base-list-head > h2 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    margin: 0;
+    padding-bottom: 0;
+}
+
+main.base-hub-root .base-list-count {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+
+main.base-hub-root .base-filter-row,
+main.base-hub-root .base-region-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: var(--space-md);
+}
+
+main.base-hub-root .base-filter-row button,
+main.base-hub-root .base-region-filter button {
+    background: transparent;
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    padding: 6px 14px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+}
+
+main.base-hub-root .base-filter-row button[aria-pressed='true'],
+main.base-hub-root .base-region-filter button[aria-pressed='true'] {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+}
+
+main.base-hub-root .base-az-list {
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+main.base-hub-root .base-az-list > li {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+}
+
+main.base-hub-root .base-az-list > li > a {
+    align-items: center;
+    color: var(--nw-off-white);
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 1fr auto auto;
+    padding: 14px 4px;
+}
+
+main.base-hub-root .base-az-list-overseas > li > a {
+    grid-template-columns: 1fr auto auto auto;
+}
+
+main.base-hub-root .base-az-list > li > a:hover {
+    text-decoration: none;
+}
+
+main.base-hub-root .base-az-name {
+    color: var(--nw-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+main.base-hub-root .base-az-type {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+main.base-hub-root .base-az-region {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+}
+
+main.base-hub-root .base-az-place {
+    align-items: center;
+    color: var(--nw-gray-light);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+}
+
+main.base-hub-root .base-az-place .lucide {
+    color: var(--gold);
+}
+
+main.base-hub-root .base-az-empty {
+    background: var(--navy-mid);
+    border-radius: 2px;
+    color: var(--nw-gray-light);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: var(--space-lg);
+    text-align: center;
+}
+
+/* NavyBasesOverseas.tsx L226-246 — the world-map band. */
+main.base-overseas-hub .base-hub-map {
+    margin-bottom: 0;
+    padding: 0 var(--space-2xl) var(--space-2xl);
+}
+
+main.base-overseas-hub .base-world-map {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.1);
+    border-radius: 4px;
+    min-height: 400px;
+    padding: var(--space-lg);
+}
+
+main.base-overseas-hub .base-map-showing {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    margin-top: var(--space-sm);
+    text-transform: uppercase;
+}
+
+/* NavyBasesOverseas.tsx L253-263 — country cards grouped by combatant command. */
+main.base-overseas-hub .base-command-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+main.base-overseas-hub .base-command-label {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin: 0 0 var(--space-sm);
+    padding-bottom: var(--space-xs);
+    text-transform: uppercase;
+}
+
+/* NavyBasesOverseas.tsx L355-359 — the "All Navy Bases" rail under the FAQs. */
+main.base-overseas-hub .base-overseas-footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    margin-top: var(--space-xl);
+}
+
+main.base-overseas-hub .base-overseas-footer-nav a {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* The shared editorial-policy box is nested inside the FAQ band, so app.css's
+   `main section > h2` gold underline lands on its heading; the legacy
+   ReferenceTrust.tsx heading has neither rule and inherits the body line-height. */
+main.base-hub-root .editorial-policy > h2 {
+    border-bottom: 0;
+    line-height: 1.5;
+    padding-bottom: 0;
+}
+
+/* Breadcrumb colours: every bases view renders the separators inside the <nav>
+   with no colour of their own (so they inherit `--nw-gray`) and the current page
+   in `--nw-gray-light` (NavyBaseDetail.tsx L178-197, NavyBaseState.tsx L101-107).
+   app.css's shared `.breadcrumb` paints both gold. */
+main.base-detail .breadcrumb span[aria-hidden='true'],
+main.base-hub .breadcrumb span[aria-hidden='true'] {
+    color: var(--nw-gray);
+}
+
+main.base-detail .breadcrumb [aria-current='page'],
+main.base-hub .breadcrumb [aria-current='page'] {
+    color: var(--nw-gray-light);
+}
+
+/* Only the base DETAIL breadcrumb sets `flexWrap: 'wrap'` (NavyBaseDetail.tsx
+   L178); all four hub breadcrumbs are a single non-wrapping flex row whose items
+   shrink and wrap their own text (NavyBasesHub.tsx L140, NavyBaseState.tsx L101,
+   NavyBasesCountry.tsx L174, NavyBasesOverseas.tsx L188). app.css wraps them all,
+   which changes the row height on narrow viewports. */
+main.base-hub .breadcrumb {
+    flex-wrap: nowrap;
+}

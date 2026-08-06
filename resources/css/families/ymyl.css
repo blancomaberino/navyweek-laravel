@@ -1,0 +1,2147 @@
+/* Per-family parity CSS, ported from the legacy component inline styles.
+   Kept in its own file so parallel work never collides in app.css. */
+
+/* ==========================================================================
+   Long-form editorial / YMYL guides — pages/content.blade.php.
+   Values ported from the inline styles in the legacy page views:
+     src/page-views/VaDisability.tsx
+     src/page-views/VeteransDay.tsx
+     src/page-views/VeteransHomeCare.tsx
+     src/page-views/BestCreditCardsForMilitary.tsx
+     src/page-views/OurProcess.tsx
+   ========================================================================== */
+
+/* Legacy <main style={{ maxWidth: 860, margin: '0 auto',
+   padding: 'var(--space-3xl) var(--space-2xl)' }}>. */
+.content-page {
+    margin: 0 auto;
+    max-width: 860px;
+    padding: var(--space-3xl) var(--space-2xl);
+}
+
+/* The hero wrapper is inert on every page whose legacy hero is a plain stack;
+   only /our-process/ turns it into a full-bleed band (below). */
+.content-hero {
+    display: contents;
+}
+
+/* The "// VETERANS BENEFITS" kicker above the h1 — legacy hero eyebrow div. */
+.content-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+/* h1: display face, tight leading, the hero block's 48px bottom margin folded in. */
+.content-page h1 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 52px);
+    letter-spacing: 2px;
+    line-height: 1.15;
+    margin: 0 0 var(--space-2xl);
+}
+
+/* Section headings — legacy <Section> title: gold display caps over a hairline
+   rule, with the 48px flex gap between sections folded into margin-top. */
+.content-page h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    margin: var(--space-2xl) 0 var(--space-md);
+    padding-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+/* Sub-headings — legacy <SubHeading>: mono micro-caps, no rule. */
+.content-page h3 {
+    border-bottom: 0;
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    line-height: 1.75;
+    margin: var(--space-xl) 0 var(--space-md);
+    padding-bottom: 0;
+    text-transform: uppercase;
+}
+
+/* The legacy sections space their children with a flex `gap`, so the last block
+   in the body carries no trailing space of its own. */
+.content-page article > :last-child {
+    margin-bottom: 0;
+}
+
+.content-page--our-process article > :last-child {
+    margin-bottom: 80px;
+}
+
+/* Section body copy — legacy section content div: 15px/1.75, gray-light, with a
+   16px flex gap between blocks. */
+.content-page p {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0 0 var(--space-md);
+}
+
+.content-page .content-lead {
+    color: var(--nw-off-white);
+    font-size: 17px;
+    line-height: 1.75;
+    margin-bottom: var(--space-xl);
+}
+
+/* The 16px off-white paragraph the home-care guide runs under its lead. */
+.content-page .content-sublead {
+    color: var(--nw-off-white);
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: var(--space-lg);
+}
+
+/* Fine print under a table — legacy 13px gray paragraph. */
+.content-page .content-fine {
+    color: var(--nw-gray);
+    font-size: 13px;
+}
+
+/* The answer-first capsule the credit-cards guide opens with. */
+.content-page .content-capsule {
+    color: var(--nw-white);
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+    max-width: 800px;
+}
+
+/* The legacy `EditorialPolicyBox` heading sets no line-height, so it takes the
+   document's 1.5 (11px → 17px); anything taller pushes every bullet down a pixel. */
+.content-page .editorial-policy h2 {
+    line-height: 1.5;
+}
+
+/* Both trust boxes close the legacy section stack, so they sit a full section gap
+   below the body — 48px on the pages whose stack uses `--space-2xl`. */
+.content-page .corrections-box {
+    margin-top: var(--space-2xl);
+}
+
+/* The legacy byline closes with `marginBottom: var(--space-2xl)` before the
+   KeyFacts card; the shared partial leaves a 32px gap, so the guide pages restate
+   the 48 here (adjacent margins collapse to the larger). */
+.content-page .key-facts {
+    margin-top: var(--space-2xl);
+}
+
+/* The shared trust cards carry their own type scale — keep the body-copy rule
+   above from reaching into them. The card title takes this page's 1.5 heading
+   leading, not the 1.6 the pillar pages use. */
+.content-page .key-facts[data-llm-key-facts] h2 {
+    border-bottom: 0;
+    line-height: 1.5;
+    padding-bottom: 0;
+}
+
+.content-page .key-facts-source {
+    color: var(--nw-gray-light);
+    font-size: 11px;
+    line-height: 1.5;
+    margin: var(--space-md) 0 0;
+}
+
+.content-page .trust-disclosure p {
+    color: var(--nw-off-white);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Legacy `ul` style object: 24px indent, 16px above, 8px between bullets. */
+.content-page .content-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: var(--space-xl) 0 var(--space-md);
+    padding-left: var(--space-lg);
+}
+
+.content-page .content-list li {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+/* FAQ, expanded treatment — legacy VaDisability/VeteransHomeCare: a display-face
+   question over its answer, with a 24px gap between entries. */
+.content-page .content-faq-item {
+    margin-bottom: var(--space-lg);
+}
+
+.content-page .content-faq-item h3 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    margin: 0 0 var(--space-xs);
+    padding-bottom: 0;
+    text-transform: none;
+}
+
+.content-page .content-faq-item p {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* FAQ, collapsed treatment — legacy VeteransDay/BestCreditCards: a stack of
+   <details> cards, closed at rest. */
+.content-faq {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+/* The same card, emitted one block at a time (the 8px flex gap between the
+   legacy stack's children becomes a bottom margin). */
+.content-faq-card {
+    margin-bottom: var(--space-sm);
+}
+
+.content-faq details,
+.content-faq-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    padding: var(--space-md) var(--space-lg);
+}
+
+/* `listStyle: 'revert'` in the legacy — the native disclosure triangle, not the
+   site-wide "+ / –" marker app.css swaps in. */
+.content-faq summary,
+.content-faq-card > summary {
+    color: var(--nw-white);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.75;
+    list-style: revert;
+    padding: 0;
+}
+
+.content-faq summary::-webkit-details-marker,
+.content-faq-card > summary::-webkit-details-marker {
+    display: revert;
+}
+
+.content-faq summary::before,
+.content-faq-card > summary::before {
+    content: none;
+}
+
+.content-page .content-faq details p,
+.content-page .content-faq-card > p {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: var(--space-sm) 0 0;
+}
+
+/* Pull-quote callout — legacy `Callout()` in VaDisability/VeteransDay/
+   VeteransHomeCare: a navy panel behind a 3px gold rule, sitting in the section's
+   16px flex gap. */
+.content-callout {
+    background: var(--navy);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.content-callout a {
+    color: var(--gold);
+    text-decoration: underline;
+}
+
+/* -- data tables ----------------------------------------------------------
+   Two treatments. The guides use a bare table in an `overflowX: auto` div; the
+   credit-cards guide wraps it in a bordered panel (`.bcc-tablewrap`) that CSS
+   restacks into cards under 820px. */
+.content-tablewrap {
+    margin: calc(var(--space-lg) + var(--space-md)) 0 var(--space-md);
+    overflow-x: auto;
+}
+
+.content-tablepanel {
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    border-radius: 6px;
+    margin: 0 0 var(--space-md);
+    overflow-x: auto;
+}
+
+/* `margin: 0` overrides the site-wide `table` rule in app.css; the legacy tables
+   carry no margin of their own — the wrapper positions them. `line-height: 1.75`
+   is inherited from the section's body-copy stack in the legacy. */
+.content-table {
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.75;
+    margin: 0;
+    width: 100%;
+}
+
+/* Legacy `<p style={{ marginTop: 'var(--space-lg)' }}>` under the rate table — 24px
+   of its own on top of the section stack's 16px gap. */
+.content-page .content-tablewrap + p {
+    margin-top: calc(var(--space-lg) + var(--space-md));
+}
+
+.content-table caption {
+    caption-side: top;
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 0 0 var(--space-sm);
+    text-align: left;
+}
+
+.content-tablewrap thead tr {
+    background: var(--navy-mid);
+}
+
+.content-tablewrap th {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 10px 14px;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.content-tablewrap td {
+    color: var(--nw-off-white);
+    padding: 10px 14px;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+}
+
+.content-table .is-right {
+    text-align: right;
+}
+
+.content-table .is-accent {
+    color: var(--gold-light);
+}
+
+/* Legacy `.bcc-table`: body face, denser head, hover row. */
+.content-tablepanel .content-table {
+    font-family: var(--font-body);
+}
+
+.content-tablepanel th {
+    background: var(--navy-mid);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 12px 14px;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.content-tablepanel td {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    color: var(--nw-off-white);
+    line-height: 1.5;
+    padding: 14px;
+    vertical-align: top;
+}
+
+.content-tablepanel tbody tr {
+    border-bottom: 0;
+}
+
+.content-tablepanel tbody tr:hover {
+    background: rgba(21, 35, 64, 0.5);
+}
+
+/* Legacy `.bcc-cardlink` / `.bcc-source`. */
+.content-tablepanel td[data-label='Card'] a {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.content-tablepanel .content-cell-sub {
+    color: var(--nw-gray);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-top: 3px;
+    text-transform: uppercase;
+}
+
+.content-tablepanel td[data-label='Notes & source'] a {
+    color: var(--gold);
+    font-size: 13px;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+
+/* Legacy `@media (max-width: 820px)`: the full table stays in the HTML and CSS
+   restacks it into one card per row. */
+@media (max-width: 820px) {
+    .content-tablepanel {
+        border: none;
+        overflow-x: visible;
+    }
+
+    .content-tablepanel .content-table,
+    .content-tablepanel tbody,
+    .content-tablepanel tr,
+    .content-tablepanel td {
+        display: block;
+        width: 100%;
+    }
+
+    .content-tablepanel thead {
+        clip: rect(0 0 0 0);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+    }
+
+    .content-tablepanel tr {
+        background: var(--navy-mid);
+        border: 1px solid rgba(201, 168, 76, 0.18);
+        border-radius: 6px;
+        margin-bottom: var(--space-md);
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .content-tablepanel tr:hover {
+        background: var(--navy-mid);
+    }
+
+    .content-tablepanel td {
+        border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+        display: grid;
+        gap: var(--space-md);
+        grid-template-columns: 40% 60%;
+        padding: 9px 0;
+    }
+
+    .content-tablepanel td:last-child {
+        border-bottom: none;
+    }
+
+    .content-tablepanel td::before {
+        color: var(--gold);
+        content: attr(data-label);
+        font-family: var(--font-mono);
+        font-size: 9.5px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+}
+
+/* -- credit-card review cards (legacy `CardBlock`) ------------------------ */
+/* The card sits inside the legacy section's `fontSize: 15 / lineHeight: 1.75`
+   stack, and every line inside it (kicker, title, meta, note, CTA) is measured
+   against that inherited leading. */
+.content-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    border-radius: 6px;
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0 0 var(--space-md);
+    padding: var(--space-lg) var(--space-xl);
+    scroll-margin-top: 80px;
+}
+
+.content-card-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.content-page .content-card h3 {
+    border-bottom: 0;
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 1px;
+    line-height: inherit;
+    margin: 0 0 var(--space-sm);
+    padding-bottom: 0;
+    text-transform: none;
+}
+
+.content-card-meta {
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    gap: var(--space-md);
+    letter-spacing: 0.5px;
+    margin-bottom: var(--space-sm);
+}
+
+.content-card-meta strong {
+    color: var(--nw-white);
+}
+
+.content-card-note {
+    color: var(--nw-gray);
+    font-size: 12.5px;
+    font-style: italic;
+    margin-bottom: var(--space-sm);
+}
+
+.content-page .content-card-body p {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.75;
+    margin: 0;
+}
+
+.content-card-cta {
+    margin-top: var(--space-md);
+}
+
+.content-card-cta a {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-decoration: underline;
+    text-transform: uppercase;
+}
+
+/* -- /contact/ cards ------------------------------------------------------ */
+.content-linkcard {
+    align-items: center;
+    background: rgba(10, 22, 40, 0.6);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 2px;
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-xl);
+    text-decoration: none;
+    transition: border-color 0.2s;
+}
+
+.content-linkcard-icon {
+    align-items: center;
+    background: rgba(201, 168, 76, 0.1);
+    border-radius: 2px;
+    color: var(--gold);
+    display: flex;
+    flex-shrink: 0;
+    height: 44px;
+    justify-content: center;
+    width: 44px;
+}
+
+.content-linkcard-label {
+    color: var(--nw-gray);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.content-linkcard-value {
+    color: var(--gold);
+    display: block;
+    font-size: 16px;
+}
+
+.content-infocard {
+    background: rgba(10, 22, 40, 0.6);
+    border: 1px solid rgba(201, 168, 76, 0.12);
+    border-radius: 2px;
+    margin-top: var(--space-lg);
+    padding: var(--space-lg) var(--space-xl);
+}
+
+.content-infocard-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.content-page .content-infocard p {
+    margin: 0;
+}
+
+/* The lead panel on /contact/ — legacy gold-ruled intro section. */
+.content-page .content-panel {
+    background: rgba(201, 168, 76, 0.04);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 2px 2px 0;
+    color: var(--nw-off-white);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+    margin: 0 0 var(--space-2xl);
+    padding: var(--space-xl) var(--space-2xl);
+}
+
+/* The mono "Last updated" / "Fees verified" stamps under an h1. */
+.content-page .content-stamp {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    margin: var(--space-sm) 0 var(--space-2xl);
+}
+
+/* The legacy line is a <div>, so it takes the document's 1.5 rather than the
+   1.75 this page's paragraphs use — 3px, which shifted everything below it. */
+.content-page .content-verified {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    margin: var(--space-md) 0 var(--space-xl);
+}
+.content-page .content-verified span {
+    color: var(--nw-off-white);
+}
+
+/* Inline "On this page:" strip — legacy `.bcc-toc`. */
+.content-jump {
+    align-items: baseline;
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 13px;
+    gap: 8px 14px;
+    padding: var(--space-md) var(--space-lg);
+}
+
+.content-jump-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.content-jump a {
+    color: var(--nw-off-white);
+    text-decoration: underline;
+    text-decoration-color: rgba(201, 168, 76, 0.5);
+}
+
+/* Section body links — legacy `SourceLink`. */
+.content-page p a,
+.content-page .content-list a,
+.content-page .content-faq-item a {
+    color: var(--gold);
+    text-decoration: underline;
+}
+
+/* "On this page" jump list — legacy <nav aria-label="On this page">. */
+.content-toc {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-lg);
+}
+
+.content-toc-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+}
+
+.content-toc ul {
+    display: grid;
+    gap: var(--space-sm) var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.content-toc li span,
+.content-toc li a {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+    color: var(--nw-off-white);
+    font-size: 14px;
+    line-height: 1.6;
+    text-decoration: none;
+}
+
+/* -- policy pages (/privacy/, /terms/, /contact/) --------------------------
+   Legacy <main maxWidth 800>, a 22px section head, and a 48px flex gap between
+   sections. The h1 is a literal uppercase string in the legacy component; here it
+   comes from `pages.h1`, so the case is applied in CSS. */
+.content-page--contact,
+.content-page--privacy,
+.content-page--terms {
+    max-width: 800px;
+}
+
+/* These three set no line-height in the legacy, so the h1 takes the document's
+   1.5 — taller than the guides' 1.15. */
+.content-page--contact h1,
+.content-page--privacy h1,
+.content-page--terms h1 {
+    font-size: clamp(36px, 6vw, 48px);
+    line-height: 1.5;
+}
+
+.content-page--contact .content-stamp,
+.content-page--privacy .content-stamp,
+.content-page--terms .content-stamp {
+    line-height: 1.5;
+}
+
+.content-page--privacy h1,
+.content-page--terms h1 {
+    margin-bottom: 0;
+}
+
+.content-page--contact h2,
+.content-page--privacy h2,
+.content-page--terms h2 {
+    font-size: 22px;
+}
+
+.content-page--contact h2 {
+    margin-bottom: var(--space-lg);
+}
+
+/* Legacy: the paragraph above the NAVCO link carries a 24px bottom margin. */
+.content-page--contact .content-linkcard {
+    margin-top: var(--space-lg);
+}
+
+/* Legacy policy `ul`: 24px indent, 8px between bullets, no top flex gap. */
+.content-page--privacy .content-list,
+.content-page--terms .content-list {
+    margin-top: var(--space-md);
+}
+
+/* -- /va-disability/, /veterans-day/ --------------------------------------
+   These two space their sections with `gap: var(--space-3xl)` (the home-care
+   guide uses `--space-2xl`, which is the shared default above). */
+.content-page--va-disability h2,
+.content-page--veterans-day h2 {
+    margin-top: var(--space-3xl);
+}
+
+/* The paragraph above the jump list carries a 48px bottom margin in the legacy. */
+.content-page--va-disability .content-toc,
+.content-page--veterans-day .content-toc {
+    margin-top: var(--space-2xl);
+}
+
+/* The editorial-policy and corrections boxes are the last two items of the section
+   stack, so they take the same 64px gap these two pages keep between sections. */
+.content-page--va-disability .editorial-policy,
+.content-page--va-disability .corrections-box,
+.content-page--veterans-day .editorial-policy,
+.content-page--veterans-day .corrections-box {
+    margin-top: var(--space-3xl);
+}
+
+/* -- /veterans-home-care/ ------------------------------------------------- */
+.content-page--veterans-home-care h1 {
+    font-size: clamp(34px, 5.5vw, 50px);
+    letter-spacing: 1.5px;
+}
+
+.content-page--veterans-home-care .content-toc {
+    margin-bottom: var(--space-2xl);
+    margin-top: var(--space-2xl);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.content-page--veterans-home-care .content-toc-label {
+    margin-bottom: var(--space-sm);
+}
+
+.content-page--veterans-home-care .content-toc ul {
+    gap: 6px var(--space-lg);
+}
+
+/* This guide's jump links set no line-height in the legacy (the VA guide's set
+   1.6), which makes each grid row a fraction of a pixel shorter. */
+.content-page--veterans-home-care .content-toc li span,
+.content-page--veterans-home-care .content-toc li a {
+    border-bottom: 0;
+    line-height: 1.5;
+}
+
+/* This guide's rate table is body-face, has no head fill and no top offset. */
+.content-page--veterans-home-care .content-tablewrap {
+    margin-top: 0;
+}
+
+.content-page--veterans-home-care .content-table {
+    font-family: var(--font-body);
+    min-width: 480px;
+}
+
+.content-page--veterans-home-care .content-tablewrap thead tr {
+    background: none;
+}
+
+/* -- /best-credit-cards-for-military/ ------------------------------------- */
+.content-page--best-credit-cards-for-military {
+    max-width: 1080px;
+}
+
+.content-page--best-credit-cards-for-military h1 {
+    font-size: clamp(36px, 6vw, 56px);
+    line-height: 1.1;
+    margin-bottom: var(--space-xl);
+}
+
+.content-page--best-credit-cards-for-military h2 {
+    font-size: 26px;
+    margin-top: var(--space-3xl);
+}
+
+/* Legacy `.bcc-h3`: display face, sentence case, no micro-caps treatment. */
+.content-page--best-credit-cards-for-military h3 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: none;
+}
+
+/* Hero stack: h1 → answer-first capsule (18px white) → supporting paragraph
+   (16px gray) → the mono "fees verified" stamp, then the byline. */
+.content-page--best-credit-cards-for-military .content-sublead {
+    color: var(--nw-gray-light);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+    max-width: 800px;
+}
+
+.content-page--best-credit-cards-for-military h1 {
+    margin-bottom: var(--space-lg);
+}
+
+/* Legacy `ulStyle` on this page is `margin: 0` — the list takes only the
+   section stack's 16px gap, not the 32px the guides' lists carry. */
+.content-page--best-credit-cards-for-military .content-list {
+    margin-top: var(--space-md);
+}
+
+/* The section stack opens 48px below the jump strip, not the 64px it keeps
+   between sections. */
+.content-page--best-credit-cards-for-military .content-jump + h2 {
+    margin-top: var(--space-2xl);
+}
+
+/* -- /our-process/ --------------------------------------------------------
+   A light editorial layout, not the navy guide layout: a full-bleed navy
+   breadcrumb bar, a centred navy hero band, then a white body in a 664px
+   column (legacy `.op-narrow` = a 760px box with 48px inner padding). */
+.content-page--our-process {
+    max-width: none;
+    padding: 0;
+}
+
+.content-page--our-process .breadcrumb {
+    background: var(--navy);
+    border-bottom: 1px solid #16243b;
+    color: #aeb6c2;
+    font-size: 12px;
+    gap: 9px;
+    letter-spacing: 0.04em;
+    margin: 0;
+    padding: 13px max(var(--space-2xl), calc((100% - 1180px) / 2 + var(--space-2xl)));
+    text-transform: none;
+}
+
+.content-page--our-process .breadcrumb a,
+.content-page--our-process .breadcrumb [aria-current='page'] {
+    color: #f7f8fa;
+}
+
+.content-page--our-process article {
+    background: #fff;
+    color: var(--navy);
+}
+
+.content-page--our-process .content-hero {
+    background: var(--navy);
+    color: #f7f8fa;
+    display: block;
+    padding: 72px var(--space-2xl) 80px;
+    text-align: center;
+}
+
+/* The hero kicker is larger and looser here than on the navy guide pages. */
+.content-page--our-process .content-eyebrow {
+    font-size: 14px;
+    letter-spacing: 0.16em;
+    margin-bottom: 24px;
+}
+
+.content-page--our-process h1 {
+    font-size: 68px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    margin: 0 auto;
+    max-width: 880px;
+    text-transform: uppercase;
+}
+
+.content-page--our-process .content-hero .content-lead {
+    color: #c3cad4;
+    font-size: 20px;
+    line-height: 1.55;
+    margin: 26px auto 0;
+    max-width: 680px;
+}
+
+/* The hero byline strip: three centred columns (label above person), not the
+   navy card the guide pages use. The partial emits role/person pairs followed by
+   the dates block, so column auto-flow over two rows lands them in place. */
+.content-page--our-process .trust-byline {
+    background: none;
+    border: 0;
+    border-radius: 0;
+    border-top: 1px solid #1e2d45;
+    margin: 40px 0 0;
+    padding: 28px 0 0;
+    text-align: center;
+}
+
+/* The partial nests every row in one column wrapper, so the three-up strip is
+   built there: role/person pairs flow down each column, dates in the third. */
+.content-page--our-process .trust-byline-col {
+    display: grid;
+    gap: 0 36px;
+    grid-auto-flow: column;
+    grid-template-rows: auto auto;
+    justify-content: center;
+}
+
+.content-page--our-process .trust-byline-person {
+    display: block;
+    margin-bottom: 0;
+}
+
+.content-page--our-process .trust-byline-person img {
+    display: none;
+}
+
+.content-page--our-process .trust-byline-name {
+    color: #fff;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.content-page--our-process .trust-byline-cred {
+    color: #8a93a2;
+    font-size: 13px;
+}
+
+/* Legacy `.op-narrow { max-width: 760px; margin: 0 auto }` with 48px of inner
+   padding — a 664px column on desktop, and the padding is what keeps the copy off
+   the edge on a phone. */
+/* Legacy `.op-narrow { max-width: 760px; margin: 0 auto }` with 48px of inner
+   padding — a 664px column on desktop. The gutter is expressed as `width` rather
+   than padding so it can't be added on top of a block's own padding (the CTA and
+   freshness panels bring their own), and so it still holds on a phone. */
+.content-page--our-process article > :not(.content-hero) {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 664px;
+    width: calc(100% - 2 * var(--space-2xl));
+}
+
+.content-page--our-process .content-hero + * {
+    margin-top: var(--space-3xl);
+}
+
+.content-page--our-process p {
+    color: #26303f;
+    font-size: 17px;
+    line-height: 1.62;
+    margin-bottom: 18px;
+}
+
+.content-page--our-process article > .content-lead {
+    color: #26303f;
+    font-size: 19px;
+    line-height: 1.62;
+    margin-bottom: 18px;
+}
+
+.content-page--our-process h2 {
+    border-bottom: 0;
+    color: var(--navy);
+    font-size: 34px;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.05;
+    margin: var(--space-3xl) auto 18px;
+    padding-bottom: 0;
+}
+
+.content-page--our-process h3 {
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+/* Legacy `@media (max-width: 860px) { .op-h1 { font-size: 44px } }`. */
+@media (max-width: 860px) {
+    .content-page--our-process h1 {
+        font-size: 44px;
+    }
+}
+
+/* The hero byline strip is a wrapping flex row in the legacy — it stacks once
+   the three columns no longer fit. */
+@media (max-width: 700px) {
+    .content-page--our-process .trust-byline-col {
+        grid-auto-flow: row;
+        grid-template-rows: none;
+    }
+}
+
+/* -- /our-process/ bespoke layout ----------------------------------------
+   Ported from the inline styles in src/page-views/OurProcess.tsx: full-bleed
+   bands alternating navy / #F7F8FA over a 664px white column, the six-step card
+   grid, the source-authority ladder, the publish gate, the refusals list, the
+   freshness bar and the corrections CTA. The design's literal neutrals are kept
+   as hex, brand colours use the shared tokens. */
+.content-page--our-process .op-lead {
+    color: #26303f;
+    font-size: 19px;
+    line-height: 1.62;
+    margin-bottom: 0;
+}
+
+/* `borderLeft: '4px solid var(--nw-red)'` with 36px of air above and below. */
+.content-page--our-process .content-callout--alert {
+    background: none;
+    border-left: 4px solid var(--nw-red);
+    border-radius: 0;
+    color: var(--navy);
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.5;
+    margin: 36px 0;
+    padding: 4px 0 4px 26px;
+}
+
+/* Full-bleed bands break out of the 664px column (the selector has to outrank
+   `article > :not(.content-hero)` above). */
+.content-page--our-process article > .op-band {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
+    width: 100%;
+}
+
+.content-page--our-process .op-band--light {
+    background: #f7f8fa;
+    border-bottom: 1px solid #edeef0;
+    border-top: 1px solid #edeef0;
+    margin-top: 56px;
+    padding: 64px var(--space-2xl);
+}
+
+.content-page--our-process .op-band--navy {
+    background: var(--navy);
+    color: #f7f8fa;
+    margin-top: 0;
+    padding: 72px var(--space-2xl);
+}
+
+.content-page--our-process .op-band-inner {
+    margin: 0 auto;
+    max-width: 1180px;
+}
+
+.content-page--our-process .op-band--navy .op-band-inner {
+    max-width: 760px;
+}
+
+.content-page--our-process .op-eyebrow {
+    color: #5c6678;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    margin-bottom: 10px;
+}
+
+.content-page--our-process .op-band--navy .op-eyebrow {
+    color: var(--gold);
+}
+
+.content-page--our-process .op-band h2 {
+    line-height: 1.5;
+    margin: 0;
+}
+
+.content-page--our-process .op-band--navy h2 {
+    line-height: 1.05;
+}
+
+.content-page--our-process .op-band--navy h2 {
+    color: #f7f8fa;
+}
+
+.content-page--our-process .op-band-lead {
+    color: #aeb6c2;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 18px 0 0;
+}
+
+.content-page--our-process .op-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 38px;
+}
+
+.content-page--our-process .op-grid--gate {
+    gap: 14px;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 34px;
+}
+
+.content-page--our-process .op-card {
+    background: #fff;
+    border-radius: 3px;
+    border-top: 3px solid var(--gold);
+    box-shadow: 0 1px 3px rgba(10, 22, 40, 0.07);
+    padding: 26px 24px 28px;
+}
+
+.content-page--our-process .op-grid--gate .op-card {
+    background: #16243b;
+    border-left: 3px solid var(--nw-green);
+    border-radius: 3px;
+    border-top: 0;
+    box-shadow: none;
+    padding: 22px;
+}
+
+.content-page--our-process .op-card-n {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.content-page--our-process .op-card-title {
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 600;
+    margin-top: 12px;
+    text-transform: uppercase;
+}
+
+.content-page--our-process .op-grid--gate .op-card-title {
+    color: #fff;
+    font-size: 17px;
+    margin-top: 0;
+}
+
+.content-page--our-process .op-card p {
+    color: #5c6678;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 8px 0 0;
+}
+
+.content-page--our-process .op-grid--gate .op-card p {
+    color: #aeb6c2;
+    margin-top: 7px;
+}
+
+/* Detailed steps + the source ladder sit back in the 664px column. */
+.content-page--our-process .op-step {
+    margin-bottom: 64px;
+}
+
+.content-page--our-process .op-band + .op-step {
+    margin-top: 72px;
+}
+
+.content-page--our-process .op-tag {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.content-page--our-process .op-tag--red {
+    color: var(--nw-red);
+}
+
+.content-page--our-process .op-step h2 {
+    margin: 10px 0 0;
+}
+
+.content-page--our-process .op-ladder h2,
+.content-page--our-process .op-refusals h2 {
+    line-height: 1.5;
+}
+
+.content-page--our-process .op-ladder h2 {
+    font-size: 28px;
+}
+
+.content-page--our-process .op-step > p {
+    color: #26303f;
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 18px 0 0;
+}
+
+.content-page--our-process .op-ladder-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 24px;
+}
+
+.content-page--our-process .op-ladder-row {
+    border-radius: 2px;
+    display: flex;
+    gap: 18px;
+    padding: 18px 22px;
+}
+
+.content-page--our-process .op-ladder-row--1 {
+    background: var(--navy);
+}
+
+.content-page--our-process .op-ladder-row--2 {
+    background: #16243b;
+}
+
+.content-page--our-process .op-ladder-row--3 {
+    background: #edeef0;
+}
+
+.content-page--our-process .op-ladder-row--4 {
+    background: #f2f3f5;
+}
+
+.content-page--our-process .op-ladder-row--5 {
+    background: #fbeaec;
+}
+
+.content-page--our-process .op-ladder-n {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    min-width: 24px;
+}
+
+.content-page--our-process .op-ladder-row--3 .op-ladder-n {
+    color: var(--navy);
+}
+
+.content-page--our-process .op-ladder-row--4 .op-ladder-n {
+    color: #5c6678;
+}
+
+.content-page--our-process .op-ladder-row--5 .op-ladder-n {
+    color: var(--nw-red);
+}
+
+.content-page--our-process .op-ladder-title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.content-page--our-process .op-ladder-row--3 .op-ladder-title,
+.content-page--our-process .op-ladder-row--4 .op-ladder-title {
+    color: var(--navy);
+}
+
+.content-page--our-process .op-ladder-row--5 .op-ladder-title {
+    color: #8a1722;
+}
+
+.content-page--our-process .op-ladder-row p {
+    color: #aeb6c2;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 4px 0 0;
+}
+
+.content-page--our-process .op-ladder-row--3 p,
+.content-page--our-process .op-ladder-row--4 p {
+    color: #5c6678;
+}
+
+.content-page--our-process .op-ladder-row--5 p {
+    color: #9a4651;
+}
+
+.content-page--our-process .op-step > .op-ladder-note {
+    color: #5c6678;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.55;
+    margin: 18px 0 0;
+}
+
+.content-page--our-process .op-refusals {
+    margin-bottom: 0;
+    margin-top: 72px;
+}
+
+.content-page--our-process .op-refusals-lead {
+    color: #26303f;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 16px 0 0;
+}
+
+.content-page--our-process .op-refusals-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    margin-top: 28px;
+}
+
+.content-page--our-process .op-refusals-row {
+    border-bottom: 1px solid #edeef0;
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+}
+
+.content-page--our-process .op-refusals-mark {
+    align-items: center;
+    background: #fbeaec;
+    border-radius: 50%;
+    color: var(--nw-red);
+    display: flex;
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 700;
+    height: 22px;
+    justify-content: center;
+    margin-top: 1px;
+    width: 22px;
+}
+
+.content-page--our-process .op-refusals-row p {
+    color: var(--navy);
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.content-page--our-process .op-freshness {
+    align-items: center;
+    background: #f7f8fa;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 64px;
+    padding: 38px 40px;
+}
+
+.content-page--our-process .op-freshness-copy {
+    flex: 1;
+    min-width: 200px;
+}
+
+.content-page--our-process .op-freshness-label {
+    color: #5c6678;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+}
+
+.content-page--our-process .op-freshness-copy p {
+    color: var(--navy);
+    font-size: 17px;
+    line-height: 1.55;
+    margin: 10px 0 0;
+}
+
+.content-page--our-process .op-freshness-stat {
+    text-align: center;
+}
+
+.content-page--our-process .op-freshness-n {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 0.9;
+}
+
+.content-page--our-process .op-freshness-unit {
+    color: #5c6678;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+}
+
+.content-page--our-process .op-rulenote {
+    border-left: 4px solid var(--gold);
+    margin-top: 56px;
+    padding-left: 26px;
+}
+
+.content-page--our-process .op-rulenote h3,
+.content-page--our-process .op-cta h3 {
+    margin: 0;
+}
+
+.content-page--our-process .op-rulenote p {
+    color: #26303f;
+    font-size: 16px;
+    line-height: 1.62;
+    margin: 14px 0 0;
+}
+
+.content-page--our-process .op-cta {
+    background: var(--navy);
+    border-radius: 4px;
+    color: #f7f8fa;
+    margin-top: 48px;
+    padding: 40px;
+}
+
+.content-page--our-process .op-cta h3 {
+    color: #f7f8fa;
+    font-size: 26px;
+}
+
+.content-page--our-process .op-cta p {
+    color: #aeb6c2;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 12px 0 0;
+    max-width: 520px;
+}
+
+.content-page--our-process .op-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.content-page--our-process .op-btn {
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.content-page--our-process .op-btn--gold {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 14px 28px;
+}
+
+.content-page--our-process .op-btn--ghost {
+    background: transparent;
+    border: 1.5px solid #38445a;
+    color: #fff;
+    padding: 12.5px 26px;
+}
+
+/* Legacy `padding: '40px 48px 80px'` on the closing band. */
+.content-page--our-process .op-reviewer {
+    color: #8a93a2;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 40px 0 80px;
+    text-align: center;
+}
+
+@media (max-width: 860px) {
+    .content-page--our-process .op-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 560px) {
+    .content-page--our-process .op-grid,
+    .content-page--our-process .op-grid--gate {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* The two VA guides ship their own EditorialPolicyBox rather than the shared
+   ReferenceTrust one, and its list inherits the page's 16px body type instead of
+   the 14px the reference pages use (VaDisability.tsx / VeteransHomeCare.tsx —
+   the `ul` const sets no font-size). At 14px the bullets wrap a line early, which
+   made the box ~90-115px short. Every other family is correct at 14px. */
+.content-page--va-disability .editorial-policy ul,
+.content-page--veterans-home-care .editorial-policy ul {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Their heading carries no gold underline either — the box is the page's own
+   component, not the shared ReferenceTrust one. */
+.content-page--va-disability .editorial-policy h2,
+.content-page--veterans-home-care .editorial-policy h2 {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+/* ==========================================================================
+   /veterans-day/free-meals/ — pages/veterans-day-free-meals.blade.php.
+   Ported from the inline styles + EXPLORER_CSS in
+   src/page-views/VeteransDayFreeMeals.tsx. The `.vdm-*` rules here restate the
+   legacy explorer CSS so it outranks the generic table rules in app.css.
+   ========================================================================== */
+.veterans-day-free-meals {
+    margin: 0 auto;
+    max-width: 1080px;
+    padding: var(--space-3xl) var(--space-2xl);
+}
+
+.veterans-day-free-meals .fm-backlink {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .fm-hero {
+    margin-bottom: var(--space-xl);
+    margin-top: var(--space-lg);
+}
+
+.veterans-day-free-meals .fm-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals h1 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 56px);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.veterans-day-free-meals .fm-intro {
+    color: var(--nw-off-white);
+    font-size: 18px;
+    line-height: 1.7;
+    margin: var(--space-lg) 0 0;
+    max-width: 760px;
+}
+
+.veterans-day-free-meals .fm-hero-meta {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: var(--space-md);
+}
+
+.veterans-day-free-meals .fm-hero-meta span,
+.veterans-day-free-meals .fm-byline-verified span {
+    color: var(--nw-off-white);
+}
+
+.veterans-day-free-meals .fm-byline {
+    align-items: flex-start;
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+}
+
+.veterans-day-free-meals .fm-byline-avatar {
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 56px;
+    object-fit: cover;
+    width: 56px;
+}
+
+.veterans-day-free-meals .fm-byline-body {
+    flex: 1 1 300px;
+    font-size: 13px;
+    line-height: 1.6;
+    min-width: 0;
+}
+
+.veterans-day-free-meals .fm-byline-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .fm-byline-name {
+    margin-bottom: 6px;
+}
+
+.veterans-day-free-meals .fm-byline-name a {
+    color: var(--gold);
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.veterans-day-free-meals .fm-byline-name span {
+    color: var(--nw-gray-light);
+}
+
+.veterans-day-free-meals .fm-byline-verified {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.veterans-day-free-meals .fm-headline-stat {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin: var(--space-xl) 0;
+    padding: var(--space-lg) var(--space-xl);
+}
+
+.veterans-day-free-meals .fm-stat-label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .fm-headline-stat p {
+    color: var(--nw-white);
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Section headings + body, matching the guide pages' `Section()` treatment. */
+.veterans-day-free-meals .fm-supporting {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+    margin-top: var(--space-3xl);
+}
+
+/* app.css gives every `section` a block margin; the legacy stack spaces them
+   with the flex `gap` alone. */
+.veterans-day-free-meals .fm-supporting > section {
+    margin: 0;
+}
+
+.veterans-day-free-meals .fm-supporting h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    line-height: 1.5;
+    margin: 0 0 var(--space-md);
+    padding-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .fm-section-body {
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    gap: var(--space-md);
+    line-height: 1.75;
+}
+
+.veterans-day-free-meals .fm-section-body p {
+    margin: 0;
+}
+
+.veterans-day-free-meals .fm-section-body ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0 0;
+    padding-left: var(--space-lg);
+}
+
+/* `border: 0` drops the 1px box app.css puts round `.fm-callout`; the legacy
+   Callout is a gold rule on the left only, with no margin of its own. */
+.veterans-day-free-meals .fm-callout {
+    background: var(--navy);
+    border: 0;
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    color: var(--nw-off-white);
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+    padding: var(--space-md) var(--space-lg);
+}
+
+/* Legacy wraps the disclosure cards in their own 8px-gap stack. */
+.veterans-day-free-meals .fm-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.veterans-day-free-meals .fm-faqs details {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 4px;
+    padding: var(--space-md) var(--space-lg);
+}
+
+.veterans-day-free-meals .fm-faqs summary {
+    color: var(--nw-white);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    line-height: 1.75;
+    list-style: revert;
+    padding: 0;
+}
+
+.veterans-day-free-meals .fm-faqs summary::-webkit-details-marker {
+    display: revert;
+}
+
+.veterans-day-free-meals .fm-faqs summary::before {
+    content: none;
+}
+
+.veterans-day-free-meals .fm-faqs details > div {
+    color: var(--nw-gray-light);
+    font-size: 15px;
+    line-height: 1.7;
+    margin-top: var(--space-sm);
+    padding: 0;
+}
+
+/* -- the offers explorer (legacy EXPLORER_CSS) ---------------------------- */
+.veterans-day-free-meals .vdm-controls {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 6px;
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: var(--space-lg);
+}
+
+.veterans-day-free-meals .vdm-control {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.veterans-day-free-meals .vdm-search {
+    grid-column: 1 / -1;
+}
+
+.veterans-day-free-meals .vdm-control label {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .vdm-control input,
+.veterans-day-free-meals .vdm-control select {
+    background: var(--navy);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 4px;
+    color: var(--nw-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    padding: 9px 11px;
+    width: 100%;
+}
+
+.veterans-day-free-meals .vdm-control input:focus,
+.veterans-day-free-meals .vdm-control select:focus {
+    border-color: var(--gold);
+    outline: none;
+}
+
+.veterans-day-free-meals .vdm-control select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.veterans-day-free-meals .vdm-resultbar {
+    align-items: center;
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    gap: var(--space-md);
+    justify-content: space-between;
+    letter-spacing: 0.5px;
+    margin: var(--space-lg) 0 var(--space-md);
+}
+
+.veterans-day-free-meals .vdm-resultbar strong {
+    color: var(--gold);
+}
+
+.veterans-day-free-meals .vdm-reset {
+    background: var(--gold);
+    border: none;
+    border-radius: 3px;
+    color: var(--navy);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 7px 14px;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .vdm-reset:hover {
+    background: var(--gold-light);
+}
+
+.veterans-day-free-meals .vdm-empty {
+    align-items: center;
+    background: var(--navy-mid);
+    border: 1px dashed rgba(201, 168, 76, 0.3);
+    border-radius: 6px;
+    color: var(--nw-gray-light);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: var(--space-3xl) var(--space-lg);
+    text-align: center;
+}
+
+.veterans-day-free-meals .vdm-empty[hidden] {
+    display: none;
+}
+
+.veterans-day-free-meals .vdm-tablewrap {
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+/* `overflow-wrap: normal` undoes app.css's `anywhere` — the legacy table lets
+   columns size to their words, and breaking mid-word doubles every row. */
+.veterans-day-free-meals .vdm-table {
+    border-collapse: collapse;
+    font-size: 14px;
+    margin: 0;
+    overflow-wrap: normal;
+    width: 100%;
+}
+
+.veterans-day-free-meals .vdm-table thead th {
+    background: var(--navy-mid);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 12px 14px;
+    position: sticky;
+    text-align: left;
+    text-transform: uppercase;
+    top: 0;
+    white-space: nowrap;
+}
+
+.veterans-day-free-meals .vdm-table td {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    color: var(--nw-off-white);
+    line-height: 1.5;
+    padding: 14px;
+    vertical-align: top;
+}
+
+.veterans-day-free-meals .vdm-table tbody tr:hover {
+    background: rgba(21, 35, 64, 0.5);
+}
+
+.veterans-day-free-meals .vdm-brand {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.veterans-day-free-meals .vdm-brand-link {
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.veterans-day-free-meals .vdm-brand-name {
+    color: var(--nw-white);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.veterans-day-free-meals .vdm-badge {
+    background: rgba(26, 92, 58, 0.18);
+    border: 1px solid rgba(26, 92, 58, 0.5);
+    border-radius: 3px;
+    color: var(--nw-green);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.veterans-day-free-meals .vdm-tag {
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-radius: 3px;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    text-transform: uppercase;
+}
+
+.veterans-day-free-meals .vdm-note {
+    color: var(--nw-gray-light);
+    font-size: 12.5px;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.veterans-day-free-meals .vdm-source {
+    color: var(--gold);
+    font-size: 13px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.veterans-day-free-meals .vdm-source:hover {
+    text-decoration: underline;
+}
+
+/* Legacy `@media (max-width: 760px)`: the full table stays in the HTML and CSS
+   restacks it into one card per row. */
+@media (max-width: 760px) {
+    .veterans-day-free-meals .vdm-tablewrap {
+        border: none;
+        overflow-x: visible;
+    }
+
+    .veterans-day-free-meals .vdm-table,
+    .veterans-day-free-meals .vdm-table tbody,
+    .veterans-day-free-meals .vdm-table tr,
+    .veterans-day-free-meals .vdm-table td {
+        display: block;
+        white-space: normal;
+        width: 100%;
+    }
+
+    .veterans-day-free-meals .vdm-table {
+        overflow-x: visible;
+    }
+
+    .veterans-day-free-meals .vdm-table thead {
+        clip: rect(0 0 0 0);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        width: 1px;
+    }
+
+    .veterans-day-free-meals .vdm-table tr {
+        background: var(--navy-mid);
+        border: 1px solid rgba(201, 168, 76, 0.18);
+        border-radius: 6px;
+        margin-bottom: var(--space-md);
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .veterans-day-free-meals .vdm-table tr:hover {
+        background: var(--navy-mid);
+    }
+
+    .veterans-day-free-meals .vdm-table td {
+        border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+        display: grid;
+        gap: var(--space-md);
+        grid-template-columns: 40% 60%;
+        padding: 9px 0;
+    }
+
+    .veterans-day-free-meals .vdm-table td:last-child {
+        border-bottom: none;
+    }
+
+    .veterans-day-free-meals .vdm-table td::before {
+        align-self: center;
+        color: var(--gold);
+        content: attr(data-label);
+        font-family: var(--font-mono);
+        font-size: 9.5px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .veterans-day-free-meals .vdm-table td[data-label='Brand'] {
+        grid-template-columns: 1fr;
+    }
+
+    .veterans-day-free-meals .vdm-table td[data-label='Brand']::before {
+        display: none;
+    }
+}
+
+/* /our-process/ byline strip — OurProcess.tsx:120-142. A centred three-up row
+   under a hairline rule: upper-case mono role labels, 16px/600 names, 13px short
+   credentials, and a green "facts verified" pill with a dot. No portraits, no
+   dates line. */
+.op-byline {
+    border-top: 1px solid #1e2d45;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+    justify-content: center;
+    margin-top: 40px;
+    padding-top: 28px;
+}
+.op-byline-role {
+    color: #7e8896;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+}
+.op-byline-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 6px;
+}
+.op-byline-cred {
+    color: #8a93a2;
+    font-size: 13px;
+    margin-top: 2px;
+}
+.op-byline-pill {
+    align-items: center;
+    background: var(--nw-green);
+    border-radius: 2px;
+    color: #fff;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    gap: 8px;
+    letter-spacing: 0.06em;
+    margin-top: 8px;
+    padding: 7px 13px;
+}
+.op-byline-pill span {
+    background: #7fe6a8;
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+}
+
+/* The card-name cell is a link the legacy styles at weight 600 (.bcc-cardlink),
+   not a <strong>. Our extractor recorded that 600 as `bold`, and `strong`
+   inherits Tailwind's relative `bolder`, which resolves to 700 — ~1.7px wider per
+   name. That widened the table's auto-layout column by 1.5px, which was just
+   enough for "AMERICAN EXPRESS" to stop wrapping and cost the table 27px. */
+.content-page--best-credit-cards-for-military .content-table a strong {
+    font-weight: 600;
+}

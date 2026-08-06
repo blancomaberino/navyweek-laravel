@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Publishing\Seo;
 
+use App\Domain\Navigation\Support\LinkUrl;
 use App\Domain\Publishing\Models\Page;
 use App\Domain\Publishing\Support\PagePaths;
 use App\Models\User;
@@ -190,8 +191,11 @@ trait BuildsSeoSchema
      */
     protected static function personSameAs(User $user): array
     {
-        return $user->linkedin_url !== null && $user->linkedin_url !== ''
-            ? ['sameAs' => [$user->linkedin_url]]
+        // Editor-supplied. Only an absolute http(s) URL is a valid external identity;
+        // anything else (empty, relative, javascript:, data:) is OMITTED — a bogus
+        // `sameAs` is worse published data than an absent field.
+        return LinkUrl::isAbsoluteHttpUrl($user->linkedin_url)
+            ? ['sameAs' => [(string) $user->linkedin_url]]
             : [];
     }
 

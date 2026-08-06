@@ -38,6 +38,7 @@ use Illuminate\Support\Carbon;
  * @property bool|null $first_time_location
  * @property string|null $first_time_badge
  * @property NavyWeekStatus $status
+ * @property array<int, string>|null $description
  * @property string|null $anchor_event_detail
  * @property string|null $anchor_event_url
  * @property string|null $first_time_note
@@ -81,6 +82,7 @@ class NavyWeekEvent extends Model
         'first_time_location',
         'first_time_badge',
         'status',
+        'description',
         'anchor_event_detail',
         'anchor_event_url',
         'first_time_note',
@@ -107,6 +109,7 @@ class NavyWeekEvent extends Model
             'lng' => 'decimal:7',
             'first_time' => 'boolean',
             'first_time_location' => 'boolean',
+            'description' => 'array',
             'navy_assets' => 'array',
             'key_venues' => 'array',
             'military_context' => 'array',

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Catalog\Repositories;
 
 use App\Domain\Catalog\Models\DiscountCategory;
+use App\Domain\Catalog\Support\DiscountCategoryOrdering;
 use App\Domain\Crm\Models\Connection;
 use Illuminate\Support\Collection;
 
@@ -21,35 +22,26 @@ final class EloquentDiscountCategoryRepository implements DiscountCategoryReposi
     }
 
     /**
-     * Port of the legacy `orderCategoryDiscounts`. The connection set is matched
-     * on `category = match_category` here (rather than being passed in as the
-     * legacy registry); which of those connections is "live" is a render-time
-     * concern applied by the caller in Phase 3, not the ordering algorithm.
+     * The category's connections, brand A–Z — the baseline the curated ordering is
+     * then applied to.
+     *
+     * This deliberately does NOT apply `pinned`/`order`/`excluded`. Those lists hold
+     * **page** slugs (`marriott-military-discount`), not the connection slugs
+     * (`marriott`) available here, so matching them in this method silently never
+     * fired: the curated order was never applied and `excluded` never excluded.
+     * {@see DiscountCategoryOrdering} applies them, in
+     * the layer that has the page slug in hand.
+     *
+     * A–Z uses `strcasecmp` to mirror the legacy `localeCompare` (case-insensitive);
+     * a raw spaceship would be byte-order, which sorts lowercase-styled brands
+     * (adidas, eBay) after uppercase ones.
      */
     public function orderedConnections(DiscountCategory $category): Collection
     {
-        $excluded = collect($category->excluded ?? [])->flip();
-
-        // Both legacy modes are the same shape — named brands first in their given
-        // order, everyone else to the end A–Z by brand — differing only in which
-        // slug list supplies the priority. An explicit full `order` wins over
-        // `pinned` (matching the legacy `if (order) … else (pinned) …`).
-        $priority = collect($category->order ?: $category->pinned ?? [])->flip();
-
         return Connection::query()
             ->where('category', $category->match_category)
             ->get()
-            ->reject(fn (Connection $c): bool => $excluded->has($c->slug))
-            // Sort by priority position (unlisted brands to the end), then brand
-            // A–Z as the tiebreak. `strcasecmp` mirrors the legacy `localeCompare`
-            // (case-insensitive) — a raw string spaceship would be byte-order, which
-            // sorts lowercase-styled brands (adidas, eBay) after uppercase ones.
-            ->sort(function (Connection $a, Connection $b) use ($priority): int {
-                $ai = $priority->has($a->slug) ? (int) $priority->get($a->slug) : PHP_INT_MAX;
-                $bi = $priority->has($b->slug) ? (int) $priority->get($b->slug) : PHP_INT_MAX;
-
-                return $ai <=> $bi ?: strcasecmp($a->brand, $b->brand);
-            })
+            ->sort(static fn (Connection $a, Connection $b): int => strcasecmp($a->brand, $b->brand))
             ->values();
     }
 }

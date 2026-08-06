@@ -3,6 +3,20 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+@import './families/local-discount.css';
+@import './families/ymyl.css';
+@import './families/fleet-week.css';
+@import './families/air-show.css';
+@import './families/jet-team.css';
+@import './families/author.css';
+@import './families/ranks.css';
+@import './families/ratings.css';
+@import './families/bases.css';
+@import './families/designators.css';
+@import './families/city.css';
+@import './families/standalone.css';
+@import './families/discount.css';
+
 /* ==========================================================================
    NavyWeek design system — "Road Trip to 250"
    Ported from the legacy src/styles/global.css tokens + component styles.
@@ -10,9 +24,9 @@
    ========================================================================== */
 
 :root {
-    --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
     --font-display: 'Bebas Neue', sans-serif;
-    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-mono: 'IBM Plex Mono', monospace;
     --gold: #c9a84c;
     --gold-light: #e8c96a;
     --gold-pale: #f5e8c2;
@@ -46,7 +60,7 @@ body {
     font-family: var(--font-body);
     font-size: 16px;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.5;
     margin: 0;
     min-height: 100vh;
     text-rendering: optimizeLegibility;
@@ -57,7 +71,7 @@ main {
     flex: 1 0 auto;
     margin: 0 auto;
     max-width: var(--nw-maxw);
-    padding: var(--space-2xl) var(--space-lg) var(--space-3xl);
+    padding: var(--space-2xl);
     width: 100%;
 }
 
@@ -66,23 +80,21 @@ h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: 0.5px;
-    line-height: 1.05;
     margin: 0 0 var(--space-md);
 }
 
-h1 { font-size: clamp(2.75rem, 6vw, 4.75rem); }
+h1 { font-size: clamp(48px, 6vw, 72px); letter-spacing: 4px; line-height: 1; }
 h2 { font-size: clamp(1.9rem, 3.5vw, 2.4rem); margin-top: var(--space-xl); }
 h3 { font-size: 1.5rem; }
 
 p { margin: 0 0 var(--space-md); }
 a { color: var(--gold); text-decoration: none; }
 a:hover { color: var(--gold-light); text-decoration: underline; }
-strong { color: var(--nw-white); font-weight: 600; }
+strong { font-weight: bolder; }
 em { color: var(--nw-off-white); }
 hr { border: 0; border-top: 1px solid rgba(201, 168, 76, 0.2); margin: var(--space-2xl) 0; }
 
 ul, ol { margin: 0 0 var(--space-md); padding-left: 1.4em; }
-li { margin-bottom: var(--space-xs); }
 
 .sr-only {
     border: 0;
@@ -109,17 +121,17 @@ li { margin-bottom: var(--space-xs); }
 
 .breadcrumb {
     align-items: center;
-    color: var(--nw-gray-light);
+    color: var(--nw-gray);
     display: flex;
     flex-wrap: wrap;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    gap: var(--space-sm);
-    letter-spacing: 1.2px;
-    margin-bottom: var(--space-lg);
+    font-size: 10px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-md);
     text-transform: uppercase;
 }
-.breadcrumb a { color: var(--nw-gray-light); }
+.breadcrumb a { color: var(--gold); }
 .breadcrumb a:hover { color: var(--gold); text-decoration: none; }
 .breadcrumb [aria-current='page'] { color: var(--gold); }
 .breadcrumb span[aria-hidden='true'] { color: rgba(201, 168, 76, 0.4); }
@@ -131,7 +143,14 @@ li { margin-bottom: var(--space-xs); }
     text-transform: uppercase;
 }
 
-.intro, .lead { color: var(--nw-off-white); font-size: 1.15rem; max-width: 70ch; }
+.intro, .lead {
+    color: var(--nw-off-white);
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 0 var(--space-lg);
+    max-width: 760px;
+}
 
 /* Calls to action */
 .cta-primary {
@@ -199,66 +218,6 @@ li { margin-bottom: var(--space-xs); }
 }
 .byline-name { color: var(--nw-off-white); font-weight: 600; margin: 2px 0; }
 .byline-verified { color: var(--nw-gray); font-family: var(--font-mono); font-size: 0.72rem; margin: 0; }
-
-/* Author profile (/authors/{slug}/) */
-.author-page { max-width: 860px; }
-.author-hero {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xl);
-    margin-bottom: var(--space-2xl);
-}
-.author-avatar {
-    background: var(--navy-mid);
-    border: 3px solid var(--gold);
-    border-radius: 50%;
-    flex-shrink: 0;
-    height: 160px;
-    object-fit: cover;
-    width: 160px;
-}
-.author-hero-body { flex: 1 1 320px; min-width: 0; }
-.author-hero-body h1 { margin-bottom: var(--space-sm); }
-.author-role { color: var(--gold-light); font-size: 1.05rem; margin: 0 0 var(--space-xs); }
-.author-credentials {
-    color: var(--nw-gray-light);
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    letter-spacing: 0.5px;
-    margin: 0;
-}
-.author-bio { margin-bottom: var(--space-2xl); }
-.author-section { margin-bottom: var(--space-2xl); }
-.author-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-    list-style: none;
-    margin: var(--space-md) 0 0;
-    padding: 0;
-}
-.author-chips li {
-    background: var(--navy-mid);
-    border: 1px solid rgba(201, 168, 76, 0.25);
-    border-radius: 2px;
-    color: var(--gold-light);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.5px;
-    margin: 0;
-    padding: 6px 12px;
-}
-.author-links { list-style: none; margin: var(--space-md) 0 0; padding: 0; }
-.author-links li { margin-bottom: var(--space-sm); }
-.author-links a { text-decoration: underline; }
-.author-disclosure {
-    border-top: 1px solid rgba(201, 168, 76, 0.15);
-    color: var(--nw-gray);
-    font-size: 0.85rem;
-    margin-top: var(--space-2xl);
-    padding-top: var(--space-lg);
-}
 
 /* Section headings with a gold underline */
 main section > h2 {
@@ -378,12 +337,14 @@ dl {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     margin: var(--space-md) 0 var(--space-lg);
 }
+/* No margin-bottom: the legacy global.css defines no dt rule at all, and the
+   components that render a <dl> space their rows with a flex gap instead. A 2px
+   base margin here stacked on top of that gap on every fact row. */
 dt {
     color: var(--nw-gray-light);
     font-family: var(--font-mono);
     font-size: 0.66rem;
     letter-spacing: 1.5px;
-    margin-bottom: 2px;
     text-transform: uppercase;
 }
 dd { color: var(--nw-off-white); margin: 0 0 var(--space-sm); }
@@ -423,8 +384,6 @@ summary {
     padding: var(--space-sm) 0;
 }
 summary::-webkit-details-marker { display: none; }
-summary::before { color: var(--gold); content: '+ '; font-family: var(--font-mono); }
-details[open] summary::before { content: '– '; }
 details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--space-sm); }
 
 /* Sources */
@@ -574,6 +533,27 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
 }
 .nw-dropdown-event:hover, .nw-dropdown-event:focus-visible, .nw-dropdown-event.is-active { color: var(--gold); }
 
+/* Indented air-show children under "Air Shows Hub" — ported from Header.tsx:62.
+   Without these the sub-items rendered as bare links: gold instead of gray, mixed
+   case instead of uppercase, no indent rule, and long names wrapped to two lines
+   because `white-space: nowrap` was missing. */
+.nw-dropdown-subevent {
+    border-left: 2px solid rgba(201, 168, 76, 0.25);
+    color: var(--nw-gray-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-left: var(--space-md);
+    padding: 8px 12px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.nw-dropdown-subevent:hover,
+.nw-dropdown-subevent:focus-visible {
+    background: rgba(201, 168, 76, 0.08);
+    color: var(--gold);
+}
+
 /* Mega menu (Deals) — full-width panel anchored under the 64px bar */
 .nw-mega { position: static; }
 .nw-mega-panel {
@@ -671,8 +651,31 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     padding: 12px 0 12px var(--space-lg);
     text-transform: uppercase;
 }
+
+/* Mobile equivalent of the indented air-show children — Header.tsx:101. */
+.nw-mob-subsublink {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    border-left: 2px solid rgba(201, 168, 76, 0.15);
+    color: var(--nw-gray-light);
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-left: var(--space-sm);
+    padding: 10px 0 10px calc(var(--space-lg) * 2);
+    text-transform: uppercase;
+}
+.nw-mob-subsublink:hover,
+.nw-mob-subsublink:focus-visible {
+    color: var(--gold);
+}
 .nw-mob-sublink.is-active { color: var(--gold); }
-.nw-mob-acc { border-bottom: 1px solid rgba(201, 168, 76, 0.08); }
+/* padding:0 takes back the global `details` rule above — the legacy accordion has
+   no padding of its own, and 8px top/bottom offset every item below it. */
+.nw-mob-acc {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    padding: 0;
+}
 .nw-mob-acc-summary {
     align-items: center;
     color: var(--nw-off-white);
@@ -752,13 +755,30 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     min-width: 96px;
     padding: 10px 16px;
 }
-.deals-card-logo img { display: block; height: auto; max-height: 32px; max-width: 120px; width: auto; }
+/* The caps are the legacy LOGO_DISPLAY_DEFAULT; 95 brands override them per record
+   via an inline style, because a long wordmark and a square badge cannot share one
+   cap without one of them rendering at the wrong optical size. */
+.deals-card-logo img { display: block; height: auto; max-height: 28px; max-width: 130px; width: auto; }
 .deals-card-headline { color: var(--gold); font-family: var(--font-display); font-size: 24px; letter-spacing: 1px; line-height: 1.15; }
 .deals-card-company { color: var(--nw-white); display: block; font-family: var(--font-display); font-size: 22px; letter-spacing: 1px; margin-bottom: 4px; }
-.deals-card-category { color: var(--nw-gray); font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; }
-.deals-card-cta { color: var(--gold); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; margin-top: auto; text-transform: uppercase; }
+.deals-card-category { color: var(--nw-gray); display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; line-height: 1.5; text-transform: uppercase; }
+/* inline-flex with the arrow as its own flex item, exactly as the legacy renders
+   it: the 13px icon plus the 6px gap are reserved out of the line box, so a long
+   brand name wraps a line earlier than it would with a trailing text glyph. */
+.deals-card-cta {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1.5px;
+    margin-top: auto;
+    text-transform: uppercase;
+}
 .deals-foot { margin-top: var(--space-2xl); text-align: center; }
 .deals-all {
+    align-items: center;
     background: var(--gold);
     border-radius: 2px;
     color: var(--navy);
@@ -766,13 +786,24 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
+    gap: 8px;
     letter-spacing: 1.5px;
     padding: 12px 32px;
     text-transform: uppercase;
 }
 .deals-all:hover { text-decoration: none; }
 @media (max-width: 1024px) { .deals-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 768px) { .deals-grid { grid-template-columns: repeat(2, 1fr); } }
+/* The legacy shrinks the section's own spacing scale below 768px, not just the
+   column count — without this the section is ~50px taller on mobile. */
+@media (max-width: 768px) {
+    .deals-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .deals-section {
+        --space-2xl: 24px;
+        --space-3xl: 40px;
+        --space-xl: 20px;
+    }
+}
 @media (max-width: 480px) { .deals-grid { grid-template-columns: 1fr; } }
 
 /* Footer */
@@ -781,6 +812,7 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     border-top: 1px solid rgba(201, 168, 76, 0.15);
     flex-shrink: 0;
     font-family: var(--font-mono);
+    padding: var(--space-2xl);
 }
 .nw-footer-inner {
     display: flex;
@@ -788,7 +820,6 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     gap: var(--space-lg);
     margin: 0 auto;
     max-width: var(--nw-maxw);
-    padding: var(--space-2xl);
 }
 .nw-footer-brand { align-items: center; display: flex; gap: var(--space-sm); }
 .nw-footer-brand-name { color: var(--nw-gray); font-family: var(--font-display); font-size: 16px; letter-spacing: 2px; }
@@ -797,19 +828,24 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     gap: var(--space-xl);
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
+/* The legacy group is a flex column with an 8px gap and the heading's own 8px
+   bottom margin; the gap supplies that spacing here, so the heading carries none
+   and the links carry no padding of their own. */
+.nw-footer-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
 .nw-footer-group-heading {
     color: var(--gold);
     font-size: 10px;
     letter-spacing: 2px;
-    margin-bottom: var(--space-sm);
     text-transform: uppercase;
 }
 .nw-footer-group a {
     color: var(--nw-gray);
-    display: block;
     font-size: 10px;
     letter-spacing: 1.5px;
-    padding: 5px 0;
     text-transform: uppercase;
 }
 .nw-footer-group a:hover { color: var(--gold); text-decoration: none; }
@@ -874,14 +910,26 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     text-transform: uppercase;
 }
 
+/* The legacy box is a wrapping flex row whose single child is a 300px-basis
+   column carrying the 13px/1.6 type scale. Flattening the column away left the
+   rows inheriting the body's 16px/1.5, which is where the byline's extra height
+   came from. */
 .trust-byline {
+    align-items: flex-start;
     background: var(--navy-mid);
     border: 1px solid rgba(201, 168, 76, 0.15);
     border-radius: 4px;
-    font-size: 13px;
-    line-height: 1.6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
     margin-bottom: var(--space-xl);
     padding: var(--space-md) var(--space-lg);
+}
+.trust-byline-col {
+    flex: 1 1 300px;
+    font-size: 13px;
+    line-height: 1.6;
+    min-width: 0;
 }
 .trust-byline-role {
     color: var(--nw-gray);
@@ -892,6 +940,7 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     text-transform: uppercase;
 }
 .trust-byline-person { align-items: center; display: flex; gap: 10px; margin-bottom: 12px; }
+.trust-byline-person.is-reviewer { margin-bottom: 6px; }
 .trust-byline-person img {
     border: 2px solid var(--gold);
     border-radius: 50%;
@@ -903,7 +952,14 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
 .trust-byline-name { color: var(--gold); font-weight: 600; text-decoration: underline; }
 .trust-byline-name.is-reviewer { color: var(--gold-light); }
 .trust-byline-cred { color: var(--nw-gray-light); }
-.trust-byline-dates, .trust-byline-process {
+.trust-byline-dates {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+.trust-byline-process {
     color: var(--nw-gray);
     font-family: var(--font-mono);
     font-size: 11px;
@@ -921,13 +977,19 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     margin: var(--space-lg) 0;
     padding: var(--space-lg) var(--space-xl);
 }
-.key-facts h2 {
+/* The underline is cancelled explicitly: when .key-facts is itself a direct
+   <section> of <main>, the `main section > h2` rule above would otherwise give
+   this heading a border it never has in KeyFacts.tsx. */
+.key-facts[data-llm-key-facts] h2 {
+    border-bottom: 0;
     color: var(--gold);
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 2px;
+    line-height: 1.5;
     margin: 0 0 var(--space-md);
+    padding-bottom: 0;
     text-transform: uppercase;
 }
 .key-facts dl {
@@ -969,12 +1031,13 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     margin-top: var(--space-2xl);
     padding: var(--space-lg) var(--space-xl);
 }
-.editorial-policy h2 {
+section.editorial-policy h2 {
     color: var(--gold);
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 2px;
+    line-height: 1.6;
     margin: 0 0 var(--space-md);
     text-transform: uppercase;
 }
@@ -1116,4 +1179,676 @@ details > div, details > p { color: var(--nw-off-white); padding: 0 0 var(--spac
     .vdm-table { display: block; overflow-x: auto; white-space: nowrap; }
     .rank-row { grid-template-columns: 44px 44px 1fr; }
     .rank-row .nato { display: none; }
+}
+
+/* ==========================================================================
+   Navy bases hubs — /navy-bases/, /navy-bases/overseas/, state + country hubs
+   ========================================================================== */
+.base-hub-hero { margin-bottom: var(--space-xl); }
+.base-hub-group, .base-hub-regions, .base-hub-all, .base-hub-map, .base-hub-host-nation, .base-hub-faqs {
+    margin-bottom: var(--space-2xl);
+}
+.base-hub h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+}
+.base-region-list {
+    display: grid;
+    gap: var(--space-sm) var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.base-region-list .count { color: var(--nw-gray); font-family: var(--font-mono); font-size: 0.72rem; }
+.base-card-list {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.base-card a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 3px;
+    color: var(--nw-off-white);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+    padding: var(--space-md) var(--space-lg);
+}
+.base-card a:hover { border-color: var(--gold); text-decoration: none; }
+.base-card-name { color: var(--nw-white); font-family: var(--font-display); font-size: 1.25rem; letter-spacing: 1px; }
+.base-card-loc { color: var(--gold); font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase; }
+.base-card-tagline { color: var(--nw-gray-light); font-size: 0.88rem; line-height: 1.5; }
+.base-nearby ul { list-style: none; margin: 0; padding: 0; }
+.base-nearby li { padding: 4px 0; }
+
+/* ==========================================================================
+   Officer designators — /navy-designators/ hub, community hubs, detail pages
+   ========================================================================== */
+.designator-hero { margin-bottom: var(--space-xl); }
+.designator-group, .designator-section { margin-bottom: var(--space-2xl); }
+.designator-hub h2, .designator-detail h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+}
+.designator-card-list {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.designator-card a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 3px;
+    color: var(--nw-off-white);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+    padding: var(--space-md) var(--space-lg);
+}
+.designator-card a:hover { border-color: var(--gold); text-decoration: none; }
+.designator-card-code {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+}
+.designator-card-name { color: var(--nw-white); font-family: var(--font-display); font-size: 1.25rem; letter-spacing: 1px; }
+.designator-card-tagline { color: var(--nw-gray-light); font-size: 0.88rem; line-height: 1.5; }
+
+/* ==========================================================================
+   Navy reference hub — /navy-reference/
+   ========================================================================== */
+.reference-hub-hero { margin-bottom: var(--space-xl); }
+.reference-hub-fleet { margin-top: var(--space-2xl); }
+.reference-hub h2 {
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-sm);
+}
+.reference-hub-cards {
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.reference-hub-cards a {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 3px;
+    color: var(--nw-off-white);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 100%;
+    padding: var(--space-lg);
+}
+.reference-hub-cards a:hover { border-color: var(--gold); text-decoration: none; }
+.reference-hub-badge {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.reference-hub-title { color: var(--nw-white); font-family: var(--font-display); font-size: 1.35rem; letter-spacing: 1px; }
+.reference-hub-desc { color: var(--nw-gray-light); font-size: 0.88rem; line-height: 1.5; }
+
+/* ==========================================================================
+   Navy Week programme pages — /schedule/ and /map/
+   ========================================================================== */
+.schedule-hero { margin-bottom: var(--space-xl); }
+.schedule-list { list-style: none; margin: 0; padding: 0; }
+.schedule-row a {
+    align-items: baseline;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.12);
+    color: var(--nw-off-white);
+    display: grid;
+    gap: var(--space-md);
+    grid-template-columns: 160px 1fr auto;
+    padding: 14px 4px;
+}
+.schedule-row a:hover { background: rgba(201, 168, 76, 0.06); text-decoration: none; }
+.schedule-dates { color: var(--gold); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 1px; }
+.schedule-city { color: var(--nw-white); font-family: var(--font-display); font-size: 1.35rem; letter-spacing: 1px; }
+.schedule-anchor { color: var(--nw-gray-light); font-size: 0.88rem; }
+.schedule-badge {
+    background: rgba(201, 168, 76, 0.15);
+    border-radius: 2px;
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+}
+.route-map-svg {
+    background: var(--navy-mid);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 4px;
+    display: block;
+    margin-bottom: var(--space-lg);
+    width: 100%;
+}
+.route-map-svg circle { fill: var(--gold); }
+@media (max-width: 720px) {
+    .schedule-row a { gap: 4px; grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   /schedule/ + /map/ — ported from src/page-views/Schedule.tsx (inline styles)
+   ========================================================================== */
+.schedule-page { max-width: 1100px; }
+.schedule-head { margin-bottom: var(--space-2xl); }
+.schedule-page h1 {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 72px);
+    letter-spacing: 4px;
+    line-height: 1.1;
+    margin: 0;
+}
+.schedule-intro {
+    color: var(--nw-off-white);
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-top: var(--space-sm);
+}
+.schedule-verified {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    margin-top: var(--space-lg);
+    text-transform: uppercase;
+}
+.schedule-official {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+.schedule-official-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.schedule-official a {
+    align-items: center;
+    color: var(--gold);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 6px;
+    letter-spacing: 1px;
+    text-decoration: underline;
+}
+
+.schedule-filterbar {
+    align-items: center;
+    background: var(--navy-mid);
+    border-radius: 2px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    margin-bottom: var(--space-2xl);
+    padding: var(--space-md);
+}
+.schedule-filter-group { display: flex; flex-wrap: wrap; gap: var(--space-md); }
+.schedule-status-buttons { display: flex; gap: var(--space-xs); }
+.schedule-status-buttons button,
+.schedule-filter-group select {
+    background: transparent;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 2px;
+    color: var(--gold);
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 8px 16px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+.schedule-filter-group select { min-width: 140px; outline: none; }
+/* The legacy sets `outline: none` with no replacement (Schedule.tsx:193), which
+   leaves keyboard users with no visible focus (WCAG 2.4.7). Restored here as a
+   deliberate, documented deviation: :focus-visible paints only during keyboard
+   interaction, so it costs nothing against the at-rest parity diff. */
+.schedule-filter-group select:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+}
+.schedule-status-buttons button.is-on { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.schedule-view-buttons { display: flex; gap: var(--space-xs); }
+.schedule-view-buttons button {
+    background: transparent;
+    border: none;
+    border-radius: 2px;
+    color: var(--nw-gray);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px;
+    transition: all 0.2s;
+}
+.schedule-view-buttons button.is-on { background: rgba(201, 168, 76, 0.1); color: var(--gold); }
+
+.schedule-grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.schedule-grid[data-view="table"] { grid-template-columns: 1fr; }
+
+.event-card {
+    background: var(--navy-mid);
+    border-radius: 2px;
+    border-top: 3px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.event-card.status-upcoming { border-top-color: var(--gold); }
+.event-card.status-active { border: 1px solid var(--nw-green); border-top: 3px solid var(--nw-green); }
+.event-card.is-past { filter: grayscale(30%); opacity: 0.6; }
+.event-card-dates {
+    color: var(--gold-light);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.event-card-city {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.event-card-state { color: var(--nw-gray); font-family: var(--font-body); font-size: 12px; font-weight: 300; }
+.event-card-anchor {
+    color: var(--nw-off-white);
+    flex: 1;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.6;
+}
+.event-card-foot {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-xs);
+}
+.event-card-foot a {
+    align-items: center;
+    color: var(--gold);
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: 4px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.event-card-foot a:hover { text-decoration: none; }
+.status-badge { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.status-badge-pill {
+    border-radius: 2px;
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    text-transform: uppercase;
+}
+.status-badge-pill.is-upcoming { background: rgba(201, 168, 76, 0.15); color: #e8c96a; }
+.status-badge-pill.is-active { background: rgba(26, 92, 58, 0.4); color: #6dc28a; }
+.status-badge-pill.is-completed { background: rgba(140, 140, 122, 0.1); color: #8c8c7a; }
+.status-badge-pill.is-firsttime { background: rgba(30, 58, 95, 0.6); color: #7aa8d8; }
+
+/* ==========================================================================
+   Home hero — ported from src/page-views/Home.tsx (inline styles)
+   ========================================================================== */
+.home-page { max-width: none; padding: 0; }
+.home-hero {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 60vh;
+    overflow: hidden;
+    padding: var(--space-3xl) var(--space-2xl);
+    position: relative;
+    text-align: center;
+}
+.home-hero-img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+.home-hero-grid {
+    background-image: linear-gradient(rgba(201, 168, 76, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(201, 168, 76, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+.home-hero-fade {
+    background: linear-gradient(to top, var(--navy), transparent);
+    bottom: 0;
+    height: 150px;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    z-index: 0;
+}
+.home-hero-body { max-width: 800px; position: relative; z-index: 1; }
+.home-hero-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+}
+.home-hero h1 {
+    color: var(--nw-white);
+    font-family: var(--font-display);
+    font-size: clamp(64px, 10vw, 96px);
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: var(--space-lg);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+.home-hero-lede {
+    color: var(--nw-off-white);
+    font-size: clamp(16px, 2vw, 20px);
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0 auto var(--space-md);
+    max-width: 600px;
+}
+.home-hero-sub {
+    color: var(--nw-gray-light);
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 auto var(--space-xl);
+    max-width: 600px;
+}
+.home-hero-cta { display: flex; flex-wrap: wrap; gap: var(--space-md); justify-content: center; }
+.home-cta-primary, .home-cta-secondary {
+    align-items: center;
+    border-radius: 2px;
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    gap: 8px;
+    letter-spacing: 1.5px;
+    padding: 12px 32px;
+    text-transform: uppercase;
+}
+.home-cta-primary { background: var(--gold); border: none; color: var(--navy); font-weight: 600; }
+.home-cta-secondary { background: transparent; border: 1px solid var(--gold); color: var(--gold); font-weight: 500; }
+.home-cta-primary:hover, .home-cta-secondary:hover { text-decoration: none; }
+
+/* The remaining home sections are full-bleed bands with their own inner width. */
+.home-page > section:not(.home-hero) {
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: var(--space-3xl) var(--space-2xl);
+    width: 100%;
+}
+
+/* ==========================================================================
+   City guide hero — ported from src/page-views/CityDetail.tsx (inline styles)
+   ========================================================================== */
+.navy-week-city { max-width: none; padding: 0; }
+.navy-week-city > *:not(.city-hero) { margin: 0 auto; max-width: 1100px; padding-left: var(--space-2xl); padding-right: var(--space-2xl); width: 100%; }
+.city-hero {
+    background: var(--navy);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    overflow: hidden;
+    padding: var(--space-3xl) var(--space-2xl);
+    position: relative;
+}
+.city-hero-img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    opacity: 0.25;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+.city-hero-tint {
+    background: radial-gradient(circle at center, rgba(30, 58, 95, 0.2) 0%, transparent 100%);
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+.city-hero-body { margin: 0 auto; max-width: 1100px; position: relative; z-index: 1; }
+.city-hero-back { margin-bottom: var(--space-lg); }
+.city-hero-back a {
+    align-items: center;
+    color: var(--gold-light);
+    display: inline-flex;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    gap: var(--space-xs);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.city-hero h1 {
+    color: var(--gold);
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 56px);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin: 0 0 var(--space-md);
+    text-transform: uppercase;
+}
+.city-hero-stats {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+.city-hero-stats > div { display: flex; flex-direction: column; gap: var(--space-xs); }
+.city-stat-label {
+    color: var(--nw-gray);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.city-stat-value {
+    color: var(--nw-off-white);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Discount guide hero extras — ported from src/page-views/DiscountDetail.tsx
+   ========================================================================== */
+.guide-logo-chip {
+    align-items: center;
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    border-radius: 6px;
+    display: inline-flex;
+    justify-content: center;
+    margin-bottom: var(--space-md);
+    min-height: 64px;
+    min-width: 140px;
+    padding: 14px 24px;
+}
+.guide-logo-chip img { display: block; height: auto; max-height: 44px; max-width: 180px; width: auto; }
+.discount-cc-callout {
+    align-items: flex-start;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.4);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    display: flex;
+    gap: 14px;
+    margin: 4px 0 var(--space-lg);
+    max-width: 720px;
+    padding: 14px 18px;
+}
+.discount-cc-icon { color: var(--gold); flex-shrink: 0; font-size: 18px; margin-top: 3px; }
+.discount-cc-eyebrow {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+}
+.discount-cc-body {
+    color: var(--nw-off-white);
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin: 0;
+}
+.discount-cc-body a { color: var(--gold); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+
+.guide-intro p {
+    color: var(--nw-off-white);
+    font-weight: 300;
+    line-height: 1.7;
+    margin: 0 0 var(--space-md);
+    max-width: 720px;
+}
+
+/* The discount guide h1 is smaller than the reference-page default. */
+.discount-guide h1 {
+    font-size: clamp(40px, 5.5vw, 64px);
+    letter-spacing: 3px;
+    line-height: 1.05;
+    margin: 0 0 var(--space-sm);
+}
+.discount-guide .discount-summary {
+    color: var(--gold-light);
+    font-family: var(--font-body);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 0 var(--space-lg);
+    max-width: 720px;
+}
+
+/* Discount tier table — ported from DiscountDetail.tsx inline styles. */
+.tier-table-wrap { border: 1px solid rgba(201, 168, 76, 0.2); border-radius: 4px; overflow-x: auto; }
+.tier-table-wrap table { border-collapse: collapse; font-family: var(--font-body); font-size: 14px; width: 100%; }
+.tier-table-wrap caption {
+    color: var(--nw-gray-light);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: var(--space-md) var(--space-md) 0;
+    text-align: left;
+    text-transform: uppercase;
+}
+.tier-table-wrap thead tr { border-bottom: 1px solid rgba(201, 168, 76, 0.25); }
+.tier-table-wrap th[scope="col"] {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    padding: 12px var(--space-md);
+    text-align: left;
+    text-transform: uppercase;
+}
+.tier-table-wrap tbody tr { border-bottom: 1px solid rgba(201, 168, 76, 0.1); }
+.tier-table-wrap tbody tr:last-child { border-bottom: none; }
+.tier-table-wrap th[scope="row"] {
+    color: var(--nw-off-white);
+    font-weight: 400;
+    padding: 12px var(--space-md);
+    text-align: left;
+    vertical-align: top;
+}
+.tier-table-wrap td {
+    color: var(--gold-light);
+    font-weight: 600;
+    padding: 12px var(--space-md);
+    vertical-align: top;
+    white-space: nowrap;
+}
+.tier-note { color: var(--nw-gray); display: block; font-size: 12px; margin-top: 4px; }
+
+.guide-brandrow { align-items: center; display: flex; flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-md); }
+.guide-category { color: var(--gold); font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+
+/* Author-only byline (VeteransDay.tsx:438-490): the portrait sits beside the text
+   column rather than inside a person row, and the label/name spacing is tighter
+   than the two-person variant's 4px/12px. */
+.trust-byline.is-solo > img {
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    height: 56px;
+    object-fit: cover;
+    width: 56px;
+}
+.trust-byline.is-solo .trust-byline-role {
+    margin-bottom: 2px;
+}
+.trust-byline-solo-name {
+    margin-bottom: 6px;
 }
