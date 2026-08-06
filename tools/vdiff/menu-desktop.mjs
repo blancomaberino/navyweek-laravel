@@ -8,7 +8,12 @@ const b = await chromium.launch();
 const shot = async (base, out) => {
   const ctx = await b.newContext({ viewport:{width:1280,height:900} });
   const p = await ctx.newPage();
-  await p.goto(base+'/schedule/',{waitUntil:'networkidle',timeout:60000}).catch(()=>{});
+  // Fail CLOSED, exactly as diff.mjs does: a swallowed navigation error leaves us
+  // measuring about:blank (or a partially-rendered error page) and printing a
+  // percentage for it.
+  const response = await p.goto(base+'/schedule/',{waitUntil:'networkidle',timeout:60000});
+  if (response === null) throw new Error(`no response for ${base}/schedule/`);
+  if (!response.ok()) throw new Error(`HTTP ${response.status()} for ${base}/schedule/`);
   await p.addStyleTag({content:'*,*::before,*::after{transition:none!important;animation:none!important}'});
   // Force the dropdown open regardless of hover support in headless.
   await p.addStyleTag({content:'.nw-dropdown .nw-dropdown-menu{visibility:visible!important;opacity:1!important}'});
@@ -30,5 +35,11 @@ if(a.width===c.width && a.height===c.height){
   const d=new PNG({width:a.width,height:a.height});
   const n=pixelmatch(a.data,c.data,d.data,a.width,a.height,{threshold:0.12});
   fs.writeFileSync('crops/menu.diff.png', PNG.sync.write(d));
-  console.log('differing px', n, ((n/(a.width*a.height))*100).toFixed(2)+'%');
-} else console.log('SIZE MISMATCH — panels are different dimensions');
+  const pct=(n/(a.width*a.height))*100;
+  console.log('differing px', n, pct.toFixed(2)+'%');
+  if (pct > 1) { console.error('FAIL — open dropdown exceeds the 1% gate'); process.exit(1); }
+} else {
+  // A size mismatch is a hard structural difference, not something to print and pass.
+  console.error('FAIL — panels are different dimensions', a.width+'x'+a.height, c.width+'x'+c.height);
+  process.exit(1);
+}

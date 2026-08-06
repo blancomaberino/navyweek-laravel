@@ -45,7 +45,13 @@
         'local' => ['Local context — unverified', 'Local context or expected programming compiled by NavyWeek.org — not yet confirmed by NAVCO.'],
     ];
     $sourceLabel = static function (string $level) use ($sourceLevels): string {
-        [$label, $description] = $sourceLevels[$level] ?? $sourceLevels['local'];
+        // `$level` is interpolated into a class + data attribute inside a raw-HTML
+        // sink, and it arrives from editor JSON (`venues[].source_level`,
+        // `daily_schedule[]…source_level`). Pin it to a KNOWN KEY first — the
+        // `?? $sourceLevels['local']` below only guards the lookup, not the two
+        // interpolations. JSX escaped className for the legacy; Blade does not here.
+        $level = isset($sourceLevels[$level]) ? $level : 'local';
+        [$label, $description] = $sourceLevels[$level];
 
         return '<span class="nwc-src is-'.$level.'" title="'.e($description).'" data-testid="source-label-'.$level.'">'.e($label).'</span>';
     };

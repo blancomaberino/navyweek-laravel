@@ -435,6 +435,23 @@ final class PageController
      * means a stored string can never become anything but a colour. Mirrors the same
      * guard the shared Deals chrome applies (ChromeCatalog::hexColour).
      */
+    /**
+     * One side of a brand's stored logo cap, in px.
+     *
+     * Same reasoning as {@see logoChipColour()}: the value is editor-supplied JSON
+     * and lands inside a `style` attribute, where Blade's escaping stops an
+     * attribute break-out but NOT CSS injection. Coercing to a positive int means a
+     * stored string can never be anything but a number of pixels.
+     *
+     * @param  array<string, mixed>|null  $display
+     */
+    private static function logoCap(?array $display, string $key, int $default): int
+    {
+        $value = $display[$key] ?? null;
+
+        return is_numeric($value) && (int) $value > 0 ? (int) $value : $default;
+    }
+
     private static function logoChipColour(?string $value): string
     {
         $value = trim((string) $value);
@@ -460,7 +477,7 @@ final class PageController
             }
 
             $connection = $offer->connection;
-            $cap = $connection->logo_display ?? ['cardMaxHeight' => 28, 'cardMaxWidth' => 130];
+            $cap = $connection->logo_display;
 
             $cards[] = [
                 'slug' => (string) $brandPage->slug,
@@ -470,8 +487,8 @@ final class PageController
                 'headline' => $offer->headline_discount,
                 'logo_url' => $connection->logo_url,
                 'logo_background' => self::logoChipColour($connection->logo_background),
-                'logo_max_height' => $cap['cardMaxHeight'],
-                'logo_max_width' => $cap['cardMaxWidth'],
+                'logo_max_height' => self::logoCap($cap, 'cardMaxHeight', 28),
+                'logo_max_width' => self::logoCap($cap, 'cardMaxWidth', 130),
             ];
         }
 
@@ -591,14 +608,14 @@ final class PageController
 
         // Per-brand logo cap; the hero chip scales the card cap by a fixed factor
         // (legacy src/data/discounts/logo.ts — LOGO_DISPLAY_DEFAULT + LOGO_HERO_SCALE).
-        $cap = $offer->connection->logo_display ?? ['cardMaxHeight' => 28, 'cardMaxWidth' => 130];
+        $cap = $offer->connection->logo_display;
 
         return response()->view('pages.discount', [
             'page' => $page,
             'offer' => $offer,
             'logoHero' => [
-                'maxHeight' => (int) round($cap['cardMaxHeight'] * 1.4),
-                'maxWidth' => (int) round($cap['cardMaxWidth'] * 1.4),
+                'maxHeight' => (int) round(self::logoCap($cap, 'cardMaxHeight', 28) * 1.4),
+                'maxWidth' => (int) round(self::logoCap($cap, 'cardMaxWidth', 130) * 1.4),
                 'background' => self::logoChipColour($offer->connection->logo_background),
             ],
             // "Ask the brand" share block: advisory (no first-party discount) pages

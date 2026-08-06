@@ -101,7 +101,7 @@
                                     </td>
                                     <td>
                                         @if (in_array($row->slug, $guideSlugs, true))
-                                            <a class="jt-guide-link" href="{{ $team->base_path }}/{{ $row->slug }}/">{{ $row->guide_label ?? $row->city }} guide</a>
+                                            <a class="jt-guide-link" href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($team->base_path.'/'.$row->slug.'/') }}">{{ $row->guide_label ?? $row->city }} guide</a>
                                         @else
                                             <span class="jt-guide-soon">Guide coming soon</span>
                                         @endif

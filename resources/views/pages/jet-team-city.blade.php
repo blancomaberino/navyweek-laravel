@@ -52,7 +52,7 @@
             <nav class="breadcrumb" aria-label="Breadcrumb">
                 <a href="/">Home</a>
                 <span aria-hidden="true">/</span>
-                <a href="{{ $team->base_path }}/">{{ $team->name }}</a>
+                <a href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($team->base_path.'/') }}">{{ $team->name }}</a>
                 <span aria-hidden="true">/</span>
                 <span aria-current="page">{{ $city->city }}</span>
             </nav>
@@ -184,7 +184,7 @@
                 <p class="jt-other-stops"><span class="jt-other-stops-label">Other {{ $city->year }} stops:</span>@if ($prevStop !== null)<span>{!! $segment(null, '← '.($prevStop->guide_label ?? $prevStop->city), $teamRoot.$prevStop->slug.'/', null) !!}</span>@endif@if ($prevStop !== null && $nextStop !== null)<span class="jt-other-stops-sep"> · </span>@endif@if ($nextStop !== null)<span>{!! $segment(null, ($nextStop->guide_label ?? $nextStop->city).' →', $teamRoot.$nextStop->slug.'/', null) !!}</span>@endif</p>
             @endif
 
-            <a class="jt-back-link" href="{{ $team->base_path }}/">
+            <a class="jt-back-link" href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize($team->base_path.'/') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                 Full {{ $team->name }} {{ $city->year }} schedule
             </a>

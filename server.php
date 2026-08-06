@@ -16,9 +16,12 @@
  * correctly 301s it to "/". It is the only public/ directory that collides with a
  * page family, but the failure looked exactly like a routing bug.
  *
- * Run with:  composer run dev   (or)  php -S 127.0.0.1:8000 -t public tools/serve.php
+ * Lives at the app root ON PURPOSE: `artisan serve` prefers `base_path('server.php')`
+ * over the framework's copy (ServeCommand.php:211), so simply existing here fixes
+ * `php artisan serve`, `composer run dev`, and Dusk alike — no special invocation
+ * to remember and no way to accidentally use the broken router.
  */
-$publicPath = getcwd();
+$publicPath = __DIR__.'/public';
 
 $uri = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? ''

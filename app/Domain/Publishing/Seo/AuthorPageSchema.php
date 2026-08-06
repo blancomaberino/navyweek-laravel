@@ -62,7 +62,7 @@ final class AuthorPageSchema
         // Editor-supplied, so it goes through the same scheme allowlist as every
         // rendered href — but OMITTED rather than replaced with the "#" placeholder:
         // publishing a bogus `sameAs` is worse structured data than publishing none.
-        if ($author->linkedin_url !== null && LinkUrl::isAllowed($author->linkedin_url)) {
+        if (LinkUrl::isAbsoluteHttpUrl($author->linkedin_url)) {
             $person['sameAs'] = [$author->linkedin_url];
         }
         // The publisher the profile writes for, mirroring the legacy `worksFor` entry.

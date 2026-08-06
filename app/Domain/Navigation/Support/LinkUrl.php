@@ -40,6 +40,28 @@ final class LinkUrl
     /**
      * The URL if it passes {@see isAllowed()}, otherwise a safe `#` placeholder.
      */
+    /**
+     * Whether the value is an absolute http(s) URL — the bar for an EXTERNAL
+     * IDENTITY (schema.org `sameAs`, `url`), which is stricter than the href bar.
+     *
+     * {@see isAllowed()} deliberately passes '', '/path' and '#frag' because those
+     * are legitimate hrefs. None of them is an identity: publishing `sameAs: [""]`
+     * or a relative path is invalid structured data, so callers that feed a schema
+     * graph must use THIS, not `isAllowed()`.
+     */
+    public static function isAbsoluteHttpUrl(?string $url): bool
+    {
+        $trimmed = ltrim((string) $url);
+
+        if ($trimmed === '') {
+            return false;
+        }
+
+        $scheme = parse_url($trimmed, PHP_URL_SCHEME);
+
+        return is_string($scheme) && in_array(mb_strtolower($scheme), ['http', 'https'], true);
+    }
+
     public static function sanitize(string $url): string
     {
         return self::isAllowed($url) ? $url : '#';

@@ -176,7 +176,7 @@
                     </div>
                     @if ($primary?->map_embed_url)
                         <iframe class="ld-map"
-                                src="{{ $primary->map_embed_url }}"
+                                src="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize((string) $primary->map_embed_url) }}"
                                 title="Map of {{ $discount->company }}, {{ $primary->street }}, {{ $primary->city }}, {{ $primary->state_abbr }}"
                                 loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"
@@ -218,7 +218,7 @@
                     <div class="ld-verif">
                         Verify: <b>{{ $discount->verification_detail ?: $discount->verification->label() }}</b>
                     </div>
-                    <a class="ld-cta" href="{{ $mapHref }}" target="_blank" rel="noopener noreferrer">Get directions →</a>
+                    <a class="ld-cta" href="{{ \App\Domain\Navigation\Support\LinkUrl::sanitize((string) $mapHref) }}" target="_blank" rel="noopener noreferrer">Get directions →</a>
                 </div>
             </aside>
         </div>
