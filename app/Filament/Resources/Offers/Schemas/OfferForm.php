@@ -6,6 +6,7 @@ namespace App\Filament\Resources\Offers\Schemas;
 
 use App\Domain\Catalog\Enums\OfferType;
 use App\Domain\Catalog\Enums\VerificationProvider;
+use App\Domain\Crm\Models\Audience;
 use App\Filament\Support\EnumOptions;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -14,6 +15,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Edit form for an Offer (one brand's discount). Grouped into identity, the
@@ -73,8 +75,32 @@ class OfferForm
                 Section::make('Audiences')
                     ->schema([
                         Select::make('audiences')
-                            ->relationship('audiences', 'key')
+                            // `audiences.key` is CAST to the Audience enum, so the raw
+                            // title attribute is an enum instance where Filament requires
+                            // `Htmlable|string` — that TypeError 500s the edit page for
+                            // EVERY offer as soon as the lookup table has a row, because
+                            // `preload()` labels every option regardless of what is
+                            // attached. Resolve the label from the record so the enum
+                            // stays the single source of the display name ("Military")
+                            // instead of the storage key ("military").
+                            ->relationship(
+                                'audiences',
+                                'key',
+                                // The callback branch of getOptionsFromRelationship()
+                                // applies no ordering of its own (the title-attribute
+                                // branch orders by that column), so pin it to the
+                                // sort_order the seeder exists to populate.
+                                static fn (Builder $query): Builder => $query->orderBy('sort_order'),
+                            )
+                            ->getOptionLabelFromRecordUsing(
+                                static fn (Audience $record): string => $record->key->label(),
+                            )
                             ->multiple()
+                            // Off deliberately: `multiple()` turns search on by default,
+                            // and the search columns fall back to the title attribute —
+                            // so users would be searching the storage key while reading
+                            // the label. Seven preloaded options need no search.
+                            ->searchable(false)
                             ->preload()
                             ->helperText('Audiences this offer serves (offer_audience pivot).'),
                     ]),
