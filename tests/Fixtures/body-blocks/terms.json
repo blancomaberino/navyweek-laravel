@@ -1,0 +1,210 @@
+[
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Last updated: April 11, 2026"
+            }
+        ],
+        "slot": "hero",
+        "variant": "stamp"
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "ACCEPTANCE OF TERMS"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "By accessing and using NavyWeek.org, you accept and agree to be bound by these Terms and Conditions. If you do not agree with any part of these terms, please do not use this website."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "ABOUT THIS WEBSITE"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "NavyWeek.org is an independent, unofficial informational resource about the U.S. Navy Week program. This website is not affiliated with, endorsed by, or officially connected to the United States Navy, the Department of Defense, or the Navy Office of Community Outreach (NAVCO). All official Navy Week information can be found at "
+            },
+            {
+                "text": "outreach.navy.mil",
+                "url": "https://outreach.navy.mil"
+            },
+            {
+                "text": "."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "USE OF CONTENT"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The content on NavyWeek.org is provided for general informational purposes only. While we strive to keep information accurate and up to date, we make no warranties or representations about the completeness, accuracy, reliability, or availability of any information on this site."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "INTELLECTUAL PROPERTY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The original content, design, and code of NavyWeek.org are the property of the site's creators. U.S. Navy imagery, logos, and official content referenced or displayed on this site remain the property of the United States Navy and the Department of Defense. Use of such materials is for informational purposes and does not imply endorsement."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "ACCEPTABLE USE"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "You agree not to:"
+            }
+        ]
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Use the website for any unlawful purpose"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Attempt to gain unauthorized access to any part of the website"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Interfere with or disrupt the website's operation"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Reproduce, duplicate, or exploit any part of the website for commercial purposes without permission"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Misrepresent your affiliation with NavyWeek.org or the U.S. Navy"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "DISCLAIMER OF WARRANTIES"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "NavyWeek.org is provided on an \"as is\" and \"as available\" basis. We disclaim all warranties, express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not guarantee that the website will be uninterrupted, secure, or error-free."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "LIMITATION OF LIABILITY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "To the fullest extent permitted by law, NavyWeek.org and its creators shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of or inability to use this website."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "EXTERNAL LINKS"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "This website contains links to external sites, including official U.S. government websites. We are not responsible for the content or practices of any linked external sites. The inclusion of any link does not imply endorsement by NavyWeek.org."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "EVENT INFORMATION ACCURACY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Navy Week event schedules, dates, locations, and details are sourced from publicly available information and may change without notice. Always verify event details with official sources before making travel or attendance plans. NavyWeek.org is not responsible for changes to event schedules or cancellations."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "CHANGES TO THESE TERMS"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "We reserve the right to update or modify these Terms and Conditions at any time. Changes will be posted on this page with an updated revision date. Your continued use of the website after any changes constitutes acceptance of the new terms."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "CONTACT"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "If you have questions about these Terms and Conditions, please visit our "
+            },
+            {
+                "text": "Contact page",
+                "url": "/contact/"
+            },
+            {
+                "text": "."
+            }
+        ]
+    }
+]

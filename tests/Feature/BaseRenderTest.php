@@ -123,3 +123,55 @@ it('uses overseas breadcrumbs and host-country address for an OCONUS base', func
         // No FAQs on this base → the FAQPage node is omitted entirely.
         ->assertDontSee('"@type":"FAQPage"', false);
 });
+
+/**
+ * The two base hubs render their intro lead from `body_blocks[0]`. That block is
+ * CMS-editable, so the moment an editor formats it the block graduates from a plain
+ * `text` key to `spans` — and a view reading `['text']` directly would silently fall
+ * back to the meta description. These are the behavioural half of the static guard in
+ * ContentBlockCoverageTest.
+ */
+function baseHubPage(?array $bodyBlocks = null): Page
+{
+    return Page::factory()->create([
+        'page_type' => PageType::BaseHub,
+        'url_path' => '/navy-bases/',
+        'slug' => 'navy-bases',
+        'is_published' => true,
+        'title' => 'Navy Bases',
+        'meta_description' => 'The meta description fallback.',
+        'body_blocks' => $bodyBlocks,
+    ]);
+}
+
+it('renders a base hub lead stored as plain text', function () {
+    baseHubPage([['type' => 'paragraph', 'text' => 'A directory of United States Navy bases.']]);
+
+    fetchBase('/navy-bases/')
+        ->assertOk()
+        ->assertSee('A directory of United States Navy bases.', escape: false);
+});
+
+it('renders a base hub lead an editor has formatted (spans, not text)', function () {
+    baseHubPage([['type' => 'paragraph', 'spans' => [
+        ['text' => 'A directory of '],
+        ['text' => 'United States Navy bases', 'bold' => true],
+        ['text' => '.'],
+    ]]]);
+
+    // The regression: indexing ['text'] here found nothing, so the lead fell back to
+    // the meta description and this sentence never appeared in the body at all.
+    // (The meta description itself is legitimately in <head>, so it is not asserted
+    // absent — the presence of the real lead is what proves the fix.)
+    fetchBase('/navy-bases/')
+        ->assertOk()
+        ->assertSee('A directory of United States Navy bases.', escape: false);
+});
+
+it('falls back to the meta description when a base hub has no body', function () {
+    baseHubPage(null);
+
+    fetchBase('/navy-bases/')
+        ->assertOk()
+        ->assertSee('The meta description fallback.', escape: false);
+});

@@ -6,8 +6,7 @@ namespace App\Filament\Resources\Menus\RelationManagers;
 
 use App\Domain\Navigation\Models\Menu;
 use App\Domain\Navigation\Models\MenuItem;
-use App\Domain\Navigation\Support\LinkUrl;
-use Closure;
+use App\Filament\Support\LinkUrlField;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -42,14 +41,8 @@ class MenuItemsRelationManager extends RelationManager
                 ->maxLength(2048)
                 // Reject a disallowed scheme (e.g. javascript:) on write; the render
                 // layer applies the same policy via LinkUrl (defense in depth).
-                ->rule(static function (): Closure {
-                    return static function (string $attribute, mixed $value, Closure $fail): void {
-                        if (is_string($value) && $value !== '' && ! LinkUrl::isAllowed($value)) {
-                            $fail('Enter a site path (starting with /) or a URL using http, https, mailto, or tel.');
-                        }
-                    };
-                })
-                ->helperText('Root-relative path (e.g. /schedule/) or an absolute http(s)/mailto/tel URL.'),
+                ->rule(LinkUrlField::rule())
+                ->helperText(LinkUrlField::helperText()),
             Select::make('parent_id')
                 ->label('Parent (dropdown)')
                 ->options(static function (RelationManager $livewire, ?MenuItem $record): array {

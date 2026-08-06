@@ -5,6 +5,7 @@
      markup-for-markup from the legacy src/page-views/NavyBasesHub.tsx; styles in
      resources/css/families/bases.css. --}}
 @php
+    use App\Domain\Publishing\Content\InlineSpans;
     use App\Domain\Publishing\Support\PagePaths;
 
     $basesRoot = PagePaths::root('bases');
@@ -18,7 +19,10 @@
         .' class="lucide lucide-chevron-down" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>';
     // NavyBasesHub.tsx L152-154 renders a fixed editorial lead; it is CMS-editable
     // here (pages.body_blocks), falling back to the meta description.
-    $lead = $page->body_blocks[0]['text'] ?? $page->meta_description;
+    // Read through InlineSpans, NOT `['text']`: a lead the CMS has formatted is
+    // stored as `spans`, and indexing `text` directly would silently drop it back
+    // to the meta description the moment an editor bolds a word.
+    $lead = InlineSpans::plainText((array) ($page->body_blocks[0] ?? [])) ?: $page->meta_description;
 @endphp
 
 @section('content')

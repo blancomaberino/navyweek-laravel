@@ -1251,6 +1251,27 @@ through** (see the request pipeline) — without that exemption its catch-all wo
   (→ `users`) that set the per-page E-E-A-T byline the discount-guide Person JSON-LD
   reads. The render-built `json_ld` and the `pageable` morph are set by the
   import/render layer, not edited.
+  **Content body** is a Filament `Builder` (`ContentBlocks`) over `pages.body_blocks`
+  — one block per type `pages/content.blade.php` renders (paragraph, heading, list,
+  note, callout, toc, jump_nav, table, card, link_card, info_card, faq_item, plus the
+  `/our-process/` band/step/ladder/refusals/freshness/rule_note/cta_panel set). Only
+  the CMS-backed content pages keep their whole body here, and the two base hubs keep
+  just their intro lead (`body_blocks[0]`, read through `InlineSpans::plainText()` —
+  never `['text']`, which loses a formatted lead). Every other data-driven page
+  (discount, event, air show) leaves it empty because its body comes from its aggregate.
+  Prose fields are `RichEditor`s bound to `content` (HTML) with a toolbar restricted
+  to the marks the stored format can carry (bold/italic/link), because the DB stores
+  inline runs, not HTML. **`BodyBlocks`** translates the whole structure on the page's
+  `mutateFormDataBeforeFill`/`…BeforeSave` hooks (`TranslatesBodyBlocks`), and
+  **`InlineSpans`** owns the inline-run vocabulary in BOTH directions: `render()`
+  produces the PAGE html the content view and both base hubs emit (sanitising every
+  editor-supplied href), while `toHtml()`/`fromHtml()` map to and from the HTML a
+  RichEditor speaks. A mark the editor cannot round-trip (`emphasis`, which TipTap
+  drops) locks its block read-only rather than being silently flattened. The translation is lossless and
+  shape-preserving by test: `dehydrate(hydrate($blocks)) === $blocks` over the whole
+  live corpus, a null-pruning pass so untouched optional fields are not written back
+  as `"variant": null`, and a fail-closed coverage guard that breaks the suite if the
+  blade grows a block type the form cannot edit.
 - **AuthorResource** (`Publishing` nav group) — CRUD over the editorial byline
   (`users` rows) that `PageResource`'s author/reviewer selects point at; before it,
   these profiles could only be created by `EditorialTeamSeeder`. It does **not** add

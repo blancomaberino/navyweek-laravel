@@ -1,0 +1,1108 @@
+[
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "Veterans Home Care 2026 — Key Facts"
+    },
+    {
+        "type": "paragraph",
+        "text": "Source: VA.gov — Aid and Attendance & Housebound · Last verified: June 2, 2026"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Most veterans want to stay in their own homes as they age. The trouble is that figuring out how the VA actually pays for that help can feel like its own full-time job. There are two completely different programs that both get called \"veterans home care,\" they have separate applications, and a social worker will rarely sit you down and explain the difference."
+            }
+        ],
+        "variant": "lead"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "This guide does that. By the end, you'll know which VA programs provide hands-on care, which one sends a monthly check you can use to pay for care yourself, who qualifies, and how to apply without paying anyone a fee to do it."
+            }
+        ],
+        "variant": "sublead"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "A bit of context on why this matters: there were about 8.1 million veterans aged 65 or older in 2021, and nearly half of all U.S. veterans are now 65 or older. The demand for in-home help is climbing fast, and the families who understand their options end up with far better care and far less out-of-pocket spending than the ones who don't."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "NavyWeek.org is independent and not affiliated with the VA. This guide is informational and not legal, medical, financial, or claims advice. Confirm any amount, deadline, or eligibility rule on "
+            },
+            {
+                "text": "VA.gov",
+                "url": "https://www.va.gov/"
+            },
+            {
+                "text": " or with an accredited representative before you act."
+            }
+        ]
+    },
+    {
+        "type": "toc",
+        "label": "On this page",
+        "items": [
+            {
+                "label": "Two programs, not one",
+                "url": "#two-programs"
+            },
+            {
+                "label": "VA home care programs (services)",
+                "url": "#service-programs"
+            },
+            {
+                "label": "Aid and Attendance (the cash side)",
+                "url": "#aid-attendance"
+            },
+            {
+                "label": "Who qualifies",
+                "url": "#who-qualifies"
+            },
+            {
+                "label": "How to apply",
+                "url": "#how-to-apply"
+            },
+            {
+                "label": "What it costs",
+                "url": "#what-it-costs"
+            },
+            {
+                "label": "Paying a family member",
+                "url": "#pay-family"
+            },
+            {
+                "label": "Choosing an agency",
+                "url": "#choose-agency"
+            },
+            {
+                "label": "Frequently asked questions",
+                "url": "#faq"
+            },
+            {
+                "label": "Where to get help",
+                "url": "#where-to-get-help"
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "THE ONE THING MOST FAMILIES GET WRONG"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Here's the distinction that trips everyone up. The VA runs two separate branches that both touch home care, and they don't talk to each other the way you'd expect."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The "
+            },
+            {
+                "text": "Veterans Health Administration (VHA)",
+                "bold": true
+            },
+            {
+                "text": " provides or arranges actual care. A nurse, an aide, or a medical team shows up at the house. You don't get cash; you get services."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The "
+            },
+            {
+                "text": "Veterans Benefits Administration (VBA)",
+                "bold": true
+            },
+            {
+                "text": " sends money. The main program here is "
+            },
+            {
+                "text": "Aid and Attendance",
+                "bold": true
+            },
+            {
+                "text": ", a tax-free monthly pension supplement you can spend on whatever care you choose, including hiring a private agency or, in many cases, a family member."
+            }
+        ]
+    },
+    {
+        "type": "callout",
+        "spans": [
+            {
+                "text": "Two branches, two applications, two sets of rules. Some families qualify for both. The rest of this guide is organized around that split, so keep it in mind as you read."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "One more practical note: the VA doesn't directly employ the aides who come to your home. It contracts that work out through its "
+            },
+            {
+                "text": "Community Care Network (CCN)",
+                "bold": true
+            },
+            {
+                "text": " — five regional networks managed by outside administrators (Optum handles Regions 1–3; TriWest handles Regions 4–5). That's why the agency at your door is a local company, not a VA employee."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "VA HOME CARE PROGRAMS (THE SERVICES SIDE)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "These are the VHA programs that put care in the home. You generally need to be enrolled in VA health care first (more on that below), and a VA social worker assesses what you need before any service starts. Here's what's on the menu."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Homemaker and Home Health Aide care"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "This is the program most people picture when they say \"home care.\" A trained aide comes to the house and helps with the daily things that have gotten hard — bathing, dressing, grooming, preparing meals, getting around safely. The aide isn't a nurse, but a registered nurse supervises the care."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "It's open to enrolled veterans of any age who meet the clinical criteria and live where the service is available. Depending on your service-connected status, a copay may apply."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Home-Based Primary Care (HBPC)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Don't confuse this with the aide program. HBPC sends a full VA medical team into the home — a physician or nurse practitioner, a nurse, a social worker, a dietitian, a therapist, a pharmacist, sometimes a psychologist. It's ongoing primary medical care for veterans with complex chronic conditions who have a genuinely hard time getting to a clinic."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "It's part of the standard VA medical benefits package, availability depends on your location, and a copay may apply based on the financial assessment from VA Form 10-10EC."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Veteran-Directed Care (VDC)"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "VDC is the flexible option. Instead of the VA assigning you an agency, you get a monthly budget tied to your level of need and you hire your own workers — which can include friends, neighbors, and certain family members. An Area Agency on Aging counselor helps you set it up, and a financial management service handles the paychecks (you never touch the cash directly)."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "You don't need a service-connected disability rating for VDC, but it's only offered in certain locations, and budgets in practice rarely run above roughly $4,500 a month."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Skilled home health care"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "This is short-term, doctor-ordered medical care: wound care, catheter management, physical or occupational or speech therapy delivered at home by a community agency. It's especially useful for veterans who live outside a VA service area."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Respite care"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Respite exists for the caregiver, not just the veteran. It covers short-term care — in the home or in a facility — so a family caregiver can rest, travel, or handle an emergency. Eligible veterans can receive up to 30 days of respite care per year."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Hospice and palliative care"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Hospice is for veterans facing a terminal illness who are no longer pursuing a cure; palliative care can run alongside active treatment to manage symptoms. Both are available to enrolled veterans who meet the clinical need, in any setting, "
+            },
+            {
+                "text": "with no copays at all",
+                "bold": true
+            },
+            {
+                "text": ". The VA also provides bereavement support to families for 13 months afterward."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Adult day health care and home telehealth"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Rounding things out: adult day health care gives veterans a supervised, social daytime program (and gives caregivers a break), and home telehealth lets a care team monitor health conditions remotely. Both help families keep a veteran at home longer."
+            }
+        ]
+    },
+    {
+        "type": "callout",
+        "spans": [
+            {
+                "text": "A copay rule worth remembering:",
+                "bold": true
+            },
+            {
+                "text": " VA geriatric and extended-care services charge no copay for the first 21 days of care in any 12-month period. If a copay applies at all, it starts on day 22 and depends on your service-connected status and income. Hospice is always copay-free."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "AID AND ATTENDANCE: THE PROGRAM THAT PAYS YOU"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Aid and Attendance (A&A) is the cash side. It's a monthly supplement added on top of the basic Veterans Pension or Survivors Pension — which means you have to qualify for that underlying pension first; A&A can't be paid on its own."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The money is tax-free and yours to direct. Most families use it to pay a home care agency or a family caregiver."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "2026 Aid and Attendance rates"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "These rates are effective December 1, 2025 through November 30, 2026, and reflect a 2.8% cost-of-living increase. They come straight from "
+            },
+            {
+                "text": "VA.gov",
+                "url": "https://www.va.gov/pension/aid-attendance-housebound/"
+            },
+            {
+                "text": "."
+            }
+        ]
+    },
+    {
+        "type": "table",
+        "variant": "plain",
+        "columns": [
+            {
+                "label": "Situation",
+                "align": "left"
+            },
+            {
+                "label": "Maximum annual benefit",
+                "align": "left"
+            },
+            {
+                "label": "Approx. monthly",
+                "align": "left"
+            }
+        ],
+        "rows": [
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Veteran, no dependents"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$29,093"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "~$2,424"
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Veteran with one dependent"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$34,488"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "~$2,874"
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Two veterans married to each other, both qualifying"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "$46,143"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "~$3,845"
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "spans": [
+                        {
+                            "text": "Surviving spouse"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "~$18,696"
+                        }
+                    ]
+                },
+                {
+                    "spans": [
+                        {
+                            "text": "~$1,558"
+                        }
+                    ]
+                }
+            ]
+        ]
+    },
+    {
+        "type": "callout",
+        "spans": [
+            {
+                "text": "Here's the catch that the table hides: these are "
+            },
+            {
+                "text": "maximums, not guaranteed checks",
+                "bold": true
+            },
+            {
+                "text": ". The actual payment equals the maximum annual pension rate minus your countable income, divided by 12. So if you have income, your check is smaller."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "The deduction almost nobody explains"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "This is the part that gets families who assume they earn too much to qualify. Your unreimbursed medical expenses — including what you pay for home care — that exceed 5% of the maximum pension rate get subtracted from your countable income. For a lot of applicants, the cost of care itself is what brings their \"countable\" income low enough to qualify. If a quick glance at your income made you think you're over the line, don't stop there."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "WHO QUALIFIES FOR VA HOME CARE"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Eligibility splits along the same two tracks. For the "
+            },
+            {
+                "text": "VHA service programs",
+                "bold": true
+            },
+            {
+                "text": ", you generally need to be enrolled in VA health care and have an assessed clinical need for the specific service. For "
+            },
+            {
+                "text": "Aid and Attendance",
+                "bold": true
+            },
+            {
+                "text": ", the bar is more detailed."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "To qualify for Aid and Attendance, you typically need to meet all four of these:"
+            }
+        ]
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Service.",
+                        "bold": true
+                    },
+                    {
+                        "text": " At least 90 days of active duty with one or more days during a wartime period (or 24 months / your full call-up if you started service after September 7, 1980), and a discharge that wasn't dishonorable."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Status.",
+                        "bold": true
+                    },
+                    {
+                        "text": " You're 65 or older, "
+                    },
+                    {
+                        "text": "or",
+                        "italic": true
+                    },
+                    {
+                        "text": " permanently and totally disabled, "
+                    },
+                    {
+                        "text": "or",
+                        "italic": true
+                    },
+                    {
+                        "text": " in a nursing home for long-term care, "
+                    },
+                    {
+                        "text": "or",
+                        "italic": true
+                    },
+                    {
+                        "text": " receiving SSDI or SSI."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Care need.",
+                        "bold": true
+                    },
+                    {
+                        "text": " You need help with daily activities, are bedridden, are in a nursing home because of incapacity, or have a qualifying severe vision impairment."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Finances.",
+                        "bold": true
+                    },
+                    {
+                        "text": " Your income and net worth fall below the limit — "
+                    },
+                    {
+                        "text": "$163,699 for 2026",
+                        "bold": true
+                    },
+                    {
+                        "text": ". Your primary home and one vehicle don't count toward that. Be aware of the three-year asset look-back: gifting assets away to qualify can trigger a penalty period."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "HOW TO APPLY"
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "For VHA home care services"
+    },
+    {
+        "type": "list",
+        "ordered": true,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Enroll in VA health care",
+                        "bold": true
+                    },
+                    {
+                        "text": " if you haven't already, using VA Form 10-10EZ (online, by phone, or by mail)."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Talk to a VA social worker",
+                        "bold": true
+                    },
+                    {
+                        "text": " at your VA medical center. Tell them you want home care and describe what's going on at home."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Get assessed.",
+                        "bold": true
+                    },
+                    {
+                        "text": " The team evaluates your needs and decides which programs and how many hours fit."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Receive your referral",
+                        "bold": true
+                    },
+                    {
+                        "text": " to a Community Care Network agency. Tip: if you already have a preferred local agency, say so "
+                    },
+                    {
+                        "text": "before",
+                        "italic": true
+                    },
+                    {
+                        "text": " a referral gets auto-assigned."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "For Aid and Attendance"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "The core form is "
+            },
+            {
+                "text": "VA Form 21-2680",
+                "bold": true
+            },
+            {
+                "text": " (Examination for Housebound Status or Permanent Need for Regular Aid and Attendance), which your physician fills out. Send it to your state's Pension Management Center, or apply online at VA.gov."
+            }
+        ]
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Nursing home residents also include "
+                    },
+                    {
+                        "text": "VA Form 21-0779",
+                        "bold": true
+                    },
+                    {
+                        "text": "."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Surviving spouses apply with "
+                    },
+                    {
+                        "text": "VA Form 21P-534EZ",
+                        "bold": true
+                    },
+                    {
+                        "text": "."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Expect the claim to take several months — three to six or more is common. The good news: approved benefits are paid retroactively to your application or intent-to-file date, so the wait doesn't cost you money. If the applicant is over 90 or in hospice, you can request expedited processing."
+            }
+        ]
+    },
+    {
+        "type": "callout",
+        "spans": [
+            {
+                "text": "You should never pay anyone to file a VA pension claim.",
+                "bold": true
+            },
+            {
+                "text": " Accredited representatives and Veterans Service Organizations help for free ("
+            },
+            {
+                "text": "VA accreditation search",
+                "url": "https://www.va.gov/ogc/apps/accreditation/"
+            },
+            {
+                "text": ")."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "WHAT IT COSTS: VA-FUNDED CARE VS. PRIVATE PAY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "When the VA arranges care through its Community Care Network, your out-of-pocket cost is usually little or nothing (subject to the copay rules above). The tradeoff is that the VA's clinical assessment — not your family — decides the type and number of hours."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Private-pay home care is more flexible but adds up. The national median for a non-medical caregiver hit $35 per hour in the 2025 CareScout (Genworth) Cost of Care Survey — about $80,080 a year at 44 hours a week. Skilled in-home nursing runs closer to $90 an hour."
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "That gap is exactly where Aid and Attendance earns its keep. The monthly benefit bridges the difference between what the VA provides directly and the additional private help many families want."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "CAN YOU PAY A FAMILY MEMBER TO PROVIDE CARE?"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "Yes — and this is one of the most common questions families ask. There are three routes, and the rules differ in one important way."
+            }
+        ]
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Through Aid and Attendance.",
+                        "bold": true
+                    },
+                    {
+                        "text": " The veteran or spouse receives the benefit and uses it to pay a caregiver. That caregiver can be an adult child, another relative, a friend, or a professional — "
+                    },
+                    {
+                        "text": "but not the veteran's spouse",
+                        "bold": true
+                    },
+                    {
+                        "text": ", since spousal income is already counted. Set up a written care agreement and keep clean records (the \"nanny tax\" rules apply)."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Through PCAFC",
+                        "bold": true
+                    },
+                    {
+                        "text": " (the Program of Comprehensive Assistance for Family Caregivers). This one pays a monthly stipend directly to the caregiver — and here a spouse "
+                    },
+                    {
+                        "text": "can",
+                        "italic": true
+                    },
+                    {
+                        "text": " be the paid caregiver. It also adds health coverage, mental-health support, and respite. The bar is higher: the veteran needs a VA disability rating of 70% or more and at least six months of needed personal care. Apply with VA Form 10-10CG. (A September 2025 rule extended the program's \"legacy\" transition period through September 30, 2028, so reassessment rules are still shifting.)"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Through Veteran-Directed Care.",
+                        "bold": true
+                    },
+                    {
+                        "text": " As covered above, you can hire and pay family members (other than a spouse) out of your VDC budget."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "HOW TO CHOOSE A VETERANS HOME CARE AGENCY"
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "A few things separate a smooth experience from a frustrating one:"
+            }
+        ]
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "Confirm CCN participation.",
+                        "bold": true
+                    },
+                    {
+                        "text": " If you're using VA-arranged care, the agency must be in the Community Care Network — properly licensed or certified and in good standing."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Speak up early.",
+                        "bold": true
+                    },
+                    {
+                        "text": " Name your preferred provider to your VA social worker before a referral is automatically assigned."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "For Aid and Attendance, you have freedom.",
+                        "bold": true
+                    },
+                    {
+                        "text": " You can use any qualified agency or hire privately, since you're paying with your own benefit."
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Ask about VA experience.",
+                        "bold": true
+                    },
+                    {
+                        "text": " An agency that regularly bills the VA and handles Aid and Attendance paperwork will save you real headaches."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "FREQUENTLY ASKED QUESTIONS"
+    },
+    {
+        "type": "faq_item",
+        "question": "Does the VA pay for in-home care?",
+        "spans": [
+            {
+                "text": "Yes, in two ways: it arranges and largely covers services through its health system, and it provides the Aid and Attendance pension you can use to pay for care yourself."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "How many hours of home care does the VA provide?",
+        "spans": [
+            {
+                "text": "There's no fixed national number. Hours are set by a clinical assessment of your needs, so they vary from one veteran to the next."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "Who qualifies for VA home care?",
+        "spans": [
+            {
+                "text": "For service programs, enrolled veterans with an assessed clinical need. For Aid and Attendance, veterans who meet the service, status, care-need, and financial criteria described above."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "Can I be paid to care for my veteran spouse?",
+        "spans": [
+            {
+                "text": "Not through Aid and Attendance — but yes through PCAFC, which can pay a spouse a monthly stipend if the veteran has a 70%+ disability rating and meets the other requirements."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "What's the income and net worth limit for Aid and Attendance?",
+        "spans": [
+            {
+                "text": "The net worth limit is $163,699 for 2026. Your primary home and one vehicle are excluded."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "How much is Aid and Attendance per month in 2026?",
+        "spans": [
+            {
+                "text": "Up to roughly $2,424 for a single veteran, $2,874 for a veteran with one dependent, and $1,558 for a surviving spouse — minus any countable income."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "What's the difference between VA home care and Aid and Attendance?",
+        "spans": [
+            {
+                "text": "VA home care is a service the VA arranges. Aid and Attendance is cash you receive and spend on care yourself."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "Does the VA cover hospice at home?",
+        "spans": [
+            {
+                "text": "Yes, with no copays, in any setting, plus 13 months of bereavement support for the family."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "How long does an Aid and Attendance claim take?",
+        "spans": [
+            {
+                "text": "Usually three to six months or more, with benefits paid retroactively to your filing date."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "Will I have a copay for VA home care?",
+        "spans": [
+            {
+                "text": "No copay for the first 21 days of care in a 12-month period. After that, it depends on your service-connected status and income. Hospice is always free."
+            }
+        ]
+    },
+    {
+        "type": "faq_item",
+        "question": "Can a veteran with dementia get home care through the VA?",
+        "spans": [
+            {
+                "text": "Yes. Dementia-related needs are exactly the kind of clinical need these programs are built to assess and cover."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 2,
+        "text": "WHERE TO GET HELP"
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "VA benefits and pension questions:",
+                        "bold": true
+                    },
+                    {
+                        "text": " 800-827-1000"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "VA health care and enrollment:",
+                        "bold": true
+                    },
+                    {
+                        "text": " 877-222-8387"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "VA Caregiver Support Line:",
+                        "bold": true
+                    },
+                    {
+                        "text": " 855-260-3274"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "type": "paragraph",
+        "spans": [
+            {
+                "text": "For the most current rates and program details, go straight to "
+            },
+            {
+                "text": "VA.gov",
+                "url": "https://www.va.gov/"
+            },
+            {
+                "text": " — third-party sites often carry outdated numbers. And remember: filing a VA claim should never cost you a dime."
+            }
+        ]
+    },
+    {
+        "type": "heading",
+        "level": 3,
+        "text": "Related guides"
+    },
+    {
+        "type": "list",
+        "ordered": false,
+        "items": [
+            {
+                "spans": [
+                    {
+                        "text": "VA disability benefits guide (2026 pay rates, ratings, how to file)",
+                        "url": "/va-disability/"
+                    }
+                ]
+            },
+            {
+                "spans": [
+                    {
+                        "text": "Navy Reference hub",
+                        "url": "/navy-reference/"
+                    }
+                ]
+            }
+        ]
+    }
+]
