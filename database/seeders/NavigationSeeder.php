@@ -38,9 +38,18 @@ class NavigationSeeder extends Seeder
                     ['url' => $item['url']],
                     [
                         'label' => $item['label'],
+                        // The header carries three extra facets a flat link list cannot
+                        // express: which dynamic panel an item IS, the nav key that
+                        // lights its tab, and its position in the mobile panel (which
+                        // differs from the desktop bar). Absent for footer/legal items.
+                        'slot' => $item['slot'] ?? null,
+                        'active_slug' => $item['active_slug'] ?? null,
                         'target' => $item['target'] ?? null,
                         'rel' => $item['rel'] ?? null,
-                        'sort_order' => $position,
+                        // An explicit `sort_order` wins over array position, so the
+                        // definition can be read in one order and rendered in another.
+                        'sort_order' => $item['sort_order'] ?? $position,
+                        'mobile_sort_order' => $item['mobile_sort_order'] ?? null,
                         'is_active' => true,
                     ],
                 );

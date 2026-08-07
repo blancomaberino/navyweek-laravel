@@ -1212,6 +1212,30 @@ with no build. The listener is wired in `DomainServiceProvider::boot` (it lives 
 `app/Domain`, outside Laravel's default listener auto-discovery). `PageUrlChanged` is
 also the future hook for response-cache invalidation (Phase 6).
 
+### Header (menu-driven since 2026-08-07)
+
+The header bar renders from the `header` menu, not from markup. `NavigationComposer`
+supplies `$navItems` (desktop order) and `$mobileNavItems` (panel order) from
+`NavigationTree::header()` / `::headerMobile()`, and `partials/header.blade.php`
+dispatches each item on its `slot`.
+
+Three `menu_items` columns exist for this, because a header is not a flat link list:
+
+| Column | Why |
+|---|---|
+| `slot` | Marks the item as the **Deals** mega-menu, the **Events** dropdown, or the off-site **CTA**. Their CONTENTS still come from `ChromeCatalog` (brand guides, event hubs) — the menu owns their POSITION, which markup previously hardcoded. |
+| `active_slug` | The nav key that lights the tab. Deliberately not derived from `url`: a detail page lights its FAMILY's tab (`/navy-bases/norfolk/` lights "Navy Bases"), which is a slug match, not a path match. |
+| `mobile_sort_order` | The two orders genuinely differ — the bar leads with Deals, the slide-out panel with Schedule. Null falls back to `sort_order`. |
+
+Before this, `header-primary` held a seven-link placeholder (Schedule / Navy Bases /
+Ranks / Air Shows / Fleet Week / Discounts / Veterans Day) that matched nothing on the
+site and rendered nowhere — editing it changed no pixel. Those rows are pruned by
+`2026_08_07_000001_prune_placeholder_header_menu_items`; the seeder itself stays
+non-destructive so an editor's own links survive a re-seed.
+
+Parity is pinned by `tools/vdiff` at 1280 and 375 **plus** the two open-state diffs
+(`menu-desktop.mjs`, `menu-mobile.mjs`) — a full-page diff cannot see a closed dropdown.
+
 ## Admin panel (Filament v4)
 
 The back-office is a Filament v4 panel at `/admin` (`AdminPanelProvider`,

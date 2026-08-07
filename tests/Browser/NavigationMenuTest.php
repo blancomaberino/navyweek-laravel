@@ -24,9 +24,11 @@ final class NavigationMenuTest extends DuskTestCase
         $this->browse(function (Browser $browser): void {
             $browser->visit('/veterans-day/free-meals/')
                 ->assertSee('NAVYWEEK')                          // brand chrome
-                ->assertPresent('.nw-header .nw-nav')            // primary nav container
+                ->assertPresent('.nw-header .nw-desktop-nav')     // primary nav container
                 ->assertPresent('.nw-footer')                    // footer chrome
-                ->assertSeeIn('.nw-footer', 'Navy Reference')    // a seeded footer column heading
+                // Uppercased by CSS, and assertSeeIn matches VISIBLE text — the
+                // sibling assertions in this file already spell their labels that way.
+                ->assertSeeIn('.nw-footer', 'NAVY REFERENCE')    // a seeded footer column heading
                 ->assertPresent('.nw-footer-legal');             // legal row
 
             // The design system is actually applied (not just present in markup).
@@ -38,11 +40,28 @@ final class NavigationMenuTest extends DuskTestCase
             $bodyBg = $browser->script('return getComputedStyle(document.body).backgroundColor;')[0];
             $this->assertSame('rgb(10, 22, 40)', $bodyBg, 'Body background must be Fleet Navy (#0A1628).');
 
-            // The primary nav links come from the seeded menu and actually navigate.
-            $navLinks = (int) $browser->script(
-                'return document.querySelectorAll(".nw-header .nw-nav .nw-navlink").length;'
+            // The bar renders the seeded header menu — the REAL one. The previous
+            // `>= 7` here was calibrated to a seven-link placeholder menu that rendered
+            // nowhere; the live bar is five links plus the Events dropdown trigger.
+            $labels = $browser->script(
+                'return Array.from(document.querySelectorAll(".nw-header .nw-desktop-nav .nw-navlink"))'.
+                '.map(a => a.textContent.trim());'
             )[0];
-            $this->assertGreaterThanOrEqual(7, $navLinks, 'The header should render the seeded primary nav links.');
+            $this->assertSame(
+                ['Deals', 'Schedule', 'Partners', 'FAQ', 'Contact'],
+                $labels,
+                'The header must render the seeded menu, in the seeded desktop order.'
+            );
+
+            // Events is a dropdown trigger rather than a link, and must still be there.
+            $this->assertSame(
+                'Events',
+                trim((string) $browser->script(
+                    'const t = Array.from(document.querySelectorAll(".nw-desktop-nav .nw-dropdown-trigger"))'.
+                    '.find(el => /Events/.test(el.textContent)); return t ? t.textContent.trim() : "";'
+                )[0]),
+                'The Events dropdown must render from its menu item.'
+            );
 
             // The external NAVCO footer link keeps its new-tab + rel attributes.
             $navco = $browser->script(
@@ -80,8 +99,8 @@ final class NavigationMenuTest extends DuskTestCase
                 // Nav links are `text-transform: uppercase`, so the browser reports
                 // the rendered (uppercased) text.
                 $browser->visit('/veterans-day/free-meals/')
-                    ->assertPresent('.nw-header .nw-nav')
-                    ->assertSeeIn('.nw-header .nw-nav', 'E2E SENTINEL LINK');
+                    ->assertPresent('.nw-header .nw-desktop-nav')
+                    ->assertSeeIn('.nw-header .nw-desktop-nav', 'E2E SENTINEL LINK');
             });
         } finally {
             $item->delete();
@@ -95,11 +114,11 @@ final class NavigationMenuTest extends DuskTestCase
             $browser->resize(390, 844)                            // mobile width
                 ->visit('/veterans-day/free-meals/')
                 ->assertPresent('.nw-hamburger')
-                ->assertMissing('.nw-header .nw-nav')             // collapsed (display:none) by default
+                ->assertMissing('.nw-header .nw-mobile-panel')    // collapsed (display:none) by default
                 ->click('.nw-hamburger')
-                ->waitFor('.nw-header .nw-nav')
-                ->assertVisible('.nw-header .nw-nav')             // revealed by the CSS-only toggle
-                ->assertSeeIn('.nw-header .nw-nav', 'DISCOUNTS'); // nav links are uppercased via CSS
+                ->waitFor('.nw-header .nw-mobile-panel')
+                ->assertVisible('.nw-header .nw-mobile-panel')    // revealed by the CSS-only toggle
+                ->assertSeeIn('.nw-header .nw-mobile-panel', 'DEALS'); // nav links are uppercased via CSS
         });
     }
 }

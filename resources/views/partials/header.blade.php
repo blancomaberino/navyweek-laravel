@@ -1,8 +1,12 @@
 {{-- Site header — ported 1:1 from the legacy src/components/Header.tsx. CSS-only
      (no JS): every link is in the SSR HTML for crawlers and paints instantly; the
-     mobile menu uses the checkbox-toggle pattern. The top bar is fixed chrome; only
-     the Deals mega-menu ($deals) and the Events dropdown ($eventLinks) are
-     data-driven, shared by App\Domain\Navigation\View\NavigationComposer. --}}
+     mobile menu uses the checkbox-toggle pattern. The bar itself is MENU DATA
+     ($navItems / $mobileNavItems — labels, urls, both orderings, slots and active
+     slugs); the CONTENTS of its two panels are catalog data ($deals, $eventLinks).
+     All shared by App\Domain\Navigation\View\NavigationComposer.
+
+     Desktop and mobile order deliberately differ (the bar leads with Deals, the panel
+     with Schedule), which is why menu_items carries `mobile_sort_order`. --}}
 @php
     // The header renders the curated REGISTRY order (Header.tsx maps `discounts`
     // as-is); only the Deals section above the footer sorts by publish date.
@@ -18,6 +22,24 @@
         ->activePage(request()->getPathInfo());
     $isActive = static fn (string $slug): bool => $activePage !== null && $slug === $activePage;
     $eventActive = collect($eventLinks)->contains(static fn ($l) => $isActive($l['slug']));
+
+    // The nav is menu data (NavigationComposer -> NavigationTree::header()), with the
+    // defaults as the render-time fallback so the chrome never paints empty.
+    $navItems ??= app(\App\Domain\Navigation\Support\NavigationTree::class)->header();
+    $mobileNavItems ??= app(\App\Domain\Navigation\Support\NavigationTree::class)->headerMobile();
+
+    // The CTA sits OUTSIDE the <nav> on desktop but inside the panel on mobile, so the
+    // desktop bar iterates everything except it.
+    $ctaItem = collect($navItems)->firstWhere('slot', \App\Domain\Navigation\Enums\MenuItemSlot::Cta);
+    $barItems = collect($navItems)
+        ->reject(fn (array $i): bool => $i['slot'] === \App\Domain\Navigation\Enums\MenuItemSlot::Cta)
+        ->all();
+
+    // The legacy derives each link's test id from its nav slug (link-discount,
+    // link-schedule, link-partners…), falling back to the label for the anchor-only
+    // items that have no slug.
+    $testId = static fn (array $item): string => $item['activeSlug']
+        ?: (\Illuminate\Support\Str::slug($item['label']) ?: 'item');
 
     $updatedAt = \Illuminate\Support\Carbon::parse($lastUpdated)->timezone('America/New_York');
     $updatedLabel = $updatedAt->format('F j, Y').' at '.$updatedAt->format('g:i A').' ET';
@@ -41,9 +63,14 @@
         </a>
 
         <nav aria-label="Main navigation" class="nw-desktop-nav">
+            @foreach ($barItems as $item)
+            @php $itemActive = $item['activeSlug'] !== null && $isActive($item['activeSlug']); @endphp
+            @switch($item['slot'])
+
             {{-- Deals — mega-menu of every discount-brand guide --}}
+            @case(\App\Domain\Navigation\Enums\MenuItemSlot::Deals)
             <div class="nw-dropdown nw-mega">
-                <a href="/discount/" class="nw-navlink @if ($isActive('discount')) is-active @endif" data-testid="link-discount">Deals</a>
+                <a href="{{ $item['href'] }}" @class(['nw-navlink', 'is-active' => $itemActive]) data-testid="link-{{ $testId($item) }}">{{ $item['label'] }}</a>
                 <span class="nw-dropdown-trigger" aria-hidden="true">{!! $chevronSvg !!}</span>
                 <div class="nw-mega-panel" role="menu">
                     <div class="nw-mega-inner">
@@ -55,17 +82,17 @@
                             @endforeach
                         </div>
                         <div class="nw-mega-foot">
-                            <a href="/discount/" class="nw-mega-all">View all deals &rarr;</a>
+                            <a href="{{ $item['href'] }}" class="nw-mega-all">View all deals &rarr;</a>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <a href="/schedule/" class="nw-navlink @if ($isActive('schedule')) is-active @endif" data-testid="link-schedule">Schedule</a>
+            @break
 
             {{-- Events — dropdown of the four hubs --}}
+            @case(\App\Domain\Navigation\Enums\MenuItemSlot::Events)
             <div class="nw-dropdown">
-                <span class="nw-dropdown-trigger @if ($eventActive) is-active @endif" tabindex="0" role="button" aria-haspopup="true">Events{!! $chevronSvg !!}</span>
+                <span @class(['nw-dropdown-trigger', 'is-active' => $eventActive]) tabindex="0" role="button" aria-haspopup="true">{{ $item['label'] }}{!! $chevronSvg !!}</span>
                 <div class="nw-dropdown-menu" role="menu">
                     @foreach ($eventLinks as $link)
                         <a href="{{ $link['href'] }}" class="nw-dropdown-event @if ($isActive($link['slug'])) is-active @endif">{{ $link['label'] }}</a>
@@ -77,13 +104,17 @@
                     @endforeach
                 </div>
             </div>
+            @break
 
-            <a href="/#partners" class="nw-navlink" data-testid="link-partners">Partners</a>
-            <a href="/#faq" class="nw-navlink" data-testid="link-faq">FAQ</a>
-            <a href="/contact/" class="nw-navlink @if ($isActive('contact')) is-active @endif" data-testid="link-contact">Contact</a>
+            @default
+            <a href="{{ $item['href'] }}" @if ($item['target']) target="{{ $item['target'] }}" @endif @if ($item['rel']) rel="{{ $item['rel'] }}" @endif @class(['nw-navlink', 'is-active' => $itemActive]) data-testid="link-{{ $testId($item) }}">{{ $item['label'] }}</a>
+            @endswitch
+            @endforeach
         </nav>
 
-        <a href="https://outreach.navy.mil/Navy-Weeks/" target="_blank" rel="noopener noreferrer" class="nw-cta" data-testid="link-official-site">Official NAVCO Site</a>
+        @if ($ctaItem !== null)
+            <a href="{{ $ctaItem['href'] }}" @if ($ctaItem['target']) target="{{ $ctaItem['target'] }}" @endif @if ($ctaItem['rel']) rel="{{ $ctaItem['rel'] }}" @endif class="nw-cta" data-testid="link-official-site">{{ $ctaItem['label'] }}</a>
+        @endif
 
         <label for="nw-mobile-toggle" class="nw-hamburger" aria-label="Toggle menu" role="button">
             <span class="nw-menu">&#9776;</span>
@@ -92,11 +123,14 @@
     </div>
 
     <nav aria-label="Mobile navigation" class="nw-mobile-panel">
-        <a href="/schedule/" class="nw-mob-link @if ($isActive('schedule')) is-active @endif">Schedule</a>
+        @foreach ($mobileNavItems as $item)
+        @php $itemActive = $item['activeSlug'] !== null && $isActive($item['activeSlug']); @endphp
+        @switch($item['slot'])
 
+        @case(\App\Domain\Navigation\Enums\MenuItemSlot::Events)
         <details class="nw-mob-acc">
-            <summary class="nw-mob-acc-summary @if ($eventActive) is-active @endif">
-                <span>Events</span>
+            <summary @class(['nw-mob-acc-summary', 'is-active' => $eventActive])>
+                <span>{{ $item['label'] }}</span>
                 <span class="nw-mob-acc-chevron" aria-hidden="true"></span>
             </summary>
             <div class="nw-mob-acc-body">
@@ -108,23 +142,30 @@
                 @endforeach
             </div>
         </details>
+        @break
 
+        @case(\App\Domain\Navigation\Enums\MenuItemSlot::Deals)
         <details class="nw-mob-acc">
-            <summary class="nw-mob-acc-summary @if ($isActive('discount')) is-active @endif">
-                <span>Deals</span>
+            <summary @class(['nw-mob-acc-summary', 'is-active' => $itemActive])>
+                <span>{{ $item['label'] }}</span>
                 <span class="nw-mob-acc-chevron" aria-hidden="true"></span>
             </summary>
             <div class="nw-mob-acc-body">
                 @foreach ($deals as $deal)
                     <a href="{{ $deal['url'] }}" class="nw-mob-sublink"><span>{{ $deal['brand'] }} discount</span></a>
                 @endforeach
-                <a href="/discount/" class="nw-mob-acc-all">View all deals &rarr;</a>
+                <a href="{{ $item['href'] }}" class="nw-mob-acc-all">View all deals &rarr;</a>
             </div>
         </details>
+        @break
 
-        <a href="/#partners" class="nw-mob-link">Partners</a>
-        <a href="/#faq" class="nw-mob-link">FAQ</a>
-        <a href="/contact/" class="nw-mob-link @if ($isActive('contact')) is-active @endif">Contact</a>
-        <a href="https://outreach.navy.mil/Navy-Weeks/" target="_blank" rel="noopener noreferrer" class="nw-mob-cta">Official NAVCO Site</a>
+        @case(\App\Domain\Navigation\Enums\MenuItemSlot::Cta)
+        <a href="{{ $item['href'] }}" @if ($item['target']) target="{{ $item['target'] }}" @endif @if ($item['rel']) rel="{{ $item['rel'] }}" @endif class="nw-mob-cta">{{ $item['label'] }}</a>
+        @break
+
+        @default
+        <a href="{{ $item['href'] }}" @if ($item['target']) target="{{ $item['target'] }}" @endif @if ($item['rel']) rel="{{ $item['rel'] }}" @endif @class(['nw-mob-link', 'is-active' => $itemActive])>{{ $item['label'] }}</a>
+        @endswitch
+        @endforeach
     </nav>
 </header>
