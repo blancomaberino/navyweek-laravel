@@ -15,9 +15,10 @@ use Illuminate\View\View;
  * reached through the base layout; the request-scoped {@see NavigationTree} and
  * {@see ChromeCatalog} mean the shared reads run once per request regardless.
  *
- * The header top bar is fixed chrome (Deals mega-menu / Schedule / Events / …),
- * ported 1:1 from the legacy Header.tsx — only the Deals list and the Events
- * dropdown are data-driven. The footer link columns remain editable menu data.
+ * The header top bar renders from the `header` menu (labels, urls, order, slots,
+ * active slugs); the CONTENTS of its two dynamic panels — the Deals mega-menu and the
+ * Events dropdown — still come from the catalog, since those are brand guides and event
+ * hubs rather than editable links. The footer link columns are editable menu data too.
  */
 final class NavigationComposer
 {
@@ -36,6 +37,11 @@ final class NavigationComposer
                 'lastUpdated' => config('site.last_updated'),
             ]),
             default => $view->with([
+                // The nav itself is now menu data: labels, urls, BOTH orderings, which
+                // item is the Deals mega-menu / Events dropdown / NAVCO CTA, and the
+                // slug that lights each tab. Editing the `header` menu changes the bar.
+                'navItems' => $this->tree->header(),
+                'mobileNavItems' => $this->tree->headerMobile(),
                 // Header: curated registry order, not the section's date sort.
                 'deals' => $this->chrome->menuDeals(),
                 'eventLinks' => $this->chrome->eventLinks(),

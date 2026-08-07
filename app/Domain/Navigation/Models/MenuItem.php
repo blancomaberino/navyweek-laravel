@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Navigation\Models;
 
+use App\Domain\Navigation\Enums\MenuItemSlot;
 use Database\Factories\MenuItemFactory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -27,9 +28,12 @@ use Illuminate\Support\Carbon;
  * @property int|null $parent_id
  * @property string $label
  * @property string $url
+ * @property MenuItemSlot|null $slot
+ * @property string|null $active_slug
  * @property string|null $target
  * @property string|null $rel
  * @property int $sort_order
+ * @property int|null $mobile_sort_order
  * @property bool $is_active
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -49,16 +53,21 @@ class MenuItem extends Model
         'parent_id',
         'label',
         'url',
+        'slot',
+        'active_slug',
         'target',
         'rel',
         'sort_order',
+        'mobile_sort_order',
         'is_active',
     ];
 
     protected function casts(): array
     {
         return [
+            'slot' => MenuItemSlot::class,
             'sort_order' => 'integer',
+            'mobile_sort_order' => 'integer',
             'is_active' => 'boolean',
         ];
     }

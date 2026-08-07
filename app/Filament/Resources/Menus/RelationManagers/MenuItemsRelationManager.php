@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Menus\RelationManagers;
 
+use App\Domain\Navigation\Enums\MenuItemSlot;
 use App\Domain\Navigation\Models\Menu;
 use App\Domain\Navigation\Models\MenuItem;
 use App\Domain\Navigation\Support\LinkUrl;
+use App\Filament\Support\EnumOptions;
 use Closure;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteAction;
@@ -50,6 +52,19 @@ class MenuItemsRelationManager extends RelationManager
                     };
                 })
                 ->helperText('Root-relative path (e.g. /schedule/) or an absolute http(s)/mailto/tel URL.'),
+            Select::make('slot')
+                ->label('Renders as')
+                ->options(EnumOptions::map(MenuItemSlot::cases()))
+                ->placeholder('Plain link')
+                ->helperText('Header only. The two panels take their CONTENTS from the catalog; this marks which item they are, so moving them here moves them on the site.'),
+            TextInput::make('active_slug')
+                ->label('Active slug')
+                ->maxLength(255)
+                ->helperText('Header only. The nav key that lights this tab — a detail page lights its family (a base guide lights "Navy Bases"), so this is matched on slug, not path.'),
+            TextInput::make('mobile_sort_order')
+                ->label('Mobile position')
+                ->numeric()
+                ->helperText('Header only. The slide-out panel orders differently from the bar (it leads with Schedule where the bar leads with Deals). Empty follows the bar.'),
             Select::make('parent_id')
                 ->label('Parent (dropdown)')
                 ->options(static function (RelationManager $livewire, ?MenuItem $record): array {
@@ -96,6 +111,12 @@ class MenuItemsRelationManager extends RelationManager
                 TextColumn::make('url')
                     ->limit(48)
                     ->color('gray'),
+                TextColumn::make('slot')
+                    ->label('Renders as')
+                    ->badge()
+                    ->formatStateUsing(fn (MenuItemSlot $state): string => $state->label())
+                    ->placeholder('Plain link')
+                    ->toggleable(),
                 TextColumn::make('parent.label')
                     ->label('Parent')
                     ->placeholder('—')

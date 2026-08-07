@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Navigation\Support;
 
+use App\Domain\Navigation\Enums\MenuItemSlot;
 use App\Domain\Navigation\Enums\MenuLocation;
 use App\Domain\Navigation\Models\Menu;
 use App\Domain\Navigation\Models\MenuItem;
@@ -25,12 +26,16 @@ use Throwable;
  *
  * @phpstan-type NavLink array{label: string, href: string, target: string|null, rel: string|null}
  * @phpstan-type NavItem array{label: string, href: string, target: string|null, rel: string|null, children: list<NavLink>}
+ * @phpstan-type HeaderItem array{label: string, href: string, slot: MenuItemSlot|null, activeSlug: string|null, target: string|null, rel: string|null}
  * @phpstan-type NavGroup array{heading: string, links: list<NavItem>}
  */
 final class NavigationTree
 {
-    /** @var list<NavItem>|null */
+    /** @var list<HeaderItem>|null */
     private ?array $headerCache = null;
+
+    /** @var list<HeaderItem>|null */
+    private ?array $headerMobileCache = null;
 
     /** @var list<NavGroup>|null */
     private ?array $footerCache = null;
@@ -41,14 +46,67 @@ final class NavigationTree
     public function __construct(private readonly MenuRepositoryInterface $menus) {}
 
     /**
-     * The header primary nav links, in order (with any dropdown children nested).
+     * The header nav, ordered for the DESKTOP bar.
      *
-     * @return list<NavItem>
+     * @return list<HeaderItem>
      */
     public function header(): array
     {
-        return $this->headerCache ??= $this->firstMenuItems(MenuLocation::Header)
+        return $this->headerCache ??= $this->headerItems('sort_order')
             ?? NavigationDefaults::headerItems();
+    }
+
+    /**
+     * The same items ordered for the MOBILE panel — the two orders genuinely differ
+     * (desktop leads with Deals, mobile with Schedule), which is why the column exists.
+     *
+     * @return list<HeaderItem>
+     */
+    public function headerMobile(): array
+    {
+        return $this->headerMobileCache ??= $this->headerItems('mobile_sort_order')
+            ?? NavigationDefaults::headerMobileItems();
+    }
+
+    /**
+     * The active header menu's items in one ordering, or null when there is no active
+     * header menu (or the tables are missing) so the caller can fall back.
+     *
+     * @return list<HeaderItem>|null
+     */
+    private function headerItems(string $orderBy): ?array
+    {
+        try {
+            $menu = $this->menus->activeMenusForLocation(MenuLocation::Header)->first();
+        } catch (Throwable) {
+            return null;
+        }
+
+        if (! $menu instanceof Menu || $menu->activeItems->isEmpty()) {
+            return null;
+        }
+
+        // `mobile_sort_order` is nullable and falls back to the desktop order, so a
+        // menu that has never been re-ordered for mobile still renders.
+        $items = $menu->activeItems
+            ->sortBy(fn (MenuItem $item): int => $orderBy === 'mobile_sort_order'
+                ? ($item->mobile_sort_order ?? $item->sort_order)
+                : $item->sort_order)
+            ->values();
+
+        $mapped = [];
+
+        foreach ($items as $item) {
+            // Through mapItem(), NOT a hand-rolled array: it is what neutralizes a
+            // disallowed scheme (LinkUrl::sanitize) and defaults `rel` on a new-tab
+            // link. Building the row inline here silently dropped both.
+            $mapped[] = $this->mapItem($item) + [
+                'slot' => $item->slot,
+                'activeSlug' => $item->active_slug,
+            ];
+        }
+
+        return $mapped;
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Navigation\Support;
 
+use App\Domain\Navigation\Enums\MenuItemSlot;
 use App\Domain\Navigation\Enums\MenuLocation;
 use Database\Seeders\NavigationSeeder;
 
@@ -18,13 +19,15 @@ use Database\Seeders\NavigationSeeder;
  *   empty if the tables are missing/unseeded or a region has no active menu).
  *
  * Keeping them in one place guarantees the fallback and the seed can never drift.
+ *
+ * @phpstan-type HeaderItem array{label: string, href: string, slot: MenuItemSlot|null, activeSlug: string|null, target: string|null, rel: string|null}
  */
 final class NavigationDefaults
 {
     /**
      * Full menu definitions (identity + placement + links), consumed by the seeder.
      *
-     * @return list<array{key: string, name: string, location: MenuLocation, sort_order: int, items: list<array{label: string, url: string, target?: string, rel?: string}>}>
+     * @return list<array{key: string, name: string, location: MenuLocation, sort_order: int, items: list<array{label: string, url: string, slot?: MenuItemSlot, active_slug?: string, target?: string, rel?: string, sort_order?: int, mobile_sort_order?: int}>}>
      */
     public static function menus(): array
     {
@@ -34,14 +37,57 @@ final class NavigationDefaults
                 'name' => 'Primary navigation',
                 'location' => MenuLocation::Header,
                 'sort_order' => 0,
+                // The REAL rendered header, ported from src/components/Header.tsx —
+                // not the seven-link placeholder this used to hold, which matched
+                // nothing on the site and rendered nowhere.
+                //
+                // `sort_order` is the desktop bar; `mobile_sort_order` is the slide-out
+                // panel, which deliberately leads with Schedule where the desktop bar
+                // leads with Deals. `slot` marks the two panels whose CONTENTS come
+                // from the catalog, and the off-site CTA.
                 'items' => [
-                    ['label' => 'Schedule', 'url' => '/schedule/'],
-                    ['label' => 'Navy Bases', 'url' => '/navy-bases/'],
-                    ['label' => 'Ranks', 'url' => '/navy-ranks/'],
-                    ['label' => 'Air Shows', 'url' => '/air-show/'],
-                    ['label' => 'Fleet Week', 'url' => '/fleetweek/'],
-                    ['label' => 'Discounts', 'url' => '/discount/'],
-                    ['label' => 'Veterans Day', 'url' => '/veterans-day/'],
+                    [
+                        'label' => 'Deals',
+                        'url' => '/discount/',
+                        'slot' => MenuItemSlot::Deals,
+                        'active_slug' => 'discount',
+                        'sort_order' => 0,
+                        'mobile_sort_order' => 2,
+                    ],
+                    [
+                        'label' => 'Schedule',
+                        'url' => '/schedule/',
+                        'active_slug' => 'schedule',
+                        'sort_order' => 1,
+                        'mobile_sort_order' => 0,
+                    ],
+                    [
+                        'label' => 'Events',
+                        'url' => '/air-show/',
+                        'slot' => MenuItemSlot::Events,
+                        'sort_order' => 2,
+                        'mobile_sort_order' => 1,
+                    ],
+                    // Both are in-page anchors on the home page, so neither carries an
+                    // active slug — the legacy renders them with a bare class.
+                    ['label' => 'Partners', 'url' => '/#partners', 'sort_order' => 3, 'mobile_sort_order' => 3],
+                    ['label' => 'FAQ', 'url' => '/#faq', 'sort_order' => 4, 'mobile_sort_order' => 4],
+                    [
+                        'label' => 'Contact',
+                        'url' => '/contact/',
+                        'active_slug' => 'contact',
+                        'sort_order' => 5,
+                        'mobile_sort_order' => 5,
+                    ],
+                    [
+                        'label' => 'Official NAVCO Site',
+                        'url' => 'https://outreach.navy.mil/Navy-Weeks/',
+                        'slot' => MenuItemSlot::Cta,
+                        'target' => '_blank',
+                        'rel' => 'noopener noreferrer',
+                        'sort_order' => 6,
+                        'mobile_sort_order' => 6,
+                    ],
                 ],
             ],
             [
@@ -112,13 +158,55 @@ final class NavigationDefaults
     }
 
     /**
-     * The header primary nav in the render view-model shape.
+     * The header nav in the render view-model shape, ordered for the DESKTOP bar.
      *
-     * @return list<array{label: string, href: string, target: string|null, rel: string|null, children: list<array{label: string, href: string, target: string|null, rel: string|null}>}>
+     * @return list<HeaderItem>
      */
     public static function headerItems(): array
     {
-        return self::itemsFor('header-primary');
+        return self::mapHeaderItems('sort_order');
+    }
+
+    /**
+     * The same items ordered for the MOBILE panel, which leads with Schedule where the
+     * desktop bar leads with Deals.
+     *
+     * @return list<HeaderItem>
+     */
+    public static function headerMobileItems(): array
+    {
+        return self::mapHeaderItems('mobile_sort_order');
+    }
+
+    /**
+     * @return list<HeaderItem>
+     */
+    private static function mapHeaderItems(string $orderBy): array
+    {
+        foreach (self::menus() as $menu) {
+            if ($menu['key'] !== 'header-primary') {
+                continue;
+            }
+
+            $items = $menu['items'];
+
+            usort(
+                $items,
+                static fn (array $a, array $b): int => ($a[$orderBy] ?? $a['sort_order'] ?? 0)
+                    <=> ($b[$orderBy] ?? $b['sort_order'] ?? 0),
+            );
+
+            return array_map(static fn (array $item): array => [
+                'label' => $item['label'],
+                'href' => $item['url'],
+                'slot' => $item['slot'] ?? null,
+                'activeSlug' => $item['active_slug'] ?? null,
+                'target' => $item['target'] ?? null,
+                'rel' => $item['rel'] ?? null,
+            ], $items);
+        }
+
+        return [];
     }
 
     /**
@@ -166,7 +254,7 @@ final class NavigationDefaults
     }
 
     /**
-     * @param  list<array{label: string, url: string, target?: string, rel?: string}>  $items
+     * @param  list<array{label: string, url: string, slot?: MenuItemSlot, active_slug?: string, target?: string, rel?: string, sort_order?: int, mobile_sort_order?: int}>  $items
      * @return list<array{label: string, href: string, target: string|null, rel: string|null, children: list<array{label: string, href: string, target: string|null, rel: string|null}>}>
      */
     private static function mapItems(array $items): array
