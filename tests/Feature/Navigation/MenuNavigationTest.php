@@ -201,6 +201,11 @@ it('reads the repository once per region despite repeated composer calls', funct
 
     $tree->header();
     $tree->header();
+    // Both header ORDERINGS share the one read — without that, the desktop bar and the
+    // mobile panel each queried the menu and this guard could not see it, because it
+    // never called headerMobile().
+    $tree->headerMobile();
+    $tree->headerMobile();
     $tree->footerGroups();
     $tree->footerGroups();
     $tree->legal();

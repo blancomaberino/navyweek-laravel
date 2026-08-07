@@ -156,14 +156,14 @@ it('sanitises a header link the same way the footer does', function () {
     expect(fetchChromePage()->getContent())->not->toContain('javascript:');
 });
 
-it('lights the tab whose active slug matches the page', function () {
+it('lights the family tab from a DETAIL page, not just an exact path match', function () {
     $this->seed(NavigationSeeder::class);
 
-    // A DETAIL page must light its family's tab, which is why the slug is stored
-    // rather than derived from the url.
-    // ChromeCatalog resolves the nav slug from the path; /privacy/ lights nothing, so
-    // the assertion is that the SCHEDULE tab lights when the schedule family is active.
-    $html = fetchChromePage('/schedule/')->getContent();
+    // This is the whole reason `active_slug` is stored rather than derived from `url`:
+    // /discount/{brand}/ must light DEALS, whose url is /discount/. A path match would
+    // light nothing here, and the previous version of this test fetched /schedule/ —
+    // where the slug and the path coincide — so it proved nothing.
+    $html = fetchChromePage('/discount/yeti-military-veteran/')->getContent();
 
-    expect($html)->toContain('class="nw-navlink is-active" data-testid="link-schedule"');
+    expect($html)->toContain('class="nw-navlink is-active" data-testid="link-discount"');
 });

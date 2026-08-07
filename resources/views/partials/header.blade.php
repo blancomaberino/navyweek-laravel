@@ -38,7 +38,8 @@
     // The legacy derives each link's test id from its nav slug (link-discount,
     // link-schedule, link-partners…), falling back to the label for the anchor-only
     // items that have no slug.
-    $testId = static fn (array $item): string => $item['activeSlug'] ?? \Illuminate\Support\Str::slug($item['label']);
+    $testId = static fn (array $item): string => $item['activeSlug']
+        ?: (\Illuminate\Support\Str::slug($item['label']) ?: 'item');
 
     $updatedAt = \Illuminate\Support\Carbon::parse($lastUpdated)->timezone('America/New_York');
     $updatedLabel = $updatedAt->format('F j, Y').' at '.$updatedAt->format('g:i A').' ET';
@@ -81,7 +82,7 @@
                             @endforeach
                         </div>
                         <div class="nw-mega-foot">
-                            <a href="/discount/" class="nw-mega-all">View all deals &rarr;</a>
+                            <a href="{{ $item['href'] }}" class="nw-mega-all">View all deals &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -106,7 +107,7 @@
             @break
 
             @default
-            <a href="{{ $item['href'] }}" @class(['nw-navlink', 'is-active' => $itemActive]) data-testid="link-{{ $testId($item) }}">{{ $item['label'] }}</a>
+            <a href="{{ $item['href'] }}" @if ($item['target']) target="{{ $item['target'] }}" @endif @if ($item['rel']) rel="{{ $item['rel'] }}" @endif @class(['nw-navlink', 'is-active' => $itemActive]) data-testid="link-{{ $testId($item) }}">{{ $item['label'] }}</a>
             @endswitch
             @endforeach
         </nav>
@@ -163,7 +164,7 @@
         @break
 
         @default
-        <a href="{{ $item['href'] }}" @class(['nw-mob-link', 'is-active' => $itemActive])>{{ $item['label'] }}</a>
+        <a href="{{ $item['href'] }}" @if ($item['target']) target="{{ $item['target'] }}" @endif @if ($item['rel']) rel="{{ $item['rel'] }}" @endif @class(['nw-mob-link', 'is-active' => $itemActive])>{{ $item['label'] }}</a>
         @endswitch
         @endforeach
     </nav>

@@ -21,6 +21,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Validation\Rules\Unique;
 
 /**
  * The links inside a menu — drag-reorderable on `sort_order`. `parent` (optional,
@@ -56,7 +57,19 @@ class MenuItemsRelationManager extends RelationManager
                 ->label('Renders as')
                 ->options(EnumOptions::map(MenuItemSlot::cases()))
                 ->placeholder('Plain link')
-                ->helperText('Header only. The two panels take their CONTENTS from the catalog; this marks which item they are, so moving them here moves them on the site.'),
+                // Each slot is ONE rendered position. Two items claiming the same one
+                // stacks two absolutely-positioned panels, and two CTAs render once on
+                // desktop but twice in the mobile panel.
+                ->unique(
+                    ignoreRecord: true,
+                    modifyRuleUsing: function (Unique $rule, RelationManager $livewire): Unique {
+                        /** @var Menu $menu */
+                        $menu = $livewire->getOwnerRecord();
+
+                        return $rule->where('menu_id', $menu->id);
+                    },
+                )
+                ->helperText('Header only. The two panels take their CONTENTS from the catalog; this marks which item they are, so moving them here moves them on the site. One item per slot.'),
             TextInput::make('active_slug')
                 ->label('Active slug')
                 ->maxLength(255)

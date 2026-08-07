@@ -37,6 +37,10 @@ final class NavigationTree
     /** @var list<HeaderItem>|null */
     private ?array $headerMobileCache = null;
 
+    private ?Menu $headerMenu = null;
+
+    private bool $headerMenuResolved = false;
+
     /** @var list<NavGroup>|null */
     private ?array $footerCache = null;
 
@@ -76,13 +80,9 @@ final class NavigationTree
      */
     private function headerItems(string $orderBy): ?array
     {
-        try {
-            $menu = $this->menus->activeMenusForLocation(MenuLocation::Header)->first();
-        } catch (Throwable) {
-            return null;
-        }
+        $menu = $this->headerMenu();
 
-        if (! $menu instanceof Menu || $menu->activeItems->isEmpty()) {
+        if ($menu === null || $menu->activeItems->isEmpty()) {
             return null;
         }
 
@@ -107,6 +107,28 @@ final class NavigationTree
         }
 
         return $mapped;
+    }
+
+    /**
+     * The header menu, resolved at most ONCE. Both orderings read it, so without this
+     * the header region would run its query + eager-loads twice per request — breaking
+     * the memoization this class's docblock promises.
+     */
+    private function headerMenu(): ?Menu
+    {
+        if (! $this->headerMenuResolved) {
+            $this->headerMenuResolved = true;
+
+            try {
+                $menu = $this->menus->activeMenusForLocation(MenuLocation::Header)->first();
+            } catch (Throwable) {
+                $menu = null;
+            }
+
+            $this->headerMenu = $menu instanceof Menu ? $menu : null;
+        }
+
+        return $this->headerMenu;
     }
 
     /**
